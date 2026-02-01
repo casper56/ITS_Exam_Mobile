@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ900 模擬測驗</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif;
+            overflow-y: scroll; /* Always show scrollbar to prevent shift */
+        }
+        
+        /* Layout */
+        .main-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            background: #212529;
+            color: #fff;
+        }
+        
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .sidebar-footer {
+            padding: 15px;
+            border-top: 1px solid #dee2e6;
+            background: #f8f9fa;
+        }
+
+        /* Main Content */
+        .content-area {
+            flex: 1;
+            margin-left: 280px; /* Match sidebar width */
+            padding: 30px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .content-area {
+                margin-left: 0;
+            }
+            .mobile-toggle {
+                display: block !important;
+            }
+        }
+
+        /* Question Card */
+        .question-card {
+            min-height: 500px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .question-header {
+            background-color: #fff;
+            border-bottom: 2px solid #0d6efd;
+            padding: 20px;
+            font-weight: bold;
+            color: #0d6efd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .question-body {
+            padding: 40px;
+            font-size: 1.1rem;
+        }
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Options */
+        .option-item {
+            list-style: none;
+            margin-bottom: 12px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-item:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+        }
+        .option-item.correct {
+            background-color: #d1e7dd !important;
+            border-color: #badbcc !important;
+            color: #0f5132 !important;
+        }
+        .option-item.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c2c7 !important;
+            color: #842029 !important;
+        }
+        .sub-opt-container.correct {
+            background-color: #d1e7dd !important;
+            border-color: #badbcc !important;
+        }
+        .sub-opt-container.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c2c7 !important;
+        }
+        .sub-question-label {
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #495057;
+            border-left: 4px solid #198754;
+            padding-left: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* Answer Section */
+        .answer-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f0f7ff;
+            border-left: 5px solid #0d6efd;
+            border-radius: 4px;
+        }
+
+        /* Grid Nodes */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+        .q-node {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .q-node:hover {
+            background-color: #e9ecef;
+        }
+        .q-node.visited {
+            background-color: #d1e7dd;
+            border-color: #badbcc;
+            color: #0f5132;
+        }
+        .q-node.active {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+            font-weight: bold;
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation Buttons */
+        .nav-btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        .nav-btn {
+            min-width: 120px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #212529;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        code {
+            font-family: Consolas, Monaco, monospace;
+            color: #d63384;
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header d-flex justify-content-between align-items-center">
+            <h5 class="m-0">題目列表</h5>
+            <small class="text-white-50" id="progress-stats">0/159</small>
+        </div>
+        
+        <div class="sidebar-content">
+            <div class="d-flex justify-content-between small mb-2 text-muted">
+                <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未讀</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd;border:1px solid #badbcc"></span> 已讀</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#0d6efd"></span> 當前</span>
+            </div>
+            <div class="progress-grid" id="progress-grid">
+                <!-- Grid items generated by JS -->
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">
+                🗑️ 重置進度
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" onclick="toggleSidebar()">
+        ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="content-area" id="main-content">
+        <div class="container-fluid" style="max-width: 1000px;">
+            <h2 class="text-center mb-4">AZ900 模擬測驗</h2>
+            <div id="question-container">
+                <!-- Question injected here -->
+            </div>
+
+            <div class="nav-btn-group">
+                <button class="btn btn-secondary nav-btn" id="btn-prev" onclick="prevQuestion()">⬅️ 上一題</button>
+                <button class="btn btn-primary nav-btn" id="btn-next" onclick="nextQuestion()">下一題 ➡️</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<script>
+    const quizData = [{"id": 1, "type": "truefalse", "question": "1. 您可以為 Microsoft Entra 使用者新增資源鎖定。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 2, "type": "truefalse", "question": "2. 您可以為相同 Azure 虛擬機器新增多個資源鎖定。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 3, "type": "truefalse", "question": "3. 您可以修改具有刪除鎖定之 Azure 資源的屬性。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 4, "type": "truefalse", "question": "4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平台即服務(PaaS)。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 5, "type": "truefalse", "question": "5. Azure SQL Database 是一種平台即服務(PaaS)。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 6, "type": "truefalse", "question": "6. Azure Cosmos DB 是一種軟體即服務(SaaS)。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 7, "type": "truefalse", "question": "7. 您只能從 Windows 裝置管理雲端服務。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 8, "type": "truefalse", "question": "8. 您可以從命令列管理雲端服務。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 9, "type": "truefalse", "question": "9. 您可以使用網頁瀏覽器管理雲端服務。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 10, "type": "truefalse", "question": "10. 雲端運算的資本支出(CapEx)成本低於內部部署。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 11, "type": "truefalse", "question": "11. 雲端運算提供與內部部署相同的設定選項。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 12, "type": "truefalse", "question": "12. 雲端運算可在業務需要變更時進行調整。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 13, "type": "truefalse", "question": "13. Azure 隨用隨付定價是 CapEx 範例。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 14, "type": "truefalse", "question": "14. 支付資料中心的電費是 OpEx 範例。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 15, "type": "truefalse", "question": "15. 部署您自己的資料中心是 CapEx 範例。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 16, "type": "truefalse", "question": "16. 在 Azure 訂用帳戶中新增資源群組會產生額外費用。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 17, "type": "truefalse", "question": "17. 透過 VPN 從內部部署網路將 10GB 的資料複製到 Azure 會產生額外的 Azure 資料傳輸費用。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 18, "type": "truefalse", "question": "18. 透過 VPN 從 Azure 將 10GB 的資料複製到內部部署網路會產生額外的 Azure 資料傳輸費用。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 19, "type": "truefalse", "question": "19. 您可以設定 Microsoft Entra 活動記錄,以在 Azure 監視器中顯示。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 20, "type": "truefalse", "question": "20. 您可以從 Azure 監視器建立警示。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 21, "type": "truefalse", "question": "21. 您可以從 Azure 監視器監視多個 Azure 訂用帳戶的資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 22, "type": "truefalse", "question": "22. 擁有權總成本(TCO)計算機會顯示在資料中心內執行工作負載的成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 23, "type": "truefalse", "question": "23. 擁有權總成本(TCO)計算機會顯示在 Azure 中執行工作負載的成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 24, "type": "truefalse", "question": "24. 擁有權總成本(TCO)計算機會產生圖形化報表。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 25, "type": "truefalse", "question": "25. Azure 儲存體中的極非經常性存取層會針對至少90天的資料儲存體最佳化。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 26, "type": "truefalse", "question": "26. Azure 儲存體中的非經常性存取層會針對至少 90 天的資料儲存體最佳化。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 27, "type": "truefalse", "question": "27. Azure 儲存體中的封存存取層會針對至少 180 天的資料儲存體最佳化。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 28, "type": "truefalse", "question": "28. Microsoft Entra 可用於管理對內部部署應用程式的存取。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 29, "type": "truefalse", "question": "29. Microsoft Entra 提供單一登入(SSO)。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 30, "type": "truefalse", "question": "30. iOS 裝置可以在 Microsoft Entra 租用戶內註冊。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 31, "type": "truefalse", "question": "31. AzCopy 是一個用來在儲存體帳戶之間來回複製 Blob 或檔案的命令列公用程式。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 32, "type": "truefalse", "question": "32. Azure 儲存體總管是一項用來傳輸大量資料的雲端託管移轉服務。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 33, "type": "truefalse", "question": "33. Azure 檔案同步會在 Azure 檔案儲存體與 Windows 檔案伺服器之間同步檔案和資料夾。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 34, "type": "truefalse", "question": "34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租用戶建立關聯。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 35, "type": "truefalse", "question": "35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租用戶。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 36, "type": "truefalse", "question": "36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租用戶。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 37, "type": "truefalse", "question": "37. Azure 虛擬桌面工作階段主機只能執行 Windows 10 或 Windows 11。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 38, "type": "truefalse", "question": "38. 一個包含 20 部工作階段主機的 Azure 虛擬桌面主機集區,最多可支援 20 位使用者同時連線。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 39, "type": "truefalse", "question": "39. Azure 虛擬桌面支援桌面與應用程式虛擬化。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 40, "type": "truefalse", "question": "40. 建立和設定虛擬網路是平台即服務(PaaS)雲端服務模型的一部分。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 41, "type": "truefalse", "question": "41. 在平台即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 42, "type": "truefalse", "question": "42. 設定平台即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 43, "type": "truefalse", "question": "43. 適用於雲端的 Microsoft Defender 可以監視 Azure 資源與內部部署資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 44, "type": "truefalse", "question": "44. 所有適用於雲端的 Microsoft Defender 功能皆為免費。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 45, "type": "truefalse", "question": "45. 您可以從適用於雲端的 Microsoft Defender 下載法規合規性報告。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 46, "type": "truefalse", "question": "46. 單一Microsoft 帳戶可用於管理多個 Azure 訂用帳戶。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 47, "type": "truefalse", "question": "47. 兩個 Azure 訂用帳戶可合併為單一訂用帳戶。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 48, "type": "truefalse", "question": "48. 公司可以使用多個 Azure 訂用帳戶的資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 49, "type": "truefalse", "question": "49. 唯讀鎖定會防止使用者刪除 Azure 資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 50, "type": "truefalse", "question": "50. 使用者可以修改已套用刪除鎖定的 Azure 資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 51, "type": "truefalse", "question": "51. 所有 Azure 資源都會繼承指派給其上層資源群組的鎖定。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 52, "type": "truefalse", "question": "52. 使用按使用量計費的方案時,所有傳送到雲端裝載之虛擬機器的資料,或從該機器中接收的資料,一律支付固定的費率。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 53, "type": "truefalse", "question": "53. 使用按使用量計費的方案時,因為只要支付所需的額外容量,所以可以降低整體成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 54, "type": "truefalse", "question": "54. 無伺服器運算是按使用量計費的方案範例。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 55, "type": "truefalse", "question": "55. Azure 中國由 Microsoft 營運。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 56, "type": "truefalse", "question": "56. Azure Government 由 Microsoft 營運。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 57, "type": "truefalse", "question": "57. Azure Government 僅適用於美國政府機構及其合作夥伴。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 58, "type": "truefalse", "question": "58. 若要實作 Azure Multi-Factor Authentication(MFA)解決方案,您必須將內部部署身分識別同步至雲端。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 59, "type": "truefalse", "question": "59. Azure Multi-Factor Authentication(MFA)有兩種有效方法,就是照片識別與護照號碼。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 60, "type": "truefalse", "question": "60. 系統管理與非系統管理使用者帳戶皆可要求 Azure Multi-Factor Authentication(MFA)。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 61, "type": "truefalse", "question": "61. 部署到資源群組的所有 Azure 資源都必須位於相同的 Azure 區域。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 62, "type": "truefalse", "question": "62. 如果您將標籤指派給某個資源群組,則該資源群組中的所有 Azure 資源都會獲指派相同的標籤。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 63, "type": "truefalse", "question": "63. 如果您將某個資源群組的管理權限指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 64, "type": "truefalse", "question": "64. 系統管理員可以在 Azure 服務健康狀態中,檢視 Azure 環境中所有服務的健康情況。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 65, "type": "truefalse", "question": "65. 系統管理員可以在 Azure 服務健康狀態中建立規則,以便在 Azure 服務失敗時收到警示。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 66, "type": "truefalse", "question": "66. 系統管理員可以在 Azure 服務健康狀態中防止服務失敗。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 67, "type": "truefalse", "question": "67. Azure DNS 僅支援公用 DNS 網域名稱。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 68, "type": "truefalse", "question": "68. Azure 虛擬機器可以自動在 Azure DNS 中註冊名稱。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 69, "type": "truefalse", "question": "69. Azure DNS 可以裝載自訂 DNS 網域。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 70, "type": "truefalse", "question": "70. 您必須擁有實體伺服器才能使用雲端運算。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 71, "type": "truefalse", "question": "71. 您必須擁有網際網路連線能力才能使用雲端運算。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 72, "type": "truefalse", "question": "72. 提高雲端運算容量的成本低於提高內部部署資料中心運算容量的成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 73, "type": "truefalse", "question": "73. 若您使用軟體即服務(SaaS),則必須套用軟體更新。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 74, "type": "truefalse", "question": "74. 若您使用基礎結構即服務(IaaS),則必須安裝欲使用的軟體。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 75, "type": "truefalse", "question": "75. Azure 備份是一種平台即服務(PaaS)。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 76, "type": "truefalse", "question": "76. 您必須擁有網際網路連線能力才能管理雲端服務。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 77, "type": "truefalse", "question": "77. 您必須安裝管理應用程式才能管理雲端服務。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 78, "type": "truefalse", "question": "78. 您可以從任何新式網頁瀏覽器管理雲端服務。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 79, "type": "truefalse", "question": "79. Azure Resource Manager(ARM)範本是一種基礎結構即程式碼(laC)的範例。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 80, "type": "truefalse", "question": "80. Bicep檔案是一種基礎結構即程式碼(laC)的範例。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 81, "type": "truefalse", "question": "81. Microsoft Excel範本是一種基礎結構即程式碼(laC)的範例。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 82, "type": "truefalse", "question": "82. 建置資料中心基礎設施是一種營運支出(OpEx)成本。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 83, "type": "truefalse", "question": "83. 技術人員的每月薪資是一種營運支出(OpEx)成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 84, "type": "truefalse", "question": "84. 租用軟體是一種營運支出(OpEx)成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 85, "type": "truefalse", "question": "85. Microsoft Purview 會提供資料備份。", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平台，\n它透過資料生命週期管理（保留/刪除規則）和電子文件探索功能協助管理數據，並在內部提供資料目錄、譜系等功能來了解和追蹤資料，\n但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份) \n或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。"}, {"id": 86, "type": "truefalse", "question": "86. Microsoft Purview 會提供資料探索。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 87, "type": "truefalse", "question": "87. Microsoft Purview 會提供資料分類。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 88, "type": "truefalse", "question": "88. 水平調整可以自動增加虛擬機器執行個體的數目。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 89, "type": "truefalse", "question": "89. 垂直調整可以自動為虛擬機器新增額外的記憶體。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 90, "type": "truefalse", "question": "90. 調整可用於根據服務需求降低成本。", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 91, "type": "single", "question": "91. 下列何者是雲端環境中垂直調整的範例?", "options": ["針對現有的 Azure 虛擬機器新增額外的 CPU", "新增額外的 Azure 虛擬桌面工作階段主機", "自動新增額外的 Azure App Service 執行個體", "新增額外的 Azure 虛擬機器"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 92, "type": "single", "question": "92. 貴公司裝載了名為 App1 的會計應用程式,供公司全體客戶使用。 App1 的使用量在每月的前三週都很低,但最後一週卻很高。 Azure 雲端服務有哪一項優點,可支援這類使用模式的成本管理?", "options": ["高可用性", "負載平衡", "彈性", "高延遲"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 93, "type": "single", "question": "93. 裝載於雲端中,並且由 Azure 管理軟體更新的 Microsoft SQL Server 資料庫是一種__________", "options": ["災害復原即服務(DRaaS)。", "基礎結構即服務(IaaS)。", "平台即服務(PaaS)。", "軟體即服務(SaaS)。"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 94, "type": "single", "question": "94. 請問應用程式該使用下列何者,才能與 Azure 互動及管理資源?", "options": ["Azure 命令列介面(CLI)", "Azure Cloud Shell", "API", "Azure Resource Manager(ARM)範本"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 95, "type": "single", "question": "95. __________可以超低折扣提供未使用的 Azure 計算容量。", "options": ["Azure 容器執行個體", "Azure 保留的虛擬機器執行個體", "Azure 現成虛擬機器執行個體", "Azure 虛擬機器擴展集"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 96, "type": "single", "question": "96. 您的公司擁有 Azure 訂用帳戶,其中包含多個區域的資源。 您需要確保系統管理員只能在這些區域中建立資源。 您應該使用下列哪一項?", "options": ["唯讀鎖定", "Azure 原則", "保留", "管理群組"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 97, "type": "single", "question": "97. 當 Microsoft 計劃執行維護,並可能影響部署至 Azure 訂閱的資源時,您需要收到通知。 您應該使用下列哪一項?", "options": ["Azure 監視器", "Azure 服務健康狀態", "Azure Advisor", "Microsoft信任中心"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 98, "type": "single", "question": "98. 以下哪一項會提供 Azure 服務和區域的健康狀態概觀。", "options": ["Azure 監視器", "Azure 資源健康狀態", "Azure 服務健康狀態", "Azure 狀態"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 99, "type": "single", "question": "99. 您要在 Azure Resource Manager 中建立名為 RG1 的資源群組。 您需要防止意外刪除 RG1 中的資源。您應該使用下列哪項設定?", "options": ["部署", "原則", "屬性", "鎖定"], "answer": [4], "weight": 1, "image": "images//q99.jpg", "explanation": ""}, {"id": 100, "type": "single", "question": "100. 如果一個名為 RG1 的資源群組具有刪除鎖定,__________可以刪除 RG1。", "options": ["只有全域管理員群組的成員", "必須先移除刪除鎖定,然後管理員才", "必須先修改 Azure 原則,然後管理員才", "必須先新增 Azure 標籤,然後管理員才"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 101, "type": "single", "question": "101. 您有一些執行 Windows Server 的内部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?", "options": ["Docker", "角色型存取控制(RBAC)", "Azure Arc", "Azure Kubernetes Service(AKS)"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 102, "type": "single", "question": "102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼項目?", "options": ["管理群組", "訂用帳戶", "虛擬網路", "資源群組"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 103, "type": "single", "question": "103. ExpressRoute 是在哪一個 OSI 層運作?", "options": ["第 5 層", "第 2 層", "第 7 層", "第 3 層"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 104, "type": "single", "question": "104. Azure 中國(Azure China)在架構或營運上有什麼特殊之處?", "options": ["由 Microsoft 提供。", "功能等同於 Azure 全球。", "服務只能從中國存取。", "是個別獨立的 Microsoft Azure 執行個體。"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 105, "type": "single", "question": "105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些項目?", "options": ["儲存體帳戶中的檔案服務", "虛擬機器資料磁碟", "Azure SQL 資料庫", "儲存體帳戶中的 Blob 服務"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 106, "type": "single", "question": "106. ____________是一項實體移轉服務,用以快速、便宜且可靠地傳輸大量資料。", "options": ["Azure 資料箱", "Azure Databricks", "Azure 檔案同步", "Azure Migrate"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 107, "type": "single", "question": "107. 您計劃將 20 部 Azure 虛擬機器部署至 Azure 環境。為了確保一部名為VM1 的虛擬機器無法連線到其他虛擬機器,VM1 必須____________", "options": ["部署至不同的虛擬網路。", "執行與其他虛擬機器不同的作業系統。", "部署至不同的資源群組。", "具有兩個網路介面。"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 108, "type": "single", "question": "108. 您可以將 Azure 原則定義指派給____________", "options": ["容器應用程式。", "資源群組", "資源鎖定。", "安全性群組。"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 109, "type": "single", "question": "109. 您可以使用____________以確保雲端資源始終符合公司標準和法規要求。", "options": ["彈性", "水平縮放", "角色型存取控制(RBAC)", "ARM 範本"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 110, "type": "single", "question": "110. 許多 Azure 資源會要求您指定應該部署的目標____________", "options": ["地理位置", "區域", "資料中心", "城市"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 111, "type": "single", "question": "111. 即使 Azure 虛擬機器的狀態為已停止(已解除配置),您仍將繼續支付____________", "options": ["計算容量的費用", "I/O 作業的費用", "網路的費用", "儲存體的費用"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 112, "type": "single", "question": "112. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure 虛擬機器:___________", "options": ["基礎結構即服務(IaaS)", "平台即服務(PaaS)", "軟體即服務(SaaS)"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 113, "type": "single", "question": "113. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure SQL 資料庫:___________", "options": ["基礎結構即服務(IaaS)", "平台即服務(PaaS)", "軟體即服務(SaaS)"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 114, "type": "single", "question": "114. ___________可確保 Azure 服務具有備援能力並防止資料中心故障。", "options": ["可用性區域", "Azure 原則", "Azure 服務健康狀態", "本地備援儲存體(LRS)"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 115, "type": "single", "question": "115. ___________是用來將相關的 Azure 原則分組。", "options": ["計劃", "管理群組", "參數", "資源群組"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 116, "type": "single", "question": "116. 當您需要同時委派權限給多部 Azure 虛擬機器時,您必須___________", "options": ["將 Azure 虛擬機器部署至同一個 Azure 區域。", "使用相同的 Azure Resource Manager 範本部署 Azure 虛擬機器。", "將 Azure 虛擬機器部署至同一個資源群組。", "將 Azure 虛擬機器部署至同一個可用性區域。"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 117, "type": "single", "question": "117. ___________支援内部部署儲存體與 Azure 儲存體之間的同步處理。", "options": ["Azure Blob 儲存體", "Azure 檔案儲存體", "Azure 佇列儲存體", "Azure 表格儲存體"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 118, "type": "single", "question": "118. Azure 容器執行個體是一種 Azure___________", "options": ["計算服務。", "身分識別服務。", "網路服務。", "儲存體服務"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 119, "type": "single", "question": "119. ___________讓組織能夠管理多個訂用帳戶間的 Azure 資源合規性。", "options": ["資源群組", "管理群組", "Azure 原則", "Azure App Service"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 120, "type": "single", "question": "120. 儲存在 Azure 儲存體帳戶封存存取層中的資料___________", "options": ["隨時都可以使用 azcopy.exe 來存取。", "只能使用 Azure 備份來讀取。", "必須先還原,才能存取資料。", "必須先解除凍結,才能存取資料。"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 121, "type": "single", "question": "121. 查詢內部部署 Microsoft SQL 伺服器的 Azure Web 應用程式是____________雲端範例。", "options": ["混合式", "多供應商", "私人", "公用"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 122, "type": "single", "question": "122. 需要使用者在登入 Microsoft Entra 時輸入密碼並提供單次密碼是一種____________", "options": ["企業對客戶(B2C)識別服務。", "受控識別。", "多重要素驗證(MFA)。", "角色型存取控制(RBAC)。"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 123, "type": "single", "question": "123. 您有一個具有唯讀鎖定的儲存體帳戶。 請問帳戶擁有者可以對儲存體帳戶執行下列哪一項動作?", "options": ["將[鎖定類型]設定為[刪除]。", "修改儲存體帳戶的權限。", "重新命名鎖定。", "移除鎖定。"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 124, "type": "single", "question": "124. 您有一個在 Azure 中執行的 Web 應用程式。 您需要確認在使用者瀏覽器中載入網頁所需的時間。 您應該使用下列何者?", "options": ["Log Analytics", "Azure 網路監看員", "Azure 監視器警示", "Azure 監視器的 Application Insights"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 125, "type": "single", "question": "125. 您可以在 Azure 中使用____________傳送電子郵件警示, 當 Azure 訂用帳戶於目前計費週期的費用超過指定限制時。", "options": ["Advisor 建議", "存取控制(IAM)", "預算警示", "合規性"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 126, "type": "single", "question": "126. 如果系統管理員停止 Azure 虛擬機器,您可以使用下列何者來自動傳送警示?", "options": ["Azure 網路監看員", "Azure 監視器", "Azure 服務健康狀態", "Azure Advisor"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 127, "type": "single", "question": "127. 您的公司有一個 Azure 訂用帳戶和三個業務單位。 您計劃為每個業務單位部署新的資源。 您需要確保部署新的資源時會利用一種可重複且可靠的方法,將相同的設定套用至每項資源。 您應該使用下列何者?", "options": ["Azure 原則", "Azure Resource Manager(ARM)範本", "資源群組", "Azure Arc"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 128, "type": "single", "question": "128. 您的公司擁有一份包含多項資源的 Azure 訂用帳戶。 您需要確認哪一個部門該為每項資源的成本負責。 您應該使用下列何者?", "options": ["標籤", "警示", "預算"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 129, "type": "single", "question": "129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同類型的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些項目?", "options": ["Azure API 管理服務", "虛擬機器擴展集", "管理群組", "Azure Resource Manager 範本"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 130, "type": "single", "question": "130. 您的公司擁有 Azure 訂用帳戶,其中包含多個區域的資源。 您需要確保系統管理員只能在這些區域中建立資源。 您應該使用下列哪一項?", "options": ["Azure 原則", "管理群組", "唯讀鎖定", "保留"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 131, "type": "single", "question": "131. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源類型」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源類型。VNET1____________", "options": ["會自動遭刪除。", "會自動移至另一個資源群組。", "會持續正常運作。", "目前是唯讀物件。"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 132, "type": "single", "question": "132. 自動調整是一種____________", "options": ["敏捷度。", "彈性。", "地理位置散發。", "可預測性。"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 133, "type": "single", "question": "133. Azure Cosmos DB是____________供應項目的範例。", "options": ["平台即服務(PaaS)", "基礎結構即服務(IaaS)", "內容即服務", "軟體即服務(SaaS)"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 134, "type": "single", "question": "134. 當雲端應用程式可以配置及釋放資源時,就表示它具有____________", "options": ["彈性。", "治理能力。", "高可用性。", "可預測性。"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 135, "type": "single", "question": "135. 能購買的 Azure 保留的 VM 執行個體最長天期為何?", "options": ["4年", "5年", "3年", "1年"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 136, "type": "single", "question": "136. 在軟體即服務(SaaS)雲端服務中,哪一項責任由 Microsoft 與客戶共同承擔?", "options": ["作業系統更新", "身分識別和目錄基礎結構管理", "應用程式管理", "資訊和資料管理"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 137, "type": "single", "question": "137. 您擁有 50 部裝載於內部部署的虛擬機器與 50 部裝載於 Azure 中的虛擬機器。這些內部部署虛擬機器與 Azure 虛擬機器皆相互連線。 這是下列何種雲端模型?", "options": ["混合式", "私人", "公用"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 138, "type": "single", "question": "138. 您可以在 Azure 中使用____________傳送電子郵件警示,當 Azure 訂用帳戶於目前計費週期的費用超過指定限制時。", "options": ["Advisor建議", "存取控制(IAM)", "預算警示", "合規性"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 139, "type": "single", "question": "139. 您必須使用 Azure Cloud Shell 管理 Azure。您該選取哪個 Azure入口網站圖示?\n 1 2 3 4", "options": ["1", "2", "3", "4"], "answer": [1], "weight": 1, "image": "images//q139.jpg", "explanation": ""}, {"id": 140, "type": "single", "question": "140. 您可以使用____________提出節省成本的建議。", "options": ["Application Insights", "Azure Advisor", "Azure 資源標籤", "Azure 服務健康狀態"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 141, "type": "single", "question": "141. 您在資料中心的 Hyper-V 主機上裝載了1,000部虛擬機器。 您計劃將所有虛擬機器全都移轉至 Azure 隨用隨付訂閱。 您必須確定適用於所規劃Azure 解決方案的支出模型。 您應該確定哪個支出模型?", "options": ["運營型", "可調整型", "彈性型", "資本型"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 142, "type": "single", "question": "142. Application Insights 這項功能屬於下列哪一個 Azure 服務?", "options": ["Azure Advisor", "Azure 應用程式閘道", "Azure Arc", "Azure 監視器"], "answer": [4], "weight": 1, "image": null, "explanation": ""}, {"id": 143, "type": "single", "question": "143. 雲端服務提供者的服務等級協定(SLA)會將 _______ 表示成指定一年內運作時間的百分比。", "options": ["可用性", "彈性", "可靠性", "可擴縮性"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 144, "type": "single", "question": "144. 哪一種雲端運算模型包含內部部署與雲端架構資源?", "options": ["混合式", "公用", "私人"], "answer": [1], "weight": 1, "image": null, "explanation": ""}, {"id": 145, "type": "single", "question": "145. ______ 可讓使用者使用單一登入 (SSO) 向多個應用程式進行驗證。", "options": ["Azure 中的應用程式安全性群組", "Microsoft Entra ID", "Azure Key Vault", "適用於雲端的 Microsoft Defender"], "answer": [2], "weight": 1, "image": null, "explanation": ""}, {"id": 146, "type": "single", "question": "146. 您可以使用 ______ 對物件進行邏輯分組以報告部門成本和跟蹤預算。", "options": ["Azure 原則", "Azure 服務健康狀態", "資源標籤", "安全性群組"], "answer": [3], "weight": 1, "image": null, "explanation": ""}, {"id": 147, "type": "multiple", "question": "147. 您擁有 Azure 環境。 您需要在執行 Android 作業系統的平板電腦中建立新的 Azure 虛擬機器。 下列哪三種是可行的解決方案?", "options": ["在 Azure Cloud Shell 中使用 Power Shell。", "使用 Power Apps 入口網站。", "使用安全性與合規性系統管理中心。", "使用 Azure 入口網站。", "在 Bash 中使用Azure Cloud Shell。"], "answer": [1, 4, 5], "weight": 1, "image": null, "explanation": ""}, {"id": 148, "type": "multiple", "question": "148. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?每個正確答案都呈現一個完整的解決方案。", "options": ["作業系統的安裝和設定", "資料中心基礎結構的實體安全性", "網路設定", "儲存體的設定和維護", "維護硬體"], "answer": [2, 5], "weight": 1, "image": null, "explanation": ""}, {"id": 149, "type": "multiple", "question": "149. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?", "options": ["儲存體的設定和維護", "網路設定", "資料中心基礎結構的實體安全性", "作業系統的安裝和設定", "維護硬體"], "answer": [3, 5], "weight": 1, "image": null, "explanation": ""}, {"id": 150, "type": "multiple", "question": "150. 您需要管理容器。您可以使用哪兩項服務?", "options": ["Azure 虛擬機器", "Azure 容器執行個體", "Azure 虛擬桌面", "Azure Functions", "Azure Kubernetes Service(AKS)"], "answer": [2, 5], "weight": 1, "image": null, "explanation": ""}, {"id": 151, "type": "multiple", "question": "151. 您計劃降低持續的 Azure 支出。 您需要確認影響資源成本的因素。 您應該指定哪三個因素?每個正確答案都呈現一個完整的解決方案。", "options": ["服務層", "輸出資料量", "Azure 區域", "處理的資料類型", "輸入資料量"], "answer": [1, 2, 3], "weight": 1, "image": null, "explanation": ""}, {"id": 152, "type": "multiple", "question": "152. Azure 系統管理員打算執行可建立 Azure 資源的 PowerShell 指令碼。 您需要建議執行此指令碼所用的電腦組態。 哪三部電腦可以執行此指令碼?", "options": ["執行 Windows10 且安裝了 Azure PowerShell 模組的電腦", "執行 macOS 且安裝了 PowerShell 的電腦", "執行 Linux 且安裝了 Azure CLI 工具的電腦", "執行 Windows 11 且安裝了 Azure CLI 工具的電腦", "執行 ChromeOS 且使用 Azure Cloud Shell 的電腦"], "answer": [1, 2, 5], "weight": 1, "image": null, "explanation": ""}, {"id": 153, "type": "multioption", "question": "153. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:\n- 您必須能夠修改App1的程式碼。\n- 投入管理App1作業系統的資源必須降至最少。\n- App2必須能夠與伺服器的作業系統互動。\n這兩個應用程式各應使用何種類型的雲端服務?\nApp1: (A)\nApp2: (B)", "options": ["1.基礎結構即服務(laaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)", "1.基礎結構即服務(laaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)"], "answer": [2, 1], "weight": 1, "image": null, "explanation": ""}, {"id": 154, "type": "multioption", "question": "154. 請將雲端服務與適當的描述進行配對。\n描述:\nA. 針對雲端環境提供最大控制能力。\nB. 針對資料庫設計提供最大控制能力,但不需要維護作業系統。\nC. 用來裝載Azure虛擬機器。", "options": ["1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)", "1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)", "1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)"], "answer": [1, 2, 1], "weight": 1, "image": null, "explanation": ""}, {"id": 155, "type": "multioption", "question": "155. 雲端模型有三種:混合雲端、私人雲端、公共雲端,請依描述進行配對。\n描述:\nA. 無需資本支出。\nB. 可提供對安全性的完整控制權。\nC. 可選擇使用內部部署資源或雲端式資源。", "options": ["1.混合雲端|2.公共雲端|3.私人雲端", "1.混合雲端|2.公共雲端|3.私人雲端", "1.混合雲端|2.公共雲端|3.私人雲端"], "answer": [3, 2, 1], "weight": 1, "image": null, "explanation": ""}, {"id": 156, "type": "multioption", "question": "156. 請將 Azure 儲存體服務與適當的描述配對。\n作答區\n(A)用於應用程式之間的可靠傳訊\n(B)可當做 Windows 裝置中的網路共用存取\n(C)可設定成使用封存存取層", "options": ["1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體", "1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體", "1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體"], "answer": [4, 3, 1], "weight": 1, "image": null, "explanation": ""}, {"id": 157, "type": "multioption", "question": "157. 您需要完成資料中心內使用的縱深防禦策略。應採取什麼措施?\n請依照順序作答:", "options": ["1.實體安全性|2.周邊|3.應用程式|4.以上皆非", "1.實體安全性|2.周邊|3.應用程式|4.以上皆非", "1.實體安全性|2.周邊|3.應用程式|4.以上皆非"], "answer": [1, 2, 3], "weight": 1, "image": "images//q157.jpg", "explanation": ""}, {"id": 158, "type": "multioption", "question": "158. 您需要根據雲端服務模型識別客戶的共同責任層級。 依照從最高客戶責任層級(頂端)到最低客戶責任層級(底部)的排列方式,您應該按照哪一種順序排列每個模型?", "options": ["1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)", "1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)", "1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)"], "answer": [3, 2, 1], "weight": 1, "image": null, "explanation": ""}, {"id": 159, "type": "multioption", "question": "159. 請將驗證方法與適當的安全性層級依照順序進行配對。", "options": ["1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證", "1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證", "1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證"], "answer": [1, 3, 2], "weight": 1, "image": "images//q159.jpg", "explanation": ""}];
+    
+    // State
+    let currentIndex = 0;
+    let visitedSet = new Set();
+    const STORAGE_KEY = 'its_python_visited_v1';
+    const INDEX_KEY = 'its_python_current_idx_v1';
+
+    const typeMapping = {
+        'single': '單選題',
+        'multiple': '複選題',
+        'multioption': '題組'
+    };
+
+    function loadState() {
+        const savedVisited = localStorage.getItem(STORAGE_KEY);
+        if (savedVisited) {
+            visitedSet = new Set(JSON.parse(savedVisited));
+        }
+        const savedIndex = localStorage.getItem(INDEX_KEY);
+        if (savedIndex !== null) {
+            currentIndex = parseInt(savedIndex, 10);
+            if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= quizData.length) {
+                currentIndex = 0;
+            }
+        }
+    }
+
+    function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...visitedSet]));
+        localStorage.setItem(INDEX_KEY, currentIndex.toString());
+    }
+
+    function resetProgress() {
+        if(confirm('確定要清除所有閱讀進度嗎？')) {
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(INDEX_KEY);
+            location.reload();
+        }
+    }
+
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
+    }
+
+    function checkAnswer(element, qIdx, optIdx, event) {
+        const item = quizData[qIdx];
+        const isMultiple = item.type === 'multiple';
+        let answers = item.answer;
+        if (!Array.isArray(answers)) answers = [answers];
+        const correctIndices = answers.map(a => parseInt(a) - 1);
+        const input = element.querySelector('input');
+
+        if (event && event.target !== input) {
+            // Clicked on div/label, manually toggle input
+            if (isMultiple) {
+                input.checked = !input.checked;
+            } else {
+                input.checked = true;
+            }
+        }
+        // If clicked on input directly, browser handles toggle.
+
+        if (!isMultiple) {
+            // Single choice - prevent multiple clicks
+            if (item.answered) return;
+            item.answered = true;
+
+            // Disable all inputs for this question
+            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
+            inputs.forEach(i => i.disabled = true);
+
+            if (correctIndices.includes(optIdx)) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct one
+                const correctInput = document.querySelector(`input[name="q${qIdx}"][id="o${correctIndices[0]}"]`);
+                if (correctInput) correctInput.closest('.option-item').classList.add('correct');
+            }
+            // Auto show answer section
+            const el = document.getElementById('ans-section');
+            el.style.display = 'block';
+        } else {
+            // Multiple choice - allow toggling and re-evaluating
+            if (input.checked) {
+                if (correctIndices.includes(optIdx)) {
+                    element.classList.add('correct');
+                    element.classList.remove('incorrect');
+                } else {
+                    element.classList.add('incorrect');
+                    element.classList.remove('correct');
+                }
+            } else {
+                element.classList.remove('correct');
+                element.classList.remove('incorrect');
+            }
+        }
+    }
+
+    function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {
+        const item = quizData[qIdx];
+        let answers = item.answer;
+        if (!Array.isArray(answers)) answers = [answers];
+        const correctSubIdx = parseInt(answers[optIdx]) - 1;
+        const input = element.querySelector('input');
+
+        if (event && event.target !== input) {
+            input.checked = true;
+        }
+
+        if (element.classList.contains('correct') || element.classList.contains('incorrect')) return;
+
+        // Disable other radios in this sub-question group
+        const inputs = document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`);
+        inputs.forEach(i => i.disabled = true);
+
+        if (subIdx === correctSubIdx) {
+            element.classList.add('correct');
+        } else {
+            element.classList.add('incorrect');
+            // Highlight correct one
+            const correctInput = document.getElementById(`o${optIdx}_s${correctSubIdx}`);
+            if (correctInput) correctInput.parentElement.classList.add('correct');
+        }
+    }
+
+    function renderQuestion(index) {
+        if (index < 0) index = 0;
+        if (index >= quizData.length) index = quizData.length - 1;
+        currentIndex = index;
+
+        visitedSet.add(index);
+        saveState();
+
+        const item = quizData[index];
+        const container = document.getElementById('question-container');
+        
+        container.innerHTML = '';
+
+        const card = document.createElement('div');
+        card.className = 'card question-card';
+
+        // Header
+        const typeLabel = typeMapping[item.type] || '單選題';
+        card.innerHTML += `
+            <div class="question-header">
+                <div>
+                    <span class="fs-5 me-2">Question ${index + 1}</span>
+                    <span class="badge bg-light text-dark border">${typeLabel}</span>
+                </div>
+                <div class="text-muted small">Total: ${quizData.length}</div>
+            </div>
+        `;
+
+        // Body
+        const body = document.createElement('div');
+        body.className = 'question-body';
+        
+        let qText = (item.question || '').replace(/●/g, '<br/>●');
+        body.innerHTML += `<div class="mb-4">${qText}</div>`;
+
+        if (item.image) {
+            body.innerHTML += `<div class="text-center mb-4"><img src="${item.image}" class="question-image" alt="Question Image"></div>`;
+        }
+
+        // Options
+        const options = item.quiz || item.options || [];
+        let optionsHtml = '<div class="mt-4">';
+        let isComplex = options.some(opt => typeof opt === 'string' && opt.includes('|'));
+
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            
+            if (optStr.includes('|')) {
+                const subOpts = optStr.split('|');
+                optionsHtml += `<div class="sub-question-label">Quiz ${optIdx + 1}</div>`;
+                optionsHtml += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => {
+                    optionsHtml += `
+                        <div class="form-check form-check-inline p-2 border rounded bg-light sub-opt-container" onclick="checkSubAnswer(this, ${index}, ${optIdx}, ${subIdx}, event)">
+                            <input class="form-check-input" type="radio" name="q${index}_opt${optIdx}" id="o${optIdx}_s${subIdx}">
+                            <label class="form-check-label ms-1" style="cursor:pointer" for="o${optIdx}_s${subIdx}">
+                                (${subIdx+1}) ${sub}
+                            </label>
+                        </div>
+                    `;
+                });
+                optionsHtml += `</div>`;
+            } else {
+                optionsHtml += `
+                    <div class="option-item" onclick="checkAnswer(this, ${index}, ${optIdx}, event)">
+                        <div class="form-check">
+                            <input class="form-check-input" type="${item.type === 'multiple' ? 'checkbox' : 'radio'}" 
+                                   name="q${index}" id="o${optIdx}" style="transform: scale(1.2); margin-top: 0.3rem;">
+                            <label class="form-check-label w-100 ps-2" for="o${optIdx}" style="cursor:pointer">
+                                ${optIdx + 1}. ${optStr}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        optionsHtml += '</div>';
+        body.innerHTML += optionsHtml;
+
+        // Footer Actions
+        const footer = document.createElement('div');
+        footer.className = 'mt-5 pt-4 border-top text-center';
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-primary px-4';
+        btn.innerHTML = '👁️ 顯示答案 / 解析';
+        btn.onclick = () => {
+            const el = document.getElementById('ans-section');
+            if(el.style.display === 'block') {
+                el.style.display = 'none';
+                btn.classList.remove('active');
+            } else {
+                el.style.display = 'block';
+                btn.classList.add('active');
+                // Scroll to answer if it's far down
+                setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100);
+            }
+        };
+        footer.appendChild(btn);
+
+        // Answer Section
+        const answerDiv = document.createElement('div');
+        answerDiv.id = 'ans-section';
+        answerDiv.className = 'answer-section text-start';
+        
+        let ansDisplay = '';
+        let answers = item.answer;
+        if (!Array.isArray(answers)) answers = [answers];
+
+        if (isComplex) {
+            let mappedAnswers = [];
+            answers.forEach((ans, i) => {
+                if (i < options.length) {
+                    const optStr = String(options[i]);
+                    if (optStr.includes('|')) {
+                        const subs = optStr.split('|');
+                        const ansIdx = parseInt(ans) - 1;
+                        if (subs[ansIdx]) {
+                            mappedAnswers.push(`Quiz ${i+1}: <b>${subs[ansIdx]}</b>`);
+                        } else {
+                            mappedAnswers.push(`Quiz ${i+1}: ${ans}`);
+                        }
+                    } else {
+                        mappedAnswers.push(`${ans}`);
+                    }
+                }
+            });
+            ansDisplay = mappedAnswers.join(', ');
+        } else {
+            ansDisplay = answers.join(', ');
+        }
+
+        answerDiv.innerHTML = `
+            <h5 class="mb-3">正確答案:</h5>
+            <div class="alert alert-success fs-5 fw-bold">${ansDisplay}</div>
+            <h5 class="mb-3 mt-4">解析:</h5>
+            <div class="explanation">${(item.explanation || '暫無解析。').replace(/●/g, '<br/>●')}</div>
+        `;
+        
+        footer.appendChild(answerDiv);
+        body.appendChild(footer);
+        card.appendChild(body);
+        container.appendChild(card);
+
+        updateUI();
+        Prism.highlightAll();
+        
+        // Auto-close sidebar on mobile after selection
+        if (window.innerWidth < 992) {
+            document.getElementById('sidebar').classList.remove('active');
+        }
+    }
+
+    function nextQuestion() {
+        if (currentIndex < quizData.length - 1) {
+            renderQuestion(currentIndex + 1);
+            window.scrollTo(0, 0);
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            renderQuestion(currentIndex - 1);
+            window.scrollTo(0, 0);
+        }
+    }
+    
+    function jumpTo(index) {
+        renderQuestion(index);
+    }
+
+    function updateUI() {
+        // Update Buttons
+        document.getElementById('btn-prev').disabled = (currentIndex === 0);
+        document.getElementById('btn-next').disabled = (currentIndex === quizData.length - 1);
+        
+        // Update Sidebar Stats
+        document.getElementById('progress-stats').innerText = `${visitedSet.size} / ${quizData.length}`;
+
+        // Update Grid
+        const grid = document.getElementById('progress-grid');
+        if (grid.children.length !== quizData.length) {
+            grid.innerHTML = '';
+            quizData.forEach((_, idx) => {
+                const node = document.createElement('div');
+                node.className = 'q-node';
+                node.innerText = idx + 1;
+                node.onclick = () => jumpTo(idx);
+                node.id = `node-${idx}`;
+                grid.appendChild(node);
+            });
+        }
+
+        // Update Grid Classes
+        for (let i = 0; i < quizData.length; i++) {
+            const node = document.getElementById(`node-${i}`);
+            if (node) {
+                node.className = 'q-node';
+                if (i === currentIndex) node.classList.add('active');
+                else if (visitedSet.has(i)) node.classList.add('visited');
+            }
+        }
+    }
+
+    // Init
+    loadState();
+    renderQuestion(currentIndex);
+
+</script>
+</body>
+</html>

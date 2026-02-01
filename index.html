@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS 認證模擬測驗入口</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #003d99 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .exam-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            background: #fff;
+        }
+        .exam-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #0d6efd;
+        }
+        .start-btn {
+            border-radius: 20px;
+            padding: 8px 25px;
+        }
+        footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">ITS 認證模擬測驗</h1>
+        <p class="lead">請選擇您要練習的考科，開始模擬測試。</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4">
+        <!-- Python -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='ITS_Python/ITS_Python.html'">
+                <div class="card-icon">🐍</div>
+                <h3 class="card-title">ITS Python</h3>
+                <p class="card-text text-muted">程式設計核心能力測驗</p>
+                <div class="mt-auto">
+                    <a href="ITS_Python/ITS_Python.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='ITS_Database/ITS_Database.html'">
+                <div class="card-icon">🗄️</div>
+                <h3 class="card-title">ITS Database</h3>
+                <p class="card-text text-muted">資料庫行政與管理測驗</p>
+                <div class="mt-auto">
+                    <a href="ITS_Database/ITS_Database.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='ITS_AI/ITS_AI.html'">
+                <div class="card-icon">🤖</div>
+                <h3 class="card-title">ITS AI</h3>
+                <p class="card-text text-muted">人工智慧核心能力測驗</p>
+                <div class="mt-auto">
+                    <a href="ITS_AI/ITS_AI.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI-900 -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='AI900/AI900.html'">
+                <div class="card-icon">☁️</div>
+                <h3 class="card-title">Azure AI-900</h3>
+                <p class="card-text text-muted">Microsoft AI Fundamentals</p>
+                <div class="mt-auto">
+                    <a href="AI900/AI900.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AZ-900 -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='AZ900/AZ900.html'">
+                <div class="card-icon">💻</div>
+                <h3 class="card-title">Azure AZ-900</h3>
+                <p class="card-text text-muted">Microsoft Azure Fundamentals</p>
+                <div class="mt-auto">
+                    <a href="AZ900/AZ900.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI -->
+        <div class="col-md-4">
+            <div class="card exam-card text-center p-4" onclick="location.href='Generative_AI/Generative_AI.html'">
+                <div class="card-icon">✨</div>
+                <h3 class="card-title">Generative AI</h3>
+                <p class="card-text text-muted">生成式人工智慧基礎測驗</p>
+                <div class="mt-auto">
+                    <a href="Generative_AI/Generative_AI.html" class="btn btn-primary start-btn">開始測驗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center">
+    <div class="container">
+        <p>&copy; 2026 ITS Exam Simulator. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('SW registered'))
+        .catch(err => console.log('SW failed', err));
+    });
+  }
+</script>
+</body>
+</html>
