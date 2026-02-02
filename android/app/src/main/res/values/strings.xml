@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ITS Exam</string>
+    <string name="title_activity_main">ITS Exam</string>
+    <string name="package_name">com.itsexam.app</string>
+    <string name="custom_url_scheme">com.itsexam.app</string>
+</resources>

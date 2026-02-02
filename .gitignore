@@ -1,0 +1,10 @@
+node_modules/
+android_sdk_copy/
+dist/
+.DS_Store
+*.apk
+*.log
+yes.txt
+# Ignore Python cache
+__pycache__/
+*.pyc

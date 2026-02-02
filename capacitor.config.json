@@ -1,0 +1,8 @@
+{
+  "appId": "com.itsexam.app",
+  "appName": "ITS Exam",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
