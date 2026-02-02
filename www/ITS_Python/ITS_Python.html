@@ -264,6 +264,33 @@
             color: #fff;
             transform: scale(0.95);
         }
+    
+        /* --- Width Fix V16 --- */
+        pre, code {
+            white-space: pre-wrap !important;       /* 讓程式碼自動換行 */
+            word-wrap: break-word !important;
+            word-break: break-all !important;
+        }
+        .question-body {
+            padding: 20px !important;               /* 縮小內邊距，增加顯示寬度 */
+        }
+        .content-area {
+            padding: 15px !important;
+        }
+        img, .question-image {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        @media (max-width: 576px) {
+            .question-body {
+                padding: 10px !important;
+            }
+            .content-area {
+                padding: 10px !important;
+            }
+        }
+        /* --------------------- */
+
     </style>
 </head>
 <body>
