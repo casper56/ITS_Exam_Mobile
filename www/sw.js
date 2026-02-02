@@ -1,4 +1,4 @@
-const CACHE_NAME = 'its-exam-v12';
+const CACHE_NAME = 'its-exam-v13';
 const URLS_TO_CACHE = [
   './index.html',
   './ITS_Python/ITS_Python.html',
