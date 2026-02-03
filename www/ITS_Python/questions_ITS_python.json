@@ -41,7 +41,7 @@
     },
     {
         "id": 3,
-        "type": "multiple",
+        "type": "single",
         "question": "3. 【CH01-3】你正在編寫一個計算使用者出生年份的程式，\n該程式詢問使用者的年齡和當前年份，\n然後輸出使用者的出生年份。\n你編寫以下程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">age = input(\"Enter your age: \")\nyear = input(\"Enter the four digit year: \")\nborn = eval(year) - eval(age)\n04 message = \"You were born in \" + str(born)\n</code></pre>\n下列選項正確答案為？",
         "options": [
             "第 1 行中的 age 的資料類型是 str",
@@ -725,7 +725,7 @@
     {
         "id": 41,
         "type": "multioption",
-        "question": "41. 【CH04-11】某間公司需要有人協助更新他們的檔案系統。\n您必須建立一個執行下列動作的簡易檔案操作程式：<pre><code class=\"language-python\">1. 查看檔案是否存在。\n2. 如果檔案存在，則顯示其內容。</code></pre>請選取正確的程式碼片段以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\nA. os.path.isfile('myFile.txt)\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>",
+        "question": "41. 【CH04-11】某間公司需要有人協助更新他們的檔案系統。\n您必須建立一個執行下列動作的簡易檔案操作程式：<pre><code class=\"language-python\">1. 查看檔案是否存在。\n2. 如果檔案存在，則顯示其內容。</code></pre>請選取正確的程式碼片段以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\nA. os.path.isfile('myFile.txt')\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>",
         "options": [
             "A|B|C|D",
             "A|B|C|D"

@@ -6,274 +6,103 @@
     <title>ITS Python 模擬測驗</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Prism.js for Syntax Highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- Prism.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
     <style>
         body {
             background-color: #f8f9fa;
             font-family: "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif;
-            overflow-y: scroll; /* Always show scrollbar to prevent shift */
+            overflow-y: scroll;
         }
-        
-        /* Layout */
-        .main-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Sidebar */
+        .main-wrapper { display: flex; min-height: 100vh; }
         .sidebar {
-            width: 280px;
-            background: #fff;
-            border-right: 1px solid #dee2e6;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1000;
-            transition: transform 0.3s ease;
+            width: 280px; background: #fff; border-right: 1px solid #dee2e6;
+            display: flex; flex-direction: column; position: fixed;
+            top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease;
         }
-        
-        .sidebar-header {
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
-            background: #212529;
-            color: #fff;
-        }
-        
-        .sidebar-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-        }
-        
-        .sidebar-footer {
-            padding: 15px;
-            border-top: 1px solid #dee2e6;
-            background: #f8f9fa;
-        }
-
-        /* Main Content */
-        .content-area {
-            flex: 1;
-            margin-left: 280px; /* Match sidebar width */
-            padding: 30px;
-            transition: margin-left 0.3s ease;
-        }
-
-        /* Mobile Responsive */
+        .sidebar-header { padding: 15px; border-bottom: 1px solid #dee2e6; background: #212529; color: #fff; }
+        .sidebar-content { flex: 1; overflow-y: auto; padding: 15px; }
+        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; }
+        .content-area { flex: 1; margin-left: 280px; padding: 30px; transition: margin-left 0.3s ease; }
         @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            .content-area {
-                margin-left: 0;
-            }
-            .mobile-toggle {
-                display: block !important;
-            }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .content-area { margin-left: 0; }
+            .mobile-toggle { display: block !important; }
         }
-
-        /* Question Card */
         .question-card {
-            min-height: 500px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
+            min-height: 500px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #fff; border-radius: 8px; overflow: hidden;
         }
         .question-header {
-            background-color: #fff;
-            border-bottom: 2px solid #0d6efd;
-            padding: 20px;
-            font-weight: bold;
-            color: #0d6efd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 20px;
+            font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center;
         }
-        .question-body {
-            padding: 40px;
-            font-size: 1.1rem;
-        }
-        .question-image {
-            max-width: 100%;
-            height: auto;
-            margin: 15px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Options */
+        .question-body { padding: 40px; font-size: 1.1rem; }
+        .question-image { max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .option-item {
-            list-style: none;
-            margin-bottom: 12px;
-            padding: 15px;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
+            list-style: none; margin-bottom: 12px; padding: 15px; border: 1px solid #e9ecef;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .option-item:hover {
-            background-color: #f8f9fa;
-            border-color: #adb5bd;
-        }
-        .option-item.correct {
-            background-color: #d1e7dd !important;
-            border-color: #badbcc !important;
-            color: #0f5132 !important;
-        }
-        .option-item.incorrect {
-            background-color: #f8d7da !important;
-            border-color: #f5c2c7 !important;
-            color: #842029 !important;
-        }
-        .sub-opt-container.correct {
-            background-color: #d1e7dd !important;
-            border-color: #badbcc !important;
-        }
-        .sub-opt-container.incorrect {
-            background-color: #f8d7da !important;
-            border-color: #f5c2c7 !important;
-        }
-        .sub-question-label {
-            font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #495057;
-            border-left: 4px solid #198754;
-            padding-left: 10px;
-            font-size: 1.05rem;
-        }
-
-        /* Answer Section */
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
+        .option-item.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
+        .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; }
+        .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; }
+        .sub-question-label { font-weight: bold; margin-top: 20px; margin-bottom: 10px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; font-size: 1.05rem; }
         .answer-section {
-            display: none;
-            margin-top: 30px;
-            padding: 25px;
-            background-color: #f0f7ff;
-            border-left: 5px solid #0d6efd;
-            border-radius: 4px;
+            display: none; margin-top: 30px; padding: 25px; background-color: #f0f7ff;
+            border-left: 5px solid #0d6efd; border-radius: 4px;
         }
-
-        /* Grid Nodes */
-        .progress-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-        }
+        .progress-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
         .q-node {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            background-color: #fff;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: #6c757d;
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            border: 1px solid #dee2e6; border-radius: 4px; background-color: #fff;
+            cursor: pointer; font-size: 0.85rem; color: #6c757d;
         }
-        .q-node:hover {
-            background-color: #e9ecef;
-        }
-        .q-node.visited {
-            background-color: #d1e7dd;
-            border-color: #badbcc;
-            color: #0f5132;
-        }
+        .q-node:hover { background-color: #e9ecef; }
+        /* Colors for Grid */
+        .q-node.correct { background-color: #d1e7dd; border-color: #badbcc; color: #0f5132; }
+        .q-node.incorrect { background-color: #f8d7da; border-color: #f5c2c7; color: #842029; }
         .q-node.active {
-            background-color: #0d6efd;
-            color: white;
-            border-color: #0d6efd;
-            font-weight: bold;
-            transform: scale(1.1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            background-color: #0d6efd; color: white; border-color: #0d6efd;
+            font-weight: bold; transform: scale(1.1); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
-        /* Navigation Buttons */
-        .nav-btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            justify-content: center;
-        }
-        .nav-btn {
-            min-width: 120px;
-        }
-
+        .nav-btn-group { display: flex; gap: 15px; margin-top: 30px; justify-content: center; }
+        .nav-btn { min-width: 120px; }
         .mobile-toggle {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1100;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #212529;
-            color: white;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
+            width: 50px; height: 50px; border-radius: 50%; background: #212529;
+            color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-
-        code {
-            font-family: Consolas, Monaco, monospace;
-            color: #d63384;
-            background-color: #f8f9fa;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
+        code { font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <div class="main-wrapper">
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header d-flex justify-content-between align-items-center">
-            <h5 class="m-0">題目列表</h5>
+            <a href="../index.html" class="text-decoration-none text-white me-2" title="回首頁">🏠</a><h5 class="m-0">題目列表</h5>
             <small class="text-white-50" id="progress-stats">0/88</small>
         </div>
-        
         <div class="sidebar-content">
             <div class="d-flex justify-content-between small mb-2 text-muted">
                 <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未讀</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd;border:1px solid #badbcc"></span> 已讀</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#0d6efd"></span> 當前</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd;border:1px solid #badbcc"></span> 答對</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#f8d7da;border:1px solid #f5c2c7"></span> 答錯</span>
             </div>
-            <div class="progress-grid" id="progress-grid">
-                <!-- Grid items generated by JS -->
-            </div>
+            <div class="progress-grid" id="progress-grid"></div>
         </div>
-
         <div class="sidebar-footer">
-            <button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">
-                🗑️ 重置進度
-            </button>
+            <button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">🗑️ 重置進度</button>
         </div>
     </nav>
-
-    <!-- Mobile Toggle -->
-    <button class="mobile-toggle" onclick="toggleSidebar()">
-        ☰
-    </button>
-
-    <!-- Main Content -->
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
     <main class="content-area" id="main-content">
         <div class="container-fluid" style="max-width: 1000px;">
             <h2 class="text-center mb-4">ITS Python 模擬測驗</h2>
-            <div id="question-container">
-                <!-- Question injected here -->
-            </div>
-
+            <div id="question-container"></div>
             <div class="nav-btn-group">
                 <button class="btn btn-secondary nav-btn" id="btn-prev" onclick="prevQuestion()">⬅️ 上一題</button>
                 <button class="btn btn-primary nav-btn" id="btn-next" onclick="nextQuestion()">下一題 ➡️</button>
@@ -282,56 +111,53 @@
     </main>
 </div>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
 <script>
     const quizData = [{"id": 1, "type": "multioption", "question": "1. 【CH01-1】資料型態的檢視：\n你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。\n輸出結果必須盡可能精准。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。\n其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。\n<pre><code class=\"language-python line-numbers line-hight19\">#步速計算器\ndistance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))\n# convert to kilometers\ndistance_kms = distance / 1000\n#輸入已用時間(分鐘)\ntime_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))\n#輸入已用秒數\ntime_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))\ntime time_minute*60+time_se_sec\npace = time / distance_kms\n#平均速度\nprint(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre>\n以上空格分别要填入的函式名為：", "options": ["int|string|float", "int|string|float", "int|string|float"], "answer": [3, 1, 1], "weight": 1, "image": null, "explanation": "● 使用 `float()` 將距離轉為浮點數，因為距離可能有小數（如 1500.5 公尺）。\n● 使用 `int()` 將時間（分鐘和秒）轉為整數，因為這些值應該是整數。"}, {"id": 2, "type": "multioption", "question": "2. 【CH01-2】你正在編寫一個 Python 程式用來記錄客戶資料並將其儲存在資料庫中。\n這個程式處理各種各樣的資料。\n以下的變數宣告後它們的資料類別是？\n<pre><code class=\"language-python\">選項 1. age = 12\n選項 2. minor = False\n選項 3. name = 'David'\n選項 4. weight = 64.5\n選項 5. zip = '545'</code></pre>", "options": ["int|bool|str|float", "int|bool|str|float", "int|bool|str|float", "int|bool|str|float", "int|bool|str|float"], "answer": [1, 2, 3, 4, 3], "weight": 1, "image": null, "explanation": "● 使用 `int()` 將年齡轉為整數，因為年齡應該是整數。\n● 使用 `bool()` 將未成年轉為布林值，因為這是一個是非題。\n● 使用 `str()` 將姓名轉為字串，因為姓名應該是字串。\n● 使用 `float()` 將體重轉為浮點數，因為體重可能有小數（如 64.5 公斤）。\n● 使用 `str()` 將郵遞區號轉為字串，因為郵遞區號應該是字串。"}, {"id": 3, "type": "multiple", "question": "3. 【CH01-3】你正在編寫一個計算使用者出生年份的程式，\n該程式詢問使用者的年齡和當前年份，\n然後輸出使用者的出生年份。\n你編寫以下程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">age = input(\"Enter your age: \")\nyear = input(\"Enter the four digit year: \")\nborn = eval(year) - eval(age)\n04 message = \"You were born in \" + str(born)\n</code></pre>\n下列選項正確答案為？", "options": ["第 1 行中的 age 的資料類型是 str", "第 3 行中的 born 的資料類型是 float", "第 4 行中的 message 的資料類型是 bool"], "answer": [1], "weight": 1, "image": null, "explanation": "● 在第 1 行， `age` 是從使用者輸入獲得的，因此它們的資料類型是字串（str）。\n● 在第 3 行，使用 `eval()` 會進行文字轉數字作業，\n但如果沒有明確指定型別，結果會是動態產生，\n因為 `age` 及 `year` 都是整數型態的字串，\n因此解析下來兩都皆為整數，而整數減掉整數結果仍為整數，\n因此`born`的資料類型是整數 int。\n● 在第 4 行，將浮點數轉換為字串後與另一個字串連接，因此`message`的資料類型應該是字串（str），而不是布林值（bool）。"}, {"id": 4, "type": "multiple", "question": "4. 【CH01-4】在 Python 資料類型的課程中創建以下三個程式碼片段：\n<pre><code class=\"language-python\"># 程式碼片段 1\nx1 = \"5\"\ny1 = 4\na = x1 * y1\n# 程式碼片段 2\nx2 = 10\ny2 = 4\nb = x2 / y2\n# 程式碼片段 3\nx3 = 5.5\ny3 = 1\nc = x3 / y3</code></pre>", "options": ["執行程式碼片段 1 後，變數 a 的資料類為 str。", "執行程式碼片段 2 後，變數 b 的資料類型是 float", "執行程式碼片段 3 後，變數 c 的資料類型為 int"], "answer": [1, 2], "weight": 1, "image": null, "explanation": "● 在 `程式碼片段 1` 中，`x1`是字串類型，`y1`是整數類型，\n在 Python 中，當你使用乘法運算子 * 在一個字串和一個整數之間時，\n它執行的不是數學上的乘法，而是 `字串重複`。\n因此為會將字串 `5` 重複 4 次 = `5555`，因此變數 a 的資料類型仍然是字串（str）。\n● 在 `程式碼片段 2 `中，`x2` 和 `y2` 都是整數類型，除法運算會產生浮點數，因此變數 b 的資料類型是浮點數（float）。\n● 在`程式碼片段 3` 中，`x3`是浮點數，除以整數`y3`後結果仍然是浮點數，因此變數 c 的資料類型也是浮點數，而不是整數（int）。"}, {"id": 5, "type": "single", "question": "5. 【CH01-5】在 Python 程式中我們利用 type() 查詢每個值的資料類別，以下的程式執行後出現的資料類別分別是：\n<pre><code class=\"language-python line-numbers line-hight19\">type (+1E10)\ntype(5.0)\ntype (\"True\")\ntype(False)</code></pre>", "options": ["int,  int,  bool,  bool", "float,  float,  str,  bool", "int,  float,  str,  bool", "float,  int,  str,  str"], "answer": [2], "weight": 1, "image": null, "explanation": "● `+1E10` 是科學記數法表示的浮點數，`type(+1E10)` 返回 `float`。\n● `5.0` 是浮點數，`type(5.0)` 返回 `float`。\n● `\"True\"` 是字串，`type(\"True\")` 返回 `str`。\n● `False` 是布林值，`type(False)` 返回 `bool`。\n\n因此正確答案是 `float, float, str, bool` 。"}, {"id": 6, "type": "single", "question": "6. 【CH01-6】你加入了電子商務公司成為其程式開發部門的實習生。\n你的程式中有一個地方要讓使用者提供一個數值。\n即使使用者輸入了小數，該值也必須轉換為整數來進行計算。\n你應該使用哪個程式碼片段？?", "options": ["totalNums = input(\"How many items would you like?\")", "totalNums = int(input(\"How many items would you like?\"))", "totalNums = str(input(\"How many items would you like?\"))", "totalNums = float(input(\"How many items would you like?\"))"], "answer": [2], "weight": 1, "image": null, "explanation": "● 使用 `int()` 將年齡轉為整數，因為年齡應該是整數。\n● 使用 `bool()` 將未成年轉為布林值，因為這是一個是非題。\n● 使用 `str()` 將姓名轉為字串，因為姓名應該是字串。\n● 使用 `float()` 將體重轉為浮點數，因為體重可能有小數（如 64.5 公斤）。\n● 使用 `str()` 將郵遞區號轉為字串，因為郵遞區號應該是字串。"}, {"id": 7, "type": "single", "question": "7. 【CH01-7】你設計了一個 Python 程式用來顯示每個員工每天工作到現在的小時數，\n你需要計算工作時數並顯示訊息，程式碼如下：\n<pre><code class=\"language-python line-numbers line-hight19\">start = input(\"What time do you start work today?\")\nend = input(\"what time is is it now?\")</code></pre>\n如果要完成這個程式，在 3 行應該使用哪個程式碼？", "options": ["print(\"You have worked for\" + str(int(end) - int(start)) + \"hours\")", "print(\"You have worked for\" + (int(end) - int(start)) + \"hours\")", "print(\"You have worked for\" + str(end - start) + \"hours\")", "print(\"You have worked for\" + int(end - start) + \"hours\")"], "answer": [1], "weight": 1, "image": null, "explanation": "● `input()` 函數功能可輸入值，轉成文字型別的值傳給變數。\n● 因此需要使用 `int()` 將 `start` 和 `end` 先將輸入變數值轉換為整數，然後才能計算工作時數。\n● 最後使用 `str()` 將結果轉換為字串以便與其他字串連接。"}, {"id": 8, "type": "multiple", "question": "8. 【CH02-1】高年級的老師要製作一份報表來顯示這次考試班上所有學生的平均分數。\n報表必須去除平均分數的小數部分。\n每個正確的答案都提供了一個完整的解決方案。\n你應該使用哪兩個程式碼片段？", "options": ["average_score = float(total_score // number_of_students)", "average score = int(total_score / number of_students)", "average_score = float(total_score ** number_of_students)", "average_score = total_score // number_of_students"], "answer": [2, 4], "weight": 1, "image": null, "explanation": "● 使用 `float()` 將平均分數轉換為浮點數，會保留小數部分，不符合要求。\n● `int()` 將平均分數轉換為整數，去除小數部分。\n● 使用 `**`（冪運算符），這不是計算平均分數的正確方法。\n● 使用 `//`（整除運算符），這會直接計算整數平均分數，去除小數部分。\n● 因此正確答案是使用 `int()` 及 `//`（整除運算符）。"}, {"id": 9, "type": "single", "question": "9. 【CH02-2】你編寫了以下的程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">a = 24\nb = 7\nans = (a % b * 100) // 2.0 ** 3.0 – b\nprint(ans)</code></pre>\n執行程式碼的輸出值是？", "options": ["30.0", "30.5", "457", "語法錯誤"], "answer": [1], "weight": 1, "image": null, "explanation": "● 首先計算 `a % b`，即 `24 % 7`，結果是 `3`。\n● 然後計算 `3 * 100`，結果是 `300`。\n● 接著計算 `2.0 ** 3.0`，即 `2.0` 的立方，結果是 `8.0`。\n● 然後計算 `(300 // 8.0)`，整除運算結果是 `37.5`。\n● 最後計算 `37.5 - 7`，結果是 `30.5`。"}, {"id": 10, "type": "single", "question": "10. 【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。\n公式內容為b等於 a 加上 5，然後再平方，其中 a 是輸入的值， b 是結果。\n你設計了以下的程式碼片段：\n<pre><code class=\"language-python line-numbers\">a = eval(input(\"Enter a number for the equation:\"))\nb =</code></pre>\n如何完成 2 行的程式碼？", "options": ["b= (a + 5)**2", "b = a + 5 **2", "b = a + 5 * 2", "b=a+(5**2)"], "answer": [1], "weight": 1, "image": null, "explanation": "● 正確是將 `a` 先加上 `5`，然後將結果平方。\n● 因此正確答案是 `b = (a + 5)**2` 。"}, {"id": 11, "type": "single", "question": "11. 【CH02-4】你正在開發一個補習班的 Python 函式來計算折扣，\n補習班希望鼓勵小朋友和老年人報名，\n只要是小朋友和老年人報名相關課程就會獲得10%的折扣。\n你編寫了以下程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">def get_discount(kid, senior): \n   discount = 0.1\n   if not (kid or senior):\n      discount = 0\n   return discount</code></pre>\n為了完成這個程式碼，你應該在 3 行加入什麼程式碼？", "options": ["if not (kid or senior):", "if (not kid) or senior:", "if not (kid and senior):", "if (not kid) and senior:"], "answer": [1], "weight": 1, "image": null, "explanation": "● 正確地檢查如果 `kid` 和 `senior` 都是 `False`，即都不是小朋友和老年人身份，則不應該給予折扣。\n● 因此正確答案是 if not (kid or senior):。"}, {"id": 12, "type": "multiple", "question": "12. 【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)", "options": ["0 or 5", "bool(0)", "None is None", "-5 < 0 < 5"], "answer": [3, 4], "weight": 1, "image": null, "explanation": "● `0 or 5` 的結果是 `5`，因為 `or` 運算符會返回第一個真值，因此這個表達式的值是 `5`，而不是 `True`。\n● bool(0) 的結果是 `False`，因為 `bool(0)` 返回 `False`。\n● `None is None` 的結果是 `True`，因為 `None is None` 確實是 `True`。\n● `-5 < 0 < 5` 的結果是 `True`，因為這是一個連鎖比較，表示 `-5` 小於 `0` 且 `0` 小於 `5`。"}, {"id": 13, "type": "single", "question": "13. 【CH02-6】計算以下的 Python 數學運算式結果為何？\n<pre><code class=\"language-python line-numbers line-hight19\">(3*(1+2)**2-2**2*3)</code></pre>", "options": ["3", "13", "15", "69"], "answer": [3], "weight": 1, "image": null, "explanation": "● 首先計算括號內的部分：`(1 + 2)` 等於 `3`。\n● 然後計算 `3 ** 2`，結果是 `9`。\n● 接著計算 `2 ** 2`，結果是 `4`。\n● 現在將這些值代入原式：\n  `(3 * 9 - 4 * 3)`\n  `= (27 - 12)`\n  `= 15`。"}, {"id": 14, "type": "multioption", "question": "14. 【CH02-7】你編寫了以下的程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">a = 'Test 1'\nprint(a)\nb = 'Test 2'\na +=b\nprint(a)\nprint(b)</code></pre>\n根據程式碼片段中提供的資訊選擇每個問題的答案進頂。\n在第一次 print 後會顯示什么？_(選項 1)_\n在第二次 print 後會顯示什么？_(選項 2)_\n在第三次 print 後會顯示什么？_(選項 3)_", "options": ["Test 1|Test 1Test 2|Test 2", "Test 1|Test 1Test 2|Test 2", "Test 1|Test 1Test 2|Test 2"], "answer": [1, 2, 3], "weight": 1, "image": null, "explanation": "● 在第一次 print 後，顯示的是變數 a 的值，即'Test 1'。\n● 在第二次 print 後，顯示的是變數 a 的值，即'Test 1Test 2'，因為在這一行中，變數 a 被更新為原本的值加上變數 b 的值。\n● 在第三次 print 後，顯示的是變數 b 的值，即'Test 2'。"}, {"id": 15, "type": "multioption", "question": "15. 【CH02-8】你為公司開發了一個 Python 應用程式，程式碼如下：\n<pre><code class=\"language-python line-numbers line-hight19\">def test(a, b, c, d): \n   value=(a+b)*c-d\n   return value</code></pre>根據程式碼片段中提供的資訊選擇每個問題的答案選頂。\n選項1 :運算式的哪個部份將第一個進行計算？\n選項2 :運算式的哪個部份將第二個進行計算？\n選項3 :哪個運算式等於題目函式中的運算式？", "options": ["a+b|b*c|c-d", "加(+)|減(-)|乘(*)", "(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d"], "answer": [1, 3, 3], "weight": 1, "image": null, "explanation": "● 選項1 的運算式為 `a+b`，將首先進行計算。\n● 選項2 的運算式為 `b*c`，將其次進行計算。\n● 選項3 的運算式為先執行 'a + b' 再 '* c' 再 `- d`，將最後進行計算。"}, {"id": 16, "type": "single", "question": "16. 【CH02-9】請按先後順序從頭至尾排列這六類運算的正確顺序：\n1. 加法和減法(+,  -)\n2. 乘法和除法(*,  /)\n3. 正數 (+)、負數 (-) 與反位元 (not) \n4. 括弧\n5. 指數 (**)\n6. 且 (And)", "options": ["加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且", "括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和滅法 -> 且", "指數 -> 乘法和除法 -> 正數、負数與反位元 -> 括弧 -> 且 -> 加法和減法", "乘法和餘法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和减法"], "answer": [2], "weight": 1, "image": null, "explanation": "● 在 Python 中，運算的優先順序如下：\n1. 括弧\n2. 指數 (**)\n3. 正數 (+)、負數 (-) 與反位元 (not)\n4. 乘法和除法 (*, /)\n5. 加法和減法 (+, -)\n6. 且 (And)\n● 因此正確的順序是：括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且。"}, {"id": 17, "type": "multioption", "question": "17. 【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，然而週四和週日也有特別的費率。費用結構如下所示：\n<pre><code class=\"language-python\">1. 費用每天 100 美元。\n2. 如果在晚上 11 點後返還，將被多收取額外一天的費用。\n3. 如果是在星期天租的，可享受 10% 的折扣。\n4. 如果是在星期四租的，可以享受 20% 的折扣。</code></pre>\n你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？\n<pre><code class=\"language-python line-numbers line-hight19\"># 車輛出租計算機\nontime = input(\"Was car returned before 11 pm? y or n\").lower()\ndays_rented = int(input(\"How many days was car rented?\"))\nday_rented = input(\"What day was the car rented?\").capitalize()\ncost_per_day = 100\nif ontime _(選項 1)_ #不準時\n    days_rented += 1\nif day_rented _(選項 2)_ #星期天租的\n    total = (days_rented * cost_per_day) * 0.9\nelif day_rented _(選項 3)_  #星期四租的\n    total = (days_rented*cost_per_day) * 0.8\nelse:\n    total = days_rented * cost_per_day\nprint(\"Cost of the car rental is : $\", total)</code></pre>\n以上空格選項分别要填入的程式為：", "options": ["!=\"n\":|==\"n\":| --\"y\":", "==\"Sunday\":|>=\"Sunday\":| is \"Sunday\":", "==\"Thursday\":|<=\"Thursday\":| is \"Thursday\":"], "answer": [2, 1, 1], "weight": 1, "image": null, "explanation": "● 選項1 的程式碼為 `ontime == \"n\"`，表示如果車輛不準時歸還，需要加費 1 天費用。\n● 選項2 的程式碼為 `day_rented == \"Sunday\"`，表示如果在星期天租車，則可以享受 10% 折扣。\n● 選項3 的程式碼為 `day_rented == \"Thursday\"`，表示如果在星期四租車，則可以享受 20% 折扣。"}, {"id": 18, "type": "multioption", "question": "18. 【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：\n<pre><code class=\"language-python line-numbers line-hight19\">a = 11\nb = 5\n</code></pre><pre><code class=\"language-python\">選項答案選擇區\nprint(a / b)的輸出結果是？_(選項 1)_\nprint(a // b)的輸出結果是？_(選項 2)_\nprint(a % b)的輸出結果是？_(選項 3)_</code></pre>", "options": ["1|2|2.2", "1|2|2.2", "1|2|2.2"], "answer": [3, 2, 1], "weight": 1, "image": null, "explanation": "● `print(a / b)` 的輸出結果是 `2.2`，因為這是浮點數除法，返回除法運算的 `值`。\n● `print(a // b)` 的輸出結果是 `2`，因為這是整除運算，返回除法運算的 `商數` 。\n● `print(a % b)` 的輸出結果是 `1`，因為這是整除運算，返回除法運算的 `餘數`。"}, {"id": 19, "type": "multioption", "question": "19. 【CH02-12】你設計了一個比較數字的 Python 程式，内容如下：\n<pre><code class=\"language-python line-numbers line-hight19\">n1 = eval(input(\"Please enter the first number: \"))\nn2 = eval(input(\"Please enter the second number: \"))\nif n1 = n2:\n    print(\"The two numbers are equal.\")\nif n1 <= n2:\n    print(\"Number 1 is less than number 2.\")\nif n1 > n2:\n    print(\"Number 1 is greater than number 2.\")\nif n2 <> n1\nprint(\"The two numbers are the same.\")</code></pre>\n針對下列每個敘述，如果正確就選擇Yes，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n\n選項 1. 第 3 行的語法是不正確的比較。\n選項 2. 第 6 行的語法只有 n1 小於 n2 時才會列印出來。\n選項 3. 第 8 行的語法只有 n1 大於 n2 時才會列印出來。\n選項 4. 第 9 行的語法是不正確的比較。</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [1, 2, 1, 1], "weight": 1, "image": null, "explanation": "● 第 3 行的語法是不正確的比較，應該是用 `==` 取代 `=`。\n● 第 6 行的語法只有 n1 小於等於 n2 時才會列印出來。\n● 第 8 行的語法只有 n1 大於 n2 時才會列印出來。\n● 在 9 行的語法是不正確的比較，應該是用 `==` 取代 `<>`。"}, {"id": 20, "type": "single", "question": "20. 【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：\n<pre><code class=\"language-python line-numbers line-hight19\">x = 0\nwhile x < 4:\n    if  x % 4 == 0:\n        print(\"party\")\n    elif  x - 2 < 0:\n        print(\"cake\")\n    elif  x / 3 == 0:\n        print(\"greeting\")\n    else:\n        print(\"birthday\")\n    x = x + 1</code></pre>\n請選擇正確的輸出結果。", "options": ["party，greeting，birthday，cake", "party，cake，birthday，birthday", "birthday，party，greeting，cake", "birthday，greeting，party，cake"], "answer": [2], "weight": 1, "image": null, "explanation": "● #x=0時：party、x=1時：cake、x=2時：birthday、x=3時：birthday"}, {"id": 21, "type": "multioption", "question": "21. 【CH02-14】您正在撰寫一個 Python 程式評估算術公式。此公式描述 a 是先取得一個輸入值，而 b 等於 a 乘以 -1 之後再平方，所以 b 是結果。\n您所建立的程式碼片段如下。\n<pre><code class=\"language-python line-numbers line-hight19\">a = eval(input(\"Enter a number for the equation: \")))\nb = 選項1 選項2 選項3 選項4 選項5</code></pre>您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，以完成第 2 行的程式碼。每個程式碼片段可能使用一次，也可能使用多次，甚至完全用不到。\n", "options": ["-|(|)|**|**2|2|a", "-|(|)|**|**2|2|a", "-|(|)|**|**2|2|a", "-|(|)|**|**2|2|a", "-|(|)|**|**2|2|a"], "answer": [2, 1, 7, 3, 5], "weight": 1, "image": null, "explanation": "● 在第 2 行的程式碼中，`b = -a ** 2` 是正確的。\n● `-` 表示負號，`a` 是輸入的數字，`**` 是指數運算符，表示平方。\n● 因此正確的程式碼片段應該是 `b = (-a)**2`。"}, {"id": 22, "type": "single", "question": "22. 【CH03-1】你編寫了以下的程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">list_1 = [1, 2, 3]\nlist_2 = [4, 5, 6]\nlist_3 = list_1 + list_2\nlist_4 = list_3 * 2\nprint(list_4)\n</code></pre>執行程式碼的輸出值是？\n", "options": ["[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]", "[4, 10, 18]", "[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]", "[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]"], "answer": [3], "weight": 1, "image": null, "explanation": "● list_4 的值是 [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]，因為 list_3 包含了 list_1 和 list_2 的所有元素，然後再乘以 2，這樣就重複了兩次。"}, {"id": 23, "type": "single", "question": "23. 【CH03-2】在下列的程式碼中：\n<pre><code class=\"language-python line-numbers line-hight19\">aList = [0, 1, 2, 3, 4]\nprint(4 in aList)</code></pre>會輸出列印的内容？", "options": ["4", "5", "True", "False"], "answer": [3], "weight": 1, "image": null, "explanation": "● `in` 關鍵字用於檢查某個值是否存在於序列中，這裡是檢查 4 是否在 aList 中。\n● 因此，程式碼會輸出 True。"}, {"id": 24, "type": "multioption", "question": "24. 【CH03-3】你為公司開發了一個 Python 應用程式，設計了以下的程式碼：\n<pre><code class=\"language-python line-numbers line-hight19\">aList = [\"a\", \"b\", \"c\", \"d\", \"e\"]\nbList = [1,2,3,4,5]\nprint(aList is bList)\nprint(aList == bList)\naList = bList\nprint(aList is bList)\nprint(aList == bList)</code></pre>根據程式碼片段中提供的資訊選擇每個問題的答案選項。\n<pre><code class=\"language-python\">選項 1. 第一次 print (第 3 行)後會顯示什麼？\n選項 2. 第二次 print (第 4 行)後會顯示什麼？\n選項 3. 第三次 print (第 6 行)後會顯示什麼？\n選項 4. 第四次 print (第 7 行)後會顯示什麼？</code></pre>", "options": ["True|False", "True|False", "True|False", "True|False"], "answer": [2, 2, 1, 1], "weight": 1, "image": null, "explanation": "● 在第一次 print 後，`aList is bList` 會顯示 False，因為它們是不同的物件。\n● 在第二次 print 後，`aList == bList` 會顯示 False，因為它們的內容不同。\n● 在第三次 print 後，`aList is bList` 會顯示 True，因為它們現在指向同一個物件。\n● 在第四次 print 後，`aList == bList` 會顯示 True，因為它們的內容相同。"}, {"id": 25, "type": "multioption", "question": "25. 【CH03-4】同事開發一個將產品名稱輸入到資料庫的程式，但是其中發生了錯誤，每個存入的名稱字母順序都顛倒了。\n請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：<pre><code class=\"language-python line-numbers line-hight19\"># 函式會反轉字串中的字元，以相反的順序返回新字串。\ndef reverse_pname(backwards_pname):\n    forward_pname = ''\n    for index in _(選項 1)_\n        forward_pname += _(選項 2)_\n    return forward_pname\nprint(reverse_pname(\"klim\"))</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\n答案 A.backwards _pname\n答案 B.len(backwards _pname)\n答案 C.range(0, len(backwards _pname),-1)\n答案 D.range(len(backwards_pname)-1,-1,-1) </code></pre><pre><code class=\"language-python\">選項 2 答案選擇區\n答案 A.backwards_pname[index-1]\n答案 B.backwards_pname[len(forward_pname)-1)\n答案 C.backwards_pname[len(backward_pname)-len(forward_pname)]\n答案 D.backwards_pname[index]</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [4, 4], "weight": 1, "image": null, "explanation": "● 在第一個空格中，應該使用 `range(len(backwards_pname)-1, -1, -1)`，\n這樣可以從字串的最後一個字元開始迭代到第一個字元。\n● 在第二個空格中，應該使用 `backwards_pname[index]`，\n這樣可以正確地取得每個字元並將其添加到 `forward_pname` 中。"}, {"id": 26, "type": "multioption", "question": "26. 【CH03-5】你有以下清單結構：<pre><code class=\"language-python line-numbers line-hight19\">alph = \"abcdefghijklmnopqrstuvwxyz\"</code></pre>以下各個程式碼片段的結果各是如何？\n請將回答區項目的選項正確填到程式碼片段的選項中<pre><code class=\"language-python\">#程式碼片段\n1. alph[3: 15] = (_選項1_)\n2. alph[3:15:3] = (_選項2_)\n3. alph[15:3:-3] = (_選項3_)\n4. alph[::-3] = (_選項4_)</code></pre><pre><code class=\"language-python\">答案選項區\nA. zwtqnkheb\nB. pmjg\nC. defghijklmno\nD. ponmlkjihgfe\nE. defghijklmnop\nF. dgjm\nG. olif</code></pre>", "options": ["A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G"], "answer": [3, 6, 2, 1], "weight": 1, "image": null, "explanation": "● 在第一個程式碼片段中，`alph[3: 15]` 會返回從索引 3 到 14 的子字串，即 `defghijklmno`。\n● 在第二個程式碼片段中，`alph[3: 15: 3]` 會返回從索引 3 開始，每隔 3 個字元取一個，即 `dgjm`。\n● 在第三個程式碼片段中，`alph[15: 3: -3]` 會返回從索引 15 到 4 的子字串，每隔 3 個字元取一個，即 `ponmlkjihgfe`。\n● 在第四個程式碼片段中，`alph[::-3]` 會返回整個字串的反向，每隔 3 個字元取一個，即 `olif`. "}, {"id": 27, "type": "multioption", "question": "27. 【CH03-6】你為學校設計了一個 Python 應用程式，在 classroom 的清單中包含了 60 位同學的姓名，最後 3 名是班上的幹部。\n你需要分割清單內容顯示除了幹部以外的所有同學，你可以利用以下哪二個程式碼達成？\n可以答成回答 Yes ， 不能回答回答 No<pre><code class=\"language-python>1. classroom[0: -2] = _(選項 1)_\n2. classroom[0: -3] = _(選項 2)_\n3. classroom[1: -3] = _(選項 3)_\n4. classroom[: -3] = _(選項 4)_\n5. classroom[1: -3] = _(選項 5)_</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [2, 1, 2, 1, 2], "weight": 1, "image": null, "explanation": "● 在這個情況下，`classroom[0: -3]` 和 `classroom[: -3]` 都可以正確地取得除了最後 3 名同學以外的所有同學。\n● 因此，選項 2 和選項 4 是正確的。"}, {"id": 28, "type": "single", "question": "28. 【CH03-7】你開發了一個 Python 應用程式，其中有一個名為 month 的清單單儲存所有月份的英文。\n你要分割這個清單，取得由第二個月份開始，每間隔一個值的月份名稱，你應該使用哪個程式碼？", "options": ["month[2:2]", "month[::2]", "month[1::2]", "month[1:2]"], "answer": [3], "weight": 1, "image": null, "explanation": "● Python 陣列元素值由 0 開始算， 0 = 第 1 個元素 , 1 = 第 2 個元素，以此類推。\n ● month[2:2] 這會建立一個從索引 2 開始到索引 2 (不包含) 的切片，結果會是一個空清單。\n ● month[::2] 這會從清單的開頭 (索引 0) 開始，每間隔一個值取一個元素。這會包含第一個月份，但題目要求從第二個月份開始。\n ● month[1::2] 從索引 1 (第二個元素) 開始一直取到清單的末尾，每次取一個元素後，跳過接下來的一個元素 (步長為 2)。\n ● month[1:2]: 這會建立一個從索引 1 開始到索引 2 (不包含) 的切片，結果只會包含第二個月份的名稱。"}, {"id": 29, "type": "multioption", "question": "29. 【CH03-8】你設計了一個函式來執行除法，因為除法的除數不能為零，所以在函式中必須要針對這個重點進行檢查。\n你要如何完成這段程式碼？\n請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">def safe_divide(numerator, denominator):\n    _(選項 1)_\n        print(\"A required value is missing.\")\n    _(選項 2)_\n        print(\"The denominator is zero.\")\n    else:\n        return numerator / denominator</code></pre><pre><code class=\"language-python\">_(選項 1)_答案選項\n答案 A. if numerator is None or denominator is None:\n答案 B. if numerator is None and denominator is None:\n答案 C. if numerator = None or denominator = None:\n答案 D. if numerator - None and denominator = None:\n\n_(選項 2)_答案選項\n答案 A. elif denominator == 0:\n答案 B. elif denominator = 0:\n答案 C. elif denominator != 0:\n答案 D, elif denominator in 0:</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [1, 1], "weight": 1, "image": null, "explanation": "● 在選項 1 中，正確的程式碼是 `if numerator is None or denominator is None:`，\n這樣可以檢查分子或分母是否為 `None`。\n● 在選項 2 中，正確的程式碼是 `elif denominator == 0:`，\n這樣可以檢查分母是否為零。"}, {"id": 30, "type": "multioption", "question": "30. 【CH03-9】您建立了下列程式來找出學生並顯示姓名。<pre><code class=\"language-python line-numbers line-hight19\">students = {1: 'Jone',2: 'Mary'}\nstudent = input('Enter the student id: ')\nif student not in students:\n    print('The student does not exist.')\nelse:\n    print('The student name is ' + students[student])</code></pre>同事回報指出,這個程式有時候產生的結果不正確，請回答以下問題：<pre><code class=\"language-python\">1.請問哪兩種資料型態儲存在第 1 行的 students 中？\nA.整数和字串 B.整數和浮點数 c.字串和浮點數 D.字串和布林值\n\n2.第 2 行的 student 是哪種資料型態？\nA.int   B.float   C.string   D.bool\n\n3.為什麽第 3 行找不到學生？\nA.語法不正確 B.不符合的資料型態 c.變數命名錯誤</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C"], "answer": [1, 3, 2], "weight": 1, "image": null, "explanation": "● 在這個程式中，`students` 是一個字典，包含了整數和字串兩種資料型態。\n● `student` 變數是由使用者輸入的，因此它的資料型態是字串。\n● 第 3 行找不到學生的原因是因為 `student` 變數的資料型態是字串，而 `students` 字典的鍵是整數，這導致了不符合的資料型態。"}, {"id": 31, "type": "multioption", "question": "31. 【CH04-1】老師正在設計一個 Python 程式，學生可以使用它來記錄他們考試的平均分數。\n該程式必須允許使用者輸入他們的名字和當前分數。\n該程式將輸出使用者名和使用者的平均分數。\n輸出必須符合以下要求：<pre><code class=\"language-python\">●  使用者姓名必須是靠左對齊的。\n●  如果使用者姓名少於 20 個字元，則必須在右側添加額外的空間。\n●  平均分數在小數點左方是三位數，小數點右方是二位數。(XXX.XX)。</code></pre>你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">name = input('Please enter your name:')\nscore = count = 0\ntotal = 0\nwhile (score != -1):\n   score = int(input('Enter your score,-1 for done:'))\n   if score == -1:\n      break\n   total += score\n   count += 1\n   average = total / count\n   print('_(選項 1)_, your average is _(選項 2)_' %(name, average))</code></pre><pre><code class=\"language-python\">問題回答區\n選項 1. 答案 A. %-20i 答案 B. %-20d 答案 C. %-20f 答案 D. %-20s\n選項 2. 答案 A. %1.6s 答案 B. %6.2f 答案 C. %6.2d 答案 D. %2.6f</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [4, 2], "weight": 1, "image": null, "explanation": "● `name` 變數的資料型態是字串(使用 s)。\n●  `average` 變數的資料型態是浮點數(使用 f)，且需要有小數2位，即 `%6.2f` 符合。"}, {"id": 32, "type": "multioption", "question": "32. 【CH04-2】你正在設計一個函式以讀取資料檔案並將結果列印為格式化表格。\n資料檔案中包含有關蔬菜的資訊。每個記錄都包含蔬菜的名稱、重量和價格。\n你需要列印資料，使其看起來像下面的範例：<pre><code class=\"language-python\">Potatos  5.4   2.33\nCarrots  2.5   1.50\nCorns   5.2   5.96</code></pre>具體地說，列印輸出必須符合以下要求：<pre><code class=\"language-python\">● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。\n● 重量必須印在 5 個空格範圍內並靠右對齊，小數點最多一個位數。\n● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。</code></pre>你創建了以下的程式碼。<pre><code class=\"language-python line-numbers line-hight19\">def print _table(file):\n   data = open(file,'r')\n   for record in data:\n      fields = record.split(',')\n？？？？</code></pre>你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。每個程式碼片段都可以使用一次、多次，或者不使用。<pre><code class=\"language-python\">問題選項區\n(選項1) (選項2) (選項3) (選項4)'\n.format(fields[0], eval(fields(1)), eval(fields[2])))</code></pre><pre><code class=\"language-python\">選項程式碼片段區\n答案 A. print('\n答案 B. {10: 0}\n答案 C. {5: 1f}\n答案 D. {7: 2f}\n答案 E. {2: 7.2f}\n答案 F. {1: 5.1f}\n答案 G. {0: 10}</code></pre>", "options": ["A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G"], "answer": [1, 7, 6, 5], "weight": 1, "image": null, "explanation": "● 在第 5 行的程式碼中，應該使用 `print('{0: 10} {1: 5.1f} {2: 7.2f}'.format(fields[0], eval(fields[1]), eval(fields[2])))`"}, {"id": 33, "type": "multiple", "question": "33. 【CH04-3】你正在設計一個電子商務程式，它可以接受來自使用者輸入，並以逗號分隔的格式輸出資料。\n你可以編寫以下程式碼接受資料輸入：<pre><code class=\"language-python line-numbers line-hight19\">product = input('Enter product name:')\nqty = input('Input quantity:')</code></pre>輸出必須符合以下要求：<pre><code class=\"language-python\"> 字串必須括在雙引號內。\n 數字不得用引號或其他字元括起來。\n 每個產品必須用逗號隔開。</code></pre>你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？", "options": ["print('\"{0}\", {1} '.format(product, qty))", "print('\"' + product + '\", ' + str(qty))", "print('\"%s\", %s' % (product, qty))", "print('{0}, {1}'.format(product, qty))", "print(product + ', ' + qty)"], "answer": [1, 2, 3], "weight": 1, "image": null, "explanation": "● 選項 1 使用了 `format` 方法。\n● 選項 2 使用了字符串拼接。\n● 選項 3 使用了舊式的格式化方法 `%`。\n● 選項 4 和 5 沒有將產品名稱括在雙引號內，因此不符合要求。"}, {"id": 34, "type": "single", "question": "34. 【CH04-4】請檢視下面的程式碼：<pre><code class=\"language-python line-numbers line-hight19\">x = 'Tiger'\ny = 'Lion'\nz = 'Jaguar'\nanimals = '{1} and {0} and {2}'\nprint(animals.format(x, y, z))</code></pre>輸出的結果為？", "options": ["Lion and Tiger and Jaguar", "Lion and Jaguar and Tiger", "Jaguar and Lion and Tiger", "Tiger and Lion and Jaguar"], "answer": [1], "weight": 1, "image": null, "explanation": "● `animals` 字串使用了格式化方法 `format`，\n其中 `{1}` 代表第二個參數 `y`，`{0}` 代表第一個參數 `x`，`{2}` 代表第三個參數 `z`。\n因此輸出的結果是 `Lion and Tiger and Jaguar`。"}, {"id": 35, "type": "single", "question": "35. 【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。你的程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">print('Enter product name: ')\n?\nprint(product_name)</code></pre>在02行應該編寫哪個程式碼？", "options": ["product_name = input()", "input(product_name)", "input('product_name')", "name = product_input"], "answer": [1], "weight": 1, "image": null, "explanation": "● `product_name` 變數用來儲存使用者輸入的產品名稱。\n● `input()` 函數會顯示提示訊息，並等待使用者輸入。\n● 使用者輸入的值會被賦值給 `product_name` 變數，然後在最後一行被列印出來。"}, {"id": 36, "type": "multioption", "question": "36. 【CH04-6】有一個旅行社需要一個簡單的程式用來輸入合作飯店及民宿的調查資料。<pre><code class=\"language-python\">● 程式必須接受輸入並返回基於五顆星規模的平均評等。\n● 輸出必須四捨五入到小數第二位。</code></pre>你必須完成這個程式碼以符合需求，你要如何完成這個程式碼？\n請在選項答案選擇區選擇適當的程式碼片段。\n<pre><code class=\"language-python line-numbers line-hight19\">sum = count = done = 0\naverage = 0.0\nwhile (done != -1):\n   rating = _(選項 1)_\n   if rating == -1:\n      break\n   sum += rating\n   count += 1\n   average = float(sum / count)\n   _(選項 2)_ + _(選項 3)_</code></pre><pre><code class=\"language-python\">選項1答案選擇區\n答案 A. print('Enter next rating (1-5),-1 for done')\n答案 B. float(input('Enter next rating (1-5),-1 for done'))\n答案 C. input('Enter next rating (1-5),-1 for done')\n答案 D. input 'Enter next rating (1-5),-1 for done')\n\n選項2答案選擇區\n答案 A. output('The average star rating for this hotel is:'\n答案 B. console.input('The average star rating for this hotel is:'\n答案 C. printline('The average star rating for this hotel is:'\n答案 D. print('The average star rating for this hotel is:'\n\n選項3答案選擇區\n答案 A. format(average, '.2f'))\n答案 B. format(average, '.2d'))\n答案 C. (average, '.2f')\n答案 D. format.average.(2d)\n</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [2, 4, 1], "weight": 1, "image": null, "explanation": "● 選項 1 使用了 `print` 函數來顯示提示訊息。\n● 選項 2 使用了 `float` 函數來將輸入的字串轉換為浮點數。\n● 選項 3 使用了舊式的格式化方法 `%`。\n● 選項 4 和 5 沒有將產品名稱括在雙引號內，因此不符合要求。"}, {"id": 37, "type": "multioption", "question": "37. 【CH04-7】你必須開發一個簡單的 Python 檔案程式來執行以下的動作：<pre><code class=\"language-python\">● 檢查檔案是否存在。\n● 如果該檔案存在，就顯示檔案内容。\n● 如果該檔案不存在，就使用指定的名稱新增檔案。\n● 在檔案最後加入文字：'End of file'。</code></pre>你需要完成程式碼以符合要求。你要如何完成這段程式碼？\n請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">import os\nif _(選項 1)_\n   file = open('theFile.txt')\n_(選項 2)_\nfile.close()\nfile = _(選項 3)_\n_(選項 4)_ ('End of file')\nfile.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\n答案 A. isfile('theFile.txt')\n答案 B. os.exist('theFile.txt')\n答案 C. os.find('theFile.txt')\n答案 D. os.path.isfile('theFile.txt')\n\n選項2答案選擇區\n答案 A. output(theFile.txt')\n答案 B. print(file.get('theFile.txt'))\n答案 C. print(file.read())\n答案 D. print('theFile.txt')\n\n選項3答案選擇區\n答案 A. open('theFile.txt', 'a')\n答案 B. open('theFile.txt', 'at')\n答案 C. open('theFile,txt', 'w')\n答案 D. open('theFile.txt', 'wt')\n\n選項3答案選擇區\n答案 A. Append\n答案 B. file.add\n答案 C. file.write\n答案 D. write\n</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [4, 3, 1, 3], "weight": 1, "image": null, "explanation": "● 在選項 1 中，`os.path.isfile('theFile.txt')` 用來檢查檔案是否存在。\n● 在選項 2 中，`print(file.read())` 用來顯示檔案內容。\n● 在選項 3 中，`open('theFile.txt', 'a')` 用來以附加模式打開檔案，如果檔案不存在則會創建它。\n● 在選項 4 中，`file.write('End of file')` 用來將文字寫入檔案。"}, {"id": 38, "type": "multioption", "question": "38. 【CH04-8】你正在設計一個 Python 處理檔案的函式。<pre><code class=\"language-python\">● 如果檔案不存在，則返回 '檔案不存在'。\n● 如果該檔案存在，則該函式返回第一行的內容。</code></pre>請完成以下程式碼：<pre><code class=\"language-python\">  import os\n  def get _ file_message(file):\n  _(選項1)_\n  _(選項2)_\n  _(選項3)_\n  _(選項4)_\n  _(選項5)_</code></pre>你應該如何安排這些程式碼片段的順序來完成函式？\n請將適合的程式碼片段移動到回答區，並按正確的順序排列。<pre><code class=\"language-python\">程式碼片段\nA.with open(file, 'r') as file:\nB.return 'File dose not exist'\nC.return file.readline()\nD.if os.path.isfile(file):\nE.else:</code></pre>", "options": ["A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E"], "answer": [4, 1, 3, 5, 2], "weight": 1, "image": null, "explanation": "● 在這個函式中，首先檢查檔案是否存在(if os.path.isfile(file):)，並以唯讀模式開啟檔案(with open(file, 'r') as file:)，並返回第一行的內容(return file.readline())。\n● 如果不存在(else:)在則返回 '檔案不存在'(return 'File dose not exist')。"}, {"id": 39, "type": "single", "question": "39. 【CH04-9】你設計一個 Python 應用程式，需要將資料讀寫到文字檔中。\n如果檔案不存在，則必須新增它。\n如果檔案已有内容，則將文字加到最後。\n你應該使用哪個程式碼？", "options": ["open('file_data', 'a')", "open('file_data', 'w')", "open('file_data', 'rt')", "open('file_data', 'r')"], "answer": [1], "weight": 1, "image": null, "explanation": "● 在這個情況下，使用 `open('file_data', 'a')` 可以以附加模式(append mode)打開檔案，\n如果檔案不存在則會創建它，如果檔案已存在則會將新內容添加到檔案的末尾。"}, {"id": 40, "type": "single", "question": "40. 【CH04-10】你正在設計一個 Python 程式來讀取學生資料的檔案，文件中包含了學生的班級、座號和姓名，下面顯示的是檔案中的資料範例：\n<pre><code class=\"language-python\">'1A',1,'David'\n'1A',2,'Mary'</code></pre>程式碼必須符合以下的需求：<pre><code class=\"language-python\">● 檔案的每一行都必須讀取和列印。\n● 如果遇到空行，則必須忽略。\n● 在完成所有行的讀取後,必須關閉檔案。</code></pre>你創建了以下的程式碼：<pre><code class=\"language-python line-numbers line-hight19\">students = open('students.txt', 'r')\neof = False\nwhile eof == False:\n   line = students.readline()\n(程式碼1)\n(程式碼2)\n           print(line.strip())\n   else:\n       print('End of file')\n       eof = True\nstudents.close()</code></pre>在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？", "options": ["(程式碼1).if line != '': (程式碼2).if line != '\\n':", "(程式碼1).if line = 'An': (程式碼2).if line != '':", "(程式碼1).if line!= != 'An': (程式碼2).if line != None:", "(程式碼1).if line != '': (程式碼2).if line != '':"], "answer": [1], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，(程式碼1)和(程式碼2)的條件判斷都是用來檢查讀取的行是否為空行，如果不是空行則進行處理。\n● 因此，正確的選擇是 `(程式碼1).if line != '': (程式碼2).if line != '\\n':`。\n● 這樣可以確保只處理非空行，並且在讀取完所有行後關閉檔案。"}, {"id": 41, "type": "multioption", "question": "41. 【CH04-11】某間公司需要有人協助更新他們的檔案系統。\n您必須建立一個執行下列動作的簡易檔案操作程式：<pre><code class=\"language-python\">1. 查看檔案是否存在。\n2. 如果檔案存在，則顯示其內容。</code></pre>請選取正確的程式碼片段以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\nA. os.path.isfile('myFile.txt)\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [1, 1], "weight": 1, "image": null, "explanation": "● 在選項 1 中，`os.path.isfile('myFile.txt')` 用來檢查檔案是否存在。\n● 在選項 2 中，`print(file.read())` 用來顯示檔案的內容。\n這樣可以確保程式能夠正確地檢查檔案是否存在並顯示其內容。"}, {"id": 42, "type": "single", "question": "42. 【CH04-12】請問下列陳述式有何功能？<pre><code class=\"language-python line-numbers line-hight19\">data = input()</code></pre>", "options": ["允許使用者在主控台中輸入文字", "建立 HTML 輸入元素", "顯示電腦上的所有輸入周邊裝置", "顯示允許使用者輸入的訊息方塊"], "answer": [1, 1], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，`data = input()` 允許使用者在主控台中輸入文字，並將用來接收使用者的輸入，並將其存儲在變數 `data` 中。"}, {"id": 43, "type": "multioption", "question": "43. 【CH05-1】你設計了一個程式要依學生的成績來顯示等級，它的規定如下：\n\n<table class='table table-bordered table-dark' style='max-width: 300px;'><tr><td>Percentage range</td><td>Letter grade</td></tr><tr><td>90 through 100</td><td>A</td></tr><tr><td>80 through 89</td><td>B</td></tr><tr><td>70 through 79</td><td>C</td></tr><tr><td>60 through 69</td><td>D</td></tr><tr><td>0 through 59</td><td>F</td></tr></table>例如，如果使用者輸入 90 ，則輸出應該是 '你的成績為 A (甲等)'。\n如果使用者輸入 89 ，則輸出應該是 '你的成績為 B (乙等)'。\n你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Letter Grade Converter\ngrade = int(input('Enter a numeric grade:'))\n_(選項 1)_\nletter_grade - 'A'\n_(選項 2)_\nletter_grade = 'B'\n_(選項 3)_\nletter_grade = 'C'\n_(選項 4)_\nletter_grade = 'D'\nelse:\nletter_grade = 'F'\nprint('Your letter grade is :', letter_grade)</code></pre><pre><code class=\"language-python\">選項1答案選擇區\n答案 A. if grade <= 90:\n答案 B. if grade >= 90:\n答案 C. elif grade > 90:\n答案 D. elif grade >= 90:</code></pre><pre><code class=\"language-python\">選項2答案選擇區\n答案 A. if grade > 80:\n答案 B. if grade >= 80:\n答案 C. elif grade > 80:\n答案 D. elif grade >= 80:</code></pre><pre><code class=\"language-python\">選項3答案選擇區\nA. if grade > 70:\nB. if grade >= 70:\nC. elif grade > 70:\nD. elif grade >= 70:</code></pre><pre><code class=\"language-python\">選項4答案選擇區\nA. if grade > 60:\nB. if grade >= 60:\nC. elif grade > 60:\nD. elif grade >= 60:</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [2, 4, 4, 4], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，使用了多個條件判斷來確定學生的成績等級，並根據不同的成績範圍給予相應的字母等級。"}, {"id": 44, "type": "multioption", "question": "44. 【CH05-2】你要設計一款以使用者年齢進行電影分級的程式，必須符合以下要求：<pre><code class=\"language-python\">● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。\n● 任何 13 歲或以上，但小於 18 歲的人都會顯示 '輔導級' 的訊息。\n● 任何 12 歲或或更年輕的人都會顯示 '普通級' 的訊息。\n● 如果年齡未知，則會顯示 '未知' 的訊息。</code></pre>你需要完成程式以符合要求，應該要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ndef get_rating(age):\n    rating = ''\n    if _(選項 1)_\n    elif _(選項 2)_\n    elif _(選項 3)_\n    else_(選項 4)_\n    return rating</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A. age<13: rating='普通級'\n答案 B. age<18: rating='輔導級'\n答案 C. :rating='限制級'\n答案 D. age is None: rating='未知'</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [4, 1, 2, 3], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，使用了多個條件判斷來確定使用者的年齡分級，並根據不同的年齡範圍給予相應的分級訊息。"}, {"id": 45, "type": "single", "question": "45. 【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：<pre><code class=\"language-python line-numbers line-hight19\">if grade > 80 and rank >= 3:\n   grade += 10\nif grade > 70 and rank > 3:\n   grade += 5\nelse:\n   grade -= 5</code></pre>當 grade = 76，rand = 3 時，執行程式碼的輸出值是？", "options": ["71", "76", "81", "86"], "answer": [1], "weight": 1, "image": null, "explanation": "● 在這個程式碼中， grade = 76 ， rank = 3 ， 因此跳過兩個判斷來到 else: ，因此最終成績為 76 - 5 = 71。"}, {"id": 46, "type": "multioption", "question": "46. 【CH05-4】你正在編寫一個函式來判別負數與非負數。這個函式必須符合以下要求：<pre><code class=\"language-python\">● 如果 a 是負数，則回傳 'The result is a negative number'\n● 如果 a 不是負數，則為非負數，再繼續判別。\n● 如果 a 大於 0，則回傳 'The result is a positive number'\n● 否則回傳 'The result is a zero'</code></pre>你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">def reResult(a):\n    if _(選項 1)_\n        answer = 'The result is a negative number'\n    _(選項 2)_\n        if _(選項 3)_\n            answer = 'The result is a positive number'\n        _(選項 4)_\n            answer = 'The result is a zero'\n    return answer</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A. if a < 0:\n答案 B. if a > 0:\n答案 C. else:\n答案 D. elif:</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 3, 2, 3], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，首先檢查 `a` 是否小於 0，如果是，則回傳 'The result is a negative number'。\n● 接著，如果 `a` 大於 0，則回傳 'The result is a positive number'。\n● 如果 `a` 等於 0，則回傳 'The result is a zero'。"}, {"id": 47, "type": "multioption", "question": "47. 【CH05-5】你設計了一個電影票收費的函式，票價的規則如下：<pre><code class=\"language-python\">● 5 歲以下 = 免費入場\n● 5 歲及以上的學生 = 60 元\n● 5 歲到 17 歲但不是學生 = 120 元\n● 17 歲以上但不是學生 = 180 元</code></pre>你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">def ticket_fee(age, school):\n    fee = 0\n    _(選項 1)_\n        fee = 60\n    _(選項 2)_\n        _(選項 3)_\n            fee = 120\n        else:\n            fee = 180\n    return fee</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A. if age >= 5 and school:\n答案 B. elif age >= 5 and not school:\n答案 C. if age <= 17:</code></pre>", "options": ["A|B|C", "A|B|C", "A|B|C"], "answer": [1, 2, 3], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，首先檢查 `age` 是否大於等於 5 且 `school` 為真，如果是，則票價為 60 元。\n● 接著，如果 `age` 大於等於 5 且 `school` 為假，則進一步檢查 `age` 是否小於等於 17，如果是，則票價為 120 元；否則票價為 180"}, {"id": 48, "type": "multioption", "question": "48. 【CH05-6】你設計一個 Python 程式來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，其中規定輸入的值必須是正整數。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">num = int(input('Enter a number with 1 or 2 digits:'))digits = '0'\nif num > 0:\n    _(選項 1)_\n        digits = '1'\n    _(選項 2)_\n        digits = '2'\n    _(選項 3)_\n        digits = '>2'\n    print(digits + ' digits.')\nelif num == 0:\n    print('The number is 0')\nelse:\n    print('The number is not a positive number')</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A. if num < 10:\n答案 B. if num < 100:\n答案 C. elif num < 100:\n答案 D. else:</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 3, 4], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，使用了多個條件判斷來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，並根據不同的數字範圍給予相應的提示訊息。"}, {"id": 49, "type": "multioption", "question": "49. 【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。\n程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">from random import randint\ntarget = randint(1,100)\nchance = 1\nprint('Guess an integer from 1 to 10. You will have 3 chances.')\n_(選項 1)_\n    guess = int(input('Guess an integer:'))\n    if guess > target:\n        print('Guess is too high')\n    elif guess < target:\n        print('Guess is too low')\n    else:\n        print('Guess is just right')\n        _(選項 2)_\n    _(選項 3)_</code></pre>程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？\n請將回答區項目的選到正確的程式碼片段<pre><code class=\"language-python\">選項答案選擇區\n答案 A. while chance < 3:\n答案 B. break\n答案 C. pass\n答案 D. chance + 1\n答案 E. while chance < 3:\n答案 F. chance = 2</code></pre>", "options": ["A|B|C|D|E|F", "A|B|C|D|E|F", "A|B|C|D|E|F"], "answer": [1, 3, 5], "weight": 1, "image": null, "explanation": "● 在這個程式碼中，使用了 while 迴圈來控制猜測的次數，最多允許三次猜測。\n● 如果猜測正確，則使用 break 來終止迴圈。\n● 如果猜測錯誤，則使用 chance + 1 來增加猜測次數，並繼續下一次猜測。"}, {"id": 50, "type": "multioption", "question": "50. 【CH05-8】在以下的程式碼中，要加入哪些程式碼片段讓 print 語法可以正確執行？\n你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">aList = 1,2,3]\nbList = ['a', 'b', 'c']\n_(選項 1)_\n   print('aList is equal to bList')\n_(選項 2)_\n   print('aList is not equal to bList')</code></pre><pre><code class=\"language-python\">選項答案選擇區\nA. if aList == bList:\nB. if alist == blist\nC. else:\nD. else</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [1, 3], "weight": 1, "image": null, "explanation": "● 首先檢查 `aList` 和 `bList` 是否相等，如果相等則印出 'aList is equal to bList'。\n● 如果不相等，則印出 'aList is not equal to bList'。"}, {"id": 51, "type": "multioption", "question": "51. 【CH05-9】你設計了一個 Python 程式來檢查輸入英文姓名的大小寫，請在下方選擇四個程式碼到回答區中進行順序排列。<pre><code class=\"language-python\">第 1 段程式為 _(選項 1)\n第 2 段程式為 _(選項 2)\n第 3 段程式為 _(選項 3)\n第 4 段程式為 _(選項 4)</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A.\nname = input('Enter your English name:')\n答案 B.\nelif name.lower() == name:\n   print(name, 'is all lower case.')\n答案 C.\nelse:\n   print(name, 'is upper case.')\n答案 D.\nelse:\n   print(name, 'is mixed case.')\n答案 E.\nif name.upper() == name:\n   print(name, 'is all upper case.')\n答案 F.\nelse:\n   print(name, 'is lower case.')</code></pre>", "options": ["A|B|C|D|E|F", "A|B|C|D|E|F", "A|B|C|D|E|F", "A|B|C|D|E|F"], "answer": [1, 5, 2, 4], "weight": 1, "image": null, "explanation": "● 首先檢查 `name` 是否為全大寫，如果是，則印出 'is all upper case.'。\n● 接著，如果 `name` 為全小寫，則印出 'is all lower case.'。\n● 如果 `name` 同時包含大寫和小寫字母，則印出 'is mixed case.'。"}, {"id": 52, "type": "multioption", "question": "52. 【CH05-10】公司決定要幫所有年薪不到 50 萬的員工調升基本工資 5%，並給予獎金 1 萬元，以下是計算公式：<pre><code class=\"language-python\">● 新工資 = 目前工資 X 105% + $10000 獎金。\n● 程式會將每個人調整後的年薪資料存入 salaryList 清單中。</code></pre>你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">#清單中的每個人的工資都根據增加而更新。\n#年薪50萬元以上的員工將不會得到加薪。\n# salaryList 是由員工資料庫中取得，程式碼不會顯示。\n_(選項 1)_\n    if salaryList[index] >= 500000:\n        _(選項 2)_\nsalaryList[index] = int((salaryList[index] * 1.05) + 10000)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\n答案 A. for index in range(len(salaryList)+1):\n答案 B. for index in range(len(salaryList)-1):\n答案 C. for index in range(len(salaryList)):\n答案 D. for index in salaryList:</code></pre><pre><code class=\"language-python\">選項 2 答案選擇區\nA. exit()\nB. continue\nC. break\nD. end</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [3, 2], "weight": 1, "image": null, "explanation": "● 使用了 for 迴圈來遍歷 `salaryList` 中的每個員工的工資。\n● 如果員工的工資大於等於 50 萬，則跳過該員工的工資調整。\n● 否則，根據公式計算新的工資並更新 `salaryList`。"}, {"id": 53, "type": "multioption", "question": "53. 【CH05-11】你設計了一個函式計算並顯示從 2 到 9 的所有乘法組合的九九乘法表。\n你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\"># Displays times tables 2 - 9\ndef times_tables():\n    _(選項 1)_\n        _(選項 2)_\n            print(row * col, end=' ')\n        print()\n\n\n# main\ntimes_tables()</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\n答案 A. for col in range(9):\n答案 B. for col in range(2, 10):\n答案 C. for col in range(2, 9, 1):\n答案 D. for col in range(10):</code></pre><pre><code class=\"language-python\">選項 2 答案選擇區\n答案 A. for row in range(9):\n答案 B. for row in range(2, 9, 1):\n答案 C. for row in range(2, 10):\n答案 D. for row in range(10):</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [2, 3], "weight": 1, "image": null, "explanation": "● 使用了兩個 for 迴圈來遍歷從 2 到 9 的所有乘法組合。\n● 第一個迴圈遍歷列(col)，第二個迴圈遍歷行(row)。\n● range(2, 10) 為產生從 2 到 9 的整數序列（注意 Python 的 range 不包含結束值）"}, {"id": 54, "type": "multioption", "question": "54. 【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。<pre><code class=\"language-python\">第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_\n   if is_prime:\n      print(n)\n第 4 段程式為 _(選項 4)_</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A.\nn = 2\nis_prime = True\nwhile n <= 100:\n答案 B.\nn = 2\nwhile n <= 100:\n   is_prime = True\n答案 C.\n         break\n答案 D.\n         Continue\n答案 E.\n   n += 1\n答案 F.\n   for i in range(2, n):\n      if n / i = = 0:\n         is_prime = False\n答案 G.\n   for i in range(2, n):\n      if n % i == 0:\n         is_prime = False</code></pre>", "options": ["A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G", "A|B|C|D|E|F|G"], "answer": [2, 7, 3, 5], "weight": 1, "image": null, "explanation": "● 使用了 while 迴圈來遍歷從 2 到 100 的所有整數。\n● 對於每個整數 `n`，使用 for 迴圈來檢查是否為質數，如果 `n` 可以被任何小於 `n` 的整數整除，則不是質數。\n● 如果是質數，則印出該質數。"}, {"id": 55, "type": "multioption", "question": "55. 【CH05-13】你用 Python 設計了一個比大小函式，必須符合以下的需求：<pre><code class=\"language-python\">● 這個函式有二個參數：一個整數清單和一個整數作為參數。\n● 該函式必須在清單中以整數進行比較。\n● 如果在清單中的整數有一個比参数整数大，則該函式必須列印一則消息，\n  指示已經找到的整數比參數整數大，然後停止查看清單的動作。\n● 如果找不到比參數整數大的數，則該函式必須列印一則消息，\n  指示在清單中找不到比參數整數大的數。</code></pre>你應該如何安排這些程式碼片段的順序來開發解決方案？\n請將適合的程式碼片段從程式碼片段清單移動到回答區，並按正確的順序排列。<pre><code class=\"language-python\">第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_\n第 4 段程式為 _(選項 4)_\n第 5 段程式為 _(選項 5)_</code></pre><pre><code class=\"language-python\">選項答案選擇區\n答案 A.\n   for i in range(len(nums)):\n答案 B.\n      if nums[i] > num:\n         print('A value greater than {0} is found in the list of {1}'.format(num, nums))\n答案 C.\n      else:\n         print('A value greater than {0} cannot be found in the list of {1}'.format(num, nums))\n答案 D.\n         break\n答案 E.\ndef search(nums, num):</code></pre>", "options": ["A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E"], "answer": [5, 1, 2, 4, 3], "weight": 1, "image": null, "explanation": "● 首先定義了一個函式 `search(nums, num)`，該函式接受一個整數清單和一個整數作為參數。\n● 接著使用 for 迴圈遍歷清單中的每個整數，檢查是否有比參數整數大的數字。\n● 如果找到比參數整數大的數字，則印出相應的消息並停止迴圈。\n● 如果沒有找到比參數整數大的數字，則印出另一條消息。"}, {"id": 56, "type": "multioption", "question": "56. 【CH05-14】你正在設計一個 Python 程式驗證產品編號。<pre><code class=\"language-python\">● 產品編號的格式必須為 dd-dddd，並且只包含數字和破折號。\n● 如果格式正確則程式必須列印 True，如果格式不正確，則列印 False。</code></pre>你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">_(選項 1)_\nparts = ''\n_(選項 2)_\n    _(選項 3)_\n    product_no = input('Enter product number (dd-dddd): ')\n    parts = product_no.split('-')\n    if len(parts) == 2:\n        if len(parts[0]) == 2 and len(parts[1]) == 4:\n            if parts[0].isdigit() and parts[1].isdigit():\n                _(選項 4)_\n    print(valid)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. product_no = ''\nB. product_no = 'sentinel'\n\n選項 2 答案選擇區\nA. while product_no != '':\nB. while product_no != 'sentinel':\n\n選項 3 答案選擇區\nA. valid = False\nB. valid = True\n\n選項 4 答案選擇區\nA. valid = False\nB. valid = True</code></pre>", "options": ["A|B", "A|B", "A|B", "A|B"], "answer": [2, 1, 1, 2], "weight": 1, "image": null, "explanation": "● 首先定義了一個空的 `product_no` 變數，然後使用 while 迴圈來持續要求使用者輸入產品編號，直到輸入 'sentinel' 為止。\n● 接著將輸入的產品編號分割成兩部分，並檢查其格式是否符合要求。\n● 如果格式正確，則印出 True；否則印出 False。"}, {"id": 57, "type": "multioption", "question": "57. 【CH05-15】你正在設計 Python 應用程式。該程式將逐一查看數字清單，並在找到 4 時進行跳脫的動作。\n你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">nList = [0,1,2,3,4,5,6,6,7,8,9]\nindex = 0\n_(選項 1)_ index < 10:\n    print(nList[index])\n    if nList[index] == 4:\n        _(選項 2)_\n    else:\n        _(選項 3)_</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 2 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 3 答案選擇區\nA. continue\nB. break\nC. index += 1\nD. index = 1</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 4, 3], "weight": 1, "image": null, "explanation": "● 使用了 while 迴圈來遍歷數字清單，並在找到 4 時使用 break 跳出迴圈。"}, {"id": 58, "type": "multioption", "question": "58. 【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。<pre><code class=\"language-python\">● 您需要列印五行程式碼。\n● 其中第一行第三行和第五行各有四個星星。\n● 而第二行和第四行各有一個星。</code></pre>如下所示：請在下列位置中選擇正確的數字以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">result_str = ''\nfor row in range(1, _(選項 1)_):\n    for column in range(1, _(選項 2)_):\n        if row == 1 or row == 3 or row == 5:\n            result_str = result_str + '*'\n        elif column == 1:\n            result_str = result_str + '*'\n    result_str += '\\ n'\nprint(result_str)</code></pre><pre><code class=\"language-python\">選項答案選擇區\nA. 3  B. 4  C. 5 D. 6</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [4, 3], "weight": 1, "image": null, "explanation": "● 使用了兩個巢狀的 for 迴圈來列印星星，外層迴圈控制行數，內層迴圈控制列印星星的數量。"}, {"id": 59, "type": "multioption", "question": "59. 【CH05-17】您正在撰寫程式碼來根據下列准則傳回字母成績：<pre><code class=\"language-python\">● 變數 grade 會將數字成績儲存成 0 到 100 之間的整數。\n● 90 到 100 的成績 = A。\n● 80 到 89 的成績 = B。\n● 70 到 7 9的成績 = C。\n● 其他所有成績都不及格。</code></pre>請選取正確的程式碼片段以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ngrade = int(input('Please enter your grade: '))\n _(選項 1)_ grade <= 100 and grade >= 0:\n     _(選項 2)_ grade >= 90:\n        print('Your grade is A.')\n     _(選項 3)_ grade >= 80:\n        print('Your grade is B.')\n     _(選項 4)_ grade < 80 and grade > 69:\n        print('Your grade is C.')\n     _(選項 5)_\n        print('Your grade is failing.')\n _(選項 6)_\n    print('Invalid grade entered.')</code></pre><pre><code class=\"language-python\">選項答案選擇區\nA. if   B. else:   C. elif   D. else if</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 1, 3, 3, 2, 2], "weight": 1, "image": null, "explanation": "● 使用了 if、elif 和 else 來根據成績的範圍來判斷並印出對應的字母成績。"}, {"id": 60, "type": "multioption", "question": "60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. letter_list in word:\nB. word in letter_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [2, 4], "weight": 1, "image": null, "explanation": "● 使用了 for 迴圈來遍歷字詞列表，並在找到特定字母時增加計數。"}, {"id": 61, "type": "multioption", "question": "61. 【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\nscores = [80,90,75,85]\ncount = 0\nsum = 0\n# 在以下的程式碼有二個錯誤：\nfor index in range(_(選項 1)_):\n    count += 1\n    sum += scores[index]\naverage = _(選項 2)_\nprint('The total scords is:', sum)\nprint('The average scords is:', average)</code></pre>你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。<pre><code class=\"language-python\">選項 1 答案選擇區\nA. size(scores)\nB. size(scores) - 1\nC. len(scores) + 1\nD. len(scores)\n\n選項 2 答案選擇區\nA. sum / count\nB. sum**count\nC. sum * count\nD. sum // count</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [3, 1], "weight": 1, "image": null, "explanation": "● 使用了 for 迴圈來遍歷分數列表，並計算總分和平均分。"}, {"id": 62, "type": "multioption", "question": "62. 【CH05-20】您正在撰寫符合下列需求的程式碼：<pre><code class=\"language-python\">● 允許使用者不斷輸入字詞。\n● 輸出每個字詞的字元數。</code></pre>請選取正確的選項以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\nx = 'Hello World'\n_(選項 1)_ x != 'QUIT':\n    num = 0\n    _(選項 2)_ char _(選項 3)_ x:\n        num += 1\n    print(num)\n    x = input('Enter a new word or QUIT to exit: ')</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\n A. while B. for C. if D. in</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 2, 4], "weight": 1, "image": null, "explanation": "● 使用了 while 迴圈來持續接收使用者輸入，並使用 for 迴圈來計算字詞的字元數。"}, {"id": 63, "type": "multioption", "question": "63. 【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。<pre><code class=\"language-python line-numbers line-hight19\">numList = [0,1,2,3,4,5,6,7,8,9]\ni = 0\nwhile (i < 10)\n  print(numList[i])\n\n  if numList[i] = 6\n      break\n   else:\n      i +=1\n</code></pre>你需要更正第 3 行和 6 行中的程式碼。你要如何更正程式碼？<pre><code class=\"language-python\">選項 1，在第 3 行中應使用哪個程式碼片段？\nA. while (i < 10):\nB. while [i < 10]\nC. while (i < 5):\nD. while [i < 5]\n\n選項 2，在第 6 行中應使用哪個程式碼片段？\nA. if numList[i] == 6\nB. if numList[i] == 6:\nC. if numList(i) = 6:\nD. if numList(i) ! 6</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [1, 2], "weight": 1, "image": null, "explanation": "● 首先需要在第 3 行的 while 迴圈後面加上冒號 `:`，以正確結束條件語句。\n● 在第 6 行的 if 條件中，需要使用雙等號 `==` 來比較是否等於 6，並且也需要加上冒號 `:`。"}, {"id": 64, "type": "single", "question": "64. 【CH06-1】公司正將過去的進銷存程式碼轉移到 Python，以下哪個是正確的語法？<pre><code class=\"language-python\">選項 A\n// Return the current revenue\ndef get_saletotal():\nreturn saletotal\n\n選項 B.\n/* Return the current revenue */\ndef get_saletotal():\nreturn saletotal\n\n選項 B.\n'Return the current revenue\ndef get_saletotal():\nreturn saletotal\n\n選項 D.\n# Return the current revenue\ndef get_saletotal():\nreturn saletotal\n</code></pre>", "options": ["A", "B", "C", "D"], "answer": [4], "weight": 1, "image": null, "explanation": "● 使用了正確的註解語法 (#) 來描述函式的功能。"}, {"id": 65, "type": "multioption", "question": "65. 【CH06-2】你設計一個函式，使用 Python 計算矩形的面積。在函式中有加入注釋，程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\"># The area_rectangle function calculates the area of rectangle\n# x is the length\n# y is the width\n# return the value of x*y\ndef area_retangle(x, y):\n   comment = '# Retrun the value'\n   return x*y # x*y</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。<pre><code class=\"language-python\">選項 A. 第 1 到 4 行在語法檢查時將被忽略。\n選項 B. 第 2 和第 3 行中的井字符號(#)非必填的。\n選項 C. 第 6 行中的字串將被解釋為注釋。\n選項 D. 第 7 行包含内嵌注釋。</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [1, 2, 2, 1], "weight": 1, "image": null, "explanation": "● 第一到第四行的註解將在語法檢查時被忽略。\n● 第二和第三行中的井字符號 (#) 是必要的，因為它們用來標記註解。\n● 第六行中的字串 `comment` 並不會被解釋為註解，因為它是被引號包圍的字串。\n● 第七行中的內嵌註解是正確的，因為它使用了井字符號 (#)。"}, {"id": 66, "type": "multiple", "question": "66. 【CH06-3】一家運動器材公司正在設計一個程式用來記錄客戶跑步時的距離，你設計以下的 Python 程式碼:<pre><code class=\"language-python line-numbers line-hight19\">？\n    name = input('What is your name?')\n    return name\n？\n    calories = kms * calories_per_km\n    return calories\ndistance = int(input('How many kilometers did you run this week?'))\nburn_rate = 80\nrunner = get_name()\ncalories_burned = calc_calories(distance, burn_rate)\nprint(runner, ', you burned about ', calories_burned, 'calories.')</code></pre>在程式中必須要定義二個必要的函式。你將在第 1 及第 4 行中使用哪些程式碼片段？", "options": ["第 1 行 = def get_name():", "第 1 行 = def get_name(runner):", "第 1 行 = def get_name(name):", "第 4 行 = def calc_calories():", "第 4 行 = def calc calories(kms, burn_rate):", "第 4 行 = def calc_calories(kms, calories_per_km):"], "answer": [1, 6], "weight": 1, "image": null, "explanation": "● 使用了正確的函式定義方式，並且參數名稱也符合函式的功能。"}, {"id": 67, "type": "multioption", "question": "67. 【CH06-4】你正在設計一個線上遊戲記記分的 Python 應用程式。需要符合以下條件的函式：<pre><code class=\"language-python\">● 函式名為 calc_score\n● 函式接收二個參數：目前分數和一個值\n● 函式將值增加到目前分數\n● 函式返回新分數</code></pre>你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n_(選項 1)_   _(選項 2)_\ncurrent += value\n__(選項 3)_</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. calc_score\nB. def calc_score\nC. return calc_score\n\n選項 2 答案選擇區\nA. (current, value):\nB. ():\nC. (current, value)\nD. ()\n\n選項 3 答案選擇區\nA. pass current\nB. return current\nC. return\nD. pass</code></pre>", "options": ["A|B|C", "A|B|C|D", "A|B|C|D"], "answer": [2, 1, 2], "weight": 1, "image": null, "explanation": "● 首先定義了一個函式 `calc_score`，該函式接受兩個參數：目前分數和一個值。\n● 接著將值增加到目前分數，並返回新的分數。"}, {"id": 68, "type": "multioption", "question": "68. 【CH06-5】你正設計一個函式用來增加遊戲中的玩家得分。該函式有以下的要求：<pre><code class=\"language-python\">● 如果沒有為變數 points 指定值，則 points 等於 1。\n● 如果變數 plus 是 True ，那麼 points 必須加倍。</code></pre>程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">def add_score(score, plus, points):\n   if plus == True:\n      points = points * 2\n   score = score + points\n   return score\npoints = 5\nscore = 10\nnew_score = add_score(score, True, points)</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n選項 1.為了符合要求必須將 1 行更改為以下內容：\ndef add _score(score, plus, points = 1):\n\n選項 2.一旦使用預值定義了任何參數，其右側任何參數也必須使用默認值進行定義。\n\n選項 3.如果只用兩個參數呼叫函式，則第三個參數的值將為 None\n\n選項 4.第 3 行的結果會改變在第 6 行中變數 points 的值。</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [1, 1, 2, 2], "weight": 1, "image": null, "explanation": "● 為了符合要求，必須將函式的參數 `points` 設定為預設值 1。\n● 當使用預設值定義任何參數時，其右側的參數也必須使用預設值進行定義。\n● 如果只用兩個參數呼叫函式，則第三個參數的值將為 None。\n● 函式內部的計算不會改變在第 6 行中變數 `points` 的值。"}, {"id": 69, "type": "multioption", "question": "69. 【CH06-6】你設計了以下的函式來計算薪水：<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n選項 1. 呼叫 getpay() 函式會發生錯誤。\n選項 2. getpay(salary = 5000) 不會回傳任何值。\n選項 3. getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No"], "answer": [2, 2, 1], "weight": 1, "image": null, "explanation": "● 呼叫 `getpay()` 函式不會發生錯誤，因為所有的參數都有預設值。\n● `getpay(salary = 5000)` 會回傳 5000，因為它符合 `if salary > 0:` 的條件。\n● `getpay(qty = 500, qtyrate=4)` 會回傳 2000，因為它符合 `if qty > 0:` 的條件。"}, {"id": 70, "type": "multioption", "question": "70. 【CH06-7】請從選取正確的選項以回答有關記錄 Python 程式碼的問題：<pre><code class=\"language-python\">選項 1 答案選擇區\n請問哪些字元代表單行文件字串的開頭和結尾？\nA. 單引號\nB. 雙引號\nC. 二個雙引號\nD. 三個雙引號\n\n選項 2 答案選擇區\n在記錄函式時，文件字串的標準位置在哪裡？\nA. 在函式宣告區塊前\nB. 緊接在函式標頭後面\nC. 在函式宣告區塊後\nD. 在程式的最後\n\n選項 3 答案選擇區\n請閱下列函式：\ndef cube (n):\n\"\"\" Returns the cube of number n \"\"\"\nreturn n*n*n\n\n請問哪個命令可列印文件字串？\nA. print( __doc___)\nB. print(cube(doc))\nC. print(cube.__doc__)\nD. print(cube(docstring))</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 1, 2], "weight": 1, "image": null, "explanation": "● 選項 1 和選項 2 的正確答案都是 A，因為單行文件字串可以用單引號或雙引號來表示。\n● 選項 3 的正確答案是 C，因為可以使用 `cube.__doc__` 來列印函式的文件字串。\n● ITS ： A A B 而 ChatGPT ： D B C"}, {"id": 71, "type": "multioption", "question": "71. 【CH06-8】請檢閱下列程式。<pre><code class=\"language-python line-numbers line-hight19\">def petstore(category, species, breed='none'):\n    \"\"\"Display information about a pet.\"\"\"\n    print(f'You have selected an animal from the {category} category.')\n    if breed == 'none':\n        print(f'The {category} you selected is a {species}')\n    else:\n        print(f'The {category} you selected is a {species} {breed}')\nprint(f'The {category} would make a great pet!')\n\ncategory = input('What animal category are you interested in?')\nspecies = input('What species are they from (canine, feline, Scarlet Macaw, Blue and Gold Macaw)?')\nif category == 'dog' or category == 'cat':\n    breed = input('What breed are you interested in?')\n    petstore(category, species, breed)\nelse:\n    petstore(category, species)\n    petstore(breed='Maltese', species='Canine', category='dog')\n    petstore('bird', species='Scarlet Macaw')</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n選項 1. 此函式會傳回一個值。\n選項 2. 第 14 行和第 17 行的函式呼叫無效。\n選項 3. 第 16 行和第 18 行的函式呼叫會產生錯誤。\n</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No"], "answer": [2, 1, 2], "weight": 5, "image": null, "explanation": "● 函式 `petstore` 沒有寫 `return` 因此並不會傳回任何值，選項 1 是錯誤的。\n● 第 14 行和第 17 行的函式呼叫是有效的，因為它們符合函式的參數要求。\n● 第 16 行和第 18 行的函式呼叫會產生錯誤，因為它們使用了不正確的參數名稱或順序。\n● 第14和17行的函式呼叫，應該是有效呼叫，ITS答案 Yes；ChatGPT：No  #有效呼叫"}, {"id": 72, "type": "multioption", "question": "72. 【CH06-9】學生們正在參加學校活動之夜。下列函式會告訴學生該前往何處參加活動：<pre><code class=\"language-python line-numbers line-hight19\">def roomAssignment(student, year):\n    \"\"\"Assign rooms to students\"\"\"\n    if year == 1:\n        print(f'{student.title()}, please report to room 115')\n    elif year == 2:\n        print(f'{student.title()}, please report to room 210')\n    elif year == 3:\n        print(f'{student.title()}, please report to room 320')\n    elif year == 4:\n        print(f'{student.title()}, please report to room 405')\n    elif year == 5:\n        print(f'{student.title()}, please report to room 515')\n    else:\n        print(f'{student.title()}, please report to room 625')\n</code></pre>請問哪兩個函式呼叫是正確的？請選擇 2個答案。\n<pre><code class=\"language-python\">選項答案選擇區\n選項 1.\nname = input('What is your name?')\ngrade = 0\nwhile grade not in (1,2,3,4,5,6):\n    grade = int(input('What grade are you in (1-6)?'))\n    roomAssignment(name, year=grade)\n\n選項 2.\nname = input('What is your name?')\ngrade = 0\nwhile grade not in (1,2,3,4,5,6):\n    grade = int(input('What grade are you in (1-6)?'))\n    roomAssignment(student, year)\n\n選項 3.\nroomAssignment('Sherlock Sassafrass',4)\n\n選項 4.\nroomAssignment(year=6, name='Minnie George')</code></pre>", "options": ["正確|錯誤", "正確|錯誤", "正確|錯誤", "正確|錯誤"], "answer": [1, 2, 1, 2], "weight": 1, "image": null, "explanation": "● 選項 1 的函式呼叫是正確的。\n● 選項 2 的函式呼是錯誤的， student 參數 應為 name 參數。\n● 選項 3 的函式呼叫也是正確的，因為它直接傳入了學生姓名和年級。\n● 選項 4 的函式呼叫是錯誤的，因為它使用了不正確的順序及參數名稱。"}, {"id": 73, "type": "single", "question": "73. 【CH06-10】您為公司開發了一個 Python 應用程式，您想要在自己的程式碼中加入附註，好讓其他團隊成員能夠了解。\n請問您應該採取下列哪一項做法？", "options": ["在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。", "在任何一行的 # 後面放置附註。", "在任何一行的 // 後面放置附註。", "在任何程式碼片段的 /**/ 之間置附註"], "answer": [2], "weight": 1, "image": null, "explanation": "● 在 Python 中，單行註解是以 # 開頭的，因此選擇 2 是正確的。\n● 選擇 1 和選擇 4 是錯誤的，因為這些註解語法不是 Python 所使用的。\n● 選擇 3 是錯誤的，因為 // 是 JavaScript 和其他語言的註解語法，而不是 Python 的。"}, {"id": 74, "type": "single", "question": "74. 【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在導入時應該使用哪個程式碼片段？", "options": ["from datetime as dt", "from datetime import datetime as dt", "import datetime from datetime as dt", "import datetime.datetime as dt"], "answer": [2], "weight": 1, "image": null, "explanation": "● 在 Python 中，使用 `from datetime import datetime as dt` 可以將 `datetime` 模組中的 `datetime` 函式導入並設定為替代名稱 `dt`。\n● 選擇 1 是錯誤的，因為它沒有指定要導入的函式。\n● 選擇 3 和選擇 4 的語法都是錯誤的。"}, {"id": 75, "type": "single", "question": "75. 【CH07-2】你設計一個讀取檔案後將檔案中的每一行列印出來的函式。程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">def print_file(filename):\n    line = None\n    if os.path.isfile(filename):\n        data = open(filename, 'r')\n    for line in data:\n        print(line)</code></pre>當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？", "options": ["你需導入 os 模組。", "path 方法並不存在 os 模組中。", "path 物件中不存在 isfile 方法。", "isfile 方法不接受一個參數。"], "answer": [1], "weight": 1, "image": null, "explanation": "● 錯誤的原因是因為沒有導入 `os` 模組。\n● 在使用 `os.path.isfile(filename)` 之前，必須先導入 `os` 模組。\n● 選擇 2、3 和 4 都是錯誤的，因為 `os.path.isfile` 方法確實存在並且接受一個參數。"}, {"id": 76, "type": "single", "question": "76. 【CH07-3】設計程式碼用來生成的隨機整数·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？", "options": ["random.randrange(11, 21, 1)", "random.randrange(11, 20, 1)", "random.randint(11, 20)", "random.randint(11, 21)"], "answer": [1, 3], "weight": 1, "image": null, "explanation": "● 選擇 1 和選擇 3 是正確的。\n● 選擇 2 是錯誤的，因為 `random.randrange(11, 20, 1)` 的最大值是 20，不包括 20。\n● 選擇 4 是錯誤的，因為 `random.randint(11, 21)` 的最大值是 21，包括 21。"}, {"id": 77, "type": "single", "question": "77. 【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？", "options": ["random.random()", "random.randrange(0.0, 1.0)", "random.randrange()", "random.randint(0, 10)"], "answer": [4], "weight": 1, "image": null, "explanation": "● 選擇 4 是正確的，因為 `random.randint(0, 10)` 可以生成 0 到 10 之間的隨機整數，包括 0 和 10。\n● 選擇 1 是錯誤的，因為 `random.random()` 生成的是 0 到 1 之間的浮點數。\n● 選擇 2 是錯誤的，因為 `random.randrange(0.0, 1.0)` 生成的是 0 到 1 之間的浮點數。\n● 選擇 3 是錯誤的，因為 `random.randrange()` 需要指定範圍。"}, {"id": 78, "type": "multiple", "question": "78. 【CH07-5】你設計程式碼來產生一個隨機數數來符合以下要求：<pre><code class=\"language-python\">● 數字是 2 的倍數。\n● 最低的數字是 2。\n● 最高的數字是 50。</code></pre>哪兩個程式碼片段將符合要求？<pre><code class=\"language-python\">選項答案選擇區\n選項 1.\nfrom random import randint\nprint(randint(1,25) * 2)\n\n選項 2.\nfrom random import randint\nprint(randint(1,50))\n\n選項 3.\nfrom random import randrange\nprint(randrange(2,50,2))\n\n選項 4.\nfrom random import randrange\nprint(randrange(2,50,1))</code></pre>", "options": ["選項 1 程式碼片段符合要求", "選項 2 程式碼片段符合要求", "選項 3 程式碼片段符合要求", "選項 4 程式碼片段符合要求"], "answer": [1, 3], "weight": 1, "image": null, "explanation": "● 選擇 1 和選擇 3 是正確的，因為它們都能生成符合條件的隨機數字。\n● 選擇 2 是錯誤的，因為 `randint(1,50)` 可能生成奇數。\n● 選擇 4 是錯誤的，因為 `randrange(2,50,1)` 會生成所有的整數，包括奇數。\n● 選擇 3 似乎不對，除非改成 print(randrange(2, 51, 2))"}, {"id": 79, "type": "multiple", "question": "79. 【CH07-6】你正在設計一個處理數字的函式。該函式具有以下要求：<pre><code class=\"language-python\">● 將浮點數傳遞到函式中\n● 函式必須取浮點數的絕對值\n● 函式必須無條件進位到整數</code></pre>你應該使用哪兩個數學函式？", "options": ["math.fabs(x)", "math.floor(x)", "math.fmod(x)", "math.ceil(x)", "math.frexp(x)"], "answer": [1, 4], "weight": 1, "image": null, "explanation": "● 選擇 1 和選擇 4 是正確的，因為它們都能滿足函式的要求。\n● 選擇 2 是錯誤的，因為 `math.floor(x)` 會將浮點數向下取整，而不是無條件進位。\n● 選擇 3 是錯誤的，因為 `math.fmod(x)` 會返回浮點數的模，而不是整數。\n● 選擇 5 是錯誤的，因為 `math.frexp(x)` 會返回浮點數的尾數和指數，而不是整數。\n● math.fabs(x) = 傳回浮點數的絕對值\n● math.floor(x) = #無條件捨去(向下取整)\n● math.fmod(x) = 取餘數(浮點除法後的餘數)\n● math.ceil(x) = 無條件進位(向上取整)\n● math.frexp(x) = 將浮點數拆成底數和指數(主要用於底層表示)"}, {"id": 80, "type": "multioption", "question": "80. 【CH07-7】您正在撰寫一個程式來顯示 My Healthy Eata Delivery 的特價優惠。<pre><code class=\"language-python line-numbers line-hight19\">import datetime\ndailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')\nweekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')\n\n\nprint('My Healthy Eats Delivery')\nif today == 'Friday' or today == 'Saturday' or today == 'Sunday':\n    print('The weekend specials include:')\n    for item in weekendspecials:\n        print(item)\nelse:\n    print('The weekday specials include: ')\n    for item in dailySpecials:\n        print(item)\n\nprint(f'Pricing specials change in (daysLeft) days')</code></pre>請選取正確的還項以完成第 4、 5 和 15 行的程式碼。<pre><code class=\"language-python\">選項答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()\n</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [1, 1, 2], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 A 和 B，因為它們都可以用來獲取當前日期。\n● 選擇 2 的正確答案是 A，因為 `strftime('%A')` 可以獲取當前的工作日。\n● 選擇 3 的正確答案是 B，因為 `6 - now.weekday()` 可以計算出週剩餘天數。\n● 注意：選項中的字母可能有誤，應該是 `%A` 而不是 `&A`。"}, {"id": 81, "type": "multioption", "question": "81. 【CH07-8】您正在撰寫一個程式來隨機指派房間(roomnumber)和隊建立組別(group)以進行公司培訓活動。請選取正確的程式碼片段以完成程式碼。<pre><code class=\"language-python line-numbers line-hight19\">import random\n\nroomsAssigned = [1]\ngroupList = ['Ropes', 'Rafting', 'Obstacle', 'Wellness']\ncount = 0\nprint('Welcome to CompanyPro's Team-Building Weekend!')\nname = input('Please enter your name (q to quit)? ')\nwhile name != 'q' and count < 50:\n    room_number = random.randint(1,50)\n    while room_number in roomsAssigned:\n        _(選項 1)_\n    print(f'{name}, your room number is {room_number}')\n    roomsAssigned.append(room_number)\n    _(選項 2)_\n    print(f'You will meet with the {group} Group this afternoon.')\n    count += 1\n    name = input('Please enter your name (q to quit)? ')</code></pre><pre><code class=\"language-python\">選項答案選擇區\n選項 1\nA. room_number = random.randint(1,50)\nB. room_number = random.randint(1,51)\nC. room_number = random.randrange(50)\nD. room_number = random.randrange(51)\n\n選項 2\nA. group = random.choice(groupList)\nB. group = random.shuffle(groupList)\nC. group = random.random(groupList)\nD. group = random.uniform(groupList)</code></pre>", "options": ["A|B|C|D", "A|B|C|D"], "answer": [1, 1], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 A，因為 `random.randint(1,50)` 可以生成 1 到 50 之間的隨機整數。\n● 選擇 2 的正確答案是 A，因為 `random.choice(groupList)` 可以從 `groupList` 中隨機選擇一個組別。\n● 選擇 B、C 和 D 都是不正確的，因為它們不符合要求。"}, {"id": 82, "type": "multioption", "question": "82. 【CH08-1】在下列的語法救述中，如果是正確的就選擇 Yes，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n\nA.在 try 語法中可以有不只一個 except 子句。\nB.在 try 語法中可以不加 except 子句。\nC.在 try 語法中可以有一個 finally 子句與 except 子句。\nD.在 try 語法中可以有不只一個 finally</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [1, 1, 1, 2], "weight": 1, "image": null, "explanation": "● 在 Python 中，`try` 語法可以有多個 `except` 子句，因此選項 A 是正確的。\n● 選項 B 是正確的，因為 `try` 語法可以沒有 `except` ，但須搭配 `finally` 子句才合法。\n● 選項 C 是正確的，因為 `try` 語法可以有一個 `finally` 子句與多個 `except` 子句。\n● 選項 D 是錯誤的，因為 `try` 語法只能有一個 `finally` 子句。"}, {"id": 83, "type": "multioption", "question": "83. 【CH08-2】你製作一個程式詢問使用者家中有多少個小孩，使用者必須輸入整數，如果輸入值不是整數，程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">程式碼片段\n\nwhile True:\n    _(選項 1)_\n        x = int(input('How many children do you have? '))\n        break\n    _(選項 2)_ ValueError:\n        print('Please make sure you entered an integer, please try again...')</code></pre><pre><code class=\"language-python\">選項答案選擇區\n選項 1\nA. try:\nB. else:\nC. except:\nD. raise:\nE. finally:\n選項 2\nA. try\nB. else\nC. except\nD. raise\nE. finally</code></pre>", "options": ["A|B|C|D|E", "A|B|C|D|E"], "answer": [1, 3], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 A，因為 `try` 語句用來捕捉可能發生的錯誤。\n● 選擇 2 的正確答案是 C，因為 `except` 用來處理 `ValueError` 異常。\n● 選擇 B、D 和 E 都是不正確的，因為它們不符合語法要求。"}, {"id": 84, "type": "multioption", "question": "84. 【CH08-3】關於 assert 方法的救述，請在回答區中選擇還適當的選頂。<pre><code class=\"language-python\">選項答案選擇區\n\n選項 1. 若要测試變數 x 與變數 y 的值是否相同·可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)\n\n選項 2. 若要測試物件 x 與物件 y 是否相同，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)\n\n選項 3. 若要測試清單中是否存在某個值，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [3, 1, 2], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 C，因為 `assertEqual(x, y)` 用來測試變數的值是否相等。\n● 選擇 2 的正確答案是 A，因為 `assertIs(x, y)` 用來測試物件是否相同。\n● 選擇 3 的正確答案是 B，因為 `assertIn(x, y)` 用來測試某個值是否在清單中。\n● assertEqual(x, y) 測試的是「x 與 y 的值相等」\n● assertIs(x, y) 測試的是「x 與 y 是同一個記憶體中的物件」\n● assertIn(x, y) # 是否存在於 y 裡面(如清單、字串、字典鍵等等)\n● assertIsInstance(x, y) #確認 x 是否是類型 y 的實例，如果不是，則拋出 AssertionError"}, {"id": 85, "type": "multioption", "question": "85. 【CH08-4】你需要測試某個物件是否為特定類別的執行個體，請問如何進行單元測試？<pre><code class=\"language-python line-numbers line-hight19\">程式碼片段\n_(選項 1)_ unittest\nclass TestIsInstance(_(選項 2)_)\ndef _(選項 3)_:\n   _(選項 4)_\nif __name__ == \"__main__\"\n   unittest.main()\n</code></pre><pre><code class=\"language-python\">選項答案選擇區\n\n選項 1\nA. from\nB. include\nC. import\nD. use\n\n選項 2\nA. TestCase\nB. unittest.TestCase\nC. unittest\nD. TestCase.unittest\n\n選項 3\nA. test isInstance()\nB. isInstance()\nC. test_isInstance(self)\nD. isInstance(self)\n\n選項 4\nA. assertIsInstance(obj, cls, msg=None)\nB. self.assertIsInstance(obj, cls, msg-None)\nC. assertIsInstance(obj, cls)\nD. self.assertIsInstance(obj, cls)</code></pre>", "options": ["A|B|C|D", "A|B|C|D", "A|B|C|D", "A|B|C|D"], "answer": [3, 2, 3, 4], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 C，因為 `import` 用來導入模組。\n● 選擇 2 的正確答案是 B，因為 `unittest.TestCase` 是單元測試的基礎類別。\n● 選擇 3 的正確答案是 C，因為 `test_isInstance(self)` 是測試方法的命名慣例。\n● 選擇 4 的正確答案是 D，因為 `self.assertIsInstance(obj, cls)` 用來測試物件是否為特定類別的實例。\n● 本題 ITS 答案 C、B、C、B ChatGPT 答案 C、B、C、D"}, {"id": 86, "type": "multioption", "question": "86. 【CH08-5】您需要撰寫執行下列工作的程式碼：<pre><code class=\"language-python\">1. 呼叫 process() 函式。\n2. 如果 process() 函式回傳錯誤，則呼叫 logError() 函式。\n3. 呼叫 process() 函式之後一律呼叫 displayResult()函式。</code></pre>你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">程式碼片段\n_(選項 1)_:\n    process()\n_(選項 2)_:\n    logError()\n_(選項 3)_:\n    displayResult()</code></pre><pre><code class=\"language-python\">選項答案選擇區\n\nA. assert\nB. raise\nC. except\nD. try\nE. finally</code></pre>", "options": ["A|B|C|D|E", "A|B|C|D|E", "A|B|C|D|E"], "answer": [4, 3, 5], "weight": 1, "image": null, "explanation": "● 選擇 1 的正確答案是 D，因為 `try` 用來捕捉可能發生的錯誤。\n● 選擇 2 的正確答案是 C，因為 `except` 用來處理 `ValueError` 異常。\n● 選擇 3 的正確答案是 E，因為 `finally` 用來確保無論是否發生錯誤都會執行的程式碼。"}, {"id": 87, "type": "multioption", "question": "87. 【CH08-6】下列函式會計算使用指數之運算式的值。<pre><code class=\"language-python line-numbers line-hight19\">def calc_power(a, b):\n   return a**b\nbase = input('Enter the number for the base: ')\nexponent = input('Enter the number for the exponent: ')\nresult = calc_power(base, exponent)\nprint('The result is ' + result)</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes，否則請選揮No。<pre><code class=\"language-python\">選項答案選擇區\n\n選項 1. 第 2 行會造成執行階段錯誤。\n選項 2. 第 6 行會造成執行階段錯誤。\n選項 3. eval 函式應該用於第 3 和 4 行。</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No"], "answer": [1, 1, 1], "weight": 1, "image": null, "explanation": "● 選項 1 的正確答案是 Yes ，因為 `a` 和 `b` 是字串類型，無法進行指數運算。\n● 選項 2 的正確答案是 Yes ，因為 `result` 是字串類型，無法與其他字串進行相加運算。\n● 選項 3 的正確答案是 Yes ，因為 `eval` 函式可以將字串轉換為數值類型。"}, {"id": 88, "type": "multioption", "question": "88. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()</code></pre>out.txt 檔案不存在執行程式碼。針對下列每個叙述，如果是正確的就選擇 Yes，否則請選擇 No。<pre><code class=\"language-python\">選項答案選擇區\n\n選項 1. 此程式碼將正常執行，不會發生錯誤。\n選項 2. 此程式碼將執行，但會產生邏輯錯誤。\n選項 3. 此程式碼將產生執行階段錯誤。\n選項 4. 此程式碼碼將產生語法錯誤。</code></pre>", "options": ["Yes|No", "Yes|No", "Yes|No", "Yes|No"], "answer": [2, 1, 1, 2], "weight": 1, "image": null, "explanation": "● 選項 1 的答案是 No — 程式碼中存在未定義變數 i 及 file_name ，將產生 UnDefined Error。\n● 選項 2 的答案是 Yes — 它不會正常執行，因為會直接因 i 及 file_name 未定義而產生執行階段錯誤，也因 i 未定義而執行 i = i + 1 產生邏輯錯誤。\n● 選項 3 的答案是 Yes ， i = i + 1 在未初始化的情況下會導致 NameError ，為執行階段錯誤。\n● 選項 4 的答案是 No ，語法是合法的，但執行時會出錯。"}];
-    
-    // State
     let currentIndex = 0;
-    let visitedSet = new Set();
-    const STORAGE_KEY = 'its_python_visited_v1';
-    const INDEX_KEY = 'its_python_current_idx_v1';
+    let correctSet = new Set();
+    let incorrectSet = new Set();
+    
+    // Dynamic keys
+    const CORR_KEY = 'its_python_correct_v1';
+    const INCORR_KEY = 'its_python_incorrect_v1';
+    const INDEX_KEY = 'its_python_index_v1';
 
-    const typeMapping = {
-        'single': '單選題',
-        'multiple': '複選題',
-        'multioption': '題組'
-    };
+    const typeMapping = { 'single': '單選題', 'multiple': '複選題', 'multioption': '題組' };
 
     function loadState() {
-        const savedVisited = localStorage.getItem(STORAGE_KEY);
-        if (savedVisited) {
-            visitedSet = new Set(JSON.parse(savedVisited));
-        }
+        const savedCorr = localStorage.getItem(CORR_KEY);
+        if (savedCorr) correctSet = new Set(JSON.parse(savedCorr));
+        
+        const savedIncorr = localStorage.getItem(INCORR_KEY);
+        if (savedIncorr) incorrectSet = new Set(JSON.parse(savedIncorr));
+
         const savedIndex = localStorage.getItem(INDEX_KEY);
         if (savedIndex !== null) {
             currentIndex = parseInt(savedIndex, 10);
-            if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= quizData.length) {
-                currentIndex = 0;
-            }
+            if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= quizData.length) currentIndex = 0;
         }
     }
 
     function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify([...visitedSet]));
+        localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
+        localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
         localStorage.setItem(INDEX_KEY, currentIndex.toString());
     }
 
     function resetProgress() {
-        if(confirm('確定要清除所有閱讀進度嗎？')) {
-            localStorage.removeItem(STORAGE_KEY);
+        if(confirm('確定要清除所有紀錄嗎？')) {
+            localStorage.removeItem(CORR_KEY);
+            localStorage.removeItem(INCORR_KEY);
             localStorage.removeItem(INDEX_KEY);
             location.reload();
         }
     }
 
-    function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('active');
-    }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 
     function checkAnswer(element, qIdx, optIdx, event) {
         const item = quizData[qIdx];
@@ -342,37 +168,30 @@
         const input = element.querySelector('input');
 
         if (event && event.target !== input) {
-            // Clicked on div/label, manually toggle input
-            if (isMultiple) {
-                input.checked = !input.checked;
-            } else {
-                input.checked = true;
-            }
+            if (isMultiple) input.checked = !input.checked;
+            else input.checked = true;
         }
-        // If clicked on input directly, browser handles toggle.
 
         if (!isMultiple) {
-            // Single choice - prevent multiple clicks
             if (item.answered) return;
             item.answered = true;
-
-            // Disable all inputs for this question
-            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
-            inputs.forEach(i => i.disabled = true);
+            document.querySelectorAll(`input[name="q${qIdx}"]`).forEach(i => i.disabled = true);
 
             if (correctIndices.includes(optIdx)) {
                 element.classList.add('correct');
+                correctSet.add(qIdx);
+                incorrectSet.delete(qIdx);
             } else {
                 element.classList.add('incorrect');
-                // Find and highlight correct one
+                incorrectSet.add(qIdx);
+                correctSet.delete(qIdx);
                 const correctInput = document.querySelector(`input[name="q${qIdx}"][id="o${correctIndices[0]}"]`);
                 if (correctInput) correctInput.closest('.option-item').classList.add('correct');
             }
-            // Auto show answer section
-            const el = document.getElementById('ans-section');
-            el.style.display = 'block';
+            saveState();
+            document.getElementById('ans-section').style.display = 'block';
+            updateUI();
         } else {
-            // Multiple choice - allow toggling and re-evaluating
             if (input.checked) {
                 if (correctIndices.includes(optIdx)) {
                     element.classList.add('correct');
@@ -385,6 +204,37 @@
                 element.classList.remove('correct');
                 element.classList.remove('incorrect');
             }
+
+            // Check overall status for Multiple Choice
+            const allOptions = document.querySelectorAll(`input[name="q${qIdx}"]`);
+            let allCorrect = true;
+            let anyWrong = false;
+
+            allOptions.forEach((inp, idx) => {
+                if (inp.checked) {
+                    if (!correctIndices.includes(idx)) {
+                        anyWrong = true; // Selected a wrong one
+                        allCorrect = false;
+                    }
+                } else {
+                    if (correctIndices.includes(idx)) {
+                        allCorrect = false; // Missed a correct one
+                    }
+                }
+            });
+
+            if (allCorrect) {
+                correctSet.add(qIdx);
+                incorrectSet.delete(qIdx);
+                document.getElementById('ans-section').style.display = 'block';
+            } else {
+                correctSet.delete(qIdx);
+                if (anyWrong) {
+                     incorrectSet.add(qIdx);
+                }
+            }
+            saveState();
+            updateUI();
         }
     }
 
@@ -395,23 +245,30 @@
         const correctSubIdx = parseInt(answers[optIdx]) - 1;
         const input = element.querySelector('input');
 
-        if (event && event.target !== input) {
-            input.checked = true;
-        }
-
+        if (event && event.target !== input) input.checked = true;
         if (element.classList.contains('correct') || element.classList.contains('incorrect')) return;
 
-        // Disable other radios in this sub-question group
-        const inputs = document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`);
-        inputs.forEach(i => i.disabled = true);
+        document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`).forEach(i => i.disabled = true);
 
         if (subIdx === correctSubIdx) {
             element.classList.add('correct');
+            const totalSub = (quizData[qIdx].quiz || quizData[qIdx].options || []).length;
+            const currentCorrect = document.querySelectorAll('.sub-opt-container.correct').length;
+            if (currentCorrect === totalSub) {
+                correctSet.add(qIdx);
+                incorrectSet.delete(qIdx);
+                saveState();
+                updateUI();
+                document.getElementById('ans-section').style.display = 'block';
+            }
         } else {
             element.classList.add('incorrect');
-            // Highlight correct one
             const correctInput = document.getElementById(`o${optIdx}_s${correctSubIdx}`);
             if (correctInput) correctInput.parentElement.classList.add('correct');
+            incorrectSet.add(qIdx);
+            correctSet.delete(qIdx);
+            saveState();
+            updateUI();
         }
     }
 
@@ -419,19 +276,14 @@
         if (index < 0) index = 0;
         if (index >= quizData.length) index = quizData.length - 1;
         currentIndex = index;
-
-        visitedSet.add(index);
         saveState();
 
         const item = quizData[index];
         const container = document.getElementById('question-container');
-        
         container.innerHTML = '';
-
+        
         const card = document.createElement('div');
         card.className = 'card question-card';
-
-        // Header
         const typeLabel = typeMapping[item.type] || '單選題';
         card.innerHTML += `
             <div class="question-header">
@@ -442,26 +294,19 @@
                 <div class="text-muted small">Total: ${quizData.length}</div>
             </div>
         `;
-
-        // Body
+        
         const body = document.createElement('div');
         body.className = 'question-body';
-        
         let qText = (item.question || '').replace(/●/g, '<br/>●');
         body.innerHTML += `<div class="mb-4">${qText}</div>`;
-
-        if (item.image) {
-            body.innerHTML += `<div class="text-center mb-4"><img src="${item.image}" class="question-image" alt="Question Image"></div>`;
-        }
-
-        // Options
+        if (item.image) body.innerHTML += `<div class="text-center mb-4"><img src="${item.image}" class="question-image" alt="Question Image"></div>`;
+        
         const options = item.quiz || item.options || [];
         let optionsHtml = '<div class="mt-4">';
         let isComplex = options.some(opt => typeof opt === 'string' && opt.includes('|'));
 
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
-            
             if (optStr.includes('|')) {
                 const subOpts = optStr.split('|');
                 optionsHtml += `<div class="sub-question-label">Quiz ${optIdx + 1}</div>`;
@@ -470,11 +315,8 @@
                     optionsHtml += `
                         <div class="form-check form-check-inline p-2 border rounded bg-light sub-opt-container" onclick="checkSubAnswer(this, ${index}, ${optIdx}, ${subIdx}, event)">
                             <input class="form-check-input" type="radio" name="q${index}_opt${optIdx}" id="o${optIdx}_s${subIdx}">
-                            <label class="form-check-label ms-1" style="cursor:pointer" for="o${optIdx}_s${subIdx}">
-                                (${subIdx+1}) ${sub}
-                            </label>
-                        </div>
-                    `;
+                            <label class="form-check-label ms-1" style="cursor:pointer" for="o${optIdx}_s${subIdx}">(${subIdx+1}) ${sub}</label>
+                        </div>`;
                 });
                 optionsHtml += `</div>`;
             } else {
@@ -483,43 +325,29 @@
                         <div class="form-check">
                             <input class="form-check-input" type="${item.type === 'multiple' ? 'checkbox' : 'radio'}" 
                                    name="q${index}" id="o${optIdx}" style="transform: scale(1.2); margin-top: 0.3rem;">
-                            <label class="form-check-label w-100 ps-2" for="o${optIdx}" style="cursor:pointer">
-                                ${optIdx + 1}. ${optStr}
-                            </label>
+                            <label class="form-check-label w-100 ps-2" for="o${optIdx}" style="cursor:pointer">${optIdx + 1}. ${optStr}</label>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
         });
         optionsHtml += '</div>';
         body.innerHTML += optionsHtml;
 
-        // Footer Actions
         const footer = document.createElement('div');
         footer.className = 'mt-5 pt-4 border-top text-center';
-        
         const btn = document.createElement('button');
         btn.className = 'btn btn-outline-primary px-4';
         btn.innerHTML = '👁️ 顯示答案 / 解析';
         btn.onclick = () => {
             const el = document.getElementById('ans-section');
-            if(el.style.display === 'block') {
-                el.style.display = 'none';
-                btn.classList.remove('active');
-            } else {
-                el.style.display = 'block';
-                btn.classList.add('active');
-                // Scroll to answer if it's far down
-                setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100);
-            }
+            if(el.style.display === 'block') { el.style.display = 'none'; btn.classList.remove('active'); }
+            else { el.style.display = 'block'; btn.classList.add('active'); setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100); }
         };
         footer.appendChild(btn);
 
-        // Answer Section
         const answerDiv = document.createElement('div');
         answerDiv.id = 'ans-section';
         answerDiv.className = 'answer-section text-start';
-        
         let ansDisplay = '';
         let answers = item.answer;
         if (!Array.isArray(answers)) answers = [answers];
@@ -532,20 +360,13 @@
                     if (optStr.includes('|')) {
                         const subs = optStr.split('|');
                         const ansIdx = parseInt(ans) - 1;
-                        if (subs[ansIdx]) {
-                            mappedAnswers.push(`Quiz ${i+1}: <b>${subs[ansIdx]}</b>`);
-                        } else {
-                            mappedAnswers.push(`Quiz ${i+1}: ${ans}`);
-                        }
-                    } else {
-                        mappedAnswers.push(`${ans}`);
-                    }
+                        if (subs[ansIdx]) mappedAnswers.push(`Quiz ${i+1}: <b>${subs[ansIdx]}</b>`);
+                        else mappedAnswers.push(`Quiz ${i+1}: ${ans}`);
+                    } else mappedAnswers.push(`${ans}`);
                 }
             });
             ansDisplay = mappedAnswers.join(', ');
-        } else {
-            ansDisplay = answers.join(', ');
-        }
+        } else ansDisplay = answers.join(', ');
 
         answerDiv.innerHTML = `
             <h5 class="mb-3">正確答案:</h5>
@@ -553,48 +374,28 @@
             <h5 class="mb-3 mt-4">解析:</h5>
             <div class="explanation">${(item.explanation || '暫無解析。').replace(/●/g, '<br/>●')}</div>
         `;
-        
         footer.appendChild(answerDiv);
         body.appendChild(footer);
         card.appendChild(body);
         container.appendChild(card);
-
         updateUI();
         Prism.highlightAll();
-        
-        // Auto-close sidebar on mobile after selection
-        if (window.innerWidth < 992) {
-            document.getElementById('sidebar').classList.remove('active');
-        }
+        if (window.innerWidth < 992) document.getElementById('sidebar').classList.remove('active');
     }
 
     function nextQuestion() {
-        if (currentIndex < quizData.length - 1) {
-            renderQuestion(currentIndex + 1);
-            window.scrollTo(0, 0);
-        }
+        if (currentIndex < quizData.length - 1) { renderQuestion(currentIndex + 1); window.scrollTo(0, 0); }
     }
-
     function prevQuestion() {
-        if (currentIndex > 0) {
-            renderQuestion(currentIndex - 1);
-            window.scrollTo(0, 0);
-        }
+        if (currentIndex > 0) { renderQuestion(currentIndex - 1); window.scrollTo(0, 0); }
     }
-    
-    function jumpTo(index) {
-        renderQuestion(index);
-    }
+    function jumpTo(index) { renderQuestion(index); }
 
     function updateUI() {
-        // Update Buttons
         document.getElementById('btn-prev').disabled = (currentIndex === 0);
         document.getElementById('btn-next').disabled = (currentIndex === quizData.length - 1);
-        
-        // Update Sidebar Stats
-        document.getElementById('progress-stats').innerText = `${visitedSet.size} / ${quizData.length}`;
+        document.getElementById('progress-stats').innerText = `答對:${correctSet.size} 答錯:${incorrectSet.size} / 共:${quizData.length}`;
 
-        // Update Grid
         const grid = document.getElementById('progress-grid');
         if (grid.children.length !== quizData.length) {
             grid.innerHTML = '';
@@ -608,21 +409,19 @@
             });
         }
 
-        // Update Grid Classes
         for (let i = 0; i < quizData.length; i++) {
             const node = document.getElementById(`node-${i}`);
             if (node) {
                 node.className = 'q-node';
                 if (i === currentIndex) node.classList.add('active');
-                else if (visitedSet.has(i)) node.classList.add('visited');
+                else if (incorrectSet.has(i)) node.classList.add('incorrect');
+                else if (correctSet.has(i)) node.classList.add('correct');
             }
         }
     }
 
-    // Init
     loadState();
     renderQuestion(currentIndex);
-
 </script>
 </body>
 </html>
