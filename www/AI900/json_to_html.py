@@ -145,11 +145,13 @@ def create_html(json_file, output_html):
     let currentIndex = 0;
     let correctSet = new Set();
     let incorrectSet = new Set();
+    let userAnswers = {{}}; // Store user choices: {{ questionIndex: choice }}
     
     // Dynamic keys
     const CORR_KEY = '{storage_base}_correct_v1';
     const INCORR_KEY = '{storage_base}_incorrect_v1';
     const INDEX_KEY = '{storage_base}_index_v1';
+    const ANSWERS_KEY = '{storage_base}_answers_v1';
 
     const typeMapping = {{ 'single': '單選題', 'multiple': '複選題', 'multioption': '題組' }};
 
@@ -165,12 +167,16 @@ def create_html(json_file, output_html):
             currentIndex = parseInt(savedIndex, 10);
             if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= quizData.length) currentIndex = 0;
         }}
+
+        const savedAns = localStorage.getItem(ANSWERS_KEY);
+        if (savedAns) userAnswers = JSON.parse(savedAns);
     }}
 
     function saveState() {{
         localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
         localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
         localStorage.setItem(INDEX_KEY, currentIndex.toString());
+        localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
     }}
 
     function resetProgress() {{
@@ -178,6 +184,7 @@ def create_html(json_file, output_html):
             localStorage.removeItem(CORR_KEY);
             localStorage.removeItem(INCORR_KEY);
             localStorage.removeItem(INDEX_KEY);
+            localStorage.removeItem(ANSWERS_KEY);
             location.reload();
         }}
     }}
@@ -196,6 +203,19 @@ def create_html(json_file, output_html):
             if (isMultiple) input.checked = !input.checked;
             else input.checked = true;
         }}
+
+        // Record User Answer
+        if (isMultiple) {{
+            // For multiple, we store an array of selected indices
+            const inputs = document.querySelectorAll(`input[name="q${{qIdx}}"]`);
+            let selected = [];
+            inputs.forEach((inp, idx) => {{ if (inp.checked) selected.push(idx); }});
+            userAnswers[qIdx] = selected;
+        }} else {{
+            // For single, store the index
+            userAnswers[qIdx] = optIdx;
+        }}
+        saveState();
 
         if (!isMultiple) {{
             if (item.answered) return;
@@ -217,6 +237,11 @@ def create_html(json_file, output_html):
             document.getElementById('ans-section').style.display = 'block';
             updateUI();
         }} else {{
+            // For multiple choice, we update UI dynamically but only finalize when correct?
+            // Actually, existing logic checks correctness immediately on click?
+            // No, the previous logic was: if (input.checked) check correctness.
+            // Let's keep the existing visual logic:
+            
             if (input.checked) {{
                 if (correctIndices.includes(optIdx)) {{
                     element.classList.add('correct');
@@ -271,6 +296,12 @@ def create_html(json_file, output_html):
         const input = element.querySelector('input');
 
         if (event && event.target !== input) input.checked = true;
+        
+        // Record User Answer for Sub-Question
+        if (!userAnswers[qIdx]) userAnswers[qIdx] = {{}};
+        userAnswers[qIdx][optIdx] = subIdx;
+        saveState();
+
         if (element.classList.contains('correct') || element.classList.contains('incorrect')) return;
 
         document.querySelectorAll(`input[name="q${{qIdx}}_opt${{optIdx}}"]`).forEach(i => i.disabled = true);
@@ -403,6 +434,84 @@ def create_html(json_file, output_html):
         body.appendChild(footer);
         card.appendChild(body);
         container.appendChild(card);
+
+        // Restore User Answer State
+        // Single/Multiple Choice
+        const savedAns = userAnswers[index];
+        const isMultiple = item.type === 'multiple';
+        let correctIndices = answers.map(a => parseInt(a) - 1);
+
+        // Check if question is already answered (completed)
+        const isCompleted = correctSet.has(index) || incorrectSet.has(index);
+
+        if (savedAns !== undefined) {{
+            if (isComplex) {{
+                // Quiz Type: savedAns is object {{ rowIdx: colIdx }}
+                for (const [r, c] of Object.entries(savedAns)) {{
+                    const rowIdx = parseInt(r);
+                    const colIdx = parseInt(c);
+                    const input = document.getElementById(`o${{rowIdx}}_s${{colIdx}}`);
+                    if (input) {{
+                        input.checked = true;
+                        // Restore colors if completed
+                        if (isCompleted) {{
+                            const wrapper = input.closest('.sub-opt-container');
+                            let correctSub = parseInt(answers[rowIdx]) - 1;
+                            
+                            if (colIdx === correctSub) {{
+                                wrapper.classList.add('correct');
+                            }} else {{
+                                wrapper.classList.add('incorrect');
+                                const corrInput = document.getElementById(`o${{rowIdx}}_s${{correctSub}}`);
+                                if (corrInput) corrInput.closest('.sub-opt-container').classList.add('correct');
+                            }}
+                            // Disable inputs
+                            document.querySelectorAll(`input[name="q${{index}}_opt${{rowIdx}}"]`).forEach(i => i.disabled = true);
+                        }}
+                    }}
+                }}
+            }} else if (isMultiple) {{
+                // Array of indices
+                if (Array.isArray(savedAns)) {{
+                    savedAns.forEach(idx => {{
+                        const input = document.querySelector(`input[name="q${{index}}"][id="o${{idx}}"]`);
+                        if (input) {{
+                            input.checked = true;
+                            if (isCompleted) {{
+                                const wrapper = input.closest('.option-item');
+                                if (correctIndices.includes(idx)) wrapper.classList.add('correct');
+                                else wrapper.classList.add('incorrect');
+                            }}
+                        }}
+                    }});
+                }}
+            }} else {{
+                // Single Index
+                const input = document.querySelector(`input[name="q${{index}}"][id="o${{savedAns}}"]`);
+                if (input) {{
+                    input.checked = true;
+                    if (isCompleted) {{
+                        const wrapper = input.closest('.option-item');
+                        if (correctIndices.includes(savedAns)) wrapper.classList.add('correct');
+                        else wrapper.classList.add('incorrect');
+                        
+                        // Disable all
+                        document.querySelectorAll(`input[name="q${{index}}"]`).forEach(i => i.disabled = true);
+                    }}
+                }}
+            }}
+        }}
+
+        // If completed, always show answer section
+        if (isCompleted) {{
+            document.getElementById('ans-section').style.display = 'block';
+             // Also ensure correct answers are highlighted for single/multiple if they weren't selected
+            if (!isComplex && !isMultiple) {{
+                 const correctInput = document.querySelector(`input[name="q${{index}}"][id="o${{correctIndices[0]}}"]`);
+                 if (correctInput) correctInput.closest('.option-item').classList.add('correct');
+            }}
+        }}
+
         updateUI();
         Prism.highlightAll();
         if (window.innerWidth < 992) document.getElementById('sidebar').classList.remove('active');

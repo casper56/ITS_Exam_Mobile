@@ -149,7 +149,7 @@ def create_pdf(json_file, output_pdf):
                 is_complex_options = True
                 # Split and format: "int|string|float" -> "(1) int (2) string (3) float"
                 sub_opts = opt_str.split('|')
-                formatted_sub = "  ".join([f"{i+1}. {val.strip()}" for i, val in enumerate(sub_opts)])
+                formatted_sub = "  ".join([f"({i+1}) {val.strip()}" for i, val in enumerate(sub_opts)])
                 # Changed from "Blank X" to "X." as requested
                 display_text = f"{idx + 1}. {formatted_sub}"
                 parsed_options.append((opt_str, sub_opts)) # Store for answer mapping
@@ -217,4 +217,4 @@ if __name__ == "__main__":
         create_pdf(sys.argv[1], sys.argv[2])
     else:
         # Default behavior if run without args
-        create_pdf('questions_python.json', 'questions_python.pdf')
+        create_pdf('questions_AI900.json', 'questions_AI900.pdf')
