@@ -1890,7 +1890,7 @@
     {
         "id": 106,
         "type": "single",
-        "question": "105. 【CH03-補充】你有一個名為 colors 的清單：<br>colors = ['red', 'green', 'blue', 'yellow']<br>執行 print(colors[-2:]) 的結果是什麼？",
+        "question": "106. 【CH03-補充】你有一個名為 colors 的清單：<br>colors = ['red', 'green', 'blue', 'yellow']<br>執行 print(colors[-2:]) 的結果是什麼？",
         "options": [
             "['blue', 'yellow']",
             "['green', 'blue']",
@@ -1907,7 +1907,7 @@
     {
         "id": 107,
         "type": "single",
-        "question": "106. 【CH03-補充】关于 Python 中的元组 (Tuple) 和清单 (List)，下列哪一项叙述是正确的？",
+        "question": "107. 【CH03-補充】关于 Python 中的元组 (Tuple) 和清单 (List)，下列哪一项叙述是正确的？",
         "options": [
             "元组是不可变的 (Immutable)，而清单是可变的 (Mutable)",
             "元组和清单都可以使用 append() 方法动态增加元素",
@@ -1924,7 +1924,7 @@
     {
         "id": 108,
         "type": "single",
-        "question": "107. 【CH03-補充】你有一個字典 <code>student = {'name': 'John', 'age': 18}</code>。<br>\n你希望取得 'score' 的值，如果 'score' 不存在，則回傳 0，避免程式崩潰。應使用哪種語法？",
+        "question": "108. 【CH03-補充】你有一個字典 <code>student = {'name': 'John', 'age': 18}</code>。<br>\n你希望取得 'score' 的值，如果 'score' 不存在，則回傳 0，避免程式崩潰。應使用哪種語法？",
         "options": [
             "student.get('score', 0)",
             "student['score'] or 0",
@@ -1941,7 +1941,7 @@
     {
         "id": 109,
         "type": "single",
-        "question": "108. 【CH03-補充】你希望在清單 `fruits = ['apple', 'banana']` 的**開頭**插入一個元素 'orange'。應該使用哪種方法？",
+        "question": "109. 【CH03-補充】你希望在清單 `fruits = ['apple', 'banana']` 的**開頭**插入一個元素 'orange'。應該使用哪種方法？",
         "options": [
             "fruits.insert(0, 'orange')",
             "fruits.append('orange')",
@@ -1958,7 +1958,7 @@
     {
         "id": 110,
         "type": "single",
-        "question": "109. 【CH03-補充】關於 `sort()` 和 `sorted()` 的區別，下列敘述何者正確？",
+        "question": "110. 【CH03-補充】關於 `sort()` 和 `sorted()` 的區別，下列敘述何者正確？",
         "options": [
             "`list.sort()` 會直接修改原始清單 (In-place)，而 `sorted(list)` 會回傳一個新的已排序清單",
             "`sorted(list)` 會直接修改原始清單，而 `list.sort()` 會回傳新清單",
@@ -1975,7 +1975,7 @@
     {
         "id": 111,
         "type": "single",
-        "question": "110. 【CH03-综合应用】执行下列 Python 代码后，最终打印出的结果为何？\n\n<pre><code>nums = [1, 2, 2, 3]\nnums = list(set(nums))\nnums.append(4)\nprint(nums)</code></pre>",
+        "question": "111. 【CH03-综合应用】执行下列 Python 代码后，最终打印出的结果为何？\n\n<pre><code>nums = [1, 2, 2, 3]\nnums = list(set(nums))\nnums.append(4)\nprint(nums)</code></pre>",
         "options": [
             "[1, 2, 3, 4]",
             "[1, 2, 2, 3, 4]",
@@ -1992,7 +1992,7 @@
     {
         "id": 112,
         "type": "single",
-        "question": "111. 【CH03-集合运算】观察下列代码，print(result) 的输出结果为何？\n\n<pre><code>set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\nresult = set_a & set_b\nprint(result)</code></pre>",
+        "question": "112. 【CH03-集合运算】观察下列代码，print(result) 的输出结果为何？\n\n<pre><code>set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\nresult = set_a & set_b\nprint(result)</code></pre>",
         "options": [
             "{1, 2, 3, 4, 5, 6}",
             "{3, 4}",
@@ -2009,7 +2009,7 @@
     {
         "id": 113,
         "type": "single",
-        "question": "112. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一种写法可以正确印出 20？",
+        "question": "113. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一种写法可以正确印出 20？",
         "options": [
             "print(data[1])",
             "print(data['b'])",
@@ -2026,7 +2026,7 @@
     {
         "id": 114,
         "type": "single",
-        "question": "113. 【CH03-不可变性】下列哪一行代码在执行时会产生错误 (Error)？",
+        "question": "114. 【CH03-不可变性】下列哪一行代码在执行时会产生错误 (Error)？",
         "options": [
             "my_list = [1, 2, 3]; my_list[0] = 9",
             "my_dict = {'x': 1}; my_dict['x'] = 9",
@@ -2043,7 +2043,7 @@
     {
         "id": 115,
         "type": "single",
-        "question": "114. 【CH03-集合操作】你想要在一个集合 `my_set = {1, 2, 3}` 中加入数字 4。下列哪一行代码是正确的？",
+        "question": "115. 【CH03-集合操作】你想要在一个集合 `my_set = {1, 2, 3}` 中加入数字 4。下列哪一行代码是正确的？",
         "options": [
             "my_set.append(4)",
             "my_set.add(4)",
@@ -2060,7 +2060,7 @@
     {
         "id": 116,
         "type": "single",
-        "question": "115. 【CH03-除错】执行下列哪一段代码会导致 `AttributeError` (属性错误)？",
+        "question": "116. 【CH03-除错】执行下列哪一段代码会导致 `AttributeError` (属性错误)？",
         "options": [
             "data = [1, 2]; data.append(3)",
             "data = {1, 2}; data.add(3)",
@@ -2077,7 +2077,7 @@
     {
         "id": 117,
         "type": "single",
-        "question": "116. 【CH03-清单逻辑】执行下列代码后，`nums` 的内容为何？\n\n<pre><code>nums = [10, 30]\nnums.insert(1, 20)</code></pre>",
+        "question": "117. 【CH03-清单逻辑】执行下列代码后，`nums` 的内容为何？\n\n<pre><code>nums = [10, 30]\nnums.insert(1, 20)</code></pre>",
         "options": [
             "[10, 20, 30]",
             "[20, 10, 30]",
@@ -2094,7 +2094,7 @@
     {
         "id": 118,
         "type": "single",
-        "question": "117. 【CH06-補充】你正在開發一個科學計算程式，需要判斷一個變數 `x` 是否為合法的數值 (不是 NaN)。<br>下列哪一種方式是**正確**的判斷方法？",
+        "question": "118. 【CH06-補充】你正在開發一個科學計算程式，需要判斷一個變數 `x` 是否為合法的數值 (不是 NaN)。<br>下列哪一種方式是**正確**的判斷方法？",
         "options": [
             "if x == float('nan'):",
             "if x == math.nan:",
@@ -2111,7 +2111,7 @@
     {
         "id": 119,
         "type": "single",
-        "question": "118. 【CH06-補充】關於 `math.fmod(x, y)` 與模數運算子 `x % y` 的差異，下列敘述何者正確？",
+        "question": "119. 【CH06-補充】關於 `math.fmod(x, y)` 與模數運算子 `x % y` 的差異，下列敘述何者正確？",
         "options": [
             "兩者功能完全相同，沒有差異",
             "`math.fmod` 適合處理整數，`%` 適合處理浮點數",
@@ -2128,7 +2128,7 @@
     {
         "id": 120,
         "type": "single",
-        "question": "119. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 `temp.txt`，應該使用 `os` 模組的哪個函式？",
+        "question": "120. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 `temp.txt`，應該使用 `os` 模組的哪個函式？",
         "options": [
             "os.delete('temp.txt')",
             "os.remove('temp.txt')",
@@ -2145,7 +2145,7 @@
     {
         "id": 121,
         "type": "single",
-        "question": "120. 【CH03-補充】你有一個清單 `scores = [100, 80, 90, 80]`。你想要移除**第一個**出現的 80 分。應該使用哪個方法？",
+        "question": "121. 【CH03-補充】你有一個清單 `scores = [100, 80, 90, 80]`。你想要移除**第一個**出現的 80 分。應該使用哪個方法？",
         "options": [
             "scores.remove(80)",
             "scores.pop(80)",
@@ -2162,7 +2162,7 @@
     {
         "id": 122,
         "type": "single",
-        "question": "121. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 $\\pi r^2$。使用 `math` 模組時，下列寫法何者最精確且標準？",
+        "question": "122. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 $\\pi r^2$。使用 `math` 模組時，下列寫法何者最精確且標準？",
         "options": [
             "area = 3.14 * (r ** 2)",
             "area = math.pi * math.pow(r, 2)",
@@ -2179,7 +2179,7 @@
     {
         "id": 123,
         "type": "single",
-        "question": "122. 【CH03-補充】你這在編寫一個程式，需要將清單 `list_b` 的**所有元素**合併到 `list_a` 的尾端，形成一個長清單。應該使用哪種方法？\n<pre><code class=\"language-python\">list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>",
+        "question": "123. 【CH03-補充】你這在編寫一個程式，需要將清單 `list_b` 的**所有元素**合併到 `list_a` 的尾端，形成一個長清單。應該使用哪種方法？\n<pre><code class=\"language-python\">list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>",
         "options": [
             "list_a.extend(list_b)",
             "list_a.append(list_b)",
@@ -2196,7 +2196,7 @@
     {
         "id": 124,
         "type": "single",
-        "question": "123. 【CH03-補充】你有一個學生成績清單 `grades = [85, 92, 78, 90, 55]`。若要快速找出清單中的**最高分**與**最低分**，應使用哪些內建函式？",
+        "question": "124. 【CH03-補充】你有一個學生成績清單 `grades = [85, 92, 78, 90, 55]`。若要快速找出清單中的**最高分**與**最低分**，應使用哪些內建函式？",
         "options": [
             "max(grades), min(grades)",
             "grades.max(), grades.min()",
@@ -2213,7 +2213,7 @@
     {
         "id": 125,
         "type": "single",
-        "question": "124. 【CH06-補充】關於 `math.sqrt(x)` 與 `math.isqrt(x)` 的差異，下列何者正確？",
+        "question": "125. 【CH06-補充】關於 `math.sqrt(x)` 與 `math.isqrt(x)` 的差異，下列何者正確？",
         "options": [
             "`math.sqrt` 回傳浮點數 (float)，`math.isqrt` 回傳整數 (int) 且無條件捨去小數",
             "`math.sqrt` 可以處理負數，`math.isqrt` 不行",
@@ -2230,7 +2230,7 @@
     {
         "id": 126,
         "type": "single",
-        "question": "125. 【CH06-補充】你需要分析浮點數的底層結構。請問 `math.frexp(x)` 函式的作用是什麼？",
+        "question": "126. 【CH06-補充】你需要分析浮點數的底層結構。請問 `math.frexp(x)` 函式的作用是什麼？",
         "options": [
             "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
             "回傳 x 的階乘 (factorial)",
@@ -2247,7 +2247,7 @@
     {
         "id": 127,
         "type": "single",
-        "question": "126. 【CH07-補充】你使用 `datetime` 模組查詢今天是星期幾：<br><pre><code class=\"language-python\">import datetime\ntoday = datetime.datetime.now()\nprint(today.weekday())</code></pre><br>如果輸出結果是 `0`，代表今天是星期幾？",
+        "question": "127. 【CH07-補充】你使用 `datetime` 模組查詢今天是星期幾：<br><pre><code class=\"language-python\">import datetime\ntoday = datetime.datetime.now()\nprint(today.weekday())</code></pre><br>如果輸出結果是 `0`，代表今天是星期幾？",
         "options": [
             "星期一 (Monday)",
             "星期日 (Sunday)",
@@ -2264,7 +2264,7 @@
     {
         "id": 128,
         "type": "single",
-        "question": "127. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
+        "question": "128. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
         "options": [
             "nums.reverse()",
             "nums = reversed(nums)",
@@ -2281,7 +2281,7 @@
     {
         "id": 129,
         "type": "single",
-        "question": "128. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。應該使用 `random` 模組的哪個函式？",
+        "question": "129. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。應該使用 `random` 模組的哪個函式？",
         "options": [
             "random.random()",
             "random.randint(0, 1)",
@@ -2298,7 +2298,7 @@
     {
         "id": 130,
         "type": "single",
-        "question": "129. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，應使用哪個斷言方法？",
+        "question": "130. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，應使用哪個斷言方法？",
         "options": [
             "self.assertIs(a, b)",
             "self.assertEqual(a, b)",
