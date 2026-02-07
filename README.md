@@ -31,29 +31,24 @@
 
 *詳情請參閱 [BUILD_APK.md](./BUILD_APK.md)*
 
-## 🐍 內容產生工具 (Python 腳本)
+## 🐍 Python 模擬考進階機制 (New!)
 
-如果您需要修改題庫 JSON 並重新產生網頁或 PDF，請使用以下工具：
+本專案針對 Python 考科實作了高度自動化的管理與平衡機制，位於 `www/ITS_Python` 目錄下：
 
-### 環境準備
-```powershell
-python -m pip install reportlab Pillow
-```
+### 1. 極致平衡出題演算法
+*   **自動分類**：腳本會根據題目特徵（如 `try`、`import`、`def` 等）自動將 149 題題庫劃分為 7 大領域。
+*   **平衡配額**：模擬考（`mock_exam.html`）每次隨機抽取 50 題，並實施**配額限制**：
+    *   **D7_進階題**：固定抽取最多 **3 題**。
+    *   **其餘領域**：每類上限 **10 題**，超出部分自動平均分配，確保練習不偏科。
 
-### 執行指令
-切換到考科目錄（如 `www/ITS_Python`）執行：
-*   **更新網頁**：`python json_to_html.py` (採優化後的緊湊版面)
-*   **產生 PDF**：`python json_to_pdf.py` (具備自動相依性檢查)
+### 2. 高清純黑 PDF 檢討報告
+*   **高品質輸出**：支援答錯題目一鍵匯出為 PDF。
+*   **全黑字體優化**：PDF 中的題目、標籤與程式碼均採純黑色 (`#000`) 設定，適合列印與深度閱讀。
+*   **背景沙箱技術**：採用隱藏沙箱渲染，產出 PDF 時不影響網頁顯示，穩定且不亂碼。
 
-### Python 題庫管理與平衡出題 (New!)
-為了確保模擬考的全面性，本專案針對 Python 考科實作了「內容自動特徵分類」與「藍圖比例抽題」機制。
-
-1.  **新增試題**：
-    直接編輯 `www/ITS_Python/questions_ITS_python.json` 增加新題目。
-2.  **自動分類與部署**：
-    執行 `python gen_balanced_exam.py`。該腳本會自動分析內容特徵並重新產生具備平衡出題邏輯的 `mock_exam.html`。
-3.  **查看分析報告**：
-    執行 `python analyze_content.py` 可產生最新的 `ITS_Python_Content_Analysis.md` 統計報告，了解題庫分佈。
+### 3. 管理工具說明
+*   **同步部署**：執行 `python gen_balanced_exam_full.py` 即可一鍵分類題庫並更新模擬考網頁。
+*   **分佈統計**：執行 `python analyze_content.py` 查看詳細的題庫覆蓋率分析。
 
 ---
 *本專案僅供學習與考照準備使用。*
