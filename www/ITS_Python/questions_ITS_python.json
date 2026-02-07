@@ -2329,7 +2329,7 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● `random.random()`：回傳 [0.0, 1.0) 之間的浮點數，這是最基礎的隨機函式。<br>● `random.randint(a, b)`：回傳整數。<br>● `random.uniform(a, b)`：回傳指定範圍內的浮點數 (不一定是 0-1)。<br>● 沒有 `random.float()` 這個函式。"
+        "explanation": "● `random.random()`：回傳 [0.0, 1.0) 之間的浮點數，這是最基礎的隨機函式。<br>● `random.randint(a, b)`：回傳整數。<br>● `random.uniform(a, b)`：回傳指定範圍內的浮點數。<br>● 沒有 `random.float()` 這個函式。<br><br><b>【random 模組範圍與型態對照表】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>函式</th><th>回傳型態</th><th>範圍定義</th><th>備註</th></tr><tr><td><b>random()</b></td><td>Float</td><td>0.0 到 1.0 (不含 1.0)</td><td><code>[0.0, 1.0)</code></td></tr><tr><td><b>randint(a, b)</b></td><td>Int</td><td>a 到 b (包含 b)</td><td><code>[a, b]</code></td></tr><tr><td><b>randrange(a, b)</b></td><td>Int</td><td>a 到 b (不含 b)</td><td><code>[a, b)</code></td></tr><tr><td><b>uniform(a, b)</b></td><td>Float</td><td>a 到 b (包含 b)</td><td><code>[a, b]</code></td></tr></table>"
     },
     {
         "id": 132,
@@ -2349,27 +2349,44 @@
         "explanation": "● `assertIs(a, b)`：檢查 `a is b` (是否為同一物件)。<br>● `assertEqual(a, b)`：檢查 `a == b` (值是否相等)。<br>● 例如：`a = [1]; b = [1]`，它們的值相等 (`Equal`) 但不是同一個物件 (`Not Is`)。"
     },
     {
-        "id": 133,
+		"id": 133,
+		"type": "single",
+		"question": "133. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
+		"options": [
+			"x: q[head]=c; y: head += 1",
+			"x: q.append(c); y: head += 1",
+			"x: q[head]=c; y: head -= 1",
+			"x: q.append(c); y: head -= 1",
+			"以上皆非"
+		],
+		"answer": [
+			2
+		],
+		"weight": 1,
+		"image": null,
+		"explanation": "本題考查佇列 (Queue) 的 FIFO (先進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (入列)</b>：使用 `append(c)` 加到尾端。<br>2. <b>Pop (出列)</b>：題目採「移動指標」方式，故 `y` 應為 `head += 1`。<br><br><b>【補充：另一種實作方式 (直接刪除)】</b><br>若不使用 `head` 指標，也可以直接使用 `pop(0)` 來移除元素，這會真實釋放記憶體：<br><pre><code class=\"language-python\">q = []\n\ndef push(q, c):\n    q.append(c)\n\ndef pop(q):\n    c = q.pop(0) # 直接移除並回傳第一個元素\n    return c\n\n# 測試\npush(q, 1)\npush(q, 2)\nprint(pop(q)) # 印出 1\nprint(q)      # 印出 [2] (1已被移除)</code></pre>"
+	},
+    {
+        "id": 134,
         "type": "single",
-        "question": "【演演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
+        "question": "134. 【演算法-堆疊】此程式中 s 是用來當作一個後進先出的堆疊 (Stack)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code class=\"language-python\">s = []\ndef push(s, c):\n    x\n#\ndef pop(s):\n    y\n    return c</code></pre>",
         "options": [
-            "x: q[head]=c; y: head += 1",
-            "x: q.append(c); y: head += 1",
-            "x: q[head]=c; y: head -= 1",
-            "x: q.append(c); y: head -= 1",
-            "以上皆非"
+            "x: s.append(c); y: c = s.pop(0)",
+            "x: s.append(c); y: c = s.pop()",
+            "x: s.insert(0, c); y: c = s.pop(0)",
+            "x: s.append(c); y: c = s[0]"
         ],
         "answer": [
             2
         ],
         "weight": 1,
         "image": null,
-        "explanation": "本題考查佇列 (Queue) 的 FIFO (先進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (入列)</b>：必須將新資料加在隊伍的「最後面」。在 Python List 中，`append(c)` 用於將元素加到尾端。若使用 `q[head]=c` 會覆蓋掉頭部資料，導致錯誤。<br>2. <b>Pop (出列)</b>：必須取出隊伍「最前面」的資料。程式碼 `c = q[head]` 已取出當前頭部資料。為了讓下一次 Pop 取出下一個元素，頭部指標 `head` 必須往後移動 (索引值 +1)，故 `y` 應為 `head += 1`。<br><br>故選 (B)。"
+        "explanation": "本題考查堆疊 (Stack) 的 LIFO (後進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (堆疊)</b>：將資料加入頂端。在 Python List 中，`append(c)` 會加到 List 尾端 (視為頂端)。<br>2. <b>Pop (取出)</b>：將資料從頂端取出。`pop()` (不帶參數) 會移除並回傳 List 的最後一個元素 (尾端)，符合後進先出的原則。<br><br><b>【比較】</b><br>● 選項 1 (`pop(0)`)：是取出第一個元素，變成 Queue (FIFO) 行為。<br>● 選項 2 (`pop()`)：是取出最後一個元素，符合 Stack (LIFO) 行為。<br>● (本題庫為 1-based 索引，故選 [2])"
     },
     {
-        "id": 134,
+        "id": 135,
         "type": "single",
-        "question": "【Python運運算元】執行下列程式碼後，輸出為何？<br><br><pre><code>a = 13 % 5\nb = -13 % 5\nc = -13 // 5\nprint(a, b, c)</code></pre>",
+        "question": "135. 【Python運算元】執行下列程式碼後，輸出為何？<br><br><pre><code>a = 13 % 5\nb = -13 % 5\nc = -13 // 5\nprint(a, b, c)</code></pre>",
         "options": [
             "3 -3 -3",
             "3 2 -3",
@@ -2385,9 +2402,9 @@
         "explanation": "本題考查 Python 對負數進行除法與取餘數的規則。<br><br><b>【解析】</b><br>1. <b>`a = 13 % 5`</b>：<br>   13 除以 5，商 2 餘 3。結果為 <b>3</b>。<br><br>2. <b>`c = -13 // 5` (地板除法)</b>：<br>   Python 的 `//` 是<b>向負無限大方向取整</b> (Floor Division)。<br>   -13 ÷ 5 = -2.6，向負無限大取整後為 <b>-3</b>。<br><br>3. <b>`b = -13 % 5` (取餘數)</b>：<br>   公式為：<code>a % b = a - (b * (a // b))</code>。<br>   代入數值：<code>-13 - (5 * (-3)) = -13 - (-15) = -13 + 15 = 2</code>。<br>   或者記憶口訣：<b>Python 取餘數的符號永遠與除數 (後者) 相同</b>。因為除數 5 是正數，餘數必為正數 <b>2</b>。<br><br>故輸出為 <code>3 2 -3</code>，選 (B)。"
     },
     {
-        "id": 135,
+        "id": 136,
         "type": "single",
-        "question": "【Python迴圈邏輯】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 2, 4, -1, 2, 3, -5, 2, -1, 1]\nq = []\nh = 0\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and h < len(q):\n            v += q[h]\n            h += 1\nprint(sum(q[h:]))</code></pre>",
+        "question": "136. 【Python迴圈邏輯】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 2, 4, -1, 2, 3, -5, 2, -1, 1]\nq = []\nh = 0\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and h < len(q):\n            v += q[h]\n            h += 1\nprint(sum(q[h:]))</code></pre>",
         "options": [
             "1",
             "3",
@@ -2403,9 +2420,9 @@
         "explanation": "此題模擬了一個類似佇列 (Queue) 的消去過程：正數入列，負數則從隊頭開始抵銷正數。<br><br><b>【執行步驟追蹤】</b><br>1. <code>s</code> 為輸入列表，<code>q</code> 為正數佇列，<code>h</code> 指向 <code>q</code> 目前有效的開頭索引。<br>2. <b>遇到 1, 1</b>：<code>q=[1, 1]</code>。<br>3. <b>遇到 -3</b>：抵銷 <code>q[0]</code> (1) 剩 -2，<code>h=1</code>；再抵銷 <code>q[1]</code> (1) 剩 -1，<code>h=2</code>。<code>q</code> 有效部分為空。<br>4. <b>遇到 2, 4</b>：<code>q=[1, 1, 2, 4]</code> (有效部分: 2, 4)，<code>h=2</code>。<br>5. <b>遇到 -1</b>：抵銷 <code>q[2]</code> (2) 剩 1，<code>h=3</code>。<code>v</code> 變正數，停止抵銷。<br>6. <b>遇到 2, 3</b>：<code>q=[..., 4, 2, 3]</code> (有效部分: 4, 2, 3)，<code>h=3</code>。<br>7. <b>遇到 -5</b>：抵銷 <code>q[3]</code> (4) 剩 -1，<code>h=4</code>；再抵銷 <code>q[4]</code> (2) 剩 1，<code>h=5</code>。停止。<br>8. <b>遇到 2</b>：<code>q=[..., 3, 2]</code> (有效部分: 3, 2)，<code>h=5</code>。<br>9. <b>遇到 -1</b>：抵銷 <code>q[5]</code> (3) 剩 2，<code>h=6</code>。停止。<br>10. <b>遇到 1</b>：<code>q=[..., 2, 1]</code> (有效部分: 2, 1)，<code>h=6</code>。<br><br>最後 <code>q[h:]</code> 即 <code>q[6:]</code>，內容為 <code>[2, 1]</code>，總和為 3。故選 (B)。"
     },
     {
-        "id": 136,
+        "id": 137,
         "type": "single",
-        "question": "【Python流程控制】執行下列程式碼後，輸出為何？<br><br><pre><code>q = []\nh = 0\ns = ''\nfor v in [3, 12, -2, 765, 23, -1, -3]:\n    if v > 0:\n        q.append(str(v))\n    else:\n        s += q[h]\n        h += 1\nprint(s)</code></pre>",
+        "question": "137. 【Python流程控制】執行下列程式碼後，輸出為何？<br><br><pre><code>q = []\nh = 0\ns = ''\nfor v in [3, 12, -2, 765, 23, -1, -3]:\n    if v > 0:\n        q.append(str(v))\n    else:\n        s += q[h]\n        h += 1\nprint(s)</code></pre>",
         "options": [
             "312765",
             "780",
@@ -2420,9 +2437,9 @@
         "explanation": "此題模擬佇列 (Queue) 行為：<br>1. 遇到正數時，將數字轉為字串並加入清單 `q` (Enqueue)。<br>2. 遇到負數時，從清單 `q` 的 `h` 位置取出字串並串接到 `s`，同時將 `h` 加 1 (Dequeue)。<br><br><b>【執行過程】</b><br>● 入列: '3', '12'<br>● 出列: '3' (s='3')<br>● 入列: '765', '23'<br>● 出列: '12' (s='312')<br>● 出列: '765' (s='312765')<br><br>故結果為 312765。"
     },
     {
-        "id": 137,
+        "id": 138,
         "type": "single",
-        "question": "【Python迴圈與列表】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 3, 4, -1, 2, 3, -5, 2, 1, -1]\nq = []\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and q:\n            v += q.pop()\nprint(sum(q))</code></pre>",
+        "question": "138. 【Python迴圈與列表】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 3, 4, -1, 2, 3, -5, 2, 1, -1]\nq = []\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and q:\n            v += q.pop()\nprint(sum(q))</code></pre>",
         "options": [
             "1",
             "3",
@@ -2438,9 +2455,9 @@
         "explanation": "此題模擬正負數抵銷的過程：正數入列，負數則從隊尾取出正數進行抵銷。<br><br><b>【關鍵邏輯】</b><br>當遇到負數 <code>v</code> 時，會不斷從 <code>q</code> 尾端 <code>pop()</code> 出正數加到 <code>v</code> 上，直到 <code>v</code> 變成非負數 (>=0) 或 <code>q</code> 變空為止。<b>注意：抵銷後若 <code>v</code> 變為正數，該數值會被捨棄，不會加回 <code>q</code>。</b><br><br><b>【執行追蹤】</b><br>1. <code>1, 1</code> 入列 -> <code>q=[1, 1]</code><br>2. <code>-3</code> 抵銷 -> <code>pop</code> 1 (剩-2), <code>pop</code> 1 (剩-1)。<code>q=[]</code><br>3. <code>3, 4</code> 入列 -> <code>q=[3, 4]</code><br>4. <code>-1</code> 抵銷 -> <code>pop</code> 4 (剩3)。停止 (3>=0)。<code>q=[3]</code><br>5. <code>2, 3</code> 入列 -> <code>q=[3, 2, 3]</code><br>6. <code>-5</code> 抵銷 -> <code>pop</code> 3 (剩-2), <code>pop</code> 2 (剩0)。停止 (0>=0)。<code>q=[3]</code><br>7. <code>2, 1</code> 入列 -> <code>q=[3, 2, 1]</code><br>8. <code>-1</code> 抵銷 -> <code>pop</code> 1 (剩0)。停止。<code>q=[3, 2]</code><br><br>最後 <code>sum([3, 2])</code> 為 5。"
     },
     {
-        "id": 138,
+        "id": 139,
         "type": "single",
-        "question": "【Python變數範圍】執行下列程式碼：<br><pre><code>s = input()\na = [s for s in input().split()]\nprint(s, a)</code></pre><br>若輸入為以下內容：<br><code>hello py</code><br><code>123 45</code><br>則輸出為何？",
+        "question": "139. 【Python變數範圍】執行下列程式碼：<br><pre><code>s = input()\na = [s for s in input().split()]\nprint(s, a)</code></pre><br>若輸入為以下內容：<br><code>hello py</code><br><code>123 45</code><br>則輸出為何？",
         "options": [
             "hello py [123, 45]",
             "hello 123 45",
@@ -2456,9 +2473,9 @@
         "explanation": "本題考查 Python 3 中列表生成式 (List Comprehension) 的變數範圍規則。<br><br>1. <code>s = input()</code>：讀取第一行，<code>s</code> 為 <code>'hello py'</code>。<br>2. <code>a = [s for s in input().split()]</code>：讀取第二行並切割為 <code>['123', '45']</code>。雖然生成式內部使用了變數名稱 <code>s</code>，但在 Python 3 中，這被視為區域變數，<b>不會覆蓋</b>外部原本的變數 <code>s</code>。<br>3. 列表內容為字串，故輸出時會帶有引號。<br>4. 最後 <code>print(s, a)</code> 輸出外部的 <code>s</code> 和列表 <code>a</code>，即 <code>hello py ['123', '45']</code>。<br><br>註：若是 Python 2，變數 <code>s</code> 會被洩漏並覆蓋，輸出結果會不同，但 ITS 考試以 Python 3 為主。"
     },
     {
-        "id": 139,
+        "id": 140,
         "type": "single",
-        "question": "【Python輸入與運算】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a + b)</code></pre><br>若輸入為以下內容：<br><code>100 45</code><br>則輸出為何？",
+        "question": "140. 【Python輸入與運算】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a + b)</code></pre><br>若輸入為以下內容：<br><code>100 45</code><br>則輸出為何？",
         "options": [
             "10045",
             "[100, 45]",
@@ -2474,9 +2491,9 @@
         "explanation": "本題考查 input 讀取、split 切割、int 型別轉換以及列表解包 (List Unpacking)。<br><br><b>【解析步驟】</b><br>1. <code>input().split()</code> 將輸入字串 \"100 45\" 切割成列表 <code>['100', '45']</code>。<br>2. 列表生成式將元素轉為整數，得到 <code>[100, 45]</code>。<br>3. <code>a, b = ...</code> 將列表解包，<code>a</code> 變成整數 100，<code>b</code> 變成整數 45。<br>4. <code>print(a + b)</code> 執行數學加法 100 + 45 = 145。<br><br>若未進行 int 轉換直接相加，結果才會是字串串接的 \"10045\" (選項 A)。本題有轉 int，故選 (C)。"
     },
     {
-        "id": 140,
+        "id": 141,
         "type": "single",
-        "question": "【Python解包錯誤】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a, b)</code></pre><br>若輸入為以下內容：<br><code>100 45 25</code><br>則輸出為何？",
+        "question": "141. 【Python解包錯誤】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a, b)</code></pre><br>若輸入為以下內容：<br><code>100 45 25</code><br>則輸出為何？",
         "options": [
             "100 45",
             "[100, 45], 25",
@@ -2492,9 +2509,9 @@
         "explanation": "本題考查 Python 的解包 (Unpacking) 規則。<br><br><b>【解析】</b><br>1. 輸入 `100 45 25` 經過處理後會變成包含 3 個元素的列表 `[100, 45, 25]`。<br>2. 左側只有 `a, b` 兩個變數。<br>3. 當右側值的數量 (3個) 多於左側變數的數量 (2個) 時，Python 無法自動決定如何分配，因此會丟擲 `ValueError: too many values to unpack`。<br><br>若要避免錯誤，需使用 `*b` (Extended Iterable Unpacking) 或確保數量一致。故本題為執行錯誤，選 (E)。"
     },
     {
-        "id": 141,
+        "id": 142,
         "type": "single",
-        "question": "【Python字元編碼】執行下列程式碼：<br><pre><code>a = \"fake\"\nb = ord(a[3]) - ord(a[1])\nc = a + chr(ord('f') + b)\nprint(c)</code></pre><br>輸出為何？",
+        "question": "142. 【Python字元編碼】執行下列程式碼：<br><pre><code>a = \"fake\"\nb = ord(a[3]) - ord(a[1])\nc = a + chr(ord('f') + b)\nprint(c)</code></pre><br>輸出為何？",
         "options": [
             "fakek",
             "fakej",
@@ -2510,9 +2527,9 @@
         "explanation": "本題考查 <code>ord()</code> 與 <code>chr()</code> 的轉換。<br><br><b>【解析】</b><br>1. <code>a[3]</code>='e', <code>a[1]</code>='a'。<br>2. <code>b = ord('e') - ord('a')</code>，即 'e' 與 'a' 的距離，結果為 4。<br>3. <code>ord('f') + 4</code>，即 'f' 往後推 4 個字母：g, h, i, j。<br>4. <code>chr()</code> 轉回字元得到 'j'。<br>5. 字串串接 \"fake\" + \"j\" = \"fakej\"。<br><br>故選 (B)。"
     },
     {
-        "id": 142,
+        "id": 143,
         "type": "single",
-        "question": "【APCS-進階切片】執行下列程式碼後，輸出為何？<br><br><pre><code>s = 'abcdefg'\nprint(s[::-2])</code></pre>",
+        "question": "143. 【APCS-進階切片】執行下列程式碼後，輸出為何？<br><br><pre><code>s = 'abcdefg'\nprint(s[::-2])</code></pre>",
         "options": [
             "geca",
             "aceg",
@@ -2527,9 +2544,9 @@
         "explanation": "本題考查字串切片的步長 (Step) 與方向。<br><br><b>【解析】</b><br>語法為 <code>s[start:end:step]</code>。<br>當 step 為負數 (<code>-2</code>) 時，表示<b>從後往前</b>每隔 2 個字元取一次。<br>1. 取最後一個 'g' (索引 -1)<br>2. 往前跳 2 格取 'e' (索引 -3)<br>3. 往前跳 2 格取 'c' (索引 -5)<br>4. 往前跳 2 格取 'a' (索引 -7)<br>結果為 <code>'geca'</code>。<br><br>ITS 較少考這種負數步長，但 APCS 必考。"
     },
     {
-        "id": 143,
+        "id": 144,
         "type": "single",
-        "question": "【APCS-遞迴邏輯】執行下列函式 <code>f(3)</code> 的回傳值為何？<br><br><pre><code>def f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)</code></pre>",
+        "question": "144. 【APCS-遞迴邏輯】執行下列函式 <code>f(3)</code> 的回傳值為何？<br><br><pre><code>def f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)</code></pre>",
         "options": [
             "0",
             "3",
@@ -2544,9 +2561,9 @@
         "explanation": "本題考查遞迴 (Recursion) 的執行流程。<br><br><b>【追蹤過程】</b><br>1. 呼叫 <code>f(3)</code>：回傳 <code>3 + f(2)</code><br>2. 呼叫 <code>f(2)</code>：回傳 <code>2 + f(1)</code><br>3. 呼叫 <code>f(1)</code>：回傳 <code>1 + f(0)</code><br>4. 呼叫 <code>f(0)</code>：遇到終止條件 (n==0)，回傳 <code>0</code><br><br><b>【回溯計算】</b><br><code>f(1) = 1 + 0 = 1</code><br><code>f(2) = 2 + 1 = 3</code><br><code>f(3) = 3 + 3 = 6</code><br><br>這其實就是在計算 0+1+2+3 的總和。"
     },
     {
-        "id": 144,
+        "id": 145,
         "type": "single",
-        "question": "【APCS-迴圈追蹤】執行下列程式碼後，<code>cnt</code> 的值為何？<br><br><pre><code>cnt = 0\nfor i in range(1, 5):\n    for j in range(i, 5):\n        cnt += 1\nprint(cnt)</code></pre>",
+        "question": "145. 【APCS-迴圈追蹤】執行下列程式碼後，<code>cnt</code> 的值為何？<br><br><pre><code>cnt = 0\nfor i in range(1, 5):\n    for j in range(i, 5):\n        cnt += 1\nprint(cnt)</code></pre>",
         "options": [
             "10",
             "16",
