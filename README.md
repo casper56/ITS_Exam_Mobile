@@ -1,85 +1,49 @@
 # ITS 認證模擬測驗 行動應用程式 (ITS Exam Mobile)
 
-本專案是一款專為準備 ITS (Information Technology Specialist) 及 Microsoft 相關認證考試而設計的模擬測驗行動應用程式。基於 Capacitor 與原生 Web 技術開發，提供流暢的行動端練習體驗。
+本專案是一款專為準備 ITS (Information Technology Specialist) 及 Microsoft 相關認證考試而設計的模擬測驗行動應用程式。基於 Capacitor 與原生 Web 技術開發，目前主要針對 **Android** 平台提供行動端練習體驗。
 
 ## 📱 主要功能說明
 
 ### 1. 多樣化考科分類
 *   首頁提供直觀的考科選擇介面。
-*   支援考科包含：Python 程式設計、Database 資料庫管理、AI 人工智慧基礎、Azure AI-900、AZ-900 等。
+*   支援考科包含：Python 程式設計、C# 軟體開發、Database 資料庫管理、AI 人工智慧基礎、Azure AI-900、AZ-900 等。
 
 ### 2. 智慧作答與確認機制
-*   **確認答題**：採用「選取後確認」流程，點選選項後需點擊「📝 答題」按鈕才會判定結果，避免誤觸。
 *   **即時反饋**：答題後立即標示對錯，並自動開啟詳細的「正確答案」與「題目解析」區塊。
 *   **多種題型支援**：完整支援單選題、複選題及複雜的題組（Multi-option）類型。
 
 ### 3. 進度管理與記憶功能
-*   **作答紀錄追蹤**：
-    *   ⚪ **未讀**：尚未嘗試的題目。
-    *   🟢 **答對**：已正確作答的題目。
-    *   🔴 **答錯**：曾經答錯的題目，方便重點複習。
-*   **自動還原狀態**：重新進入頁面或切換題目時，系統會自動選取您先前的答案並鎖定，且直接顯示解析。
-*   **獨立紀錄系統**：每個考科擁有獨立的 LocalStorage 紀錄空間，互不干擾。
+*   **作答紀錄追蹤**：系統會以顏色標示（⚪未讀、🟢答對、🔴答錯）方便重點複習。
+*   **自動還原狀態**：重新進入頁面時，系統會自動恢復先前的作答紀錄與解析顯示。
 
-### 4. 行動端閱讀體驗優化
-*   **靈活縮放**：
-    *   提供控制按鈕可調整字體大小（支援 6px ~ 40px）。
-    *   支援行動裝置原生兩指撥弄 (Pinch-to-zoom) 手勢縮放。
-*   **程式碼排版**：
-    *   內建 **Prism.js** 支援 Python 等程式碼語法高亮。
-    *   **自動換行功能**：程式碼區塊與圖片會自動適應螢幕寬度，徹底解決橫向溢出問題。
-*   **側邊欄導覽**：提供網格狀題目索引，快速切換題號，並顯示「目前位置 / 總題數」資訊。
+### 4. 閱讀體驗優化
+*   **靈活縮放**：提供縮放按鈕並支援行動裝置兩指撥弄 (Pinch-to-zoom) 手勢。
+*   **語法高亮**：內建 Prism.js 支援程式碼區塊排版，解決橫向溢出問題。
 
-### 5. 離線與技術特性
-*   **PWA 支援**：內建 Service Worker，確保資源快取，提升載入效能。
-*   **Capacitor 核心**：跨平台封裝技術，可輕鬆打包為 Android APK 檔案。
+## 📦 如何取得 APK (Android)
 
-## 🛠️ 開發與建置
+本專案已設定 **GitHub Actions 雲端自動化編譯**，您無需在本地安裝複雜的 Android 開發環境即可取得安裝檔。
 
-### 環境需求
-*   Node.js & npm
-*   Android Studio & Android SDK
-*   Capacitor CLI
+1.  **推送變更**：將代碼 `git push` 到 GitHub 後。
+2.  **查看 Actions**：前往 GitHub 儲存庫的 **"Actions"** 標籤頁。
+3.  **下載產物**：點擊最近一次成功的 **"Build Android APK"** 工作，在頁面最下方的 **"Artifacts"** 下載 `app-debug` 壓縮檔。
+4.  **安裝**：解壓後將 `app-debug.apk` 傳送至手機安裝即可。
 
-### 建置指令
-1.  **同步 Web 資產**：
-    ```bash
-    npx cap sync
-    ```
-2.  **編譯 APK (Debug)**：
-    ```bash
-    cd android
-    ./gradlew assembleDebug
-    ```
+*詳情請參閱 [BUILD_APK.md](./BUILD_APK.md)*
 
 ## 🐍 內容產生工具 (Python 腳本)
 
-專案內提供了 Python 腳本，用於將 `questions_*.json` 轉換為網頁 (HTML) 或列印用的 PDF。
+如果您需要修改題庫 JSON 並重新產生網頁或 PDF，請使用以下工具：
 
-### 1. 環境準備
-請確保您的電腦已安裝 Python，並安裝必要套件：
+### 環境準備
 ```powershell
 python -m pip install reportlab Pillow
 ```
 
-### 2. 執行產生腳本
-切換到對應的考科目錄（例如 `www/ITS_Python`），並在該目錄下執行：
-
-*   **產生網頁 (HTML)**：
-    ```powershell
-    python json_to_html.py
-    ```
-    *執行後會根據 JSON 內容更新該目錄下的 HTML 檔，採用優化後的緊湊版面。*
-
-*   **產生 PDF**：
-    ```powershell
-    python json_to_pdf.py
-    ```
-    *執行後會產生列印用的 PDF 檔，包含題目、正確答案與解析。*
-
-### 3. 注意事項
-*   **版面優化**：目前的腳本已包含自動節省版面的優化（更小的邊距、緊湊的選項高度與字體大小）。
-*   **相依性檢查**：`json_to_pdf.py` 內建自動修復機制，若缺少套件會嘗試自動安裝。
+### 執行指令
+切換到考科目錄（如 `www/ITS_Python`）執行：
+*   **更新網頁**：`python json_to_html.py` (採優化後的緊湊版面)
+*   **產生 PDF**：`python json_to_pdf.py` (具備自動相依性檢查)
 
 ---
 *本專案僅供學習與考照準備使用。*
