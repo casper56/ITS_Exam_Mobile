@@ -46,7 +46,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 
 <div id="exam-ui">
     <header class="exam-header d-flex justify-content-between align-items-center">
-        <div><h5 class="m-0">{display_title}</h5><small id="q-progress">1 / 40</small></div>
+        <div><h5 class="m-0">{display_title}</h5><small id="q-progress">1 / 50</small></div>
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
@@ -63,7 +63,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 <div id="result-screen" class="container">
     <h2 class="mb-4">考試結束</h2>
     <div class="score-circle" id="final-score">0</div>
-    <p class="lead">答對題數：<span id="correct-count">0</span> / 40</p>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
     <div id="result-msg" class="mb-4"></div>
     <div class="mt-5">
         <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
@@ -83,8 +83,8 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     let timerInterval;
 
     function startExam() {{
-        // 隨機抽取 40 題
-        examQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 40);
+        // 隨機抽取 50 題
+        examQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 50);
         renderQuestion(0);
         startTimer();
     }}
@@ -108,9 +108,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const container = document.getElementById('question-area');
         container.innerHTML = '';
 
-        document.getElementById('q-progress').innerText = `題目 ${{index + 1}} / 40`;
+        document.getElementById('q-progress').innerText = `題目 ${{index + 1}} / 50`;
         document.getElementById('btn-prev').disabled = index === 0;
-        document.getElementById('btn-next').innerText = index === 39 ? '完成答題 (交卷)' : '下一題 ➡️';
+        document.getElementById('btn-next').innerText = index === 49 ? '完成答題 (交卷)' : '下一題 ➡️';
 
         const card = document.createElement('div');
         card.className = 'card question-card';
@@ -118,7 +118,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         let qText = item.question.replace(/●/g, '<br/>●').replace(/^\d+\.\s*/, '');
         
         let html = `
-            <div class="question-header">Question ${{index + 1}} / 40</div>
+            <div class="question-header">Question ${{index + 1}} / 50</div>
             <div class="question-body">
                 <div class="mb-4">${{qText}}</div>
         `;
@@ -181,14 +181,14 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 
     function changeQuestion(dir) {{
         let next = currentIndex + dir;
-        if (next >= 0 && next < 40) renderQuestion(next);
-        else if (next === 40) confirmSubmit();
+        if (next >= 0 && next < 50) renderQuestion(next);
+        else if (next === 50) confirmSubmit();
     }}
 
     function confirmSubmit() {{
         const answeredCount = Object.keys(userAnswers).length;
-        if (answeredCount < 40) {{
-            if (!confirm(`您還有 ${{40 - answeredCount}} 題未作答，確定要交卷嗎？`)) return;
+        if (answeredCount < 50) {{
+            if (!confirm(`您還有 ${{50 - answeredCount}} 題未作答，確定要交卷嗎？`)) return;
         }} else {{
             if (!confirm('確定要交卷嗎？')) return;
         }}
@@ -222,7 +222,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         document.getElementById('result-screen').style.display = 'block';
         document.getElementById('correct-count').innerText = correctCount;
         
-        const score = Math.round((correctCount / 40) * 100);
+        const score = Math.round((correctCount / 50) * 100);
         document.getElementById('final-score').innerText = score;
         
         if (score >= 70) document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
