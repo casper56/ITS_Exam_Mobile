@@ -56,27 +56,27 @@ def create_html(json_file, output_html):
             .mobile-toggle {{ display: block !important; }}
         }}
         .question-card {{
-            min-height: 500px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background: #fff; border-radius: 8px; overflow: hidden;
+            min-height: 400px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #fff; border-radius: 6px; overflow: hidden;
         }}
         .question-header {{
             background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 20px;
             font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center;
         }}
-        .question-body {{ padding: 40px; font-size: 1.1rem; }}
+        .question-body {{ padding: 15px 25px; font-size: 1rem; }}
         .question-image {{ max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .option-item {{
-            list-style: none; margin-bottom: 12px; padding: 15px; border: 1px solid #e9ecef;
-            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+            list-style: none; margin-bottom: 5px; padding: 5px 12px; border: 1px solid #e9ecef;
+            border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }}
         .option-item:hover {{ background-color: #f8f9fa; border-color: #adb5bd; }}
         .option-item.correct {{ background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }}
         .option-item.incorrect {{ background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }}
         .sub-opt-container.correct {{ background-color: #d1e7dd !important; border-color: #badbcc !important; }}
         .sub-opt-container.incorrect {{ background-color: #f8d7da !important; border-color: #f5c2c7 !important; }}
-        .sub-question-label {{ font-weight: bold; margin-top: 20px; margin-bottom: 10px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; font-size: 1.05rem; }}
+        .sub-question-label {{ font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; font-size: 1.05rem; }}
         .answer-section {{
-            display: none; margin-top: 30px; padding: 25px; background-color: #f0f7ff;
+            display: none; margin-top: 20px; padding: 15px 20px; background-color: #f0f7ff;
             border-left: 5px solid #0d6efd; border-radius: 4px;
         }}
         .progress-grid {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }}
@@ -93,7 +93,7 @@ def create_html(json_file, output_html):
             background-color: #0d6efd; color: white; border-color: #0d6efd;
             font-weight: bold; transform: scale(1.1); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }}
-        .nav-btn-group {{ display: flex; gap: 15px; margin-top: 30px; justify-content: center; }}
+        .nav-btn-group {{ display: flex; gap: 15px; margin-top: 20px; justify-content: center; }}
         .nav-btn {{ min-width: 120px; }}
         .mobile-toggle {{
             display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
@@ -101,6 +101,7 @@ def create_html(json_file, output_html):
             color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }}
         code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }}
+        .explanation {{ font-size: 1rem; }}
     </style>
 </head>
 <body>
@@ -354,11 +355,11 @@ def create_html(json_file, output_html):
         const body = document.createElement('div');
         body.className = 'question-body';
         let qText = (item.question || '').replace(/●/g, '<br/>●');
-        body.innerHTML += `<div class="mb-4">${{qText}}</div>`;
-        if (item.image) body.innerHTML += `<div class="text-center mb-4"><img src="${{item.image}}" class="question-image" alt="Question Image"></div>`;
+        body.innerHTML += `<div class="mb-3">${{qText}}</div>`;
+        if (item.image) body.innerHTML += `<div class="text-center mb-3"><img src="${{item.image}}" class="question-image" alt="Question Image"></div>`;
         
         const options = item.quiz || item.options || [];
-        let optionsHtml = '<div class="mt-4">';
+        let optionsHtml = '<div class="mt-3">';
         let isComplex = options.some(opt => typeof opt === 'string' && opt.includes('|'));
 
         options.forEach((opt, optIdx) => {{
@@ -369,7 +370,7 @@ def create_html(json_file, output_html):
                 optionsHtml += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => {{
                     optionsHtml += `
-                        <div class="form-check form-check-inline p-2 border rounded bg-light sub-opt-container" onclick="checkSubAnswer(this, ${{index}}, ${{optIdx}}, ${{subIdx}}, event)">
+                        <div class="form-check form-check-inline p-1 border rounded bg-light sub-opt-container" onclick="checkSubAnswer(this, ${{index}}, ${{optIdx}}, ${{subIdx}}, event)">
                             <input class="form-check-input" type="radio" name="q${{index}}_opt${{optIdx}}" id="o${{optIdx}}_s${{subIdx}}">
                             <label class="form-check-label ms-1" style="cursor:pointer" for="o${{optIdx}}_s${{subIdx}}">(${{subIdx+1}}) ${{sub}}</label>
                         </div>`;
@@ -380,7 +381,7 @@ def create_html(json_file, output_html):
                     <div class="option-item" onclick="checkAnswer(this, ${{index}}, ${{optIdx}}, event)">
                         <div class="form-check">
                             <input class="form-check-input" type="${{item.type === 'multiple' ? 'checkbox' : 'radio'}}" 
-                                   name="q${{index}}" id="o${{optIdx}}" style="transform: scale(1.2); margin-top: 0.3rem;">
+                                   name="q${{index}}" id="o${{optIdx}}" style="transform: scale(1.1); margin-top: 0.2rem;">
                             <label class="form-check-label w-100 ps-2" for="o${{optIdx}}" style="cursor:pointer">${{optIdx + 1}}. ${{optStr}}</label>
                         </div>
                     </div>`;
@@ -390,7 +391,7 @@ def create_html(json_file, output_html):
         body.innerHTML += optionsHtml;
 
         const footer = document.createElement('div');
-        footer.className = 'mt-5 pt-4 border-top text-center';
+        footer.className = 'mt-4 pt-3 border-top text-center';
         const btn = document.createElement('button');
         btn.className = 'btn btn-outline-primary px-4';
         btn.innerHTML = '👁️ 顯示答案 / 解析';
@@ -425,9 +426,9 @@ def create_html(json_file, output_html):
         }} else ansDisplay = answers.join(', ');
 
         answerDiv.innerHTML = `
-            <h5 class="mb-3">正確答案:</h5>
-            <div class="alert alert-success fs-5 fw-bold">${{ansDisplay}}</div>
-            <h5 class="mb-3 mt-4">解析:</h5>
+            <h6 class="mb-1 fw-bold">正確答案:</h6>
+            <div class="alert alert-success fs-6 fw-bold mb-2 p-2">${{ansDisplay}}</div>
+            <h6 class="mb-1 mt-2 fw-bold">解析:</h6>
             <div class="explanation">${{(item.explanation || '暫無解析。').replace(/●/g, '<br/>●')}}</div>
         `;
         footer.appendChild(answerDiv);

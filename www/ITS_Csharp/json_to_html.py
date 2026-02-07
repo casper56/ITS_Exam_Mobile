@@ -10,7 +10,6 @@ def create_html(json_file, output_html):
         display_title = "ITS Exam"
 
     # Derive generic storage key base from filename
-    # e.g. "ITS_Python.html" -> "its_python"
     storage_base = base_name.lower().replace(' ', '_')
     
     # Load JSON
@@ -21,7 +20,9 @@ def create_html(json_file, output_html):
         print(f"Error reading JSON file {json_file}: {e}")
         return
 
+    # Escape for JS template literal
     json_str = json.dumps(data, ensure_ascii=False)
+    json_str = json_str.replace('\\', '\\\\').replace('`', '\\`').replace('${', '\\${')
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-TW">
@@ -64,6 +65,7 @@ def create_html(json_file, output_html):
             font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center;
         }}
         .question-body {{ padding: 15px 25px; font-size: 1rem; }}
+        .question-text {{ white-space: pre-wrap; line-height: 1.5; }}
         .question-image {{ max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .option-item {{ list-style: none; margin-bottom: 5px; padding: 5px 12px; border: 1px solid #e9ecef;
             border-radius: 6px; cursor: pointer; transition: all 0.2s;
@@ -71,12 +73,12 @@ def create_html(json_file, output_html):
         .option-item:hover {{ background-color: #f8f9fa; border-color: #adb5bd; }}
         .option-item.correct {{ background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }}
         .option-item.incorrect {{ background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }}
-        .sub-opt-container.correct {{ background-color: #d1e7dd !important; border-color: #badbcc !important; }}
-        .sub-opt-container.incorrect {{ background-color: #f8d7da !important; border-color: #f5c2c7 !important; }}
         .sub-question-label {{ font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; font-size: 1.05rem; }}
-        .answer-section {{ display: none; margin-top: 20px; padding: 15px 20px; background-color: #f0f7ff;
+        .answer-section {{
+            display: none; margin-top: 20px; padding: 15px 25px; background-color: #f0f7ff;
             border-left: 5px solid #0d6efd; border-radius: 4px;
         }}
+        .explanation {{ white-space: pre-wrap; line-height: 1.6; margin-top: 5px; }}
         .progress-grid {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }}
         .q-node {{
             aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
@@ -84,7 +86,6 @@ def create_html(json_file, output_html):
             cursor: pointer; font-size: 0.85rem; color: #6c757d;
         }}
         .q-node:hover {{ background-color: #e9ecef; }}
-        /* Colors for Grid */
         .q-node.correct {{ background-color: #d1e7dd; border-color: #badbcc; color: #0f5132; }}
         .q-node.incorrect {{ background-color: #f8d7da; border-color: #f5c2c7; color: #842029; }}
         .q-node.active {{
@@ -108,14 +109,9 @@ def create_html(json_file, output_html):
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header d-flex justify-content-between align-items-center">
             <a href="../index.html" class="text-decoration-none text-white me-2" title="回首頁">🏠</a><h5 class="m-0">題目列表</h5>
-            <small class="text-white-50" id="progress-stats">0/{len(data)}</small>
+            <small class="text-white-50" id="progress-stats">0/0</small>
         </div>
         <div class="sidebar-content">
-            <div class="d-flex justify-content-between small mb-2 text-muted">
-                <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未讀</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd;border:1px solid #badbcc"></span> 答對</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#f8d7da;border:1px solid #f5c2c7"></span> 答錯</span>
-            </div>
             <div class="progress-grid" id="progress-grid"></div>
         </div>
         <div class="sidebar-footer">
@@ -137,16 +133,17 @@ def create_html(json_file, output_html):
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 
 <script>
-    const quizData = {json_str};
+    const rawJson = `{json_str}`;
+    const quizData = JSON.parse(rawJson);
+    
     let currentIndex = 0;
     let correctSet = new Set();
     let incorrectSet = new Set();
-    let userAnswers = {{}}; // Store user choices: {{ questionIndex: choice }}
+    let userAnswers = {{}};
     
-    // Dynamic keys
     const CORR_KEY = '{storage_base}_correct_v1';
     const INCORR_KEY = '{storage_base}_incorrect_v1';
     const INDEX_KEY = '{storage_base}_index_v1';
@@ -157,16 +154,13 @@ def create_html(json_file, output_html):
     function loadState() {{
         const savedCorr = localStorage.getItem(CORR_KEY);
         if (savedCorr) correctSet = new Set(JSON.parse(savedCorr));
-        
         const savedIncorr = localStorage.getItem(INCORR_KEY);
         if (savedIncorr) incorrectSet = new Set(JSON.parse(savedIncorr));
-
         const savedIndex = localStorage.getItem(INDEX_KEY);
         if (savedIndex !== null) {{
             currentIndex = parseInt(savedIndex, 10);
             if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= quizData.length) currentIndex = 0;
         }}
-
         const savedAns = localStorage.getItem(ANSWERS_KEY);
         if (savedAns) userAnswers = JSON.parse(savedAns);
     }}
@@ -195,7 +189,7 @@ def create_html(json_file, output_html):
         const isMultiple = item.type === 'multiple';
         let answers = item.answer;
         if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseInt(a) - 1);
+        const correctIndices = answers.map(a => parseInt(a));
         const input = element.querySelector('input');
 
         if (event && event.target !== input) {{
@@ -203,15 +197,12 @@ def create_html(json_file, output_html):
             else input.checked = true;
         }}
 
-        // Record User Answer
         if (isMultiple) {{
-            // For multiple, we store an array of selected indices
             const inputs = document.querySelectorAll(`input[name="q${{qIdx}}"]`);
             let selected = [];
             inputs.forEach((inp, idx) => {{ if (inp.checked) selected.push(idx); }});
             userAnswers[qIdx] = selected;
         }} else {{
-            // For single, store the index
             userAnswers[qIdx] = optIdx;
         }}
         saveState();
@@ -236,40 +227,17 @@ def create_html(json_file, output_html):
             document.getElementById('ans-section').style.display = 'block';
             updateUI();
         }} else {{
-            // For multiple choice, we update UI dynamically but only finalize when correct?
-            // Actually, existing logic checks correctness immediately on click?
-            // No, the previous logic was: if (input.checked) check correctness.
-            // Let's keep the existing visual logic:
-            
             if (input.checked) {{
-                if (correctIndices.includes(optIdx)) {{
-                    element.classList.add('correct');
-                    element.classList.remove('incorrect');
-                }} else {{
-                    element.classList.add('incorrect');
-                    element.classList.remove('correct');
-                }}
-            }} else {{
-                element.classList.remove('correct');
-                element.classList.remove('incorrect');
-            }}
+                if (correctIndices.includes(optIdx)) {{ element.classList.add('correct'); element.classList.remove('incorrect'); }}
+                else {{ element.classList.add('incorrect'); element.classList.remove('correct'); }}
+            }} else {{ element.classList.remove('correct'); element.classList.remove('incorrect'); }}
 
-            // Check overall status for Multiple Choice
             const allOptions = document.querySelectorAll(`input[name="q${{qIdx}}"]`);
             let allCorrect = true;
             let anyWrong = false;
-
             allOptions.forEach((inp, idx) => {{
-                if (inp.checked) {{
-                    if (!correctIndices.includes(idx)) {{
-                        anyWrong = true; // Selected a wrong one
-                        allCorrect = false;
-                    }}
-                }} else {{
-                    if (correctIndices.includes(idx)) {{
-                        allCorrect = false; // Missed a correct one
-                    }}
-                }}
+                if (inp.checked) {{ if (!correctIndices.includes(idx)) {{ anyWrong = true; allCorrect = false; }} }}
+                else {{ if (correctIndices.includes(idx)) {{ allCorrect = false; }} }}
             }});
 
             if (allCorrect) {{
@@ -278,56 +246,15 @@ def create_html(json_file, output_html):
                 document.getElementById('ans-section').style.display = 'block';
             }} else {{
                 correctSet.delete(qIdx);
-                if (anyWrong) {{
-                     incorrectSet.add(qIdx);
-                }}
+                if (anyWrong) incorrectSet.add(qIdx);
             }}
-            saveState();
-            updateUI();
-        }}
-    }}
-
-    function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {{
-        const item = quizData[qIdx];
-        let answers = item.answer;
-        if (!Array.isArray(answers)) answers = [answers];
-        const correctSubIdx = parseInt(answers[optIdx]) - 1;
-        const input = element.querySelector('input');
-
-        if (event && event.target !== input) input.checked = true;
-        
-        // Record User Answer for Sub-Question
-        if (!userAnswers[qIdx]) userAnswers[qIdx] = {{}};
-        userAnswers[qIdx][optIdx] = subIdx;
-        saveState();
-
-        if (element.classList.contains('correct') || element.classList.contains('incorrect')) return;
-
-        document.querySelectorAll(`input[name="q${{qIdx}}_opt${{optIdx}}"]`).forEach(i => i.disabled = true);
-
-        if (subIdx === correctSubIdx) {{
-            element.classList.add('correct');
-            const totalSub = (quizData[qIdx].quiz || quizData[qIdx].options || []).length;
-            const currentCorrect = document.querySelectorAll('.sub-opt-container.correct').length;
-            if (currentCorrect === totalSub) {{
-                correctSet.add(qIdx);
-                incorrectSet.delete(qIdx);
-                saveState();
-                updateUI();
-                document.getElementById('ans-section').style.display = 'block';
-            }}
-        }} else {{
-            element.classList.add('incorrect');
-            const correctInput = document.getElementById(`o${{optIdx}}_s${{correctSubIdx}}`);
-            if (correctInput) correctInput.parentElement.classList.add('correct');
-            incorrectSet.add(qIdx);
-            correctSet.delete(qIdx);
             saveState();
             updateUI();
         }}
     }}
 
     function renderQuestion(index) {{
+        if (!quizData || quizData.length === 0) return;
         if (index < 0) index = 0;
         if (index >= quizData.length) index = quizData.length - 1;
         currentIndex = index;
@@ -340,7 +267,7 @@ def create_html(json_file, output_html):
         const card = document.createElement('div');
         card.className = 'card question-card';
         const typeLabel = typeMapping[item.type] || '單選題';
-        card.innerHTML += `
+        card.innerHTML = `
             <div class="question-header">
                 <div>
                     <span class="fs-5 me-2">Question ${{index + 1}}</span>
@@ -352,38 +279,24 @@ def create_html(json_file, output_html):
         
         const body = document.createElement('div');
         body.className = 'question-body';
-        let qText = (item.question || '').replace(/●/g, '<br/>●');
-        body.innerHTML += `<div class="mb-3">${{qText}}</div>`;
+        
+        let qContent = item.question;
+        if (Array.isArray(qContent)) qContent = qContent.join('\\n');
+        
+        body.innerHTML = `<div class="question-text mb-4">${{qContent}}</div>`;
         if (item.image) body.innerHTML += `<div class="text-center mb-3"><img src="${{item.image}}" class="question-image" alt="Question Image"></div>`;
         
         const options = item.quiz || item.options || [];
         let optionsHtml = '<div class="mt-3">';
-        let isComplex = options.some(opt => typeof opt === 'string' && opt.includes('|'));
-
         options.forEach((opt, optIdx) => {{
-            const optStr = String(opt);
-            if (optStr.includes('|')) {{
-                const subOpts = optStr.split('|');
-                optionsHtml += `<div class="sub-question-label">Quiz ${{optIdx + 1}}</div>`;
-                optionsHtml += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
-                subOpts.forEach((sub, subIdx) => {{
-                    optionsHtml += `
-                        <div class="form-check form-check-inline p-1 border rounded bg-light sub-opt-container" onclick="checkSubAnswer(this, ${{index}}, ${{optIdx}}, ${{subIdx}}, event)">
-                            <input class="form-check-input" type="radio" name="q${{index}}_opt${{optIdx}}" id="o${{optIdx}}_s${{subIdx}}">
-                            <label class="form-check-label ms-1" style="cursor:pointer" for="o${{optIdx}}_s${{subIdx}}">(${{subIdx+1}}) ${{sub}}</label>
-                        </div>`;
-                }});
-                optionsHtml += `</div>`;
-            }} else {{
-                optionsHtml += `
-                    <div class="option-item" onclick="checkAnswer(this, ${{index}}, ${{optIdx}}, event)">
-                        <div class="form-check">
-                            <input class="form-check-input" type="${{item.type === 'multiple' ? 'checkbox' : 'radio'}}" 
-                                   name="q${{index}}" id="o${{optIdx}}" style="transform: scale(1.1); margin-top: 0.2rem;">
-                            <label class="form-check-label w-100 ps-2" for="o${{optIdx}}" style="cursor:pointer">${{optIdx + 1}}. ${{optStr}}</label>
-                        </div>
-                    </div>`;
-            }}
+            optionsHtml += `
+                <div class="option-item" onclick="checkAnswer(this, ${{index}}, ${{optIdx}}, event)">
+                    <div class="form-check">
+                        <input class="form-check-input" type="${{item.type === 'multiple' ? 'checkbox' : 'radio'}}" 
+                               name="q${{index}}" id="o${{optIdx}}" style="transform: scale(1.1); margin-top: 0.2rem;">
+                        <label class="form-check-label w-100 ps-2" for="o${{optIdx}}" style="cursor:pointer">${{optIdx + 1}}. ${{opt}}</label>
+                    </div>
+                </div>`;
         }});
         optionsHtml += '</div>';
         body.innerHTML += optionsHtml;
@@ -403,74 +316,32 @@ def create_html(json_file, output_html):
         const answerDiv = document.createElement('div');
         answerDiv.id = 'ans-section';
         answerDiv.className = 'answer-section text-start';
-        let ansDisplay = '';
         let answers = item.answer;
         if (!Array.isArray(answers)) answers = [answers];
+        let ansDisplay = answers.map(a => parseInt(a) + 1).join(', ');
 
-        if (isComplex) {{
-            let mappedAnswers = [];
-            answers.forEach((ans, i) => {{
-                if (i < options.length) {{
-                    const optStr = String(options[i]);
-                    if (optStr.includes('|')) {{
-                        const subs = optStr.split('|');
-                        const ansIdx = parseInt(ans) - 1;
-                        if (subs[ansIdx]) mappedAnswers.push(`Quiz ${{i+1}}: <b>${{subs[ansIdx]}}</b>`);
-                        else mappedAnswers.push(`Quiz ${{i+1}}: ${{ans}}`);
-                    }} else mappedAnswers.push(`${{ans}}`);
-                }}
-            }});
-            ansDisplay = mappedAnswers.join(', ');
-        }} else ansDisplay = answers.join(', ');
+        let expContent = item.explanation;
+        if (Array.isArray(expContent)) expContent = expContent.join('\\n');
 
-        answerDiv.innerHTML = `
-            <h6 class="mb-1 fw-bold">正確答案:</h6>
-            <div class="alert alert-success fs-6 fw-bold mb-2 p-2">${{ansDisplay}}</div>
-            <h6 class="mb-1 mt-2 fw-bold">解析:</h6>
-            <div class="explanation">${{(item.explanation || '暫無解析。').replace(/●/g, '<br/>●')}}</div>
-        `;
+        // 最終修正：完全手動控制間距，移除所有標題標籤與 Alert
+        let ansHtml = '<div style="font-weight:bold; color:#495057; margin-bottom:5px">正確答案:</div>';
+        ansHtml += '<div style="background-color:#d1e7dd; color:#0f5132; padding:8px 15px; border-radius:4px; font-weight:bold; margin-bottom:15px">' + ansDisplay + '</div>';
+        ansHtml += '<div style="font-weight:bold; color:#495057; margin-bottom:5px">解析:</div>';
+        ansHtml += '<div class="explanation">' + (expContent || '暫無解析。') + '</div>';
+
+        answerDiv.innerHTML = ansHtml;
         footer.appendChild(answerDiv);
         body.appendChild(footer);
         card.appendChild(body);
         container.appendChild(card);
 
-        // Restore User Answer State
-        // Single/Multiple Choice
         const savedAns = userAnswers[index];
         const isMultiple = item.type === 'multiple';
-        let correctIndices = answers.map(a => parseInt(a) - 1);
-
-        // Check if question is already answered (completed)
+        const correctIndices = answers.map(a => parseInt(a));
         const isCompleted = correctSet.has(index) || incorrectSet.has(index);
 
         if (savedAns !== undefined) {{
-            if (isComplex) {{
-                // Quiz Type: savedAns is object {{ rowIdx: colIdx }}
-                for (const [r, c] of Object.entries(savedAns)) {{
-                    const rowIdx = parseInt(r);
-                    const colIdx = parseInt(c);
-                    const input = document.getElementById(`o${{rowIdx}}_s${{colIdx}}`);
-                    if (input) {{
-                        input.checked = true;
-                        // Restore colors if completed
-                        if (isCompleted) {{
-                            const wrapper = input.closest('.sub-opt-container');
-                            let correctSub = parseInt(answers[rowIdx]) - 1;
-                            
-                            if (colIdx === correctSub) {{
-                                wrapper.classList.add('correct');
-                            }} else {{
-                                wrapper.classList.add('incorrect');
-                                const corrInput = document.getElementById(`o${{rowIdx}}_s${{correctSub}}`);
-                                if (corrInput) corrInput.closest('.sub-opt-container').classList.add('correct');
-                            }}
-                            // Disable inputs
-                            document.querySelectorAll(`input[name="q${{index}}_opt${{rowIdx}}"]`).forEach(i => i.disabled = true);
-                        }}
-                    }}
-                }}
-            }} else if (isMultiple) {{
-                // Array of indices
+            if (isMultiple) {{
                 if (Array.isArray(savedAns)) {{
                     savedAns.forEach(idx => {{
                         const input = document.querySelector(`input[name="q${{index}}"][id="o${{idx}}"]`);
@@ -485,7 +356,6 @@ def create_html(json_file, output_html):
                     }});
                 }}
             }} else {{
-                // Single Index
                 const input = document.querySelector(`input[name="q${{index}}"][id="o${{savedAns}}"]`);
                 if (input) {{
                     input.checked = true;
@@ -493,19 +363,15 @@ def create_html(json_file, output_html):
                         const wrapper = input.closest('.option-item');
                         if (correctIndices.includes(savedAns)) wrapper.classList.add('correct');
                         else wrapper.classList.add('incorrect');
-                        
-                        // Disable all
                         document.querySelectorAll(`input[name="q${{index}}"]`).forEach(i => i.disabled = true);
                     }}
                 }}
             }}
         }}
 
-        // If completed, always show answer section
         if (isCompleted) {{
             document.getElementById('ans-section').style.display = 'block';
-             // Also ensure correct answers are highlighted for single/multiple if they weren't selected
-            if (!isComplex && !isMultiple) {{
+            if (!isMultiple) {{
                  const correctInput = document.querySelector(`input[name="q${{index}}"][id="o${{correctIndices[0]}}"]`);
                  if (correctInput) correctInput.closest('.option-item').classList.add('correct');
             }}
@@ -516,19 +382,14 @@ def create_html(json_file, output_html):
         if (window.innerWidth < 992) document.getElementById('sidebar').classList.remove('active');
     }}
 
-    function nextQuestion() {{
-        if (currentIndex < quizData.length - 1) {{ renderQuestion(currentIndex + 1); window.scrollTo(0, 0); }}
-    }}
-    function prevQuestion() {{
-        if (currentIndex > 0) {{ renderQuestion(currentIndex - 1); window.scrollTo(0, 0); }}
-    }}
+    function nextQuestion() {{ if (currentIndex < quizData.length - 1) {{ renderQuestion(currentIndex + 1); window.scrollTo(0, 0); }} }}
+    function prevQuestion() {{ if (currentIndex > 0) {{ renderQuestion(currentIndex - 1); window.scrollTo(0, 0); }} }}
     function jumpTo(index) {{ renderQuestion(index); }}
 
     function updateUI() {{
         document.getElementById('btn-prev').disabled = (currentIndex === 0);
         document.getElementById('btn-next').disabled = (currentIndex === quizData.length - 1);
         document.getElementById('progress-stats').innerText = `答對:${{correctSet.size}} 答錯:${{incorrectSet.size}} / 共:${{quizData.length}}`;
-
         const grid = document.getElementById('progress-grid');
         if (grid.children.length !== quizData.length) {{
             grid.innerHTML = '';
@@ -541,7 +402,6 @@ def create_html(json_file, output_html):
                 grid.appendChild(node);
             }});
         }}
-
         for (let i = 0; i < quizData.length; i++) {{
             const node = document.getElementById(`node-${{i}}`);
             if (node) {{
@@ -554,7 +414,7 @@ def create_html(json_file, output_html):
     }}
 
     loadState();
-    renderQuestion(currentIndex);
+    if (quizData && quizData.length > 0) renderQuestion(currentIndex);
 </script>
 </body>
 </html>"""
@@ -569,7 +429,6 @@ if __name__ == "__main__":
     elif len(sys.argv) > 1:
         input_json = sys.argv[1]
         output_name = os.path.basename(input_json).replace('.json', '.html')
-        output_name = output_name.replace('questions_', '')
         create_html(input_json, output_name)
     else:
-        create_html('questions_ITS_Database.json', 'ITS_Database.html')
+        create_html('questions_ITS_csharp.json', 'ITS_Csharp.html')

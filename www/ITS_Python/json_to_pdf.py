@@ -1,3 +1,19 @@
+import sys
+import subprocess
+try:
+    import reportlab
+    from PIL import Image
+except ImportError:
+    print('[-] 偵測到缺少必要套件：reportlab 或 Pillow')
+    print(f'[!] 正在嘗試為您安裝至目前的 Python 環境 ({sys.executable})...')
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'reportlab', 'Pillow'])
+        print('[+] 安裝完成，請重新執行腳本。')
+    except Exception as e:
+        print(f'[X] 自動安裝失敗: {e}')
+        print(f'[!] 請手動執行: {sys.executable} -m pip install reportlab Pillow')
+    sys.exit(0)
+
 import json
 import os
 import re
@@ -92,13 +108,13 @@ def create_pdf(json_file, output_pdf):
     styles['Normal'].fontName = font_name
     
     if 'Question' not in styles:
-        styles.add(ParagraphStyle(name='Question', parent=styles['Heading2'], fontName=font_name, fontSize=11, spaceAfter=10, leading=16))
+        styles.add(ParagraphStyle(name='Question', parent=styles['Heading2'], fontName=font_name, fontSize=11, spaceAfter=6, leading=14))
     if 'Option' not in styles:
-        styles.add(ParagraphStyle(name='Option', parent=styles['Normal'], fontName=font_name, fontSize=10, leftIndent=20, spaceAfter=2, leading=14))
+        styles.add(ParagraphStyle(name='Option', parent=styles['Normal'], fontName=font_name, fontSize=10, leftIndent=20, spaceAfter=1, leading=12))
     if 'Answer' not in styles:
-        styles.add(ParagraphStyle(name='Answer', parent=styles['Normal'], fontName=font_name, fontSize=10, textColor=colors.blue, spaceBefore=5, spaceAfter=5))
+        styles.add(ParagraphStyle(name='Answer', parent=styles['Normal'], fontName=font_name, fontSize=10, textColor=colors.blue, spaceBefore=3, spaceAfter=3))
     if 'Explanation' not in styles:
-        styles.add(ParagraphStyle(name='Explanation', parent=styles['Normal'], fontName=font_name, fontSize=10, textColor=colors.darkgreen))
+        styles.add(ParagraphStyle(name='Explanation', parent=styles['Normal'], fontName=font_name, fontSize=10, textColor=colors.darkgreen, spaceAfter=2))
     if 'NormalChinese' not in styles:
         styles.add(ParagraphStyle(name='NormalChinese', parent=styles['Normal'], fontName=font_name, fontSize=10))
 
@@ -128,7 +144,7 @@ def create_pdf(json_file, output_pdf):
                         display_height = display_width * aspect
                     img = ReportLabImage(full_image_path, width=display_width, height=display_height)
                     story.append(img)
-                    story.append(Spacer(1, 10))
+                    story.append(Spacer(1, 5))
                 except Exception as e:
                     story.append(Paragraph(f"[Could not load image: {image_path}]", styles['NormalChinese']))
         
@@ -201,9 +217,9 @@ def create_pdf(json_file, output_pdf):
             explanation = clean_html(explanation, code_font=font_name)
             story.append(Paragraph(f"<b>Explanation:</b><br/>{explanation}", styles['Explanation']))
 
-        story.append(Spacer(1, 15))
+        story.append(Spacer(1, 10))
         story.append(Paragraph("<hr color='silver' width='100%'/>", styles['Normal']))
-        story.append(Spacer(1, 15))
+        story.append(Spacer(1, 10))
 
     try:
         doc.build(story)

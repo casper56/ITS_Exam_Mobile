@@ -52,5 +52,34 @@
     ./gradlew assembleDebug
     ```
 
+## 🐍 內容產生工具 (Python 腳本)
+
+專案內提供了 Python 腳本，用於將 `questions_*.json` 轉換為網頁 (HTML) 或列印用的 PDF。
+
+### 1. 環境準備
+請確保您的電腦已安裝 Python，並安裝必要套件：
+```powershell
+python -m pip install reportlab Pillow
+```
+
+### 2. 執行產生腳本
+切換到對應的考科目錄（例如 `www/ITS_Python`），並在該目錄下執行：
+
+*   **產生網頁 (HTML)**：
+    ```powershell
+    python json_to_html.py
+    ```
+    *執行後會根據 JSON 內容更新該目錄下的 HTML 檔，採用優化後的緊湊版面。*
+
+*   **產生 PDF**：
+    ```powershell
+    python json_to_pdf.py
+    ```
+    *執行後會產生列印用的 PDF 檔，包含題目、正確答案與解析。*
+
+### 3. 注意事項
+*   **版面優化**：目前的腳本已包含自動節省版面的優化（更小的邊距、緊湊的選項高度與字體大小）。
+*   **相依性檢查**：`json_to_pdf.py` 內建自動修復機制，若缺少套件會嘗試自動安裝。
+
 ---
 *本專案僅供學習與考照準備使用。*

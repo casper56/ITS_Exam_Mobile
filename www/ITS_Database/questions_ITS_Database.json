@@ -68,8 +68,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 您有一個名為Customer 的資料表。您需要建立一個名為 District 的新資料行。<br>\n請問您應該使用哪一個陳述式?",
+        "id": 5,
+        "question": "5. 您有一個名為Customer 的資料表。您需要建立一個名為 District 的新資料行。<br>\n請問您應該使用哪一個陳述式?",
         "options": [
             "ALTER TABLE Customer ADD (INTEGER District)",
             "ALTER TABLE Customer ADD (District INTEGER)",
@@ -84,8 +84,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 您有一個名為Product 的資料表。您建立了一個檢視表,其中包含 Product 資料中<br>\n屬於 Furniture 類的所有產品。<br>\n您針對 Product 資料表執行一個陳述式來刪除屬於 Furniture 類別的所有產品。<br>\n在您執行該陳述式之後,檢視表的結果集將:",
+        "id": 6,
+        "question": "6. 您有一個名為Product 的資料表。您建立了一個檢視表,其中包含 Product 資料中<br>\n屬於 Furniture 類的所有產品。<br>\n您針對 Product 資料表執行一個陳述式來刪除屬於 Furniture 類別的所有產品。<br>\n在您執行該陳述式之後,檢視表的結果集將:",
         "options": [
             "被封存",
             "被刪除",
@@ -100,8 +100,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 函數與預存程序之間的其中一項差異在於,函數:",
+        "id": 7,
+        "question": "7. 函數與預存程序之間的其中一項差異在於,函數:",
         "options": [
             "必須有傳回值",
             "無法接受參數",
@@ -116,8 +116,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、<br>\nEmployeeName。請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?",
+        "id": 8,
+        "question": "8. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、<br>\nEmployeeName。請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?",
         "options": [
             "SELECT COUNT(rows) FROM Employee",
             "SELECT COUNT(*) FROM Employee",
@@ -132,8 +132,8 @@
         "type": "single"
     },
     {
-        "id": 5,
-        "question": "5. 您刪除了order資料表中的資料列,orderltem 資料表中的對應資料列也被自動刪<br>\n除了。<br>\n這是下列其中一種程序的範例:",
+        "id": 9,
+        "question": "9. 您刪除了order資料表中的資料列,orderltem 資料表中的對應資料列也被自動刪<br>\n除了。<br>\n這是下列其中一種程序的範例:",
         "options": [
             "串聯刪除 (Cascade Delete)",
             "骨牌法刪除 (Dominoe Delete)",
@@ -149,8 +149,8 @@
         "type": "single"
     },
     {
-        "id": 6,
-        "question": "6. 請問哪一個陳述式會建立複合鍵?",
+        "id": 10,
+        "question": "10. 請問哪一個陳述式會建立複合鍵?",
         "options": [
             "CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY (OrderID, OrderltemID))",
             "CREATE TABLE Order ( OrderID INTEGER PRIMARY KEY, Order Itemid INTEGER PRIMARY KEY)",
@@ -165,8 +165,8 @@
         "type": "single"
     },
     {
-        "id": 7,
-        "question": "7. 一位開發人員嘗試使用下列查詢,在資料表中新增一個名為Prefix 資料行:<br>\nALTER TABLE Person ADD Prefix varchar(4) NOT NULL;<br>\n這位開發人員在執行查詢之後收到錯誤訊息。但是,這位開發人員無法記住確切的錯<br>\n誤訊息。請問這個問題的可能原因為何?",
+        "id": 11,
+        "question": "11. 一位開發人員嘗試使用下列查詢,在資料表中新增一個名為Prefix 資料行:<br>\nALTER TABLE Person ADD Prefix varchar(4) NOT NULL;<br>\n這位開發人員在執行查詢之後收到錯誤訊息。但是,這位開發人員無法記住確切的錯<br>\n誤訊息。請問這個問題的可能原因為何?",
         "options": [
             "應該使用DEFAULT 關鍵字來指定預設值",
             "varchar(4)資料類型不適用於Person 資料表",
@@ -181,8 +181,8 @@
         "type": "single"
     },
     {
-        "id": 8,
-        "question": "8. 您在某間咖啡廳工作,公司要求您設定網站來儲存購物費用。您需要建議公司在資<br>\n料庫資料表中使用某種資料類型,以便根據收費金額執行財務函數。<br>\n請問您應該使用哪一種資料類型?",
+        "id": 12,
+        "question": "12. 您在某間咖啡廳工作,公司要求您設定網站來儲存購物費用。您需要建議公司在資<br>\n料庫資料表中使用某種資料類型,以便根據收費金額執行財務函數。<br>\n請問您應該使用哪一種資料類型?",
         "options": [
             "binary",
             "bit",
@@ -197,8 +197,8 @@
         "type": "single"
     },
     {
-        "id": 9,
-        "question": "9. 您正在建立一個名為Student 的資料庫物件儲存以下資料:<br>\n<br><img src=\"images/9_3.png\" class=\"q-image\"><br>\n請問您應該使用哪一個語法來建立物件?",
+        "id": 13,
+        "question": "13. 您正在建立一個名為Student 的資料庫物件儲存以下資料:<br>\n<br><img src=\"images/9_3.png\" class=\"q-image\"><br>\n請問您應該使用哪一個語法來建立物件?",
         "options": [
             "CREATE TABLE Student( ID INT, Name VARCHAR (100), Age INT)",
             "CREATE Student ( ID INT, Name VARCHAR (100), Age INT)",
@@ -213,8 +213,8 @@
         "type": "single"
     },
     {
-        "id": 10,
-        "question": "10. 您需要利用下面的程式碼設定一個資料庫來提供北美哺乳動物的檢視表<br>\n(NorthAmericaMammals View):<br>\n①<br>\n②<br>\n③<br>\nWHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1<br>\n請將下方A~F的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使<br>\n用一次,也可能使用多次,甚至完全用不到。<br>\nA. CREATE VIEW [dbo].[NorthAmericaMammals_View]<br>\nB. INSERT VIEW [dbo].[NorthAmericaMammals_View]<br>\nC. AS JOIN a.Id, a. Name<br>\nD. AS SELECT a.Id, a.Name<br>\nE. FROM Animal a<br>\nF. JOIN Animals a<br>\n請問填入的程式碼片段順序為何?",
+        "id": 14,
+        "question": "14. 您需要利用下面的程式碼設定一個資料庫來提供北美哺乳動物的檢視表<br>\n(NorthAmericaMammals View):<br>\n①<br>\n②<br>\n③<br>\nWHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1<br>\n請將下方A~F的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使<br>\n用一次,也可能使用多次,甚至完全用不到。<br>\nA. CREATE VIEW [dbo].[NorthAmericaMammals_View]<br>\nB. INSERT VIEW [dbo].[NorthAmericaMammals_View]<br>\nC. AS JOIN a.Id, a. Name<br>\nD. AS SELECT a.Id, a.Name<br>\nE. FROM Animal a<br>\nF. JOIN Animals a<br>\n請問填入的程式碼片段順序為何?",
         "options": [
             "A、C、F",
             "A、D、E",
@@ -229,8 +229,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. CREATE VIEW [dbo].[NorthAmericaMammals_View] (A)",
+        "id": 15,
+        "question": "15. CREATE VIEW [dbo].[NorthAmericaMammals_View] (A)",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -238,8 +238,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. AS SELECT a.Id, a.Name (D)",
+        "id": 16,
+        "question": "16. AS SELECT a.Id, a.Name (D)",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -247,8 +247,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. FROM Animal a (E)",
+        "id": 17,
+        "question": "17. FROM Animal a (E)",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -256,8 +256,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. WHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1 (題目已給定)<br>\n所以組合起來是 A、D、E。",
+        "id": 18,
+        "question": "18. WHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1 (題目已給定)<br>\n所以組合起來是 A、D、E。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -265,8 +265,8 @@
         "type": "single"
     },
     {
-        "id": 11,
-        "question": "11. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n① 您可以使用預存程序來刪除資料。<br>\n② 函數必須具有傳回值。<br>\n③ 預存程序必須具有傳回值。<br>\n請問填入正確或錯誤符號順序為何?",
+        "id": 19,
+        "question": "19. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n① 您可以使用預存程序來刪除資料。<br>\n② 函數必須具有傳回值。<br>\n③ 預存程序必須具有傳回值。<br>\n請問填入正確或錯誤符號順序為何?",
         "options": [
             "X、○、○",
             "○、○、X",
@@ -281,8 +281,8 @@
         "type": "single"
     },
     {
-        "id": 12,
-        "question": "12. 請問哪一個陳述式會從資料表中移除所有資料列,但不記錄個別資料列刪除動作?",
+        "id": 20,
+        "question": "20. 請問哪一個陳述式會從資料表中移除所有資料列,但不記錄個別資料列刪除動作?",
         "options": [
             "ALTER TABLE",
             "DROP TABLE",
@@ -297,8 +297,8 @@
         "type": "single"
     },
     {
-        "id": 13,
-        "question": "13. 請問關聯式資料庫會使用哪一項功能來確保輸入資料行中的資料有效?",
+        "id": 21,
+        "question": "21. 請問關聯式資料庫會使用哪一項功能來確保輸入資料行中的資料有效?",
         "options": [
             "屬性",
             "主索引鍵",
@@ -313,8 +313,8 @@
         "type": "single"
     },
     {
-        "id": 14,
-        "question": "14. 您需要從資料庫中移除名為Employeeview 的檢視表。請問您應該使用哪一個<br>\n陳述式?",
+        "id": 22,
+        "question": "22. 您需要從資料庫中移除名為Employeeview 的檢視表。請問您應該使用哪一個<br>\n陳述式?",
         "options": [
             "DELETE EmployeeView",
             "DELETE VIEW EmployeeView",
@@ -329,8 +329,8 @@
         "type": "single"
     },
     {
-        "id": 15,
-        "question": "15. 建立預存程序的其中一個原因是要:",
+        "id": 23,
+        "question": "23. 建立預存程序的其中一個原因是要:",
         "options": [
             "提升效能",
             "將儲存空間最小化",
@@ -345,8 +345,8 @@
         "type": "single"
     },
     {
-        "id": 16,
-        "question": "16. 請問您應該使用哪一個陳述式來移除外部索引鍵?",
+        "id": 24,
+        "question": "24. 請問您應該使用哪一個陳述式來移除外部索引鍵?",
         "options": [
             "ALTER TABLE",
             "DELETE TABLE",
@@ -361,8 +361,8 @@
         "type": "single"
     },
     {
-        "id": 17,
-        "question": "17. 您的公司將客戶的社會安全號碼儲存在 Customers 資料表的SSN 資料行中。但<br>\n是,新的法規禁止公司儲存這些資訊。<br>\n執行下列查詢會導致系統發生錯誤。<br>\nALTER TABLE Customers<br>\nREMOVE SSN;<br>\n請問您需要對上述查詢進行哪些變更,才能讓它從Customers 資料表中移除 N資料行?",
+        "id": 25,
+        "question": "25. 您的公司將客戶的社會安全號碼儲存在 Customers 資料表的SSN 資料行中。但<br>\n是,新的法規禁止公司儲存這些資訊。<br>\n執行下列查詢會導致系統發生錯誤。<br>\nALTER TABLE Customers<br>\nREMOVE SSN;<br>\n請問您需要對上述查詢進行哪些變更,才能讓它從Customers 資料表中移除 N資料行?",
         "options": [
             "ALTER TABLE Customers DROP COLUMN SSN;",
             "ALTER TABLE Customers DELETE COLUMN",
@@ -377,8 +377,8 @@
         "type": "single"
     },
     {
-        "id": 18,
-        "question": "18. 您需要刪除某個資料庫資料表。請問您應該使用哪一個資料定義語言(DDL) 關鍵<br>\n字?",
+        "id": 26,
+        "question": "26. 您需要刪除某個資料庫資料表。請問您應該使用哪一個資料定義語言(DDL) 關鍵<br>\n字?",
         "options": [
             "ALTER",
             "TRUNCATE",
@@ -393,8 +393,8 @@
         "type": "single"
     },
     {
-        "id": 19,
-        "question": "19. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:<br>\n<br><img src=\"images/19_4.png\" class=\"q-image\"><br>\n您有下列需求:<br>\n* StudentName 必須包含字元字串。<br>\n* GradeLevel 必須是整數。<br>\n* DaysAbsent可以在小數點後面包含一位數字。<br>\n可使用的資料類型是:",
+        "id": 27,
+        "question": "27. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:<br>\n<br><img src=\"images/19_4.png\" class=\"q-image\"><br>\n您有下列需求:<br>\n* StudentName 必須包含字元字串。<br>\n* GradeLevel 必須是整數。<br>\n* DaysAbsent可以在小數點後面包含一位數字。<br>\n可使用的資料類型是:",
         "options": [
             "BIT",
             "DECIMAL",
@@ -415,8 +415,8 @@
         "type": "single"
     },
     {
-        "id": 20,
-        "question": "20. 您正在開發一個SQL 陳述式以建立資料表。請問哪兩個 SQL 關鍵字可用於<br>\nCREATE TABLE 陳述式?(請選擇2個答案)",
+        "id": 28,
+        "question": "28. 您正在開發一個SQL 陳述式以建立資料表。請問哪兩個 SQL 關鍵字可用於<br>\nCREATE TABLE 陳述式?(請選擇2個答案)",
         "options": [
             "ORDER BY",
             "CONSTRAINT",
@@ -432,8 +432,8 @@
         "type": "multiple"
     },
     {
-        "id": 21,
-        "question": "21. 您建立了一個名為 Games 的資料,其中包含最近發行之電玩遊戲的評論分數。<br>\n您需要建立一個檢視表來傳回按照字母順序排列的遊戲名稱清單。Name 代表遊戲<br>\n名稱。請問您應該使用哪一個查詢?",
+        "id": 29,
+        "question": "29. 您建立了一個名為 Games 的資料,其中包含最近發行之電玩遊戲的評論分數。<br>\n您需要建立一個檢視表來傳回按照字母順序排列的遊戲名稱清單。Name 代表遊戲<br>\n名稱。請問您應該使用哪一個查詢?",
         "options": [
             "CREATE VIEW MyGames AS SELECT Name FROM Games",
             "CREATE VIEW MyGames AS SELECT * FROM Games",
@@ -448,8 +448,8 @@
         "type": "single"
     },
     {
-        "id": 22,
-        "question": "22. 您撰寫了一系列執行冗長複雜查詢的SQL 陳述式。這些陳述式會透過電子郵件<br>\n傳送結果。<br>\n您希望能夠在需要時隨時手動呼叫程式碼。請問您可以使用哪一個資料庫物件來儲<br>\n存程式碼?",
+        "id": 30,
+        "question": "30. 您撰寫了一系列執行冗長複雜查詢的SQL 陳述式。這些陳述式會透過電子郵件<br>\n傳送結果。<br>\n您希望能夠在需要時隨時手動呼叫程式碼。請問您可以使用哪一個資料庫物件來儲<br>\n存程式碼?",
         "options": [
             "預存程序",
             "函數",
@@ -464,8 +464,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 您執行了下列查詢:<br>\nSELECT EmployeeID, FirstName, DepartmentName<br>\nFROM Employee, Department<br>\n這種作業稱為:",
+        "id": 31,
+        "question": "31. 您執行了下列查詢:<br>\nSELECT EmployeeID, FirstName, DepartmentName<br>\nFROM Employee, Department<br>\n這種作業稱為:",
         "options": [
             "笛卡兒乘積 (B) 等聯結",
             "交集 (D) 外部聯結"
@@ -478,8 +478,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 請問哪一個查詢會傳回除了加州(CA)以外,其他所有州在2017年1月之後提交之單<br>\n的結果集?",
+        "id": 32,
+        "question": "32. 請問哪一個查詢會傳回除了加州(CA)以外,其他所有州在2017年1月之後提交之單<br>\n的結果集?",
         "options": [
             "SELECT * FROM orders WHERE order_date > '2017-01-01' AND ship_state LIKE 'CA'",
             "SELECT * FROM orders WHERE order_date > '2017-01-01' AND ship_state <> 'CA'",
@@ -494,8 +494,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 訂單日期在 '2017-01-01' 之後 (order_date > '2017-01-01')。",
+        "id": 33,
+        "question": "33. 訂單日期在 '2017-01-01' 之後 (order_date > '2017-01-01')。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -503,8 +503,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 運送州別「不是」CA (ship_state <> 'CA')。<> 是 SQL 中「不等於」的運算子。<br>\n因為兩個條件要同時滿足，所以必須使用 AND 來連接它們。",
+        "id": 34,
+        "question": "34. 運送州別「不是」CA (ship_state <> 'CA')。<> 是 SQL 中「不等於」的運算子。<br>\n因為兩個條件要同時滿足，所以必須使用 AND 來連接它們。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -512,8 +512,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. 您需要針對 students 資料表中的資料建立一份報表。此報表必須符合下列需求:<br>\nA.顯示在2020年6月1日當天或之後註冊的所有學生<br>\nB.顯示在2020年畢業的所有學生<br>\nC.按照註冊順序傳回結果集,最新的註冊日期列在第一個<br>\nerrollment_date 會指定註冊日期。graduation_date 會指定畢業日期。<br>\n如果 academic_status 是 Graduated,就表示學生畢業。請問您應該使用哪一個查<br>\n詢?",
+        "id": 35,
+        "question": "35. 您需要針對 students 資料表中的資料建立一份報表。此報表必須符合下列需求:<br>\nA.顯示在2020年6月1日當天或之後註冊的所有學生<br>\nB.顯示在2020年畢業的所有學生<br>\nC.按照註冊順序傳回結果集,最新的註冊日期列在第一個<br>\nerrollment_date 會指定註冊日期。graduation_date 會指定畢業日期。<br>\n如果 academic_status 是 Graduated,就表示學生畢業。請問您應該使用哪一個查<br>\n詢?",
         "options": [
             "SELECT * FROM students WHERE enrollment_date >= '2020-06-01' OR academic_status='Graduated' OR graduation_date >= '2020-01-01' ORDER BY enrollment_date DESC",
             "SELECT * FROM students WHERE enrollment_date >= '2020-06-01' AND academic_status='Graduated' AND graduation_date >= '2020-01-01' ORDER BY enrollment_date ASC",
@@ -528,8 +528,8 @@
         "type": "single"
     },
     {
-        "id": 5,
-        "question": "5. 請問哪一個SQL陳述式會傳回訂單數目少於50的國家地區以及各國家地區的訂單<br>\n數目?<br>\norderID 代表個別訂單、Country 代表國家地區,而orders 代表訂單數目。",
+        "id": 36,
+        "question": "36. 請問哪一個SQL陳述式會傳回訂單數目少於50的國家地區以及各國家地區的訂單<br>\n數目?<br>\norderID 代表個別訂單、Country 代表國家地區,而orders 代表訂單數目。",
         "options": [
             "SELECT COUNT(orderID), Country FROM Orders GROUP BY Country HAVING COUNT(orderID) < 50;",
             "SELECT Country, orderID FROM Orders WHERE COUNT(orderID) < 50; GROUP BY Country;",
@@ -544,8 +544,8 @@
         "type": "single"
     },
     {
-        "id": 6,
-        "question": "6. 有一個名為 Playerstat 資料表包含以下欄位:<br>\n<br><img src=\"images/6_5.png\" class=\"q-image\"><br>\n您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:<br>\nSELECT PlayerID, (1)<br>\nFROM PlayerStat (2) TeamID = 1<br>\n(3) (4)<br>\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。<br>\n每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。<br>\nA. PlayerID B. COUNT C. GROUP BY<br>\nD. TeamID E. WHERE F. SUM(Points)<br>\nG. HAVING<br>\n請問填入的程式碼片段順序為何?",
+        "id": 37,
+        "question": "37. 有一個名為 Playerstat 資料表包含以下欄位:<br>\n<br><img src=\"images/6_5.png\" class=\"q-image\"><br>\n您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:<br>\nSELECT PlayerID, (1)<br>\nFROM PlayerStat (2) TeamID = 1<br>\n(3) (4)<br>\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。<br>\n每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。<br>\nA. PlayerID B. COUNT C. GROUP BY<br>\nD. TeamID E. WHERE F. SUM(Points)<br>\nG. HAVING<br>\n請問填入的程式碼片段順序為何?",
         "options": [
             "F、C、D、B",
             "D、C、E、F",
@@ -560,8 +560,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 計算總分，所以 (1) 應填入 SUM(Points) (F)。",
+        "id": 38,
+        "question": "38. 計算總分，所以 (1) 應填入 SUM(Points) (F)。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -569,8 +569,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 篩選出 TeamID 為 1 的隊伍，所以 (2) 應填入 WHERE (E)。",
+        "id": 39,
+        "question": "39. 篩選出 TeamID 為 1 的隊伍，所以 (2) 應填入 WHERE (E)。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -578,8 +578,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. (3) 已經給定條件 TeamID=1。",
+        "id": 40,
+        "question": "40. (3) 已經給定條件 TeamID=1。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -587,8 +587,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. 要「每位」隊員的總分，代表要根據 PlayerID 進行分組，所以 (4) 應填入<br>\nGROUP BY PlayerID (C, A)。<br>\n組合起來的順序是 F, E, C, A",
+        "id": 41,
+        "question": "41. 要「每位」隊員的總分，代表要根據 PlayerID 進行分組，所以 (4) 應填入<br>\nGROUP BY PlayerID (C, A)。<br>\n組合起來的順序是 F, E, C, A",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -596,8 +596,8 @@
         "type": "single"
     },
     {
-        "id": 7,
-        "question": "7. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料<br>\n中。<br>\n這個資料表具有一個名為 courseID 的外部索引鍵,可連結至 courses 資料表中的主<br>\n索引鍵。<br>\n您需要使用這兩個根據 courseID 配對的資料表來傳回學生姓名和課程名稱。<br>\n您執行了下列查詢:<br>\nSELECT students.name, courses.name<br>\nFROM students OUTER JOIN courses<br>\nWHERE student.courseID = courses.courseID<br>\n此查詢會傳回錯誤。<br>\n請問您該如何修正查詢?",
+        "id": 42,
+        "question": "42. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料<br>\n中。<br>\n這個資料表具有一個名為 courseID 的外部索引鍵,可連結至 courses 資料表中的主<br>\n索引鍵。<br>\n您需要使用這兩個根據 courseID 配對的資料表來傳回學生姓名和課程名稱。<br>\n您執行了下列查詢:<br>\nSELECT students.name, courses.name<br>\nFROM students OUTER JOIN courses<br>\nWHERE student.courseID = courses.courseID<br>\n此查詢會傳回錯誤。<br>\n請問您該如何修正查詢?",
         "options": [
             "SELECT students.Name, courses.Name FROM students INNER JOIN ON courses WHERE students.courseID = courses.CourseID",
             "SELECT students.name, courses.name FROM students INNER JOIN courses ON students.courseID = courses.courseID",
@@ -612,8 +612,8 @@
         "type": "single"
     },
     {
-        "id": 8,
-        "question": "8. 有一個預存程序包含以下查詢:<br>\nSELECT 'Greetings' + Prefix + FirstName FROM Person;<br>\n此預存程序會傳回所有 null值。您確認 Person 資料表包含資料。<br>\n請問這個問題的可能原因為何?",
+        "id": 43,
+        "question": "43. 有一個預存程序包含以下查詢:<br>\nSELECT 'Greetings' + Prefix + FirstName FROM Person;<br>\n此預存程序會傳回所有 null值。您確認 Person 資料表包含資料。<br>\n請問這個問題的可能原因為何?",
         "options": [
             "Prefix 或FirstName 資料行具有null值。",
             "您必須在查詢中 指定 NULLIF 關鍵字。",
@@ -628,8 +628,8 @@
         "type": "single"
     },
     {
-        "id": 9,
-        "question": "9. 請問哪一個關鍵字會結合兩個查詢的結果並且僅傳回兩個結果集都有出現的資料<br>\n列?",
+        "id": 44,
+        "question": "44. 請問哪一個關鍵字會結合兩個查詢的結果並且僅傳回兩個結果集都有出現的資料<br>\n列?",
         "options": [
             "UNION",
             "INTERSECT",
@@ -644,8 +644,8 @@
         "type": "single"
     },
     {
-        "id": 10,
-        "question": "10. 有一個名為Cars 的資料庫資料表,其定義如下所示。<br>\n<br><img src=\"images/10_6.png\" class=\"q-image\"><br>\n您設有下列SQL 陳述式:<br>\nSELECT *<br>\nFROM Cars c<br>\nWHERE c. Origin <> 'USA' AND c.Color <> 'Black'<br>\n請問此 SQL 陳述式會傳回多少個資料列?",
+        "id": 45,
+        "question": "45. 有一個名為Cars 的資料庫資料表,其定義如下所示。<br>\n<br><img src=\"images/10_6.png\" class=\"q-image\"><br>\n您設有下列SQL 陳述式:<br>\nSELECT *<br>\nFROM Cars c<br>\nWHERE c. Origin <> 'USA' AND c.Color <> 'Black'<br>\n請問此 SQL 陳述式會傳回多少個資料列?",
         "options": [
             "4",
             "5",
@@ -660,8 +660,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 原始資料共 8 筆。",
+        "id": 46,
+        "question": "46. 原始資料共 8 筆。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -669,8 +669,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 第一個條件 c.Origin <> 'USA' (產地不是美國) 會排除掉 Truck 和 Convertible。<br>\n剩下 6 筆。",
+        "id": 47,
+        "question": "47. 第一個條件 c.Origin <> 'USA' (產地不是美國) 會排除掉 Truck 和 Convertible。<br>\n剩下 6 筆。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -678,8 +678,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 第二個條件 c.Color <> 'Black' (顏色不是黑色) 會從剩下的 6 筆中，再排除掉<br>\nCompact 和 Hybrid。剩下 4 筆。<br>\n因為兩個條件是用 AND 連接，所以必須同時滿足。最終結果是 4 筆。",
+        "id": 48,
+        "question": "48. 第二個條件 c.Color <> 'Black' (顏色不是黑色) 會從剩下的 6 筆中，再排除掉<br>\nCompact 和 Hybrid。剩下 4 筆。<br>\n因為兩個條件是用 AND 連接，所以必須同時滿足。最終結果是 4 筆。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -687,8 +687,8 @@
         "type": "single"
     },
     {
-        "id": 11,
-        "question": "11. 您需要將兩個查詢的結果結合成單一結果,而且包含這兩個查詢中的所有資料列。<br>\n請問您應該使用哪一個SQL述式?",
+        "id": 49,
+        "question": "49. 您需要將兩個查詢的結果結合成單一結果,而且包含這兩個查詢中的所有資料列。<br>\n請問您應該使用哪一個SQL述式?",
         "options": [
             "EXCEPT",
             "JOIN",
@@ -703,8 +703,8 @@
         "type": "single"
     },
     {
-        "id": 12,
-        "question": "12. 您有一個儲存客戶相關資訊的 customer 資料表,以及一個儲存已提交訂單相關<br>\n資訊的 order 資料表。<br>\n每個資料表都包含一個customerID 資料行,您使用個別資料表中的Customer 資料<br>\n行來聯結這兩個資料表。<br>\n您執行了一個選取下列資料的查詢:<br>\n* 所有客戶及其訂單<br>\n* 沒有任何訂單的客戶<br>\n請問這些結果代表哪一種聯結?",
+        "id": 50,
+        "question": "50. 您有一個儲存客戶相關資訊的 customer 資料表,以及一個儲存已提交訂單相關<br>\n資訊的 order 資料表。<br>\n每個資料表都包含一個customerID 資料行,您使用個別資料表中的Customer 資料<br>\n行來聯結這兩個資料表。<br>\n您執行了一個選取下列資料的查詢:<br>\n* 所有客戶及其訂單<br>\n* 沒有任何訂單的客戶<br>\n請問這些結果代表哪一種聯結?",
         "options": [
             "完全聯結",
             "內部聯結",
@@ -719,8 +719,8 @@
         "type": "single"
     },
     {
-        "id": 13,
-        "question": "13. 您 其中包含名為CustomerID、Firstname 和 Date Joined 資料列。<br>\nCustomerID 是主索引鍵。<br>\n您執行了下列查詢:<br>\nSELECT CustomerID, FirstName, Date Joined<br>\nFROM Customer<br>\n請問結果集會以哪種方式組織資料列?",
+        "id": 51,
+        "question": "51. 您 其中包含名為CustomerID、Firstname 和 Date Joined 資料列。<br>\nCustomerID 是主索引鍵。<br>\n您執行了下列查詢:<br>\nSELECT CustomerID, FirstName, Date Joined<br>\nFROM Customer<br>\n請問結果集會以哪種方式組織資料列?",
         "options": [
             "按照無法預測的順序",
             "按照 FirstName 的字母序",
@@ -735,8 +735,8 @@
         "type": "single"
     },
     {
-        "id": 14,
-        "question": "14. 您正在撰寫一個 SELECT 陳述式找出名稱包含特定字元的所有產品。<br>\n請問您應該在 WHERE子句中使用哪一個關鍵字?",
+        "id": 52,
+        "question": "52. 您正在撰寫一個 SELECT 陳述式找出名稱包含特定字元的所有產品。<br>\n請問您應該在 WHERE子句中使用哪一個關鍵字?",
         "options": [
             "LIKE",
             "FETCH",
@@ -751,8 +751,8 @@
         "type": "single"
     },
     {
-        "id": 15,
-        "question": "15. 請問哪一個查詢會正確傳回 ship_state 不含德州 (TX) 和亞利桑那州 (AZ) 之所<br>\n有訂單的結果集?",
+        "id": 53,
+        "question": "53. 請問哪一個查詢會正確傳回 ship_state 不含德州 (TX) 和亞利桑那州 (AZ) 之所<br>\n有訂單的結果集?",
         "options": [
             "SELECT * FROM Orders WHERE NOT ship_state = 'TX' OR NOT ship_state = 'AZ'",
             "SELECT * FROM Orders WHERE NOT ship_state = 'TX' AND NOT ship_state = 'AZ'",
@@ -767,8 +767,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 您有一個名為Student 的資料表,其中包含100個資料列。<br>\n部分資料列 Firstname 資料行具有NULL值,您執行了下列陳述式:<br>\nDELETE FROM Student<br>\n請問結果為何?",
+        "id": 54,
+        "question": "54. 您有一個名為Student 的資料表,其中包含100個資料列。<br>\n部分資料列 Firstname 資料行具有NULL值,您執行了下列陳述式:<br>\nDELETE FROM Student<br>\n請問結果為何?",
         "options": [
             "您會收到錯誤訊息",
             "系統將刪除資料表中的所有資料列",
@@ -783,8 +783,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 您的資料庫包含一個名為Customer的資料表。您需要從Customer資料表中刪除<br>\nCustomerID為12345的記錄。<br>\n請問您應該使用哪一個陳述式?",
+        "id": 55,
+        "question": "55. 您的資料庫包含一個名為Customer的資料表。您需要從Customer資料表中刪除<br>\nCustomerID為12345的記錄。<br>\n請問您應該使用哪一個陳述式?",
         "options": [
             "DELETE FROM Customer WHERE CustomerID = 12345",
             "DELETE Customer ID FROM Customer WHERE CustomerID = 12345",
@@ -799,8 +799,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 您有一個名為 Product 的資料表包含以下資料。<br>\n<br><img src=\"images/3_7.png\" class=\"q-image\"><br>\nProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表<br>\n的外部索引鍵。您執行了下列陳述式:<br>\nINSERT INTO Product VALUES (3296, 'Table', 4444) 請問結果為何?",
+        "id": 56,
+        "question": "56. 您有一個名為 Product 的資料表包含以下資料。<br>\n<br><img src=\"images/3_7.png\" class=\"q-image\"><br>\nProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表<br>\n的外部索引鍵。您執行了下列陳述式:<br>\nINSERT INTO Product VALUES (3296, 'Table', 4444) 請問結果為何?",
         "options": [
             "語法錯誤",
             "Product 資料表中的新資料列",
@@ -816,8 +816,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. 您有一個資料庫資料表(AddressInfo) 包含以下資料行:<br>\n<br><img src=\"images/4_8.png\" class=\"q-image\"><br>\n您必須在資料表中插入下列記錄:<br>\n<br><img src=\"images/4_9.png\" class=\"q-image\"><br>\n請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)",
+        "id": 57,
+        "question": "57. 您有一個資料庫資料表(AddressInfo) 包含以下資料行:<br>\n<br><img src=\"images/4_8.png\" class=\"q-image\"><br>\n您必須在資料表中插入下列記錄:<br>\n<br><img src=\"images/4_9.png\" class=\"q-image\"><br>\n請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)",
         "options": [
             "INSERT INTO AddressInfo VALUES ('1234 Main Street', 'Dallas', 'TX', ' 75201')",
             "INSERT INTO Addressinfo ( 1234 Main Street', 'Dallas', 'TX', '75201') VALUES ([StreetAddress], [City], [State], [PostalCode])",
@@ -833,8 +833,8 @@
         "type": "multiple"
     },
     {
-        "id": 5,
-        "question": "5. 您接受了某間地方慈善機構的IT實習工作該慈善機構要求您使用一個名為<br>\nVolunteer 的資料庫資料表來保留志工的記錄。<br>\n這個資料表包含以下資料行和資料列:<br>\n<br><img src=\"images/5_10.png\" class=\"q-image\"><br>\n當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請<br>\n問您應該選擇哪一個陳述式?",
+        "id": 58,
+        "question": "58. 您接受了某間地方慈善機構的IT實習工作該慈善機構要求您使用一個名為<br>\nVolunteer 的資料庫資料表來保留志工的記錄。<br>\n這個資料表包含以下資料行和資料列:<br>\n<br><img src=\"images/5_10.png\" class=\"q-image\"><br>\n當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請<br>\n問您應該選擇哪一個陳述式?",
         "options": [
             "UPDATE Volunteer SET GivenName = 'Kimberly' WHERE Given Name = 'Tia'",
             "UPDATE GivenName = 'Kimberly' FROM Volunteer WHERE Given Name = 'Tia'",
@@ -849,8 +849,8 @@
         "type": "single"
     },
     {
-        "id": 6,
-        "question": "6. 請問哪一個SQL 陳述式是資料操作語言(DML) 陳述式?",
+        "id": 59,
+        "question": "59. 請問哪一個SQL 陳述式是資料操作語言(DML) 陳述式?",
         "options": [
             "SELECT INTO Employee FROM NewHires",
             "INSERT INTO Employee VALUES ('Jack Smith');",
@@ -865,8 +865,8 @@
         "type": "single"
     },
     {
-        "id": 7,
-        "question": "7. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。<br>\n<br><img src=\"images/7_11.png\" class=\"q-image\"><br>\n<br><img src=\"images/7_12.png\" class=\"q-image\"><br>\n舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?",
+        "id": 60,
+        "question": "60. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。<br>\n<br><img src=\"images/7_11.png\" class=\"q-image\"><br>\n<br><img src=\"images/7_12.png\" class=\"q-image\"><br>\n舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?",
         "options": [
             "UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = ' San Francisco')",
             "UPDATE LoanedBooks SET Books = 0 WHERE (Name In 'Harry', 'San Francisco')",
@@ -881,8 +881,8 @@
         "type": "single"
     },
     {
-        "id": 8,
-        "question": "8. Products 資料表包含以下資料:<br>\n<br><img src=\"images/8_13.png\" class=\"q-image\"><br>\n請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和<br>\nPrice?",
+        "id": 61,
+        "question": "61. Products 資料表包含以下資料:<br>\n<br><img src=\"images/8_13.png\" class=\"q-image\"><br>\n請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和<br>\nPrice?",
         "options": [
             "SELECT ItemName, Price FROM Products WHERE Item Description LIKE '%chocolate%';",
             "SELECT ItemName, Price FROM Products WHERE Item Description LIKE 'chocolate';",
@@ -897,8 +897,8 @@
         "type": "single"
     },
     {
-        "id": 9,
-        "question": "9. 有一個名為Flight 的資料表包含以下欄位:<br>\n<br><img src=\"images/9_14.png\" class=\"q-image\"><br>\n您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果<br>\n應該依照最新的抵達時間來排序,程式碼如下:<br>\nSELECT FlightNumber<br>\nFROM Flight<br>\nWHERE Destination Airport = 'LGA' (1)<br>\nArrival Time (2) GETDATE()<br>\n(3) (4)<br>\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使<br>\n用一次,也可能使用多次,甚至完全用不到。<br>\n① (A) OR (B) AND<br>\n② (A) < (B) > (C) =<br>\n③ (A) GROUP BY (B) ORDER BY<br>\n④ (A) ArrivalTime ASC (B) Arrival Time DESC<br>\n請問填入的程式碼片段順序為何?",
+        "id": 62,
+        "question": "62. 有一個名為Flight 的資料表包含以下欄位:<br>\n<br><img src=\"images/9_14.png\" class=\"q-image\"><br>\n您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果<br>\n應該依照最新的抵達時間來排序,程式碼如下:<br>\nSELECT FlightNumber<br>\nFROM Flight<br>\nWHERE Destination Airport = 'LGA' (1)<br>\nArrival Time (2) GETDATE()<br>\n(3) (4)<br>\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使<br>\n用一次,也可能使用多次,甚至完全用不到。<br>\n① (A) OR (B) AND<br>\n② (A) < (B) > (C) =<br>\n③ (A) GROUP BY (B) ORDER BY<br>\n④ (A) ArrivalTime ASC (B) Arrival Time DESC<br>\n請問填入的程式碼片段順序為何?",
         "options": [
             "B、B、B、B",
             "A、A、A、A",
@@ -913,8 +913,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 目的地是 LGA: WHERE DestinationAirport = 'LGA'。",
+        "id": 63,
+        "question": "63. 目的地是 LGA: WHERE DestinationAirport = 'LGA'。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -922,8 +922,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的<br>\n函數)。所以 ArrivalTime > GETDATE()。",
+        "id": 64,
+        "question": "64. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的<br>\n函數)。所以 ArrivalTime > GETDATE()。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -931,8 +931,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 依照最新的抵達時間排序: (3) ORDER BY，(4) ArrivalTime DESC (DESC 是遞減<br>\n排序，最新的在最前面)。<br>\n組合起來，順序是 B, B, B, B。",
+        "id": 65,
+        "question": "65. 依照最新的抵達時間排序: (3) ORDER BY，(4) ArrivalTime DESC (DESC 是遞減<br>\n排序，最新的在最前面)。<br>\n組合起來，順序是 B, B, B, B。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -940,8 +940,8 @@
         "type": "single"
     },
     {
-        "id": 10,
-        "question": "10. 您有下列資料表定義:<br>\nCREATE TABLE Road<br>\n(RoadID INTEGER NOT NULL,<br>\nDistance INTEGER NOT NULL)<br>\nRoad 資料表包含以下資料:<br>\n<br><img src=\"images/10_15.png\" class=\"q-image\"><br>\n您執行了下列陳述式: INSERT INTO Road VALUES (1234, 36) 請問結果為何?",
+        "id": 66,
+        "question": "66. 您有下列資料表定義:<br>\nCREATE TABLE Road<br>\n(RoadID INTEGER NOT NULL,<br>\nDistance INTEGER NOT NULL)<br>\nRoad 資料表包含以下資料:<br>\n<br><img src=\"images/10_15.png\" class=\"q-image\"><br>\n您執行了下列陳述式: INSERT INTO Road VALUES (1234, 36) 請問結果為何?",
         "options": [
             "語法錯誤",
             "資料表中的新資料列",
@@ -956,8 +956,8 @@
         "type": "single"
     },
     {
-        "id": 11,
-        "question": "11. 您需要使用 Employee 資料表中所有的資料填入名為 Employeecopy 的資料表。<br>\n請問您應該使用哪一個陳述式?",
+        "id": 67,
+        "question": "67. 您需要使用 Employee 資料表中所有的資料填入名為 Employeecopy 的資料表。<br>\n請問您應該使用哪一個陳述式?",
         "options": [
             "COPY INTO Employee SELECT * FROM Employee",
             "INSERT INTO EmployeeCopy SELECT * FROM Employee",
@@ -972,8 +972,8 @@
         "type": "single"
     },
     {
-        "id": 12,
-        "question": "12. 您有一個名為Product 的資料。Product 資料表包含 ProductDescription 和<br>\nProductCategory 的資料行。<br>\n您需要將 Product 資料中所有湯匙的ProductCategory 值都變更為43。<br>\n如果 ProductDescription為spoon,就表示該項目是湯匙。請問您應該使用哪一個陳<br>\n述式?",
+        "id": 68,
+        "question": "68. 您有一個名為Product 的資料。Product 資料表包含 ProductDescription 和<br>\nProductCategory 的資料行。<br>\n您需要將 Product 資料中所有湯匙的ProductCategory 值都變更為43。<br>\n如果 ProductDescription為spoon,就表示該項目是湯匙。請問您應該使用哪一個陳<br>\n述式?",
         "options": [
             "SET Product TO ProductCategory = 43 WHERE Product Description = ' spoon'",
             "UPDATE Product SET ProductCategory = 43 WHERE Product Description = ' spoon'",
@@ -988,8 +988,8 @@
         "type": "single"
     },
     {
-        "id": 13,
-        "question": "13. 您執行了交易的陳述式,以便從資料表中刪除100個資料列。僅刪除 40 個資料列<br>\n之後,交易便失敗。請問資料庫的結果為何?",
+        "id": 69,
+        "question": "69. 您執行了交易的陳述式,以便從資料表中刪除100個資料列。僅刪除 40 個資料列<br>\n之後,交易便失敗。請問資料庫的結果為何?",
         "options": [
             "資料表將損壞。",
             "交易將重新啟動。",
@@ -1004,8 +1004,8 @@
         "type": "single"
     },
     {
-        "id": 14,
-        "question": "14. 請問哪一個陳述式會刪除未輸入員工電話號碼的資料列?",
+        "id": 70,
+        "question": "70. 請問哪一個陳述式會刪除未輸入員工電話號碼的資料列?",
         "options": [
             "DELETE FROM Employee WHERE Phone IS NULL",
             "DELETE FROM Employee WHERE Phone = NULLABLE",
@@ -1020,8 +1020,8 @@
         "type": "single"
     },
     {
-        "id": 15,
-        "question": "15. Customers 資料表包含以下資料:<br>\n<br><img src=\"images/15_16.png\" class=\"q-image\"><br>\n您要建立一個查詢來傳回包含LastName、Phonenumber 及 Extension 分機為有<br>\n效號碼的結果集。此結果集應該依照客戶的姓氏來排序,程式碼如下:<br>\nSELECT LastName, Phone Number, Extension<br>\nFROM Customers<br>\nWHERE (1) (2)<br>\n(3) LastName;<br>\n請將下方程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次,<br>\n也可能使用多次,甚至完全用不到。<br>\n① (A) PhonesNumber (B) NOT NULL",
+        "id": 71,
+        "question": "71. Customers 資料表包含以下資料:<br>\n<br><img src=\"images/15_16.png\" class=\"q-image\"><br>\n您要建立一個查詢來傳回包含LastName、Phonenumber 及 Extension 分機為有<br>\n效號碼的結果集。此結果集應該依照客戶的姓氏來排序,程式碼如下:<br>\nSELECT LastName, Phone Number, Extension<br>\nFROM Customers<br>\nWHERE (1) (2)<br>\n(3) LastName;<br>\n請將下方程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次,<br>\n也可能使用多次,甚至完全用不到。<br>\n① (A) PhonesNumber (B) NOT NULL",
         "options": [
             "IS NOT NULL (D) Extension (E) <>NULL ② (A) Phones Number (B) NOT NULL",
             "IS NOT NULL (D) Extension (E) <> NULL ③ (A) GROUP BY (B) HAVING (C) ORDER BY (D) SORT BY 請問填入的程式碼片段順序為何?",
@@ -1038,8 +1038,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 分機號碼是有效號碼，代表它不是 ‘NULL’。所以 (1) 應填入 ‘Extension’",
+        "id": 72,
+        "question": "72. 分機號碼是有效號碼，代表它不是 ‘NULL’。所以 (1) 應填入 ‘Extension’",
         "options": [
             "，(2) 應填入 ‘IS NOT NULL’ (C)。"
         ],
@@ -1049,8 +1049,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 題目沒有提到對 ‘PhoneNumber’ 的篩選，所以 (3) 不需要。",
+        "id": 73,
+        "question": "73. 題目沒有提到對 ‘PhoneNumber’ 的篩選，所以 (3) 不需要。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1058,8 +1058,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 結果要依照姓氏排序，所以 (4) 應填入 ‘ORDER BY LastName’ (題目已給定)。<br>\n組合起來，順序是 D, C, (無), (無)。選項 (B) 的 D, C, C 是最接近的，可能題目有誤<br>\n或有其他解讀，但在選項中 B 是最佳選擇。",
+        "id": 74,
+        "question": "74. 結果要依照姓氏排序，所以 (4) 應填入 ‘ORDER BY LastName’ (題目已給定)。<br>\n組合起來，順序是 D, C, (無), (無)。選項 (B) 的 D, C, C 是最接近的，可能題目有誤<br>\n或有其他解讀，但在選項中 B 是最佳選擇。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1067,8 +1067,8 @@
         "type": "single"
     },
     {
-        "id": 16,
-        "question": "16. 下列名為Building 的資料儲存了數棟大樓的相關資料及其最新的檢查日期。<br>\n<br><img src=\"images/16_17.png\" class=\"q-image\"><br>\nAddress 欄位儲存的是大樓的地址。InspectionDate 欄位儲存的是最新的檢查日期。<br>\nInspection Date 欄位中的NULL 值代表該大樓尚未檢查過。<br>\n您需要顯示最早完成檢查的10棟大樓地址,程式碼如下:<br>\nSELECT (1) Address<br>\nFROM Building<br>\nWHERE InspectionDate (2) (3) InspectionDate請將下方的程式碼片段排列到上方<br>\n缺失的正確位置。<br>\n每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。<br>\nA. COUNT B. IS NOT NULL C. ORDER BY<br>\nD. HAVING E. GROUP BY F. IS NULL<br>\nG. TOP 10<br>\n請問填入的程式碼片段順序為何?",
+        "id": 75,
+        "question": "75. 下列名為Building 的資料儲存了數棟大樓的相關資料及其最新的檢查日期。<br>\n<br><img src=\"images/16_17.png\" class=\"q-image\"><br>\nAddress 欄位儲存的是大樓的地址。InspectionDate 欄位儲存的是最新的檢查日期。<br>\nInspection Date 欄位中的NULL 值代表該大樓尚未檢查過。<br>\n您需要顯示最早完成檢查的10棟大樓地址,程式碼如下:<br>\nSELECT (1) Address<br>\nFROM Building<br>\nWHERE InspectionDate (2) (3) InspectionDate請將下方的程式碼片段排列到上方<br>\n缺失的正確位置。<br>\n每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。<br>\nA. COUNT B. IS NOT NULL C. ORDER BY<br>\nD. HAVING E. GROUP BY F. IS NULL<br>\nG. TOP 10<br>\n請問填入的程式碼片段順序為何?",
         "options": [
             "A、C、F",
             "A、D、E",
@@ -1083,8 +1083,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 要選出前 10 筆，所以 (1) 應填入 TOP 10 (G)。",
+        "id": 76,
+        "question": "76. 要選出前 10 筆，所以 (1) 應填入 TOP 10 (G)。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1092,8 +1092,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 要找「已完成」檢查的，所以檢查日期不能是 NULL。所以 (2) 應填入 IS NOT<br>\nNULL (B)。",
+        "id": 77,
+        "question": "77. 要找「已完成」檢查的，所以檢查日期不能是 NULL。所以 (2) 應填入 IS NOT<br>\nNULL (B)。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1101,8 +1101,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 要找「最早」完成的，所以要排序。 (3) 應填入 ORDER BY (C)。",
+        "id": 78,
+        "question": "78. 要找「最早」完成的，所以要排序。 (3) 應填入 ORDER BY (C)。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1110,8 +1110,8 @@
         "type": "single"
     },
     {
-        "id": 4,
-        "question": "4. (4) 則指定排序的欄位 InspectionDate (預設為 ASC 升序，即最早的在前面)。<br>\n組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E<br>\n視為 C 的筆誤，則是唯一包含 G 和 B 的選項。",
+        "id": 79,
+        "question": "79. (4) 則指定排序的欄位 InspectionDate (預設為 ASC 升序，即最早的在前面)。<br>\n組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E<br>\n視為 C 的筆誤，則是唯一包含 G 和 B 的選項。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -1119,8 +1119,8 @@
         "type": "single"
     },
     {
-        "id": 17,
-        "question": "17. Items OnOrder 資料表包含以下資料:<br>\n<br><img src=\"images/17_18.png\" class=\"q-image\"><br>\n您需要建立一個查詢來顯示訂單總數、平均單行商品總計、最高單行商品總計,以及<br>\n所有訂購商品的總計。<br>\nLineltemTotal 代表單行商品總計。<br>\n請問您應該使用哪一個查詢?",
+        "id": 80,
+        "question": "80. Items OnOrder 資料表包含以下資料:<br>\n<br><img src=\"images/17_18.png\" class=\"q-image\"><br>\n您需要建立一個查詢來顯示訂單總數、平均單行商品總計、最高單行商品總計,以及<br>\n所有訂購商品的總計。<br>\nLineltemTotal 代表單行商品總計。<br>\n請問您應該使用哪一個查詢?",
         "options": [
             "SELECT COUNT(ID), AVG(LineltemTotal), MAX(LineltemTotal), SUM(LineltemTotal) FROM ItemsOnOrder;",
             "SELECT SUM(ID), AVG(LineltemTotal), MAX(LineltemTotal), SUM(LineltemTotal) FROM ItemsOnOrder",
@@ -1135,8 +1135,8 @@
         "type": "single"
     },
     {
-        "id": 18,
-        "question": "18. 您建立了下列查詢來判斷 Sample Move 是否只在 Movie 資料表中出現一次:<br>\nSELECT Title<br>\nFROM Movie<br>\nWHERE Title = 'Sample Movie'<br>\nORDER BY Title<br>\nGROUP BY Title<br>\nHAVING COUNT(*) = 1<br>\n當您執行此查詢後,卻傳回語法錯誤。<br>\n您需要修改查詢以正常執行(不發生錯誤)並傳回正確的結果。<br>\n請問您應該採取下列哪一項做法?",
+        "id": 81,
+        "question": "81. 您建立了下列查詢來判斷 Sample Move 是否只在 Movie 資料表中出現一次:<br>\nSELECT Title<br>\nFROM Movie<br>\nWHERE Title = 'Sample Movie'<br>\nORDER BY Title<br>\nGROUP BY Title<br>\nHAVING COUNT(*) = 1<br>\n當您執行此查詢後,卻傳回語法錯誤。<br>\n您需要修改查詢以正常執行(不發生錯誤)並傳回正確的結果。<br>\n請問您應該採取下列哪一項做法?",
         "options": [
             "移除 ORDER BY子句。",
             "移除 GROUPBY子句。",
@@ -1151,8 +1151,8 @@
         "type": "single"
     },
     {
-        "id": 19,
-        "question": "19. 您有兩個資料表,分別名為 Cars 與 Colors,其定義如下。這兩個資料表會透過<br>\nColorID 建立關聯。<br>\n<br><img src=\"images/19_19.png\" class=\"q-image\"><br>\n<br><img src=\"images/19_20.png\" class=\"q-image\"><br>\n您執行了下列SQL述式:<br>\nSELECT *<br>\nFROM Cars<br>\nLEFT OUTER JOIN Colors<br>\nON Cars.ColorID = Colors.ColorID<br>\n請問此 SQL 陳述式會傳回多少個資料列?",
+        "id": 82,
+        "question": "82. 您有兩個資料表,分別名為 Cars 與 Colors,其定義如下。這兩個資料表會透過<br>\nColorID 建立關聯。<br>\n<br><img src=\"images/19_19.png\" class=\"q-image\"><br>\n<br><img src=\"images/19_20.png\" class=\"q-image\"><br>\n您執行了下列SQL述式:<br>\nSELECT *<br>\nFROM Cars<br>\nLEFT OUTER JOIN Colors<br>\nON Cars.ColorID = Colors.ColorID<br>\n請問此 SQL 陳述式會傳回多少個資料列?",
         "options": [
             "0",
             "2",
@@ -1167,8 +1167,8 @@
         "type": "single"
     },
     {
-        "id": 20,
-        "question": "20. Products 資料表包含以下資料:<br>\n<br><img src=\"images/20_21.png\" class=\"q-image\"><br>\n請問哪一個查詢會將商品1價格提高6%?",
+        "id": 83,
+        "question": "83. Products 資料表包含以下資料:<br>\n<br><img src=\"images/20_21.png\" class=\"q-image\"><br>\n請問哪一個查詢會將商品1價格提高6%?",
         "options": [
             "UPDATE Products SET Price = Price * 1.06 WHERE Item Number = 1",
             "ALTER Products SET Price = Price + 1.06 WHERE Item Number = 1;",
@@ -1183,8 +1183,8 @@
         "type": "single"
     },
     {
-        "id": 1,
-        "question": "1. 您有一個資料表包含以下資料。<br>\n<br><img src=\"images/1_22.png\" class=\"q-image\"><br>\n請問哪一個資料庫詞彙是用來描述 ProductID 與 Product Cateory 之間的關聯性?",
+        "id": 84,
+        "question": "84. 您有一個資料表包含以下資料。<br>\n<br><img src=\"images/1_22.png\" class=\"q-image\"><br>\n請問哪一個資料庫詞彙是用來描述 ProductID 與 Product Cateory 之間的關聯性?",
         "options": [
             "世代",
             "複合",
@@ -1200,8 +1200,8 @@
         "type": "single"
     },
     {
-        "id": 2,
-        "question": "2. 您需要停用 User1 檢視 Customer資料中資料的存取權請問您應該使用哪一個陳<br>\n述式?",
+        "id": 85,
+        "question": "85. 您需要停用 User1 檢視 Customer資料中資料的存取權請問您應該使用哪一個陳<br>\n述式?",
         "options": [
             "REMOVE User1 FROM Customer",
             "REVOKE User1 FROM Customer",
@@ -1216,8 +1216,8 @@
         "type": "single"
     },
     {
-        "id": 3,
-        "question": "3. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選<br>\n取正確的選項以完成敘述。<br>\n① 叢集索引可提升以下查詢的效能:",
+        "id": 86,
+        "question": "86. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選<br>\n取正確的選項以完成敘述。<br>\n① 叢集索引可提升以下查詢的效能:",
         "options": [
             "傳回大型結果集 (B)傳回許多資料行",
             "不用 ORDER BY 或GROUP BY 子句 ② 叢集索引可提升以下資料行查詢的:",
@@ -1233,8 +1233,8 @@
         "type": "multiple"
     },
     {
-        "id": 4,
-        "question": "4. 您建立了下列資料表,其中顯示過去寵物表演的獲勝者。<br>\n寵物比賽獲勝者<br>\n<br><img src=\"images/4_23.png\" class=\"q-image\"><br>\n請問哪一個資料行可防止資料表成為第三正規形式?",
+        "id": 87,
+        "question": "87. 您建立了下列資料表,其中顯示過去寵物表演的獲勝者。<br>\n寵物比賽獲勝者<br>\n<br><img src=\"images/4_23.png\" class=\"q-image\"><br>\n請問哪一個資料行可防止資料表成為第三正規形式?",
         "options": [
             "ID",
             "Year",
@@ -1249,8 +1249,8 @@
         "type": "single"
     },
     {
-        "id": 5,
-        "question": "5. 請問哪一個陳述式會建立索引?",
+        "id": 88,
+        "question": "88. 請問哪一個陳述式會建立索引?",
         "options": [
             "CREATE TABLE Employee (EmployeeID INTEGER PRIMARY KEY)",
             "CREATE TABLE Employee (EmployeeID INTEGER INDEX)",
@@ -1264,71 +1264,291 @@
         "image": null,
         "type": "single"
     },
-    {
-        "id": 6,
-        "question": "6. 您需要將資料庫正規化為第一正規形式。請問您必須符合哪兩項需求?(請選擇2個<br>\n答案)",
-        "options": [
-            "排除複合索引鍵",
-            "排除重複資料列",
-            "排除外部索引鍵",
-            "排除重複群組"
-        ],
-        "answer": [
-            2,
-            4
-        ],
-        "explanation": "第一正規形式 (1NF) 的核心要求有兩個：",
-        "image": null,
-        "type": "multiple"
-    },
-    {
-        "id": 1,
-        "question": "1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不<br>\n能有「重複群組」，例如一個 Telephone 欄位中不能同時儲存 手機、家裡、 公司<br>\n三個電話號碼。",
-        "options": [],
-        "answer": [],
-        "explanation": "",
-        "image": null,
-        "type": "single"
-    },
-    {
-        "id": 2,
-        "question": "2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>\n因此，(B) 和 (D) 是 1NF 的基本要求。",
-        "options": [],
-        "answer": [],
-        "explanation": "",
-        "image": null,
-        "type": "single"
-    },
-    {
-        "id": 7,
-        "question": "7. 您有一個名為Product 的資料表,其中包含一百萬個資料列 您需要使用下列查詢來<br>\n搜尋產品資訊:<br>\nSELECT ProductName, Price FROM Product WHERE Category = 'Science<br>\nBooks' 請問以下何者能讓這種搜尋更有效率?",
-        "options": [
-            "Category 資料行的非叢集索引",
-            "Price 資料行的非叢集索引",
-            "ProductName 資料行的叢集索引",
-            "Price 資料行的叢集索引"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'<br>\n這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條<br>\n件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」<br>\n，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄<br>\n所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。",
-        "image": null,
-        "type": "single"
-    },
-    {
-        "id": 8,
-        "question": "8. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n①完整資料庫備份就是整個資料庫中所有資料的複本。<br>\n②交易記錄備份會備份資料庫中的所有資料。<br>\n③ 差異備份只會複製上次完整備份之前變更的資料。<br>\n④ 檔案或檔案群組還原會指定要復原的資料庫部分。<br>\n請問填入正確或錯誤符號順序為何?",
-        "options": [
-            "X、X、○、○",
-            "○、X、X、○",
-            "X、X、X、X",
-            "○、○、X、○"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "①正確(○): 完整備份 (Full Backup) 就是對整個資料庫（包括資料、物件、結構）進<br>\n行一次完整的複製。<br>\n②錯誤(X): 交易記錄備份 (Transaction Log Backup) 只備份自上次交易記錄備份以<br>\n來的所有交易紀錄，<br>\n而不是資料庫中的所有資料。它用於時間點復原。<br>\n③正確(X): 差異備份 (Differential Backup) 會備份自「上一次完整備份」以來所有<br>\n變更過的資料。<br>\n題目中的「之前」應為「之後」的筆誤，若理解為「自上次完整備份以來」，則為<br>\n正確。<br>\n④正確(○): 當資料庫非常大時，可以只備份或還原特定的檔案或檔案群組，增加管<br>\n理的彈性。<br>\n因此，順序為 ○、X、X、○。",
-        "image": null,
-        "type": "single"
-    }
+    
+  {
+    "id": 89,
+    "question": "89. 您需要將資料庫正規化為第一正規形式。請問您必須符合哪兩項需求?(請選擇2個答案)",
+    "options": [
+      "排除複合索引鍵",
+      "排除重複資料列",
+      "排除外部索引鍵",
+      "排除重複群組"
+    ],
+    "answer": [
+      2,
+      4
+    ],
+    "explanation": "第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。",
+    "image": null,
+    "type": "multiple"
+  },
+  {
+    "id": 90,
+    "question": "90. 您有一個名為 Product 的資料表,其中包含一百萬個資料列 您需要使用下列查詢來搜尋產品資訊:<br>\nSELECT ProductName, Price FROM Product WHERE Category = 'Science Books'<br>\n請問以下何者能讓這種搜尋更有效率?",
+    "options": [
+      "Category 資料行的非叢集索引",
+      "Price 資料行的非叢集索引",
+      "ProductName 資料行的叢集索引",
+      "Price 資料行的叢集索引"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'<br>\n這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 91,
+    "question": "91. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n①完整資料庫備份就是整個資料庫中所有資料的複本。<br>\n②交易記錄備份會備份資料庫中的所有資料。<br>\n③ 差異備份只會複製上次完整備份之前變更的資料。<br>\n④ 檔案或檔案群組還原會指定要復原的資料庫部分。<br>\n請問填入正確或錯誤符號順序為何?",
+    "options": [
+      "X、X、○、○",
+      "○、X、X、○",
+      "X、X、X、X",
+      "○、○、X、○"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "①正確(○): 完整備份 (Full Backup) 就是對整個資料庫（包括資料、物件、結構）進行一次完整的複製。<br>\n②錯誤(X): 交易記錄備份 (Transaction Log Backup) 只備份自上次交易記錄備份以來的所有交易紀錄，而不是資料庫中的所有資料。它用於時間點復原。<br>\n③正確(X): 差異備份 (Differential Backup) 會備份自「上一次完整備份」以來所有變更過的資料。(題目中的「之前」應為「之後」的筆誤)。<br>\n④正確(○): 當資料庫非常大時，可以只備份或還原特定的檔案或檔案群組，增加管理的彈性。<br>\n因此，順序為 ○、X、X、○。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 92,
+    "question": "92. 您有一個儲存訂單詳細資料的資料表 OrderDetails，主索引鍵由 OrderID 和 ProductID 組成 (複合鍵)。<br>\n該資料表包含一個 ProductName 欄位，該欄位只相依於 ProductID，而不相依於 OrderID。<br>\n請問這違反了哪一種正規化形式？",
+    "options": [
+      "第一正規化 (1NF)",
+      "第二正規化 (2NF)",
+      "第三正規化 (3NF)",
+      "第四正規化 (4NF)"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。<br>\n在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 93,
+    "question": "93. 您正在設計一個 Employee 資料表，其中包含一個 Age (年齡) 欄位。<br>\n您希望確保輸入的年齡數值必須大於等於 18。<br>\n請問您應該使用哪一種條件約束 (Constraint)？",
+    "options": [
+      "PRIMARY KEY",
+      "FOREIGN KEY",
+      "UNIQUE",
+      "CHECK"
+    ],
+    "answer": [
+      4
+    ],
+    "explanation": "CHECK 條件約束用於限制欄位中可接受的值範圍。<br>\n您可以定義一個表達式 (例如：Age >= 18)，資料庫會自動檢查所有新增或修改的資料是否符合此條件。<br>\n(A) 主鍵用於唯一識別。(B) 外鍵用於關聯資料表。(C) UNIQUE 用於確保不重複。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 94,
+    "question": "94. 您在一個交易 (Transaction) 中執行了多個 UPDATE 指令來修改銀行帳戶餘額。<br>\n確認所有操作都正確無誤後，您希望將這些變更永久寫入資料庫。<br>\n請問您應該執行哪一個指令？",
+    "options": [
+      "ROLLBACK",
+      "COMMIT",
+      "SAVEPOINT",
+      "TRUNCATE"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "交易管理中，COMMIT 指令用於將交易中的所有更動「永久保存」到資料庫中。<br>\n(A) ROLLBACK 是在發生錯誤或後悔時，將資料復原到交易開始前的狀態。<br>\n(C) SAVEPOINT 是在交易中設定檢查點，以便部分復原。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 95,
+    "question": "95. 駭客透過在網頁輸入框中輸入 <code>' OR '1'='1</code> 等惡意字串，試圖操縱後端資料庫執行的 SQL 指令。<br>\n這種攻擊手法稱為什麼？",
+    "options": [
+      "暴力破解 (Brute Force)",
+      "中間人攻擊 (Man-in-the-Middle)",
+      "SQL 注入 (SQL Injection)",
+      "跨站腳本攻擊 (XSS)"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "SQL 注入 (SQL Injection) 是一種常見的資料庫安全漏洞。<br>\n攻擊者透過輸入惡意的 SQL 語法片段，欺騙資料庫執行非預期的指令 (例如繞過登入驗證或刪除資料)。<br>\n防範方法包含使用參數化查詢 (Parameterized Queries) 等。",
+    "image": null,
+    "type": "single"
+  },
+  {
+    "id": 96,
+    "question": "96. 您希望授權使用者 UserA 能夠在 Products 資料表上執行 SELECT 和 UPDATE 操作，但不允許 DELETE。<br>\n請問您應該使用哪一個 SQL 陳述式？",
+    "options": [
+      "GRANT SELECT, UPDATE ON Products TO UserA",
+      "REVOKE DELETE ON Products FROM UserA",
+      "DENY DELETE ON Products TO UserA",
+      "ALTER USER UserA ADD SELECT, UPDATE ON Products"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "GRANT 是用來授予權限的標準指令。<br>\n語法為：GRANT [權限列表] ON [物件] TO [使用者];。<br>\n選項 (A) 明確授予了查詢 (SELECT) 和修改 (UPDATE) 的權限，且未授予刪除權限，符合需求。",
+    "image": null,
+    "type": "single"
+  },
+  
+  {
+    "id": 97,
+    "type": "single",
+    "question": "97. 【CH03-補充】您執行了一個查詢來選取客戶居住的城市，但結果中包含了許多重複的城市名稱（例如出現了多次 'Taipei'）。<br>\n請問您應該在 SELECT 陳述式中使用哪一個關鍵字來移除重複的資料列，只顯示唯一的城市名稱？",
+    "options": [
+      "UNIQUE",
+      "DISTINCT",
+      "DIFFERENT",
+      "SINGLE"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "在 SELECT 陳述式中，`DISTINCT` 關鍵字用於從結果集中移除重複的資料列，只傳回唯一的值。<br>\n`UNIQUE` 是用於建立資料表時的條件約束 (Constraint)，而非查詢關鍵字。"
+  },
+  {
+    "id": 98,
+    "type": "single",
+    "question": "98. 【CH03-補充】您正在搜尋名字為 'Tom'、'Tim' 或 'Tam' 的員工。<br>\n您知道名字的第一個字母是 'T'，第三個字母是 'm'，但中間的字母只有一個字元且不確定是什麼。<br>\n請問您應該使用哪一個 `LIKE` 樣式？",
+    "options": [
+      "LIKE 'T%m'",
+      "LIKE 'T_m'",
+      "LIKE 'T*m'",
+      "LIKE 'T?m'"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "SQL 的 `LIKE` 運算子中：<br>\n● `_` (底線) 代表 **這位置只有 1 個任意字元**。<br>\n● `%` (百分比) 代表 **0 個或多個任意字元**。<br>\n因為題目強調「中間的字母只有一個」，所以 `T_m` 是正確答案（會符合 Tim, Tom, Tam，但不會符合 Team）。"
+  },
+  {
+    "id": 99,
+    "type": "single",
+    "question": "99. 【CH03-補充】您需要依照「部門 (Department)」對員工進行升冪排序 (A-Z)。如果員工屬於同一個部門，則必須依照「薪資 (Salary)」進行降冪排序 (高到低)。<br>\n請問 ORDER BY 子句應該怎麼寫？",
+    "options": [
+      "ORDER BY Department ASC, Salary ASC",
+      "ORDER BY Department DESC, Salary DESC",
+      "ORDER BY Department ASC, Salary DESC",
+      "ORDER BY Salary DESC, Department ASC"
+    ],
+    "answer": [
+      3
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "SQL 允許對多個欄位進行排序。排序優先順序由左至右。<br>\n1. 先排 `Department ASC` (升冪)。<br>\n2. 當部門相同時，再排 `Salary DESC` (降冪)。"
+  },
+  {
+    "id": 100,
+    "type": "single",
+    "question": "100. 【CH05-補充】為了簡化權限管理，您希望將一組權限（例如 SELECT, UPDATE）一次指派給多個使用者（例如 UserA, UserB, UserC），而不是逐一授權。<br>\n請問您應該先建立哪種資料庫物件？",
+    "options": [
+      "角色 (Role)",
+      "檢視表 (View)",
+      "索引 (Index)",
+      "觸發程序 (Trigger)"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "● **角色 (Role)** 是一組權限的集合。最佳實務是將權限授予「角色」，然後將使用者加入該角色。<br>\n這樣當人員異動時，只需調整角色的成員，而不用逐一修改權限設定。"
+  },
+  {
+    "id": 101,
+    "type": "single",
+    "question": "101. 【CH01-補充】您正在設計一個使用者資料表，需要儲存使用者的「登入密碼」。<br>\n基於安全性考量，密碼不應以明文儲存，且即使是資料庫管理員也無法還原成原始密碼。<br>\n請問您應該使用哪種技術？",
+    "options": [
+      "加密 (Encryption)",
+      "雜湊 (Hashing)",
+      "遮罩 (Masking)",
+      "壓縮 (Compression)"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。"
+  },
+  {
+    "id": 102,
+    "type": "single",
+    "question": "102. 【CH01-補充】主管要求您設定資料庫，以便追蹤「是誰」在「什麼時候」修改了薪資資料表 (Salary) 中的數據。<br>\n請問這屬於哪種資料保護措施？",
+    "options": [
+      "驗證 (Authentication)",
+      "授權 (Authorization)",
+      "稽核 (Auditing)",
+      "正規化 (Normalization)"
+    ],
+    "answer": [
+      3
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。"
+  },
+  {
+    "id": 103,
+    "type": "single",
+    "question": "103. 【CH03-補充】您正在撰寫一個計算平均成本的查詢：`SELECT Cost / Quantity AS AvgCost FROM Inventory`。<br>\n為了避免因 `Quantity` 為 0 而導致「除以零 (Divide by zero)」的錯誤，您應該使用哪個函數？",
+    "options": [
+      "ISNULL(Quantity, 1)",
+      "NULLIF(Quantity, 0)",
+      "COALESCE(Quantity, 0)",
+      "ROUND(Quantity, 0)"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。"
+  },
+  {
+    "id": 104,
+    "type": "single",
+    "question": "104. 【CH03-補充】您有一個員工資料表 `Employees`，其中包含 `EmployeeID`, `Name` 和 `ManagerID`。<br>\n`ManagerID` 欄位儲存的是該員工的主管的 `EmployeeID`。<br>\n若您想列出「員工姓名」及其「主管姓名」，應該使用哪種聯結 (Join)？",
+    "options": [
+      "交叉聯結 (Cross Join)",
+      "自我聯結 (Self Join)",
+      "自然聯結 (Natural Join)",
+      "聯集 (Union)"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。"
+  },
+  {
+    "id": 105,
+    "type": "single",
+    "question": "105. 【CH03-補充】您想要找出所有「單價高於『任何』(ANY) 一項文具類產品」的商品。<br>\n請問下列 SQL 語法何者正確？",
+    "options": [
+      "WHERE Price > ANY (SELECT Price FROM Products WHERE Category = 'Stationery')",
+      "WHERE Price > ALL (SELECT Price FROM Products WHERE Category = 'Stationery')",
+      "WHERE Price > SOME (SELECT Price FROM Products WHERE Category = 'Stationery')",
+      "WHERE Price > (SELECT MAX(Price) FROM Products WHERE Category = 'Stationery')"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。"
+  }
+
+
+
 ]
