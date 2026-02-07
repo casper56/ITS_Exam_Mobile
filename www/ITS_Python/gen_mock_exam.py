@@ -73,6 +73,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
     const allQuestions = {json_str};
@@ -225,8 +226,34 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const score = Math.round((correctCount / 50) * 100);
         document.getElementById('final-score').innerText = score;
         
-        if (score >= 70) document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
+        if (score >= 70) {{
+            document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
+            launchFireworks();
+        }}
         else document.getElementById('result-msg').innerHTML = '<h4 class="text-danger fw-bold">未達及格分數 (70分)，再接再厲！</h4>';
+    }}
+
+    function launchFireworks() {{
+        var duration = 5 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = {{ startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }};
+
+        function randomInRange(min, max) {{
+            return Math.random() * (max - min) + min;
+        }}
+
+        var interval = setInterval(function() {{
+            var timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {{
+                return clearInterval(interval);
+            }}
+
+            var particleCount = 50 * (timeLeft / duration);
+            // since particles fall down, start a bit higher than random
+            confetti(Object.assign({{}}, defaults, {{ particleCount, origin: {{ x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }} }}));
+            confetti(Object.assign({{}}, defaults, {{ particleCount, origin: {{ x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }} }}));
+        }}, 250);
     }}
 
     // 自動啟動
