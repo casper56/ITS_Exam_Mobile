@@ -6,6 +6,8 @@ def create_html(json_file, output_html):
     # Derive title from filename
     base_name = os.path.splitext(os.path.basename(output_html))[0]
     display_title = base_name.replace('_', ' ')
+    if display_title == "ITS Csharp":
+        display_title = "ITS Software Development"
     if not display_title:
         display_title = "ITS Exam"
 
