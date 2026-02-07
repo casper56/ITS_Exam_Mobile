@@ -40,6 +40,21 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         #result-screen {{ display: none; text-align: center; padding: 50px 20px; }}
         .score-circle {{ width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }}
         code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }}
+        
+        /* 列印與預覽錯誤題目樣式 */
+        #review-area {{ display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding-top: 20px; }}
+        .review-item {{ margin-bottom: 30px; padding: 15px; border: 1px solid #eee; border-radius: 8px; page-break-inside: avoid; }}
+        .review-id {{ font-weight: bold; color: #d63384; margin-bottom: 10px; }}
+        .review-ans {{ color: #198754; font-weight: bold; background: #e9f7ef; padding: 5px 10px; border-radius: 4px; margin: 10px 0; }}
+        .review-exp {{ font-size: 0.95rem; color: #666; border-left: 3px solid #0d6efd; padding-left: 10px; }}
+
+        @media print {{
+            body {{ background: white; }}
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print {{ display: none !important; }}
+            #result-screen {{ display: block !important; padding: 0 !important; }}
+            #review-area {{ display: block !important; border: none !important; }}
+            .review-item {{ border: 1px solid #ccc !important; }}
+        }}
     </style>
 </head>
 <body>
@@ -65,9 +80,16 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     <div class="score-circle" id="final-score">0</div>
     <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
     <div id="result-msg" class="mb-4"></div>
-    <div class="mt-5">
+    <div class="mt-5 no-print">
         <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
-        <button class="btn btn-outline-secondary btn-lg" onclick="location.reload()">重新挑戰</button>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="exportIncorrectPDF()" style="display:none;">💾 匯出錯誤題目 PDF</button>
+    </div>
+
+    <!-- 錯誤題目回顧區 (預覽與列印用) -->
+    <div id="review-area">
+        <h3 class="mb-4 text-center">錯誤題目回顧報告</h3>
+        <div id="review-list"></div>
     </div>
 </div>
 
@@ -84,7 +106,6 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     let timerInterval;
 
     function startExam() {{
-        // 隨機抽取 50 題
         examQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 50);
         renderQuestion(0);
         startTimer();
@@ -199,6 +220,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     function submitExam() {{
         clearInterval(timerInterval);
         let correctCount = 0;
+        let incorrectHTML = '';
 
         examQuestions.forEach((item, idx) => {{
             const userAns = userAnswers[idx];
@@ -216,7 +238,19 @@ def create_mock_exam_html(json_file, output_html, subject_name):
                 isCorrect = userAns === (parseInt(item.answer) - 1);
             }}
 
-            if (isCorrect) correctCount++;
+            if (isCorrect) {{
+                correctCount++;
+            }} else {{
+                let qText = item.question.replace(/●/g, '<br/>●');
+                let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+                incorrectHTML += `
+                    <div class="review-item">
+                        <div class="review-id">題目 ${{idx + 1}} (原始編號: ${{item.id}})</div>
+                        <div class="mb-2">${{qText}}</div>
+                        <div class="review-ans">正確答案：${{ansText}}</div>
+                        <div class="review-exp"><b>解析：</b><br/>${{(item.explanation || '暫無解析。').replace(/●/g, '<br/>●')}}</div>
+                    </div>`;
+            }}
         }});
 
         document.getElementById('exam-ui').style.display = 'none';
@@ -226,6 +260,11 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const score = Math.round((correctCount / 50) * 100);
         document.getElementById('final-score').innerText = score;
         
+        if (correctCount < 50) {{
+            document.getElementById('btn-export-pdf').style.display = 'inline-block';
+            document.getElementById('review-list').innerHTML = incorrectHTML;
+        }}
+
         if (score >= 70) {{
             document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
             launchFireworks();
@@ -233,30 +272,26 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         else document.getElementById('result-msg').innerHTML = '<h4 class="text-danger fw-bold">未達及格分數 (70分)，再接再厲！</h4>';
     }}
 
+    function exportIncorrectPDF() {{
+        document.getElementById('review-area').style.display = 'block';
+        window.print();
+        setTimeout(() => {{ document.getElementById('review-area').style.display = 'none'; }}, 1000);
+    }}
+
     function launchFireworks() {{
         var duration = 5 * 1000;
         var animationEnd = Date.now() + duration;
         var defaults = {{ startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }};
-
-        function randomInRange(min, max) {{
-            return Math.random() * (max - min) + min;
-        }}
-
+        function randomInRange(min, max) {{ return Math.random() * (max - min) + min; }}
         var interval = setInterval(function() {{
             var timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {{
-                return clearInterval(interval);
-            }}
-
+            if (timeLeft <= 0) return clearInterval(interval);
             var particleCount = 50 * (timeLeft / duration);
-            // since particles fall down, start a bit higher than random
             confetti(Object.assign({{}}, defaults, {{ particleCount, origin: {{ x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }} }}));
             confetti(Object.assign({{}}, defaults, {{ particleCount, origin: {{ x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }} }}));
         }}, 250);
     }}
 
-    // 自動啟動
     startExam();
 </script>
 </body>
