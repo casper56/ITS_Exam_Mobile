@@ -1864,11 +1864,11 @@
             "self.assert(x)"
         ],
         "answer": [
-            0
+            1
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● `assertTrue(x)` (選項1) 是 `unittest` 的標準方法。<br>● `assertIsTrue` (選項2) 不是標準方法，執行會報錯。<br>● 注意：JSON 索引 [0] 對應第一個選項 `self.assertTrue(x)`，這才是正確答案。<br><br><b>【正確對照表】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>檢查目標</th><th>❌ 錯誤寫法 (不存在)</th><th>✅ 正確寫法</th></tr><tr><td>驗證 True</td><td>assertIsTrue</td><td><b>assertTrue</b></td></tr><tr><td>驗證 False</td><td>assertIsFalse</td><td><b>assertFalse</b></td></tr></table>"
+        "explanation": "● `assertTrue(x)` (選項1) 是 `unittest` 的標準方法。<br>● `assertIsTrue` (選項2) 不是標準方法，執行會報錯。<br><br><b>【正確對照表】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>檢查目標</th><th>❌ 錯誤寫法 (不存在)</th><th>✅ 正確寫法</th></tr><tr><td>驗證 True</td><td>assertIsTrue</td><td><b>assertTrue</b></td></tr><tr><td>驗證 False</td><td>assertIsFalse</td><td><b>assertFalse</b></td></tr></table>"
     },
     {
         "id": 105,

@@ -45,5 +45,15 @@ python -m pip install reportlab Pillow
 *   **更新網頁**：`python json_to_html.py` (採優化後的緊湊版面)
 *   **產生 PDF**：`python json_to_pdf.py` (具備自動相依性檢查)
 
+### Python 題庫管理與平衡出題 (New!)
+為了確保模擬考的全面性，本專案針對 Python 考科實作了「內容自動特徵分類」與「藍圖比例抽題」機制。
+
+1.  **新增試題**：
+    直接編輯 `www/ITS_Python/questions_ITS_python.json` 增加新題目。
+2.  **自動分類與部署**：
+    執行 `python gen_balanced_exam.py`。該腳本會自動分析內容特徵並重新產生具備平衡出題邏輯的 `mock_exam.html`。
+3.  **查看分析報告**：
+    執行 `python analyze_content.py` 可產生最新的 `ITS_Python_Content_Analysis.md` 統計報告，了解題庫分佈。
+
 ---
 *本專案僅供學習與考照準備使用。*
