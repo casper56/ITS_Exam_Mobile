@@ -1994,296 +1994,7 @@
     {
         "id": 112,
         "type": "single",
-        "question": "112. 【CH03-綜合應用】執行下列 Python 程式碼後，最終列印出的結果為何？\n\n<pre><code>nums = [1, 2, 2, 3]\nnums = list(set(nums))\nnums.append(4)\nprint(nums)</code></pre>",
-        "options": [
-            "[1, 2, 3, 4]",
-            "[1, 2, 2, 3, 4]",
-            "{1, 2, 3, 4}",
-            "(1, 2, 3, 4)"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "此題考查了三個步驟的邏輯變化：<br><br><b>【步驟解析】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>步驟程式碼</th><th>資料變化</th><th>說明</th></tr><tr><td><code>nums = [1, 2, 2, 3]</code></td><td><code>[1, 2, 2, 3]</code></td><td>初始清單，包含重複的 2。</td></tr><tr><td><code>set(nums)</code></td><td><code>{1, 2, 3}</code></td><td>轉為集合，<b>自動去除重複值</b>。</td></tr><tr><td><code>list(...)</code></td><td><code>[1, 2, 3]</code></td><td>再轉回清單，準備進行修改。</td></tr><tr><td><code>nums.append(4)</code></td><td><code>[1, 2, 3, 4]</code></td><td>清單是<b>可變</b>的，加入新元素 4。</td></tr></table><br><br><b>【錯誤選項分析】</b><br>● 選項 B：錯誤，因為轉為 set 時重複的 2 已經被移除了。<br>● 選項 C：錯誤，最終已轉回 List，符號應為 <code>[]</code> 而非 <code>{}</code>。<br>● 選項 D：錯誤，這是 Tuple 的符號。"
-    },
-    {
-        "id": 113,
-        "type": "single",
-        "question": "113. 【CH03-集合運算】觀察下列程式碼，print(result) 的輸出結果為何？\n\n<pre><code>set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\nresult = set_a & set_b\nprint(result)</code></pre>",
-        "options": [
-            "{1, 2, 3, 4, 5, 6}",
-            "{3, 4}",
-            "[3, 4]",
-            "{1, 2, 5, 6}"
-        ],
-        "answer": [
-            2
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "此題考查集合 (Set) 的交集運算子號 <code>&</code>。<br><br><b>【解析步驟】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>符號</th><th>名稱</th><th>邏輯</th><th>計算結果</th></tr><tr><td><code>&</code></td><td>交集 (Intersection)</td><td><b>且 (AND)</b><br>兩個集合都有的元素</td><td>set_a 有 3,4<br>set_b 有 3,4<br>結果: <code>{3, 4}</code></td></tr></table><br><br><b>【錯誤選項排除】</b><br>● 選項 A：這是聯集 (Union, 符號 <code>|</code>) 的結果。<br>● 選項 C：集合運算的結果依然是集合 <code>{}</code>，不會自動變成清單 <code>[]</code>。<br>● 選項 D：這是差集的概念 (互有的差異)。"
-    },
-    {
-        "id": 114,
-        "type": "single",
-        "question": "114. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？",
-        "options": [
-            "print(data[1])",
-            "print(data['b'])",
-            "print(data.b)",
-            "print(data(20))"
-        ],
-        "answer": [
-            2
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "字典 (Dictionary) 是透過<b>鍵 (Key)</b> 來查詢值 (Value)，而不是透過數字索引。<br><br><b>【選項解析】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>程式碼</th><th>結果 / 原因</th></tr><tr><td>A</td><td><code>data[1]</code></td><td><span style='color:red;'>報錯 (KeyError)</span><br>字典沒有順序，不能用數字索引。</td></tr><tr><td>B</td><td><code>data['b']</code></td><td><span style='color:green;'>正確</span><br>透過 Key 'b' 找到對應的 Value 20。</td></tr><tr><td>C</td><td><code>data.b</code></td><td><span style='color:red;'>報錯 (AttributeError)</span><br>Python 字典不支援點號 (.) 訪問屬性。</td></tr><tr><td>D</td><td><code>data(20)</code></td><td><span style='color:red;'>報錯 (TypeError)</span><br>字典不是函式，不能用小括號呼叫。</td></tr></table>"
-    },
-    {
-        "id": 115,
-        "type": "single",
-        "question": "115. 【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？",
-        "options": [
-            "my_list = [1, 2, 3]; my_list[0] = 9",
-            "my_dict = {'x': 1}; my_dict['x'] = 9",
-            "my_tuple = (1, 2, 3); my_tuple[0] = 9",
-            "my_set = {1, 2, 3}; my_set.add(9)"
-        ],
-        "answer": [
-            3
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "本題考查資料結構的<b>可變性 (Mutability)</b>。<br><br><b>【逐項分析】</b><br><ul style='margin-top:5px; padding-left:20px;'><li><b>A (List):</b> 清單是可變的 (Mutable)，可以修改指定位置的值。 -> <span style='color:green;'>Pass</span></li><li><b>B (Dict):</b> 字典是可變的，可以更新 Key 對應的值。 -> <span style='color:green;'>Pass</span></li><li><b>C (Tuple):</b> <span style='color:red;'><b>錯誤 (TypeError)</b></span><br>元組是<b>不可變 (Immutable)</b> 的，一旦建立，不能修改內部元素。</li><li><b>D (Set):</b> 集合可以透過 add() 方法新增資料。 -> <span style='color:green;'>Pass</span></li></ul>"
-    },
-    {
-        "id": 116,
-        "type": "single",
-        "question": "116. 【CH03-集合操作】你想要在一個集合 `my_set = {1, 2, 3}` 中加入數字 4。下列哪一行程式碼是正確的？",
-        "options": [
-            "my_set.append(4)",
-            "my_set.add(4)",
-            "my_set.insert(3, 4)",
-            "my_set[3] = 4"
-        ],
-        "answer": [
-            2
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "此題考查集合 (Set) 的專用新增方法。<br><br><b>【分析】</b><br>● <b>選項 B (正確)：</b> 集合是無序的，像是把東西丟進籃子，所以使用 <code>add()</code>。<br>● 選項 A (錯誤)：<code>append()</code> 是清單 (List) 專用的，集合沒有順序，不能「排在最後」。<br>● 選項 C (錯誤)：集合沒有索引，無法使用 <code>insert()</code> 指定位置。<br>● 選項 D (錯誤)：集合不支援索引賦值 (Item Assignment)。"
-    },
-    {
-        "id": 117,
-        "type": "single",
-        "question": "117. 【CH03-除錯】執行下列哪一段程式碼會導致 `AttributeError` (屬性錯誤)？",
-        "options": [
-            "data = [1, 2]; data.append(3)",
-            "data = {1, 2}; data.add(3)",
-            "data = {'a': 1}; data['b'] = 2",
-            "data = (1, 2); data.append(3)"
-        ],
-        "answer": [
-            4
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "本題考查不同資料結構的可用方法 (Method)。<br><br><b>【逐項檢查】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>型別</th><th>程式碼</th><th>結果</th></tr><tr><td>A</td><td>清單 (List)</td><td><code>.append(3)</code></td><td><span style='color:green;'>成功</span> (加入末尾)</td></tr><tr><td>B</td><td>集合 (Set)</td><td><code>.add(3)</code></td><td><span style='color:green;'>成功</span> (新增元素)</td></tr><tr><td>C</td><td>字典 (Dict)</td><td><code>['b'] = 2</code></td><td><span style='color:green;'>成功</span> (新增 Key-Value)</td></tr><tr><td>D</td><td>元組 (Tuple)</td><td><code>.append(3)</code></td><td><span style='color:red;'><b>報錯</b></span><br>元組是不可變的，且本身沒有 append 方法。</td></tr></table>"
-    },
-    {
-        "id": 118,
-        "type": "single",
-        "question": "118. 【CH03-清單邏輯】執行下列程式碼後，`nums` 的內容為何？\n\n<pre><code>nums = [10, 30]\nnums.insert(1, 20)</code></pre>",
-        "options": [
-            "[10, 20, 30]",
-            "[20, 10, 30]",
-            "[10, 30, 20]",
-            "[10, 20]"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "此題考查 `insert(index, value)` 的運作邏輯。<br><br><b>【圖解步驟】</b><br>1. 初始清單：<code>[10, 30]</code> (索引 0 是 10，索引 1 是 30)<br>2. 執行 <code>insert(1, 20)</code>：意思是「我要插隊佔領<b>索引 1</b> 的位置，把原本的人往後擠」。<br>3. 結果：<br>   索引 0: 10 (不動)<br>   索引 1: <b>20</b> (新來的)<br>   索引 2: 30 (原本的索引 1 被擠到了 2)<br><br>故結果為 <code>[10, 20, 30]</code>。"
-    },
-    {
-        "id": 119,
-        "type": "single",
-        "question": "119. 【CH06-補充】你正在開發一個科學計算程式，需要判斷一個變數 `x` 是否為合法的數值 (不是 NaN)。<br>下列哪一種方式是**正確**的判斷方法？",
-        "options": [
-            "if x == float('nan'):",
-            "if x == math.nan:",
-            "if math.isnan(x):",
-            "if x is math.nan:"
-        ],
-        "answer": [
-            3
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● 在 Python (IEEE 754 標準) 中，`NaN` (Not a Number) 有一個特殊性質：**它不等於自己**。<br>● 因此 `x == math.nan` 永遠會回傳 `False`。<br>● 必須使用專用函式 `math.isnan(x)` 來檢查。"
-    },
-    {
-        "id": 120,
-        "type": "single",
-        "question": "120. 【CH06-補充】關於 `math.fmod(x, y)` 與模數運運算元 `x % y` 的差異，下列敘述何者正確？",
-        "options": [
-            "兩者功能完全相同，沒有差異",
-            "`math.fmod` 適合處理整數，`%` 適合處理浮點數",
-            "當處理負數時，`math.fmod` 的結果符號會隨被除數 (x)，而 `%` 的結果符號隨除數 (y)",
-            "`math.fmod` 只回傳整數，`%` 回傳浮點數"
-        ],
-        "answer": [
-            3
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `math.fmod(-10, 3)` 會得到 `-1.0` (符號跟隨 -10)。<br>● `-10 % 3` 會得到 `2` (符號跟隨 3)。<br>● 這是 ITS/Python 考試中關於數學模組的經典細節題。"
-    },
-    {
-        "id": 121,
-        "type": "single",
-        "question": "121. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 `temp.txt`，應該使用 `os` 模組的哪個函式？",
-        "options": [
-            "os.delete('temp.txt')",
-            "os.remove('temp.txt')",
-            "os.path.delete('temp.txt')",
-            "os.files.del('temp.txt')"
-        ],
-        "answer": [
-            2
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● Python 中刪除檔案的標準函式是 `os.remove()` (或 `os.unlink()`)。<br>● `os.rmdir()` 是用來刪除空資料夾的。<br>● 沒有 `os.delete` 這個函式。"
-    },
-    {
-        "id": 122,
-        "type": "single",
-        "question": "122. 【CH03-補充】你有一個清單 `scores = [100, 80, 90, 80]`。你想要移除**第一個**出現的 80 分。應該使用哪個方法？",
-        "options": [
-            "scores.remove(80)",
-            "scores.pop(80)",
-            "scores.delete(80)",
-            "del scores[80]"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `list.remove(x)`：移除清單中**第一個**值為 `x` 的元素。<br>● `list.pop(i)`：移除**索引**為 `i` 的元素 (若不填則移除最後一個)。<br>● `pop(80)` 會試圖移除索引 80 的元素，導致 IndexError。"
-    },
-    {
-        "id": 123,
-        "type": "single",
-        "question": "123. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 $\\pi r^2$。使用 `math` 模組時，下列寫法何者最精確且標準？",
-        "options": [
-            "area = 3.14 * (r ** 2)",
-            "area = math.pi * math.pow(r, 2)",
-            "area = math.PI * r * r",
-            "area = math.pi * math.sqrt(r)"
-        ],
-        "answer": [
-            2
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `math.pi` 提供比 3.14 更精確的圓周率數值。<br>● `math.pow(x, y)` 是計算 x 的 y 次方。<br>● 雖然 `math.pi * r**2` 也是對的，但在考題選項中，通常測試對 `math` 模組函式 (`pow`, `pi`) 的認識。"
-    },
-    {
-        "id": 124,
-        "type": "single",
-        "question": "124. 【CH03-補充】你這在編寫一個程式，需要將清單 `list_b` 的**所有元素**合併到 `list_a` 的尾端，形成一個長清單。應該使用哪種方法？\n<pre><code class=\"language-python\">list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>",
-        "options": [
-            "list_a.extend(list_b)",
-            "list_a.append(list_b)",
-            "list_a.insert(list_b)",
-            "list_a.add(list_b)"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `extend()` 會將另一個清單的內容**拆解**後加入。<br>● `append()` 會將整個清單當作**一個元素**加入 (變成 `[1, 2, [3, 4]]`)。<br>● 這是 ITS 考試中關於 List Merging 的常見考點。"
-    },
-    {
-        "id": 125,
-        "type": "single",
-        "question": "125. 【CH03-補充】你有一個學生成績清單 `grades = [85, 92, 78, 90, 55]`。若要快速找出清單中的**最高分**與**最低分**，應使用哪些內建函式？",
-        "options": [
-            "max(grades), min(grades)",
-            "grades.max(), grades.min()",
-            "largest(grades), smallest(grades)",
-            "high(grades), low(grades)"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● Python 提供內建函式 `max()` 和 `min()` 來處理序列資料。<br>● List 物件本身沒有 `.max()` 或 `.min()` 方法。"
-    },
-    {
-        "id": 126,
-        "type": "single",
-        "question": "126. 【CH06-補充】關於 `math.sqrt(x)` 與 `math.isqrt(x)` 的差異，下列何者正確？",
-        "options": [
-            "`math.sqrt` 回傳浮點數 (float)，`math.isqrt` 回傳整數 (int) 且無條件捨去小數",
-            "`math.sqrt` 可以處理負數，`math.isqrt` 不行",
-            "兩者功能完全相同，只是新舊版本差異",
-            "`math.isqrt` 會四捨五入到最接近的整數"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `math.sqrt(10)` 回傳 `3.16...` (float)。<br>● `math.isqrt(10)` 回傳 `3` (int)，即整數平方根 (Integer Square Root)。<br>● 這是 Python 3.8 新增的函式，也在 ITS 考綱範圍內。"
-    },
-    {
-        "id": 127,
-        "type": "single",
-        "question": "127. 【CH06-補充】你需要分析浮點數的底層結構。請問 `math.frexp(x)` 函式的作用是什麼？",
-        "options": [
-            "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
-            "回傳 x 的階乘 (factorial)",
-            "回傳 x 的絕對值 (absolute value)",
-            "回傳 x 的自然對數 (natural log)"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `math.frexp(x)` 是 ITS 考綱中列出的較冷門函式。<br>● 它會將浮點數分解為 `(m, e)`，使得 `x = m * (2 ** e)`。<br>● 例如 `math.frexp(8.0)` 回傳 `(0.5, 4)`，因為 `0.5 * 16 = 8`。"
-    },
-    {
-        "id": 128,
-        "type": "single",
-        "question": "128. 【CH07-補充】你使用 `datetime` 模組查詢今天是星期幾：<br><pre><code class=\"language-python\">import datetime\ntoday = datetime.datetime.now()\nprint(today.weekday())</code></pre><br>如果輸出結果是 `0`，代表今天是星期幾？",
-        "options": [
-            "星期一 (Monday)",
-            "星期日 (Sunday)",
-            "星期六 (Saturday)",
-            "1 月 1 日"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● 在 Python 的 `datetime.weekday()` 方法中：<br>● **0 代表星期一**<br>● **6 代表星期日**<br>● 注意與某些資料庫或語言 (如 1=Sunday) 的差異。"
-    },
-    {
-        "id": 129,
-        "type": "single",
-        "question": "129. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
+        "question": "112. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
         "options": [
             "nums.reverse()",
             "nums = reversed(nums)",
@@ -2298,9 +2009,315 @@
         "explanation": "● `list.reverse()` 是清單的方法，會直接修改原始清單，回傳 `None`。<br>● `reversed(list)` 是內建函式，會回傳一個新的迭代器，不會修改原始清單。<br>● `[::-1]` 會產生一個新的清單複本。"
     },
     {
+        "id": 113,
+        "type": "single",
+        "question": "113. 【CH03-綜合應用】執行下列 Python 程式碼後，最終列印出的結果為何？\n\n<pre><code>nums = [1, 2, 2, 3]\nnums = list(set(nums))\nnums.append(4)\nprint(nums)</code></pre>",
+        "options": [
+            "[1, 2, 3, 4]",
+            "[1, 2, 2, 3, 4]",
+            "{1, 2, 3, 4}",
+            "(1, 2, 3, 4)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "此題考查了三個步驟的邏輯變化：<br><br><b>【步驟解析】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>步驟程式碼</th><th>資料變化</th><th>說明</th></tr><tr><td><code>nums = [1, 2, 2, 3]</code></td><td><code>[1, 2, 2, 3]</code></td><td>初始清單，包含重複的 2。</td></tr><tr><td><code>set(nums)</code></td><td><code>{1, 2, 3}</code></td><td>轉為集合，<b>自動去除重複值</b>。</td></tr><tr><td><code>list(...)</code></td><td><code>[1, 2, 3]</code></td><td>再轉回清單，準備進行修改。</td></tr><tr><td><code>nums.append(4)</code></td><td><code>[1, 2, 3, 4]</code></td><td>清單是<b>可變</b>的，加入新元素 4。</td></tr></table><br><br><b>【錯誤選項分析】</b><br>● 選項 B：錯誤，因為轉為 set 時重複的 2 已經被移除了。<br>● 選項 C：錯誤，最終已轉回 List，符號應為 <code>[]</code> 而非 <code>{}</code>。<br>● 選項 D：錯誤，這是 Tuple 的符號。"
+    },
+    {
+        "id": 114,
+        "type": "single",
+        "question": "114. 【CH03-集合運算】觀察下列程式碼，print(result) 的輸出結果為何？\n\n<pre><code>set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\nresult = set_a & set_b\nprint(result)</code></pre>",
+        "options": [
+            "{1, 2, 3, 4, 5, 6}",
+            "{3, 4}",
+            "[3, 4]",
+            "{1, 2, 5, 6}"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "此題考查集合 (Set) 的交集運算子號 <code>&</code>。<br><br><b>【解析步驟】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>符號</th><th>名稱</th><th>邏輯</th><th>計算結果</th></tr><tr><td><code>&</code></td><td>交集 (Intersection)</td><td><b>且 (AND)</b><br>兩個集合都有的元素</td><td>set_a 有 3,4<br>set_b 有 3,4<br>結果: <code>{3, 4}</code></td></tr></table><br><br><b>【錯誤選項排除】</b><br>● 選項 A：這是聯集 (Union, 符號 <code>|</code>) 的結果。<br>● 選項 C：集合運算的結果依然是集合 <code>{}</code>，不會自動變成清單 <code>[]</code>。<br>● 選項 D：這是差集的概念 (互有的差異)。"
+    },
+    {
+        "id": 115,
+        "type": "single",
+        "question": "115. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？",
+        "options": [
+            "print(data[1])",
+            "print(data['b'])",
+            "print(data.b)",
+            "print(data(20))"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "字典 (Dictionary) 是透過<b>鍵 (Key)</b> 來查詢值 (Value)，而不是透過數字索引。<br><br><b>【選項解析】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>程式碼</th><th>結果 / 原因</th></tr><tr><td>A</td><td><code>data[1]</code></td><td><span style='color:red;'>報錯 (KeyError)</span><br>字典沒有順序，不能用數字索引。</td></tr><tr><td>B</td><td><code>data['b']</code></td><td><span style='color:green;'>正確</span><br>透過 Key 'b' 找到對應的 Value 20。</td></tr><tr><td>C</td><td><code>data.b</code></td><td><span style='color:red;'>報錯 (AttributeError)</span><br>Python 字典不支援點號 (.) 訪問屬性。</td></tr><tr><td>D</td><td><code>data(20)</code></td><td><span style='color:red;'>報錯 (TypeError)</span><br>字典不是函式，不能用小括號呼叫。</td></tr></table>"
+    },
+    {
+        "id": 116,
+        "type": "single",
+        "question": "116. 【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？",
+        "options": [
+            "my_list = [1, 2, 3]; my_list[0] = 9",
+            "my_dict = {'x': 1}; my_dict['x'] = 9",
+            "my_tuple = (1, 2, 3); my_tuple[0] = 9",
+            "my_set = {1, 2, 3}; my_set.add(9)"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "本題考查資料結構的<b>可變性 (Mutability)</b>。<br><br><b>【逐項分析】</b><br><ul style='margin-top:5px; padding-left:20px;'><li><b>A (List):</b> 清單是可變的 (Mutable)，可以修改指定位置的值。 -> <span style='color:green;'>Pass</span></li><li><b>B (Dict):</b> 字典是可變的，可以更新 Key 對應的值。 -> <span style='color:green;'>Pass</span></li><li><b>C (Tuple):</b> <span style='color:red;'><b>錯誤 (TypeError)</b></span><br>元組是<b>不可變 (Immutable)</b> 的，一旦建立，不能修改內部元素。</li><li><b>D (Set):</b> 集合可以透過 add() 方法新增資料。 -> <span style='color:green;'>Pass</span></li></ul>"
+    },
+    {
+        "id": 117,
+        "type": "single",
+        "question": "117. 【CH03-集合操作】你想要在一個集合 `my_set = {1, 2, 3}` 中加入數字 4。下列哪一行程式碼是正確的？",
+        "options": [
+            "my_set.append(4)",
+            "my_set.add(4)",
+            "my_set.insert(3, 4)",
+            "my_set[3] = 4"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "此題考查集合 (Set) 的專用新增方法。<br><br><b>【分析】</b><br>● <b>選項 B (正確)：</b> 集合是無序的，像是把東西丟進籃子，所以使用 <code>add()</code>。<br>● 選項 A (錯誤)：<code>append()</code> 是清單 (List) 專用的，集合沒有順序，不能「排在最後」。<br>● 選項 C (錯誤)：集合沒有索引，無法使用 <code>insert()</code> 指定位置。<br>● 選項 D (錯誤)：集合不支援索引賦值 (Item Assignment)。"
+    },
+    {
+        "id": 118,
+        "type": "single",
+        "question": "118. 【CH03-除錯】執行下列哪一段程式碼會導致 `AttributeError` (屬性錯誤)？",
+        "options": [
+            "data = [1, 2]; data.append(3)",
+            "data = {1, 2}; data.add(3)",
+            "data = {'a': 1}; data['b'] = 2",
+            "data = (1, 2); data.append(3)"
+        ],
+        "answer": [
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "本題考查不同資料結構的可用方法 (Method)。<br><br><b>【逐項檢查】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>型別</th><th>程式碼</th><th>結果</th></tr><tr><td>A</td><td>清單 (List)</td><td><code>.append(3)</code></td><td><span style='color:green;'>成功</span> (加入末尾)</td></tr><tr><td>B</td><td>集合 (Set)</td><td><code>.add(3)</code></td><td><span style='color:green;'>成功</span> (新增元素)</td></tr><tr><td>C</td><td>字典 (Dict)</td><td><code>['b'] = 2</code></td><td><span style='color:green;'>成功</span> (新增 Key-Value)</td></tr><tr><td>D</td><td>元組 (Tuple)</td><td><code>.append(3)</code></td><td><span style='color:red;'><b>報錯</b></span><br>元組是不可變的，且本身沒有 append 方法。</td></tr></table>"
+    },
+    {
+        "id": 119,
+        "type": "single",
+        "question": "119. 【CH03-清單邏輯】執行下列程式碼後，`nums` 的內容為何？\n\n<pre><code>nums = [10, 30]\nnums.insert(1, 20)</code></pre>",
+        "options": [
+            "[10, 20, 30]",
+            "[20, 10, 30]",
+            "[10, 30, 20]",
+            "[10, 20]"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "此題考查 `insert(index, value)` 的運作邏輯。<br><br><b>【圖解步驟】</b><br>1. 初始清單：<code>[10, 30]</code> (索引 0 是 10，索引 1 是 30)<br>2. 執行 <code>insert(1, 20)</code>：意思是「我要插隊佔領<b>索引 1</b> 的位置，把原本的人往後擠」。<br>3. 結果：<br>   索引 0: 10 (不動)<br>   索引 1: <b>20</b> (新來的)<br>   索引 2: 30 (原本的索引 1 被擠到了 2)<br><br>故結果為 <code>[10, 20, 30]</code>。"
+    },
+    {
+        "id": 120,
+        "type": "single",
+        "question": "120. 【CH06-補充】你正在開發一個科學計算程式，需要判斷一個變數 `x` 是否為合法的數值 (不是 NaN)。<br>下列哪一種方式是**正確**的判斷方法？",
+        "options": [
+            "if x == float('nan'):",
+            "if x == math.nan:",
+            "if math.isnan(x):",
+            "if x is math.nan:"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● 在 Python (IEEE 754 標準) 中，`NaN` (Not a Number) 有一個特殊性質：**它不等於自己**。<br>● 因此 `x == math.nan` 永遠會回傳 `False`。<br>● 必須使用專用函式 `math.isnan(x)` 來檢查。"
+    },
+    {
+        "id": 121,
+        "type": "single",
+        "question": "121. 【CH06-補充】關於 `math.fmod(x, y)` 與模數運運算元 `x % y` 的差異，下列敘述何者正確？",
+        "options": [
+            "兩者功能完全相同，沒有差異",
+            "`math.fmod` 適合處理整數，`%` 適合處理浮點數",
+            "當處理負數時，`math.fmod` 的結果符號會隨被除數 (x)，而 `%` 的結果符號隨除數 (y)",
+            "`math.fmod` 只回傳整數，`%` 回傳浮點數"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `math.fmod(-10, 3)` 會得到 `-1.0` (符號跟隨 -10)。<br>● `-10 % 3` 會得到 `2` (符號跟隨 3)。<br>● 這是 ITS/Python 考試中關於數學模組的經典細節題。"
+    },
+    {
+        "id": 122,
+        "type": "single",
+        "question": "122. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 `temp.txt`，應該使用 `os` 模組的哪個函式？",
+        "options": [
+            "os.delete('temp.txt')",
+            "os.remove('temp.txt')",
+            "os.path.delete('temp.txt')",
+            "os.files.del('temp.txt')"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● Python 中刪除檔案的標準函式是 `os.remove()` (或是 `os.unlink()`，兩者功能相同)。<br>● **注意：** `os.remove` 只能刪除檔案，不能刪除資料夾。<br>● (本題庫為 1-based 索引，故選 [2])<br><br><b>【刪除指令總整理】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>對象</th><th>指令 (os / shutil)</th><th>指令 (pathlib - 推薦)</th><th>備註</th></tr><tr><td><b>刪除檔案</b></td><td><code>os.remove('a.txt')</code><br><code>os.unlink('a.txt')</code></td><td><code>Path('a.txt').unlink()</code></td><td>若檔案不存在會報錯 `FileNotFoundError`</td></tr><tr><td><b>刪除空資料夾</b></td><td><code>os.rmdir('folder')</code></td><td><code>Path('folder').rmdir()</code></td><td>若資料夾內有東西會報錯</td></tr><tr><td><b>刪除整包資料夾</b><br>(含內容)</td><td><code>shutil.rmtree('folder')</code></td><td>無直接對應</td><td>危險操作，請小心使用</td></tr></table><br><br><b>【範例：安全刪除】</b><br><pre><code class=\"language-python\">import os\n\nfile_path = 'temp.txt'\n\n# 先檢查是否存在，避免報錯\nif os.path.exists(file_path):\n    os.remove(file_path)\n    print('已刪除')\nelse:\n    print('檔案不存在')</code></pre>"
+    },
+    {
+        "id": 123,
+        "type": "single",
+        "question": "123. 【CH03-補充】你有一個清單 `scores = [100, 80, 90, 80]`。你想要移除**第一個**出現的 80 分。應該使用哪個方法？",
+        "options": [
+            "scores.remove(80)",
+            "scores.pop(80)",
+            "scores.delete(80)",
+            "del scores[80]"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `list.remove(x)`：移除清單中**第一個**值為 `x` 的元素。<br>● `list.pop(i)`：移除**索引**為 `i` 的元素 (若不填則移除最後一個)。<br>● `pop(80)` 會試圖移除索引 80 的元素，導致 IndexError。"
+    },
+    {
+        "id": 124,
+        "type": "single",
+        "question": "124. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 $\\pi r^2$。使用 `math` 模組時，下列寫法何者最精確且標準？",
+        "options": [
+            "area = 3.14 * (r ** 2)",
+            "area = math.pi * math.pow(r, 2)",
+            "area = math.PI * r * r",
+            "area = math.pi * math.sqrt(r)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `math.pi` 提供比 3.14 更精確的圓周率數值。<br>● `math.pow(x, y)` 是計算 x 的 y 次方。<br>● 雖然 `math.pi * r**2` 也是對的，但在考題選項中，通常測試對 `math` 模組函式 (`pow`, `pi`) 的認識。"
+    },
+    {
+        "id": 125,
+        "type": "single",
+        "question": "125. 【CH03-補充】你這在編寫一個程式，需要將清單 `list_b` 的**所有元素**合併到 `list_a` 的尾端，形成一個長清單。應該使用哪種方法？\n<pre><code class=\"language-python\">list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>",
+        "options": [
+            "list_a.extend(list_b)",
+            "list_a.append(list_b)",
+            "list_a.insert(list_b)",
+            "list_a.add(list_b)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `extend()` 會將另一個清單的內容**拆解**後加入。<br>● `append()` 會將整個清單當作**一個元素**加入 (變成 `[1, 2, [3, 4]]`)。<br>● 這是 ITS 考試中關於 List Merging 的常見考點。"
+    },
+    {
+        "id": 126,
+        "type": "single",
+        "question": "126. 【CH03-補充】你有一個學生成績清單 `grades = [85, 92, 78, 90, 55]`。若要快速找出清單中的**最高分**與**最低分**，應使用哪些內建函式？",
+        "options": [
+            "max(grades), min(grades)",
+            "grades.max(), grades.min()",
+            "largest(grades), smallest(grades)",
+            "high(grades), low(grades)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● Python 提供內建函式 `max()` 和 `min()` 來處理序列資料。<br>● List 物件本身沒有 `.max()` 或 `.min()` 方法。"
+    },
+    {
+        "id": 127,
+        "type": "single",
+        "question": "127. 【CH06-補充】關於 `math.sqrt(x)` 與 `math.isqrt(x)` 的差異，下列何者正確？",
+        "options": [
+            "`math.sqrt` 回傳浮點數 (float)，`math.isqrt` 回傳整數 (int) 且無條件捨去小數",
+            "`math.sqrt` 可以處理負數，`math.isqrt` 不行",
+            "兩者功能完全相同，只是新舊版本差異",
+            "`math.isqrt` 會四捨五入到最接近的整數"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `math.sqrt(10)` 回傳 `3.16...` (float)。<br>● `math.isqrt(10)` 回傳 `3` (int)，即整數平方根 (Integer Square Root)。<br>● 這是 Python 3.8 新增的函式，也在 ITS 考綱範圍內。"
+    },
+    {
+        "id": 128,
+        "type": "single",
+        "question": "128. 【CH06-補充】你需要分析浮點數的底層結構。請問 `math.frexp(x)` 函式的作用是什麼？",
+        "options": [
+            "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
+            "回傳 x 的階乘 (factorial)",
+            "回傳 x 的絕對值 (absolute value)",
+            "回傳 x 的自然對數 (natural log)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `math.frexp(x)` 是 ITS 考綱中列出的較冷門函式。<br>● 它會將浮點數分解為 `(m, e)`，使得 `x = m * (2 ** e)`。<br>● 例如 `math.frexp(8.0)` 回傳 `(0.5, 4)`，因為 `0.5 * 16 = 8`。"
+    },
+    {
+        "id": 129,
+        "type": "single",
+        "question": "129. 【CH07-補充】你使用 `datetime` 模組查詢今天是星期幾：<br><pre><code class=\"language-python\">import datetime\ntoday = datetime.datetime.now()\nprint(today.weekday())</code></pre><br>如果輸出結果是 `0`，代表今天是星期幾？",
+        "options": [
+            "星期一 (Monday)",
+            "星期日 (Sunday)",
+            "星期六 (Saturday)",
+            "1 月 1 日"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● 在 Python 的 `datetime.weekday()` 方法中：<br>● **0 代表星期一**<br>● **6 代表星期日**<br>● 注意與某些資料庫或語言 (如 1=Sunday) 的差異。"
+    },
+    {
         "id": 130,
         "type": "single",
-        "question": "130. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。應該使用 `random` 模組的哪個函式？",
+        "question": "130. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
+        "options": [
+            "nums.reverse()",
+            "nums = reversed(nums)",
+            "nums = nums[::-1]",
+            "nums.sort(reverse=False)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `list.reverse()` 是清單的方法，會直接修改原始清單，回傳 `None`。<br>● `reversed(list)` 是內建函式，會回傳一個新的迭代器，不會修改原始清單。<br>● `[::-1]` 會產生一個新的清單複本。"
+    },
+    {
+        "id": 131,
+        "type": "single",
+        "question": "131. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。應該使用 `random` 模組的哪個函式？",
         "options": [
             "random.random()",
             "random.randint(0, 1)",
@@ -2315,9 +2332,9 @@
         "explanation": "● `random.random()`：回傳 [0.0, 1.0) 之間的浮點數，這是最基礎的隨機函式。<br>● `random.randint(a, b)`：回傳整數。<br>● `random.uniform(a, b)`：回傳指定範圍內的浮點數 (不一定是 0-1)。<br>● 沒有 `random.float()` 這個函式。"
     },
     {
-        "id": 131,
+        "id": 132,
         "type": "single",
-        "question": "131. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，應使用哪個斷言方法？",
+        "question": "132. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，應使用哪個斷言方法？",
         "options": [
             "self.assertIs(a, b)",
             "self.assertEqual(a, b)",
@@ -2332,7 +2349,7 @@
         "explanation": "● `assertIs(a, b)`：檢查 `a is b` (是否為同一物件)。<br>● `assertEqual(a, b)`：檢查 `a == b` (值是否相等)。<br>● 例如：`a = [1]; b = [1]`，它們的值相等 (`Equal`) 但不是同一個物件 (`Not Is`)。"
     },
     {
-        "id": 132,
+        "id": 133,
         "type": "single",
         "question": "【演演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
         "options": [
@@ -2350,7 +2367,7 @@
         "explanation": "本題考查佇列 (Queue) 的 FIFO (先進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (入列)</b>：必須將新資料加在隊伍的「最後面」。在 Python List 中，`append(c)` 用於將元素加到尾端。若使用 `q[head]=c` 會覆蓋掉頭部資料，導致錯誤。<br>2. <b>Pop (出列)</b>：必須取出隊伍「最前面」的資料。程式碼 `c = q[head]` 已取出當前頭部資料。為了讓下一次 Pop 取出下一個元素，頭部指標 `head` 必須往後移動 (索引值 +1)，故 `y` 應為 `head += 1`。<br><br>故選 (B)。"
     },
     {
-        "id": 133,
+        "id": 134,
         "type": "single",
         "question": "【Python運運算元】執行下列程式碼後，輸出為何？<br><br><pre><code>a = 13 % 5\nb = -13 % 5\nc = -13 // 5\nprint(a, b, c)</code></pre>",
         "options": [
@@ -2368,7 +2385,7 @@
         "explanation": "本題考查 Python 對負數進行除法與取餘數的規則。<br><br><b>【解析】</b><br>1. <b>`a = 13 % 5`</b>：<br>   13 除以 5，商 2 餘 3。結果為 <b>3</b>。<br><br>2. <b>`c = -13 // 5` (地板除法)</b>：<br>   Python 的 `//` 是<b>向負無限大方向取整</b> (Floor Division)。<br>   -13 ÷ 5 = -2.6，向負無限大取整後為 <b>-3</b>。<br><br>3. <b>`b = -13 % 5` (取餘數)</b>：<br>   公式為：<code>a % b = a - (b * (a // b))</code>。<br>   代入數值：<code>-13 - (5 * (-3)) = -13 - (-15) = -13 + 15 = 2</code>。<br>   或者記憶口訣：<b>Python 取餘數的符號永遠與除數 (後者) 相同</b>。因為除數 5 是正數，餘數必為正數 <b>2</b>。<br><br>故輸出為 <code>3 2 -3</code>，選 (B)。"
     },
     {
-        "id": 134,
+        "id": 135,
         "type": "single",
         "question": "【Python迴圈邏輯】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 2, 4, -1, 2, 3, -5, 2, -1, 1]\nq = []\nh = 0\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and h < len(q):\n            v += q[h]\n            h += 1\nprint(sum(q[h:]))</code></pre>",
         "options": [
@@ -2386,7 +2403,7 @@
         "explanation": "此題模擬了一個類似佇列 (Queue) 的消去過程：正數入列，負數則從隊頭開始抵銷正數。<br><br><b>【執行步驟追蹤】</b><br>1. <code>s</code> 為輸入列表，<code>q</code> 為正數佇列，<code>h</code> 指向 <code>q</code> 目前有效的開頭索引。<br>2. <b>遇到 1, 1</b>：<code>q=[1, 1]</code>。<br>3. <b>遇到 -3</b>：抵銷 <code>q[0]</code> (1) 剩 -2，<code>h=1</code>；再抵銷 <code>q[1]</code> (1) 剩 -1，<code>h=2</code>。<code>q</code> 有效部分為空。<br>4. <b>遇到 2, 4</b>：<code>q=[1, 1, 2, 4]</code> (有效部分: 2, 4)，<code>h=2</code>。<br>5. <b>遇到 -1</b>：抵銷 <code>q[2]</code> (2) 剩 1，<code>h=3</code>。<code>v</code> 變正數，停止抵銷。<br>6. <b>遇到 2, 3</b>：<code>q=[..., 4, 2, 3]</code> (有效部分: 4, 2, 3)，<code>h=3</code>。<br>7. <b>遇到 -5</b>：抵銷 <code>q[3]</code> (4) 剩 -1，<code>h=4</code>；再抵銷 <code>q[4]</code> (2) 剩 1，<code>h=5</code>。停止。<br>8. <b>遇到 2</b>：<code>q=[..., 3, 2]</code> (有效部分: 3, 2)，<code>h=5</code>。<br>9. <b>遇到 -1</b>：抵銷 <code>q[5]</code> (3) 剩 2，<code>h=6</code>。停止。<br>10. <b>遇到 1</b>：<code>q=[..., 2, 1]</code> (有效部分: 2, 1)，<code>h=6</code>。<br><br>最後 <code>q[h:]</code> 即 <code>q[6:]</code>，內容為 <code>[2, 1]</code>，總和為 3。故選 (B)。"
     },
     {
-        "id": 135,
+        "id": 136,
         "type": "single",
         "question": "【Python流程控制】執行下列程式碼後，輸出為何？<br><br><pre><code>q = []\nh = 0\ns = ''\nfor v in [3, 12, -2, 765, 23, -1, -3]:\n    if v > 0:\n        q.append(str(v))\n    else:\n        s += q[h]\n        h += 1\nprint(s)</code></pre>",
         "options": [
@@ -2403,7 +2420,7 @@
         "explanation": "此題模擬佇列 (Queue) 行為：<br>1. 遇到正數時，將數字轉為字串並加入清單 `q` (Enqueue)。<br>2. 遇到負數時，從清單 `q` 的 `h` 位置取出字串並串接到 `s`，同時將 `h` 加 1 (Dequeue)。<br><br><b>【執行過程】</b><br>● 入列: '3', '12'<br>● 出列: '3' (s='3')<br>● 入列: '765', '23'<br>● 出列: '12' (s='312')<br>● 出列: '765' (s='312765')<br><br>故結果為 312765。"
     },
     {
-        "id": 136,
+        "id": 137,
         "type": "single",
         "question": "【Python迴圈與列表】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 3, 4, -1, 2, 3, -5, 2, 1, -1]\nq = []\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and q:\n            v += q.pop()\nprint(sum(q))</code></pre>",
         "options": [
@@ -2421,7 +2438,7 @@
         "explanation": "此題模擬正負數抵銷的過程：正數入列，負數則從隊尾取出正數進行抵銷。<br><br><b>【關鍵邏輯】</b><br>當遇到負數 <code>v</code> 時，會不斷從 <code>q</code> 尾端 <code>pop()</code> 出正數加到 <code>v</code> 上，直到 <code>v</code> 變成非負數 (>=0) 或 <code>q</code> 變空為止。<b>注意：抵銷後若 <code>v</code> 變為正數，該數值會被捨棄，不會加回 <code>q</code>。</b><br><br><b>【執行追蹤】</b><br>1. <code>1, 1</code> 入列 -> <code>q=[1, 1]</code><br>2. <code>-3</code> 抵銷 -> <code>pop</code> 1 (剩-2), <code>pop</code> 1 (剩-1)。<code>q=[]</code><br>3. <code>3, 4</code> 入列 -> <code>q=[3, 4]</code><br>4. <code>-1</code> 抵銷 -> <code>pop</code> 4 (剩3)。停止 (3>=0)。<code>q=[3]</code><br>5. <code>2, 3</code> 入列 -> <code>q=[3, 2, 3]</code><br>6. <code>-5</code> 抵銷 -> <code>pop</code> 3 (剩-2), <code>pop</code> 2 (剩0)。停止 (0>=0)。<code>q=[3]</code><br>7. <code>2, 1</code> 入列 -> <code>q=[3, 2, 1]</code><br>8. <code>-1</code> 抵銷 -> <code>pop</code> 1 (剩0)。停止。<code>q=[3, 2]</code><br><br>最後 <code>sum([3, 2])</code> 為 5。"
     },
     {
-        "id": 137,
+        "id": 138,
         "type": "single",
         "question": "【Python變數範圍】執行下列程式碼：<br><pre><code>s = input()\na = [s for s in input().split()]\nprint(s, a)</code></pre><br>若輸入為以下內容：<br><code>hello py</code><br><code>123 45</code><br>則輸出為何？",
         "options": [
@@ -2439,7 +2456,7 @@
         "explanation": "本題考查 Python 3 中列表生成式 (List Comprehension) 的變數範圍規則。<br><br>1. <code>s = input()</code>：讀取第一行，<code>s</code> 為 <code>'hello py'</code>。<br>2. <code>a = [s for s in input().split()]</code>：讀取第二行並切割為 <code>['123', '45']</code>。雖然生成式內部使用了變數名稱 <code>s</code>，但在 Python 3 中，這被視為區域變數，<b>不會覆蓋</b>外部原本的變數 <code>s</code>。<br>3. 列表內容為字串，故輸出時會帶有引號。<br>4. 最後 <code>print(s, a)</code> 輸出外部的 <code>s</code> 和列表 <code>a</code>，即 <code>hello py ['123', '45']</code>。<br><br>註：若是 Python 2，變數 <code>s</code> 會被洩漏並覆蓋，輸出結果會不同，但 ITS 考試以 Python 3 為主。"
     },
     {
-        "id": 138,
+        "id": 139,
         "type": "single",
         "question": "【Python輸入與運算】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a + b)</code></pre><br>若輸入為以下內容：<br><code>100 45</code><br>則輸出為何？",
         "options": [
@@ -2457,7 +2474,7 @@
         "explanation": "本題考查 input 讀取、split 切割、int 型別轉換以及列表解包 (List Unpacking)。<br><br><b>【解析步驟】</b><br>1. <code>input().split()</code> 將輸入字串 \"100 45\" 切割成列表 <code>['100', '45']</code>。<br>2. 列表生成式將元素轉為整數，得到 <code>[100, 45]</code>。<br>3. <code>a, b = ...</code> 將列表解包，<code>a</code> 變成整數 100，<code>b</code> 變成整數 45。<br>4. <code>print(a + b)</code> 執行數學加法 100 + 45 = 145。<br><br>若未進行 int 轉換直接相加，結果才會是字串串接的 \"10045\" (選項 A)。本題有轉 int，故選 (C)。"
     },
     {
-        "id": 139,
+        "id": 140,
         "type": "single",
         "question": "【Python解包錯誤】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a, b)</code></pre><br>若輸入為以下內容：<br><code>100 45 25</code><br>則輸出為何？",
         "options": [
@@ -2475,7 +2492,7 @@
         "explanation": "本題考查 Python 的解包 (Unpacking) 規則。<br><br><b>【解析】</b><br>1. 輸入 `100 45 25` 經過處理後會變成包含 3 個元素的列表 `[100, 45, 25]`。<br>2. 左側只有 `a, b` 兩個變數。<br>3. 當右側值的數量 (3個) 多於左側變數的數量 (2個) 時，Python 無法自動決定如何分配，因此會丟擲 `ValueError: too many values to unpack`。<br><br>若要避免錯誤，需使用 `*b` (Extended Iterable Unpacking) 或確保數量一致。故本題為執行錯誤，選 (E)。"
     },
     {
-        "id": 140,
+        "id": 141,
         "type": "single",
         "question": "【Python字元編碼】執行下列程式碼：<br><pre><code>a = \"fake\"\nb = ord(a[3]) - ord(a[1])\nc = a + chr(ord('f') + b)\nprint(c)</code></pre><br>輸出為何？",
         "options": [
@@ -2493,7 +2510,7 @@
         "explanation": "本題考查 <code>ord()</code> 與 <code>chr()</code> 的轉換。<br><br><b>【解析】</b><br>1. <code>a[3]</code>='e', <code>a[1]</code>='a'。<br>2. <code>b = ord('e') - ord('a')</code>，即 'e' 與 'a' 的距離，結果為 4。<br>3. <code>ord('f') + 4</code>，即 'f' 往後推 4 個字母：g, h, i, j。<br>4. <code>chr()</code> 轉回字元得到 'j'。<br>5. 字串串接 \"fake\" + \"j\" = \"fakej\"。<br><br>故選 (B)。"
     },
     {
-        "id": 141,
+        "id": 142,
         "type": "single",
         "question": "【APCS-進階切片】執行下列程式碼後，輸出為何？<br><br><pre><code>s = 'abcdefg'\nprint(s[::-2])</code></pre>",
         "options": [
@@ -2510,7 +2527,7 @@
         "explanation": "本題考查字串切片的步長 (Step) 與方向。<br><br><b>【解析】</b><br>語法為 <code>s[start:end:step]</code>。<br>當 step 為負數 (<code>-2</code>) 時，表示<b>從後往前</b>每隔 2 個字元取一次。<br>1. 取最後一個 'g' (索引 -1)<br>2. 往前跳 2 格取 'e' (索引 -3)<br>3. 往前跳 2 格取 'c' (索引 -5)<br>4. 往前跳 2 格取 'a' (索引 -7)<br>結果為 <code>'geca'</code>。<br><br>ITS 較少考這種負數步長，但 APCS 必考。"
     },
     {
-        "id": 142,
+        "id": 143,
         "type": "single",
         "question": "【APCS-遞迴邏輯】執行下列函式 <code>f(3)</code> 的回傳值為何？<br><br><pre><code>def f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)</code></pre>",
         "options": [
@@ -2527,7 +2544,7 @@
         "explanation": "本題考查遞迴 (Recursion) 的執行流程。<br><br><b>【追蹤過程】</b><br>1. 呼叫 <code>f(3)</code>：回傳 <code>3 + f(2)</code><br>2. 呼叫 <code>f(2)</code>：回傳 <code>2 + f(1)</code><br>3. 呼叫 <code>f(1)</code>：回傳 <code>1 + f(0)</code><br>4. 呼叫 <code>f(0)</code>：遇到終止條件 (n==0)，回傳 <code>0</code><br><br><b>【回溯計算】</b><br><code>f(1) = 1 + 0 = 1</code><br><code>f(2) = 2 + 1 = 3</code><br><code>f(3) = 3 + 3 = 6</code><br><br>這其實就是在計算 0+1+2+3 的總和。"
     },
     {
-        "id": 143,
+        "id": 144,
         "type": "single",
         "question": "【APCS-迴圈追蹤】執行下列程式碼後，<code>cnt</code> 的值為何？<br><br><pre><code>cnt = 0\nfor i in range(1, 5):\n    for j in range(i, 5):\n        cnt += 1\nprint(cnt)</code></pre>",
         "options": [
