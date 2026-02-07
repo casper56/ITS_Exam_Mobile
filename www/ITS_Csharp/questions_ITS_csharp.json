@@ -2466,5 +2466,263 @@
         "weight": 1,
         "image": null,
         "type": "single"
-    }
+    },
+	
+  {
+    "id": 110,
+    "type": "single",
+    "question": "【OOP-繼承】在物件導向程式設計中，當一個類別 (Class) 衍生自另一個類別時，這稱為繼承。例如 `Dog` 類別繼承自 `Animal` 類別。請問這代表了什麼關係？",
+    "options": [
+      "Has-a 關係 (擁有)",
+      "Is-a 關係 (是一個)",
+      "Uses-a 關係 (使用)",
+      "Was-a 關係 (過去是)"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "繼承 (Inheritance) 建立的是 **Is-a** 的關係。例如：狗 (Dog) **是一個 (is an)** 動物 (Animal)。這是判斷是否該使用繼承的主要依據。"
+  },
+  {
+    "id": 111,
+    "type": "single",
+    "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
+    "options": [
+      "public",
+      "private",
+      "protected",
+      "internal"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**private** (私有) 成員只能在類別內部存取，這是**封裝 (Encapsulation)** 的核心概念，用於保護資料不被外部不當修改。"
+  },
+  {
+    "id": 112,
+    "type": "single",
+    "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
+    "options": [
+      "overload (多載)",
+      "override (覆寫)",
+      "shadow (遮蔽)",
+      "extend (延伸)"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**override (覆寫)** 用於在子類別中重新定義父類別的虛擬 (virtual) 或抽象 (abstract) 方法，這是實現**多型 (Polymorphism)** 的方式。"
+  },
+  {
+    "id": 113,
+    "type": "single",
+    "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
+    "options": [
+      "類別是藍圖，物件是根據藍圖建立的實體",
+      "物件是藍圖，類別是實體",
+      "類別存在於 Heap 記憶體，物件存在於 Stack 記憶體",
+      "一個類別只能建立一個物件"
+    ],
+    "answer": [
+      0
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。"
+  },
+  {
+    "id": 114,
+    "type": "single",
+    "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
+    "options": [
+      "設計 (Design)",
+      "測試 (Testing)",
+      "需求分析 (Requirements Analysis)",
+      "開發 (Development)"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。"
+  },
+  {
+    "id": 115,
+    "type": "single",
+    "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
+    "options": [
+      "單元測試 (Unit Testing)",
+      "整合測試 (Integration Testing)",
+      "系統測試 (System Testing)",
+      "驗收測試 (Acceptance Testing)"
+    ],
+    "answer": [
+      0
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。"
+  },
+  {
+    "id": 116,
+    "type": "single",
+    "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
+    "options": [
+      "CSS",
+      "JavaScript",
+      "HTML",
+      "C#"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；**CSS** 負責樣式與美觀；**JavaScript** 負責行為與互動。"
+  },
+  {
+    "id": 117,
+    "type": "single",
+    "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字體變成白色，您應該使用哪種技術？",
+    "options": [
+      "HTML",
+      "CSS (Cascading Style Sheets)",
+      "XML",
+      "HTTP"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字體、排版）。"
+  },
+  {
+    "id": 118,
+    "type": "single",
+    "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
+    "options": [
+      "資料庫伺服器",
+      "網頁伺服器 (IIS/Apache)",
+      "客戶端瀏覽器 (Client-side Browser)",
+      "防火牆"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。"
+  },
+  {
+    "id": 119,
+    "type": "single",
+    "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
+    "options": [
+      "Web Browser",
+      "Web Server",
+      "DNS Server",
+      "Proxy Server"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**Web Server (網頁伺服器)** 負責儲存、處理並傳送網頁檔案給客戶端。"
+  },
+  {
+    "id": 120,
+    "type": "single",
+    "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
+    "options": [
+      "類別可以繼承多個抽象類別",
+      "介面可以包含實作程式碼 (在 C# 8.0 之前)",
+      "類別可以實作多個介面",
+      "抽象類別可以直接被實體化 (new)"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "C# 支援**單一繼承**（只能繼承一個類別），但可以**實作多個介面**。抽象類別不能被直接實體化，必須被繼承。"
+  },
+  {
+    "id": 121,
+    "type": "single",
+    "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
+    "options": [
+      "Stack (堆疊)",
+      "Heap (堆積)",
+      "Queue (佇列)",
+      "Cache (快取)"
+    ],
+    "answer": [
+      1
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "參考型別（如 Class）的實體儲存在 **Heap**；而實值型別（如 int, bool）的值通常儲存在 **Stack**（當作為區域變數時）。"
+  },
+  {
+    "id": 122,
+    "type": "single",
+    "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
+    "options": [
+      "2 -> 4 -> 1 -> 3 -> 5",
+      "1 -> 2 -> 3 -> 4 -> 5",
+      "4 -> 2 -> 1 -> 5 -> 3",
+      "2 -> 1 -> 4 -> 3 -> 5"
+    ],
+    "answer": [
+      0
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "標準瀑布式流程：**需求分析** -> **設計** -> **開發 (實作)** -> **測試** -> **維護** (部署後)。"
+  },
+  {
+    "id": 123,
+    "type": "single",
+    "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合類型？",
+    "options": [
+      "List<int>",
+      "Array",
+      "HashSet<int>",
+      "Queue<int>"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**HashSet** 是一種集合，其特性是**不允許重複元素**，且存取速度快。"
+  },
+  {
+    "id": 124,
+    "type": "single",
+    "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
+    "options": [
+      "HTML Tags",
+      "CSS Styles",
+      "Cookies / Session",
+      "FTP"
+    ],
+    "answer": [
+      2
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": "**Cookies** 和 **Session** 是 Web 應用程式用來追蹤使用者狀態（如購物車、登入資訊）的主要機制。"
+  }
+
+	
 ]
