@@ -47,7 +47,7 @@
     {
         "id": 4,
         "type": "truefalse",
-        "question": "4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平台即服務(PaaS)。",
+        "question": "4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平臺即服務(PaaS)。",
         "options": [
             "O",
             "X"
@@ -62,7 +62,7 @@
     {
         "id": 5,
         "type": "truefalse",
-        "question": "5. Azure SQL Database 是一種平台即服務(PaaS)。",
+        "question": "5. Azure SQL Database 是一種平臺即服務(PaaS)。",
         "options": [
             "O",
             "X"
@@ -437,7 +437,7 @@
     {
         "id": 30,
         "type": "truefalse",
-        "question": "30. iOS 裝置可以在 Microsoft Entra 租用戶內註冊。",
+        "question": "30. iOS 裝置可以在 Microsoft Entra 租使用者內註冊。",
         "options": [
             "O",
             "X"
@@ -497,7 +497,7 @@
     {
         "id": 34,
         "type": "truefalse",
-        "question": "34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租用戶建立關聯。",
+        "question": "34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租使用者建立關聯。",
         "options": [
             "O",
             "X"
@@ -512,7 +512,7 @@
     {
         "id": 35,
         "type": "truefalse",
-        "question": "35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租用戶。",
+        "question": "35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租使用者。",
         "options": [
             "O",
             "X"
@@ -527,7 +527,7 @@
     {
         "id": 36,
         "type": "truefalse",
-        "question": "36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租用戶。",
+        "question": "36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租使用者。",
         "options": [
             "O",
             "X"
@@ -587,7 +587,7 @@
     {
         "id": 40,
         "type": "truefalse",
-        "question": "40. 建立和設定虛擬網路是平台即服務(PaaS)雲端服務模型的一部分。",
+        "question": "40. 建立和設定虛擬網路是平臺即服務(PaaS)雲端服務模型的一部分。",
         "options": [
             "O",
             "X"
@@ -602,7 +602,7 @@
     {
         "id": 41,
         "type": "truefalse",
-        "question": "41. 在平台即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。",
+        "question": "41. 在平臺即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。",
         "options": [
             "O",
             "X"
@@ -617,7 +617,7 @@
     {
         "id": 42,
         "type": "truefalse",
-        "question": "42. 設定平台即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。",
+        "question": "42. 設定平臺即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。",
         "options": [
             "O",
             "X"
@@ -932,7 +932,7 @@
     {
         "id": 63,
         "type": "truefalse",
-        "question": "63. 如果您將某個資源群組的管理權限指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。",
+        "question": "63. 如果您將某個資源群組的管理許可權指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。",
         "options": [
             "O",
             "X"
@@ -1112,7 +1112,7 @@
     {
         "id": 75,
         "type": "truefalse",
-        "question": "75. Azure 備份是一種平台即服務(PaaS)。",
+        "question": "75. Azure 備份是一種平臺即服務(PaaS)。",
         "options": [
             "O",
             "X"
@@ -1272,7 +1272,7 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平台，<br>\n它透過資料生命週期管理（保留/刪除規則）和電子文件探索功能協助管理數據，並在內部提供資料目錄、譜系等功能來了解和追蹤資料，<br>\n但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份) <br>\n或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。"
+        "explanation": "Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平臺，<br>\n它透過資料生命週期管理（保留/刪除規則）和電子檔案探索功能協助管理資料，並在內部提供資料目錄、譜系等功能來瞭解和追蹤資料，<br>\n但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份) <br>\n或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。"
     },
     {
         "id": 86,
@@ -1390,7 +1390,7 @@
         "options": [
             "災害復原即服務(DRaaS)。",
             "基礎結構即服務(IaaS)。",
-            "平台即服務(PaaS)。",
+            "平臺即服務(PaaS)。",
             "軟體即服務(SaaS)。"
         ],
         "answer": [
@@ -1425,7 +1425,7 @@
             "Azure 容器執行個體",
             "Azure 保留的虛擬機器執行個體",
             "Azure 現成虛擬機器執行個體",
-            "Azure 虛擬機器擴展集"
+            "Azure 虛擬機器擴充套件集"
         ],
         "answer": [
             3
@@ -1522,7 +1522,7 @@
     {
         "id": 101,
         "type": "single",
-        "question": "101. 您有一些執行 Windows Server 的内部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?",
+        "question": "101. 您有一些執行 Windows Server 的內部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?",
         "options": [
             "Docker",
             "角色型存取控制(RBAC)",
@@ -1539,7 +1539,7 @@
     {
         "id": 102,
         "type": "single",
-        "question": "102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼項目?",
+        "question": "102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼專案?",
         "options": [
             "管理群組",
             "訂用帳戶",
@@ -1590,7 +1590,7 @@
     {
         "id": 105,
         "type": "single",
-        "question": "105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些項目?",
+        "question": "105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些專案?",
         "options": [
             "儲存體帳戶中的檔案服務",
             "虛擬機器資料磁碟",
@@ -1712,7 +1712,7 @@
         "question": "112. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure 虛擬機器:___________",
         "options": [
             "基礎結構即服務(IaaS)",
-            "平台即服務(PaaS)",
+            "平臺即服務(PaaS)",
             "軟體即服務(SaaS)"
         ],
         "answer": [
@@ -1728,7 +1728,7 @@
         "question": "113. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure SQL 資料庫:___________",
         "options": [
             "基礎結構即服務(IaaS)",
-            "平台即服務(PaaS)",
+            "平臺即服務(PaaS)",
             "軟體即服務(SaaS)"
         ],
         "answer": [
@@ -1762,7 +1762,7 @@
         "options": [
             "計劃",
             "管理群組",
-            "參數",
+            "引數",
             "資源群組"
         ],
         "answer": [
@@ -1775,7 +1775,7 @@
     {
         "id": 116,
         "type": "single",
-        "question": "116. 當您需要同時委派權限給多部 Azure 虛擬機器時,您必須___________",
+        "question": "116. 當您需要同時委派許可權給多部 Azure 虛擬機器時,您必須___________",
         "options": [
             "將 Azure 虛擬機器部署至同一個 Azure 區域。",
             "使用相同的 Azure Resource Manager 範本部署 Azure 虛擬機器。",
@@ -1792,7 +1792,7 @@
     {
         "id": 117,
         "type": "single",
-        "question": "117. ___________支援内部部署儲存體與 Azure 儲存體之間的同步處理。",
+        "question": "117. ___________支援內部部署儲存體與 Azure 儲存體之間的同步處理。",
         "options": [
             "Azure Blob 儲存體",
             "Azure 檔案儲存體",
@@ -1896,8 +1896,8 @@
         "type": "single",
         "question": "123. 您有一個具有唯讀鎖定的儲存體帳戶。 請問帳戶擁有者可以對儲存體帳戶執行下列哪一項動作?",
         "options": [
-            "將[鎖定類型]設定為[刪除]。",
-            "修改儲存體帳戶的權限。",
+            "將[鎖定型別]設定為[刪除]。",
+            "修改儲存體帳戶的許可權。",
             "重新命名鎖定。",
             "移除鎖定。"
         ],
@@ -1995,10 +1995,10 @@
     {
         "id": 129,
         "type": "single",
-        "question": "129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同類型的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些項目?",
+        "question": "129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同型別的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些專案?",
         "options": [
             "Azure API 管理服務",
-            "虛擬機器擴展集",
+            "虛擬機器擴充套件集",
             "管理群組",
             "Azure Resource Manager 範本"
         ],
@@ -2029,7 +2029,7 @@
     {
         "id": 131,
         "type": "single",
-        "question": "131. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源類型」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源類型。VNET1____________",
+        "question": "131. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源型別」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源型別。VNET1____________",
         "options": [
             "會自動遭刪除。",
             "會自動移至另一個資源群組。",
@@ -2063,9 +2063,9 @@
     {
         "id": 133,
         "type": "single",
-        "question": "133. Azure Cosmos DB是____________供應項目的範例。",
+        "question": "133. Azure Cosmos DB是____________供應專案的範例。",
         "options": [
-            "平台即服務(PaaS)",
+            "平臺即服務(PaaS)",
             "基礎結構即服務(IaaS)",
             "內容即服務",
             "軟體即服務(SaaS)"
@@ -2381,7 +2381,7 @@
             "服務層",
             "輸出資料量",
             "Azure 區域",
-            "處理的資料類型",
+            "處理的資料型別",
             "輸入資料量"
         ],
         "answer": [
@@ -2416,10 +2416,10 @@
     {
         "id": 153,
         "type": "multioption",
-        "question": "153. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:<br>\n- 您必須能夠修改App1的程式碼。<br>\n- 投入管理App1作業系統的資源必須降至最少。<br>\n- App2必須能夠與伺服器的作業系統互動。<br>\n這兩個應用程式各應使用何種類型的雲端服務?<br>\nApp1: (A)<br>\nApp2: (B)",
+        "question": "153. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:<br>\n- 您必須能夠修改App1的程式碼。<br>\n- 投入管理App1作業系統的資源必須降至最少。<br>\n- App2必須能夠與伺服器的作業系統互動。<br>\n這兩個應用程式各應使用何種型別的雲端服務?<br>\nApp1: (A)<br>\nApp2: (B)",
         "options": [
-            "1.基礎結構即服務(laaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(laaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)"
+            "1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
+            "1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)"
         ],
         "answer": [
             2,
@@ -2434,9 +2434,9 @@
         "type": "multioption",
         "question": "154. 請將雲端服務與適當的描述進行配對。<br>\n描述:<br>\nA. 針對雲端環境提供最大控制能力。<br>\nB. 針對資料庫設計提供最大控制能力,但不需要維護作業系統。<br>\nC. 用來裝載Azure虛擬機器。",
         "options": [
-            "1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(IaaS)|2.平台即服務(PaaS)|3.軟體即服務(SaaS)"
+            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
+            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
+            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)"
         ],
         "answer": [
             1,
@@ -2506,9 +2506,9 @@
         "type": "multioption",
         "question": "158. 您需要根據雲端服務模型識別客戶的共同責任層級。 依照從最高客戶責任層級(頂端)到最低客戶責任層級(底部)的排列方式,您應該按照哪一種順序排列每個模型?",
         "options": [
-            "1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)",
-            "1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)",
-            "1.軟體即服務(SaaS)|2.平台即服務(PaaS)|3.基礎結構即服務(IaaS)"
+            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)",
+            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)",
+            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)"
         ],
         "answer": [
             3,

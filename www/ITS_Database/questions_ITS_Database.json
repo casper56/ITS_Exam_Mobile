@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "question": "1. 您有兩個資料表,分別名為 SalesPerson 與 Sales。<br>\n您需要確保 Sales 資料表中的每筆記錄都在 SalesPerson 資料表中保存有效的相關<br>\n聯銷售人員記錄。<br>\n請問您應該將哪一個資料庫物件新增至 Sales 資料表?",
+        "question": "1. 您有兩個資料表,分別名為 SalesPerson 與 Sales。<br>\n您需要確保 Sales 資料表中的每筆記錄都在 SalesPerson 資料表中儲存有效的相關<br>\n聯銷售人員記錄。<br>\n請問您應該將哪一個資料庫物件新增至 Sales 資料表?",
         "options": [
             "叢集索引",
             "外部索引鍵",
@@ -54,7 +54,7 @@
         "id": 4,
         "question": "4. 您的資料庫有一個 Department 資料以及一個 Employee 資料表。您需要確保一<br>\n位員工只能被借派到一個現有的部門。<br>\n請問您應該對 Employee 資料表套用什麼?",
         "options": [
-            "資料類型",
+            "資料型別",
             "外部索引鍵",
             "索引",
             "主索引鍵",
@@ -101,17 +101,17 @@
     },
     {
         "id": 7,
-        "question": "7. 函數與預存程序之間的其中一項差異在於,函數:",
+        "question": "7. 函式與預存程式之間的其中一項差異在於,函式:",
         "options": [
             "必須有傳回值",
-            "無法接受參數",
+            "無法接受引數",
             "無法包含交易",
-            "必須由觸發程序呼叫"
+            "必須由觸發程式呼叫"
         ],
         "answer": [
             1
         ],
-        "explanation": "函數 (Function) 必須傳回一個值，而預存程序 (Stored Procedure) 則不一定需要。<br>\n預存程序可以執行多個 SQL 陳述式，並可以傳回多個結果集或沒有任何結果。",
+        "explanation": "函式 (Function) 必須傳回一個值，而預存程式 (Stored Procedure) 則不一定需要。<br>\n預存程式可以執行多個 SQL 陳述式，並可以傳回多個結果集或沒有任何結果。",
         "image": null,
         "type": "single"
     },
@@ -127,17 +127,17 @@
         "answer": [
             2
         ],
-        "explanation": "COUNT(*) 是一個聚合函數，用於計算資料表中的所有資料列數目，包括包含<br>\nNULL 值的資料列。<br>\nCOUNT(rows) 和 SUM(*) 不是標準的 SQL 語法，SELECT * FROM Employee 則是<br>\n返回所有資料列和欄位，而不是資料列的數量。",
+        "explanation": "COUNT(*) 是一個聚合函式，用於計算資料表中的所有資料列數目，包括包含<br>\nNULL 值的資料列。<br>\nCOUNT(rows) 和 SUM(*) 不是標準的 SQL 語法，SELECT * FROM Employee 則是<br>\n返回所有資料列和欄位，而不是資料列的數量。",
         "image": null,
         "type": "single"
     },
     {
         "id": 9,
-        "question": "9. 您刪除了order資料表中的資料列,orderltem 資料表中的對應資料列也被自動刪<br>\n除了。<br>\n這是下列其中一種程序的範例:",
+        "question": "9. 您刪除了order資料表中的資料列,orderltem 資料表中的對應資料列也被自動刪<br>\n除了。<br>\n這是下列其中一種程式的範例:",
         "options": [
             "串聯刪除 (Cascade Delete)",
             "骨牌法刪除 (Dominoe Delete)",
-            "函數法刪除 (Functional Delete)",
+            "函式法刪除 (Functional Delete)",
             "繼承法刪除 (Inherited Deete)",
             "瀑布法刪除 (Waterfall Delete)"
         ],
@@ -169,7 +169,7 @@
         "question": "11. 一位開發人員嘗試使用下列查詢,在資料表中新增一個名為Prefix 資料行:<br>\nALTER TABLE Person ADD Prefix varchar(4) NOT NULL;<br>\n這位開發人員在執行查詢之後收到錯誤訊息。但是,這位開發人員無法記住確切的錯<br>\n誤訊息。請問這個問題的可能原因為何?",
         "options": [
             "應該使用DEFAULT 關鍵字來指定預設值",
-            "varchar(4)資料類型不適用於Person 資料表",
+            "varchar(4)資料型別不適用於Person 資料表",
             "應該先執行 DROP CONSTRAINT 查詢,再執行 ALTER TABLE 查詢",
             "Person 資料表是空的"
         ],
@@ -182,7 +182,7 @@
     },
     {
         "id": 12,
-        "question": "12. 您在某間咖啡廳工作,公司要求您設定網站來儲存購物費用。您需要建議公司在資<br>\n料庫資料表中使用某種資料類型,以便根據收費金額執行財務函數。<br>\n請問您應該使用哪一種資料類型?",
+        "question": "12. 您在某間咖啡廳工作,公司要求您設定網站來儲存購物費用。您需要建議公司在資<br>\n料庫資料表中使用某種資料型別,以便根據收費金額執行財務函式。<br>\n請問您應該使用哪一種資料型別?",
         "options": [
             "binary",
             "bit",
@@ -192,7 +192,7 @@
         "answer": [
             3
         ],
-        "explanation": "在處理金錢、貨幣等需要高精確度的數值時，應該使用 decimal (或 numeric,<br>\nmoney) 這類固定小數點的資料類型。這可以避免使用 float 等浮點數資料類型時可<br>\n能發生的微小誤差，確保財務計算的準確性。<br>\n(A) binary 用於儲存二進位資料。<br>\n(B) bit 用於儲存 0 或 1 的布林值。<br>\n(D) varchar 用於儲存字串。",
+        "explanation": "在處理金錢、貨幣等需要高精確度的數值時，應該使用 decimal (或 numeric,<br>\nmoney) 這類固定小數點的資料型別。這可以避免使用 float 等浮點數資料型別時可<br>\n能發生的微小誤差，確保財務計算的準確性。<br>\n(A) binary 用於儲存二進位資料。<br>\n(B) bit 用於儲存 0 或 1 的布林值。<br>\n(D) varchar 用於儲存字串。",
         "image": null,
         "type": "single"
     },
@@ -266,7 +266,7 @@
     },
     {
         "id": 19,
-        "question": "19. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n① 您可以使用預存程序來刪除資料。<br>\n② 函數必須具有傳回值。<br>\n③ 預存程序必須具有傳回值。<br>\n請問填入正確或錯誤符號順序為何?",
+        "question": "19. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n① 您可以使用預存程式來刪除資料。<br>\n② 函式必須具有傳回值。<br>\n③ 預存程式必須具有傳回值。<br>\n請問填入正確或錯誤符號順序為何?",
         "options": [
             "X、○、○",
             "○、○、X",
@@ -276,7 +276,7 @@
         "answer": [
             4
         ],
-        "explanation": "① 正確(○): 預存程序是一系列的 SQL 陳述式集合，當然可以包含 DELETE 陳述式<br>\n來刪除資料。<br>\n② 正確(○): 這是函數與預存程序最主要的區別之一。函數被設計來計算並傳回一個<br>\n值。<br>\n③ 錯誤(X): 預存程序「可以」透過輸出參數或傳回碼來傳回值，但並非「必須」。<br>\n它可以只執行操作而不傳回任何東西。<br>\n因此，順序為 ○、○、X。",
+        "explanation": "① 正確(○): 預存程式是一系列的 SQL 陳述式集合，當然可以包含 DELETE 陳述式<br>\n來刪除資料。<br>\n② 正確(○): 這是函式與預存程式最主要的區別之一。函式被設計來計算並傳回一個<br>\n值。<br>\n③ 錯誤(X): 預存程式「可以」透過輸出引數或傳回碼來傳回值，但並非「必須」。<br>\n它可以只執行操作而不傳回任何東西。<br>\n因此，順序為 ○、○、X。",
         "image": null,
         "type": "single"
     },
@@ -308,7 +308,7 @@
         "answer": [
             3
         ],
-        "explanation": "條件約束 (Constraint) 是資料庫用來強制執行資料完整性規則的主要機制。它包含<br>\n了多種類型，例如：<br>\n* NOT NULL: 確保欄位不能是空值。<br>\n* UNIQUE: 確保欄位中的值是唯一的。<br>\n* PRIMARY KEY: 主索引鍵約束 (是 NOT NULL 和 UNIQUE 的結合)。<br>\n* FOREIGN KEY: 外部索引鍵約束，確保參考完整性。<br>\n* CHECK: 確保欄位中的值符合指定的條件。<br>\n這些約束共同確保了輸入資料的有效性。",
+        "explanation": "條件約束 (Constraint) 是資料庫用來強制執行資料完整性規則的主要機制。它包含<br>\n了多種型別，例如：<br>\n* NOT NULL: 確保欄位不能是空值。<br>\n* UNIQUE: 確保欄位中的值是唯一的。<br>\n* PRIMARY KEY: 主索引鍵約束 (是 NOT NULL 和 UNIQUE 的結合)。<br>\n* FOREIGN KEY: 外部索引鍵約束，確保參考完整性。<br>\n* CHECK: 確保欄位中的值符合指定的條件。<br>\n這些約束共同確保了輸入資料的有效性。",
         "image": null,
         "type": "single"
     },
@@ -330,7 +330,7 @@
     },
     {
         "id": 23,
-        "question": "23. 建立預存程序的其中一個原因是要:",
+        "question": "23. 建立預存程式的其中一個原因是要:",
         "options": [
             "提升效能",
             "將儲存空間最小化",
@@ -340,7 +340,7 @@
         "answer": [
             1
         ],
-        "explanation": "預存程序 (Stored Procedure) 有多個優點，其中最主要的一個是「提升效能」。因<br>\n為預存程序是預先編譯好並儲存在資料庫伺服器上，當被呼叫時，資料庫無需重新<br>\n解析和編譯 SQL 陳述式，減少了網路傳輸量和伺服器的處理負擔，從而提升了執行<br>\n效率。",
+        "explanation": "預存程式 (Stored Procedure) 有多個優點，其中最主要的一個是「提升效能」。因<br>\n為預存程式是預先編譯好並儲存在資料庫伺服器上，當被呼叫時，資料庫無需重新<br>\n解析和編譯 SQL 陳述式，減少了網路傳輸量和伺服器的處理負擔，從而提升了執行<br>\n效率。",
         "image": null,
         "type": "single"
     },
@@ -394,14 +394,14 @@
     },
     {
         "id": 27,
-        "question": "27. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:<br>\n<br><img src=\"images/19_4.png\" class=\"q-image\"><br>\n您有下列需求:<br>\n* StudentName 必須包含字元字串。<br>\n* GradeLevel 必須是整數。<br>\n* DaysAbsent可以在小數點後面包含一位數字。<br>\n可使用的資料類型是:",
+        "question": "27. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:<br>\n<br><img src=\"images/19_4.png\" class=\"q-image\"><br>\n您有下列需求:<br>\n* StudentName 必須包含字元字串。<br>\n* GradeLevel 必須是整數。<br>\n* DaysAbsent可以在小數點後麵包含一位數字。<br>\n可使用的資料型別是:",
         "options": [
             "BIT",
             "DECIMAL",
             "VARCHAR",
             "DATETIME",
             "INT",
-            "CHAR StudentName、GradeLevel 及DaysAbsent 的資料類型為何?",
+            "CHAR StudentName、GradeLevel 及DaysAbsent 的資料型別為何?",
             "C、E、B",
             "C、B、E",
             "F、E、B",
@@ -451,15 +451,15 @@
         "id": 30,
         "question": "30. 您撰寫了一系列執行冗長複雜查詢的SQL 陳述式。這些陳述式會透過電子郵件<br>\n傳送結果。<br>\n您希望能夠在需要時隨時手動呼叫程式碼。請問您可以使用哪一個資料庫物件來儲<br>\n存程式碼?",
         "options": [
-            "預存程序",
-            "函數",
+            "預存程式",
+            "函式",
             "檢視表",
-            "觸發程序"
+            "觸發程式"
         ],
         "answer": [
             4
         ],
-        "explanation": "預存程序 (Stored Procedure) 就是被設計來儲存一系列可重複使用的 SQL 陳述式。<br>\n它可以接受參數、執行複雜的邏輯、並可由使用者或應用程式「手動呼叫」。這完<br>\n全符合題目的需求。<br>\n(B) 函數主要用於傳回單一值。<br>\n(C) 檢視表主要用於簡化查詢。<br>\n(D) 觸發程序是自動執行的，不能手動呼叫。<br>\nCH03<br>\n1.您有兩個資料表,每個資料表都有三個資料列。建立了一個使用交叉聯結的 SQL 查<br>\n詢,這個查詢不包含WHERE子句。<br>\n請問這兩個資料表的笛卡兒乘積會包含多少個資料列?<br>\n(A) 0 (B) 3<br>\n(C) 6 (D) 9<br>\n<br>\n交叉聯結 (CROSS JOIN) 會產生兩個資料表的「笛卡兒乘積」。這意味著第一個資<br>\n料表的每一筆資料列，都會與第二個資料表的每一筆資料列進行配對。<br>\n因此，結果集的總資料列數會是第一個資料表的資料列數「乘以」第二個資料表的<br>\n資料列數。在這個例子中，就是 3 * 3 = 9。",
+        "explanation": "預存程式 (Stored Procedure) 就是被設計來儲存一系列可重複使用的 SQL 陳述式。<br>\n它可以接受引數、執行複雜的邏輯、並可由使用者或應用程式「手動呼叫」。這完<br>\n全符合題目的需求。<br>\n(B) 函式主要用於傳回單一值。<br>\n(C) 檢視表主要用於簡化查詢。<br>\n(D) 觸發程式是自動執行的，不能手動呼叫。<br>\nCH03<br>\n1.您有兩個資料表,每個資料表都有三個資料列。建立了一個使用交叉聯結的 SQL 查<br>\n詢,這個查詢不包含WHERE子句。<br>\n請問這兩個資料表的笛卡兒乘積會包含多少個資料列?<br>\n(A) 0 (B) 3<br>\n(C) 6 (D) 9<br>\n<br>\n交叉聯結 (CROSS JOIN) 會產生兩個資料表的「笛卡兒乘積」。這意味著第一個資<br>\n料表的每一筆資料列，都會與第二個資料表的每一筆資料列進行配對。<br>\n因此，結果集的總資料列數會是第一個資料表的資料列數「乘以」第二個資料表的<br>\n資料列數。在這個例子中，就是 3 * 3 = 9。",
         "image": null,
         "type": "single"
     },
@@ -504,7 +504,7 @@
     },
     {
         "id": 34,
-        "question": "34. 運送州別「不是」CA (ship_state <> 'CA')。<> 是 SQL 中「不等於」的運算子。<br>\n因為兩個條件要同時滿足，所以必須使用 AND 來連接它們。",
+        "question": "34. 運送州別「不是」CA (ship_state <> 'CA')。<> 是 SQL 中「不等於」的運運算元。<br>\n因為兩個條件要同時滿足，所以必須使用 AND 來連線它們。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -613,17 +613,17 @@
     },
     {
         "id": 43,
-        "question": "43. 有一個預存程序包含以下查詢:<br>\nSELECT 'Greetings' + Prefix + FirstName FROM Person;<br>\n此預存程序會傳回所有 null值。您確認 Person 資料表包含資料。<br>\n請問這個問題的可能原因為何?",
+        "question": "43. 有一個預存程式包含以下查詢:<br>\nSELECT 'Greetings' + Prefix + FirstName FROM Person;<br>\n此預存程式會傳回所有 null值。您確認 Person 資料表包含資料。<br>\n請問這個問題的可能原因為何?",
         "options": [
             "Prefix 或FirstName 資料行具有null值。",
             "您必須在查詢中 指定 NULLIF 關鍵字。",
-            "加號(+)運算子無法用來附加字元資料。",
+            "加號(+)運運算元無法用來附加字元資料。",
             "您必須在SELECT 陳述式中指定 JOIN 關鍵字。"
         ],
         "answer": [
             1
         ],
-        "explanation": "在大多數的 SQL 資料庫系統中（如 SQL Server），當你使用 + 運算子來串接字串<br>\n時，只要其中任何一個部分是 NULL，整個串接的結果就會是 NULL。因此，如果<br>\nPrefix 或 FirstName 欄位中有任何一筆資料是 NULL，該筆資料列的查詢結果就會<br>\n是 NULL。",
+        "explanation": "在大多數的 SQL 資料庫系統中（如 SQL Server），當你使用 + 運運算元來串接字串<br>\n時，只要其中任何一個部分是 NULL，整個串接的結果就會是 NULL。因此，如果<br>\nPrefix 或 FirstName 欄位中有任何一筆資料是 NULL，該筆資料列的查詢結果就會<br>\n是 NULL。",
         "image": null,
         "type": "single"
     },
@@ -639,7 +639,7 @@
         "answer": [
             2
         ],
-        "explanation": "INTERSECT (交集) 運算子會比較兩個 SELECT 陳述式的結果集，並只傳回在「兩個」<br>\n結果集中都存在的資料列。它會自動移除重複的資料列。<br>\n(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。",
+        "explanation": "INTERSECT (交集) 運運算元會比較兩個 SELECT 陳述式的結果集，並只傳回在「兩個」<br>\n結果集中都存在的資料列。它會自動移除重複的資料列。<br>\n(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。",
         "image": null,
         "type": "single"
     },
@@ -679,7 +679,7 @@
     },
     {
         "id": 48,
-        "question": "48. 第二個條件 c.Color <> 'Black' (顏色不是黑色) 會從剩下的 6 筆中，再排除掉<br>\nCompact 和 Hybrid。剩下 4 筆。<br>\n因為兩個條件是用 AND 連接，所以必須同時滿足。最終結果是 4 筆。",
+        "question": "48. 第二個條件 c.Color <> 'Black' (顏色不是黑色) 會從剩下的 6 筆中，再排除掉<br>\nCompact 和 Hybrid。剩下 4 筆。<br>\n因為兩個條件是用 AND 連線，所以必須同時滿足。最終結果是 4 筆。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -698,7 +698,7 @@
         "answer": [
             4
         ],
-        "explanation": "UNION (聯集) 運算子就是用來將兩個或多個 SELECT 陳述式的結果集合併成一個單<br>\n一的結果集。UNION 預設會移除重複的資料列。如果想要保留所有重複的資料列<br>\n，可以使用 UNION ALL。",
+        "explanation": "UNION (聯集) 運運算元就是用來將兩個或多個 SELECT 陳述式的結果集合併成一個單<br>\n一的結果集。UNION 預設會移除重複的資料列。如果想要保留所有重複的資料列<br>\n，可以使用 UNION ALL。",
         "image": null,
         "type": "single"
     },
@@ -746,7 +746,7 @@
         "answer": [
             1
         ],
-        "explanation": "LIKE 運算子專門用於字串的比對，可以搭配萬用字元來進行模糊搜尋。<br>\n* %: 代表零個或多個任意字元。<br>\n* _: 代表一個任意字元。<br>\n例如 WHERE ProductName LIKE '%apple%' 可以找出名稱中包含 'apple' 的所有<br>\n產品。",
+        "explanation": "LIKE 運運算元專門用於字串的比對，可以搭配萬用字元來進行模糊搜尋。<br>\n* %: 代表零個或多個任意字元。<br>\n* _: 代表一個任意字元。<br>\n例如 WHERE ProductName LIKE '%apple%' 可以找出名稱中包含 'apple' 的所有<br>\n產品。",
         "image": null,
         "type": "single"
     },
@@ -762,7 +762,7 @@
         "answer": [
             2
         ],
-        "explanation": "要同時排除 TX 和 AZ，條件必須是「州不等於 TX」『而且』「州不等於 AZ」。所<br>\n以必須使用 AND 來連接這兩個條件。如果使用 OR，那麼德州的訂單會因為「不等<br>\n於 AZ」而滿足條件被選出來，反之亦然，這就不對了。正確的邏輯是 WHERE<br>\nship_state <> 'TX' AND ship_state <> 'AZ'，或是 WHERE ship_state NOT IN<br>\n('TX', 'AZ')。選項 (B) 的 NOT ... AND NOT ... 在邏輯上是正確的。<br>\nCH04",
+        "explanation": "要同時排除 TX 和 AZ，條件必須是「州不等於 TX」『而且』「州不等於 AZ」。所<br>\n以必須使用 AND 來連線這兩個條件。如果使用 OR，那麼德州的訂單會因為「不等<br>\n於 AZ」而滿足條件被選出來，反之亦然，這就不對了。正確的邏輯是 WHERE<br>\nship_state <> 'TX' AND ship_state <> 'AZ'，或是 WHERE ship_state NOT IN<br>\n('TX', 'AZ')。選項 (B) 的 NOT ... AND NOT ... 在邏輯上是正確的。<br>\nCH04",
         "image": null,
         "type": "single"
     },
@@ -876,7 +876,7 @@
         "answer": [
             3
         ],
-        "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 ‘LIKE’ 運算子搭配萬用字<br>\n元 ‘%’。’%’ 代表零個或多個任意字元。所以 ‘LIKE '%chocolate%'‘ 的意<br>\n思是，只要 ‘ItemDescription’ 欄位中的任何位置出現 'chocolate' 這個詞，不<br>\n論前後是否有其他文字，都符合條件。",
+        "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 ‘LIKE’ 運運算元搭配萬用字<br>\n元 ‘%’。’%’ 代表零個或多個任意字元。所以 ‘LIKE '%chocolate%'‘ 的意<br>\n思是，只要 ‘ItemDescription’ 欄位中的任何位置出現 'chocolate' 這個詞，不<br>\n論前後是否有其他文字，都符合條件。",
         "image": null,
         "type": "single"
     },
@@ -892,7 +892,7 @@
         "answer": [
             1
         ],
-        "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 LIKE 運算子搭配萬用字元 %。<br>\n% 代表零個或多個任意字元。所以 LIKE '%chocolate%' 的意思是，只要<br>\nItemDescription 欄位中的任何位置出現 'chocolate' 這個詞，不論前後是否有其他<br>\n文字，都符合條件。",
+        "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 LIKE 運運算元搭配萬用字元 %。<br>\n% 代表零個或多個任意字元。所以 LIKE '%chocolate%' 的意思是，只要<br>\nItemDescription 欄位中的任何位置出現 'chocolate' 這個詞，不論前後是否有其他<br>\n文字，都符合條件。",
         "image": null,
         "type": "single"
     },
@@ -923,7 +923,7 @@
     },
     {
         "id": 64,
-        "question": "64. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的<br>\n函數)。所以 ArrivalTime > GETDATE()。",
+        "question": "64. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的<br>\n函式)。所以 ArrivalTime > GETDATE()。",
         "options": [],
         "answer": [],
         "explanation": "",
@@ -973,7 +973,7 @@
     },
     {
         "id": 68,
-        "question": "68. 您有一個名為Product 的資料。Product 資料表包含 ProductDescription 和<br>\nProductCategory 的資料行。<br>\n您需要將 Product 資料中所有湯匙的ProductCategory 值都變更為43。<br>\n如果 ProductDescription為spoon,就表示該項目是湯匙。請問您應該使用哪一個陳<br>\n述式?",
+        "question": "68. 您有一個名為Product 的資料。Product 資料表包含 ProductDescription 和<br>\nProductCategory 的資料行。<br>\n您需要將 Product 資料中所有湯匙的ProductCategory 值都變更為43。<br>\n如果 ProductDescription為spoon,就表示該專案是湯匙。請問您應該使用哪一個陳<br>\n述式?",
         "options": [
             "SET Product TO ProductCategory = 43 WHERE Product Description = ' spoon'",
             "UPDATE Product SET ProductCategory = 43 WHERE Product Description = ' spoon'",
@@ -1015,7 +1015,7 @@
         "answer": [
             1
         ],
-        "explanation": "在 SQL 中，要判斷一個欄位的值是否為 NULL，不能使用等於 (=) 或不等於 (<>)<br>\n運算子。必須使用專門的 IS NULL 或 IS NOT NULL 來判斷。因此，要找出電話號<br>\n碼為空的紀錄，條件應該是 WHERE Phone IS NULL。",
+        "explanation": "在 SQL 中，要判斷一個欄位的值是否為 NULL，不能使用等於 (=) 或不等於 (<>)<br>\n運運算元。必須使用專門的 IS NULL 或 IS NOT NULL 來判斷。因此，要找出電話號<br>\n碼為空的紀錄，條件應該是 WHERE Phone IS NULL。",
         "image": null,
         "type": "single"
     },
@@ -1211,7 +1211,7 @@
         "answer": [
             4
         ],
-        "explanation": "在 SQL 中，管理權限的指令是 GRANT (授予權限) 和 REVOKE(撤銷權限)。<br>\n要撤銷 User1 對 Customer 資料表的 SELECT (檢視) 權限，標準的語法是 REVOKE<br>\nSELECT ON [物件名稱] FROM [使用者或角色];。<br>\n選項 (D) 完全符合此語法。",
+        "explanation": "在 SQL 中，管理許可權的指令是 GRANT (授予許可權) 和 REVOKE(撤銷許可權)。<br>\n要撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是 REVOKE<br>\nSELECT ON [物件名稱] FROM [使用者或角色];。<br>\n選項 (D) 完全符合此語法。",
         "image": null,
         "type": "single"
     },
@@ -1264,291 +1264,286 @@
         "image": null,
         "type": "single"
     },
-    
-  {
-    "id": 89,
-    "question": "89. 您需要將資料庫正規化為第一正規形式。請問您必須符合哪兩項需求?(請選擇2個答案)",
-    "options": [
-      "排除複合索引鍵",
-      "排除重複資料列",
-      "排除外部索引鍵",
-      "排除重複群組"
-    ],
-    "answer": [
-      2,
-      4
-    ],
-    "explanation": "第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。",
-    "image": null,
-    "type": "multiple"
-  },
-  {
-    "id": 90,
-    "question": "90. 您有一個名為 Product 的資料表,其中包含一百萬個資料列 您需要使用下列查詢來搜尋產品資訊:<br>\nSELECT ProductName, Price FROM Product WHERE Category = 'Science Books'<br>\n請問以下何者能讓這種搜尋更有效率?",
-    "options": [
-      "Category 資料行的非叢集索引",
-      "Price 資料行的非叢集索引",
-      "ProductName 資料行的叢集索引",
-      "Price 資料行的叢集索引"
-    ],
-    "answer": [
-      1
-    ],
-    "explanation": "解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'<br>\n這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 91,
-    "question": "91. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n①完整資料庫備份就是整個資料庫中所有資料的複本。<br>\n②交易記錄備份會備份資料庫中的所有資料。<br>\n③ 差異備份只會複製上次完整備份之前變更的資料。<br>\n④ 檔案或檔案群組還原會指定要復原的資料庫部分。<br>\n請問填入正確或錯誤符號順序為何?",
-    "options": [
-      "X、X、○、○",
-      "○、X、X、○",
-      "X、X、X、X",
-      "○、○、X、○"
-    ],
-    "answer": [
-      2
-    ],
-    "explanation": "①正確(○): 完整備份 (Full Backup) 就是對整個資料庫（包括資料、物件、結構）進行一次完整的複製。<br>\n②錯誤(X): 交易記錄備份 (Transaction Log Backup) 只備份自上次交易記錄備份以來的所有交易紀錄，而不是資料庫中的所有資料。它用於時間點復原。<br>\n③正確(X): 差異備份 (Differential Backup) 會備份自「上一次完整備份」以來所有變更過的資料。(題目中的「之前」應為「之後」的筆誤)。<br>\n④正確(○): 當資料庫非常大時，可以只備份或還原特定的檔案或檔案群組，增加管理的彈性。<br>\n因此，順序為 ○、X、X、○。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 92,
-    "question": "92. 您有一個儲存訂單詳細資料的資料表 OrderDetails，主索引鍵由 OrderID 和 ProductID 組成 (複合鍵)。<br>\n該資料表包含一個 ProductName 欄位，該欄位只相依於 ProductID，而不相依於 OrderID。<br>\n請問這違反了哪一種正規化形式？",
-    "options": [
-      "第一正規化 (1NF)",
-      "第二正規化 (2NF)",
-      "第三正規化 (3NF)",
-      "第四正規化 (4NF)"
-    ],
-    "answer": [
-      2
-    ],
-    "explanation": "第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。<br>\n在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 93,
-    "question": "93. 您正在設計一個 Employee 資料表，其中包含一個 Age (年齡) 欄位。<br>\n您希望確保輸入的年齡數值必須大於等於 18。<br>\n請問您應該使用哪一種條件約束 (Constraint)？",
-    "options": [
-      "PRIMARY KEY",
-      "FOREIGN KEY",
-      "UNIQUE",
-      "CHECK"
-    ],
-    "answer": [
-      4
-    ],
-    "explanation": "CHECK 條件約束用於限制欄位中可接受的值範圍。<br>\n您可以定義一個表達式 (例如：Age >= 18)，資料庫會自動檢查所有新增或修改的資料是否符合此條件。<br>\n(A) 主鍵用於唯一識別。(B) 外鍵用於關聯資料表。(C) UNIQUE 用於確保不重複。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 94,
-    "question": "94. 您在一個交易 (Transaction) 中執行了多個 UPDATE 指令來修改銀行帳戶餘額。<br>\n確認所有操作都正確無誤後，您希望將這些變更永久寫入資料庫。<br>\n請問您應該執行哪一個指令？",
-    "options": [
-      "ROLLBACK",
-      "COMMIT",
-      "SAVEPOINT",
-      "TRUNCATE"
-    ],
-    "answer": [
-      2
-    ],
-    "explanation": "交易管理中，COMMIT 指令用於將交易中的所有更動「永久保存」到資料庫中。<br>\n(A) ROLLBACK 是在發生錯誤或後悔時，將資料復原到交易開始前的狀態。<br>\n(C) SAVEPOINT 是在交易中設定檢查點，以便部分復原。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 95,
-    "question": "95. 駭客透過在網頁輸入框中輸入 <code>' OR '1'='1</code> 等惡意字串，試圖操縱後端資料庫執行的 SQL 指令。<br>\n這種攻擊手法稱為什麼？",
-    "options": [
-      "暴力破解 (Brute Force)",
-      "中間人攻擊 (Man-in-the-Middle)",
-      "SQL 注入 (SQL Injection)",
-      "跨站腳本攻擊 (XSS)"
-    ],
-    "answer": [
-      3
-    ],
-    "explanation": "SQL 注入 (SQL Injection) 是一種常見的資料庫安全漏洞。<br>\n攻擊者透過輸入惡意的 SQL 語法片段，欺騙資料庫執行非預期的指令 (例如繞過登入驗證或刪除資料)。<br>\n防範方法包含使用參數化查詢 (Parameterized Queries) 等。",
-    "image": null,
-    "type": "single"
-  },
-  {
-    "id": 96,
-    "question": "96. 您希望授權使用者 UserA 能夠在 Products 資料表上執行 SELECT 和 UPDATE 操作，但不允許 DELETE。<br>\n請問您應該使用哪一個 SQL 陳述式？",
-    "options": [
-      "GRANT SELECT, UPDATE ON Products TO UserA",
-      "REVOKE DELETE ON Products FROM UserA",
-      "DENY DELETE ON Products TO UserA",
-      "ALTER USER UserA ADD SELECT, UPDATE ON Products"
-    ],
-    "answer": [
-      1
-    ],
-    "explanation": "GRANT 是用來授予權限的標準指令。<br>\n語法為：GRANT [權限列表] ON [物件] TO [使用者];。<br>\n選項 (A) 明確授予了查詢 (SELECT) 和修改 (UPDATE) 的權限，且未授予刪除權限，符合需求。",
-    "image": null,
-    "type": "single"
-  },
-  
-  {
-    "id": 97,
-    "type": "single",
-    "question": "97. 【CH03-補充】您執行了一個查詢來選取客戶居住的城市，但結果中包含了許多重複的城市名稱（例如出現了多次 'Taipei'）。<br>\n請問您應該在 SELECT 陳述式中使用哪一個關鍵字來移除重複的資料列，只顯示唯一的城市名稱？",
-    "options": [
-      "UNIQUE",
-      "DISTINCT",
-      "DIFFERENT",
-      "SINGLE"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "在 SELECT 陳述式中，`DISTINCT` 關鍵字用於從結果集中移除重複的資料列，只傳回唯一的值。<br>\n`UNIQUE` 是用於建立資料表時的條件約束 (Constraint)，而非查詢關鍵字。"
-  },
-  {
-    "id": 98,
-    "type": "single",
-    "question": "98. 【CH03-補充】您正在搜尋名字為 'Tom'、'Tim' 或 'Tam' 的員工。<br>\n您知道名字的第一個字母是 'T'，第三個字母是 'm'，但中間的字母只有一個字元且不確定是什麼。<br>\n請問您應該使用哪一個 `LIKE` 樣式？",
-    "options": [
-      "LIKE 'T%m'",
-      "LIKE 'T_m'",
-      "LIKE 'T*m'",
-      "LIKE 'T?m'"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "SQL 的 `LIKE` 運算子中：<br>\n● `_` (底線) 代表 **這位置只有 1 個任意字元**。<br>\n● `%` (百分比) 代表 **0 個或多個任意字元**。<br>\n因為題目強調「中間的字母只有一個」，所以 `T_m` 是正確答案（會符合 Tim, Tom, Tam，但不會符合 Team）。"
-  },
-  {
-    "id": 99,
-    "type": "single",
-    "question": "99. 【CH03-補充】您需要依照「部門 (Department)」對員工進行升冪排序 (A-Z)。如果員工屬於同一個部門，則必須依照「薪資 (Salary)」進行降冪排序 (高到低)。<br>\n請問 ORDER BY 子句應該怎麼寫？",
-    "options": [
-      "ORDER BY Department ASC, Salary ASC",
-      "ORDER BY Department DESC, Salary DESC",
-      "ORDER BY Department ASC, Salary DESC",
-      "ORDER BY Salary DESC, Department ASC"
-    ],
-    "answer": [
-      3
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "SQL 允許對多個欄位進行排序。排序優先順序由左至右。<br>\n1. 先排 `Department ASC` (升冪)。<br>\n2. 當部門相同時，再排 `Salary DESC` (降冪)。"
-  },
-  {
-    "id": 100,
-    "type": "single",
-    "question": "100. 【CH05-補充】為了簡化權限管理，您希望將一組權限（例如 SELECT, UPDATE）一次指派給多個使用者（例如 UserA, UserB, UserC），而不是逐一授權。<br>\n請問您應該先建立哪種資料庫物件？",
-    "options": [
-      "角色 (Role)",
-      "檢視表 (View)",
-      "索引 (Index)",
-      "觸發程序 (Trigger)"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "● **角色 (Role)** 是一組權限的集合。最佳實務是將權限授予「角色」，然後將使用者加入該角色。<br>\n這樣當人員異動時，只需調整角色的成員，而不用逐一修改權限設定。"
-  },
-  {
-    "id": 101,
-    "type": "single",
-    "question": "101. 【CH01-補充】您正在設計一個使用者資料表，需要儲存使用者的「登入密碼」。<br>\n基於安全性考量，密碼不應以明文儲存，且即使是資料庫管理員也無法還原成原始密碼。<br>\n請問您應該使用哪種技術？",
-    "options": [
-      "加密 (Encryption)",
-      "雜湊 (Hashing)",
-      "遮罩 (Masking)",
-      "壓縮 (Compression)"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。"
-  },
-  {
-    "id": 102,
-    "type": "single",
-    "question": "102. 【CH01-補充】主管要求您設定資料庫，以便追蹤「是誰」在「什麼時候」修改了薪資資料表 (Salary) 中的數據。<br>\n請問這屬於哪種資料保護措施？",
-    "options": [
-      "驗證 (Authentication)",
-      "授權 (Authorization)",
-      "稽核 (Auditing)",
-      "正規化 (Normalization)"
-    ],
-    "answer": [
-      3
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。"
-  },
-  {
-    "id": 103,
-    "type": "single",
-    "question": "103. 【CH03-補充】您正在撰寫一個計算平均成本的查詢：`SELECT Cost / Quantity AS AvgCost FROM Inventory`。<br>\n為了避免因 `Quantity` 為 0 而導致「除以零 (Divide by zero)」的錯誤，您應該使用哪個函數？",
-    "options": [
-      "ISNULL(Quantity, 1)",
-      "NULLIF(Quantity, 0)",
-      "COALESCE(Quantity, 0)",
-      "ROUND(Quantity, 0)"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。"
-  },
-  {
-    "id": 104,
-    "type": "single",
-    "question": "104. 【CH03-補充】您有一個員工資料表 `Employees`，其中包含 `EmployeeID`, `Name` 和 `ManagerID`。<br>\n`ManagerID` 欄位儲存的是該員工的主管的 `EmployeeID`。<br>\n若您想列出「員工姓名」及其「主管姓名」，應該使用哪種聯結 (Join)？",
-    "options": [
-      "交叉聯結 (Cross Join)",
-      "自我聯結 (Self Join)",
-      "自然聯結 (Natural Join)",
-      "聯集 (Union)"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。"
-  },
-  {
-    "id": 105,
-    "type": "single",
-    "question": "105. 【CH03-補充】您想要找出所有「單價高於『任何』(ANY) 一項文具類產品」的商品。<br>\n請問下列 SQL 語法何者正確？",
-    "options": [
-      "WHERE Price > ANY (SELECT Price FROM Products WHERE Category = 'Stationery')",
-      "WHERE Price > ALL (SELECT Price FROM Products WHERE Category = 'Stationery')",
-      "WHERE Price > SOME (SELECT Price FROM Products WHERE Category = 'Stationery')",
-      "WHERE Price > (SELECT MAX(Price) FROM Products WHERE Category = 'Stationery')"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。"
-  }
-
-
-
+    {
+        "id": 89,
+        "question": "89. 您需要將資料庫正規化為第一正規形式。請問您必須符合哪兩項需求?(請選擇2個答案)",
+        "options": [
+            "排除複合索引鍵",
+            "排除重複資料列",
+            "排除外部索引鍵",
+            "排除重複群組"
+        ],
+        "answer": [
+            2,
+            4
+        ],
+        "explanation": "第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。",
+        "image": null,
+        "type": "multiple"
+    },
+    {
+        "id": 90,
+        "question": "90. 您有一個名為 Product 的資料表,其中包含一百萬個資料列 您需要使用下列查詢來搜尋產品資訊:<br>\nSELECT ProductName, Price FROM Product WHERE Category = 'Science Books'<br>\n請問以下何者能讓這種搜尋更有效率?",
+        "options": [
+            "Category 資料行的非叢集索引",
+            "Price 資料行的非叢集索引",
+            "ProductName 資料行的叢集索引",
+            "Price 資料行的叢集索引"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'<br>\n這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 91,
+        "question": "91. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。<br>\n①完整資料庫備份就是整個資料庫中所有資料的複本。<br>\n②交易記錄備份會備份資料庫中的所有資料。<br>\n③ 差異備份只會複製上次完整備份之前變更的資料。<br>\n④ 檔案或檔案群組還原會指定要復原的資料庫部分。<br>\n請問填入正確或錯誤符號順序為何?",
+        "options": [
+            "X、X、○、○",
+            "○、X、X、○",
+            "X、X、X、X",
+            "○、○、X、○"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "①正確(○): 完整備份 (Full Backup) 就是對整個資料庫（包括資料、物件、結構）進行一次完整的複製。<br>\n②錯誤(X): 交易記錄備份 (Transaction Log Backup) 只備份自上次交易記錄備份以來的所有交易紀錄，而不是資料庫中的所有資料。它用於時間點復原。<br>\n③正確(X): 差異備份 (Differential Backup) 會備份自「上一次完整備份」以來所有變更過的資料。(題目中的「之前」應為「之後」的筆誤)。<br>\n④正確(○): 當資料庫非常大時，可以只備份或還原特定的檔案或檔案群組，增加管理的彈性。<br>\n因此，順序為 ○、X、X、○。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 92,
+        "question": "92. 您有一個儲存訂單詳細資料的資料表 OrderDetails，主索引鍵由 OrderID 和 ProductID 組成 (複合鍵)。<br>\n該資料表包含一個 ProductName 欄位，該欄位只相依於 ProductID，而不相依於 OrderID。<br>\n請問這違反了哪一種正規化形式？",
+        "options": [
+            "第一正規化 (1NF)",
+            "第二正規化 (2NF)",
+            "第三正規化 (3NF)",
+            "第四正規化 (4NF)"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。<br>\n在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 93,
+        "question": "93. 您正在設計一個 Employee 資料表，其中包含一個 Age (年齡) 欄位。<br>\n您希望確保輸入的年齡數值必須大於等於 18。<br>\n請問您應該使用哪一種條件約束 (Constraint)？",
+        "options": [
+            "PRIMARY KEY",
+            "FOREIGN KEY",
+            "UNIQUE",
+            "CHECK"
+        ],
+        "answer": [
+            4
+        ],
+        "explanation": "CHECK 條件約束用於限制欄位中可接受的值範圍。<br>\n您可以定義一個表示式 (例如：Age >= 18)，資料庫會自動檢查所有新增或修改的資料是否符合此條件。<br>\n(A) 主鍵用於唯一識別。(B) 外來鍵用於關聯資料表。(C) UNIQUE 用於確保不重複。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 94,
+        "question": "94. 您在一個交易 (Transaction) 中執行了多個 UPDATE 指令來修改銀行帳戶餘額。<br>\n確認所有操作都正確無誤後，您希望將這些變更永久寫入資料庫。<br>\n請問您應該執行哪一個指令？",
+        "options": [
+            "ROLLBACK",
+            "COMMIT",
+            "SAVEPOINT",
+            "TRUNCATE"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "交易管理中，COMMIT 指令用於將交易中的所有更動「永久儲存」到資料庫中。<br>\n(A) ROLLBACK 是在發生錯誤或後悔時，將資料復原到交易開始前的狀態。<br>\n(C) SAVEPOINT 是在交易中設定檢查點，以便部分復原。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 95,
+        "question": "95. 駭客透過在網頁輸入框中輸入 <code>' OR '1'='1</code> 等惡意字串，試圖操縱後端資料庫執行的 SQL 指令。<br>\n這種攻擊手法稱為什麼？",
+        "options": [
+            "暴力破解 (Brute Force)",
+            "中間人攻擊 (Man-in-the-Middle)",
+            "SQL 注入 (SQL Injection)",
+            "跨站指令碼攻擊 (XSS)"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "SQL 注入 (SQL Injection) 是一種常見的資料庫安全漏洞。<br>\n攻擊者透過輸入惡意的 SQL 語法片段，欺騙資料庫執行非預期的指令 (例如繞過登入驗證或刪除資料)。<br>\n防範方法包含使用引數化查詢 (Parameterized Queries) 等。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 96,
+        "question": "96. 您希望授權使用者 UserA 能夠在 Products 資料表上執行 SELECT 和 UPDATE 操作，但不允許 DELETE。<br>\n請問您應該使用哪一個 SQL 陳述式？",
+        "options": [
+            "GRANT SELECT, UPDATE ON Products TO UserA",
+            "REVOKE DELETE ON Products FROM UserA",
+            "DENY DELETE ON Products TO UserA",
+            "ALTER USER UserA ADD SELECT, UPDATE ON Products"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GRANT 是用來授予許可權的標準指令。<br>\n語法為：GRANT [許可權列表] ON [物件] TO [使用者];。<br>\n選項 (A) 明確授予了查詢 (SELECT) 和修改 (UPDATE) 的許可權，且未授予刪除許可權，符合需求。",
+        "image": null,
+        "type": "single"
+    },
+    {
+        "id": 97,
+        "type": "single",
+        "question": "97. 【CH03-補充】您執行了一個查詢來選取客戶居住的城市，但結果中包含了許多重複的城市名稱（例如出現了多次 'Taipei'）。<br>\n請問您應該在 SELECT 陳述式中使用哪一個關鍵字來移除重複的資料列，只顯示唯一的城市名稱？",
+        "options": [
+            "UNIQUE",
+            "DISTINCT",
+            "DIFFERENT",
+            "SINGLE"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "在 SELECT 陳述式中，`DISTINCT` 關鍵字用於從結果集中移除重複的資料列，只傳回唯一的值。<br>\n`UNIQUE` 是用於建立資料表時的條件約束 (Constraint)，而非查詢關鍵字。"
+    },
+    {
+        "id": 98,
+        "type": "single",
+        "question": "98. 【CH03-補充】您正在搜尋名字為 'Tom'、'Tim' 或 'Tam' 的員工。<br>\n您知道名字的第一個字母是 'T'，第三個字母是 'm'，但中間的字母只有一個字元且不確定是什麼。<br>\n請問您應該使用哪一個 `LIKE` 樣式？",
+        "options": [
+            "LIKE 'T%m'",
+            "LIKE 'T_m'",
+            "LIKE 'T*m'",
+            "LIKE 'T?m'"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "SQL 的 `LIKE` 運運算元中：<br>\n● `_` (底線) 代表 **這位置只有 1 個任意字元**。<br>\n● `%` (百分比) 代表 **0 個或多個任意字元**。<br>\n因為題目強調「中間的字母只有一個」，所以 `T_m` 是正確答案（會符合 Tim, Tom, Tam，但不會符合 Team）。"
+    },
+    {
+        "id": 99,
+        "type": "single",
+        "question": "99. 【CH03-補充】您需要依照「部門 (Department)」對員工進行升冪排序 (A-Z)。如果員工屬於同一個部門，則必須依照「薪資 (Salary)」進行降冪排序 (高到低)。<br>\n請問 ORDER BY 子句應該怎麼寫？",
+        "options": [
+            "ORDER BY Department ASC, Salary ASC",
+            "ORDER BY Department DESC, Salary DESC",
+            "ORDER BY Department ASC, Salary DESC",
+            "ORDER BY Salary DESC, Department ASC"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "SQL 允許對多個欄位進行排序。排序優先順序由左至右。<br>\n1. 先排 `Department ASC` (升冪)。<br>\n2. 當部門相同時，再排 `Salary DESC` (降冪)。"
+    },
+    {
+        "id": 100,
+        "type": "single",
+        "question": "100. 【CH05-補充】為了簡化許可權管理，您希望將一組許可權（例如 SELECT, UPDATE）一次指派給多個使用者（例如 UserA, UserB, UserC），而不是逐一授權。<br>\n請問您應該先建立哪種資料庫物件？",
+        "options": [
+            "角色 (Role)",
+            "檢視表 (View)",
+            "索引 (Index)",
+            "觸發程式 (Trigger)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● **角色 (Role)** 是一組許可權的集合。最佳實務是將許可權授予「角色」，然後將使用者加入該角色。<br>\n這樣當人員異動時，只需調整角色的成員，而不用逐一修改許可權設定。"
+    },
+    {
+        "id": 101,
+        "type": "single",
+        "question": "101. 【CH01-補充】您正在設計一個使用者資料表，需要儲存使用者的「登入密碼」。<br>\n基於安全性考量，密碼不應以明文儲存，且即使是資料庫管理員也無法還原成原始密碼。<br>\n請問您應該使用哪種技術？",
+        "options": [
+            "加密 (Encryption)",
+            "雜湊 (Hashing)",
+            "遮罩 (Masking)",
+            "壓縮 (Compression)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。"
+    },
+    {
+        "id": 102,
+        "type": "single",
+        "question": "102. 【CH01-補充】主管要求您設定資料庫，以便追蹤「是誰」在「什麼時候」修改了薪資資料表 (Salary) 中的資料。<br>\n請問這屬於哪種資料保護措施？",
+        "options": [
+            "驗證 (Authentication)",
+            "授權 (Authorization)",
+            "稽核 (Auditing)",
+            "正規化 (Normalization)"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。"
+    },
+    {
+        "id": 103,
+        "type": "single",
+        "question": "103. 【CH03-補充】您正在撰寫一個計算平均成本的查詢：`SELECT Cost / Quantity AS AvgCost FROM Inventory`。<br>\n為了避免因 `Quantity` 為 0 而導致「除以零 (Divide by zero)」的錯誤，您應該使用哪個函式？",
+        "options": [
+            "ISNULL(Quantity, 1)",
+            "NULLIF(Quantity, 0)",
+            "COALESCE(Quantity, 0)",
+            "ROUND(Quantity, 0)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。"
+    },
+    {
+        "id": 104,
+        "type": "single",
+        "question": "104. 【CH03-補充】您有一個員工資料表 `Employees`，其中包含 `EmployeeID`, `Name` 和 `ManagerID`。<br>\n`ManagerID` 欄位儲存的是該員工的主管的 `EmployeeID`。<br>\n若您想列出「員工姓名」及其「主管姓名」，應該使用哪種聯結 (Join)？",
+        "options": [
+            "交叉聯結 (Cross Join)",
+            "自我聯結 (Self Join)",
+            "自然聯結 (Natural Join)",
+            "聯集 (Union)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。"
+    },
+    {
+        "id": 105,
+        "type": "single",
+        "question": "105. 【CH03-補充】您想要找出所有「單價高於『任何』(ANY) 一項文具類產品」的商品。<br>\n請問下列 SQL 語法何者正確？",
+        "options": [
+            "WHERE Price > ANY (SELECT Price FROM Products WHERE Category = 'Stationery')",
+            "WHERE Price > ALL (SELECT Price FROM Products WHERE Category = 'Stationery')",
+            "WHERE Price > SOME (SELECT Price FROM Products WHERE Category = 'Stationery')",
+            "WHERE Price > (SELECT MAX(Price) FROM Products WHERE Category = 'Stationery')"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。"
+    }
 ]

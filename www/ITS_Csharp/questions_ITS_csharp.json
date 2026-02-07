@@ -2,7 +2,7 @@
     {
         "id": 1,
         "question": [
-            "您正在建立用以儲存測驗結果的應用程式。<br/>您需要記錄每個答案正確或不正確。<br/>您還需要將儲存資料所需的記憶體數量減到最少。<br/>您應該使用哪一種資料類型？"
+            "您正在建立用以儲存測驗結果的應用程式。<br/>您需要記錄每個答案正確或不正確。<br/>您還需要將儲存資料所需的記憶體數量減到最少。<br/>您應該使用哪一種資料型別？"
         ],
         "options": [
             "boolean",
@@ -15,11 +15,10 @@
         ],
         "explanation": [
             "題目解析",
-			"boolean在C#中是1位元組",
-			"double是雙精度浮點數，通常需要8個位元組",
-			"integer是整數，通常4位元組",
-			"string是字串型別，佔用的記憶體更大。"
-
+            "boolean在C#中是1位元組",
+            "double是雙精度浮點數，通常需要8個位元組",
+            "integer是整數，通常4位元組",
+            "string是字串型別，佔用的記憶體更大。"
         ],
         "weight": 1,
         "image": null,
@@ -176,8 +175,8 @@
         ],
         "explanation": [
             "題目核心要點",
-			"  1. 語法結構：setInterval( Function, Interval )，其中： Function 是函式的引用（不加括號）。",
-			"  2. Interval 是以毫秒為單位的時間（1000 毫秒 = 1 秒）。"
+            "  1. 語法結構：setInterval( Function, Interval )，其中： Function 是函式的引用（不加括號）。",
+            "  2. Interval 是以毫秒為單位的時間（1000 毫秒 = 1 秒）。"
         ],
         "weight": 1,
         "image": null,
@@ -230,10 +229,10 @@
         ],
         "explanation": [
             "題目解析重點",
-			"1.DelegateA是一個普通的委託，而EventA是一個事件。",
-			"2.delegate 欄位可以直接賦值（=）或用 +=/-= 來加減委派方法。",
-			"3.event 在外部只能用 += 或 -= 來訂閱/取消事件，不能直接用 = 指派事件處理器。",
-			"4.=只允許在事件宣告類別的內部使用（或在事件自訂 add/remove accessor 時）。"
+            "1.DelegateA是一個普通的委託，而EventA是一個事件。",
+            "2.delegate 欄位可以直接賦值（=）或用 +=/-= 來加減委派方法。",
+            "3.event 在外部只能用 += 或 -= 來訂閱/取消事件，不能直接用 = 指派事件處理器。",
+            "4.=只允許在事件宣告類別的內部使用（或在事件自訂 add/remove accessor 時）。"
         ],
         "weight": 1,
         "image": null,
@@ -254,9 +253,9 @@
             0
         ],
         "explanation": [
-            "抽象類別（abstract class）無法被直接具現化（不能用 new 關鍵字創建實例）。 ",
-			"它可以用來定義抽象方法，這些方法必須由繼承自該抽象類別的非抽象子類別來實作。",
-			"這與題目的需求完全吻合。sealed 類別則相反，它無法被繼承。"
+            "抽象類別（abstract class）無法被直接具現化（不能用 new 關鍵字建立例項）。 ",
+            "它可以用來定義抽象方法，這些方法必須由繼承自該抽象類別的非抽象子類別來實作。",
+            "這與題目的需求完全吻合。sealed 類別則相反，它無法被繼承。"
         ],
         "weight": 1,
         "image": null,
@@ -278,19 +277,19 @@
         ],
         "explanation": [
             "依照堆疊操作後，最上層依序彈出 8 → 3 → 7 → 6，剩下的是 2、4、6，其中 6 為最上層。",
-			"堆疊是後進先出（LIFO）的資料結構。 ",
-			"初始堆疊（Stack）:  ",
-			"[2, 4, 6, 8] (8在最上面)。 ",
-			"Pop: 移除 8。堆疊: [2, 4, 6]。 ",
-			"Push 3: 堆疊: [2, 4, 6, 3] (3在最上面)。 ",
-			"Pop: 移除 3。堆疊: [2, 4, 6]. ",
-			"Push 4: 堆疊: [2, 4, 6, 4]. ",
-			"Push 6: 堆疊: [2, 4, 6, 4, 6]. ",
-			"Push 7: 堆疊: [2, 4, 6, 4, 6, 7]. ",
-			"Pop: 移除 7。堆疊: [2, 4, 6, 4, 6]. ",
-			"Pop: 移除 6。堆疊: [2, 4, 6, 4]. ",
-			"Pop: 移除 4。堆疊: [2, 4, 6]. ",
-			"最後，最上層的元素是 6。 "
+            "堆疊是後進先出（LIFO）的資料結構。 ",
+            "初始堆疊（Stack）:  ",
+            "[2, 4, 6, 8] (8在最上面)。 ",
+            "Pop: 移除 8。堆疊: [2, 4, 6]。 ",
+            "Push 3: 堆疊: [2, 4, 6, 3] (3在最上面)。 ",
+            "Pop: 移除 3。堆疊: [2, 4, 6]. ",
+            "Push 4: 堆疊: [2, 4, 6, 4]. ",
+            "Push 6: 堆疊: [2, 4, 6, 4, 6]. ",
+            "Push 7: 堆疊: [2, 4, 6, 4, 6, 7]. ",
+            "Pop: 移除 7。堆疊: [2, 4, 6, 4, 6]. ",
+            "Pop: 移除 6。堆疊: [2, 4, 6, 4]. ",
+            "Pop: 移除 4。堆疊: [2, 4, 6]. ",
+            "最後，最上層的元素是 6。 "
         ],
         "weight": 1,
         "image": null,
@@ -326,7 +325,7 @@
     {
         "id": 13,
         "question": [
-            "請將清單中的每個版本控制系統命令，移至正確的描述位置：<br/>命令：<br/>1. branch<br/>2. checkout<br/>3. commit<br/>4. merge<br/>5. rollback<br/>描述：<br/>A. 儲存新的專案快照<br/>B. 管理開發程式碼行<br/>C. 更新工作專案的全部或其中一部分<br/>D. 將您的本機專案還原回先前的狀態<br/>E. 將另一個專案的內容導入目前的專案<br/>哪一個選項的順序正確？"
+            "請將清單中的每個版本控制系統命令，移至正確的描述位置：<br/>命令：<br/>1. branch<br/>2. checkout<br/>3. commit<br/>4. merge<br/>5. rollback<br/>描述：<br/>A. 儲存新的專案快照<br/>B. 管理開發程式碼行<br/>C. 更新工作專案的全部或其中一部分<br/>D. 將您的本機專案還原回先前的狀態<br/>E. 將另一個專案的內容匯入目前的專案<br/>哪一個選項的順序正確？"
         ],
         "options": [
             "12345",
@@ -368,7 +367,7 @@
     {
         "id": 15,
         "question": [
-            "哪一個詞能描述將物件的實值型別轉換成參考型別的程序？"
+            "哪一個詞能描述將物件的實值型別轉換成參考型別的程式？"
         ],
         "options": [
             "Boxing",
@@ -452,7 +451,7 @@
     {
         "id": 19,
         "question": [
-            "哪一個詞能描述將物件轉換成較一般類型的程序？"
+            "哪一個詞能描述將物件轉換成較一般型別的程式？"
         ],
         "options": [
             "向上轉型",
@@ -528,7 +527,7 @@
             "r1.Seconds = 99;",
             "r1.Display();",
             "r2.Display();",
-            "r1.DisplayRaw();</code></pre><br/>此程式碼必須輸出下列結果至主控台：<br/>99 seconds<br/>1.65 minutes<br/>99<br/>請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：<br/>宣告：<br/><pre><code class=\"language-csharp\">(1)public override void Display(){",
+            "r1.DisplayRaw();</code></pre><br/>此程式碼必須輸出下列結果至主控臺：<br/>99 seconds<br/>1.65 minutes<br/>99<br/>請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：<br/>宣告：<br/><pre><code class=\"language-csharp\">(1)public override void Display(){",
             "(2)public void DisplayRaw() {",
             "(3)void IDisplayResult.Display() {</code></pre><br/>(4)private void Display()<br/>作答區：<br/><pre><code class=\"language-csharp\">public class FootRace : Race, IDisplayResult",
             "{</code></pre><br/>＿ (A) ＿<br/><pre><code class=\"language-csharp\">Console.WriteLine(Seconds + &quot; seconds&quot;);",
@@ -619,7 +618,7 @@
     {
         "id": 26,
         "question": [
-            "您正在建立一個 Web 應用程式。即將存取該應用程式的用戶端電腦會執行各種網頁瀏覽器。哪一個詞能描述讓應用程式可供用戶端電腦存取的程序？"
+            "您正在建立一個 Web 應用程式。即將存取該應用程式的使用者端電腦會執行各種網頁瀏覽器。哪一個詞能描述讓應用程式可供使用者端電腦存取的程式？"
         ],
         "options": [
             "轉型",
@@ -661,7 +660,7 @@
     {
         "id": 28,
         "question": [
-            "請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。"
+            "請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受使用者端要求，然後以網頁的形式將資料傳回使用者端來回應。"
         ],
         "options": [
             "FTP",
@@ -682,7 +681,7 @@
     {
         "id": 29,
         "question": [
-            "請選取正確的選項以完成句子。擁有存取權的用戶端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。"
+            "請選取正確的選項以完成句子。擁有存取權的使用者端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。"
         ],
         "options": [
             "FTP",
@@ -703,7 +702,7 @@
     {
         "id": 30,
         "question": [
-            "哪一個程序會將資料轉換為 Web 服務所用的 XML 字串？"
+            "哪一個程式會將資料轉換為 Web 服務所用的 XML 字串？"
         ],
         "options": [
             "還原序列化",
@@ -873,7 +872,7 @@
     {
         "id": 38,
         "question": [
-            "哪一個 LINQ 運算子會壓平合併序列？"
+            "哪一個 LINQ 運運算元會壓平合併序列？"
         ],
         "options": [
             "SelectMany",
@@ -898,7 +897,7 @@
     {
         "id": 39,
         "question": [
-            "如何設定 NoSQL 文件資料庫的資料結構？"
+            "如何設定 NoSQL 檔案資料庫的資料結構？"
         ],
         "options": [
             "設為 XML",
@@ -1211,7 +1210,7 @@
             "請選擇正確的選項以完成有關加密解密的句子：<br/>數位簽章需要？"
         ],
         "options": [
-            "私密鑰匙",
+            "私金鑰匙",
             "公開鑰匙",
             "私密和公開鑰匙"
         ],
@@ -1287,7 +1286,7 @@
             "{",
             "_name = name;",
             "}",
-            "}</code></pre><br/>呼叫包含三個參數的建構函式時，指派欄位的順序為何？<br/>請選出下列欄位位置正確排序：<br/>1._defaultTeam<br/>2._rank<br/>3. _name"
+            "}</code></pre><br/>呼叫包含三個引數的建構函式時，指派欄位的順序為何？<br/>請選出下列欄位位置正確排序：<br/>1._defaultTeam<br/>2._rank<br/>3. _name"
         ],
         "options": [
             "123",
@@ -1356,7 +1355,7 @@
     {
         "id": 59,
         "question": [
-            "下列何者必須存在，才能從特定類別推導出繼承性？"
+            "下列何者必須存在，才能從特定類別推匯出繼承性？"
         ],
         "options": [
             "has-a 關聯",
@@ -1398,7 +1397,7 @@
     {
         "id": 61,
         "question": [
-            "您建立了一個AMumber類型的物件並將類別定義如下:<br/><pre><code class=\"language-csharp\">public class ANumber {",
+            "您建立了一個AMumber型別的物件並將類別定義如下:<br/><pre><code class=\"language-csharp\">public class ANumber {",
             "private int _number = 7;",
             "public ANumber() {",
             "}",
@@ -1460,7 +1459,7 @@
             "r1.Seconds = 99;",
             "r1.Display();",
             "r2.Display();",
-            "r1.DisplayRaw();</code></pre><br/>此程式碼必須輸出下列結果至主控台：<br/>99 seconds<br/>1.65 minutes<br/>99<br/>請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：<br/>宣告：<br/><pre><code class=\"language-csharp\">(1)public override void Display(){",
+            "r1.DisplayRaw();</code></pre><br/>此程式碼必須輸出下列結果至主控臺：<br/>99 seconds<br/>1.65 minutes<br/>99<br/>請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：<br/>宣告：<br/><pre><code class=\"language-csharp\">(1)public override void Display(){",
             "(2)public void DisplayRaw() {",
             "(3)void IDisplayResult.Display() {",
             "(4)private void Display() {</code></pre><br/>作答區：<br/><pre><code class=\"language-csharp\">public class FootRace : Race, IDisplayResult",
@@ -1493,7 +1492,7 @@
         ],
         "options": [
             "批次處理",
-            "用戶端",
+            "使用者端",
             "多執行緒",
             "伺服器端"
         ],
@@ -1568,7 +1567,7 @@
     {
         "id": 68,
         "question": [
-            "請從清單中選取正確的選項以完成句子。<br/>所有網頁伺服器會經由 ＿＿ 通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。"
+            "請從清單中選取正確的選項以完成句子。<br/>所有網頁伺服器會經由 ＿＿ 通訊協定接受使用者端要求，然後以網頁的形式將資料傳回使用者端來回應。"
         ],
         "options": [
             "FTP",
@@ -1589,7 +1588,7 @@
     {
         "id": 69,
         "question": [
-            "請從清單中選取正確的選項以完成句子。<br/>擁有存取權的用戶端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。"
+            "請從清單中選取正確的選項以完成句子。<br/>擁有存取權的使用者端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。"
         ],
         "options": [
             "FTP",
@@ -1723,7 +1722,7 @@
     {
         "id": 75,
         "question": [
-            "您需要建立一個傳入人員 UserName 和 Age 的預存程序。<br/>Age 必須是以年為單位的整數。<br/>UserName 至少必須有三個字元。<br/>您應該使用哪一個陳述式來建立此預存程序？"
+            "您需要建立一個傳入人員 UserName 和 Age 的預存程式。<br/>Age 必須是以年為單位的整數。<br/>UserName 至少必須有三個字元。<br/>您應該使用哪一個陳述式來建立此預存程式？"
         ],
         "options": [
             "CREATE PROCEDURE StoreData @UserName nvarchar (255), @Age int",
@@ -1813,8 +1812,8 @@
         "options": [
             "JSON 物件可使用名稱/值對來建立。             # JSON 基本結構就是 key:value 配對",
             "JSON 物件可使用已排序的值清單來建立。 #這描述的是 JSON 陣列 (Array)，而不是 JSON 物件。",
-            "JSON 物件可運用命名空間。   #JSON 沒有命名空間的概念，那是 XML 的特性。",
-            "JSON 物件可延伸。   # JSON 是輕量格式, 可以自由新增 key/value，沒有schema, 具有「可擴展性」。 E. 以上皆是 F. 以上皆非"
+            "JSON 物件可運用名稱空間。   #JSON 沒有名稱空間的概念，那是 XML 的特性。",
+            "JSON 物件可延伸。   # JSON 是輕量格式, 可以自由新增 key/value，沒有schema, 具有「可擴充套件性」。 E. 以上皆是 F. 以上皆非"
         ],
         "answer": [
             0,
@@ -1856,7 +1855,7 @@
         ],
         "options": [
             "提升效能                           #因為重複使用現有連線，減少建立/關閉連線的開銷。",
-            "提升可擴縮性                  #連線池可以讓有限的連線資源服務更多用戶，提升系統可擴充能力。",
+            "提升可擴縮性                  #連線池可以讓有限的連線資源服務更多使用者，提升系統可擴充能力。",
             "縮短建立連線的時間     #因為新請求可以直接重用池中連線，而不需要重新 handshake。",
             "不需要任何設定             #雖然有些框架會自動啟用，但通常還是需要設定(最大池大小、逾時等)。 E. 提升安全性                      #安全性和連線池沒有直接關係。 F. 以上皆非"
         ],
@@ -1881,7 +1880,7 @@
             "using 陳述式    # C# 的 using 陳述式(using (...) { ... })在區塊結束時會自動呼叫 Dispose()，作資源釋放。",
             "using 指示詞    #這個只是 using System; 之類的 namespace 引用，不會釋放資源。",
             "finally 區塊     # try …finally…無論是否發生例外, finally 區塊的程式碼一定會執行，用來釋放資源。",
-            "throw 關鍵字  #這是拋出例外，和資源釋出無關。 E. 以上皆是 F. 以上皆非"
+            "throw 關鍵字  #這是丟擲例外，和資源釋出無關。 E. 以上皆是 F. 以上皆非"
         ],
         "answer": [
             0,
@@ -1900,7 +1899,7 @@
             "您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案。）"
         ],
         "options": [
-            "測試案例必要的任何前置條件  #單元測試需要定義測試前的狀態，例如輸入參數、初始資料等。",
+            "測試案例必要的任何前置條件  #單元測試需要定義測試前的狀態，例如輸入引數、初始資料等。",
             "測試案例的預期結果                    #單元測試的重點就是比較「實際結果」與「預期結果」",
             "與其他測試案例的整合                       #單元測試應該是獨立的，不依賴其他測試。",
             "綜合成單一測試的所有使用案例    #這比較像整合測試，不是單元測試。 E. 沒有任何判斷提示的測試案例         #單元測試必須要有判斷標準(assertion)，否則測不出對錯。 F. 以上皆非"
@@ -1919,7 +1918,7 @@
     {
         "id": 84,
         "question": [
-            "下列哪兩項敘述正確描述了JSON物件?(請選擇2個答案·)<br/>(AJSON物件可使用名稱/直對來建置。<br/>(B)JSON物件可使用已排序的值清單來建置。<br/>(C)JSON物件可運用命名空間。<br/>(D)JSON物件可延伸。<br/>(E)以上皆是<br/>(F)以上皆非"
+            "下列哪兩項敘述正確描述了JSON物件?(請選擇2個答案·)<br/>(AJSON物件可使用名稱/直對來建置。<br/>(B)JSON物件可使用已排序的值清單來建置。<br/>(C)JSON物件可運用名稱空間。<br/>(D)JSON物件可延伸。<br/>(E)以上皆是<br/>(F)以上皆非"
         ],
         "options": [],
         "answer": [
@@ -2124,8 +2123,8 @@
             "逸出 (Escape) 的意思是把使用者輸入中的特殊字元（如 ', \", ;）轉換為無害字元，避免被解釋為 SQL 語法的一部分。",
             "雖然這樣做可以降低風險，但要注意它 不是最安全、最推薦的方法。",
             "更佳的防禦方式：",
-            "參數化查詢 (Parameterized Query, Prepared Statement) → 最標準的解法。",
-            "最小權限原則 (Least Privilege) → 限制資料庫帳號權限。",
+            "引數化查詢 (Parameterized Query, Prepared Statement) → 最標準的解法。",
+            "最小許可權原則 (Least Privilege) → 限制資料庫帳號許可權。",
             "輸入驗證 (Input Validation) → 過濾非預期的輸入內容。"
         ],
         "weight": 1,
@@ -2280,7 +2279,7 @@
             "11     }",
             "12 };",
             "13 xhr.open(&#x27;GET&#x27;, &#x27;menu.json&#x27;, true);",
-            "14 xhr.send(null);</code></pre><br/>在第 13 行，true 參數會指定非同步處理。"
+            "14 xhr.send(null);</code></pre><br/>在第 13 行，true 引數會指定非同步處理。"
         ],
         "options": [
             "Yes",
@@ -2299,7 +2298,7 @@
     {
         "id": 101,
         "question": [
-            "請回答有關佇列的敘述：<br/>佇列的項目數有限制。"
+            "請回答有關佇列的敘述：<br/>佇列的專案數有限制。"
         ],
         "options": [
             "Yes",
@@ -2337,7 +2336,7 @@
     {
         "id": 103,
         "question": [
-            "請回答有關佇列的敘述：<br/>佇列的項目是按照加入的順序儲存。"
+            "請回答有關佇列的敘述：<br/>佇列的專案是按照加入的順序儲存。"
         ],
         "options": [
             "Yes",
@@ -2356,7 +2355,7 @@
     {
         "id": 104,
         "question": [
-            "請回答有關 NoSQL 資料庫的敘述：<br/>文件資料庫會將資料儲存在類似 JSON 的檔案中。"
+            "請回答有關 NoSQL 資料庫的敘述：<br/>檔案資料庫會將資料儲存在類似 JSON 的檔案中。"
         ],
         "options": [
             "Yes",
@@ -2375,7 +2374,7 @@
     {
         "id": 105,
         "question": [
-            "請回答有關 NoSQL 資料庫的敘述：<br/>文件資料庫的設計目的是以預先定義的關聯處理資料。"
+            "請回答有關 NoSQL 資料庫的敘述：<br/>檔案資料庫的設計目的是以預先定義的關聯處理資料。"
         ],
         "options": [
             "Yes",
@@ -2467,262 +2466,259 @@
         "image": null,
         "type": "single"
     },
-	
-  {
-    "id": 110,
-    "type": "single",
-    "question": "【OOP-繼承】在物件導向程式設計中，當一個類別 (Class) 衍生自另一個類別時，這稱為繼承。例如 `Dog` 類別繼承自 `Animal` 類別。請問這代表了什麼關係？",
-    "options": [
-      "Has-a 關係 (擁有)",
-      "Is-a 關係 (是一個)",
-      "Uses-a 關係 (使用)",
-      "Was-a 關係 (過去是)"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "繼承 (Inheritance) 建立的是 **Is-a** 的關係。例如：狗 (Dog) **是一個 (is an)** 動物 (Animal)。這是判斷是否該使用繼承的主要依據。"
-  },
-  {
-    "id": 111,
-    "type": "single",
-    "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
-    "options": [
-      "public",
-      "private",
-      "protected",
-      "internal"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**private** (私有) 成員只能在類別內部存取，這是**封裝 (Encapsulation)** 的核心概念，用於保護資料不被外部不當修改。"
-  },
-  {
-    "id": 112,
-    "type": "single",
-    "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
-    "options": [
-      "overload (多載)",
-      "override (覆寫)",
-      "shadow (遮蔽)",
-      "extend (延伸)"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**override (覆寫)** 用於在子類別中重新定義父類別的虛擬 (virtual) 或抽象 (abstract) 方法，這是實現**多型 (Polymorphism)** 的方式。"
-  },
-  {
-    "id": 113,
-    "type": "single",
-    "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
-    "options": [
-      "類別是藍圖，物件是根據藍圖建立的實體",
-      "物件是藍圖，類別是實體",
-      "類別存在於 Heap 記憶體，物件存在於 Stack 記憶體",
-      "一個類別只能建立一個物件"
-    ],
-    "answer": [
-      0
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。"
-  },
-  {
-    "id": 114,
-    "type": "single",
-    "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
-    "options": [
-      "設計 (Design)",
-      "測試 (Testing)",
-      "需求分析 (Requirements Analysis)",
-      "開發 (Development)"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。"
-  },
-  {
-    "id": 115,
-    "type": "single",
-    "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
-    "options": [
-      "單元測試 (Unit Testing)",
-      "整合測試 (Integration Testing)",
-      "系統測試 (System Testing)",
-      "驗收測試 (Acceptance Testing)"
-    ],
-    "answer": [
-      0
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。"
-  },
-  {
-    "id": 116,
-    "type": "single",
-    "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
-    "options": [
-      "CSS",
-      "JavaScript",
-      "HTML",
-      "C#"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；**CSS** 負責樣式與美觀；**JavaScript** 負責行為與互動。"
-  },
-  {
-    "id": 117,
-    "type": "single",
-    "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字體變成白色，您應該使用哪種技術？",
-    "options": [
-      "HTML",
-      "CSS (Cascading Style Sheets)",
-      "XML",
-      "HTTP"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字體、排版）。"
-  },
-  {
-    "id": 118,
-    "type": "single",
-    "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
-    "options": [
-      "資料庫伺服器",
-      "網頁伺服器 (IIS/Apache)",
-      "客戶端瀏覽器 (Client-side Browser)",
-      "防火牆"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。"
-  },
-  {
-    "id": 119,
-    "type": "single",
-    "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
-    "options": [
-      "Web Browser",
-      "Web Server",
-      "DNS Server",
-      "Proxy Server"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**Web Server (網頁伺服器)** 負責儲存、處理並傳送網頁檔案給客戶端。"
-  },
-  {
-    "id": 120,
-    "type": "single",
-    "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
-    "options": [
-      "類別可以繼承多個抽象類別",
-      "介面可以包含實作程式碼 (在 C# 8.0 之前)",
-      "類別可以實作多個介面",
-      "抽象類別可以直接被實體化 (new)"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "C# 支援**單一繼承**（只能繼承一個類別），但可以**實作多個介面**。抽象類別不能被直接實體化，必須被繼承。"
-  },
-  {
-    "id": 121,
-    "type": "single",
-    "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
-    "options": [
-      "Stack (堆疊)",
-      "Heap (堆積)",
-      "Queue (佇列)",
-      "Cache (快取)"
-    ],
-    "answer": [
-      1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "參考型別（如 Class）的實體儲存在 **Heap**；而實值型別（如 int, bool）的值通常儲存在 **Stack**（當作為區域變數時）。"
-  },
-  {
-    "id": 122,
-    "type": "single",
-    "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
-    "options": [
-      "2 -> 4 -> 1 -> 3 -> 5",
-      "1 -> 2 -> 3 -> 4 -> 5",
-      "4 -> 2 -> 1 -> 5 -> 3",
-      "2 -> 1 -> 4 -> 3 -> 5"
-    ],
-    "answer": [
-      0
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "標準瀑布式流程：**需求分析** -> **設計** -> **開發 (實作)** -> **測試** -> **維護** (部署後)。"
-  },
-  {
-    "id": 123,
-    "type": "single",
-    "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合類型？",
-    "options": [
-      "List<int>",
-      "Array",
-      "HashSet<int>",
-      "Queue<int>"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**HashSet** 是一種集合，其特性是**不允許重複元素**，且存取速度快。"
-  },
-  {
-    "id": 124,
-    "type": "single",
-    "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
-    "options": [
-      "HTML Tags",
-      "CSS Styles",
-      "Cookies / Session",
-      "FTP"
-    ],
-    "answer": [
-      2
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "**Cookies** 和 **Session** 是 Web 應用程式用來追蹤使用者狀態（如購物車、登入資訊）的主要機制。"
-  }
-
-	
+    {
+        "id": 110,
+        "type": "single",
+        "question": "【OOP-繼承】在物件導向程式設計中，當一個類別 (Class) 衍生自另一個類別時，這稱為繼承。例如 `Dog` 類別繼承自 `Animal` 類別。請問這代表了什麼關係？",
+        "options": [
+            "Has-a 關係 (擁有)",
+            "Is-a 關係 (是一個)",
+            "Uses-a 關係 (使用)",
+            "Was-a 關係 (過去是)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "繼承 (Inheritance) 建立的是 **Is-a** 的關係。例如：狗 (Dog) **是一個 (is an)** 動物 (Animal)。這是判斷是否該使用繼承的主要依據。"
+    },
+    {
+        "id": 111,
+        "type": "single",
+        "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
+        "options": [
+            "public",
+            "private",
+            "protected",
+            "internal"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**private** (私有) 成員只能在類別內部存取，這是**封裝 (Encapsulation)** 的核心概念，用於保護資料不被外部不當修改。"
+    },
+    {
+        "id": 112,
+        "type": "single",
+        "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
+        "options": [
+            "overload (多載)",
+            "override (覆寫)",
+            "shadow (遮蔽)",
+            "extend (延伸)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**override (覆寫)** 用於在子類別中重新定義父類別的虛擬 (virtual) 或抽象 (abstract) 方法，這是實現**多型 (Polymorphism)** 的方式。"
+    },
+    {
+        "id": 113,
+        "type": "single",
+        "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
+        "options": [
+            "類別是藍圖，物件是根據藍圖建立的實體",
+            "物件是藍圖，類別是實體",
+            "類別存在於 Heap 記憶體，物件存在於 Stack 記憶體",
+            "一個類別只能建立一個物件"
+        ],
+        "answer": [
+            0
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。"
+    },
+    {
+        "id": 114,
+        "type": "single",
+        "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
+        "options": [
+            "設計 (Design)",
+            "測試 (Testing)",
+            "需求分析 (Requirements Analysis)",
+            "開發 (Development)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。"
+    },
+    {
+        "id": 115,
+        "type": "single",
+        "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
+        "options": [
+            "單元測試 (Unit Testing)",
+            "整合測試 (Integration Testing)",
+            "系統測試 (System Testing)",
+            "驗收測試 (Acceptance Testing)"
+        ],
+        "answer": [
+            0
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。"
+    },
+    {
+        "id": 116,
+        "type": "single",
+        "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
+        "options": [
+            "CSS",
+            "JavaScript",
+            "HTML",
+            "C#"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；**CSS** 負責樣式與美觀；**JavaScript** 負責行為與互動。"
+    },
+    {
+        "id": 117,
+        "type": "single",
+        "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？",
+        "options": [
+            "HTML",
+            "CSS (Cascading Style Sheets)",
+            "XML",
+            "HTTP"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字型、排版）。"
+    },
+    {
+        "id": 118,
+        "type": "single",
+        "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
+        "options": [
+            "資料庫伺服器",
+            "網頁伺服器 (IIS/Apache)",
+            "客戶端瀏覽器 (Client-side Browser)",
+            "防火牆"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。"
+    },
+    {
+        "id": 119,
+        "type": "single",
+        "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
+        "options": [
+            "Web Browser",
+            "Web Server",
+            "DNS Server",
+            "Proxy Server"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**Web Server (網頁伺服器)** 負責儲存、處理並傳送網頁檔案給客戶端。"
+    },
+    {
+        "id": 120,
+        "type": "single",
+        "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
+        "options": [
+            "類別可以繼承多個抽象類別",
+            "介面可以包含實作程式碼 (在 C# 8.0 之前)",
+            "類別可以實作多個介面",
+            "抽象類別可以直接被實體化 (new)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "C# 支援**單一繼承**（只能繼承一個類別），但可以**實作多個介面**。抽象類別不能被直接實體化，必須被繼承。"
+    },
+    {
+        "id": 121,
+        "type": "single",
+        "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
+        "options": [
+            "Stack (堆疊)",
+            "Heap (堆積)",
+            "Queue (佇列)",
+            "Cache (快取)"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "參考型別（如 Class）的實體儲存在 **Heap**；而實值型別（如 int, bool）的值通常儲存在 **Stack**（當作為區域變數時）。"
+    },
+    {
+        "id": 122,
+        "type": "single",
+        "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
+        "options": [
+            "2 -> 4 -> 1 -> 3 -> 5",
+            "1 -> 2 -> 3 -> 4 -> 5",
+            "4 -> 2 -> 1 -> 5 -> 3",
+            "2 -> 1 -> 4 -> 3 -> 5"
+        ],
+        "answer": [
+            0
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "標準瀑布式流程：**需求分析** -> **設計** -> **開發 (實作)** -> **測試** -> **維護** (部署後)。"
+    },
+    {
+        "id": 123,
+        "type": "single",
+        "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？",
+        "options": [
+            "List<int>",
+            "Array",
+            "HashSet<int>",
+            "Queue<int>"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**HashSet** 是一種集合，其特性是**不允許重複元素**，且存取速度快。"
+    },
+    {
+        "id": 124,
+        "type": "single",
+        "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
+        "options": [
+            "HTML Tags",
+            "CSS Styles",
+            "Cookies / Session",
+            "FTP"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "**Cookies** 和 **Session** 是 Web 應用程式用來追蹤使用者狀態（如購物車、登入資訊）的主要機制。"
+    }
 ]
