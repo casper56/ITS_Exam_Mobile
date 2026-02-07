@@ -2349,23 +2349,23 @@
         "explanation": "● `assertIs(a, b)`：檢查 `a is b` (是否為同一物件)。<br>● `assertEqual(a, b)`：檢查 `a == b` (值是否相等)。<br>● 例如：`a = [1]; b = [1]`，它們的值相等 (`Equal`) 但不是同一個物件 (`Not Is`)。"
     },
     {
-		"id": 133,
-		"type": "single",
-		"question": "133. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
-		"options": [
-			"x: q[head]=c; y: head += 1",
-			"x: q.append(c); y: head += 1",
-			"x: q[head]=c; y: head -= 1",
-			"x: q.append(c); y: head -= 1",
-			"以上皆非"
-		],
-		"answer": [
-			2
-		],
-		"weight": 1,
-		"image": null,
-		"explanation": "本題考查佇列 (Queue) 的 FIFO (先進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (入列)</b>：使用 `append(c)` 加到尾端。<br>2. <b>Pop (出列)</b>：題目採「移動指標」方式，故 `y` 應為 `head += 1`。<br><br><b>【補充：另一種實作方式 (直接刪除)】</b><br>若不使用 `head` 指標，也可以直接使用 `pop(0)` 來移除元素，這會真實釋放記憶體：<br><pre><code class=\"language-python\">q = []\n\ndef push(q, c):\n    q.append(c)\n\ndef pop(q):\n    c = q.pop(0) # 直接移除並回傳第一個元素\n    return c\n\n# 測試\npush(q, 1)\npush(q, 2)\nprint(pop(q)) # 印出 1\nprint(q)      # 印出 [2] (1已被移除)</code></pre>"
-	},
+        "id": 133,
+        "type": "single",
+        "question": "133. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
+        "options": [
+            "x: q[head]=c; y: head += 1",
+            "x: q.append(c); y: head += 1",
+            "x: q[head]=c; y: head -= 1",
+            "x: q.append(c); y: head -= 1",
+            "以上皆非"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "本題考查佇列 (Queue) 的 FIFO (先進先出) 實作邏輯。<br><br><b>【解析】</b><br>1. <b>Push (入列)</b>：使用 `append(c)` 加到尾端。<br>2. <b>Pop (出列)</b>：題目採「移動指標」方式，故 `y` 應為 `head += 1`。<br><br><b>【補充：另一種實作方式 (直接刪除)】</b><br>若不使用 `head` 指標，也可以直接使用 `pop(0)` 來移除元素，這會真實釋放記憶體：<br><pre><code class=\"language-python\">q = []\n\ndef push(q, c):\n    q.append(c)\n\ndef pop(q):\n    c = q.pop(0) # 直接移除並回傳第一個元素\n    return c\n\n# 測試\npush(q, 1)\npush(q, 2)\nprint(pop(q)) # 印出 1\nprint(q)      # 印出 [2] (1已被移除)</code></pre>"
+    },
     {
         "id": 134,
         "type": "single",
@@ -2576,5 +2576,73 @@
         "weight": 1,
         "image": null,
         "explanation": "本題考查巢狀迴圈 (Nested Loop) 的執行次數計算。<br><br><b>【解析】</b><br>外層迴圈 <code>i</code> 從 1 跑到 4。<br>內層迴圈 <code>j</code> 從 <code>i</code> 跑到 4。<br>● i=1 時: j=1,2,3,4 (共 4 次)<br>● i=2 時: j=2,3,4 (共 3 次)<br>● i=3 時: j=3,4 (共 2 次)<br>● i=4 時: j=4 (共 1 次)<br><br>總次數 <code>cnt = 4 + 3 + 2 + 1 = 10</code>。<br><br>這類題目考驗您是否能冷靜地追蹤變數變化，是 APCS 的核心考題。"
+    },
+    {
+        "id": 146,
+        "type": "single",
+        "question": "146. 【CH06-補充】在 Python 中，若要取得「自 1970 年 1 月 1 日 00:00:00 (UTC) 起」經過的總秒數 (Unix Timestamp)，應使用下列哪個函式？",
+        "options": [
+            "time.clock()",
+            "time.now()",
+            "time.time()",
+            "time.date()"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `time.time()`：回傳當前時間的時間戳記 (Timestamp)，型態為浮點數 (float)，單位為秒。<br>● 這通常用於計算程式執行的時間差 (結束時間 - 開始時間)。<br>● `datetime.now()` 才是取得日期格式，`time.now()` 不存在。"
+    },
+    {
+        "id": 147,
+        "type": "single",
+        "question": "147. 【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？",
+        "options": [
+            "time.stop(3.5)",
+            "time.pause(3500)",
+            "time.sleep(3.5)",
+            "time.wait(3.5)"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `time.sleep(secs)`：讓程式暫停指定的秒數。<br>● 參數可以是整數 (int) 或浮點數 (float)，例如 `3.5` 代表 3.5 秒。<br>● 其他選項如 stop, pause, wait 皆非標準 `time` 模組的函式。"
+    },
+    {
+        "id": 148,
+        "type": "single",
+        "question": "148. 【CH06-補充】若您在程式開頭使用了 `import time as t`，則下列哪一行程式碼是**正確**的呼叫方式？",
+        "options": [
+            "time.sleep(1)",
+            "t.sleep(1)",
+            "sleep(1)",
+            "Time.sleep(1)"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `import time as t` 意思是載入模組並給它一個別名 `t`。<br>● 一旦定義了別名，原本的模組名稱 `time` 在該程式區塊中通常就無法直接使用了，必須使用別名 `t` 來呼叫函式，如 `t.sleep(1)`。"
+    },
+    {
+        "id": 149,
+        "type": "single",
+        "question": "149. 【CH06-補充】關於 `from time import *` 的用法，下列敘述何者正確？",
+        "options": [
+            "這是不合法的 Python 語法",
+            "這會匯入 time 模組，但呼叫時仍需加上 `time.` 前綴 (例如 `time.sleep()`)",
+            "這會將 time 模組內的所有函式匯入，呼叫時不須加前綴 (例如直接寫 `sleep()`)",
+            "這只能匯入 sleep 函式，其他函式無法使用"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": "● `from module import *` 會將模組內所有公開的函式與變數直接匯入目前的命名空間 (Namespace)。<br>● 優點：呼叫時方便，不用打模組名稱 (直接寫 `sleep(1)`)。<br>● 缺點：容易產生名稱衝突 (例如自定義變數剛好也叫 time)，通常不建議在大型專案使用。"
     }
 ]
