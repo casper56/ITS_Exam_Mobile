@@ -1874,23 +1874,23 @@
 		"image": null,
 		"explanation": "● `assertTrue(x)` 是 `unittest.TestCase` 的方法，用於驗證 `x` 是否為真值 (Truthiness)。<br>● `assertEqual(x, 'True')` 會檢查 x 是否等於字串 'True'，這通常不是我們想要的。<br><br><b>【關於 assertIsTrue 的補充】</b><br>許多考生會因為其他語言（如 C# NUnit）的經驗而誤選 `assertIsTrue`，但在 Python `unittest` 中：<br>1. <b>不存在此方法</b>：若撰寫 `self.assertIsTrue(x)`，執行時會直接拋出 `AttributeError: 'Test' object has no attribute 'assertIsTrue'`。<br>2. <b>正確對照表</b>：<br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>檢查目標</th><th>❌ 錯誤寫法 (不存在)</th><th>✅ 正確寫法</th></tr><tr><td>驗證 True</td><td>assertIsTrue</td><td><b>assertTrue</b></td></tr><tr><td>驗證 False</td><td>assertIsFalse</td><td><b>assertFalse</b></td></tr><tr><td>驗證 None</td><td>assertIsNull</td><td><b>assertIsNone</b></td></tr></table>"
 	},
-{
-    "id": 105,
-    "type": "single",
-    "question": "105. 【CH08-補充】在 `unittest` 中，若要驗證變數 `x` 的資料型態是否為整數 (`int`)，最推薦使用的斷言方法是？",
-    "options": [
-        "self.assertType(x, int)",
-        "self.assertIsInstance(x, int)",
-        "self.assertEqual(type(x), int)",
-        "self.assertClass(x, int)"
-    ],
-    "answer": [
-        1
-    ],
-    "weight": 1,
-    "image": null,
-    "explanation": "● `assertIsInstance(obj, cls)` 是專門用來檢查物件是否為特定類別 (或其子類別) 的實例。<br>● `assertType` 與 `assertClass` 均不是 `unittest` 的標準方法。<br>● `assertEqual(type(x), int)` 雖然可行，但不支援繼承 (Liskov Substitution Principle)，因此官方建議使用 `assertIsInstance`。"
-},
+	{
+		"id": 105,
+		"type": "single",
+		"question": "105. 【CH08-補充】在 `unittest` 中，若要驗證變數 `x` 的資料型態是否為整數 (`int`)，最推薦使用的斷言方法是？",
+		"options": [
+			"self.assertType(x, int)",
+			"self.assertIsInstance(x, int)",
+			"self.assertEqual(type(x), int)",
+			"self.assertClass(x, int)"
+		],
+		"answer": [
+			1
+		],
+		"weight": 1,
+		"image": null,
+		"explanation": "● `assertIsInstance(obj, cls)` 是專門用來檢查物件是否為特定類別 (或其子類別) 的實例。<br>● `assertType` 與 `assertClass` 均不是 `unittest` 的標準方法。<br>● `assertEqual(type(x), int)` 雖然可行，但不支援繼承 (Liskov Substitution Principle)，因此官方建議使用 `assertIsInstance`。"
+	},
     {
         "id": 105,
         "type": "single",
