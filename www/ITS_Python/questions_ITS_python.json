@@ -1806,23 +1806,23 @@
 		"image": null,
 		"explanation": "● **`random.choices`** 支援 `weights` 參數來設定每個元素的權重 (機率)，且支援可重複取樣 (`k` 可大於清單長度)。<br>● **`random.sample`** **不支援** `weights` 參數，且無法在母體不足時取出比母體更多的元素 (會報錯)。<br><br><b>【選項解析】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th style='background-color: #f2f2f2;'>語法特徵</th><th style='background-color: #f2f2f2;'>結果與問題</th></tr><tr><td><b>1 (正確)</b></td><td><code>choices(..., weights=[...], k=5)</code></td><td>✅ <b>成功</b>。<br>依指定機率 (10:30:60) 隨機選 5 次。</td></tr><tr><td><b>2</b></td><td><code>sample(..., weights=...)</code></td><td>❌ <b>錯誤 (TypeError)</b>。<br><code>sample</code> 不接受 <code>weights</code> 參數。</td></tr><tr><td><b>3</b></td><td><code>choices(..., k=5)</code></td><td>⚠️ <b>機率相等</b>。<br>未設權重，每個獎品機率皆為 33.3%。</td></tr><tr><td><b>4</b></td><td><code>sample(..., 5)</code></td><td>❌ <b>錯誤 (ValueError)</b>。<br>母體只有 3 個，無法取出 5 個不重複元素。</td></tr></table>"
 	},
-    {
-        "id": 101,
-        "type": "single",
-        "question": "101. 【CH07-補充】執行以下程式碼後，變數 `nums` 的狀態為何？\n<pre><code class=\"language-python\">import random\nnums = [1, 2, 3, 4, 5]\nrandom.shuffle(nums)</code></pre>",
-        "options": [
-            "nums 的元素順序被隨機打亂，且直接修改了原始清單",
-            "nums 保持不變，shuffle 回傳了一個新的打亂清單",
-            "nums 變成了 None",
-            "會發生錯誤，因為 list 不支援 shuffle"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": null,
-        "explanation": "● `random.shuffle(x)` 會**原地 (in-place)** 打亂序列 `x` 的順序。\n● 它不會回傳新清單 (回傳 None)，而是直接修改傳入的物件。"
-    },
+	{
+		"id": 101,
+		"type": "single",
+		"question": "101. 【CH07-補充】執行以下程式碼後，變數 `nums` 的狀態為何？\n<pre><code class=\"language-python\">import random\nnums = [1, 2, 3, 4, 5]\nrandom.shuffle(nums)</code></pre>",
+		"options": [
+			"nums 的元素順序被隨機打亂，且直接修改了原始清單",
+			"nums 保持不變，shuffle 回傳了一個新的打亂清單",
+			"nums 變成了 None",
+			"會發生錯誤，因為 list 不支援 shuffle"
+		],
+		"answer": [
+			1
+		],
+		"weight": 1,
+		"image": null,
+		"explanation": "● `random.shuffle(x)` 會**原地 (in-place)** 打亂序列 `x` 的順序。\n● 它不會回傳新清單 (回傳 None)，而是直接修改傳入的物件。\n<pre><code class=\"language-python\">import random\nnums = [1, 2, 3, 4, 5]\nrandom.shuffle(nums)\nprint(nums)  # Output could be: [3, 5, 2, 1, 4]</code></pre>"
+	},
     {
         "id": 102,
         "type": "single",

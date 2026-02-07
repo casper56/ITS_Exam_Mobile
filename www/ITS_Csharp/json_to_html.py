@@ -64,9 +64,9 @@ def create_html(json_file, output_html):
             background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 20px;
             font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center;
         }}
-        .question-body {{ padding: 15px 25px; font-size: 1rem; }}
+        .question-body {{ padding: 15px 25px 10px 25px; font-size: 1rem; }}
         .question-text {{ white-space: pre-wrap; line-height: 1.5; }}
-        .question-image {{ max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+        .question-image {{ max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .option-item {{ list-style: none; margin-bottom: 5px; padding: 5px 12px; border: 1px solid #e9ecef;
             border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }}
@@ -74,15 +74,14 @@ def create_html(json_file, output_html):
         .option-item.correct {{ background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }}
         .option-item.incorrect {{ background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }}
         .sub-question-label {{ font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; font-size: 1.05rem; }}
-        .answer-section {{
-            display: none; margin-top: 20px; padding: 15px 25px; background-color: #f0f7ff;
-            border-left: 5px solid #0d6efd; border-radius: 4px;
+        .answer-section {{ display: none; margin-top: 12px; padding: 10px 15px 5px 15px; background-color: #f0f7ff;
+            border-left: 5px solid #0d6efd; border-radius: 6px;
         }}
         .explanation {{ white-space: pre-wrap; line-height: 1.6; margin-top: 5px; }}
         .progress-grid {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }}
         .q-node {{
             aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-            border: 1px solid #dee2e6; border-radius: 4px; background-color: #fff;
+            border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff;
             cursor: pointer; font-size: 0.85rem; color: #6c757d;
         }}
         .q-node:hover {{ background-color: #e9ecef; }}
@@ -92,15 +91,15 @@ def create_html(json_file, output_html):
             background-color: #0d6efd; color: white; border-color: #0d6efd;
             font-weight: bold; transform: scale(1.1); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }}
-        .nav-btn-group {{ display: flex; gap: 15px; margin-top: 20px; justify-content: center; }}
+        .nav-btn-group {{ display: flex; gap: 15px; margin-top: 15px; justify-content: center; }}
         .nav-btn {{ min-width: 120px; }}
         .mobile-toggle {{
             display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
             width: 50px; height: 50px; border-radius: 50%; background: #212529;
             color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }}
-        code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }}
-        .explanation {{ font-size: 1rem; }}
+        code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; }}
+        .explanation {{ font-size: 1rem; margin: 0; }}
     </style>
 </head>
 <body>
