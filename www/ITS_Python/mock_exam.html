@@ -170,7 +170,7 @@
         let selected = [];
         let remainingPool = [];
 
-        // 1. Minimum 3 questions per category (at least 5% of 50 is 2.5, round up to 3)
+        // 1. Minimum 3 questions per category (at least 6% of 50 is 3)
         categories.forEach(cat => {
             if (groups[cat]) {
                 const shuffled = [...groups[cat]].sort(() => 0.5 - Math.random());
