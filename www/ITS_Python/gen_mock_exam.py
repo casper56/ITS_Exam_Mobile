@@ -221,7 +221,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         }}, 1000);
     }}
 
-    function renderQuestion(index) {{
+    function renderQuestion(index, scrollTop = true) {{
         currentIndex = index;
         const item = examQuestions[index];
         const container = document.getElementById('question-area');
@@ -281,7 +281,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         card.innerHTML = html;
         container.appendChild(card);
         Prism.highlightAll();
-        window.scrollTo(0, 0);
+        if (scrollTop) window.scrollTo(0, 0);
     }}
 
     function selectOption(optIdx) {{
@@ -294,7 +294,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         }} else {{
             userAnswers[currentIndex] = optIdx;
         }}
-        renderQuestion(currentIndex);
+        renderQuestion(currentIndex, false);
     }}
 
     function selectSub(quizIdx, subIdx) {{
@@ -302,7 +302,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
             userAnswers[currentIndex] = {{}};
         }}
         userAnswers[currentIndex][quizIdx] = subIdx;
-        renderQuestion(currentIndex);
+        renderQuestion(currentIndex, false);
     }}
 
     function changeQuestion(dir) {{
