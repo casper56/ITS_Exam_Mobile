@@ -180,10 +180,10 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const d1Key = 'D1_資料型別與運算子';
         let selected = [];
         
-        // 1. Handle D1 specifically (max 20)
+        // 1. Handle D1 specifically (max 17)
         if (groups[d1Key]) {{
             const d1Pool = [...groups[d1Key]].sort(() => 0.5 - Math.random());
-            selected = d1Pool.slice(0, Math.min(20, d1Pool.length));
+            selected = d1Pool.slice(0, Math.min(17, d1Pool.length));
         }}
 
         // 2. Fill the rest from other categories
