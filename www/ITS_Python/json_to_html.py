@@ -416,7 +416,7 @@ def create_html(json_file, output_html):
             const optStr = String(opt);
             if (optStr.includes('|')) {{
                 const subOpts = optStr.split('|');
-                optionsHtml += `<div class="sub-question-label">Quiz ${{optIdx + 1}}</div>`;
+                optionsHtml += `<div class="sub-question-label">選項 ${{optIdx + 1}}</div>`;
                 optionsHtml += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => {{
                     optionsHtml += `
@@ -467,8 +467,8 @@ def create_html(json_file, output_html):
                     if (optStr.includes('|')) {{
                         const subs = optStr.split('|');
                         const ansIdx = parseInt(ans) - 1;
-                        if (subs[ansIdx]) mappedAnswers.push(`Quiz ${{i+1}}: <b>${{subs[ansIdx]}}</b>`);
-                        else mappedAnswers.push(`Quiz ${{i+1}}: ${{ans}}`);
+                        if (subs[ansIdx]) mappedAnswers.push(`選項 ${{i+1}}: <b>${{subs[ansIdx]}}</b>`);
+                        else mappedAnswers.push(`選項 ${{i+1}}: ${{ans}}`);
                     }} else mappedAnswers.push(`${{ans}}`);
                 }}
             }});

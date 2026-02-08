@@ -262,7 +262,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
             const optStr = String(opt);
             if (optStr.includes('|')) {{
                 const subOpts = optStr.split('|');
-                html += `<div class="sub-question-label">子題目 ${{optIdx + 1}}</div>`;
+                html += `<div class="sub-question-label">選項 ${{optIdx + 1}}</div>`;
                 html += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => {{
                     const isSel = (savedAns && savedAns[optIdx] === subIdx);
