@@ -187,11 +187,11 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         let selected = [];
         let remainingPool = [];
 
-        // 1. Minimum 3 questions per category (at least 6% of 50 is 3)
+        // 1. Minimum 4 questions per category (at least 8% of 50 is 4)
         categories.forEach(cat => {{
             if (groups[cat]) {{
                 const shuffled = [...groups[cat]].sort(() => 0.5 - Math.random());
-                const minPick = shuffled.slice(0, Math.min(3, shuffled.length));
+                const minPick = shuffled.slice(0, Math.min(4, shuffled.length));
                 selected = selected.concat(minPick);
                 // Put others back to remaining pool
                 remainingPool = remainingPool.concat(shuffled.slice(minPick.length));
