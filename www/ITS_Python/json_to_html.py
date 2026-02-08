@@ -37,7 +37,7 @@ def create_html(json_file, output_html):
         body {{
             background-color: #f8f9fa;
             font-family: "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif;
-            overflow-y: scroll;
+            overflow-y: auto;
         }}
         .main-wrapper {{ display: flex; min-height: 100vh; }}
         .sidebar {{
@@ -150,6 +150,7 @@ def create_html(json_file, output_html):
             color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }}
         code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; border: 1px solid #dee2e6; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; }}
+        pre {{ white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; }}
         .explanation {{ font-size: 1rem; margin: 0; }}
     </style>
 </head>
