@@ -149,7 +149,7 @@ def create_html(json_file, output_html):
             width: 50px; height: 50px; border-radius: 50%; background: #212529;
             color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }}
-        code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; }}
+        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; border: 1px solid #dee2e6; }}
         .explanation {{ font-size: 1rem; margin: 0; }}
     </style>
 </head>
