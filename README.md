@@ -57,5 +57,35 @@
 *   **核心自動化**：執行 `python gen_balanced_exam.py` 即可自動分類題庫、生成資料檔並更新測驗網頁。
 *   **PDF 檢討報告**：支援答錯題目匯出為高清純黑 PDF，適合深度複習。
 
+## 🛠️ 開發維護與題庫更新指令
+
+本專案的 Python 考科內容是透過腳本動態生成的。若您修改了 `questions_ITS_python.json`，請務必執行以下指令來更新網頁：
+
+### 1. 進入工作目錄
+所有 Python 相關腳本與資料皆位於 `www/ITS_Python` 目錄下：
+```powershell
+cd www/ITS_Python
+```
+
+### 2. 更新測驗列表頁面 (ITS_Python.html)
+此指令會讀取 JSON 並生成帶有側邊導覽、即時解析功能的完整題庫列表：
+```powershell
+python json_to_html.py
+```
+
+### 3. 更新模擬考頁面 (mock_exam.html)
+此指令會根據官方權重算法（Domain 平衡、錯題優先、D1 上限）生成 50 題隨機模擬考試卷：
+```powershell
+python gen_mock_exam.py
+```
+
+### 4. 提交並編譯 APK
+完成網頁更新後，請提交變更至 GitHub，Actions 會自動編譯最新的 APK：
+```powershell
+git add .
+git commit -m "feat: update questions and regenerate html"
+git push origin devtest
+```
+
 ---
 *本專案僅供學習與考照準備使用。*
