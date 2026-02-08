@@ -99,15 +99,23 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 
         @media print {{
             @page {{ size: auto; margin: 10mm; }}
-            body {{ background: white; width: 100%; margin: 0; padding: 0; }}
+            html, body {{ 
+                background: white; 
+                width: 100%; 
+                margin: 0; 
+                padding: 0; 
+                overflow: visible !important;
+                height: auto !important;
+            }}
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print {{ display: none !important; }}
-            #result-screen {{ display: block !important; padding: 0 !important; width: 100% !important; }}
-            #review-area {{ display: block !important; border: none !important; width: 100% !important; }}
-            .review-item {{ border: 1px solid #ccc !important; width: 100% !important; page-break-inside: avoid; }}
+            #result-screen {{ display: block !important; padding: 0 !important; width: 100% !important; overflow: visible !important; }}
+            #review-area {{ display: block !important; border: none !important; width: 100% !important; overflow: visible !important; }}
+            .review-item {{ border: 1px solid #ccc !important; width: 100% !important; page-break-inside: avoid; overflow: visible !important; }}
             pre, code {{ 
                 white-space: pre-wrap !important; 
                 word-break: break-all !important; 
-                overflow-x: hidden !important; 
+                overflow: visible !important; 
+                height: auto !important;
             }}
         }}
     </style>
