@@ -41,6 +41,55 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         .score-circle {{ width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }}
         code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }}
         
+        /* Semi-circle Side Buttons */
+        .side-nav-btn {{
+            position: fixed;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 100px;
+            background: rgba(13, 110, 253, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1060;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            outline: none !important;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            font-family: serif;
+            font-weight: bold;
+        }}
+        .side-nav-btn:hover {{
+            background: #0d6efd;
+            width: 50px;
+            color: white;
+        }}
+        .side-nav-prev {{ 
+            left: 0; 
+            border-radius: 0 50px 50px 0; 
+            padding-right: 8px;
+        }}
+        .side-nav-next {{ 
+            right: 0; 
+            border-radius: 50px 0 0 50px;
+            padding-left: 8px;
+        }}
+        .side-nav-btn.disabled {{
+            display: none;
+        }}
+
+        @media (max-width: 768px) {{
+            .side-nav-btn {{ width: 35px; height: 80px; font-size: 1.2rem; background: rgba(33, 37, 41, 0.7); }}
+            .side-nav-btn:hover {{ width: 40px; }}
+        }}
+
         /* 列印與預覽錯誤題目樣式 */
         #review-area {{ display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding-top: 20px; }}
         .review-item {{ margin-bottom: 30px; padding: 15px; border: 1px solid #eee; border-radius: 8px; page-break-inside: avoid; }}
@@ -66,12 +115,11 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
 
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)" title="上一題">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)" title="下一題">&#10095;</div>
+
     <main class="container main-content">
         <div id="question-area"></div>
-        <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-secondary px-4" id="btn-prev" onclick="changeQuestion(-1)">⬅️ 上一題</button>
-            <button class="btn btn-primary px-5" id="btn-next" onclick="changeQuestion(1)">下一題 ➡️</button>
-        </div>
     </main>
 </div>
 
@@ -79,6 +127,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     <h2 class="mb-4">考試結束</h2>
     <div class="score-circle" id="final-score">0</div>
     <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
+    <div id="category-stats" class="mb-4"></div>
     <div id="result-msg" class="mb-4"></div>
     <div class="mt-5 no-print">
         <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
@@ -131,8 +180,15 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         container.innerHTML = '';
 
         document.getElementById('q-progress').innerText = `題目 ${{index + 1}} / 50`;
-        document.getElementById('btn-prev').disabled = index === 0;
-        document.getElementById('btn-next').innerText = index === 49 ? '完成答題 (交卷)' : '下一題 ➡️';
+        
+        // Update Side Buttons
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) {{
+            sideNext.style.display = 'flex';
+            sideNext.title = index === 49 ? '交卷' : '下一題';
+        }}
 
         const card = document.createElement('div');
         card.className = 'card question-card';
@@ -221,8 +277,13 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         clearInterval(timerInterval);
         let correctCount = 0;
         let incorrectHTML = '';
+        const stats = {{}}; // {{ category: {{ total: 0, correct: 0 }} }}
 
         examQuestions.forEach((item, idx) => {{
+            const cat = item.category || '未分類';
+            if (!stats[cat]) stats[cat] = {{ total: 0, correct: 0 }};
+            stats[cat].total++;
+
             const userAns = userAnswers[idx];
             let isCorrect = false;
 
@@ -240,6 +301,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
 
             if (isCorrect) {{
                 correctCount++;
+                stats[cat].correct++;
             }} else {{
                 let qText = item.question.replace(/●/g, '<br/>●');
                 let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
@@ -252,6 +314,24 @@ def create_mock_exam_html(json_file, output_html, subject_name):
                     </div>`;
             }}
         }});
+
+        // Generate Stats HTML
+        let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
+        
+        Object.entries(stats).forEach(([cat, data]) => {{
+            const percent = ((data.total / 50) * 100).toFixed(1);
+            const accuracy = ((data.correct / data.total) * 100).toFixed(0);
+            const badgeClass = accuracy >= 70 ? 'bg-success' : (accuracy >= 40 ? 'bg-warning text-dark' : 'bg-danger');
+            
+            statsHTML += `<tr>
+                <td class="fw-bold">${{cat}}</td>
+                <td class="text-center"><span class="badge bg-secondary rounded-pill">${{data.total}}</span></td>
+                <td class="text-center text-muted small">${{percent}}%</td>
+                <td class="text-center"><div class="progress" style="height: 20px;"><div class="progress-bar ${{badgeClass}}" role="progressbar" style="width: ${{accuracy}}%">${{accuracy}}%</div></div></td>
+            </tr>`;
+        }});
+        statsHTML += '</tbody></table></div></div></div></div>';
+        document.getElementById('category-stats').innerHTML = statsHTML;
 
         document.getElementById('exam-ui').style.display = 'none';
         document.getElementById('result-screen').style.display = 'block';

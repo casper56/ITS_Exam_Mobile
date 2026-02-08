@@ -91,8 +91,59 @@ def create_html(json_file, output_html):
             background-color: #0d6efd; color: white; border-color: #0d6efd;
             font-weight: bold; transform: scale(1.1); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }}
-        .nav-btn-group {{ display: flex; gap: 15px; margin-top: 15px; justify-content: center; }}
-        .nav-btn {{ min-width: 120px; }}
+        
+        /* Semi-circle Side Buttons */
+        .side-nav-btn {{
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 100px;
+            background: rgba(13, 110, 253, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            outline: none !important;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            font-family: serif;
+            font-weight: bold;
+        }}
+        .side-nav-btn:hover {{
+            background: #0d6efd;
+            width: 50px;
+            color: white;
+        }}
+        .side-nav-prev {{ 
+            left: 280px; 
+            border-radius: 0 50px 50px 0; 
+            padding-right: 8px;
+        }}
+        .side-nav-next {{ 
+            right: 0; 
+            border-radius: 50px 0 0 50px;
+            padding-left: 8px;
+        }}
+        
+        @media (max-width: 992px) {{
+            .side-nav-prev {{ left: 0; }}
+            .side-nav-btn {{ 
+                width: 35px; 
+                height: 80px; 
+                font-size: 1.2rem;
+                background: rgba(33, 37, 41, 0.7);
+            }}
+            .side-nav-btn:hover {{ width: 40px; }}
+        }}
+
         .mobile-toggle {{
             display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
             width: 50px; height: 50px; border-radius: 50%; background: #212529;
@@ -123,14 +174,15 @@ def create_html(json_file, output_html):
         </div>
     </nav>
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+    
+    <!-- Side Floating Navigation -->
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()" title="上一題">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()" title="下一題">&#10095;</div>
+
     <main class="content-area" id="main-content">
         <div class="container-fluid" style="max-width: 1000px;">
             <h2 class="text-center mb-4">{display_title} 模擬測驗</h2>
             <div id="question-container"></div>
-            <div class="nav-btn-group">
-                <button class="btn btn-secondary nav-btn" id="btn-prev" onclick="prevQuestion()">⬅️ 上一題</button>
-                <button class="btn btn-primary nav-btn" id="btn-next" onclick="nextQuestion()">下一題 ➡️</button>
-            </div>
         </div>
     </main>
 </div>
@@ -525,8 +577,15 @@ def create_html(json_file, output_html):
     function jumpTo(index) {{ renderQuestion(index); }}
 
     function updateUI() {{
-        document.getElementById('btn-prev').disabled = (currentIndex === 0);
-        document.getElementById('btn-next').disabled = (currentIndex === quizData.length - 1);
+        const isFirst = (currentIndex === 0);
+        const isLast = (currentIndex === quizData.length - 1);
+
+        // Update Floating Buttons
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = isFirst ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = isLast ? 'none' : 'flex';
+
         document.getElementById('progress-stats').innerText = `答對:${{correctSet.size}} 答錯:${{incorrectSet.size}} / 共:${{quizData.length}}`;
 
         const grid = document.getElementById('progress-grid');
