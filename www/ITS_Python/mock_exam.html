@@ -155,7 +155,11 @@
     let timerInterval;
 
     function startExam() {
-        // Group questions by category
+        const categories = [
+            'D1_資料型別與運算子', 'D2_流程控制與判斷', 'D3_輸入輸出與檔案',
+            'D4_函式與註解', 'D5_錯誤處理與測試', 'D6_模組與常用工具', 'D7_其他進階題型'
+        ];
+        
         const groups = {};
         allQuestions.forEach(q => {
             const cat = q.category || 'D7_其他進階題型';
@@ -163,29 +167,37 @@
             groups[cat].push(q);
         });
 
-        const d1Key = 'D1_資料型別與運算子';
         let selected = [];
-        
-        // 1. Handle D1 specifically (max 17)
-        if (groups[d1Key]) {
-            const d1Pool = [...groups[d1Key]].sort(() => 0.5 - Math.random());
-            selected = d1Pool.slice(0, Math.min(17, d1Pool.length));
-        }
+        let remainingPool = [];
 
-        // 2. Fill the rest from other categories
-        let otherPool = [];
-        Object.keys(groups).forEach(cat => {
-            if (cat !== d1Key) {
-                otherPool = otherPool.concat(groups[cat]);
+        // 1. Minimum 3 questions per category (at least 5% of 50 is 2.5, round up to 3)
+        categories.forEach(cat => {
+            if (groups[cat]) {
+                const shuffled = [...groups[cat]].sort(() => 0.5 - Math.random());
+                const minPick = shuffled.slice(0, Math.min(3, shuffled.length));
+                selected = selected.concat(minPick);
+                // Put others back to remaining pool
+                remainingPool = remainingPool.concat(shuffled.slice(minPick.length));
             }
         });
-        
-        // Add remaining D1 questions back to otherPool if needed (though usually we just want to limit them)
-        // If we strictly want MAX 22, we don't add the rest of D1 back.
-        
-        otherPool.sort(() => 0.5 - Math.random());
-        const needed = 50 - selected.length;
-        selected = selected.concat(otherPool.slice(0, needed));
+
+        // 2. Fill the rest to 50 questions
+        remainingPool.sort(() => 0.5 - Math.random());
+        const d1Key = 'D1_資料型別與運算子';
+
+        for (let q of remainingPool) {
+            if (selected.length >= 50) break;
+            
+            const cat = q.category || 'D7_其他進階題型';
+            if (cat === d1Key) {
+                const d1Count = selected.filter(sq => sq.category === d1Key).length;
+                if (d1Count < 17) {
+                    selected.push(q);
+                }
+            } else {
+                selected.push(q);
+            }
+        }
 
         // 3. Final Shuffle
         examQuestions = selected.sort(() => 0.5 - Math.random());
