@@ -24,6 +24,22 @@
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
         code { font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; }
         
+        /* 固定側邊按鈕樣式 - 同練習頁 */
+        .nav-btn-fixed {
+            position: fixed; top: 50%; transform: translateY(-50%); z-index: 1060;
+            width: 50px; height: 80px; background: rgba(13, 110, 253, 0.1);
+            backdrop-filter: blur(4px); border: 1px solid rgba(13, 110, 253, 0.2);
+            color: #0d6efd; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; font-size: 1.8rem; font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .nav-btn-fixed:hover { background: rgba(13, 110, 253, 0.8); color: white; width: 55px; }
+        .nav-btn-prev { left: 0; border-radius: 0 40px 40px 0; }
+        .nav-btn-next { right: 0; border-radius: 40px 0 0 40px; }
+        .nav-btn-fixed.disabled { opacity: 0.05; cursor: not-allowed; pointer-events: none; }
+        
+        @media (min-width: 992px) { .main-content { padding-left: 70px; padding-right: 70px; } }
+
         #loading-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -72,15 +88,14 @@
     <header class="exam-header d-flex justify-content-between align-items-center">
         <div><h5 class="m-0">ITS Python 模擬考試</h5><small id="q-progress">1 / 50</small></div>
         <div class="timer-box" id="timer">50:00</div>
-        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+        <button class="btn btn-danger fw-bold px-4 py-2" style="border: 2px solid #000; font-size: 1.1rem;" onclick="confirmSubmit()">交卷</button>
     </header>
+
+    <div class="nav-btn-fixed nav-btn-prev" id="btn-prev" onclick="changeQuestion(-1)">❮</div>
+    <div class="nav-btn-fixed nav-btn-next" id="btn-next" onclick="changeQuestion(1)">❯</div>
 
     <main class="container main-content">
         <div id="question-area"></div>
-        <div class="d-flex justify-content-between mt-4">
-            <button class="btn btn-secondary px-4" id="btn-prev" onclick="changeQuestion(-1)">⬅️ 上一題</button>
-            <button class="btn btn-primary px-5" id="btn-next" onclick="changeQuestion(1)">下一題 ➡️</button>
-        </div>
     </main>
 </div>
 
@@ -208,8 +223,20 @@
         const container = document.getElementById('question-area');
         container.innerHTML = '';
         document.getElementById('q-progress').innerText = `題目 ${index + 1} / 50`;
-        document.getElementById('btn-prev').disabled = index === 0;
-        document.getElementById('btn-next').innerText = index === 49 ? '完成答題 (交卷)' : '下一題 ➡️';
+        
+        // 更新固定按鈕狀態
+        const prevBtn = document.getElementById('btn-prev');
+        const nextBtn = document.getElementById('btn-next');
+        if (index === 0) prevBtn.classList.add('disabled'); else prevBtn.classList.remove('disabled');
+        
+        nextBtn.innerHTML = '❯';
+        if (index === 49) {
+            nextBtn.classList.add('btn-success', 'text-white');
+            nextBtn.title = "交卷";
+        } else {
+            nextBtn.classList.remove('btn-success', 'text-white');
+            nextBtn.title = "下一題";
+        }
 
         let qText = item.question.replace(/●/g, '<br/>●').replace(/^\d+\.\s*/, '');
         let html = `<div class="card question-card"><div class="question-header">Question ${index + 1} / 50 <span class="badge bg-light text-dark float-end">${item.category || ''}</span></div><div class="question-body"><div class="mb-4">${qText}</div>`;
