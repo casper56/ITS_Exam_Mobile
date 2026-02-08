@@ -3163,22 +3163,7 @@
     {
         "id": 188,
         "type": "truefalse",
-        "question": "188. 聊天機器人可以支援語音輸入。",
-        "options": [
-            "✔️",
-            "❌"
-        ],
-        "answer": [
-            1
-        ],
-        "weight": 1,
-        "image": "",
-        "explanation": "結合語音轉文字（Speech-to-Text）服務後，機器人即可處理語音輸入。"
-    },
-    {
-        "id": 189,
-        "type": "truefalse",
-        "question": "189. 每一種溝通管道都需要一個不同聊天機器人。",
+        "question": "188. 每一種溝通管道都需要一個不同聊天機器人。",
         "options": [
             "✔️",
             "❌"
@@ -3191,9 +3176,9 @@
         "explanation": "一個後端機器人可以透過 Azure Bot Service 同時對接到多個通訊管道（如：Web, Teams, Facebook 等）。 "
     },
     {
-        "id": 190,
+        "id": 189,
         "type": "truefalse",
-        "question": "190. 【聊天機器人可以結合自然語言及受限的回應選項來管理交談程式。",
+        "question": "189. 【聊天機器人可以結合自然語言及受限的回應選項來管理交談程式。",
         "options": [
             "✔️",
             "❌"
@@ -3206,9 +3191,9 @@
         "explanation": "現代機器人常使用混合模式，即結合 NLP 的開放對話與按鈕選單（如：調適型卡片）來引導使用者。"
     },
     {
-        "id": 191,
+        "id": 190,
         "type": "truefalse",
-        "question": "191. 您可以使用 Azure AI 語言服務的問題解答查詢 Azure SQL 資料庫。",
+        "question": "190. 您可以使用 Azure AI 語言服務的問題解答查詢 Azure SQL 資料庫。",
         "options": [
             "✔️",
             "❌"
@@ -3221,9 +3206,9 @@
         "explanation": "問題解答（Question Answering）僅能查詢與其知識庫關聯的資料，不能直接執行 SQL 查詢關聯式資料庫。 "
     },
     {
-        "id": 192,
+        "id": 191,
         "type": "truefalse",
-        "question": "192. 若您希望知識庫針對詢問類似問題的不同使用者,提供相同答案,則應該使用 Azure AI 語言服務的問題解答。",
+        "question": "191. 若您希望知識庫針對詢問類似問題的不同使用者,提供相同答案,則應該使用 Azure AI 語言服務的問題解答。",
         "options": [
             "✔️",
             "❌"
@@ -3236,9 +3221,9 @@
         "explanation": "問題解答的核心功能就是從知識庫中匹配相似的問題，並回傳預設好的標準答案。 "
     },
     {
-        "id": 193,
+        "id": 192,
         "type": "truefalse",
-        "question": "193. Azure AI 語言服務的問題解答可以判斷使用者語句的意圖。",
+        "question": "192. Azure AI 語言服務的問題解答可以判斷使用者語句的意圖。",
         "options": [
             "✔️",
             "❌"
@@ -3251,9 +3236,9 @@
         "explanation": "專門判斷「意圖（Intent）」的服務是「交談語言理解 (CLU)」。 "
     },
     {
-        "id": 194,
+        "id": 193,
         "type": "truefalse",
-        "question": "194. Azure AI 語言服務可以識別文字是以何種語言撰寫。",
+        "question": "193. Azure AI 語言服務可以識別文字是以何種語言撰寫。",
         "options": [
             "✔️",
             "❌"
@@ -3266,9 +3251,9 @@
         "explanation": "這屬於語言服務中的「語言偵測」功能。"
     },
     {
-        "id": 195,
+        "id": 194,
         "type": "truefalse",
-        "question": "195. Azure AI 語言服務可以偵測檔案中的手寫簽名。",
+        "question": "194. Azure AI 語言服務可以偵測檔案中的手寫簽名。",
         "options": [
             "✔️",
             "❌"
@@ -3281,9 +3266,9 @@
         "explanation": "偵測影像中的筆跡或簽名位置應屬於「Azure AI 檔案智慧服務」的範疇。 "
     },
     {
-        "id": 196,
+        "id": 195,
         "type": "truefalse",
-        "question": "196. Azure AI 語言服務可以識別檔案中所提及的公司 and 組織。",
+        "question": "195. Azure AI 語言服務可以識別檔案中所提及的公司 and 組織。",
         "options": [
             "✔️",
             "❌"
@@ -3296,9 +3281,9 @@
         "explanation": "這是「命名實體辨識 (NER)」的功能。 "
     },
     {
-        "id": 197,
+        "id": 196,
         "type": "truefalse",
-        "question": "197. 可以使用 Azure AI 語音服務將通話轉譯為文字。",
+        "question": "196. 可以使用 Azure AI 語音服務將通話轉譯為文字。",
         "options": [
             "✔️",
             "❌"
@@ -3311,9 +3296,9 @@
         "explanation": "語音轉文字服務可以即時或非即時地將語音訊號轉化為書面文字。"
     },
     {
-        "id": 198,
+        "id": 197,
         "type": "truefalse",
-        "question": "198. 您可以使用 Azure AI 語言服務從通話文字記錄中擷取關鍵實體。 ",
+        "question": "197. 您可以使用 Azure AI 語言服務從通話文字記錄中擷取關鍵實體。 ",
         "options": [
             "✔️",
             "❌"
@@ -3326,9 +3311,9 @@
         "explanation": "文字紀錄產生後，可以利用語言服務的 NER 功能進一步分析其中的關鍵資訊。 "
     },
     {
-        "id": 199,
+        "id": 198,
         "type": "truefalse",
-        "question": "199. 您可以使用 Azure AI 語音服務將通話音訊翻譯為其他語言。 ",
+        "question": "198. 您可以使用 Azure AI 語音服務將通話音訊翻譯為其他語言。 ",
         "options": [
             "✔️",
             "❌"
@@ -3341,9 +3326,9 @@
         "explanation": "這屬於語音服務中的「語音翻譯 (Speech Translation)」功能。"
     },
     {
-        "id": 200,
+        "id": 199,
         "type": "truefalse",
-        "question": "200. Azure AI 語言服務可用來從檔案中擷取關鍵片語。 ",
+        "question": "199. Azure AI 語言服務可用來從檔案中擷取關鍵片語。 ",
         "options": [
             "✔️",
             "❌"
@@ -3356,9 +3341,9 @@
         "explanation": "這屬於語言服務提供的基本 NLP 分析功能之一。 "
     },
     {
-        "id": 201,
+        "id": 200,
         "type": "truefalse",
-        "question": "201. Azure AI 語言服務可用來根據使用者提示產生新聞稿。 ",
+        "question": "200. Azure AI 語言服務可用來根據使用者提示產生新聞稿。 ",
         "options": [
             "✔️",
             "❌"
@@ -3371,9 +3356,9 @@
         "explanation": "根據提示語生成內容屬於「生成式 AI（如 Azure OpenAI）」的工作，傳統語言服務主要在於「分析」而非創作。"
     },
     {
-        "id": 202,
+        "id": 201,
         "type": "truefalse",
-        "question": "202. Azure AI 語言服務可用來建置社交媒體摘要分析器以偵測情緒。 ",
+        "question": "201. Azure AI 語言服務可用來建置社交媒體摘要分析器以偵測情緒。 ",
         "options": [
             "✔️",
             "❌"
@@ -3386,9 +3371,9 @@
         "explanation": "可以利用「情感分析」功能來偵測社群媒體上公眾對於特定話題的正面或負面反應。"
     },
     {
-        "id": 203,
+        "id": 202,
         "type": "truefalse",
-        "question": "203. 您可以使用語音啟動的虛擬助理與機器人交談。",
+        "question": "202. 您可以使用語音啟動的虛擬助理與機器人交談。",
         "options": [
             "✔️",
             "❌"
@@ -3401,9 +3386,9 @@
         "explanation": "這屬於交談式 AI 結合語音技術的典型運作模式。"
     },
     {
-        "id": 204,
+        "id": 203,
         "type": "truefalse",
-        "question": "204. 您可以使用 Microsoft Teams 與機器人交談。",
+        "question": "203. 您可以使用 Microsoft Teams 與機器人交談。",
         "options": [
             "✔️",
             "❌"
@@ -3416,9 +3401,9 @@
         "explanation": "Teams 是微軟支援機器人互動的核心通訊介面。"
     },
     {
-        "id": 205,
+        "id": 204,
         "type": "truefalse",
-        "question": "205. 可以使用網頁聊天介面與機器人交談。",
+        "question": "204. 可以使用網頁聊天介面與機器人交談。",
         "options": [
             "✔️",
             "❌"
@@ -3431,9 +3416,9 @@
         "explanation": "網頁聊天介面（Web Chat）是部署機器人最基本且廣泛的方式。"
     },
     {
-        "id": 206,
+        "id": 205,
         "type": "truefalse",
-        "question": "206. OpenAI 的 GPT-3.5 Turbo 模型能將語音轉成文字。 ",
+        "question": "205. OpenAI 的 GPT-3.5 Turbo 模型能將語音轉成文字。 ",
         "options": [
             "✔️",
             "❌"
@@ -3446,9 +3431,9 @@
         "explanation": "GPT-3.5 是一個文字大型語言模型。語音轉文字是由 Whisper 模型或 Azure 語音服務處理。"
     },
     {
-        "id": 207,
+        "id": 206,
         "type": "truefalse",
-        "question": "207. Azure OpenAI 的內嵌文字模型能依據文字相似性將文字轉換成數值向量。",
+        "question": "206. Azure OpenAI 的內嵌文字模型能依據文字相似性將文字轉換成數值向量。",
         "options": [
             "✔️",
             "❌"
@@ -3461,9 +3446,9 @@
         "explanation": "這就是內嵌（Embeddings）模型的定義，將文字語義對映到數值向量空間。"
     },
     {
-        "id": 208,
+        "id": 207,
         "type": "truefalse",
-        "question": "208. Azure OpenAI 的 DALL-E 模型能根據文字提示產生對應的影像。",
+        "question": "207. Azure OpenAI 的 DALL-E 模型能根據文字提示產生對應的影像。",
         "options": [
             "✔️",
             "❌"
@@ -3476,9 +3461,9 @@
         "explanation": "DALL-E 是一個生成式模型，專門用於「文生圖」。"
     },
     {
-        "id": 209,
+        "id": 208,
         "type": "truefalse",
-        "question": "209. 轉換器模型架構中包含編碼器 and 解碼器兩個區塊。",
+        "question": "208. 轉換器模型架構中包含編碼器 and 解碼器兩個區塊。",
         "options": [
             "✔️",
             "❌"
@@ -3491,9 +3476,9 @@
         "explanation": "這是 Transformer 模型架構的基本組成部分。 "
     },
     {
-        "id": 210,
+        "id": 209,
         "type": "truefalse",
-        "question": "210. 轉換器模型架構中會用到自我注意力。",
+        "question": "209. 轉換器模型架構中會用到自我注意力。",
         "options": [
             "✔️",
             "❌"
@@ -3506,9 +3491,9 @@
         "explanation": "自我注意力（Self-attention）是 Transformer 能夠理解長距離詞語關聯的核心機制。"
     },
     {
-        "id": 211,
+        "id": 210,
         "type": "truefalse",
-        "question": "211. 轉換器模型架構中包含加密 and 解密兩個區塊。",
+        "question": "210. 轉換器模型架構中包含加密 and 解密兩個區塊。",
         "options": [
             "✔️",
             "❌"
@@ -3521,9 +3506,9 @@
         "explanation": "架構中是「編碼（Encoding）」與「解碼（Decoding）」，並非資訊安全中的加密。"
     },
     {
-        "id": 212,
+        "id": 211,
         "type": "truefalse",
-        "question": "212. 必須自己建置 and 訓練模型,才能建立符合 Microsoft 負責任 AI 準則的解決方案。",
+        "question": "211. 必須自己建置 and 訓練模型,才能建立符合 Microsoft 負責任 AI 準則的解決方案。",
         "options": [
             "✔️",
             "❌"
@@ -3536,9 +3521,9 @@
         "explanation": "即便使用微軟提供的預訓練模型（如 Azure AI 服務），只要在實作過程中落實過濾、監控與透明度，亦能符合責任 AI 準則。"
     },
     {
-        "id": 213,
+        "id": 212,
         "type": "truefalse",
-        "question": "213. Azure OpenAI 使用預先訓練的生成式 AI 模型。",
+        "question": "212. Azure OpenAI 使用預先訓練的生成式 AI 模型。",
         "options": [
             "✔️",
             "❌"
@@ -3551,9 +3536,9 @@
         "explanation": "Azure OpenAI 提供的 GPT、DALL-E 等模型都是已經由大量資料預先訓練好的基礎模型。 "
     },
     {
-        "id": 214,
+        "id": 213,
         "type": "truefalse",
-        "question": "214. 開發者可使用自己的資料來微調 Azure OpenAI。",
+        "question": "213. 開發者可使用自己的資料來微調 Azure OpenAI。",
         "options": [
             "✔️",
             "❌"

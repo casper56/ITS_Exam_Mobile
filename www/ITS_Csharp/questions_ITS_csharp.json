@@ -1525,27 +1525,6 @@
     {
         "id": 66,
         "question": [
-            "您正在開發一個 Web 程式。需要使用階層式樣式表（CSS）建立下列圖形：<br/>請選擇正確的選項以完成句子。<br/>對於 border-radius 式，您應該使用此值？"
-        ],
-        "options": [
-            "10px;",
-            "\"10px, 10px, 10px;\"",
-            "inherit;",
-            "initial;"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": [
-            ""
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
-    {
-        "id": 67,
-        "question": [
             "請從清單中選取正確的選項以完成句子。<br/>所有網頁伺服器都有 ＿＿ 位址和網域名稱，用以在網際網路上識別其身分。"
         ],
         "options": [
@@ -1565,7 +1544,7 @@
         "type": "single"
     },
     {
-        "id": 68,
+        "id": 67,
         "question": [
             "請從清單中選取正確的選項以完成句子。<br/>所有網頁伺服器會經由 ＿＿ 通訊協定接受使用者端要求，然後以網頁的形式將資料傳回使用者端來回應。"
         ],
@@ -1586,7 +1565,7 @@
         "type": "single"
     },
     {
-        "id": 69,
+        "id": 68,
         "question": [
             "請從清單中選取正確的選項以完成句子。<br/>擁有存取權的使用者端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。"
         ],
@@ -1607,7 +1586,7 @@
         "type": "single"
     },
     {
-        "id": 70,
+        "id": 69,
         "question": [
             "您的網站（sunsetweb.org）需要 SSL。<br/>您使用如下圖所示的設定建立了一個虛擬目錄。<br/>您將 Overview.jpg 檔案儲存在虛擬目錄中。<br/>您應該使用哪一個 URL 來存取該檔案？"
         ],
@@ -1628,7 +1607,7 @@
         "type": "single"
     },
     {
-        "id": 71,
+        "id": 70,
         "question": [
             "下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：<br/><pre><code class=\"language-csharp\">public class CarService",
             "{",
@@ -1662,7 +1641,7 @@
         "type": "single"
     },
     {
-        "id": 72,
+        "id": 71,
         "question": [
             "請在圖表中指出MVC架構模式的正確元件。請從清單中選取正確的這項以完成圖表(依照ABC順序回答)"
         ],
@@ -1683,7 +1662,7 @@
         "type": "single"
     },
     {
-        "id": 73,
+        "id": 72,
         "question": [
             "請完成圖表以解說MVC 架構的核心功能。請將每個動作"
         ],
@@ -1699,7 +1678,7 @@
         "type": "single"
     },
     {
-        "id": 74,
+        "id": 73,
         "question": [
             "哪一個正規化要求資料表的屬性僅相依於主索引鍵？"
         ],
@@ -1720,7 +1699,7 @@
         "type": "single"
     },
     {
-        "id": 75,
+        "id": 74,
         "question": [
             "您需要建立一個傳入人員 UserName 和 Age 的預存程式。<br/>Age 必須是以年為單位的整數。<br/>UserName 至少必須有三個字元。<br/>您應該使用哪一個陳述式來建立此預存程式？"
         ],
@@ -1741,7 +1720,7 @@
         "type": "single"
     },
     {
-        "id": 76,
+        "id": 75,
         "question": [
             "在更新資料庫的多個資料表時，使用交易有何優點？"
         ],
@@ -1762,7 +1741,7 @@
         "type": "single"
     },
     {
-        "id": 77,
+        "id": 76,
         "question": [
             "您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？"
         ],
@@ -1783,7 +1762,7 @@
         "type": "single"
     },
     {
-        "id": 78,
+        "id": 77,
         "question": [
             "您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）"
         ],
@@ -1805,7 +1784,7 @@
         "type": "multiple"
     },
     {
-        "id": 79,
+        "id": 78,
         "question": [
             "下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）"
         ],
@@ -1827,7 +1806,7 @@
         "type": "multiple"
     },
     {
-        "id": 80,
+        "id": 79,
         "question": [
             "下列哪兩項敘述正描述了將資料庫正規化的優點？（請選擇 2 個答案）"
         ],
@@ -1849,7 +1828,7 @@
         "type": "multiple"
     },
     {
-        "id": 81,
+        "id": 80,
         "question": [
             "連線共用有哪三項優點？（請選擇 3 個答案。）"
         ],
@@ -1872,7 +1851,7 @@
         "type": "multiple"
     },
     {
-        "id": 82,
+        "id": 81,
         "question": [
             "哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）"
         ],
@@ -1894,7 +1873,7 @@
         "type": "multiple"
     },
     {
-        "id": 83,
+        "id": 82,
         "question": [
             "您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案。）"
         ],
@@ -1916,7 +1895,7 @@
         "type": "multiple"
     },
     {
-        "id": 84,
+        "id": 83,
         "question": [
             "下列哪兩項敘述正確描述了JSON物件?(請選擇2個答案·)<br/>(AJSON物件可使用名稱/直對來建置。<br/>(B)JSON物件可使用已排序的值清單來建置。<br/>(C)JSON物件可運用名稱空間。<br/>(D)JSON物件可延伸。<br/>(E)以上皆是<br/>(F)以上皆非"
         ],
@@ -1933,7 +1912,7 @@
         "type": "multiple"
     },
     {
-        "id": 85,
+        "id": 84,
         "question": [
             "連級共用有那三項憂點2(請選擇:個答案・)<br/>(1)提升效能<br/>(2)提升可據能性<br/>(3)縮短建立連線的時間<br/>(4)不需要任何設定<br/>(5)提升安全性<br/>(6)以上皆非"
         ],
@@ -1951,7 +1930,7 @@
         "type": "multiple"
     },
     {
-        "id": 86,
+        "id": 85,
         "question": [
             "請回答有關單元測試的敘述：<br/>單元測試會測試整個應用程式的整合與相依性。"
         ],
@@ -1970,7 +1949,7 @@
         "type": "single"
     },
     {
-        "id": 87,
+        "id": 86,
         "question": [
             "單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。"
         ],
@@ -1989,7 +1968,7 @@
         "type": "single"
     },
     {
-        "id": 88,
+        "id": 87,
         "question": [
             "單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，然後判斷其行為表現是否完全符合預期。"
         ],
@@ -2008,7 +1987,7 @@
         "type": "single"
     },
     {
-        "id": 89,
+        "id": 88,
         "question": [
             "連結清單可進行排序。"
         ],
@@ -2027,7 +2006,7 @@
         "type": "single"
     },
     {
-        "id": 90,
+        "id": 89,
         "question": [
             "連結清單最多包含 100 個節點。"
         ],
@@ -2046,7 +2025,7 @@
         "type": "single"
     },
     {
-        "id": 91,
+        "id": 90,
         "question": [
             "您可以在連結清單(Linked List)內任何位置加入新的節點。"
         ],
@@ -2065,7 +2044,7 @@
         "type": "single"
     },
     {
-        "id": 92,
+        "id": 91,
         "question": [
             "數位簽章會使用寄件者的公開金鑰來加密訊息。"
         ],
@@ -2085,7 +2064,7 @@
         "type": "single"
     },
     {
-        "id": 93,
+        "id": 92,
         "question": [
             "CSRF（跨網站偽造要求）權杖是用來防止攻擊。"
         ],
@@ -2104,7 +2083,7 @@
         "type": "single"
     },
     {
-        "id": 94,
+        "id": 93,
         "question": [
             "防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。"
         ],
@@ -2132,7 +2111,7 @@
         "type": "single"
     },
     {
-        "id": 95,
+        "id": 94,
         "question": [
             "Person 類別中的方法可以存取 co1or 屬性。"
         ],
@@ -2151,7 +2130,7 @@
         "type": "single"
     },
     {
-        "id": 96,
+        "id": 95,
         "question": [
             "某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。請選取 [正確] 或 [錯誤]。Person 類別中的方法可以存取 NumberOfLeaves 屬性。"
         ],
@@ -2170,7 +2149,7 @@
         "type": "single"
     },
     {
-        "id": 97,
+        "id": 96,
         "question": [
             "某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。<br/>Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。<br/>請選取 [正確] 或 [錯誤]。<br/>Tree 類別中的方法可以存取 Person 中的所有私用屬性。"
         ],
@@ -2200,7 +2179,7 @@
         "type": "single"
     },
     {
-        "id": 98,
+        "id": 97,
         "question": [
             "請回答有關程式碼的敘述：<br/>加上行號僅為參考之用。<br/><pre><code class=\"language-csharp\">01 var xhr = new XMLHttpRequest();",
             "02 xhr.onload = function() {",
@@ -2232,7 +2211,7 @@
         "type": "single"
     },
     {
-        "id": 99,
+        "id": 98,
         "question": [
             "請回答有關程式碼的敘述：<br/>加上行號僅為參考之用。<br/><pre><code class=\"language-csharp\">01 var xhr = new XMLHttpRequest();",
             "02 xhr.onload = function() {",
@@ -2264,7 +2243,7 @@
         "type": "single"
     },
     {
-        "id": 100,
+        "id": 99,
         "question": [
             "請回答有關程式碼的敘述：<br/>加上行號僅為參考之用。<br/><pre><code class=\"language-csharp\">01 var xhr = new XMLHttpRequest();",
             "02 xhr.onload = function() {",
@@ -2296,7 +2275,7 @@
         "type": "single"
     },
     {
-        "id": 101,
+        "id": 100,
         "question": [
             "請回答有關佇列的敘述：<br/>佇列的專案數有限制。"
         ],
@@ -2315,7 +2294,7 @@
         "type": "single"
     },
     {
-        "id": 102,
+        "id": 101,
         "question": [
             "請回答有關佇列的敘述：<br/>佇列是一種先進先出（FIFO）資料結構。"
         ],
@@ -2334,7 +2313,7 @@
         "type": "single"
     },
     {
-        "id": 103,
+        "id": 102,
         "question": [
             "請回答有關佇列的敘述：<br/>佇列的專案是按照加入的順序儲存。"
         ],
@@ -2353,7 +2332,7 @@
         "type": "single"
     },
     {
-        "id": 104,
+        "id": 103,
         "question": [
             "請回答有關 NoSQL 資料庫的敘述：<br/>檔案資料庫會將資料儲存在類似 JSON 的檔案中。"
         ],
@@ -2372,7 +2351,7 @@
         "type": "single"
     },
     {
-        "id": 105,
+        "id": 104,
         "question": [
             "請回答有關 NoSQL 資料庫的敘述：<br/>檔案資料庫的設計目的是以預先定義的關聯處理資料。"
         ],
@@ -2391,7 +2370,7 @@
         "type": "single"
     },
     {
-        "id": 106,
+        "id": 105,
         "question": [
             "請回答有關 NoSQL 資料庫的敘述：<br/>索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。"
         ],
@@ -2410,7 +2389,7 @@
         "type": "single"
     },
     {
-        "id": 107,
+        "id": 106,
         "question": [
             "實體關聯圖表（ERD）是專為物件導向的資料庫所設計。"
         ],
@@ -2429,7 +2408,7 @@
         "type": "single"
     },
     {
-        "id": 108,
+        "id": 107,
         "question": [
             "實體關聯圖表（ERD）包含實體、關聯和屬性。"
         ],
@@ -2448,7 +2427,7 @@
         "type": "single"
     },
     {
-        "id": 109,
+        "id": 108,
         "question": [
             "基數是指資料表的互相連結方式，例如一對多。"
         ],
@@ -2467,7 +2446,7 @@
         "type": "single"
     },
     {
-        "id": 110,
+        "id": 109,
         "type": "single",
         "question": "【OOP-繼承】在物件導向程式設計中，當一個類別 (Class) 衍生自另一個類別時，這稱為繼承。例如 `Dog` 類別繼承自 `Animal` 類別。請問這代表了什麼關係？",
         "options": [
@@ -2484,7 +2463,7 @@
         "explanation": "繼承 (Inheritance) 建立的是 **Is-a** 的關係。例如：狗 (Dog) **是一個 (is an)** 動物 (Animal)。這是判斷是否該使用繼承的主要依據。"
     },
     {
-        "id": 111,
+        "id": 110,
         "type": "single",
         "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
         "options": [
@@ -2501,7 +2480,7 @@
         "explanation": "**private** (私有) 成員只能在類別內部存取，這是**封裝 (Encapsulation)** 的核心概念，用於保護資料不被外部不當修改。"
     },
     {
-        "id": 112,
+        "id": 111,
         "type": "single",
         "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
         "options": [
@@ -2518,7 +2497,7 @@
         "explanation": "**override (覆寫)** 用於在子類別中重新定義父類別的虛擬 (virtual) 或抽象 (abstract) 方法，這是實現**多型 (Polymorphism)** 的方式。"
     },
     {
-        "id": 113,
+        "id": 112,
         "type": "single",
         "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
         "options": [
@@ -2535,7 +2514,7 @@
         "explanation": "類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。"
     },
     {
-        "id": 114,
+        "id": 113,
         "type": "single",
         "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
         "options": [
@@ -2552,7 +2531,7 @@
         "explanation": "**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。"
     },
     {
-        "id": 115,
+        "id": 114,
         "type": "single",
         "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
         "options": [
@@ -2569,7 +2548,7 @@
         "explanation": "**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。"
     },
     {
-        "id": 116,
+        "id": 115,
         "type": "single",
         "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
         "options": [
@@ -2586,7 +2565,7 @@
         "explanation": "**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；**CSS** 負責樣式與美觀；**JavaScript** 負責行為與互動。"
     },
     {
-        "id": 117,
+        "id": 116,
         "type": "single",
         "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？",
         "options": [
@@ -2603,7 +2582,7 @@
         "explanation": "**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字型、排版）。"
     },
     {
-        "id": 118,
+        "id": 117,
         "type": "single",
         "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
         "options": [
@@ -2620,7 +2599,7 @@
         "explanation": "雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。"
     },
     {
-        "id": 119,
+        "id": 118,
         "type": "single",
         "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
         "options": [
@@ -2637,7 +2616,7 @@
         "explanation": "**Web Server (網頁伺服器)** 負責儲存、處理並傳送網頁檔案給客戶端。"
     },
     {
-        "id": 120,
+        "id": 119,
         "type": "single",
         "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
         "options": [
@@ -2654,7 +2633,7 @@
         "explanation": "C# 支援**單一繼承**（只能繼承一個類別），但可以**實作多個介面**。抽象類別不能被直接實體化，必須被繼承。"
     },
     {
-        "id": 121,
+        "id": 120,
         "type": "single",
         "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
         "options": [
@@ -2671,7 +2650,7 @@
         "explanation": "參考型別（如 Class）的實體儲存在 **Heap**；而實值型別（如 int, bool）的值通常儲存在 **Stack**（當作為區域變數時）。"
     },
     {
-        "id": 122,
+        "id": 121,
         "type": "single",
         "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
         "options": [
@@ -2688,7 +2667,7 @@
         "explanation": "標準瀑布式流程：**需求分析** -> **設計** -> **開發 (實作)** -> **測試** -> **維護** (部署後)。"
     },
     {
-        "id": 123,
+        "id": 122,
         "type": "single",
         "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？",
         "options": [
@@ -2705,7 +2684,7 @@
         "explanation": "**HashSet** 是一種集合，其特性是**不允許重複元素**，且存取速度快。"
     },
     {
-        "id": 124,
+        "id": 123,
         "type": "single",
         "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
         "options": [
