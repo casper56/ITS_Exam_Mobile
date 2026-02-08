@@ -149,6 +149,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     <div class="mt-5 no-print">
         <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
         <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button class="btn btn-outline-danger btn-lg me-2" onclick="clearWrongHistory()">🗑️ 清除錯題紀錄</button>
         <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="exportIncorrectPDF()" style="display:none;">💾 匯出錯誤題目 PDF</button>
     </div>
 
@@ -171,6 +172,16 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     let timeLeft = 50 * 60; 
     let timerInterval;
 
+    const WRONG_KEY = 'its_python_wrong_ids';
+
+    function clearWrongHistory() {{
+        if (confirm('確定要清除所有累積的錯題紀錄嗎？(清除後將恢復隨機抽題)')) {{
+            localStorage.removeItem(WRONG_KEY);
+            alert('紀錄已清除');
+            location.reload();
+        }}
+    }}
+
     function startExam() {{
         const categories = [
             'D1_資料型別與運算子', 'D2_流程控制與判斷', 'D3_輸入輸出與檔案',
@@ -178,7 +189,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         ];
         
         // Load wrong history
-        const wrongIds = new Set(JSON.parse(localStorage.getItem('its_python_wrong_ids') || '[]'));
+        const wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
 
         const groups = {{}};
         allQuestions.forEach(q => {{
@@ -354,7 +365,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const stats = {{}}; // {{ category: {{ total: 0, correct: 0 }} }}
         
         // Load existing wrong history
-        let wrongIds = new Set(JSON.parse(localStorage.getItem('its_python_wrong_ids') || '[]'));
+        let wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
 
         examQuestions.forEach((item, idx) => {{
             const cat = item.category || '未分類';
@@ -395,7 +406,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         }});
         
         // Save updated history
-        localStorage.setItem('its_python_wrong_ids', JSON.stringify([...wrongIds]));
+        localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongIds]));
 
         // Generate Stats HTML
         let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
