@@ -24,7 +24,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
     <style>
-        body {{ background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; }}
+        body {{ background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; overflow-y: auto; }}
         .exam-header {{ position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }}
         .timer-box {{ font-size: 1.5rem; font-weight: bold; color: #ffc107; }}
         .main-content {{ margin-top: 80px; padding-bottom: 100px; }}
@@ -39,7 +39,8 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         .sub-question-label {{ font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; }}
         #result-screen {{ display: none; text-align: center; padding: 50px 20px; }}
         .score-circle {{ width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }}
-        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; border: 1px solid #dee2e6; }}
+        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; border: 1px solid #dee2e6; white-space: pre-wrap !important; word-break: break-all !important; }}
+        pre {{ white-space: pre-wrap !important; word-break: break-all !important; }}
         
         /* Semi-circle Side Buttons */
         .side-nav-btn {{
