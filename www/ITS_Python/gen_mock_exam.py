@@ -177,6 +177,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
             'D4_函式與註解', 'D5_錯誤處理與測試', 'D6_模組與常用工具', 'D7_其他進階題型'
         ];
         
+        // Load wrong history
+        const wrongIds = new Set(JSON.parse(localStorage.getItem('its_python_wrong_ids') || '[]'));
+
         const groups = {{}};
         allQuestions.forEach(q => {{
             const cat = q.category || 'D7_其他進階題型';
@@ -187,19 +190,27 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         let selected = [];
         let remainingPool = [];
 
-        // 1. Minimum 4 questions per category (at least 8% of 50 is 4)
+        // Helper sort: Wrong first, then random
+        const prioritySort = (a, b) => {{
+            const aW = wrongIds.has(a.id) ? 1 : 0;
+            const bW = wrongIds.has(b.id) ? 1 : 0;
+            return (bW - aW) || (0.5 - Math.random());
+        }};
+
+        // 1. Minimum 4 questions per category (Wrong questions FIRST)
         categories.forEach(cat => {{
             if (groups[cat]) {{
-                const shuffled = [...groups[cat]].sort(() => 0.5 - Math.random());
-                const minPick = shuffled.slice(0, Math.min(4, shuffled.length));
+                // Sort by priority (wrong first)
+                const sorted = [...groups[cat]].sort(prioritySort);
+                const minPick = sorted.slice(0, Math.min(4, sorted.length));
                 selected = selected.concat(minPick);
                 // Put others back to remaining pool
-                remainingPool = remainingPool.concat(shuffled.slice(minPick.length));
+                remainingPool = remainingPool.concat(sorted.slice(minPick.length));
             }}
         }});
 
-        // 2. Fill the rest to 50 questions
-        remainingPool.sort(() => 0.5 - Math.random());
+        // 2. Fill the rest to 50 questions (Prioritizing remaining wrong questions)
+        remainingPool.sort(prioritySort);
         const d1Key = 'D1_資料型別與運算子';
 
         for (let q of remainingPool) {{
@@ -216,7 +227,7 @@ def create_mock_exam_html(json_file, output_html, subject_name):
             }}
         }}
 
-        // 3. Final Shuffle
+        // 3. Final Shuffle (So you don't guess based on order)
         examQuestions = selected.sort(() => 0.5 - Math.random());
         
         renderQuestion(0);
@@ -341,6 +352,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         let correctCount = 0;
         let incorrectHTML = '';
         const stats = {{}}; // {{ category: {{ total: 0, correct: 0 }} }}
+        
+        // Load existing wrong history
+        let wrongIds = new Set(JSON.parse(localStorage.getItem('its_python_wrong_ids') || '[]'));
 
         examQuestions.forEach((item, idx) => {{
             const cat = item.category || '未分類';
@@ -365,7 +379,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
             if (isCorrect) {{
                 correctCount++;
                 stats[cat].correct++;
+                wrongIds.delete(item.id); // Remove from wrong history if answered correctly
             }} else {{
+                wrongIds.add(item.id); // Add to wrong history
                 let qText = item.question.replace(/●/g, '<br/>●');
                 let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 incorrectHTML += `
@@ -377,6 +393,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
                     </div>`;
             }}
         }});
+        
+        // Save updated history
+        localStorage.setItem('its_python_wrong_ids', JSON.stringify([...wrongIds]));
 
         // Generate Stats HTML
         let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
