@@ -349,7 +349,11 @@
         // Generate Stats HTML
         let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
         
-        Object.entries(stats).forEach(([cat, data]) => {
+        // Sort categories D1, D2, D3...
+        const sortedCats = Object.keys(stats).sort();
+
+        sortedCats.forEach(cat => {
+            const data = stats[cat];
             const percent = ((data.total / 50) * 100).toFixed(1);
             const accuracy = ((data.correct / data.total) * 100).toFixed(0);
             const badgeClass = accuracy >= 70 ? 'bg-success' : (accuracy >= 40 ? 'bg-warning text-dark' : 'bg-danger');
