@@ -28,9 +28,9 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         .exam-header {{ position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }}
         .timer-box {{ font-size: 1.5rem; font-weight: bold; color: #ffc107; }}
         .main-content {{ margin-top: 80px; padding-bottom: 100px; }}
-        .question-card {{ border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }}
+        .question-card {{ border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; overflow: visible !important; }}
         .question-header {{ background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }}
-        .question-body {{ padding: 20px 25px; font-size: 1rem; }}
+        .question-body {{ padding: 20px 25px; font-size: 1rem; overflow: visible !important; }}
         .option-item {{ list-style: none; margin-bottom: 8px; padding: 10px 15px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; }}
         .option-item:hover {{ background-color: #f8f9fa; border-color: #adb5bd; }}
         .option-item.selected {{ background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }}
@@ -39,8 +39,8 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         .sub-question-label {{ font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #495057; border-left: 4px solid #198754; padding-left: 10px; }}
         #result-screen {{ display: none; text-align: center; padding: 50px 20px; }}
         .score-circle {{ width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }}
-        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; border: 1px solid #dee2e6; white-space: pre-wrap !important; word-break: break-all !important; }}
-        pre {{ white-space: pre-wrap !important; word-break: break-all !important; }}
+        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 4px; border: 1px solid #dee2e6; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; }}
+        pre {{ white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; }}
         
         /* Semi-circle Side Buttons */
         .side-nav-btn {{
