@@ -169,7 +169,41 @@ def create_mock_exam_html(json_file, output_html, subject_name):
     let timerInterval;
 
     function startExam() {{
-        examQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 50);
+        // Group questions by category
+        const groups = {{}};
+        allQuestions.forEach(q => {{
+            const cat = q.category || 'D7_其他進階題型';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push(q);
+        }});
+
+        const d1Key = 'D1_資料型別與運算子';
+        let selected = [];
+        
+        // 1. Handle D1 specifically (max 22)
+        if (groups[d1Key]) {{
+            const d1Pool = [...groups[d1Key]].sort(() => 0.5 - Math.random());
+            selected = d1Pool.slice(0, Math.min(22, d1Pool.length));
+        }}
+
+        // 2. Fill the rest from other categories
+        let otherPool = [];
+        Object.keys(groups).forEach(cat => {{
+            if (cat !== d1Key) {{
+                otherPool = otherPool.concat(groups[cat]);
+            }}
+        }});
+        
+        // Add remaining D1 questions back to otherPool if needed (though usually we just want to limit them)
+        // If we strictly want MAX 22, we don't add the rest of D1 back.
+        
+        otherPool.sort(() => 0.5 - Math.random());
+        const needed = 50 - selected.length;
+        selected = selected.concat(otherPool.slice(0, needed));
+
+        // 3. Final Shuffle
+        examQuestions = selected.sort(() => 0.5 - Math.random());
+        
         renderQuestion(0);
         startTimer();
     }}
