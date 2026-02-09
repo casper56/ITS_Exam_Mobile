@@ -79,6 +79,28 @@ python json_to_html.py
 python gen_mock_exam.py
 ```
 
+## 📝 題庫維護注意事項
+
+### 1. HTML 標籤顯示處理 (C# 考科適用)
+由於解析內容（explanation）支援 HTML 語法，如果您在說明中想直接顯示 HTML 標籤（如 `<html>`、`<div>`）而非執行它們，請使用以下規則：
+
+*   **自動保護**：大部分在 `<code>` 或 `<pre>` 區塊內的標籤會自動轉為純文字顯示。
+*   **手動強制轉義**：若標籤在一般文字中導致換行或消失，請在 JSON 中使用 **雙反斜線 `\\`** 進行轉義。
+    *   **範例**：在 JSON 中寫 `"使用 \\<html> 標籤"`，網頁上會正確顯示為 `"使用 <html> 標籤"`。
+
+### 2. 資料格式建議
+為了維持 JSON 檔案的易讀性與 Git 版本管理的便利：
+*   **解析欄位 (explanation)**：建議採用 **字串陣列 (Array)** 格式，每行一個元素。系統產檔時會自動處理換行。
+
+### 3. C# 題庫同步指令
+若修改了 C# 相關 JSON，請執行同步腳本：
+```powershell
+# 同步圖片連結
+python scripts/sync_images.py
+# 重新生成網頁 (包含 smartEscape 邏輯)
+python www/ITS_Csharp/json_to_html.py www/ITS_Csharp/questions_ITS_csharp.json www/ITS_Csharp/ITS_Csharp.html
+```
+
 ### 4. 提交並編譯 APK
 完成網頁更新後，請提交變更至 GitHub，Actions 會自動編譯最新的 APK：
 ```powershell

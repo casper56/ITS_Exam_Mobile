@@ -60,15 +60,15 @@ def create_html(json_file, output_html):
         }}
         .question-card {{
             min-height: 400px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background: #fff; border-radius: 6px; overflow: hidden;
+            background: #fff; border-radius: 6px;
         }}
         .question-header {{
             background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 20px;
             font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center;
         }}
         .question-body {{ padding: 15px 25px 10px 25px; font-size: 1rem; }}
-        .question-text {{ white-space: pre-wrap; line-height: 1.5; }}
-        .question-image {{ max-width: 100%; height: auto; margin: 15px 0; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+        .question-text {{ white-space: pre-wrap; line-height: 1.5; margin-bottom: 20px; }}
+        .question-image {{ display: block; max-width: 100%; height: auto; margin: 20px auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .option-item {{ list-style: none; margin-bottom: 5px; padding: 5px 12px; border: 1px solid #e9ecef;
             border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }}
@@ -79,7 +79,10 @@ def create_html(json_file, output_html):
         .answer-section {{ display: none; margin-top: 12px; padding: 10px 15px 5px 15px; background-color: #f0f7ff;
             border-left: 5px solid #0d6efd; border-radius: 6px;
         }}
-        .explanation {{ white-space: pre-wrap; line-height: 1.6; margin-top: 5px; }}
+        .explanation {{ font-size: 1rem; margin: 0; }}
+        .explanation table {{ width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; }}
+        .explanation th, .explanation td {{ border: 1px solid #dee2e6; padding: 8px; text-align: left; font-size: 0.95rem; }}
+        .explanation th {{ background-color: #f8f9fa; font-weight: bold; }}
         .progress-grid {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }}
         .q-node {{
             aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
@@ -95,13 +98,67 @@ def create_html(json_file, output_html):
         }}
         .nav-btn-group {{ display: flex; gap: 15px; margin-top: 15px; justify-content: center; }}
         .nav-btn {{ min-width: 120px; }}
-        .mobile-toggle {{
-            display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
-            width: 50px; height: 50px; border-radius: 50%; background: #212529;
-            color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        
+        /* Semi-circle Side Buttons */
+        .side-nav-btn {{
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 100px;
+            background: rgba(13, 110, 253, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            outline: none !important;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            font-family: serif;
+            font-weight: bold;
+        }}
+        .side-nav-btn:hover {{
+            background: #0d6efd;
+            width: 50px;
+            color: white;
+        }}
+        .side-nav-prev {{ 
+            left: 280px; 
+            border-radius: 0 50px 50px 0; 
+            padding-right: 8px;
+        }}
+        .side-nav-next {{ 
+            right: 0; 
+            border-radius: 50px 0 0 50px;
+            padding-left: 8px;
+        }}
+        
+        @media (max-width: 992px) {{
+            .side-nav-prev {{ left: 0; }}
+            .side-nav-btn {{ 
+                width: 35px; 
+                height: 80px; 
+                font-size: 1.2rem;
+                background: rgba(33, 37, 41, 0.7);
+            }}
+            .side-nav-btn:hover {{ width: 40px; }}
+            .sidebar {{ transform: translateX(-100%); }}
+            .sidebar.active {{ transform: translateX(0); }}
+            .content-area {{ margin-left: 0; }}
+            .mobile-toggle {{ display: block !important; }}
         }}
         code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; }}
-        .explanation {{ font-size: 1rem; margin: 0; }}
+        .explanation {{ font-size: 1rem; margin: 0; white-space: pre-wrap; line-height: 1.6; }}
+        .explanation table {{ width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; white-space: normal; }}
+        .explanation th, .explanation td {{ border: 1px solid #dee2e6; padding: 8px; text-align: left; font-size: 0.95rem; }}
+        .explanation th {{ background-color: #f8f9fa; font-weight: bold; }}
     </style>
 </head>
 <body>
@@ -120,14 +177,15 @@ def create_html(json_file, output_html):
         </div>
     </nav>
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Side Floating Navigation -->
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()" title="上一題">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()" title="下一題">&#10095;</div>
+
     <main class="content-area" id="main-content">
         <div class="container-fluid" style="max-width: 1000px;">
             <h2 class="text-center mb-4">{display_title} 模擬測驗</h2>
             <div id="question-container"></div>
-            <div class="nav-btn-group">
-                <button class="btn btn-secondary nav-btn" id="btn-prev" onclick="prevQuestion()">⬅️ 上一題</button>
-                <button class="btn btn-primary nav-btn" id="btn-next" onclick="nextQuestion()">下一題 ➡️</button>
-            </div>
         </div>
     </main>
 </div>
@@ -151,6 +209,74 @@ def create_html(json_file, output_html):
     const ANSWERS_KEY = '{storage_base}_answers_v1';
 
     const typeMapping = {{ 'single': '單選題', 'multiple': '複選題', 'multioption': '題組' }};
+
+    function smartEscape(str) {{
+        if (!str) return "";
+        
+        // 0. 處理強制轉義符
+        let manualEscapes = [];
+        let processed = str.replace(/\\\\<([\s\S]*?)>/g, (match, content) => {{
+            manualEscapes.push(content);
+            return "___MANUAL_ESC_PH___";
+        }});
+
+        // 1. 隔離 code 區塊
+        let codeBlocks = [];
+        let placeholder = "___CODE_BLOCK_PH___";
+        
+        // 先抓大塊的 (pre code)
+        processed = processed.replace(/<pre><code(.*?)>([\s\S]*?)<\/code><\/pre>/gi, (match, attrs, content) => {{
+            codeBlocks.push({{ type: 'block', attrs, content }});
+            return placeholder;
+        }});
+        // 再抓小塊的 (code)
+        processed = processed.replace(/<code(.*?)>([\s\S]*?)<\/code>/gi, (match, attrs, content) => {{
+            codeBlocks.push({{ type: 'inline', attrs, content }});
+            return placeholder;
+        }});
+
+        // 2. 轉義 HTML 特殊字元
+        processed = processed.replace(/</g, "&lt;")
+                             .replace(/>/g, "&gt;");
+        
+        // 3. 還原白名單標籤
+        processed = processed.replace(/&lt;br\s*\/?&gt;/gi, "<br/>")
+                             .replace(/&lt;b&gt;/gi, "<b>")
+                             .replace(/&lt;\/b&gt;/gi, "</b>")
+                             .replace(/&lt;table&gt;/gi, "<table>")
+                             .replace(/&lt;\/table&gt;/gi, "</table>")
+                             .replace(/&lt;thead&gt;/gi, "<thead>")
+                             .replace(/&lt;\/thead&gt;/gi, "</thead>")
+                             .replace(/&lt;tbody&gt;/gi, "<tbody>")
+                             .replace(/&lt;\/tbody&gt;/gi, "</tbody>")
+                             .replace(/&lt;tr&gt;/gi, "<tr>")
+                             .replace(/&lt;\/tr&gt;/gi, "</tr>")
+                             .replace(/&lt;th&gt;/gi, "<th>")
+                             .replace(/&lt;\/th&gt;/gi, "</th>")
+                             .replace(/&lt;td&gt;/gi, "<td>")
+                             .replace(/&lt;\/td&gt;/gi, "</td>")
+                             .replace(/&lt;div&gt;/gi, "<div>")
+                             .replace(/&lt;\/div&gt;/gi, "</div>");
+
+        // 4. 精確還原 code 區塊
+        processed = processed.replace(new RegExp(placeholder, 'g'), () => {{
+            let block = codeBlocks.shift();
+            if (!block) return "";
+            let safeContent = block.content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            if (block.type === 'block') {{
+                return "<pre><code" + block.attrs + ">" + safeContent + "</code></pre>";
+            }} else {{
+                return "<code" + block.attrs + ">" + safeContent + "</code>";
+            }}
+        }});
+
+        // 5. 還原手動轉義
+        processed = processed.replace(/___MANUAL_ESC_PH___/g, () => {{
+            return "&lt;" + manualEscapes.shift() + "&gt;";
+        }});
+
+        return processed;
+    }}
 
     function loadState() {{
         const savedCorr = localStorage.getItem(CORR_KEY);
@@ -190,7 +316,7 @@ def create_html(json_file, output_html):
         const isMultiple = item.type === 'multiple';
         let answers = item.answer;
         if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseInt(a));
+        const correctIndices = answers.map(a => parseInt(a) - 1);
         const input = element.querySelector('input');
 
         if (event && event.target !== input) {{
@@ -283,24 +409,29 @@ def create_html(json_file, output_html):
         
         let qContent = item.question;
         if (Array.isArray(qContent)) qContent = qContent.join('\\n');
+        qContent = smartEscape(qContent);
         
-        body.innerHTML = `<div class="question-text mb-4">${{qContent}}</div>`;
-        if (item.image) body.innerHTML += `<div class="text-center mb-3"><img src="${{item.image}}" class="question-image" alt="Question Image"></div>`;
+        let bodyHtml = `<div class="question-text mb-4">${{qContent}}</div>`;
+        if (item.image) {{
+            bodyHtml += `<div class="text-center mb-3 clearfix"><img src="${{item.image}}" class="question-image" alt="Question Image"></div>`;
+        }}
         
         const options = item.quiz || item.options || [];
         let optionsHtml = '<div class="mt-3">';
         options.forEach((opt, optIdx) => {{
+            let safeOpt = smartEscape(String(opt));
             optionsHtml += `
                 <div class="option-item" onclick="checkAnswer(this, ${{index}}, ${{optIdx}}, event)">
                     <div class="form-check">
                         <input class="form-check-input" type="${{item.type === 'multiple' ? 'checkbox' : 'radio'}}" 
                                name="q${{index}}" id="o${{optIdx}}" style="transform: scale(1.1); margin-top: 0.2rem;">
-                        <label class="form-check-label w-100 ps-2" for="o${{optIdx}}" style="cursor:pointer">${{optIdx + 1}}. ${{opt}}</label>
+                        <label class="form-check-label w-100 ps-2" for="o${{optIdx}}" style="cursor:pointer">${{optIdx + 1}}. ${{safeOpt}}</label>
                     </div>
                 </div>`;
         }});
         optionsHtml += '</div>';
-        body.innerHTML += optionsHtml;
+        bodyHtml += optionsHtml;
+        body.innerHTML = bodyHtml;
 
         const footer = document.createElement('div');
         footer.className = 'mt-4 pt-3 border-top text-center';
@@ -319,16 +450,21 @@ def create_html(json_file, output_html):
         answerDiv.className = 'answer-section text-start';
         let answers = item.answer;
         if (!Array.isArray(answers)) answers = [answers];
-        let ansDisplay = answers.map(a => parseInt(a) + 1).join(', ');
+        let ansDisplay = answers.map(a => parseInt(a)).join(', ');
 
         let expContent = item.explanation;
-        if (Array.isArray(expContent)) expContent = expContent.join('\\n');
+        let safeExp = "";
+        if (Array.isArray(expContent)) {{
+            safeExp = smartEscape(expContent.join('\\n'));
+        }} else {{
+            safeExp = smartEscape(expContent);
+        }}
 
         // 最終修正：完全手動控制間距，移除所有標題標籤與 Alert
         let ansHtml = '<div style="font-weight:bold; color:#495057; margin-bottom:5px">正確答案:</div>';
         ansHtml += '<div style="background-color:#d1e7dd; color:#0f5132; padding:8px 15px; border-radius:4px; font-weight:bold; margin-bottom:15px">' + ansDisplay + '</div>';
         ansHtml += '<div style="font-weight:bold; color:#495057; margin-bottom:5px">解析:</div>';
-        ansHtml += '<div class="explanation">' + (expContent || '暫無解析。') + '</div>';
+        ansHtml += '<div class="explanation">' + (safeExp || '暫無解析。') + '</div>';
 
         answerDiv.innerHTML = ansHtml;
         footer.appendChild(answerDiv);
@@ -338,7 +474,7 @@ def create_html(json_file, output_html):
 
         const savedAns = userAnswers[index];
         const isMultiple = item.type === 'multiple';
-        const correctIndices = answers.map(a => parseInt(a));
+        const correctIndices = answers.map(a => parseInt(a) - 1);
         const isCompleted = correctSet.has(index) || incorrectSet.has(index);
 
         if (savedAns !== undefined) {{
@@ -388,8 +524,15 @@ def create_html(json_file, output_html):
     function jumpTo(index) {{ renderQuestion(index); }}
 
     function updateUI() {{
-        document.getElementById('btn-prev').disabled = (currentIndex === 0);
-        document.getElementById('btn-next').disabled = (currentIndex === quizData.length - 1);
+        const isFirst = (currentIndex === 0);
+        const isLast = (currentIndex === quizData.length - 1);
+
+        // Update Floating Buttons
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = isFirst ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = isLast ? 'none' : 'flex';
+
         document.getElementById('progress-stats').innerText = `答對:${{correctSet.size}} 答錯:${{incorrectSet.size}} / 共:${{quizData.length}}`;
         const grid = document.getElementById('progress-grid');
         if (grid.children.length !== quizData.length) {{
