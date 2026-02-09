@@ -95,11 +95,17 @@ python gen_mock_exam.py
 ### 3. C# 題庫同步指令
 若修改了 C# 相關 JSON，請執行同步腳本：
 ```powershell
-# 同步圖片連結
+# 同步圖片連結 (自動偵測 images/ 資料夾中的 idXX.png 並關聯至題庫)
 python scripts/sync_images.py
 # 重新生成網頁 (包含 smartEscape 邏輯)
 python www/ITS_Csharp/json_to_html.py www/ITS_Csharp/questions_ITS_csharp.json www/ITS_Csharp/ITS_Csharp.html
 ```
+
+#### 圖片自動同步說明 (`sync_images.py`)
+為了簡化維護，系統支援「圖片自動對號入座」功能：
+*   **命名通則**：將圖片命名為 `id[題號].png`（例如 `id24.png`）或 `id[題號1]_[題號2].png`（多題共用，如 `id6_7.png`）。
+*   **放置路徑**：放入 `www/ITS_Csharp/images/` 目錄。
+*   **自動化執行**：執行 `python scripts/sync_images.py` 後，腳本會自動將圖片路徑寫入 JSON 的 `image` 欄位並更新網頁內容，無需手動修改 JSON 程式碼。
 
 ### 4. 提交並編譯 APK
 完成網頁更新後，請提交變更至 GitHub，Actions 會自動編譯最新的 APK：
