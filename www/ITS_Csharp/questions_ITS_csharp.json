@@ -12,7 +12,9 @@
             1
         ],
         "explanation": [
-            "boolean在C#中是1位元組， double是雙精度浮點數，通常需要8個位元組， integer是整數，通常4位元組 string是字串型別，佔用的記憶體更大。"
+            "<pre><code class=\"language-csharp\">boolean在C#中是1位元組byte，",
+			"double是雙精度浮點數，通常需要8個位元組，",
+			"integer是整數，通常4位元組 string是字串型別，佔用的記憶體更大。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -31,7 +33,23 @@
             2
         ],
         "explanation": [
-            "1. 函式呼叫與堆疊的關係 在程式中，當一個函式（如 Blue）被另一個函式（如 Red）呼叫時，會在 堆疊（Stack） 上建立一個「執行上下文」（Execution Context），包含： 2. 呼叫者（Red）的返回地址（即執行完 Blue 後要返回的程式位置） 3. Blue 的區域性變數、引數等資料 4. 其他執行所需的元資料  堆疊是一種後進先出（LIFO） 的記憶體結構，用於管理函式呼叫的巢狀層級。 1. 執行完 Blue 後的處理 2. 執行資料清除：當 Blue 執行完成後，其佔用的堆疊空間會被彈出(Pop), 釋放記憶體。 3.最後一個指示保留在頂端：堆疊頂端（Top of Stack）會保留 最後一個未完成的函式呼叫的返回地址，以便執行完 Blue 後能正確返回到 Red 的執行位置。"
+			
+			"<pre><code class=\"language-csharp\">A. 函式呼叫儲存在堆疊上。   //但沒有提到執行完成後如何處理",
+			"B. 函式呼叫儲存在堆疊上, 且完成之後, 執行資料都將從堆疊上清除, 並將最後一個指示保留在頂端。",
+			"C. 函式呼叫儲存在堆積的記憶體中。 //堆積指(heap), 用於動態記憶體分配, 別於堆疊。",
+			"   //堆 (heap), 用於動態記憶體分配, (如物件、動態陣列)，與函式呼叫無直接關聯。",
+			"D. 除了最後一個指標以外，其所有資料都將終結。",
+			"   //堆疊的處理是按順序壓入彈出，是「堆疊頂端保留返回地址」，而非「指標」。",
+            "1. 函式呼叫與堆疊的關係 在程式中，當一個函式（如 Blue）被另一個函式（如 Red）呼叫時，會在 堆疊（Stack） ",
+			"   上建立一個「執行上下文」（Execution Context），包含： ",
+			"2. 呼叫者（Red）的返回地址（即執行完 Blue 後要返回的程式位置） ",
+			"3. Blue 的區域性變數、引數等資料 ",
+			"4. 其他執行所需的元資料  堆疊是一種後進先出（LIFO） 的記憶體結構，用於管理函式呼叫的巢狀層級。",
+			"-----------------",
+			"1. 執行完 Blue 後的處理 ",
+			"2. 執行資料清除：當 Blue 執行完成後，其佔用的堆疊空間會被彈出(Pop), 釋放記憶體。 ",
+			"3. 最後一個指示保留在頂端：堆疊頂端（Top of Stack）會保留 最後一個未完成的函式呼叫的返回地址，",
+			"   以便執行完 Blue 後能正確返回到 Red 的執行位置。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -39,7 +57,7 @@
     },
     {
         "id": 3,
-        "question": "你執行了下列程式碼：<br/><pre><code class=\"language-csharp\">int a = 10;\nint b = 20;\nint c = 30;\nint result = 0;\n\nif (a &lt;= b || c &gt; a)\n   result = 10;\nelse if (a &lt;= b || c &lt;= a))\n   result = 20;\nelse\n   result = 30;\n\n程式碼執行完畢之後，result 的值為何？</pre>",
+        "question": "你執行了下列程式碼：<br/><pre><code class=\"language-csharp\">int a = 10;\nint b = 20;\nint c = 30;\nint result = 0;\n\nif (a &lt;= b || c &gt; a)\n   result = 10;\nelse if (a &lt;= b || c &lt;= a))\n   result = 20;\nelse\n   result = 30;\n\n程式碼執行完畢之後，result 的值為何？</code></pre>",
         "options": [
             "0",
             "10",
@@ -50,7 +68,7 @@
             2
         ],
         "explanation": [
-            "因第一個條件成立，直接賦值為 10，後續條件不執行。"
+            "<pre><code class=\"language-csharp\">因第一個條件成立，直接賦值為 10，後續條件不執行。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -69,7 +87,7 @@
             4
         ],
         "explanation": [
-            "因前兩個條件判斷皆為假，執行 else 分支，將 result 賦值為 30。"
+            "<pre><code class=\"language-csharp\">因前兩個條件判斷皆為假，執行 else 分支，將 result 賦值為 30。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -88,7 +106,14 @@
             2
         ],
         "explanation": [
-            "B . 只有在擲回例外狀況時才執行程式碼"
+            "B . 只有在擲回例外狀況時才執行程式碼",
+			"<pre><code class=\"language-csharp\">詳解",
+			"A. 不論是否擲回例外狀況都執行程式碼　　＃catch 只有在異常被 throw 時才執行，h 區段不會觸發。",
+			"B. 只有在擲回例外狀況時才執行程式碼",
+			"C. 跳出錯誤處理常式                // catch 的功能是「處理異常」，而非「跳出」異常處理流程",
+			"D. 結束應用程式的執行作業    ",
+			"// catch 只是處理異常，不會終止整體程式執行(除非在 catch 中主動呼叫 System.exit())</code></pre>"
+
         ],
         "weight": 1,
         "image": null,
@@ -107,10 +132,16 @@
             2
         ],
         "explanation": [
-            ""
+            "<pre><code class=\"language-csharp\">A. fetch(         //用於從伺服器非同步取得資料的 API，與更新時間無關",
+			"B. setInterval(   // 完整程式碼應為setInterval(updateClock, 1000), 每秒更新Clock 1次",
+			"C. setTimeout(     //setTimeout只執行一次，所以不符合題目要求",
+			"D. 以上皆非",
+
+			"題目核心需求：題目要求「每秒更新 clock 元素一次」，JavaScript 中處理「定期執行」",
+			"正確答案：B. setInterval(   //因為 setInterval() 是唯一能實現「每秒重複執行」的語法，符合題目需求。</code></pre>"
         ],
         "weight": 1,
-        "image": "images/id6_7.png",
+        "image": null,
         "type": "single"
     },
     {
@@ -128,17 +159,17 @@
         "explanation": [
             "1. 說明重點：<code>setInterval(Function, Interval)</code>，其中 Function 是函式的引用（不加括號）。",
             "2. 時間單位：Interval 是以毫秒為單位的時間（1000 毫秒 = 1 秒）。",
-            "<br/>",
+            
             "<b>程式碼完整範例：</b>",
             "<pre><code class=\"language-csharp\">setInterval(updateClock, 1000); // 正確呼叫方式\n\nfunction updateClock() {\n  let d = new Date();\n  document.getElementById(\"clock\").innerHTML =\n    d.getHours() + \":\" + d.getMinutes() + \":\" + d.getSeconds();\n}</code></pre>",
-            "<br/>",
+           
             "<b>補充說明：</b>",
             "● <code>updateClock</code> 是函式的引用（指向函式本身）。",
             "● <code>updateClock()</code> 是函式的執行（會立即執行並回傳結果）。",
             "● 由於 <code>setInterval</code> 需要的是「以後每秒執行一次」的指令，因此必須傳入函式引用。"
         ],
         "weight": 1,
-        "image": "images/id6_7.png",
+        "image": null,
         "type": "single"
     },
     {
@@ -180,43 +211,41 @@
             3
         ],
         "explanation": [
-            "1.DelegateA是一個普通的委託，而EventA是一個事件。",
+            "<pre><code class=\"language-csharp\">1.DelegateA是一個普通的委託，而EventA是一個事件。",
             "2.delegate 欄位可以直接賦值（=）或用 +=/-= 來加減委派方法。",
             "3.event 在外部只能用 += 或 -= 來訂閱/取消事件，不能直接用 = 指派事件處理器。",
-            "4. = 只允許在事件宣告類別的內部使用（或在事件自訂 add/remove accessor 時）。"
+            "4. = 只允許在事件宣告類別的內部使用（或在事件自訂 add/remove accessor 時）。</code></pre>"
         ],
         "weight": 1,
         "image": null,
         "type": "single"
     },
     {
-        "id": 10,
-        "question": "<pre><code class=\"language-csharp\">您正在將軟體規格轉換為程式碼元件。\n規格需要無法具現化的類別，但是可以指定必須在實體繼承類別中實作的方法。\n您應該建置哪一種類別？</code></pre>",
-        "options": [
-            "abstract",
-            "protected",
-            "sealed",
-            "public"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": [
-            "題目要求建置一個 無法直接實體化(不能被 instantiate) 的類別，但需要 在繼承的子類別中實作方法。 1. 類別本身不能直接建立實體（需被繼承）。 2. 類別中必須包含未實作的方法（需子類實現）。",
-            "",
-            "<pre><code class=\"language-csharp\">A. abstract        //完全符合題目需求：無法直接實體化 + 子類需實作方法",
-            "B. protected       //訪問修飾詞，用於限制類別成員(如方法、欄位)的可見性，與類別實體化無關",
-            "C. sealed            //這個修飾詞用於 禁止類別被繼承（即封裝類別），與題目需求相反",
-            "D. public            //這是 訪問修飾詞，表示類別可被其他程式碼訪問，但 public類別可以被直接實體化",
-            "題目重點解析",
-            "題目要求建置一個 無法直接實體化(不能被 instantiate) 的類別，但需要 在繼承的子類別中實作方法。",
-            "1. 類別本身不能直接建立實體（需被繼承）。",
-            "2. 類別中必須包含未實作的方法（需子類實現）。</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 10,
+		"question": "<pre><code class=\"language-csharp\">您正在將軟體規格轉換為程式碼元件。\n規格需要無法具現化的類別，但是可以指定必須在實體繼承類別中實作的方法。\n您應該建置哪一種類別？</code></pre>",
+		"options": [
+			"abstract",
+			"protected",
+			"sealed",
+			"public"
+		],
+		"answer": [
+			1
+		],
+		"explanation": [
+			"<b>核心重點：抽象類別的定義與規範</b>",
+			"題目要求建置一個 <b>無法直接實體化</b> (不能被 instantiate) 的類別，但需要 <b>在繼承的子類別中實作方法</b>。",
+			"<b>關鍵特性對照表：</b>",
+			"<table><tr><th>修飾詞</th><th>能否具現化 (New)</th><th>能否繼承</th><th>核心目的</th></tr><tr><td><b>abstract</b></td><td>❌ 否</td><td>✅ 是</td><td><b>定義規範</b>：作為基底類別，強制子類別實作。</td></tr><tr><td><b>protected</b></td><td>視類別定義</td><td>✅ 是</td><td><b>存取控制</b>：限制成員僅限類別內部或子類存取。</td></tr><tr><td><b>sealed</b></td><td>✅ 是</td><td>❌ 否</td><td><b>防止擴充</b>：確保類別邏輯不被修改或繼承。</td></tr><tr><td><b>public</b></td><td>✅ 是</td><td>✅ 是</td><td><b>公開存取</b>：開放給所有外部組件使用。</td></tr></table>",
+			"<b>選項逐一解析：</b>",
+			"<pre><code class=\"language-csharp\">A. abstract (正確) -> 符合「無法具現化」且「由子類實作」的規格需求。\nB. protected      -> 此為成員存取權限，與類別能否具現化無直接關係。\nC. sealed         -> 密封類別，禁止繼承，與題目需求完全相反。\nD. public         -> 公開類別，預設可被具現化。</code></pre>",
+			"<b>小結：</b>",
+			"在物件導向設計中，當一個類別僅作為「概念藍圖」而非具體實體時，應使用 <b>abstract</b> 關鍵字。"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
         "id": 11,
         "question": "<pre><code class=\"language-csharp\">有一個堆疊包含整數值，這些值會按照下列順序推入堆疊：2、4、6、8。\n您執行了下列作業序列：\nPop\nPush 3\nPop\nPush 4\nPush 6\nPush 7\nPop\nPop\nPop\n這些作業執行完畢之後，最上層元素的值為何？</code></pre>",
@@ -232,7 +261,7 @@
         "explanation": [
             "依照堆疊操作後，最上層依序彈出 8 → 3 → 7 → 6，剩下的是 2、4、6，其中 6 為最上層。",
             "<pre><code class=\"language-csharp\">解題步驟",
-            "//原序           // [2、4、6、8]",
+            "//原序     // [2、4、6、8]",
             "Pop       // [2、4、6]",
             "Push 3    // [2、4、6、3]",
             "Pop       // [2、4、6]",
@@ -250,7 +279,7 @@
     },
     {
         "id": 12,
-        "question": "<pre><code class=\"language-csharp\">您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。\n其他團隊成員所進行的應用程式維護作業不得影響您的工作。請問您該怎麼做？請將清單中適當的詞彙移至正確位置：\n詞彙：\n1. 合併   (merge)                2. 提取要求   (pull request)               3. 推送   (push)\n4. 分支   (Branch)               5. 認可    (commit)                        6. 複製            \n\n您應該先建立原始程式碼的 __A__。\n當您在本機工作並確認變更時，需要執行 __B__，如此您的變更才能儲存在本機儲存庫中。\n\n然後，您應該執行 __C__，以將您的變更儲存在遠端儲存庫中。\n為了通知其他開發人員您所做的變更，您應該建立 __D__。    \n在您的功能完成之後，其他開發人員應該執行 __E__。</pre>",
+        "question": "<pre><code class=\"language-csharp\">您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。\n其他團隊成員所進行的應用程式維護作業不得影響您的工作。請問您該怎麼做？請將清單中適當的詞彙移至正確位置：\n詞彙：\n1. 合併   (merge)                2. 提取要求   (pull request)               3. 推送   (push)\n4. 分支   (Branch)               5. 認可    (commit)                        6. 複製            \n\n您應該先建立原始程式碼的 __A__。\n當您在本機工作並確認變更時，需要執行 __B__，如此您的變更才能儲存在本機儲存庫中。\n\n然後，您應該執行 __C__，以將您的變更儲存在遠端儲存庫中。\n為了通知其他開發人員您所做的變更，您應該建立 __D__。    \n在您的功能完成之後，其他開發人員應該執行 __E__。</code></pre>",
         "options": [
             "45321",
             "12345",
@@ -261,7 +290,7 @@
             1
         ],
         "explanation": [
-            "※正確的順序應該是： 1. 建立分支  (4) 2. 認可  (5) 3. 推送  (3) 4. 提取要求  (2) 5. 合併   (1)",
+            "※正確的順序應該是： 建立分支  (4) , 認可  (5) , 推送  (3) , 提取要求 (2) ,  合併   (1)",
             "<pre><code class=\"language-csharp\">解題步驟",
             "※題目需求",
             "你要開發新功能，且不想影響其他人的維護工作 → 先建立一個Branch（分支）",
@@ -295,7 +324,8 @@
             2
         ],
         "explanation": [
-            "<pre><code class=\"language-csharp\">解題步驟",
+            "<pre><code class=\"language-csharp\">註:上述命令與描述選項似乎都是打散應依實際中文描述的順序, 然後挑選命令英文數字編號",
+			"解題步驟",
             "正確順序的推導：將命令與描述的對應關係按順序排列：",
             "checkout  → B   (2)  //用於建立新的分支（管理開發程式碼行）",
             "branch    → C   (1)  //用於切換分支或更新工作目錄（更新專案的全部或部分）",
@@ -309,152 +339,199 @@
         "type": "single"
     },
     {
-        "id": 14,
-        "question": "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。\n您需要將 accessCount 成員變數的可用性限制為基底類別以及衍生自基底類別的任何類別。\n請問您應該使用哪個存取修飾詞？</code></pre>",
-        "options": [
-            "internal",
-            "private",
-            "protected",
-            "public"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">解題步驟",
-            "A. internal    //只能在同一個組件（assembly）中存取，不限繼承關係",
-            "B. private     //只有定義它的類別內可存取",
-            "C. protected   //基底類別內部、 所有衍生類別(包括直接或間接繼承的子類別)可訪問",
-            "D. public      //任何地方都可存取",
-            "</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 14,
+		"question": "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。\n您需要將 accessCount 成員變數的可用性限制為基底類別以及衍生自基底類別的任何類別。\n請問您應該使用哪個存取修飾詞？</code></pre>",
+		"options": [
+			"internal",
+			"private",
+			"protected",
+			"public"
+		],
+		"answer": [
+			3
+		],
+		"explanation": [
+			"<b>核心重點：繼承關係中的成員存取限制</b>",
+			"題目要求將變數限制在「基底類別」與「衍生類別」之間，這符合 <b>protected</b> 的定義。",
+			"<b>存取修飾詞對照表：</b>",
+			"<table><tr><th>修飾詞</th><th>類別內部</th><th>衍生類別(子類)</th><th>外部/其他</th></tr><tr><td>private</td><td>✅</td><td>❌</td><td>❌</td></tr><tr><td><b>protected</b></td><td>✅</td><td><b>✅</b></td><td>❌</td></tr><tr><td>internal</td><td>✅</td><td>❌ (除非同組件)</td><td>❌</td></tr><tr><td>public</td><td>✅</td><td>✅</td><td>✅</td></tr></table>",
+			"<b>選項分析：</b>",
+			"<pre><code class=\"language-csharp\">A. internal  -> 限制在同一個組件（DLL/EXE）中，不一定有繼承關係。\nB. private   -> 僅限該類別內部，子類別也無法讀取，過於嚴格。\nC. protected -> (正確) 專門開放給基底與衍生類別共享成員。\nD. public    -> 全開放，無法達到「限制可用性」的規格需求。</code></pre>"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 15,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>",
-        "options": [
-            "Boxing",
-            "Unboxing",
-            "介接",
-            "對應"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">解題步驟",
-            "A. Boxing    //是值型別轉換為物件(reference type)的過程",
-            "B. Unboxing  //是相反的過程，從引用型別中提取值型別",
-            "C. 介接       //可能指介面(Interface)或介面的實現，但與型別轉換無直接關聯。介面是類別的抽象定義",
-            "D. 對應       //通常指資料或結構的對映關係",
-            "</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 15,
+		"question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>",
+		"options": [
+			"Boxing",
+			"Unboxing",
+			"介接",
+			"對應"
+		],
+		"answer": [
+			1
+		],
+		"explanation": [
+			"<b>核心重點：型別轉換與記憶體配置</b>",
+			"當我們把 <b>實值型別</b> (如 int, bool) 封裝在一個 <b>object</b> 容器中時，這個程序稱為 <b>Boxing (裝箱)</b>。",
+			"<b>Boxing vs. Unboxing 對照表：</b>",
+			"<table><tr><th>術語</th><th>轉換方向</th><th>記憶體變化</th><th>效能影響</th></tr><tr><td><b>Boxing (裝箱)</b></td><td>實值型別 → 參考型別</td><td>從 Stack 搬到 Heap</td><td>較高 (需分配記憶體)</td></tr><tr><td><b>Unboxing (拆箱)</b></td><td>參考型別 → 實值型別</td><td>從 Heap 搬回到 Stack</td><td>較低</td></tr></table>",
+			"",
+			"<b>選項逐一解析：</b>",
+			"<pre><code class=\"language-csharp\">A. Boxing (正確) -> 將值型別轉換為 object 或介面型別的過程。\nB. Unboxing     -> 相反過程，從 object 中提取出原本的值型別。\nC. 介接 (Interface) -> 指實作介面的過程，與此轉換無關。\nD. 對應 (Mapping)   -> 通常指資料對應 (如 ORM)，並非型別轉換術語。</code></pre>",
+			"<b>開發小提醒：</b>",
+			"過度頻繁的 Boxing 會造成垃圾回收 (GC) 的負擔，影響效能，應盡量使用 <b>泛型 (Generics)</b> 來避免。"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 16,
-        "question": "<pre><code class=\"language-csharp\">您有一個具有屬性的類別。\n您需要確保該類別的取用者可以寫入屬性的值。\n請問您應該使用哪一個關鍵字？</code></pre>",
-        "options": [
-            "set",
-            "get",
-            "add",
-            "value"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": [
-            "<code class=\"language-csharp\">A. set       //用於讓外部寫入屬性值（可寫）\nB. get       //用於讓外部讀取屬性值（只讀）\nC. add      //通常與集合型別（如 List<T>）的 Add 方法相關，用於新增元素，與屬性訪問無直接關聯\nD. value  //是屬性內部的儲存變數名稱，非訪問器關鍵字。</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 16,
+		"question": "<pre><code class=\"language-csharp\">您有一個具有屬性的類別。\n您需要確保該類別的取用者可以寫入屬性的值。\n請問您應該使用哪一個關鍵字？</code></pre>",
+		"options": [
+			"set",
+			"get",
+			"add",
+			"value"
+		],
+		"answer": [
+			1
+		],
+		"explanation": [
+			"<b>核心重點：屬性存取子 (Accessors) 的功能</b>",
+			"在 C# 中，屬性 (Property) 透過 <code>get</code> 和 <code>set</code> 存取子來控制私有欄位的讀取與寫入行為。",
+			"<b>存取關鍵字對照表：</b>",
+			"<table><tr><th>關鍵字</th><th>正式名稱</th><th>主要用途</th><th>讀寫權限</th></tr><tr><td><b>get</b></td><td>取用器 (Getter)</td><td>回傳屬性的值</td><td>唯讀 (Read-only)</td></tr><tr><td><b>set</b></td><td>設定器 (Setter)</td><td><b>寫入/修改</b>屬性的值</td><td>唯寫/可讀寫</td></tr><tr><td><b>value</b></td><td>隱含參數</td><td>代表外部傳入的新數值</td><td>-</td></tr></table>",
+			"<b>程式碼範例：</b>",
+			"<pre><code class=\"language-csharp\">public class Player {\n    private int _score;\n    public int Score {\n        get { return _score; }   // 讀取值\n        set { _score = value; }  // 寫入值，value 是系統保留字\n    }\n}</code></pre>",
+			"<b>選項分析：</b>",
+			"<pre><code class=\"language-csharp\">A. set (正確) -> 專門用於賦予屬性值，允許外部「寫入」。\nB. get       -> 用於獲取屬性值，若只有 get 則屬性為唯讀。\nC. add       -> 用於「事件 (event)」的訂閱或「集合 (Collection)」的新增，非屬性存取。\nD. value     -> 是 set 區塊內使用的「值變數」，而非定義權限的存取子。</code></pre>"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 17,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>",
-        "options": [
-            "基底類別",
-            "衍生類別",
-            "繼承類別",
-            "超級類別"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": [
-            "<code class=\"language-csharp\">A. 基底類別  //基底類別（Base class）是被其他類別繼承的原始類別\nB. 衍生類別  //衍生類別（Derived class）是從基底類別繼承屬性與方法的類別\nC. 繼承類別  //「繼承類別」的語法或語意與 C# 的繼承機制無直接對應。\nD. 超級類別  //在 C# 中，超級類別是基底類別的非正式稱呼，語意與「繼承功能的類別」無直接關聯</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 17,
+		"question": "<pre><code class=\"language-csharp\">哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>",
+		"options": [
+			"基底類別",
+			"衍生類別",
+			"繼承類別",
+			"超級類別"
+		],
+		"answer": [
+			2
+		],
+		"explanation": [
+			"<b>核心重點：繼承關係中的角色命名</b>",
+			"在 C# 的繼承機制中，我們將類別分為「提供功能者」與「獲得功能者」兩個角色。",
+			"---",
+			"<b>1. 繼承角色對照表：</b>",
+			"<table><tr><th>正式術語</th><th>別名</th><th>角色描述 (大腦白話翻譯)</th></tr><tr><td><b>基底類別 (Base Class)</b></td><td>父類別 / 老爸</td><td>原本就存在的<b>現有類別</b>，提供功能讓別人抄。</td></tr><tr><td><b>衍生類別 (Derived Class)</b></td><td>子類別 / 兒子</td><td><b>自現有類別繼承功能</b>的類別，是衍生出來的新產品。</td></tr></table>",
+			"---",
+			"<b>2. 程式碼範例：</b>",
+			"<pre><code class=\"language-csharp\">// 基底類別 (Base Class) -> 現有的\npublic class Shape { \n    public void Draw() { } \n}\n\n// 衍生類別 (Derived Class) -> 自現有類別繼承功能\npublic class Rectangle : Shape { \n    public void GetArea() { } \n}</code></pre>",
+			"---",
+			"<b>3. 選項解析：</b>",
+			"<pre><code class=\"language-csharp\">A. 基底類別 -> 指的是「被繼承」的那一個範本。\nB. 衍生類別 (正確) -> 描述從既有功能「衍生」出來的新版本。\nC. 繼承類別 -> 非正式術語，通常僅作為動作描述。\nD. 超級類別 -> 這是 Java 的術語 (Super Class)，在 C# 證照考試中不選。</code></pre>",
+			"<b>💡 記憶小撇步：</b>",
+			"題目問的是「哪一個詞描述『去繼承別人』的類別」，就像是從老爸那裡『衍生』出來的後代，所以選<b>衍生類別</b>。"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 18,
-        "question": "<pre><code class=\"language-csharp\">類別 C 和類別 D 繼承自類別 B。\n類別 B 繼承自類別 A。\n這些類別的方法如下所示：\n\n所有類別都有受保護的範圍。\n類別 C 可以存取哪些方法？</code></pre>",
-        "options": [
-            "僅 m1 和 m3",
-            "僅 m2 和 m3",
-            "僅 m3 和 m4",
-            "m1、m2 和 m3"
-        ],
-        "answer": [
-            4
-        ],
-        "explanation": [
-            "<code class=\"language-csharp\">D. m1、m2 和 m3",
-            "A → B → C 的繼承鏈(類C繼承自B，而B繼承自A)，C因此可以存取A、B以及C本身。</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 18,
+		"question": "<pre><code class=\"language-csharp\">類別 C 和類別 D 繼承自類別 B。\n類別 B 繼承自類別 A。\n這些類別的方法如下所示：\n\n所有類別都有受保護的範圍。\n類別 C 可以存取哪些方法？</code></pre>",
+		"options": [
+			"僅 m1 和 m3",
+			"僅 m2 和 m3",
+			"僅 m3 和 m4",
+			"m1、m2 和 m3"
+		],
+		"answer": [
+			4
+		],
+		"explanation": [
+			"<b>核心重點：繼承鏈與受保護 (protected) 成員的存取</b>",
+			"本題考察在多層繼承（Multilevel Inheritance）中，<code>protected</code> 成員如何被向下傳遞。",
+			"<b>1. 繼承結構示意圖：</b>",
+			"<pre><code class=\"language-csharp\">類別 A (m1) ← 基底\n   └── 類別 B (m2) ← 衍生自 A\n          ├── 類別 C (m3) ← 衍生自 B\n          └── 類別 D (m4) ← 衍生自 B</code></pre>",
+			"<b>2. 成員存取權限對照表：</b>",
+			"<table><tr><th>方法來源</th><th>方法名稱</th><th>類別 C 是否可存取</th><th>原因說明</th></tr><tr><td>類別 A</td><td>m1</td><td>✅ 是</td><td>C 位於 A 的繼承鏈下方，可接收受保護成員。</td></tr><tr><td>類別 B</td><td>m2</td><td>✅ 是</td><td>C 直接繼承 B，可存取父類別受保護成員。</td></tr><tr><td>類別 C</td><td>m3</td><td>✅ 是</td><td>類別可存取自身的成員。</td></tr><tr><td>類別 D</td><td>m4</td><td>❌ 否</td><td><b>兄弟類別</b>之間無法存取彼此的受保護成員。</td></tr></table>",
+			"<b>3. 選項逐一解析：</b>",
+			"<pre><code class=\"language-csharp\">A. 僅 m1 和 m3 -> 漏掉了父類別 B 的 m2。\nB. 僅 m2 和 m3 -> 漏掉了祖父類別 A 的 m1。\nC. 僅 m3 和 m4 -> 錯誤！C 與 D 是平輩，無法存取彼此的 protected 成員。\nD. m1、m2 和 m3 (正確) -> C 可以存取整個垂直繼承鏈上方的所有 protected 成員。</code></pre>",
+			"<b>開發小提醒：</b>",
+			"受保護成員 (protected) 就像「傳家寶」，會一代一代往下傳（A → B → C），但不會分給兄弟（C ↔ D）。"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 19,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>",
-        "options": [
-            "向上轉型",
-            "向下轉型",
-            "介接",
-            "Flex 處理"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": [
-            "<code class=\"language-csharp\">A. 向上轉型   // ✅ → 子類別 → 父類別(較一般)",
-            "B. 向下轉型    //❌  → 父類別 → 子類別(較特殊)可能導致 ClassCastException(實際型別與目標型別不符)",
-            "C. 介接       //❌  → 通常指介面實作（interface）或系統間的接口",
-            "D. Flex 處理  //❌  → 指 Flex 框架或靈活處理，與型別轉換無直接關係</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+		"id": 19,
+		"question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>",
+		"options": [
+			"向上轉型",
+			"向下轉型",
+			"介接",
+			"Flex 處理"
+		],
+		"answer": [
+			1
+		],
+		"explanation": [
+			"<b>核心重點：向上轉型 (Upcasting) 的隱式轉換規則</b>",
+			"「較一般類型」指的是繼承鏈中位置較上方的<b>父類別 (基底類別)</b>。",
+			"<b>1. 轉型方向圖解：</b>",
+			"<code class=\"language-csharp\">【父類別：Canvas】 (較一般/泛用)  ▲\n         │                       ║  <b>向上轉型 (Upcasting)</b>\n【子類別：PictureCanvas】 (較特殊) ║  ✅ 隱式轉換 (自動進行)\n         └───────────────────────╝</code>",
+			"<b>2. 轉換特性對照表：</b>",
+			"<table><tr><th>轉換類型</th><th>方向</th><th>語法要求</th><th>安全性</th></tr><tr><td><b>向上轉型</b></td><td>子型別 → 父型別</td><td><b>隱式轉換 (自動)</b></td><td>✅ 絕對安全</td></tr><tr><td><b>向下轉型</b></td><td>父型別 → 子型別</td><td>顯式轉換 (強制轉型)</td><td>⚠️ 可能導致執行期錯誤</td></tr></table>",
+			"<b>3. 選項解析：</b>",
+			"<pre><code class=\"language-csharp\">A. 向上轉型 (正確) -> 將子類別(特殊)看作父類別(一般)的過程。\nB. 向下轉型 -> 將父類別轉為子類別，需強制轉型且有風險。\nC. 介接 -> 通常指介面 (Interface) 的實作，非型別轉換術語。\nD. Flex 處理 -> 與 C# 型別系統無關。</code></pre>",
+			"<b>白話小結：</b>",
+			"「賓士車」是一種「汽車」：這種從特殊到一般的自然轉換，就是向上轉型。"
+		],
+		"weight": 1,
+		"image": null,
+		"type": "single"
+	},
     {
-        "id": 20,
-        "question": "<pre><code class=\"language-csharp\">衍生類別可以覆寫哪一種函式？</code></pre>",
-        "options": [
-            "static 函式",
-            "private virtual 函式",
-            "protected virtual 成員函式",
-            "非虛擬 public 成員函式"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": [
-            "<code class=\"language-csharp\">A. static 函式   //靜態函式屬於類別, 而非物件實體, 子類無法覆寫靜態函式，因為它與類別継承無關。\nB. private virtual 函式  //private限制子類無法訪問該函式, 即使是虛擬函式, 也無法覆寫私有成員\nC. protected virtual 成員函式  //允許子類訪問該函式- virtual 修飾字表示該函式可被子類繼承並覆寫。\nD. 非虛擬 public 成員函式  //若未宣告 virtual 或 abstract則不能被覆寫, 即使是 public若非虛擬也無法覆寫</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single"
-    },
+    "id": 20,
+    "question": "<pre><code class=\"language-csharp\">衍生類別可以覆寫哪一種函式？</code></pre>",
+    "options": [
+        "static 函式",
+        "private virtual 函式",
+        "protected virtual 成員函式",
+        "非虛擬 public 成員函式"
+    ],
+    "answer": [
+        3
+    ],
+    "explanation": 
+		[
+			"<b>核心重點：覆寫 (Override) 的成功條件</b>",
+			"想要在衍生類別中成功修改父類別的方法，必須同時滿足「看得到 (Access)」與「准許改 (Virtual)」兩個條件。",
+			"<b>1. 修改權限接力圖解：</b>",
+			"<b>1. 修改權限接力圖解：</b>",
+			"[[image01]]",
+			"<b>2. 覆寫條件判定表：</b>",
+			"<table><tr><th>組合類型</th><th>能否覆寫</th><th>原因說明 (白話解析)</th></tr><tr><td>static</td><td>❌ 否</td><td>屬於類別而非物件，不支援多型。</td></tr><tr><td>private virtual</td><td>❌ 否</td><td>子類別<b>看不到</b>父類的私有財產，無法覆寫。</td></tr><tr><td><b>protected virtual</b></td><td><b>✅ 是</b></td><td>子類別看得到父類成員，且父類標記為准許修改。</td></tr><tr><td>非虛擬 (Non-virtual)</td><td>❌ 否</td><td>父類別沒加 virtual，代表這方法不准動。</td></tr></table>",
+			"---",
+			"<b>3. 選項分析：</b>",
+			"<pre><code class=\"language-csharp\">A. static -> 靜態函式不具備繼承特性。\nB. private -> 子類別無法存取父類別的私有成員。\nC. protected virtual (正確) -> 符合「子類可見」與「父類准許」。\nD. 非虛擬 -> 沒有 virtual 關鍵字，子類別就不能 override。</code></pre>"
+		],
+		"weight": 1,
+		"image01": "images/id20_override_diagram.png",
+		"image": null,
+		"type": "single"
+	},
     {
         "id": 21,
         "question": "<pre><code class=\"language-csharp\">下列哪一項敘述正確描述了在基底類別中宣告為虛擬的 C# 方法？</code></pre>",
@@ -468,7 +545,10 @@
             2
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. 衍生類別的實作看不到此方法\nB. 可透過衍生類別本身的實作覆寫此方法\nC. 必須在直接繼承自該類別的任何非抽象類別中覆寫此方法\nD. 無法透過衍生類別本身的實作覆寫此方法</code>"
+            "<pre><code class=\"language-csharp\">A. 衍生類別的實作看不到此方法",
+			"B. 可透過衍生類別本身的實作覆寫此方法",
+			"C. 必須在直接繼承自該類別的任何非抽象類別中覆寫此方法",
+			"D. 無法透過衍生類別本身的實作覆寫此方法</code></pre>"
         ],
         "weight": 1,
         "image": null,

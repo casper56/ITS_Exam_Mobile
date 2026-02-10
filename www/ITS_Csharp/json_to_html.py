@@ -154,7 +154,7 @@ def create_html(json_file, output_html):
             .content-area {{ margin-left: 0; }}
             .mobile-toggle {{ display: block !important; }}
         }}
-        code {{ font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; }}
+        code {{ font-family: Consolas, Monaco, monospace; color: #212529; background-color: #f8f9fa; padding: 2px 4px; border-radius: 6px; }}
         .explanation {{ font-size: 1rem; margin: 0; white-space: pre-wrap; line-height: 1.6; }}
         .explanation table {{ width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; white-space: normal; }}
         .explanation th, .explanation td {{ border: 1px solid #dee2e6; padding: 8px; text-align: left; font-size: 0.95rem; }}
@@ -255,6 +255,7 @@ def create_html(json_file, output_html):
                              .replace(/&lt;\/th&gt;/gi, "</th>")
                              .replace(/&lt;td&gt;/gi, "<td>")
                              .replace(/&lt;\/td&gt;/gi, "</td>")
+                             .replace(/&lt;img([\s\S]*?)&gt;/gi, "<img$1>")
                              .replace(/&lt;div&gt;/gi, "<div>")
                              .replace(/&lt;\/div&gt;/gi, "</div>");
 
@@ -459,6 +460,16 @@ def create_html(json_file, output_html):
         }} else {{
             safeExp = smartEscape(expContent);
         }}
+
+        // 自動替換 [[image01]], [[image02]]... 佔位符
+        Object.keys(item).forEach(key => {{
+            if (key.startsWith('image') && item[key]) {{
+                const imgPlaceholder = `[[${{key}}]]`;
+                const imgHtml = `<img src="${{item[key]}}" class="explanation-img" style="display:block; max-width:100%; height:auto; margin:10px auto; border:1px solid #ddd; border-radius:6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">`;
+                safeExp = safeExp.split(imgPlaceholder).join(imgHtml);
+                qContent = qContent.split(imgPlaceholder).join(imgHtml);
+            }}
+        }});
 
         // 最終修正：完全手動控制間距，移除所有標題標籤與 Alert
         let ansHtml = '<div style="font-weight:bold; color:#495057; margin-bottom:5px">正確答案:</div>';

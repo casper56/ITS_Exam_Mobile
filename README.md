@@ -81,38 +81,35 @@ python gen_mock_exam.py
 
 ## 📝 題庫維護注意事項
 
-### 1. HTML 標籤顯示處理 (C# 考科適用)
-由於解析內容（explanation）支援 HTML 語法，如果您在說明中想直接顯示 HTML 標籤（如 `<html>`、`<div>`）而非執行它們，請使用以下規則：
+### 1. 圖片佔位符機制 (C# 考科推薦)
+為了達成「只動 JSON，不寫 HTML」的目標，C# 考科支援自動換圖機制：
+*   **步驟一**：在 JSON 題目物件中定義圖片路徑，例如 `"image01": "images/id20.png"`。
+*   **步驟二**：在 `question` 或 `explanation` 內容中輸入 `[[image01]]`。
+*   **結果**：產檔時系統會自動將其替換為帶有樣式（置中、圓角、陰影）的 `<img>` 標籤。
 
-*   **自動保護**：大部分在 `<code>` 或 `<pre>` 區塊內的標籤會自動轉為純文字顯示。
-*   **手動強制轉義**：若標籤在一般文字中導致換行或消失，請在 JSON 中使用 **雙反斜線 `\\`** 進行轉義。
-    *   **範例**：在 JSON 中寫 `"使用 \\<html> 標籤"`，網頁上會正確顯示為 `"使用 <html> 標籤"`。
+### 2. 解析文字顏色自訂指南 (C# 考科)
+在編寫 `explanation` 時，可以透過 `<code>` 標籤自訂顏色。
 
-### 2. 資料格式建議
-為了維持 JSON 檔案的易讀性與 Git 版本管理的便利：
-*   **解析欄位 (explanation)**：建議採用 **字串陣列 (Array)** 格式，每行一個元素。系統產檔時會自動處理換行。
+#### **顏色特性與預設值**
+*   **黑色 (預設)**：不論使用 `<code>` 或 `<pre>`，目前系統預設均為黑色 (`#212529`)。
+*   **粉紅色**：若需要原本的粉紅色，請手動指定 `<code style='color: #d63384;'>`。
+*   **代碼區塊**：使用 `<pre><code class="language-csharp">...</code></pre>` 會由 Prism.js 進行語法高亮。
 
-### 3. C# 題庫同步指令
-若修改了 C# 相關 JSON，請執行同步腳本：
+#### **常用顏色代碼表**
+| 顏色名稱 | 色碼 (HEX) | 建議用途 |
+| :--- | :--- | :--- |
+| **標準黑色** | `#212529` | 系統預設值，適合一般說明 |
+| **專業藍色** | `#007bff` | 標題、重點強調、正確選項 |
+| **成功綠色** | `#28a745` | 表示正確做法、通過 |
+| **警示紅色** | `#dc3545` | 表示錯誤、禁止、危險 |
+
+### 3. 生效與同步流程
+當您修改了 JSON 資料（路徑、文字、顏色或圖片佔位符）後，請務必執行腳本將變更同步至網頁：
 ```powershell
-# 同步圖片連結 (自動偵測 images/ 資料夾中的 idXX.png 並關聯至題庫)
-python scripts/sync_images.py
-# 重新生成網頁 (包含 smartEscape 邏輯)
-python www/ITS_Csharp/json_to_html.py www/ITS_Csharp/questions_ITS_csharp.json www/ITS_Csharp/ITS_Csharp.html
-```
-
-#### 圖片自動同步說明 (`sync_images.py`)
-為了簡化維護，系統支援「圖片自動對號入座」功能：
-*   **命名通則**：將圖片命名為 `id[題號].png`（例如 `id24.png`）或 `id[題號1]_[題號2].png`（多題共用，如 `id6_7.png`）。
-*   **放置路徑**：放入 `www/ITS_Csharp/images/` 目錄。
-*   **自動化執行**：執行 `python scripts/sync_images.py` 後，腳本會自動將圖片路徑寫入 JSON 的 `image` 欄位並更新網頁內容，無需手動修改 JSON 程式碼。
-
-### 4. 提交並編譯 APK
-完成網頁更新後，請提交變更至 GitHub，Actions 會自動編譯最新的 APK：
-```powershell
-git add .
-git commit -m "feat: update questions and regenerate html"
-git push origin devtest
+# 進入 C# 資料夾
+cd www/ITS_Csharp
+# 執行同步腳本
+python json_to_html.py
 ```
 
 ---
