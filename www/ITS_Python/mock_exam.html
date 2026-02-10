@@ -75,11 +75,12 @@
         }
 
         /* 列印與預覽錯誤題目樣式 */
-        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding-top: 20px; }
-        .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #eee; border-radius: 8px; page-break-inside: avoid; }
-        .review-id { font-weight: bold; color: #212529; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 5px 10px; border-radius: 4px; margin: 10px 0; }
-        .review-exp { font-size: 0.95rem; color: #666; border-left: 3px solid #0d6efd; padding-left: 10px; }
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+        .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
+        .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #eee; }
+        .no-print { display: none !important; }
 
         @media print {
             @page { size: auto; margin: 10mm; }
@@ -433,9 +434,22 @@
     }
 
     function exportIncorrectPDF() {
+        // 手機 APK 不支援 window.print()，改為開啟純文字預覽模式供截圖
+        document.getElementById('result-screen').classList.add('no-print');
         document.getElementById('review-area').style.display = 'block';
-        window.print();
-        setTimeout(() => { document.getElementById('review-area').style.display = 'none'; }, 1000);
+        
+        // 建立一個浮動的「關閉預覽」按鈕
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '⬅️ 結束預覽 (返回結果)';
+        closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print';
+        closeBtn.onclick = () => {
+            document.getElementById('review-area').style.display = 'none';
+            document.getElementById('result-screen').classList.remove('no-print');
+            closeBtn.remove();
+            window.scrollTo(0, 0);
+        };
+        document.body.appendChild(closeBtn);
+        window.scrollTo(0, 0);
     }
 
     function launchFireworks() {
