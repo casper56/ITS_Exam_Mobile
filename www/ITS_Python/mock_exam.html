@@ -13,19 +13,20 @@
         .main-content { margin-top: 80px; padding-bottom: 100px; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; overflow: visible !important; }
         .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
-        .question-body { padding: 20px 25px; font-size: 1rem; overflow: visible !important; background-color: #fff; color: #212529; }
-        .option-item { list-style: none; margin-bottom: 8px; padding: 10px 15px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; }
+        .question-body { padding: 15px 20px; font-size: 0.85rem; overflow: visible !important; background-color: #fff; color: #212529; }
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 0.9rem; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
-        .sub-opt-container { padding: 8px 12px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
         .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
-        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        code { font-family: Consolas, Monaco, monospace; color: #212529; background-color: #fff; padding: 2px 4px; border-radius: 4px; border: 1px solid #eee; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; }
-        pre { white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; background-color: #fff; color: #212529; border: none; }
+        code { font-family: Consolas, Monaco, monospace; color: #212529; background-color: #fff; padding: 2px 4px; border-radius: 4px; border: 1px solid #eee; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; font-size: 0.85rem; }
+        pre { white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; background-color: #fff; color: #212529; border: none; font-size: 0.85rem; }
         
-        /* Semi-circle Side Buttons */
+        /* 預設不隱藏 no-print 類別，只有在預覽時動態隱藏 */
+        .preview-active .no-print { display: none !important; }
         .side-nav-btn {
             position: fixed;
             top: 55%;
@@ -80,7 +81,6 @@
         .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
         .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
         .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #eee; }
-        .no-print { display: none !important; }
 
         @media print {
             @page { size: auto; margin: 10mm; }
@@ -484,16 +484,17 @@
 
     function exportIncorrectPDF() {
         // 手機 APK 不支援 window.print()，改為開啟純文字預覽模式供截圖
-        document.getElementById('result-screen').classList.add('no-print');
+        document.body.classList.add('preview-active');
         document.getElementById('review-area').style.display = 'block';
         
         // 建立一個浮動的「關閉預覽」按鈕
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '⬅️ 結束預覽 (返回結果)';
-        closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print';
+        closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3';
+        closeBtn.style.zIndex = '3000';
         closeBtn.onclick = () => {
             document.getElementById('review-area').style.display = 'none';
-            document.getElementById('result-screen').classList.remove('no-print');
+            document.body.classList.remove('preview-active');
             closeBtn.remove();
             window.scrollTo(0, 0);
         };
