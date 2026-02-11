@@ -556,7 +556,7 @@
     },
     {
         "id": 22,
-        "question": "<pre><code class=\"language-csharp\">您正在撰寫一個儲存及顯示各種賽跑結果的應用程式。此應用程式包含下列定義：\npublic interface IDisplayResult {\n void Display();\n}\n\npublic class Race {\n public int Seconds;\n public virtual void Display() {\n  Console.WriteLine(Seconds);  \n }\n}\n\n下列程式碼會顯示競賽的結果：\nvar r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();   \nr2.Display();         \nr1.DisplayRaw(); \n\n此程式碼必須輸出下列結果至主控台：\n99 seconds\n1.65 minutes\n99\n\n請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：\n宣告：\n(1)public override void Display(){ \n(2)public void DisplayRaw() {\n(3)void IDisplayResult.Display() {\n(4)private void Display()\n作答區：\npublic class FootRace : Race, IDisplayResult\n{\n    ＿ (A) ＿  // public override void Display() {  \n    Console.WriteLine(Seconds + \" seconds\");     }\n    ＿ (B) ＿  // public void DisplayRaw() { \n    base.Display();\n    }\n    ＿ (C) ＿  // void IDisplayResult.Display() {  \n    Console.WriteLine(Seconds / 60d + \" minutes\");  \n    }\n}</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">您正在撰寫一個儲存及顯示各種賽跑結果的應用程式。此應用程式包含下列定義：\npublic interface IDisplayResult {\n void Display();\n}\n\npublic class Race {\n public int Seconds;\n public virtual void Display() {\n  Console.WriteLine(Seconds);  \n }\n}\n\n下列程式碼會顯示競賽的結果：\nvar r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();   \nr2.Display();         \nr1.DisplayRaw(); \n\n此程式碼必須輸出下列結果至主控台：\n99 seconds\n1.65 minutes\n99\n\n請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：\n宣告：\n(1)public override void Display(){ \n(2)public void DisplayRaw() {\n(3)void IDisplayResult.Display() {\n(4)private void Display()\n作答區：\npublic class FootRace : Race, IDisplayResult\n{\n    ＿ (A) ＿  \n    Console.WriteLine(Seconds + \" seconds\");\n     }\n    ＿ (B) ＿    \n    base.Display();\n    }\n    ＿ (C) ＿   \n    Console.WriteLine(Seconds / 60d + \" minutes\");  \n    }\n}</code></pre>",
         "options": [
             "123",
             "132",
@@ -597,7 +597,7 @@
         ],
         "explanation": [
             "<code class=\"language-csharp\">A. 使用內部樣式表。 //用 <style> 標籤寫在單一 HTML 頁面中, 只能套用在該頁面，不方便共用",
-            "B. 使用內嵌樣式。     //用 style=\"...\" 直接寫在 HTML 標籤上, 完全無法集中管理，最不推薦",
+            "B. 使用內嵌樣式。    //用 style=\"...\" 直接寫在 HTML 標籤上, 完全無法集中管理，最不推薦",
             "C. 使用外部樣式表。  // CSS 寫在 .css 檔案中, 透過 <link rel=\"stylesheet\" href=\"...\"> 引入,",
 			"                     一份 CSS 檔可套用到多個網頁，符合題目要求",
             "D. 使用可延伸標記語言(XML)結構描述。  //是 XML 的資料驗證用 schema，和網頁樣式無關</code>"
@@ -763,7 +763,7 @@
     },
     {
         "id": 31,
-        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。\nB1 是控制器，B2 是模型，B3 是檢視</code></pre>",
         "options": [
             "231",
             "123",
@@ -774,7 +774,14 @@
             2
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. 231        B. 123        C. 312        D. 213</code>"
+            "<code class=\"language-csharp\">A. 231        B. 123        C. 312        D. 213",
+			"在 MVC（Model-View-Controller）架構中，元件的流程通常如下:",
+			"使用者（圖中的人）與檢視（View） 互動，發出請求。",
+			"請求由控制器（Controller） 接收。",
+			"控制器與模型（Model） 互動，處理資料和業務邏輯。",
+			"模型將更新後的資料返回給控制器，然後控制器選擇正確的檢視來呈現資料。",
+			"圖片中的",
+			"B1 是控制器，B2 是模型，B3 是檢視。因此答案是 123。</code>"
         ],
         "weight": 1,
         "image": "images/id31.png",
@@ -787,23 +794,18 @@
             "12345",
             "23154",
             "34512",
-            "41532 動作："
+            "41532"
         ],
         "answer": [
             4
         ],
         "explanation": [
-            "根據 MVC 架構，順序為： 41532",
-            "4 使用者點選按鈕(View)，",
-            "1 將事件轉換成要求(Controller)，",
-            "5 驗證要求、儲存資料(Controller)，",
-            "3 解譯並傳遞資料(Model)，",
-            "2 顯示資料(View)。",
-            "<code class=\"language-csharp\">A. 12345",
-            "B. 23154",
-            "C. 34512",
-            "D. 41532",
-            "動作：</code>"
+            "<pre><code class=\"language-csharp\">根據 MVC 架構，順序為： 41532",
+            "4 使用者點選按鈕(View)",
+            "1 將事件轉換成要求(Controller)",
+            "5 驗證要求、儲存資料(Controller)",
+            "3 解譯並傳遞資料(Model)",
+            "2 顯示資料(View)。</code></pre>"
         ],
         "weight": 1,
         "image": "images/id32.png",
@@ -816,15 +818,13 @@
             "多對多",
             "多維",
             "一維",
-            "一對多 圖片："
+            "一對多"
         ],
         "answer": [
             4
         ],
         "explanation": [
-            "一個 Customer（顧客）可以有多個 Order（訂單），但每筆 Order 只能屬於一個 Customer，因此這是典型的「一對多」關聯性。",
-            "<code class=\"language-csharp\">A. 多對多        B. 多維        C. 一維        D. 一對多     ",
-            "圖片：</code>"
+            "一個 Customer（顧客）可以有多個 Order（訂單），但每筆 Order 只能屬於一個 Customer，因此這是典型的「一對多」關聯性"
         ],
         "weight": 1,
         "image": "images/id33.png",
@@ -834,22 +834,16 @@
         "id": 34,
         "question": "<pre><code class=\"language-csharp\">有一個名為 Items 的資料表，其欄位包括：\n- ID（integer，主索引鍵，自動產生）\n- Description（text）\n- Completed（Boolean）\n\n您只需要刪除 Completed 欄位設為 True 的資料列。請問您應該使用哪一個陳述式？</code></pre>",
         "options": [
-            "DELETE FROM Items WHERE (Items.Completed =",
-            "",
-            "DELETE FROM * WHERE (Items.Completed =",
-            "",
+            "DELETE FROM Items WHERE (Items.Completed =1)",
+            "DELETE FROM * WHERE (Items.Completed =1)",
             "DELETE FROM Items",
-            "DELETE FROM Items WHERE (Items.Completed = 0)"
+            "DELETE FROM Items WHERE (Items.Completed =0)"
         ],
         "answer": [
             1
         ],
         "explanation": [
-            "選項A 是唯一符合以下條件的正確語法： 1. 語法正確：使用 DELETE FROM table_name WHERE condition。 2. 條件正確：Completed = 1 確切對應 True。 3. 邏輯正確：僅刪除符合條件的資料列，不影響其他資料。",
-            "<code class=\"language-csharp\">A. DELETE FROM Items WHERE (Items.Completed = 1)",
-            "B. DELETE FROM * WHERE (Items.Completed = 1)",
-            "C. DELETE FROM Items",
-            "D. DELETE FROM Items WHERE (Items.Completed = 0)</code>"
+            "選項A 是唯一符合以下條件的正確語法： \n1. 使用 DELETE FROM table_name WHERE condition。 \n2. 條件正確：Completed = 1 確切對應 True。 \n3. 邏輯正確：僅刪除符合條件的資料列，不影響其他資料。"
         ],
         "weight": 1,
         "image": null,
@@ -879,7 +873,7 @@
     },
     {
         "id": 36,
-        "question": "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：\n- 如果客戶只有一張發票，請刪除該發票。\n- 如果客戶有多張發票，請取消交易。\n請問 B 部分應填入下列何者程式碼？\n-- A 部分\nDECLARE @invoice_count INT;\n\nSELECT @invoice_count = COUNT(*)\nFROM Invoices\nWHERE CustomerID = 123;\n\nIF @invoice_count = 1\nBEGIN\n    DELETE FROM Invoices\n    WHERE CustomerID = 123;\n    -- C 部分   // 提交交易(若條件成立) COMMIT TRAN;\nEND\nELSE\nBEGIN\n    -- B 部分    // 回滾交易(若條件不成立) ROLLBACK TRAN;\nEND</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：\n- 如果客戶只有一張發票，請刪除該發票。\n- 如果客戶有多張發票，請取消交易。\n請問 B 部分應填入下列何者程式碼？\n-- A 部分\nDECLARE @invoice_count INT;\n\nSELECT @invoice_count = COUNT(*)\nFROM Invoices\nWHERE CustomerID = 123;\n\nIF @invoice_count = 1\nBEGIN\n    DELETE FROM Invoices\n    WHERE CustomerID = 123;\n    -- C 部分   \nEND\nELSE\nBEGIN\n    -- B 部分\nEND</code></pre>",
         "options": [
             "SAVE TRAN;",
             "REVOKE TRAN;",
@@ -890,10 +884,13 @@
             3
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. SAVE TRAN;",
-            "B. REVOKE TRAN;",
-            "C. ROLLBACK TRAN;",
-            "D. END TRAN;</code>"
+          
+			"<pre><code class=\"language-csharp\">題目分析",
+			"題目要求在交易中處理以下邏輯：",
+			"1. 若客戶僅有一張發票：刪除該發票。（COMMIT TRANSACTION）",
+			"2. 若客戶有多張發票：取消交易  (ROLLBACK TRANSACTION）（回滾操作）。",
+			"這涉及「交易控制語句」的使用，關鍵在於如何處理交易的回滾（rollback）與提交（commit）。</code></pre>"
+
         ],
         "weight": 1,
         "image": null,
@@ -912,10 +909,7 @@
             4
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. CATCH TRAN;",
-            "B. ROLLBACK TRAN;",
-            "C. GRANT TRAN;",
-            "D. COMMIT TRAN;</code>"
+            "<code class=\"language-csharp\">題目分析：若客戶只有一張發票，刪除操作成功，需提交交易以確保資料正確性</code>"
         ],
         "weight": 1,
         "image": null,
@@ -934,7 +928,10 @@
             1
         ],
         "explanation": [
-            "問題：哪一個 LINQ 運運算元會「壓平合併序列」？ 正解說明 SelectMany 是唯一一個能將巢狀序列「壓平」並合併成單一序列的 LINQ 運運算元。例如： var nested = new List<List<int>> { new List<int> { 1, 2 }, new List<int> { 3, 4 } }; var flattened = nested.SelectMany(list => list).ToList();",
+            "問題：哪一個 LINQ 運運算元會「壓平合併序列」？ ",
+			"正解說明 SelectMany 是唯一一個能將巢狀序列「壓平」並合併成單一序列的 LINQ 運運算元。",
+			"例如： var nested = new List<List<int>> { new List<int> { 1, 2 }, new List<int> { 3, 4 } }; ",
+			"       var flattened = nested.SelectMany(list => list).ToList();",
             "<code class=\"language-csharp\">A. SelectMany  //是 LINQ 中用於「壓平巢狀序列」的運運算元。它會將每個元素轉換為一個序列",
             "B. GroupBy    //根據某個條件(例如屬性)將元素分組, 並返回一個鍵值對集合(IGrouping<TKey, TElement>)",
             "C. ToArray    // ToArray 是將 IEnumerable<T> 轉換為陣列（T[]）",
@@ -960,10 +957,27 @@
             "<code class=\"language-csharp\">A. 設為 XML      //一種結構化資料格式，其階層性（如 <root><child>...</child></root>）",
             "B. 使用兩個資料行：    //偏向「關係型資料庫」的「欄位」概念",
             "C. 設為資料列和資料行  //這是傳統關係型資料庫的「表格」結構，與NoSQL的靈活資料結構無關",
-            "D. 設為節點、邏輯和屬性 //</code>"
+            "D. 設為節點、邏輯和屬性 //",
+			"ChatGPT：",
+			"A. 設為 XML     ❌ 雖然文件型資料庫理論上可存 XML，但主要標準是 JSON/BSON",
+			"B. 使用兩個資料行 ❌ 這是關聯式資料表思維，不適用於文件型資料庫",
+			"C. 設為資料列和資料行 ❌ 這是關聯式（Relational）資料庫的結構",
+			"D. 設為節點、邏輯和屬性 ✅ 符合 JSON/BSON 結構的組成方式",
+			"✅ 正確答案：D. 設為節點、邏輯和屬性",
+			"Copilot",
+			"文件資料庫的資料結構通常由：",
+			" -- 節點（Node）：代表一個資料物件或文件",
+			" -- 邏輯（Logic）：資料之間的關聯或結構邏輯（例如巢狀結構）",
+			" -- 屬性（Attribute）：每個節點的欄位或鍵值對",
+			"這種結構非常靈活，適合儲存非結構化或半結構化資料。",
+			"✅ 正確答案是：D. 設為節點、邏輯和屬性",
+			"❌ 其他選項解析：</code>",
+			"[[image02]]",
+			""
         ],
         "weight": 1,
         "image": null,
+		"image02": "images/id39.png",
         "type": "single"
     },
     {
@@ -982,7 +996,8 @@
             "<code class=\"language-csharp\">A. byte         //無法儲存小數（僅能儲存整數）",
             "B. decimal      //128位元的高精度浮點數，可儲存小數點後 28~29位 的數值。",
             "C. double       //64位元的浮點數，可儲存小數點後 15~17位 的數值 ",
-            "D. float        //32位元的浮點數,精度不足(小數點後僅七位，未達「超過七位」的需求)</code>"
+            "D. float        //32位元的浮點數,精度不足( 小數點後僅約 6 ~ 9 位(保證 7 位),未達「超過七位」的需求)",
+			"                // 只要小數點後超過 7 位，後面的數字就會開始「亂猜」。</code>"
         ],
         "weight": 1,
         "image": null,
@@ -1012,7 +1027,7 @@
     },
     {
         "id": 42,
-        "question": "<pre><code class=\"language-csharp\">您執行了下列程式碼：\nbool beakerFull = true;\nbool flameOn = false;\nint iResult = 0;\n\nif (beakerFull) {\n    if (flameOn) {\n        iResult = 1;\n    } else {\n        iResult = 2;  // beakerFull == true、flameOn == false\n    }\n} else {\n    iResult = 3;\n}\n\n程式碼執行完畢之後，哪一個值會儲存在 iResult 變數中？</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">您執行了下列程式碼：\nbool beakerFull = true;\nbool flameOn = false;\nint iResult = 0;\n\nif (beakerFull) {\n    if (flameOn) {\n        iResult = 1;\n    } else {\n        iResult = 2; \n    }\n} else {\n    iResult = 3;\n}\n\n程式碼執行完畢之後，哪一個值會儲存在 iResult 變數中？</code></pre>",
         "options": [
             "0",
             "1",
@@ -1077,7 +1092,7 @@
     },
     {
         "id": 45,
-        "question": "<pre><code class=\"language-csharp\">有一個 C# 程式包含下列程式碼：\npublic delegate string CheckCodingStyle(string code); //委派定義\n\npublic void CheckCode(string code, CheckCodingStyle algorithm)  //方法定義\n{\n    // 請在這裡呼叫委派方法\n}\n\n您需要在第 05 行撰寫一個陳述式以呼叫 CheckCodingStyle 委派。\n請問您應該使用哪個陳述式最恰當？</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">有一個 C# 程式包含下列程式碼：\npublic delegate string CheckCodingStyle(string code); \n\npublic void CheckCode(string code, CheckCodingStyle algorithm)  \n{\n    // 請在這裡呼叫委派方法\n}\n\n您需要在第 05 行撰寫一個陳述式以呼叫 CheckCodingStyle 委派。\n請問您應該使用哪個陳述式最恰當？</code></pre>",
         "options": [
             "algorithm(code);",
             "algorithm = new CheckCodingStyle(code);",
@@ -1089,12 +1104,19 @@
         ],
         "explanation": [
             "<code class=\"language-csharp\">A. algorithm(code);    // ✅直接呼叫委派並傳入 code 參數",
-            "B. algorithm = new CheckCodingStyle(code);    //建委派物件的語法, 但 code 是 string，而不是方法名稱",
-            "C. algorithm.CheckCodingStyle(code);    // algorithm 是委派, 不是型別或物件, 沒有CheckCodingStyle 方法",
-            "D. code.CheckCodingStyle(algorithm);    // code 是字串，沒有這樣的方法，會編譯錯誤</code>"
+            "B. algorithm = new CheckCodingStyle(code);//建委派物件的語法, 但 code 是 string，而不是方法名稱",
+            "C. algorithm.CheckCodingStyle(code);// algorithm 是委派, 不是型別或物件, 沒有CheckCodingStyle 方法",
+            "D. code.CheckCodingStyle(algorithm);// code 是字串，沒有這樣的方法，會編譯錯誤",
+			"正確答案：A. algorithm(code); ",
+			"algorithm 是一個 CheckCodingStyle 委派其呼叫方式需以 algorithm() 的語法執行，傳入 code 引數，",
+			"符合委派的語法規則。其他選項均因語法錯誤或邏輯錯誤而無法正確執行。</code>",
+			"[[image01]]"
+			
+
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/id45.png",
         "type": "single"
     },
     {
@@ -1113,15 +1135,32 @@
             "<code class=\"language-csharp\">A. Model-View-Controller (MVC)",
             "B. Windows Forms",
             "C. Entity Framework .NET Core",
-            "D. RESTful 應用程式介面 (RESTful API)</code>"
+            "D. RESTful 應用程式介面 (RESTful API)</code>",
+        "<b>1. 選項分析與需求對應</b>",
+        "<b>A. Model-View-Controller (MVC)</b>",
+        "<b>  架構特性</b>：MVC 是一種程式設計架構模式，將應用程式分為三部分：\n    Model（模型）、View（檢視）、Controller（控制器）。",
+        "<b>  與需求的契合點</b>：",
+        "<b>  將商務邏輯與展示元功能隔開</b>：MVC 的設計核心就在於分離業務邏輯（Model）與視覺呈現（View），符合題目需求。",
+        "<b>  適用於 Web 運算：</b>MVC 可與 HTML、JavaScript 結合，支援行動裝置與 PC/Mac，符合題目中的硬體介面需求。",
+        "<b>  可延伸性與安全性：</b>MVC 的分層設計有助於系統擴充與維護，符合安全且可延伸的目標。",
+        "<b>B. Windows Forms</b>",
+        "   適用於 Windows 桌面應用，但題目需求包括「行動裝置」與「瀏覽器」，無法覆蓋跨平臺需求，且無法有效分離邏輯與呈現。",
+        "<b>C. Entity Framework .NET Core</b>",
+        "   這僅是物件資料庫對映（ORM）工具，是用於與資料庫互動的開發工具，而非整體的系統架構模式。",
+        "<b>D. RESTful 應用程式介面 (RESTful API)</b>",
+        "   這是一種後端服務介面標準，用於與前端互動，而非整體應用程式的架構模式。",
+        "---",
+        "<b>2. 正確答案的邏輯</b>",
+        "題目重點：需求強調「分離商務邏輯與視覺呈現」、「跨平臺支援」與「可擴充性」。",
+        "MVC 的優勢：能有效分離邏輯與視覺，並與 HTML/JavaScript 結合支援瀏覽器與行動裝置，符合後端 .NET Core 的設定。"
         ],
         "weight": 1,
-        "image": null,
+		"image": "images/id46.png",
         "type": "single"
     },
     {
         "id": 47,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 theStack 的堆疊包含整數值，這些值會按照下列順序推入堆疊：\n1 → 4 → 1 → 6 → 3 → 5 → 6\n推入堆疊的第一個數字是 1。\n然後執行下列程式碼：\nfor (int i = 0; i < 3; i++)\n    theStack.pop();  // (1)：移除 6、(2)：移除5、(3)：移除 3\n\n請問程式執行完畢之後，theStack 將包含什麼？ //[1, 4, 1, 6] ← 頂部</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">有一個名為 theStack 的堆疊包含整數值，這些值會按照下列順序推入堆疊：\n1 → 4 → 1 → 6 → 3 → 5 → 6\n推入堆疊的第一個數字是 1。\n然後執行下列程式碼：\nfor (int i = 0; i < 3; i++)\n    theStack.pop();  \n\n請問程式執行完畢之後，theStack 將包含什麼？</code></pre>",
         "options": [
             "6、1、4、1",
             "6、5、3、6",
@@ -1143,7 +1182,7 @@
     },
     {
         "id": 48,
-        "question": "<pre><code class=\"language-csharp\">請根據 Git 的常見操作流程，將下列詞語移至正確位置。\n詞語：\n1.合併        2.提取要求        3.推送\n4.分支        5.認可           6.複製\n\nA. 您應該先建立原始的程式碼的 ______ 副本。 //分支(4)\nB. 當您在本機工作並確認變更時，需要執行 ____, 如此您的變更才能儲存在本機版本庫中。//認可(5)\nC. 然後，您應該執行 ______，以將您的變更儲存在遠端存放庫中。 //推送(3)\nD. 為了通知他們有人修改所的變更，您應建立 ______。  //提取要求(2)\nE. 在您的功能完成後，其他開發人員應該執行 ______ 將其納入主要分支。   //合併(1)</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">請根據 Git 的常見操作流程，將下列詞語移至正確位置。\n詞語：\n1.合併        2.提取要求        3.推送\n4.分支        5.認可           6.複製\n\nA. 您應該先建立原始的程式碼的 ______ 副本。 \nB. 當您在本機工作並確認變更時，需要執行 ____, 如此您的變更才能儲存在本機版本庫中。\nC. 然後，您應該執行 ______，以將您的變更儲存在遠端存放庫中。 \nD. 為了通知他們有人修改所的變更，您應建立 ______。  \nE. 在您的功能完成後，其他開發人員應該執行 ______ 將其納入主要分支。  </code></pre>",
         "options": [
             "12345",
             "25431",
@@ -1154,7 +1193,14 @@
             4
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. 12345          B. 25431          C. 31254          D. 45321</code>"
+            "<pre><code class=\"language-csharp\">4   分支     Branch",
+			"5   認可      Commit",
+			"3   推送      Push",
+			"2   提取要求   Pull Request",
+			"1   合併      Merge",
+			"※Git 常見操作的完整流程表（Clone → Branch → Commit → Push → Pull Request → Merge）",
+			"Clone(複製)是屬於初始化步驟，不是每天都要做，本題的情境是日常開發循環，因此省略Clone</code></pre>"
+
         ],
         "weight": 1,
         "image": null,
@@ -1162,7 +1208,7 @@
     },
     {
         "id": 49,
-        "question": "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。\n您想要正確地將頁面填入完成的碼\n可回報您的變更之前，必須先執行?</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。\n您想要正確地將頁面填入完成的碼\n</code></pre>",
         "options": [
             "複製 (Clone)",
             "派生 (Fork)",
@@ -1176,10 +1222,13 @@
             "<code class=\"language-csharp\">A. 複製 (Clone)          // 用於第一次把遠端專案下載到本機，並不是回報變更之前必要的最後一步。",
             "B. 派生 (Fork)             // 是在 GitHub 上複製一份倉庫到自己的帳號下, 通常是跨專案協作時才用，非日常回報",
             "C. 提取 (Pull/Fetch)       // 這是「同步」把遠端變更拉到本機，而非提交前的必要步驟。",
-            "D. 暫存 (Stage / git add)  //在 Git 流程裡，「回報變更」（= commit/push/pull request）之前，必須先用 git add 把變更放到 暫存區，才能 commit，再 push，最後才能回報。</code>"
+            "D. 暫存 (Stage / git add)  //在 Git 流程裡，「回報變更」（= commit/push/pull request）之前，",
+			"                           //必須先用 git add 把變更放到 暫存區，才能 commit，再 push，最後才能回報。</code>",
+			"[[image01]]"
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/id49.png",
         "type": "single"
     },
     {
@@ -1189,19 +1238,35 @@
             "複製 (Clone)",
             "派生 (Fork)",
             "提取 (Pull / Fetch)",
-            "暫存(Stage / git add) ※上方說明為ChatGPT、Copilot說明： 答案：C. 提取 ※下方選ITS說明：答案：B. 派生 選項分析",
-            "複製 ：通常指 git clone（完整複製整個倉庫），但題目明確要求「非複製模式」，故排除。",
-            "派生 ：在軟體開發中，「派生」（derive）指從已有的基礎（如遠端分支）衍生出新的版本或變更。  在 GitHub 的語境下，這可能對應 git pull（拉取遠端變更並合併到本地分支），或 git fetch（僅提取遠端變更，不影響本地工作目錄）。 「非複製模式」的關鍵在於「僅提取變更」而非完整複製，因此「派生」更符合此情境。",
-            "提取 ：可能對應 git fetch，但僅提取資料而不合併，需額外操作（如 git merge）才能整合變更，與「直接複製到設定檔」的目標不完全吻合。",
-            "暫存 ：指 git stash，用於暫存本地修改，與題目要求的「複製遠端變更」無關。",
-            "派生 正解理由： 非複製模式：避免完整複製倉庫，僅提取遠端的變更（如新提交）。 派生：強調從遠端基礎(如分支或提交)衍生出新的版本或配置，符合「將遠端變更整合到本地設定檔」的邏輯。 GitHub 的常見操作： git pull = git fetch + git merge（提取變更並合併）。 若僅需提取變更而不合併，需明確操作（如 git fetch），但「派生」更貼近「整合變更」的語意。"
-        ],
-        "answer": [],
+            "暫存(Stage / git add) "
+		],
+        "answer": [
+			2
+		],
         "explanation": [
-            "<code class=\"language-csharp\">A. 複製 ：通常指 git clone（完整複製整個倉庫），但題目明確要求「非複製模式」，故排除。",
-            "B. 派生 ：在軟體開發中，「派生」（derive）指從已有的基礎（如遠端分支）衍生出新的版本或變更。  在 GitHub 的語境下，這可能對應 git pull（拉取遠端變更並合併到本地分支），或 git fetch（僅提取遠端變更，不影響本地工作目錄）。 「非複製模式」的關鍵在於「僅提取變更」而非完整複製，因此「派生」更符合此情境。",
-            "C. 提取 ：可能對應 git fetch，但僅提取資料而不合併，需額外操作（如 git merge）才能整合變更，與「直接複製到設定檔」的目標不完全吻合。",
-            "D. 暫存 ：指 git stash，用於暫存本地修改，與題目要求的「複製遠端變更」無關。</code>"
+            "<code class=\"language-csharp\">A. 複製 (Clone)  //會把整個遠端儲存庫複製到本地，是初次取得專案的方式。  不符合「非複製模式」",
+			"B. 派生 (Fork)  //建立遠端儲存庫的副本, 通常用於開源貢獻,  與本地設定檔無關，也非取得變更方式",
+			"C. 提取 (Pull / Fetch) // fetch 會從遠端取得最新變更但不合併；pull 則會取得並合併到本地分支。",
+            "                         ✅ 完全符合「非複製模式」且是用來取得遠端變更的方式。",
+			"D. 暫存(Stage / git add) //是指將本地變更加入暫存區(staging area)，準備提交， 與遠端變更無關。",
+			"※上方說明為ChatGPT、Copilot說明： 答案：C. 提取",
+			"※下方選ITS說明：答案：B. 派生",
+			"選項分析",
+			"A. 複製 ：通常指 git clone（完整複製整個倉庫），但題目明確要求「非複製模式」，故排除。",
+            "B. 派生 ：在軟體開發中，「派生」（derive）指從已有的基礎（如遠端分支）衍生出新的版本或變更。  ",
+			"         在 GitHub 的語境下，這可能對應 git pull（拉取遠端變更並合併到本地分支），",
+			"         或 git fetch（僅提取遠端變更，不影響本地工作目錄）。",
+			"         「非複製模式」的關鍵在於「僅提取變更」而非完整複製，因此「派生」更符合此情境。",
+            "C. 提取 ：可能對應 git fetch，但僅提取資料而不合併，需額外操作（如 git merge）才能整合變更，",
+			"         與「直接複製到設定檔」的目標不完全吻合。",
+            "D. 暫存 ：指 git stash，用於暫存本地修改，與題目要求的「複製遠端變更」無關。",
+			"正解理由：",
+			"  非複製模式：避免完整複製倉庫，僅提取遠端的變更（如新提交）。 ",
+			"  派生：強調從遠端基礎(如分支或提交)衍生出新的版本或配置，符合「將遠端變更整合到本地設定檔」的邏輯。 ",
+			"  GitHub 的常見操作： ",
+			"  git pull = git fetch + git merge（提取變更並合併）。 ",
+			"  若僅需提取變更而不合併，需明確操作（如 git fetch），但「派生」更貼近「整合變更」的語意。</code>"
+
         ],
         "weight": 1,
         "image": null,
@@ -1222,8 +1287,12 @@
         "explanation": [
             "<code class=\"language-csharp\">A. 複製(Clone)       //初次複製整個儲存庫到本地，不適用已有本地儲存庫情況，也非用來「獲知最新修訂」",
             "B. 派生(Fork)            //建立儲存庫副本，通常用於貢獻或分支開發。 不會讓你知道原始儲存庫的最新修訂。",
-            "C. 提取(Pull / Fetch)    //fetch取得遠端最新修訂但不合併； pull：取得並合併到本地分支。  是用來「獲知」和「取得」遠端儲存庫最新修訂的正確方式",
-            "D. 暫存Stage / git add)  //是本地操作，將變更加入暫存區， 與遠端修訂無關。</code>"
+            "C. 提取(Pull / Fetch)    //fetch取得遠端最新修訂但不合併； pull：取得並合併到本地分支。",
+			"                          是用來「獲知」和「取得」遠端儲存庫最新修訂的正確方式",
+            "D. 暫存Stage / git add)  //是本地操作，將變更加入暫存區， 與遠端修訂無關。",
+			"正解理由",
+			" 執行 git fetch 或 git pull。這些指令會從遠端儲存庫拉取最新的提交紀錄，並更新本地的工作目錄或索引。</code>"
+
         ],
         "weight": 1,
         "image": null,
@@ -1241,10 +1310,12 @@
         ],
         "explanation": [
             "<code class=\"language-csharp\">A. 非對稱加密   //公鑰與私鑰機制，以確保資料完整性與來源真實性",
-            "B. 對稱加密  //因無辦法透過金鑰證明傳送者的身份，不能實現「來源驗證」，無法用於數位簽章。</code>"
+            "B. 對稱加密  //因無辦法透過金鑰證明傳送者的身份，不能實現「來源驗證」，無法用於數位簽章。</code>",
+			"[[image01]]"
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/id52.png",
         "type": "single"
     },
     {
@@ -1262,10 +1333,13 @@
             "在軟體開發中，數位簽章的流程如下： 1. 生成簽章：傳送者使用自己的私金鑰匙對資料進行加密，產生數位簽章。 2. 驗證簽章：接收者使用傳送者的公開鑰匙解密簽章，確認其真實性與未被篡改。 因此，數位簽章的完整實現需依賴私金鑰匙與公開鑰匙的組合，選項 C 是正確答案。",
             "<code class=\"language-csharp\">A. 私密鑰匙",
             "B. 公開鑰匙",
-            "C. 私密和公開鑰匙</code>"
+            "C. 私密和公開鑰匙</code>",
+			"[[image01]]"
+			
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/id53.png",
         "type": "single"
     },
     {
@@ -1281,11 +1355,15 @@
             3
         ],
         "explanation": [
-            "選項解析 A. 建立實值型別 ：錯誤, 建構函式並非專門用於「建立實值型別」，其初始化通常由語言本身處理。 B. 自基底類別繼承： 錯誤：繼承（Inheritance）是物件導向的特性，由「繼承語法」（如 class Derived : public Base）實現，與建構函式無直接關聯。建構函式的作用是初始化物件，而非處理繼承關係。 C. 初始化該類別的物件 正確：建構函式的核心功能是初始化物件。當使用 new 或直接建立類別實體（如 ClassName obj;）時，建構函式自動被呼叫，用於設定物件的初始狀態，例如初始化成員變數、分配資源、設預設值等。 D. 釋放類別所有的資源 錯誤：釋放資源（如記憶體、檔案、物件連結等）是析構函式（Destructor） 的責任，而非建構函式。建構函式主要處理物件的初始化，而析構函式在物件生命週期結束時被呼叫。",
-            "<code class=\"language-csharp\">A. 建立實值型別",
-            "B. 自基底類別繼承",
-            "C. 初始化該類別的物件",
-            "D. 釋放類別所有的資源</code>"
+            "<code class=\"language-csharp\">選項解析",
+			"A. 建立實值型別   ：錯誤, 建構函式並非專門用於「建立實值型別」，其初始化通常由語言本身處理。 ",
+			"B. 自基底類別繼承 ：錯誤：繼承（Inheritance）是物件導向的特性，由「繼承語法」（如 class Derived : public Base）實現，",
+			"                        與建構函式無直接關聯。建構函式的作用是初始化物件，而非處理繼承關係。",
+			"C. 初始化該類別的物件 正確：建構函式的核心功能是初始化物件。當使用 new 或直接建立類別實體（如 ClassName obj;）時，",
+			"                          建構函式自動被呼叫，用於設定物件的初始狀態，例如初始化成員變數、分配資源、設預設值等。",
+			"D. 釋放類別所有的資源 錯誤：釋放資源（如記憶體、檔案、物件連結等）是析構函式（Destructor） 的責任，而非建構函式。",
+			"                          建構函式主要處理物件的初始化，而析構函式在物件生命週期結束時被呼叫。",
+            "</code>"
         ],
         "weight": 1,
         "image": null,
@@ -1315,40 +1393,40 @@
     },
     {
         "id": 56,
-        "question": "<pre><code class=\"language-csharp\">//!!\n下列程式碼會追蹤與競賽選手排名的資訊。(一般先名字、名次、隊伍)\npublic class RankedPlayer\n{\nprivate static string _defaultTeam;\nprivate int _rank;\nprivate string _name;\npublic RankedPlayer(string name, int rank):this(name)\n{\n_rank = rank;\n          }\n\npublic RankedPlayer(string name, string team, int rank):this(name, rank)\n{\n_defaultTeam = team;\n}\n\npublic RankedPlayer(string name)\n{\n_name = name;\n}\n}\n呼叫包含三個參數的建構函式時，指派欄位的順序為何？\n請選出下列欄位位置正確排序：\n1._defaultTeam\n2._rank\n3. _name</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">//!!\n下列程式碼會追蹤與競賽選手排名的資訊。\npublic class RankedPlayer\n{\nprivate static string _defaultTeam;\nprivate int _rank;\nprivate string _name;\npublic RankedPlayer(string name, int rank):this(name)\n{\n   _rank = rank;\n}\n\npublic RankedPlayer(string name, string team, int rank):this(name, rank)\n{\n     _defaultTeam = team;\n}\n\npublic RankedPlayer(string name)\n{\n    _name = name;\n}\n}\n呼叫包含三個參數的建構函式時，指派欄位的順序為何？\n請選出下列欄位位置正確排序：\n1._defaultTeam\n2._rank\n3. _name</code></pre>",
         "options": [
             "123",
             "321",
             "231",
-            "132 ※一般欄位會先名字、名次、隊伍"
+            "132"
         ],
         "answer": [
             2
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. 123",
-            "B. 321   //依照建構函式的參數順序，欄位指派順序應該是：_name → _rank → _defaultTeam",
-            "C. 231",
-            "D. 132",
-            "",
-            "※一般欄位會先名字、名次、隊伍</code>"
+            "<code class=\"language-csharp\">依照建構函式的參數順序，欄位指派順序應該是：_name → _rank → _defaultTeam",
+            "※一般欄位會先名字、名次、隊伍</code>",
+			"[[image01]]"
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/id56.png",
         "type": "single"
     },
     {
         "id": 57,
-        "question": "<pre><code class=\"language-csharp\">您正在開發一個追蹤網球比賽的應用程式。\n比賽由下列 Match 類別代表：\npublic class Match {\n    public Match() {\n        Location = \"unknown\";    // (1) 建構函式時第一次指派\n    }\n\n    public string Location { get; set; }   // (2) 第二次指派\n    public DateTime MatchDate { get; set; }\n}\n\n比賽是使用下列程式碼來建立：\nMatch myMatch = new Match();                      //1\nmyMatch.Location = \"north region\";                //2\nmyMatch.MatchDate = new DateTime(2021, 4, 14);\n\n新建立 Match 類別的 Location 屬性指派了幾次？</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">您正在開發一個追蹤網球比賽的應用程式。\n比賽由下列 Match 類別代表：\npublic class Match {\n    public Match() {\n        Location = \"unknown\"; \n    }\n\n    public string Location { get; set; }   \n    public DateTime MatchDate { get; set; }\n}\n\n比賽是使用下列程式碼來建立：\nMatch myMatch = new Match();                      //1\nmyMatch.Location = \"north region\";                //2\nmyMatch.MatchDate = new DateTime(2021, 4, 14);\n\n新建立 Match 類別的 Location 屬性指派了幾次？</code></pre>",
         "options": [
             "0",
             "1",
             "2",
             "3"
         ],
-        "answer": [],
+        "answer": [
+			2
+		],
         "explanation": [
-            "<code class=\"language-csharp\">A. 0          B. 1          C. 2          D. 3                  //!! 原A. 1          B. 2          C. 3          D. 4</code>"
+            "<code class=\"language-csharp\">正確答案：ITS -> C. 2    </code>"
         ],
         "weight": 1,
         "image": null,
@@ -1367,8 +1445,11 @@
             4
         ],
         "explanation": [
-            "<code class=\"language-csharp\">C. 對應  //可能混淆 ORM (物件關聯對應 Object-Relational Mapping)，但和類別繼承無關",
-            "D. 繼承     //子類別(如 Mammal)繼承父類別(如 Animal)的屬性與方法，並可擴充套件其功能。</code>"
+            "<code class=\"language-csharp\">",
+			"A. 資料封裝化 //指「把資料和行為包在類別裡面，限制外部直接存取內部欄位」。和本題無關",
+			"B. 結構基礎模組化  //並不是標準 OOP 的四大特性名詞。看起來像干擾選項。",
+			"C. 對應          //可能混淆 ORM (物件關聯對應 Object-Relational Mapping)，但和類別繼承無關",
+			"D. 繼承         //子類別(如 Mammal)繼承父類別(如 Animal)的屬性與方法，並可擴充套件其功能</code>"
         ],
         "weight": 1,
         "image": null,
@@ -1398,7 +1479,7 @@
     },
     {
         "id": 60,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。請問應從 Glass 類別中呼叫 break() 方法的語法是？</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。\n請問應從 Glass 類別中呼叫 break() 方法的語法是？</code></pre>",
         "options": [
             "base.break();",
             "this.break();",
