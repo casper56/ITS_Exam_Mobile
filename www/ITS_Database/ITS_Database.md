@@ -1,66 +1,50 @@
-1. Database Design
-1.1 Given a scenario, design tables for storing data
-• Identify entities, rows/records, columns/fields
-1.2 Given a scenario, identify the appropriate primary key
-• Primary key, composite/compound key
-1.3 Given a scenario, choose data types to meet requirements
-• Definition and importance of data types; how data types affect storage
-requirements; data types for storing text, numbers, dates and times, and
-Boolean values
-1.4 Given a scenario, design relationships between tables
-• How to establish relationships using primary and foreign keys, entity-
-relationship diagrams (ERDs), referential integrity
-1.5 Normalize a database
-• Reasons for normalization, how to normalize a database to third normal
-form (3NF)
-1.6 Given a scenario, identify data protection measures
-• Backups, restore, principle of least privilege, GRANT, WITH GRANT
-OPTION, REVOKE, purpose of roles, when to use encryption, hashing, and
-masking, purpose of auditing
-2. Database Object Management using DDL
-2.1 Construct and analyze queries that create, alter, and drop tables
-• Create, alter, and drop tables by using proper ANSI SQL syntax; NULL and
-NOT NULL
-2.2 Construct and analyze queries that create, alter, and drop views
-• Create, alter, and drop views by using proper ANSI SQL syntax; purpose of
-views
-2.3 Construct and analyze stored procedures and functions
-• Input and output parameters, return values, purpose of stored procedures
-2.4 Given a scenario, choose between clustered and non-clustered
-indexes
-• When to use clustered vs. non-clustered indexes, syntax for creating
-indexes
-IT SPECIALIST EXAM OBJECTIVES
-Databases
-Candidates for this exam are seeking to prove introductory knowledge of how to design,
-create, and query relational databases, such as MySQL, Microsoft SQL Server, or Oracle.
-Candidates should have at least 150 hours of instruction or hands-on experience
-with database design and object management, data retrieval and manipulation, and
-related troubleshooting. Candidates should be able to write ANSI SQL statements and
-troubleshoot syntax errors and runtime errors.
-The syntax in the exam is provided in ANSI SQL.
-© 2025 Certiport, Inc. Certiport and the Certiport logo are registered trademarks of Certiport Inc. All other trademarks and registered trademarks are the property of their respective holders.3. Data Retrieval
-3.1 Construct and analyze queries that select data
-• INNER JOIN, LEFT JOIN, RIGHT JOIN, CROSS JOIN (Cartesian product),
-and FULL OUTER JOIN; self joins; combine result sets by using UNION and
-INTERSECT; DISTINCT; column alias; computed columns; concatentation
-using the + operator and CONCAT(); NULLIF()
-3.2 Construct and analyze queries that sort and filter data
-• ORDER BY, WHERE, LIKE, BETWEEN, AND, OR, NOT, TOP (LIMIT), IN, NOT
-IN, ANY, ALL, NULL, NOT NULL, comparison operators
-3.3 Construct and analyze queries that aggregate data
-• GROUP BY, HAVING, MIN, MAX, COUNT, AVG (AVERAGE), SUM
-4. Data Manipulation using DML
-4.1 Construct and analyze INSERT statements
-• INSERT INTO SELECT, INSERT INTO VALUES
-4.2 Construct and analyze UPDATE statements
-• Update data in a single table
-4.3 Construct and analyze DELETE statements
-• Delete data from a single table
-5. Troubleshooting
-5.1 Troubleshoot data object management query failures
-• Syntax and runtime errors
-5.2 Troubleshoot data retrieval query failures
-• Syntax and runtime errors
-5.3 Troubleshoot data manipulation query failures
-• Syntax and runtime errors
+# ITS Database 模擬試題統計分析報告
+
+本報告根據 `questions_ITS_Database.json` 題庫內容，對照 ITS 官方考試大綱進行分類統計，並紀錄模擬考系統的出題邏輯。
+
+---
+
+## 🎓 考前衝刺必勝策略 (Study Strategy)
+
+根據本系統的題庫規模與演算法設計，建議考生依照以下計畫進行練習，以保證考取：
+
+### 1. 目標：穩定 90 分以上
+*   **及格線**：官方正式考試及格線為 70 分。
+*   **建議目標**：在本系統連續 3 次取得 **90 分以上** (40 題中錯誤少於 4 題)。
+
+### 2. 黃金練習次數：5 - 8 次
+*   **題庫覆蓋**：本系統總題庫約 105 題，每次隨機抽取 40 題。
+*   **練習效果**：練習 5 次後，機率上您已見過幾乎所有的題庫內容。利用「錯題優先」機制，能極速消除知識盲點。
+
+---
+
+## 📋 模擬考試出題原則 (Blueprint)
+
+### 1. 抽題配置 (40 題/卷)
+*   **總題數**：40 題。
+*   **下限保證**：D1 ~ D5 五大領域**每一類別至少抽出 3 題**，確保全考綱覆蓋。
+*   **錯題優先**：系統自動追蹤答錯紀錄，優先抽出錯題。
+
+---
+
+## 📊 完整題庫分佈
+
+### D1_資料庫概念 - 11 題
+*   涵蓋關聯式模型、基數 (Cardinality)、資料字典。
+
+### D2_資料庫設計 - 28 題
+*   涵蓋 DDL 語法 (Create/Alter)、資料型別、主鍵與外鍵、檢視表。
+
+### D3_資料操作 - 32 題
+*   涵蓋 DML 語法 (Select, Insert, Update, Delete)、Join 連接、聚合函數。
+
+### D4_資料儲存與安全性 - 24 題
+*   涵蓋 索引 (Index)、備份與還原、權限管理 (Grant/Revoke)。
+
+### D5_資料庫維護 - 10 題
+*   涵蓋 **正規化 (1NF/2NF/3NF)**、事務 (Transaction/ACID)。
+
+---
+
+## 📈 趨勢分析
+資料庫考試中，**D2 設計**與 **D3 操作**佔了題量的一半以上，是得分的基本盤。而 **D5 正規化**雖然題數較少，但往往是考生最容易失分的部分，建議利用弱點分析功能多加練習。
