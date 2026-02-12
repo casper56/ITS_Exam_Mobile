@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ900 模擬考試</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
+    <style>
+        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; overflow-y: auto; }
+        .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; overflow: visible !important; }
+        .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+        .question-body { padding: 15px 20px; font-size: 0.85rem; overflow: visible !important; background-color: #fff; color: #212529; }
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 0.9rem; }
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
+        .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
+        #result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        code { font-family: Consolas, Monaco, monospace; color: #212529; background-color: #fff; padding: 2px 4px; border-radius: 4px; border: 1px solid #eee; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; font-size: 0.85rem; }
+        pre { white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; background-color: #fff; color: #212529; border: none; font-size: 0.85rem; }
+        
+        /* 預設不隱藏 no-print 類別，只有在預覽時動態隱藏 */
+        .preview-active .no-print { display: none !important; }
+        .side-nav-btn {
+            position: fixed;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 100px;
+            background: rgba(13, 110, 253, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1060;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            outline: none !important;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            font-family: serif;
+            font-weight: bold;
+        }
+        .side-nav-btn:hover {
+            background: #0d6efd;
+            width: 50px;
+            color: white;
+        }
+        .side-nav-prev { 
+            left: 0; 
+            border-radius: 0 50px 50px 0; 
+            padding-right: 8px;
+        }
+        .side-nav-next { 
+            right: 0; 
+            border-radius: 50px 0 0 50px;
+            padding-left: 8px;
+        }
+        .side-nav-btn.disabled {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .side-nav-btn { width: 35px; height: 80px; font-size: 1.2rem; background: rgba(33, 37, 41, 0.7); }
+            .side-nav-btn:hover { width: 40px; }
+        }
+
+        /* 列印與預覽錯誤題目樣式 */
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+        .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
+        .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #eee; }
+
+        @media print {
+            @page { size: auto; margin: 10mm; }
+            * { 
+                overflow: visible !important; 
+                max-height: none !important; 
+                height: auto !important;
+            }
+            html, body { 
+                background: white; 
+                width: 100%; 
+                margin: 0; 
+                padding: 0; 
+            }
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
+            #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; }
+            .review-item { 
+                border: 1px solid #eee !important; 
+                width: 100% !important; 
+                page-break-inside: avoid; 
+                margin-bottom: 15px !important;
+                padding: 10px !important;
+            }
+            pre, code { 
+                white-space: pre-wrap !important; 
+                word-break: break-all !important; 
+                border: none !important;
+                font-size: 0.8rem !important;
+            }
+        }
+
+        /* Zoom 控制按鈕樣式 */
+        .zoom-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .zoom-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #0d6efd;
+            border: 2px solid #0d6efd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .zoom-btn:active { transform: scale(0.9); background: #0d6efd; color: #fff; }
+    </style>
+</head>
+<body>
+
+<!-- Zoom Controls -->
+<div class="zoom-controls no-print">
+    <div class="zoom-btn" onclick="adjustZoom(0.1)" title="放大">➕</div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)" title="縮小">➖</div>
+</div>
+
+<div id="exam-ui">
+    <header class="exam-header d-flex justify-content-between align-items-center">
+        <div><h5 class="m-0">AZ900 模擬考試</h5><small id="q-progress">1 / 50</small></div>
+        <div class="timer-box" id="timer">50:00</div>
+        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+    </header>
+
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)" title="上一題">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)" title="下一題">&#10095;</div>
+
+    <main class="container-fluid main-content" style="max-width: 100%; margin-top: 80px; padding-left: 15px; padding-right: 15px;">
+        <div id="question-area"></div>
+    </main>
+</div>
+
+<div id="result-screen" class="container-fluid" style="max-width: 100%; margin: 0; padding-left: 15px; padding-right: 15px;">
+    <h2 class="mb-4">考試結束</h2>
+    <div class="score-circle" id="final-score">0</div>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
+    <div id="category-stats" class="mb-4"></div>
+    <div id="result-msg" class="mb-4"></div>
+    <div class="mt-5 no-print">
+        <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button class="btn btn-outline-danger btn-lg me-2" onclick="clearWrongHistory()">🗑️ 清除錯題紀錄</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="exportIncorrectPDF()" style="display:none;">💾 匯出錯誤題目 PDF</button>
+    </div>
+
+    <!-- 錯誤題目回顧區 (預覽與列印用) -->
+    <div id="review-area">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print">
+            <h3 class="m-0">錯誤題目回顧報告</h3>
+            <button class="btn btn-success" onclick="window.print()">🖨️ 列印 / 另存 PDF</button>
+        </div>
+        <div id="review-list"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    let currentZoom = 1.0;
+    let savedZoomBeforePreview = 1.0;
+
+    function applyZoom() {
+        document.body.style.zoom = currentZoom;
+        // 針對不支援 zoom 的瀏覽器備案
+        if (document.body.style.zoom === undefined || document.body.style.zoom === "") {
+            document.body.style.transform = `scale(${currentZoom})`;
+            document.body.style.transformOrigin = "top center";
+            document.body.style.width = (100 / currentZoom) + "%";
+        }
+    }
+
+    function adjustZoom(delta) {
+        currentZoom = Math.max(0.5, Math.min(3.0, currentZoom + delta));
+        applyZoom();
+    }
+
+    // 自動初始化縮放
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.innerWidth < 600) {
+            currentZoom = 0.85; // 手機版預設縮小一點點
+            applyZoom();
+        }
+    });
+
+    const allQuestions = [{"id": 1, "type": "truefalse", "question": "1. \u60a8\u53ef\u4ee5\u70ba Microsoft Entra \u4f7f\u7528\u8005\u65b0\u589e\u8cc7\u6e90\u9396\u5b9a\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 2, "type": "truefalse", "question": "2. \u60a8\u53ef\u4ee5\u70ba\u76f8\u540c Azure \u865b\u64ec\u6a5f\u5668\u65b0\u589e\u591a\u500b\u8cc7\u6e90\u9396\u5b9a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 3, "type": "truefalse", "question": "3. \u60a8\u53ef\u4ee5\u4fee\u6539\u5177\u6709\u522a\u9664\u9396\u5b9a\u4e4b Azure \u8cc7\u6e90\u7684\u5c6c\u6027\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 4, "type": "truefalse", "question": "4. \u5b89\u88dd\u5728 Azure \u865b\u64ec\u6a5f\u5668\u4e0a\u7684 Microsoft SQL Server 2022 \u662f\u4e00\u7a2e\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 5, "type": "truefalse", "question": "5. Azure SQL Database \u662f\u4e00\u7a2e\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 6, "type": "truefalse", "question": "6. Azure Cosmos DB \u662f\u4e00\u7a2e\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 7, "type": "truefalse", "question": "7. \u60a8\u53ea\u80fd\u5f9e Windows \u88dd\u7f6e\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 8, "type": "truefalse", "question": "8. \u60a8\u53ef\u4ee5\u5f9e\u547d\u4ee4\u5217\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 9, "type": "truefalse", "question": "9. \u60a8\u53ef\u4ee5\u4f7f\u7528\u7db2\u9801\u700f\u89bd\u5668\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 10, "type": "truefalse", "question": "10. \u96f2\u7aef\u904b\u7b97\u7684\u8cc7\u672c\u652f\u51fa(CapEx)\u6210\u672c\u4f4e\u65bc\u5167\u90e8\u90e8\u7f72\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 11, "type": "truefalse", "question": "11. \u96f2\u7aef\u904b\u7b97\u63d0\u4f9b\u8207\u5167\u90e8\u90e8\u7f72\u76f8\u540c\u7684\u8a2d\u5b9a\u9078\u9805\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 12, "type": "truefalse", "question": "12. \u96f2\u7aef\u904b\u7b97\u53ef\u5728\u696d\u52d9\u9700\u8981\u8b8a\u66f4\u6642\u9032\u884c\u8abf\u6574\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 13, "type": "truefalse", "question": "13. Azure \u96a8\u7528\u96a8\u4ed8\u5b9a\u50f9\u662f CapEx \u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 14, "type": "truefalse", "question": "14. \u652f\u4ed8\u8cc7\u6599\u4e2d\u5fc3\u7684\u96fb\u8cbb\u662f OpEx \u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 15, "type": "truefalse", "question": "15. \u90e8\u7f72\u60a8\u81ea\u5df1\u7684\u8cc7\u6599\u4e2d\u5fc3\u662f CapEx \u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 16, "type": "truefalse", "question": "16. \u5728 Azure \u8a02\u7528\u5e33\u6236\u4e2d\u65b0\u589e\u8cc7\u6e90\u7fa4\u7d44\u6703\u7522\u751f\u984d\u5916\u8cbb\u7528\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 17, "type": "truefalse", "question": "17. \u900f\u904e VPN \u5f9e\u5167\u90e8\u90e8\u7f72\u7db2\u8def\u5c07 10GB \u7684\u8cc7\u6599\u8907\u88fd\u5230 Azure \u6703\u7522\u751f\u984d\u5916\u7684 Azure \u8cc7\u6599\u50b3\u8f38\u8cbb\u7528\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 18, "type": "truefalse", "question": "18. \u900f\u904e VPN \u5f9e Azure \u5c07 10GB \u7684\u8cc7\u6599\u8907\u88fd\u5230\u5167\u90e8\u90e8\u7f72\u7db2\u8def\u6703\u7522\u751f\u984d\u5916\u7684 Azure \u8cc7\u6599\u50b3\u8f38\u8cbb\u7528\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 19, "type": "truefalse", "question": "19. \u60a8\u53ef\u4ee5\u8a2d\u5b9a Microsoft Entra \u6d3b\u52d5\u8a18\u9304,\u4ee5\u5728 Azure \u76e3\u8996\u5668\u4e2d\u986f\u793a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 20, "type": "truefalse", "question": "20. \u60a8\u53ef\u4ee5\u5f9e Azure \u76e3\u8996\u5668\u5efa\u7acb\u8b66\u793a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 21, "type": "truefalse", "question": "21. \u60a8\u53ef\u4ee5\u5f9e Azure \u76e3\u8996\u5668\u76e3\u8996\u591a\u500b Azure \u8a02\u7528\u5e33\u6236\u7684\u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 22, "type": "truefalse", "question": "22. \u64c1\u6709\u6b0a\u7e3d\u6210\u672c(TCO)\u8a08\u7b97\u6a5f\u6703\u986f\u793a\u5728\u8cc7\u6599\u4e2d\u5fc3\u5167\u57f7\u884c\u5de5\u4f5c\u8ca0\u8f09\u7684\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 23, "type": "truefalse", "question": "23. \u64c1\u6709\u6b0a\u7e3d\u6210\u672c(TCO)\u8a08\u7b97\u6a5f\u6703\u986f\u793a\u5728 Azure \u4e2d\u57f7\u884c\u5de5\u4f5c\u8ca0\u8f09\u7684\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 24, "type": "truefalse", "question": "24. \u64c1\u6709\u6b0a\u7e3d\u6210\u672c(TCO)\u8a08\u7b97\u6a5f\u6703\u7522\u751f\u5716\u5f62\u5316\u5831\u8868\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 25, "type": "truefalse", "question": "25. Azure \u5132\u5b58\u9ad4\u4e2d\u7684\u6975\u975e\u7d93\u5e38\u6027\u5b58\u53d6\u5c64\u6703\u91dd\u5c0d\u81f3\u5c1190\u5929\u7684\u8cc7\u6599\u5132\u5b58\u9ad4\u6700\u4f73\u5316\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 26, "type": "truefalse", "question": "26. Azure \u5132\u5b58\u9ad4\u4e2d\u7684\u975e\u7d93\u5e38\u6027\u5b58\u53d6\u5c64\u6703\u91dd\u5c0d\u81f3\u5c11 90 \u5929\u7684\u8cc7\u6599\u5132\u5b58\u9ad4\u6700\u4f73\u5316\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 27, "type": "truefalse", "question": "27. Azure \u5132\u5b58\u9ad4\u4e2d\u7684\u5c01\u5b58\u5b58\u53d6\u5c64\u6703\u91dd\u5c0d\u81f3\u5c11 180 \u5929\u7684\u8cc7\u6599\u5132\u5b58\u9ad4\u6700\u4f73\u5316\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 28, "type": "truefalse", "question": "28. Microsoft Entra \u53ef\u7528\u65bc\u7ba1\u7406\u5c0d\u5167\u90e8\u90e8\u7f72\u61c9\u7528\u7a0b\u5f0f\u7684\u5b58\u53d6\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 29, "type": "truefalse", "question": "29. Microsoft Entra \u63d0\u4f9b\u55ae\u4e00\u767b\u5165(SSO)\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 30, "type": "truefalse", "question": "30. iOS \u88dd\u7f6e\u53ef\u4ee5\u5728 Microsoft Entra \u79df\u4f7f\u7528\u8005\u5167\u8a3b\u518a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 31, "type": "truefalse", "question": "31. AzCopy \u662f\u4e00\u500b\u7528\u4f86\u5728\u5132\u5b58\u9ad4\u5e33\u6236\u4e4b\u9593\u4f86\u56de\u8907\u88fd Blob \u6216\u6a94\u6848\u7684\u547d\u4ee4\u5217\u516c\u7528\u7a0b\u5f0f\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 32, "type": "truefalse", "question": "32. Azure \u5132\u5b58\u9ad4\u7e3d\u7ba1\u662f\u4e00\u9805\u7528\u4f86\u50b3\u8f38\u5927\u91cf\u8cc7\u6599\u7684\u96f2\u7aef\u8a17\u7ba1\u79fb\u8f49\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 33, "type": "truefalse", "question": "33. Azure \u6a94\u6848\u540c\u6b65\u6703\u5728 Azure \u6a94\u6848\u5132\u5b58\u9ad4\u8207 Windows \u6a94\u6848\u4f3a\u670d\u5668\u4e4b\u9593\u540c\u6b65\u6a94\u6848\u548c\u8cc7\u6599\u593e\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 34, "type": "truefalse", "question": "34. \u4e00\u500b Azure \u8a02\u7528\u5e33\u6236\u53ef\u4ee5\u8207\u591a\u500b Microsoft Entra \u79df\u4f7f\u7528\u8005\u5efa\u7acb\u95dc\u806f\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 35, "type": "truefalse", "question": "35. \u60a8\u53ef\u4ee5\u8b8a\u66f4\u8207 Azure \u8a02\u7528\u5e33\u6236\u5efa\u7acb\u95dc\u806f\u7684 Microsoft Entra \u79df\u4f7f\u7528\u8005\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 36, "type": "truefalse", "question": "36. \u7576 Azure \u8a02\u7528\u5e33\u6236\u5230\u671f\u6642,\u6703\u81ea\u52d5\u522a\u9664\u5df2\u5efa\u7acb\u95dc\u806f\u7684 Microsoft Entra \u79df\u4f7f\u7528\u8005\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 37, "type": "truefalse", "question": "37. Azure \u865b\u64ec\u684c\u9762\u5de5\u4f5c\u968e\u6bb5\u4e3b\u6a5f\u53ea\u80fd\u57f7\u884c Windows 10 \u6216 Windows 11\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 38, "type": "truefalse", "question": "38. \u4e00\u500b\u5305\u542b 20 \u90e8\u5de5\u4f5c\u968e\u6bb5\u4e3b\u6a5f\u7684 Azure \u865b\u64ec\u684c\u9762\u4e3b\u6a5f\u96c6\u5340,\u6700\u591a\u53ef\u652f\u63f4 20 \u4f4d\u4f7f\u7528\u8005\u540c\u6642\u9023\u7dda\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 39, "type": "truefalse", "question": "39. Azure \u865b\u64ec\u684c\u9762\u652f\u63f4\u684c\u9762\u8207\u61c9\u7528\u7a0b\u5f0f\u865b\u64ec\u5316\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 40, "type": "truefalse", "question": "40. \u5efa\u7acb\u548c\u8a2d\u5b9a\u865b\u64ec\u7db2\u8def\u662f\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u7684\u4e00\u90e8\u5206\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 41, "type": "truefalse", "question": "41. \u5728\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u4e2d,\u70ba Azure Web \u61c9\u7528\u7a0b\u5f0f\u66f4\u65b0\u7a0b\u5f0f\u78bc\u662f\u5ba2\u6236\u7684\u8cac\u4efb\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 42, "type": "truefalse", "question": "42. \u8a2d\u5b9a\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u7684\u4f7f\u7528\u8005\u5b58\u53d6\u6b0a\u662f\u5ba2\u6236\u7684\u8cac\u4efb\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 43, "type": "truefalse", "question": "43. \u9069\u7528\u65bc\u96f2\u7aef\u7684 Microsoft Defender \u53ef\u4ee5\u76e3\u8996 Azure \u8cc7\u6e90\u8207\u5167\u90e8\u90e8\u7f72\u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 44, "type": "truefalse", "question": "44. \u6240\u6709\u9069\u7528\u65bc\u96f2\u7aef\u7684 Microsoft Defender \u529f\u80fd\u7686\u70ba\u514d\u8cbb\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 45, "type": "truefalse", "question": "45. \u60a8\u53ef\u4ee5\u5f9e\u9069\u7528\u65bc\u96f2\u7aef\u7684 Microsoft Defender \u4e0b\u8f09\u6cd5\u898f\u5408\u898f\u6027\u5831\u544a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 46, "type": "truefalse", "question": "46. \u55ae\u4e00Microsoft \u5e33\u6236\u53ef\u7528\u65bc\u7ba1\u7406\u591a\u500b Azure \u8a02\u7528\u5e33\u6236\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 47, "type": "truefalse", "question": "47. \u5169\u500b Azure \u8a02\u7528\u5e33\u6236\u53ef\u5408\u4f75\u70ba\u55ae\u4e00\u8a02\u7528\u5e33\u6236\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 48, "type": "truefalse", "question": "48. \u516c\u53f8\u53ef\u4ee5\u4f7f\u7528\u591a\u500b Azure \u8a02\u7528\u5e33\u6236\u7684\u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 49, "type": "truefalse", "question": "49. \u552f\u8b80\u9396\u5b9a\u6703\u9632\u6b62\u4f7f\u7528\u8005\u522a\u9664 Azure \u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 50, "type": "truefalse", "question": "50. \u4f7f\u7528\u8005\u53ef\u4ee5\u4fee\u6539\u5df2\u5957\u7528\u522a\u9664\u9396\u5b9a\u7684 Azure \u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 51, "type": "truefalse", "question": "51. \u6240\u6709 Azure \u8cc7\u6e90\u90fd\u6703\u7e7c\u627f\u6307\u6d3e\u7d66\u5176\u4e0a\u5c64\u8cc7\u6e90\u7fa4\u7d44\u7684\u9396\u5b9a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 52, "type": "truefalse", "question": "52. \u4f7f\u7528\u6309\u4f7f\u7528\u91cf\u8a08\u8cbb\u7684\u65b9\u6848\u6642,\u6240\u6709\u50b3\u9001\u5230\u96f2\u7aef\u88dd\u8f09\u4e4b\u865b\u64ec\u6a5f\u5668\u7684\u8cc7\u6599,\u6216\u5f9e\u8a72\u6a5f\u5668\u4e2d\u63a5\u6536\u7684\u8cc7\u6599,\u4e00\u5f8b\u652f\u4ed8\u56fa\u5b9a\u7684\u8cbb\u7387\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 53, "type": "truefalse", "question": "53. \u4f7f\u7528\u6309\u4f7f\u7528\u91cf\u8a08\u8cbb\u7684\u65b9\u6848\u6642,\u56e0\u70ba\u53ea\u8981\u652f\u4ed8\u6240\u9700\u7684\u984d\u5916\u5bb9\u91cf,\u6240\u4ee5\u53ef\u4ee5\u964d\u4f4e\u6574\u9ad4\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 54, "type": "truefalse", "question": "54. \u7121\u4f3a\u670d\u5668\u904b\u7b97\u662f\u6309\u4f7f\u7528\u91cf\u8a08\u8cbb\u7684\u65b9\u6848\u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 55, "type": "truefalse", "question": "55. Azure \u4e2d\u570b\u7531 Microsoft \u71df\u904b\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 56, "type": "truefalse", "question": "56. Azure Government \u7531 Microsoft \u71df\u904b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 57, "type": "truefalse", "question": "57. Azure Government \u50c5\u9069\u7528\u65bc\u7f8e\u570b\u653f\u5e9c\u6a5f\u69cb\u53ca\u5176\u5408\u4f5c\u5925\u4f34\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 58, "type": "truefalse", "question": "58. \u82e5\u8981\u5be6\u4f5c Azure Multi-Factor Authentication(MFA)\u89e3\u6c7a\u65b9\u6848,\u60a8\u5fc5\u9808\u5c07\u5167\u90e8\u90e8\u7f72\u8eab\u5206\u8b58\u5225\u540c\u6b65\u81f3\u96f2\u7aef\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 59, "type": "truefalse", "question": "59. Azure Multi-Factor Authentication(MFA)\u6709\u5169\u7a2e\u6709\u6548\u65b9\u6cd5,\u5c31\u662f\u7167\u7247\u8b58\u5225\u8207\u8b77\u7167\u865f\u78bc\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 60, "type": "truefalse", "question": "60. \u7cfb\u7d71\u7ba1\u7406\u8207\u975e\u7cfb\u7d71\u7ba1\u7406\u4f7f\u7528\u8005\u5e33\u6236\u7686\u53ef\u8981\u6c42 Azure Multi-Factor Authentication(MFA)\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 61, "type": "truefalse", "question": "61. \u90e8\u7f72\u5230\u8cc7\u6e90\u7fa4\u7d44\u7684\u6240\u6709 Azure \u8cc7\u6e90\u90fd\u5fc5\u9808\u4f4d\u65bc\u76f8\u540c\u7684 Azure \u5340\u57df\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 62, "type": "truefalse", "question": "62. \u5982\u679c\u60a8\u5c07\u6a19\u7c64\u6307\u6d3e\u7d66\u67d0\u500b\u8cc7\u6e90\u7fa4\u7d44,\u5247\u8a72\u8cc7\u6e90\u7fa4\u7d44\u4e2d\u7684\u6240\u6709 Azure \u8cc7\u6e90\u90fd\u6703\u7372\u6307\u6d3e\u76f8\u540c\u7684\u6a19\u7c64\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 63, "type": "truefalse", "question": "63. \u5982\u679c\u60a8\u5c07\u67d0\u500b\u8cc7\u6e90\u7fa4\u7d44\u7684\u7ba1\u7406\u8a31\u53ef\u6b0a\u6307\u6d3e\u7d66\u4e86\u67d0\u4f4d\u4f7f\u7528\u8005,\u5247\u8a72\u4f7f\u7528\u8005\u5c31\u53ef\u4ee5\u7ba1\u7406\u8a72\u8cc7\u6e90\u7fa4\u7d44\u4e2d\u7684\u6240\u6709 Azure \u8cc7\u6e90\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 64, "type": "truefalse", "question": "64. \u7cfb\u7d71\u7ba1\u7406\u54e1\u53ef\u4ee5\u5728 Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b\u4e2d,\u6aa2\u8996 Azure \u74b0\u5883\u4e2d\u6240\u6709\u670d\u52d9\u7684\u5065\u5eb7\u60c5\u6cc1\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 65, "type": "truefalse", "question": "65. \u7cfb\u7d71\u7ba1\u7406\u54e1\u53ef\u4ee5\u5728 Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b\u4e2d\u5efa\u7acb\u898f\u5247,\u4ee5\u4fbf\u5728 Azure \u670d\u52d9\u5931\u6557\u6642\u6536\u5230\u8b66\u793a\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 66, "type": "truefalse", "question": "66. \u7cfb\u7d71\u7ba1\u7406\u54e1\u53ef\u4ee5\u5728 Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b\u4e2d\u9632\u6b62\u670d\u52d9\u5931\u6557\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 67, "type": "truefalse", "question": "67. Azure DNS \u50c5\u652f\u63f4\u516c\u7528 DNS \u7db2\u57df\u540d\u7a31\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 68, "type": "truefalse", "question": "68. Azure \u865b\u64ec\u6a5f\u5668\u53ef\u4ee5\u81ea\u52d5\u5728 Azure DNS \u4e2d\u8a3b\u518a\u540d\u7a31\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 69, "type": "truefalse", "question": "69. Azure DNS \u53ef\u4ee5\u88dd\u8f09\u81ea\u8a02 DNS \u7db2\u57df\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 70, "type": "truefalse", "question": "70. \u60a8\u5fc5\u9808\u64c1\u6709\u5be6\u9ad4\u4f3a\u670d\u5668\u624d\u80fd\u4f7f\u7528\u96f2\u7aef\u904b\u7b97\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 71, "type": "truefalse", "question": "71. \u60a8\u5fc5\u9808\u64c1\u6709\u7db2\u969b\u7db2\u8def\u9023\u7dda\u80fd\u529b\u624d\u80fd\u4f7f\u7528\u96f2\u7aef\u904b\u7b97\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 72, "type": "truefalse", "question": "72. \u63d0\u9ad8\u96f2\u7aef\u904b\u7b97\u5bb9\u91cf\u7684\u6210\u672c\u4f4e\u65bc\u63d0\u9ad8\u5167\u90e8\u90e8\u7f72\u8cc7\u6599\u4e2d\u5fc3\u904b\u7b97\u5bb9\u91cf\u7684\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 73, "type": "truefalse", "question": "73. \u82e5\u60a8\u4f7f\u7528\u8edf\u9ad4\u5373\u670d\u52d9(SaaS),\u5247\u5fc5\u9808\u5957\u7528\u8edf\u9ad4\u66f4\u65b0\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 74, "type": "truefalse", "question": "74. \u82e5\u60a8\u4f7f\u7528\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS),\u5247\u5fc5\u9808\u5b89\u88dd\u6b32\u4f7f\u7528\u7684\u8edf\u9ad4\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 75, "type": "truefalse", "question": "75. Azure \u5099\u4efd\u662f\u4e00\u7a2e\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 76, "type": "truefalse", "question": "76. \u60a8\u5fc5\u9808\u64c1\u6709\u7db2\u969b\u7db2\u8def\u9023\u7dda\u80fd\u529b\u624d\u80fd\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 77, "type": "truefalse", "question": "77. \u60a8\u5fc5\u9808\u5b89\u88dd\u7ba1\u7406\u61c9\u7528\u7a0b\u5f0f\u624d\u80fd\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 78, "type": "truefalse", "question": "78. \u60a8\u53ef\u4ee5\u5f9e\u4efb\u4f55\u65b0\u5f0f\u7db2\u9801\u700f\u89bd\u5668\u7ba1\u7406\u96f2\u7aef\u670d\u52d9\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 79, "type": "truefalse", "question": "79. Azure Resource Manager(ARM)\u7bc4\u672c\u662f\u4e00\u7a2e\u57fa\u790e\u7d50\u69cb\u5373\u7a0b\u5f0f\u78bc(laC)\u7684\u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 80, "type": "truefalse", "question": "80. Bicep\u6a94\u6848\u662f\u4e00\u7a2e\u57fa\u790e\u7d50\u69cb\u5373\u7a0b\u5f0f\u78bc(laC)\u7684\u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 81, "type": "truefalse", "question": "81. Microsoft Excel\u7bc4\u672c\u662f\u4e00\u7a2e\u57fa\u790e\u7d50\u69cb\u5373\u7a0b\u5f0f\u78bc(laC)\u7684\u7bc4\u4f8b\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 82, "type": "truefalse", "question": "82. \u5efa\u7f6e\u8cc7\u6599\u4e2d\u5fc3\u57fa\u790e\u8a2d\u65bd\u662f\u4e00\u7a2e\u71df\u904b\u652f\u51fa(OpEx)\u6210\u672c\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 83, "type": "truefalse", "question": "83. \u6280\u8853\u4eba\u54e1\u7684\u6bcf\u6708\u85aa\u8cc7\u662f\u4e00\u7a2e\u71df\u904b\u652f\u51fa(OpEx)\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 84, "type": "truefalse", "question": "84. \u79df\u7528\u8edf\u9ad4\u662f\u4e00\u7a2e\u71df\u904b\u652f\u51fa(OpEx)\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 85, "type": "truefalse", "question": "85. Microsoft Purview \u6703\u63d0\u4f9b\u8cc7\u6599\u5099\u4efd\u3002", "options": ["O", "X"], "answer": [2], "weight": 1, "image": null, "explanation": "Microsoft Purview \u672c\u8eab\u4e0d\u662f\u4e00\u500b\u76f4\u63a5\u7684\u8cc7\u6599\u5099\u4efd\u5de5\u5177\uff0c\u800c\u662f\u63d0\u4f9b\u8cc7\u6599\u6cbb\u7406\u3001\u5408\u898f\u548c\u4fdd\u8b77\u7684\u5e73\u81fa\uff0c<br>\n\u5b83\u900f\u904e\u8cc7\u6599\u751f\u547d\u9031\u671f\u7ba1\u7406\uff08\u4fdd\u7559/\u522a\u9664\u898f\u5247\uff09\u548c\u96fb\u5b50\u6a94\u6848\u63a2\u7d22\u529f\u80fd\u5354\u52a9\u7ba1\u7406\u8cc7\u6599\uff0c\u4e26\u5728\u5167\u90e8\u63d0\u4f9b\u8cc7\u6599\u76ee\u9304\u3001\u8b5c\u7cfb\u7b49\u529f\u80fd\u4f86\u77ad\u89e3\u548c\u8ffd\u8e64\u8cc7\u6599\uff0c<br>\n\u4f46\u82e5\u8981\u5be6\u969b\u300c\u5099\u4efd\u300d\u5927\u91cf\u8cc7\u6599\u6216\u5be6\u73fe\u8de8\u7cfb\u7d71\u7684\u707d\u96e3\u5fa9\u539f (BCDR)\uff0c\u901a\u5e38\u9700\u8981\u642d\u914d\u5176\u4ed6 Microsoft 365 \u670d\u52d9 (\u5982 Exchange \u5099\u4efd) <br>\n\u6216\u81ea\u5b9a\u7fa9\u7684\u5099\u4efd\u7b56\u7565\u4f86\u5be6\u73fe\uff0cPurview \u4e3b\u8981\u662f\u5354\u52a9\u5236\u5b9a\u548c\u57f7\u884c\u653f\u7b56\uff0c\u4e26\u767c\u73fe\u61c9\u5099\u4efd\u548c\u61c9\u4fdd\u7559\u7684\u5167\u5bb9\u3002", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 86, "type": "truefalse", "question": "86. Microsoft Purview \u6703\u63d0\u4f9b\u8cc7\u6599\u63a2\u7d22\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 87, "type": "truefalse", "question": "87. Microsoft Purview \u6703\u63d0\u4f9b\u8cc7\u6599\u5206\u985e\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 88, "type": "truefalse", "question": "88. \u6c34\u5e73\u8abf\u6574\u53ef\u4ee5\u81ea\u52d5\u589e\u52a0\u865b\u64ec\u6a5f\u5668\u57f7\u884c\u500b\u9ad4\u7684\u6578\u76ee\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 89, "type": "truefalse", "question": "89. \u5782\u76f4\u8abf\u6574\u53ef\u4ee5\u81ea\u52d5\u70ba\u865b\u64ec\u6a5f\u5668\u65b0\u589e\u984d\u5916\u7684\u8a18\u61b6\u9ad4\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 90, "type": "truefalse", "question": "90. \u8abf\u6574\u53ef\u7528\u65bc\u6839\u64da\u670d\u52d9\u9700\u6c42\u964d\u4f4e\u6210\u672c\u3002", "options": ["O", "X"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 91, "type": "single", "question": "91. \u4e0b\u5217\u4f55\u8005\u662f\u96f2\u7aef\u74b0\u5883\u4e2d\u5782\u76f4\u8abf\u6574\u7684\u7bc4\u4f8b?", "options": ["\u91dd\u5c0d\u73fe\u6709\u7684 Azure \u865b\u64ec\u6a5f\u5668\u65b0\u589e\u984d\u5916\u7684 CPU", "\u65b0\u589e\u984d\u5916\u7684 Azure \u865b\u64ec\u684c\u9762\u5de5\u4f5c\u968e\u6bb5\u4e3b\u6a5f", "\u81ea\u52d5\u65b0\u589e\u984d\u5916\u7684 Azure App Service \u57f7\u884c\u500b\u9ad4", "\u65b0\u589e\u984d\u5916\u7684 Azure \u865b\u64ec\u6a5f\u5668"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 92, "type": "single", "question": "92. \u8cb4\u516c\u53f8\u88dd\u8f09\u4e86\u540d\u70ba App1 \u7684\u6703\u8a08\u61c9\u7528\u7a0b\u5f0f,\u4f9b\u516c\u53f8\u5168\u9ad4\u5ba2\u6236\u4f7f\u7528\u3002 App1 \u7684\u4f7f\u7528\u91cf\u5728\u6bcf\u6708\u7684\u524d\u4e09\u9031\u90fd\u5f88\u4f4e,\u4f46\u6700\u5f8c\u4e00\u9031\u537b\u5f88\u9ad8\u3002 Azure \u96f2\u7aef\u670d\u52d9\u6709\u54ea\u4e00\u9805\u512a\u9ede,\u53ef\u652f\u63f4\u9019\u985e\u4f7f\u7528\u6a21\u5f0f\u7684\u6210\u672c\u7ba1\u7406?", "options": ["\u9ad8\u53ef\u7528\u6027", "\u8ca0\u8f09\u5e73\u8861", "\u5f48\u6027", "\u9ad8\u5ef6\u9072"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 93, "type": "single", "question": "93. \u88dd\u8f09\u65bc\u96f2\u7aef\u4e2d,\u4e26\u4e14\u7531 Azure \u7ba1\u7406\u8edf\u9ad4\u66f4\u65b0\u7684 Microsoft SQL Server \u8cc7\u6599\u5eab\u662f\u4e00\u7a2e__________", "options": ["\u707d\u5bb3\u5fa9\u539f\u5373\u670d\u52d9(DRaaS)\u3002", "\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)\u3002", "\u5e73\u81fa\u5373\u670d\u52d9(PaaS)\u3002", "\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)\u3002"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 94, "type": "single", "question": "94. \u8acb\u554f\u61c9\u7528\u7a0b\u5f0f\u8a72\u4f7f\u7528\u4e0b\u5217\u4f55\u8005,\u624d\u80fd\u8207 Azure \u4e92\u52d5\u53ca\u7ba1\u7406\u8cc7\u6e90?", "options": ["Azure \u547d\u4ee4\u5217\u4ecb\u9762(CLI)", "Azure Cloud Shell", "API", "Azure Resource Manager(ARM)\u7bc4\u672c"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 95, "type": "single", "question": "95. __________\u53ef\u4ee5\u8d85\u4f4e\u6298\u6263\u63d0\u4f9b\u672a\u4f7f\u7528\u7684 Azure \u8a08\u7b97\u5bb9\u91cf\u3002", "options": ["Azure \u5bb9\u5668\u57f7\u884c\u500b\u9ad4", "Azure \u4fdd\u7559\u7684\u865b\u64ec\u6a5f\u5668\u57f7\u884c\u500b\u9ad4", "Azure \u73fe\u6210\u865b\u64ec\u6a5f\u5668\u57f7\u884c\u500b\u9ad4", "Azure \u865b\u64ec\u6a5f\u5668\u64f4\u5145\u5957\u4ef6\u96c6"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 96, "type": "single", "question": "96. \u60a8\u7684\u516c\u53f8\u64c1\u6709 Azure \u8a02\u7528\u5e33\u6236,\u5176\u4e2d\u5305\u542b\u591a\u500b\u5340\u57df\u7684\u8cc7\u6e90\u3002 \u60a8\u9700\u8981\u78ba\u4fdd\u7cfb\u7d71\u7ba1\u7406\u54e1\u53ea\u80fd\u5728\u9019\u4e9b\u5340\u57df\u4e2d\u5efa\u7acb\u8cc7\u6e90\u3002 \u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u54ea\u4e00\u9805?", "options": ["\u552f\u8b80\u9396\u5b9a", "Azure \u539f\u5247", "\u4fdd\u7559", "\u7ba1\u7406\u7fa4\u7d44"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 97, "type": "single", "question": "97. \u7576 Microsoft \u8a08\u5283\u57f7\u884c\u7dad\u8b77,\u4e26\u53ef\u80fd\u5f71\u97ff\u90e8\u7f72\u81f3 Azure \u8a02\u95b1\u7684\u8cc7\u6e90\u6642,\u60a8\u9700\u8981\u6536\u5230\u901a\u77e5\u3002 \u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u54ea\u4e00\u9805?", "options": ["Azure \u76e3\u8996\u5668", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b", "Azure Advisor", "Microsoft\u4fe1\u4efb\u4e2d\u5fc3"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 98, "type": "single", "question": "98. \u4ee5\u4e0b\u54ea\u4e00\u9805\u6703\u63d0\u4f9b Azure \u670d\u52d9\u548c\u5340\u57df\u7684\u5065\u5eb7\u72c0\u614b\u6982\u89c0\u3002", "options": ["Azure \u76e3\u8996\u5668", "Azure \u8cc7\u6e90\u5065\u5eb7\u72c0\u614b", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b", "Azure \u72c0\u614b"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 99, "type": "single", "question": "99. \u60a8\u8981\u5728 Azure Resource Manager \u4e2d\u5efa\u7acb\u540d\u70ba RG1 \u7684\u8cc7\u6e90\u7fa4\u7d44\u3002 \u60a8\u9700\u8981\u9632\u6b62\u610f\u5916\u522a\u9664 RG1 \u4e2d\u7684\u8cc7\u6e90\u3002\u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u54ea\u9805\u8a2d\u5b9a?", "options": ["\u90e8\u7f72", "\u539f\u5247", "\u5c6c\u6027", "\u9396\u5b9a"], "answer": [4], "weight": 1, "image": "images//q99.jpg", "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 100, "type": "single", "question": "100. \u5982\u679c\u4e00\u500b\u540d\u70ba RG1 \u7684\u8cc7\u6e90\u7fa4\u7d44\u5177\u6709\u522a\u9664\u9396\u5b9a,__________\u53ef\u4ee5\u522a\u9664 RG1\u3002", "options": ["\u53ea\u6709\u5168\u57df\u7ba1\u7406\u54e1\u7fa4\u7d44\u7684\u6210\u54e1", "\u5fc5\u9808\u5148\u79fb\u9664\u522a\u9664\u9396\u5b9a,\u7136\u5f8c\u7ba1\u7406\u54e1\u624d", "\u5fc5\u9808\u5148\u4fee\u6539 Azure \u539f\u5247,\u7136\u5f8c\u7ba1\u7406\u54e1\u624d", "\u5fc5\u9808\u5148\u65b0\u589e Azure \u6a19\u7c64,\u7136\u5f8c\u7ba1\u7406\u54e1\u624d"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 101, "type": "single", "question": "101. \u60a8\u6709\u4e00\u4e9b\u57f7\u884c Windows Server \u7684\u5167\u90e8\u90e8\u7f72\u4f3a\u670d\u5668\u3002 \u60a8\u61c9\u8a72\u5be6\u4f5c\u4e0b\u5217\u54ea\u4e00\u9805,\u624d\u80fd\u4f7f\u7528 Azure \u5165\u53e3\u7db2\u7ad9\u7ba1\u7406\u9019\u4e9b\u4f3a\u670d\u5668?", "options": ["Docker", "\u89d2\u8272\u578b\u5b58\u53d6\u63a7\u5236(RBAC)", "Azure Arc", "Azure Kubernetes Service(AKS)"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 102, "type": "single", "question": "102. \u8cb4\u516c\u53f8\u6253\u7b97\u958b\u59cb\u4f7f\u7528 Azure,\u4e26\u5c07\u6240\u6709\u7db2\u8def\u8cc7\u6e90\u5168\u90fd\u79fb\u8f49\u81f3 Azure\u3002 \u60a8\u5fc5\u9808\u958b\u59cb\u63a2\u7d22 Azure \u4ee5\u8a08\u5283\u79fb\u8f49\u6d41\u7a0b\u3002 \u60a8\u61c9\u8a72\u5148\u5efa\u7acb\u4ec0\u9ebc\u5c08\u6848?", "options": ["\u7ba1\u7406\u7fa4\u7d44", "\u8a02\u7528\u5e33\u6236", "\u865b\u64ec\u7db2\u8def", "\u8cc7\u6e90\u7fa4\u7d44"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 103, "type": "single", "question": "103. ExpressRoute \u662f\u5728\u54ea\u4e00\u500b OSI \u5c64\u904b\u4f5c?", "options": ["\u7b2c 5 \u5c64", "\u7b2c 2 \u5c64", "\u7b2c 7 \u5c64", "\u7b2c 3 \u5c64"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 104, "type": "single", "question": "104. Azure \u4e2d\u570b(Azure China)\u5728\u67b6\u69cb\u6216\u71df\u904b\u4e0a\u6709\u4ec0\u9ebc\u7279\u6b8a\u4e4b\u8655?", "options": ["\u7531 Microsoft \u63d0\u4f9b\u3002", "\u529f\u80fd\u7b49\u540c\u65bc Azure \u5168\u7403\u3002", "\u670d\u52d9\u53ea\u80fd\u5f9e\u4e2d\u570b\u5b58\u53d6\u3002", "\u662f\u500b\u5225\u7368\u7acb\u7684 Microsoft Azure \u57f7\u884c\u500b\u9ad4\u3002"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 105, "type": "single", "question": "105. \u60a8\u8a08\u5283\u5c07\u6578\u90e8\u57f7\u884c Windows11 \u96fb\u8166\u4e2d\u7684\u7db2\u8def\u78c1\u789f\u6a5f\u5c0d\u61c9\u81f3 Azure \u5132\u5b58\u9ad4\u3002 \u60a8\u5fc5\u9808\u5728 Azure \u4e2d\u70ba\u898f\u5283\u7684\u5c0d\u61c9\u78c1\u789f\u6a5f\u5efa\u7acb\u5132\u5b58\u9ad4\u89e3\u6c7a\u65b9\u6848\u3002\u60a8\u61c9\u8a72\u5efa\u7acb\u54ea\u4e9b\u5c08\u6848?", "options": ["\u5132\u5b58\u9ad4\u5e33\u6236\u4e2d\u7684\u6a94\u6848\u670d\u52d9", "\u865b\u64ec\u6a5f\u5668\u8cc7\u6599\u78c1\u789f", "Azure SQL \u8cc7\u6599\u5eab", "\u5132\u5b58\u9ad4\u5e33\u6236\u4e2d\u7684 Blob \u670d\u52d9"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 106, "type": "single", "question": "106. ____________\u662f\u4e00\u9805\u5be6\u9ad4\u79fb\u8f49\u670d\u52d9,\u7528\u4ee5\u5feb\u901f\u3001\u4fbf\u5b9c\u4e14\u53ef\u9760\u5730\u50b3\u8f38\u5927\u91cf\u8cc7\u6599\u3002", "options": ["Azure \u8cc7\u6599\u7bb1", "Azure Databricks", "Azure \u6a94\u6848\u540c\u6b65", "Azure Migrate"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 107, "type": "single", "question": "107. \u60a8\u8a08\u5283\u5c07 20 \u90e8 Azure \u865b\u64ec\u6a5f\u5668\u90e8\u7f72\u81f3 Azure \u74b0\u5883\u3002\u70ba\u4e86\u78ba\u4fdd\u4e00\u90e8\u540d\u70baVM1 \u7684\u865b\u64ec\u6a5f\u5668\u7121\u6cd5\u9023\u7dda\u5230\u5176\u4ed6\u865b\u64ec\u6a5f\u5668,VM1 \u5fc5\u9808____________", "options": ["\u90e8\u7f72\u81f3\u4e0d\u540c\u7684\u865b\u64ec\u7db2\u8def\u3002", "\u57f7\u884c\u8207\u5176\u4ed6\u865b\u64ec\u6a5f\u5668\u4e0d\u540c\u7684\u4f5c\u696d\u7cfb\u7d71\u3002", "\u90e8\u7f72\u81f3\u4e0d\u540c\u7684\u8cc7\u6e90\u7fa4\u7d44\u3002", "\u5177\u6709\u5169\u500b\u7db2\u8def\u4ecb\u9762\u3002"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 108, "type": "single", "question": "108. \u60a8\u53ef\u4ee5\u5c07 Azure \u539f\u5247\u5b9a\u7fa9\u6307\u6d3e\u7d66____________", "options": ["\u5bb9\u5668\u61c9\u7528\u7a0b\u5f0f\u3002", "\u8cc7\u6e90\u7fa4\u7d44", "\u8cc7\u6e90\u9396\u5b9a\u3002", "\u5b89\u5168\u6027\u7fa4\u7d44\u3002"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 109, "type": "single", "question": "109. \u60a8\u53ef\u4ee5\u4f7f\u7528____________\u4ee5\u78ba\u4fdd\u96f2\u7aef\u8cc7\u6e90\u59cb\u7d42\u7b26\u5408\u516c\u53f8\u6a19\u6e96\u548c\u6cd5\u898f\u8981\u6c42\u3002", "options": ["\u5f48\u6027", "\u6c34\u5e73\u7e2e\u653e", "\u89d2\u8272\u578b\u5b58\u53d6\u63a7\u5236(RBAC)", "ARM \u7bc4\u672c"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 110, "type": "single", "question": "110. \u8a31\u591a Azure \u8cc7\u6e90\u6703\u8981\u6c42\u60a8\u6307\u5b9a\u61c9\u8a72\u90e8\u7f72\u7684\u76ee\u6a19____________", "options": ["\u5730\u7406\u4f4d\u7f6e", "\u5340\u57df", "\u8cc7\u6599\u4e2d\u5fc3", "\u57ce\u5e02"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 111, "type": "single", "question": "111. \u5373\u4f7f Azure \u865b\u64ec\u6a5f\u5668\u7684\u72c0\u614b\u70ba\u5df2\u505c\u6b62(\u5df2\u89e3\u9664\u914d\u7f6e),\u60a8\u4ecd\u5c07\u7e7c\u7e8c\u652f\u4ed8____________", "options": ["\u8a08\u7b97\u5bb9\u91cf\u7684\u8cbb\u7528", "I/O \u4f5c\u696d\u7684\u8cbb\u7528", "\u7db2\u8def\u7684\u8cbb\u7528", "\u5132\u5b58\u9ad4\u7684\u8cbb\u7528"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 112, "type": "single", "question": "112. Azure \u865b\u64ec\u6a5f\u5668\u548c Azure SQL \u8cc7\u6599\u5eab\u4f7f\u7528\u54ea\u7a2e\u96f2\u7aef\u90e8\u7f72\u89e3\u6c7a\u65b9\u6848?Azure \u865b\u64ec\u6a5f\u5668:___________", "options": ["\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)", "\u5e73\u81fa\u5373\u670d\u52d9(PaaS)", "\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 113, "type": "single", "question": "113. Azure \u865b\u64ec\u6a5f\u5668\u548c Azure SQL \u8cc7\u6599\u5eab\u4f7f\u7528\u54ea\u7a2e\u96f2\u7aef\u90e8\u7f72\u89e3\u6c7a\u65b9\u6848?Azure SQL \u8cc7\u6599\u5eab:___________", "options": ["\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)", "\u5e73\u81fa\u5373\u670d\u52d9(PaaS)", "\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 114, "type": "single", "question": "114. ___________\u53ef\u78ba\u4fdd Azure \u670d\u52d9\u5177\u6709\u5099\u63f4\u80fd\u529b\u4e26\u9632\u6b62\u8cc7\u6599\u4e2d\u5fc3\u6545\u969c\u3002", "options": ["\u53ef\u7528\u6027\u5340\u57df", "Azure \u539f\u5247", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b", "\u672c\u5730\u5099\u63f4\u5132\u5b58\u9ad4(LRS)"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 115, "type": "single", "question": "115. ___________\u662f\u7528\u4f86\u5c07\u76f8\u95dc\u7684 Azure \u539f\u5247\u5206\u7d44\u3002", "options": ["\u8a08\u5283", "\u7ba1\u7406\u7fa4\u7d44", "\u5f15\u6578", "\u8cc7\u6e90\u7fa4\u7d44"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 116, "type": "single", "question": "116. \u7576\u60a8\u9700\u8981\u540c\u6642\u59d4\u6d3e\u8a31\u53ef\u6b0a\u7d66\u591a\u90e8 Azure \u865b\u64ec\u6a5f\u5668\u6642,\u60a8\u5fc5\u9808___________", "options": ["\u5c07 Azure \u865b\u64ec\u6a5f\u5668\u90e8\u7f72\u81f3\u540c\u4e00\u500b Azure \u5340\u57df\u3002", "\u4f7f\u7528\u76f8\u540c\u7684 Azure Resource Manager \u7bc4\u672c\u90e8\u7f72 Azure \u865b\u64ec\u6a5f\u5668\u3002", "\u5c07 Azure \u865b\u64ec\u6a5f\u5668\u90e8\u7f72\u81f3\u540c\u4e00\u500b\u8cc7\u6e90\u7fa4\u7d44\u3002", "\u5c07 Azure \u865b\u64ec\u6a5f\u5668\u90e8\u7f72\u81f3\u540c\u4e00\u500b\u53ef\u7528\u6027\u5340\u57df\u3002"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 117, "type": "single", "question": "117. ___________\u652f\u63f4\u5167\u90e8\u90e8\u7f72\u5132\u5b58\u9ad4\u8207 Azure \u5132\u5b58\u9ad4\u4e4b\u9593\u7684\u540c\u6b65\u8655\u7406\u3002", "options": ["Azure Blob \u5132\u5b58\u9ad4", "Azure \u6a94\u6848\u5132\u5b58\u9ad4", "Azure \u4f47\u5217\u5132\u5b58\u9ad4", "Azure \u8868\u683c\u5132\u5b58\u9ad4"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 118, "type": "single", "question": "118. Azure \u5bb9\u5668\u57f7\u884c\u500b\u9ad4\u662f\u4e00\u7a2e Azure___________", "options": ["\u8a08\u7b97\u670d\u52d9\u3002", "\u8eab\u5206\u8b58\u5225\u670d\u52d9\u3002", "\u7db2\u8def\u670d\u52d9\u3002", "\u5132\u5b58\u9ad4\u670d\u52d9"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 119, "type": "single", "question": "119. ___________\u8b93\u7d44\u7e54\u80fd\u5920\u7ba1\u7406\u591a\u500b\u8a02\u7528\u5e33\u6236\u9593\u7684 Azure \u8cc7\u6e90\u5408\u898f\u6027\u3002", "options": ["\u8cc7\u6e90\u7fa4\u7d44", "\u7ba1\u7406\u7fa4\u7d44", "Azure \u539f\u5247", "Azure App Service"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 120, "type": "single", "question": "120. \u5132\u5b58\u5728 Azure \u5132\u5b58\u9ad4\u5e33\u6236\u5c01\u5b58\u5b58\u53d6\u5c64\u4e2d\u7684\u8cc7\u6599___________", "options": ["\u96a8\u6642\u90fd\u53ef\u4ee5\u4f7f\u7528 azcopy.exe \u4f86\u5b58\u53d6\u3002", "\u53ea\u80fd\u4f7f\u7528 Azure \u5099\u4efd\u4f86\u8b80\u53d6\u3002", "\u5fc5\u9808\u5148\u9084\u539f,\u624d\u80fd\u5b58\u53d6\u8cc7\u6599\u3002", "\u5fc5\u9808\u5148\u89e3\u9664\u51cd\u7d50,\u624d\u80fd\u5b58\u53d6\u8cc7\u6599\u3002"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 121, "type": "single", "question": "121. \u67e5\u8a62\u5167\u90e8\u90e8\u7f72 Microsoft SQL \u4f3a\u670d\u5668\u7684 Azure Web \u61c9\u7528\u7a0b\u5f0f\u662f____________\u96f2\u7aef\u7bc4\u4f8b\u3002", "options": ["\u6df7\u5408\u5f0f", "\u591a\u4f9b\u61c9\u5546", "\u79c1\u4eba", "\u516c\u7528"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 122, "type": "single", "question": "122. \u9700\u8981\u4f7f\u7528\u8005\u5728\u767b\u5165 Microsoft Entra \u6642\u8f38\u5165\u5bc6\u78bc\u4e26\u63d0\u4f9b\u55ae\u6b21\u5bc6\u78bc\u662f\u4e00\u7a2e____________", "options": ["\u4f01\u696d\u5c0d\u5ba2\u6236(B2C)\u8b58\u5225\u670d\u52d9\u3002", "\u53d7\u63a7\u8b58\u5225\u3002", "\u591a\u91cd\u8981\u7d20\u9a57\u8b49(MFA)\u3002", "\u89d2\u8272\u578b\u5b58\u53d6\u63a7\u5236(RBAC)\u3002"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 123, "type": "single", "question": "123. \u60a8\u6709\u4e00\u500b\u5177\u6709\u552f\u8b80\u9396\u5b9a\u7684\u5132\u5b58\u9ad4\u5e33\u6236\u3002 \u8acb\u554f\u5e33\u6236\u64c1\u6709\u8005\u53ef\u4ee5\u5c0d\u5132\u5b58\u9ad4\u5e33\u6236\u57f7\u884c\u4e0b\u5217\u54ea\u4e00\u9805\u52d5\u4f5c?", "options": ["\u5c07[\u9396\u5b9a\u578b\u5225]\u8a2d\u5b9a\u70ba[\u522a\u9664]\u3002", "\u4fee\u6539\u5132\u5b58\u9ad4\u5e33\u6236\u7684\u8a31\u53ef\u6b0a\u3002", "\u91cd\u65b0\u547d\u540d\u9396\u5b9a\u3002", "\u79fb\u9664\u9396\u5b9a\u3002"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 124, "type": "single", "question": "124. \u60a8\u6709\u4e00\u500b\u5728 Azure \u4e2d\u57f7\u884c\u7684 Web \u61c9\u7528\u7a0b\u5f0f\u3002 \u60a8\u9700\u8981\u78ba\u8a8d\u5728\u4f7f\u7528\u8005\u700f\u89bd\u5668\u4e2d\u8f09\u5165\u7db2\u9801\u6240\u9700\u7684\u6642\u9593\u3002 \u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u4f55\u8005?", "options": ["Log Analytics", "Azure \u7db2\u8def\u76e3\u770b\u54e1", "Azure \u76e3\u8996\u5668\u8b66\u793a", "Azure \u76e3\u8996\u5668\u7684 Application Insights"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 125, "type": "single", "question": "125. \u60a8\u53ef\u4ee5\u5728 Azure \u4e2d\u4f7f\u7528____________\u50b3\u9001\u96fb\u5b50\u90f5\u4ef6\u8b66\u793a, \u7576 Azure \u8a02\u7528\u5e33\u6236\u65bc\u76ee\u524d\u8a08\u8cbb\u9031\u671f\u7684\u8cbb\u7528\u8d85\u904e\u6307\u5b9a\u9650\u5236\u6642\u3002", "options": ["Advisor \u5efa\u8b70", "\u5b58\u53d6\u63a7\u5236(IAM)", "\u9810\u7b97\u8b66\u793a", "\u5408\u898f\u6027"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 126, "type": "single", "question": "126. \u5982\u679c\u7cfb\u7d71\u7ba1\u7406\u54e1\u505c\u6b62 Azure \u865b\u64ec\u6a5f\u5668,\u60a8\u53ef\u4ee5\u4f7f\u7528\u4e0b\u5217\u4f55\u8005\u4f86\u81ea\u52d5\u50b3\u9001\u8b66\u793a?", "options": ["Azure \u7db2\u8def\u76e3\u770b\u54e1", "Azure \u76e3\u8996\u5668", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b", "Azure Advisor"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 127, "type": "single", "question": "127. \u60a8\u7684\u516c\u53f8\u6709\u4e00\u500b Azure \u8a02\u7528\u5e33\u6236\u548c\u4e09\u500b\u696d\u52d9\u55ae\u4f4d\u3002 \u60a8\u8a08\u5283\u70ba\u6bcf\u500b\u696d\u52d9\u55ae\u4f4d\u90e8\u7f72\u65b0\u7684\u8cc7\u6e90\u3002 \u60a8\u9700\u8981\u78ba\u4fdd\u90e8\u7f72\u65b0\u7684\u8cc7\u6e90\u6642\u6703\u5229\u7528\u4e00\u7a2e\u53ef\u91cd\u8907\u4e14\u53ef\u9760\u7684\u65b9\u6cd5,\u5c07\u76f8\u540c\u7684\u8a2d\u5b9a\u5957\u7528\u81f3\u6bcf\u9805\u8cc7\u6e90\u3002 \u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u4f55\u8005?", "options": ["Azure \u539f\u5247", "Azure Resource Manager(ARM)\u7bc4\u672c", "\u8cc7\u6e90\u7fa4\u7d44", "Azure Arc"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 128, "type": "single", "question": "128. \u60a8\u7684\u516c\u53f8\u64c1\u6709\u4e00\u4efd\u5305\u542b\u591a\u9805\u8cc7\u6e90\u7684 Azure \u8a02\u7528\u5e33\u6236\u3002 \u60a8\u9700\u8981\u78ba\u8a8d\u54ea\u4e00\u500b\u90e8\u9580\u8a72\u70ba\u6bcf\u9805\u8cc7\u6e90\u7684\u6210\u672c\u8ca0\u8cac\u3002 \u60a8\u61c9\u8a72\u4f7f\u7528\u4e0b\u5217\u4f55\u8005?", "options": ["\u6a19\u7c64", "\u8b66\u793a", "\u9810\u7b97"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 129, "type": "single", "question": "129. \u8cb4\u516c\u53f8\u6709\u6578\u500b\u696d\u52d9\u55ae\u4f4d\u3002 \u6bcf\u500b\u696d\u52d9\u55ae\u4f4d\u9700\u8981 20 \u7a2e\u4e0d\u540c\u7684 Azure \u8cc7\u6e90\u7dad\u6301\u65e5\u5e38\u904b\u4f5c\u3002\u6240\u6709\u696d\u52d9\u55ae\u4f4d\u90fd\u9700\u8981\u76f8\u540c\u578b\u5225\u7684 Azure \u8cc7\u6e90\u3002 \u60a8\u5fc5\u9808\u5efa\u8b70\u4e00\u9805\u89e3\u6c7a\u65b9\u6848,\u5c07 Azure \u8cc7\u6e90\u7684\u5efa\u7acb\u904e\u7a0b\u81ea\u52d5\u5316\u3002 \u60a8\u61c9\u8a72\u5728\u5efa\u8b70\u4e2d\u5305\u542b\u54ea\u4e9b\u5c08\u6848?", "options": ["Azure API \u7ba1\u7406\u670d\u52d9", "\u865b\u64ec\u6a5f\u5668\u64f4\u5145\u5957\u4ef6\u96c6", "\u7ba1\u7406\u7fa4\u7d44", "Azure Resource Manager \u7bc4\u672c"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 130, "type": "single", "question": "130. \u60a8\u5728\u540d\u70ba RG1 \u7684\u8cc7\u6e90\u7fa4\u7d44\u4e2d\u64c1\u6709\u4e00\u500b\u540d\u70ba VNET1 \u7684 Azure \u865b\u64ec\u7db2\u8def\u3002\u60a8\u6307\u6d3e\u4e86\u300c\u4e0d\u5141\u8a31\u7684\u8cc7\u6e90\u578b\u5225\u300d\u7684 Azure \u539f\u5247\u5b9a\u7fa9,\u4e26\u4e14\u6307\u5b9a\u865b\u64ec\u7db2\u8def\u4e26\u975eRG1 \u4e2d\u5141\u8a31\u7684\u8cc7\u6e90\u578b\u5225\u3002VNET1____________", "options": ["\u6703\u81ea\u52d5\u906d\u522a\u9664\u3002", "\u6703\u81ea\u52d5\u79fb\u81f3\u53e6\u4e00\u500b\u8cc7\u6e90\u7fa4\u7d44\u3002", "\u6703\u6301\u7e8c\u6b63\u5e38\u904b\u4f5c\u3002", "\u76ee\u524d\u662f\u552f\u8b80\u7269\u4ef6\u3002"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 131, "type": "single", "question": "131. \u81ea\u52d5\u8abf\u6574\u662f\u4e00\u7a2e____________", "options": ["\u654f\u6377\u5ea6\u3002", "\u5f48\u6027\u3002", "\u5730\u7406\u4f4d\u7f6e\u6563\u767c\u3002", "\u53ef\u9810\u6e2c\u6027\u3002"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 132, "type": "single", "question": "132. Azure Cosmos DB\u662f____________\u4f9b\u61c9\u5c08\u6848\u7684\u7bc4\u4f8b\u3002", "options": ["\u5e73\u81fa\u5373\u670d\u52d9(PaaS)", "\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)", "\u5167\u5bb9\u5373\u670d\u52d9", "\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 133, "type": "single", "question": "133. \u7576\u96f2\u7aef\u61c9\u7528\u7a0b\u5f0f\u53ef\u4ee5\u914d\u7f6e\u53ca\u91cb\u653e\u8cc7\u6e90\u6642,\u5c31\u8868\u793a\u5b83\u5177\u6709____________", "options": ["\u5f48\u6027\u3002", "\u6cbb\u7406\u80fd\u529b\u3002", "\u9ad8\u53ef\u7528\u6027\u3002", "\u53ef\u9810\u6e2c\u6027\u3002"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 134, "type": "single", "question": "134. \u80fd\u8cfc\u8cb7\u7684 Azure \u4fdd\u7559\u7684 VM \u57f7\u884c\u500b\u9ad4\u6700\u9577\u5929\u671f\u70ba\u4f55?", "options": ["4\u5e74", "5\u5e74", "3\u5e74", "1\u5e74"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 135, "type": "single", "question": "135. \u5728\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)\u96f2\u7aef\u670d\u52d9\u4e2d,\u54ea\u4e00\u9805\u8cac\u4efb\u7531 Microsoft \u8207\u5ba2\u6236\u5171\u540c\u627f\u64d4?", "options": ["\u4f5c\u696d\u7cfb\u7d71\u66f4\u65b0", "\u8eab\u5206\u8b58\u5225\u548c\u76ee\u9304\u57fa\u790e\u7d50\u69cb\u7ba1\u7406", "\u61c9\u7528\u7a0b\u5f0f\u7ba1\u7406", "\u8cc7\u8a0a\u548c\u8cc7\u6599\u7ba1\u7406"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 136, "type": "single", "question": "136. \u60a8\u64c1\u6709 50 \u90e8\u88dd\u8f09\u65bc\u5167\u90e8\u90e8\u7f72\u7684\u865b\u64ec\u6a5f\u5668\u8207 50 \u90e8\u88dd\u8f09\u65bc Azure \u4e2d\u7684\u865b\u64ec\u6a5f\u5668\u3002\u9019\u4e9b\u5167\u90e8\u90e8\u7f72\u865b\u64ec\u6a5f\u5668\u8207 Azure \u865b\u64ec\u6a5f\u5668\u7686\u76f8\u4e92\u9023\u7dda\u3002 \u9019\u662f\u4e0b\u5217\u4f55\u7a2e\u96f2\u7aef\u6a21\u578b?", "options": ["\u6df7\u5408\u5f0f", "\u79c1\u4eba", "\u516c\u7528"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 137, "type": "single", "question": "137. \u60a8\u5fc5\u9808\u4f7f\u7528 Azure Cloud Shell \u7ba1\u7406 Azure\u3002\u60a8\u8a72\u9078\u53d6\u54ea\u500b Azure\u5165\u53e3\u7db2\u7ad9\u5716\u793a?<br>\n 1 2 3 4", "options": ["1", "2", "3", "4"], "answer": [1], "weight": 1, "image": "images//q139.jpg", "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 138, "type": "single", "question": "138. \u60a8\u53ef\u4ee5\u4f7f\u7528____________\u63d0\u51fa\u7bc0\u7701\u6210\u672c\u7684\u5efa\u8b70\u3002", "options": ["Application Insights", "Azure Advisor", "Azure \u8cc7\u6e90\u6a19\u7c64", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 139, "type": "single", "question": "139. \u60a8\u5728\u8cc7\u6599\u4e2d\u5fc3\u7684 Hyper-V \u4e3b\u6a5f\u4e0a\u88dd\u8f09\u4e861,000\u90e8\u865b\u64ec\u6a5f\u5668\u3002 \u60a8\u8a08\u5283\u5c07\u6240\u6709\u865b\u64ec\u6a5f\u5668\u5168\u90fd\u79fb\u8f49\u81f3 Azure \u96a8\u7528\u96a8\u4ed8\u8a02\u95b1\u3002 \u60a8\u5fc5\u9808\u78ba\u5b9a\u9069\u7528\u65bc\u6240\u898f\u5283Azure \u89e3\u6c7a\u65b9\u6848\u7684\u652f\u51fa\u6a21\u578b\u3002 \u60a8\u61c9\u8a72\u78ba\u5b9a\u54ea\u500b\u652f\u51fa\u6a21\u578b?", "options": ["\u904b\u71df\u578b", "\u53ef\u8abf\u6574\u578b", "\u5f48\u6027\u578b", "\u8cc7\u672c\u578b"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 140, "type": "single", "question": "140. Application Insights \u9019\u9805\u529f\u80fd\u5c6c\u65bc\u4e0b\u5217\u54ea\u4e00\u500b Azure \u670d\u52d9?", "options": ["Azure Advisor", "Azure \u61c9\u7528\u7a0b\u5f0f\u9598\u9053", "Azure Arc", "Azure \u76e3\u8996\u5668"], "answer": [4], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 141, "type": "single", "question": "141. \u96f2\u7aef\u670d\u52d9\u63d0\u4f9b\u8005\u7684\u670d\u52d9\u7b49\u7d1a\u5354\u5b9a(SLA)\u6703\u5c07 _______ \u8868\u793a\u6210\u6307\u5b9a\u4e00\u5e74\u5167\u904b\u4f5c\u6642\u9593\u7684\u767e\u5206\u6bd4\u3002", "options": ["\u53ef\u7528\u6027", "\u5f48\u6027", "\u53ef\u9760\u6027", "\u53ef\u64f4\u7e2e\u6027"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 142, "type": "single", "question": "142. \u54ea\u4e00\u7a2e\u96f2\u7aef\u904b\u7b97\u6a21\u578b\u5305\u542b\u5167\u90e8\u90e8\u7f72\u8207\u96f2\u7aef\u67b6\u69cb\u8cc7\u6e90?", "options": ["\u6df7\u5408\u5f0f", "\u516c\u7528", "\u79c1\u4eba"], "answer": [1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 143, "type": "single", "question": "143. ______ \u53ef\u8b93\u4f7f\u7528\u8005\u4f7f\u7528\u55ae\u4e00\u767b\u5165 (SSO) \u5411\u591a\u500b\u61c9\u7528\u7a0b\u5f0f\u9032\u884c\u9a57\u8b49\u3002", "options": ["Azure \u4e2d\u7684\u61c9\u7528\u7a0b\u5f0f\u5b89\u5168\u6027\u7fa4\u7d44", "Microsoft Entra ID", "Azure Key Vault", "\u9069\u7528\u65bc\u96f2\u7aef\u7684 Microsoft Defender"], "answer": [2], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 144, "type": "single", "question": "144. \u60a8\u53ef\u4ee5\u4f7f\u7528 ______ \u5c0d\u7269\u4ef6\u9032\u884c\u908f\u8f2f\u5206\u7d44\u4ee5\u5831\u544a\u90e8\u9580\u6210\u672c\u548c\u8ddf\u8e64\u9810\u7b97\u3002", "options": ["Azure \u539f\u5247", "Azure \u670d\u52d9\u5065\u5eb7\u72c0\u614b", "\u8cc7\u6e90\u6a19\u7c64", "\u5b89\u5168\u6027\u7fa4\u7d44"], "answer": [3], "weight": 1, "image": null, "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 145, "type": "multiple", "question": "145. \u60a8\u64c1\u6709 Azure \u74b0\u5883\u3002 \u60a8\u9700\u8981\u5728\u57f7\u884c Android \u4f5c\u696d\u7cfb\u7d71\u7684\u5e73\u677f\u96fb\u8166\u4e2d\u5efa\u7acb\u65b0\u7684 Azure \u865b\u64ec\u6a5f\u5668\u3002 \u4e0b\u5217\u54ea\u4e09\u7a2e\u662f\u53ef\u884c\u7684\u89e3\u6c7a\u65b9\u6848?", "options": ["\u5728 Azure Cloud Shell \u4e2d\u4f7f\u7528 Power Shell\u3002", "\u4f7f\u7528 Power Apps \u5165\u53e3\u7db2\u7ad9\u3002", "\u4f7f\u7528\u5b89\u5168\u6027\u8207\u5408\u898f\u6027\u7cfb\u7d71\u7ba1\u7406\u4e2d\u5fc3\u3002", "\u4f7f\u7528 Azure \u5165\u53e3\u7db2\u7ad9\u3002", "\u5728 Bash \u4e2d\u4f7f\u7528Azure Cloud Shell\u3002"], "answer": [1, 4, 5], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 146, "type": "multiple", "question": "146. \u5728\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u4e2d,\u54ea\u5169\u500b\u5143\u7d20\u662f\u96f2\u7aef\u670d\u52d9\u63d0\u4f9b\u8005\u7684\u8cac\u4efb?\u6bcf\u500b\u6b63\u78ba\u7b54\u6848\u90fd\u5448\u73fe\u4e00\u500b\u5b8c\u6574\u7684\u89e3\u6c7a\u65b9\u6848\u3002", "options": ["\u4f5c\u696d\u7cfb\u7d71\u7684\u5b89\u88dd\u548c\u8a2d\u5b9a", "\u8cc7\u6599\u4e2d\u5fc3\u57fa\u790e\u7d50\u69cb\u7684\u5be6\u9ad4\u5b89\u5168\u6027", "\u7db2\u8def\u8a2d\u5b9a", "\u5132\u5b58\u9ad4\u7684\u8a2d\u5b9a\u548c\u7dad\u8b77", "\u7dad\u8b77\u786c\u9ad4"], "answer": [2, 5], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 147, "type": "multiple", "question": "147. \u5728\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u4e2d,\u54ea\u5169\u500b\u5143\u7d20\u662f\u96f2\u7aef\u670d\u52d9\u63d0\u4f9b\u8005\u7684\u8cac\u4efb?", "options": ["\u5132\u5b58\u9ad4\u7684\u8a2d\u5b9a\u548c\u7dad\u8b77", "\u7db2\u8def\u8a2d\u5b9a", "\u8cc7\u6599\u4e2d\u5fc3\u57fa\u790e\u7d50\u69cb\u7684\u5be6\u9ad4\u5b89\u5168\u6027", "\u4f5c\u696d\u7cfb\u7d71\u7684\u5b89\u88dd\u548c\u8a2d\u5b9a", "\u7dad\u8b77\u786c\u9ad4"], "answer": [3, 5], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 148, "type": "multiple", "question": "148. \u60a8\u9700\u8981\u7ba1\u7406\u5bb9\u5668\u3002\u60a8\u53ef\u4ee5\u4f7f\u7528\u54ea\u5169\u9805\u670d\u52d9?", "options": ["Azure \u865b\u64ec\u6a5f\u5668", "Azure \u5bb9\u5668\u57f7\u884c\u500b\u9ad4", "Azure \u865b\u64ec\u684c\u9762", "Azure Functions", "Azure Kubernetes Service(AKS)"], "answer": [2, 5], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 149, "type": "multiple", "question": "149. \u60a8\u8a08\u5283\u964d\u4f4e\u6301\u7e8c\u7684 Azure \u652f\u51fa\u3002 \u60a8\u9700\u8981\u78ba\u8a8d\u5f71\u97ff\u8cc7\u6e90\u6210\u672c\u7684\u56e0\u7d20\u3002 \u60a8\u61c9\u8a72\u6307\u5b9a\u54ea\u4e09\u500b\u56e0\u7d20?\u6bcf\u500b\u6b63\u78ba\u7b54\u6848\u90fd\u5448\u73fe\u4e00\u500b\u5b8c\u6574\u7684\u89e3\u6c7a\u65b9\u6848\u3002", "options": ["\u670d\u52d9\u5c64", "\u8f38\u51fa\u8cc7\u6599\u91cf", "Azure \u5340\u57df", "\u8655\u7406\u7684\u8cc7\u6599\u578b\u5225", "\u8f38\u5165\u8cc7\u6599\u91cf"], "answer": [1, 2, 3], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 150, "type": "multiple", "question": "150. Azure \u7cfb\u7d71\u7ba1\u7406\u54e1\u6253\u7b97\u57f7\u884c\u53ef\u5efa\u7acb Azure \u8cc7\u6e90\u7684 PowerShell \u6307\u4ee4\u78bc\u3002 \u60a8\u9700\u8981\u5efa\u8b70\u57f7\u884c\u6b64\u6307\u4ee4\u78bc\u6240\u7528\u7684\u96fb\u8166\u7d44\u614b\u3002 \u54ea\u4e09\u90e8\u96fb\u8166\u53ef\u4ee5\u57f7\u884c\u6b64\u6307\u4ee4\u78bc?", "options": ["\u57f7\u884c Windows10 \u4e14\u5b89\u88dd\u4e86 Azure PowerShell \u6a21\u7d44\u7684\u96fb\u8166", "\u57f7\u884c macOS \u4e14\u5b89\u88dd\u4e86 PowerShell \u7684\u96fb\u8166", "\u57f7\u884c Linux \u4e14\u5b89\u88dd\u4e86 Azure CLI \u5de5\u5177\u7684\u96fb\u8166", "\u57f7\u884c Windows 11 \u4e14\u5b89\u88dd\u4e86 Azure CLI \u5de5\u5177\u7684\u96fb\u8166", "\u57f7\u884c ChromeOS \u4e14\u4f7f\u7528 Azure Cloud Shell \u7684\u96fb\u8166"], "answer": [1, 2, 5], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 151, "type": "multioption", "question": "151. \u60a8\u8a08\u5283\u4f7f\u7528 Azure \u88dd\u8f09\u5169\u500b\u540d\u70ba App1 \u53ca App2 \u7684\u61c9\u7528\u7a0b\u5f0f\u3002\u9019\u5169\u500b\u61c9\u7528\u7a0b\u5f0f\u5fc5\u9808\u7b26\u5408\u4e0b\u5217\u9700\u6c42:<br>\n- \u60a8\u5fc5\u9808\u80fd\u5920\u4fee\u6539App1\u7684\u7a0b\u5f0f\u78bc\u3002<br>\n- \u6295\u5165\u7ba1\u7406App1\u4f5c\u696d\u7cfb\u7d71\u7684\u8cc7\u6e90\u5fc5\u9808\u964d\u81f3\u6700\u5c11\u3002<br>\n- App2\u5fc5\u9808\u80fd\u5920\u8207\u4f3a\u670d\u5668\u7684\u4f5c\u696d\u7cfb\u7d71\u4e92\u52d5\u3002<br>\n\u9019\u5169\u500b\u61c9\u7528\u7a0b\u5f0f\u5404\u61c9\u4f7f\u7528\u4f55\u7a2e\u578b\u5225\u7684\u96f2\u7aef\u670d\u52d9?<br>\nApp1: (A)<br>\nApp2: (B)", "options": ["1.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(laaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)", "1.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(laaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)"], "answer": [2, 1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 152, "type": "multioption", "question": "152. \u8acb\u5c07\u96f2\u7aef\u670d\u52d9\u8207\u9069\u7576\u7684\u63cf\u8ff0\u9032\u884c\u914d\u5c0d\u3002<br>\n\u63cf\u8ff0:<br>\nA. \u91dd\u5c0d\u96f2\u7aef\u74b0\u5883\u63d0\u4f9b\u6700\u5927\u63a7\u5236\u80fd\u529b\u3002<br>\nB. \u91dd\u5c0d\u8cc7\u6599\u5eab\u8a2d\u8a08\u63d0\u4f9b\u6700\u5927\u63a7\u5236\u80fd\u529b,\u4f46\u4e0d\u9700\u8981\u7dad\u8b77\u4f5c\u696d\u7cfb\u7d71\u3002<br>\nC. \u7528\u4f86\u88dd\u8f09Azure\u865b\u64ec\u6a5f\u5668\u3002", "options": ["1.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)", "1.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)", "1.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)"], "answer": [1, 2, 1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 153, "type": "multioption", "question": "153. \u96f2\u7aef\u6a21\u578b\u6709\u4e09\u7a2e:\u6df7\u5408\u96f2\u7aef\u3001\u79c1\u4eba\u96f2\u7aef\u3001\u516c\u5171\u96f2\u7aef,\u8acb\u4f9d\u63cf\u8ff0\u9032\u884c\u914d\u5c0d\u3002<br>\n\u63cf\u8ff0:<br>\nA. \u7121\u9700\u8cc7\u672c\u652f\u51fa\u3002<br>\nB. \u53ef\u63d0\u4f9b\u5c0d\u5b89\u5168\u6027\u7684\u5b8c\u6574\u63a7\u5236\u6b0a\u3002<br>\nC. \u53ef\u9078\u64c7\u4f7f\u7528\u5167\u90e8\u90e8\u7f72\u8cc7\u6e90\u6216\u96f2\u7aef\u5f0f\u8cc7\u6e90\u3002", "options": ["1.\u6df7\u5408\u96f2\u7aef|2.\u516c\u5171\u96f2\u7aef|3.\u79c1\u4eba\u96f2\u7aef", "1.\u6df7\u5408\u96f2\u7aef|2.\u516c\u5171\u96f2\u7aef|3.\u79c1\u4eba\u96f2\u7aef", "1.\u6df7\u5408\u96f2\u7aef|2.\u516c\u5171\u96f2\u7aef|3.\u79c1\u4eba\u96f2\u7aef"], "answer": [3, 2, 1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 154, "type": "multioption", "question": "154. \u8acb\u5c07 Azure \u5132\u5b58\u9ad4\u670d\u52d9\u8207\u9069\u7576\u7684\u63cf\u8ff0\u914d\u5c0d\u3002<br>\n\u4f5c\u7b54\u5340<br>\n(A)\u7528\u65bc\u61c9\u7528\u7a0b\u5f0f\u4e4b\u9593\u7684\u53ef\u9760\u50b3\u8a0a<br>\n(B)\u53ef\u7576\u505a Windows \u88dd\u7f6e\u4e2d\u7684\u7db2\u8def\u5171\u7528\u5b58\u53d6<br>\n(C)\u53ef\u8a2d\u5b9a\u6210\u4f7f\u7528\u5c01\u5b58\u5b58\u53d6\u5c64", "options": ["1.Azure Blob \u5132\u5b58\u9ad4|2.Azure \u78c1\u789f\u5132\u5b58\u9ad4|3.Azure \u6a94\u6848\u5132\u5b58\u9ad4|4.Azure \u4f47\u5217\u5132\u5b58\u9ad4", "1.Azure Blob \u5132\u5b58\u9ad4|2.Azure \u78c1\u789f\u5132\u5b58\u9ad4|3.Azure \u6a94\u6848\u5132\u5b58\u9ad4|4.Azure \u4f47\u5217\u5132\u5b58\u9ad4", "1.Azure Blob \u5132\u5b58\u9ad4|2.Azure \u78c1\u789f\u5132\u5b58\u9ad4|3.Azure \u6a94\u6848\u5132\u5b58\u9ad4|4.Azure \u4f47\u5217\u5132\u5b58\u9ad4"], "answer": [4, 3, 1], "weight": 1, "image": null, "explanation": "", "category": "D2_Azure\u67b6\u69cb\u8207\u670d\u52d9"}, {"id": 155, "type": "multioption", "question": "155. \u60a8\u9700\u8981\u5b8c\u6210\u8cc7\u6599\u4e2d\u5fc3\u5167\u4f7f\u7528\u7684\u7e31\u6df1\u9632\u79a6\u7b56\u7565\u3002\u61c9\u63a1\u53d6\u4ec0\u9ebc\u63aa\u65bd?<br>\n\u8acb\u4f9d\u7167\u9806\u5e8f\u4f5c\u7b54:", "options": ["1.\u5be6\u9ad4\u5b89\u5168\u6027|2.\u5468\u908a|3.\u61c9\u7528\u7a0b\u5f0f|4.\u4ee5\u4e0a\u7686\u975e", "1.\u5be6\u9ad4\u5b89\u5168\u6027|2.\u5468\u908a|3.\u61c9\u7528\u7a0b\u5f0f|4.\u4ee5\u4e0a\u7686\u975e", "1.\u5be6\u9ad4\u5b89\u5168\u6027|2.\u5468\u908a|3.\u61c9\u7528\u7a0b\u5f0f|4.\u4ee5\u4e0a\u7686\u975e"], "answer": [1, 2, 3], "weight": 1, "image": "images//q157.jpg", "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}, {"id": 156, "type": "multioption", "question": "156. \u60a8\u9700\u8981\u6839\u64da\u96f2\u7aef\u670d\u52d9\u6a21\u578b\u8b58\u5225\u5ba2\u6236\u7684\u5171\u540c\u8cac\u4efb\u5c64\u7d1a\u3002 \u4f9d\u7167\u5f9e\u6700\u9ad8\u5ba2\u6236\u8cac\u4efb\u5c64\u7d1a(\u9802\u7aef)\u5230\u6700\u4f4e\u5ba2\u6236\u8cac\u4efb\u5c64\u7d1a(\u5e95\u90e8)\u7684\u6392\u5217\u65b9\u5f0f,\u60a8\u61c9\u8a72\u6309\u7167\u54ea\u4e00\u7a2e\u9806\u5e8f\u6392\u5217\u6bcf\u500b\u6a21\u578b?", "options": ["1.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)", "1.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)", "1.\u8edf\u9ad4\u5373\u670d\u52d9(SaaS)|2.\u5e73\u81fa\u5373\u670d\u52d9(PaaS)|3.\u57fa\u790e\u7d50\u69cb\u5373\u670d\u52d9(IaaS)"], "answer": [3, 2, 1], "weight": 1, "image": null, "explanation": "", "category": "D1_\u96f2\u7aef\u57fa\u790e\u6982\u5ff5"}, {"id": 157, "type": "multioption", "question": "157. \u8acb\u5c07\u9a57\u8b49\u65b9\u6cd5\u8207\u9069\u7576\u7684\u5b89\u5168\u6027\u5c64\u7d1a\u4f9d\u7167\u9806\u5e8f\u9032\u884c\u914d\u5c0d\u3002", "options": ["1.\u591a\u91cd\u8981\u7d20\u9a57\u8b49(MFA)|2.\u5bc6\u78bc\u9a57\u8b49|3.\u7121\u5bc6\u78bc\u9a57\u8b49", "1.\u591a\u91cd\u8981\u7d20\u9a57\u8b49(MFA)|2.\u5bc6\u78bc\u9a57\u8b49|3.\u7121\u5bc6\u78bc\u9a57\u8b49", "1.\u591a\u91cd\u8981\u7d20\u9a57\u8b49(MFA)|2.\u5bc6\u78bc\u9a57\u8b49|3.\u7121\u5bc6\u78bc\u9a57\u8b49"], "answer": [1, 3, 2], "weight": 1, "image": "images//q159.jpg", "explanation": "", "category": "D3_\u7ba1\u7406\u8207\u6cbb\u7406"}];
+    let examQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = {}; 
+    let timeLeft = 50 * 60; 
+    let timerInterval;
+
+    const WRONG_KEY = 'its_az900_wrong_ids';
+
+    function clearWrongHistory() {
+        if (confirm('確定要清除所有累積的錯題紀錄嗎？(清除後將恢復隨機抽題)')) {
+            localStorage.removeItem(WRONG_KEY);
+            alert('紀錄已清除');
+            location.reload();
+        }
+    }
+
+    function startExam() {
+        const categories = ["D1_雲端基礎概念", "D2_Azure架構與服務", "D3_管理與治理"];
+        const wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+        let selected = [];
+        let catCounts = {}; 
+        categories.forEach(c => catCounts[c] = 0);
+        const prioritySort = (arr) => {
+            return [...arr].sort((a, b) => {
+                const aW = wrongIds.has(a.id) ? 1 : 0;
+                const bW = wrongIds.has(b.id) ? 1 : 0;
+                return (bW - aW) || (0.5 - Math.random());
+            });
+        };
+        const sortedAll = prioritySort(allQuestions);
+        categories.forEach(cat => {
+            while (catCounts[cat] < 5) {
+                const found = sortedAll.find(q => q.category === cat && !selected.some(s => s.id === q.id));
+                if (found) {
+                    selected.push(found);
+                    catCounts[cat]++;
+                } else break;
+            }
+        });
+        for (let q of sortedAll) {
+            if (selected.length >= 50) break;
+            if (selected.some(s => s.id === q.id)) continue;
+            selected.push(q);
+            catCounts[q.category]++;
+        }
+        examQuestions = selected.sort(() => 0.5 - Math.random());
+        renderQuestion(0);
+        startTimer();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer').innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
+            if (timeLeft <= 0) {
+                alert("時間到！系統自動交卷。");
+                submitExam();
+            }
+        }, 1000);
+    }
+
+    function renderQuestion(index, scrollTop = true) {
+        currentIndex = index;
+        const item = examQuestions[index];
+        const container = document.getElementById('question-area');
+        container.innerHTML = '';
+
+        document.getElementById('q-progress').innerText = `題目 ${index + 1} / 50`;
+        
+        // Update Side Buttons
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) {
+            sideNext.style.display = 'flex';
+            sideNext.title = index === 49 ? '交卷' : '下一題';
+        }
+
+        const card = document.createElement('div');
+        card.className = 'card question-card';
+        
+        let qText = item.question.replace(/●/g, '<br/>●').replace(/^\d+\.\s*/, '');
+        
+        let html = `
+            <div class="question-header">Question ${index + 1} / 50</div>
+            <div class="question-body">
+                <div class="mb-4">${qText}</div>
+        `;
+
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+
+        const options = item.quiz || item.options || [];
+        const savedAns = userAnswers[index];
+
+        html += '<div class="mt-3">';
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            if (optStr.includes('|')) {
+                const subOpts = optStr.split('|');
+                html += `<div class="sub-question-label">選項 ${optIdx + 1}</div>`;
+                html += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => {
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx);
+                    html += `
+                        <div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})">
+                            (${subIdx+1}) ${sub}
+                        </div>`;
+                });
+                html += `</div>`;
+            } else {
+                const isSel = Array.isArray(savedAns) ? savedAns.includes(optIdx) : savedAns === optIdx;
+                html += `
+                    <div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})">
+                        ${optIdx + 1}. ${optStr}
+                    </div>`;
+            }
+        });
+        html += '</div></div>';
+        card.innerHTML = html;
+        container.appendChild(card);
+        Prism.highlightAll();
+        if (scrollTop) window.scrollTo(0, 0);
+    }
+
+    function selectOption(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (item.type === 'multiple') {
+            if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
+            const idx = userAnswers[currentIndex].indexOf(optIdx);
+            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
+            else userAnswers[currentIndex].push(optIdx);
+        } else {
+            userAnswers[currentIndex] = optIdx;
+        }
+        renderQuestion(currentIndex, false);
+    }
+
+    function selectSub(quizIdx, subIdx) {
+        if (typeof userAnswers[currentIndex] !== 'object' || userAnswers[currentIndex] === null) {
+            userAnswers[currentIndex] = {};
+        }
+        userAnswers[currentIndex][quizIdx] = subIdx;
+        renderQuestion(currentIndex, false);
+    }
+
+    function changeQuestion(dir) {
+        let next = currentIndex + dir;
+        if (next >= 0 && next < 50) renderQuestion(next);
+        else if (next === 50) confirmSubmit();
+    }
+
+    function confirmSubmit() {
+        const answeredCount = Object.keys(userAnswers).length;
+        if (answeredCount < 50) {
+            if (!confirm(`您還有 ${50 - answeredCount} 題未作答，確定要交卷嗎？`)) return;
+        } else {
+            if (!confirm('確定要交卷嗎？')) return;
+        }
+        submitExam();
+    }
+
+    function submitExam() {
+        clearInterval(timerInterval);
+        let correctCount = 0;
+        let incorrectHTML = '';
+        const stats = {}; // { category: { total: 0, correct: 0 } }
+        
+        // Load existing wrong history
+        let wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+
+        examQuestions.forEach((item, idx) => {
+            const cat = item.category || '未分類';
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0 };
+            stats[cat].total++;
+
+            const userAns = userAnswers[idx];
+            let isCorrect = false;
+
+            if (item.type === 'multioption') {
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                isCorrect = answers.every((a, i) => userAns && (parseInt(a) - 1) === userAns[i]);
+            } else if (item.type === 'multiple') {
+                const answers = item.answer.map(a => parseInt(a) - 1);
+                isCorrect = Array.isArray(userAns) && 
+                            userAns.length === answers.length && 
+                            userAns.every(val => answers.includes(val));
+            } else {
+                isCorrect = userAns === (parseInt(item.answer) - 1);
+            }
+
+            if (isCorrect) {
+                correctCount++;
+                stats[cat].correct++;
+                wrongIds.delete(item.id); // Remove from wrong history if answered correctly
+            } else {
+                wrongIds.add(item.id); // Add to wrong history
+                let qText = item.question.replace(/●/g, '<br/>●');
+                let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+                
+                // 生成選項列表 HTML
+                let optionsHTML = '<hr class="my-2"><div class="fw-bold mb-1">選擇：</div>';
+                optionsHTML += '<ul class="list-group list-group-flush mb-3" style="font-size: 0.85rem;">';
+                const options = item.quiz || item.options || [];
+                options.forEach((opt, oIdx) => {
+                    optionsHTML += `<li class="list-group-item p-1" style="background: transparent; border: none;">${oIdx + 1}. ${opt}</li>`;
+                });
+                optionsHTML += '</ul>';
+
+                let expText = item.explanation || '暫無解析。';
+                if (Array.isArray(expText)) expText = expText.join('<br/>');
+                expText = expText.replace(/●/g, '<br/>●');
+
+                incorrectHTML += `
+                    <div class="review-item">
+                        <div class="review-id">題目 ${idx + 1} (原始編號: ${item.id})</div>
+                        <div class="mb-2">${qText}</div>
+                        ${optionsHTML}
+                        <div class="review-ans">正確答案：${ansText}</div>
+                        <div class="review-exp"><b>解析：</b><br/>${expText}</div>
+                    </div>`;
+            }
+        });
+        
+        // Save updated history
+        localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongIds]));
+
+        // Generate Stats HTML
+        let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
+        
+        // Sort categories D1, D2, D3...
+        const sortedCats = Object.keys(stats).sort();
+
+        sortedCats.forEach(cat => {
+            const data = stats[cat];
+            const percent = ((data.total / 50) * 100).toFixed(1);
+            const accuracy = ((data.correct / data.total) * 100).toFixed(0);
+            const badgeClass = accuracy >= 70 ? 'bg-success' : (accuracy >= 40 ? 'bg-warning text-dark' : 'bg-danger');
+            
+            statsHTML += `<tr>
+                <td class="fw-bold">${cat}</td>
+                <td class="text-center"><span class="badge bg-secondary rounded-pill">${data.total}</span></td>
+                <td class="text-center text-muted small">${percent}%</td>
+                <td class="text-center"><div class="progress" style="height: 20px;"><div class="progress-bar ${badgeClass}" role="progressbar" style="width: ${accuracy}%">${accuracy}%</div></div></td>
+            </tr>`;
+        });
+        statsHTML += '</tbody></table></div></div></div></div>';
+        document.getElementById('category-stats').innerHTML = statsHTML;
+
+        document.getElementById('exam-ui').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        document.getElementById('correct-count').innerText = correctCount;
+        
+        const score = Math.round((correctCount / 50) * 100);
+        document.getElementById('final-score').innerText = score;
+        
+        if (correctCount < 50) {
+            document.getElementById('btn-export-pdf').style.display = 'inline-block';
+            document.getElementById('review-list').innerHTML = incorrectHTML;
+        }
+
+        if (score >= 70) {
+            document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
+            launchFireworks();
+        }
+        else document.getElementById('result-msg').innerHTML = '<h4 class="text-danger fw-bold">未達及格分數 (70分)，再接再厲！</h4>';
+    }
+
+    function exportIncorrectPDF() {
+        // 先顯示回顧區域
+        document.getElementById('review-area').style.display = 'block';
+        document.body.classList.add('preview-active');
+
+        // 判斷是否為 PC 版 (簡單判斷是否有觸控或 UserAgent)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            // PC 版直接呼叫系統列印 (使用者可選擇「另存為 PDF」)
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        } else {
+            // 手機 App 版維持純文字預覽模式供截圖
+            savedZoomBeforePreview = currentZoom;
+            currentZoom = 0.7; 
+            applyZoom();
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '⬅️ 結束預覽 (返回結果)';
+            closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print';
+            closeBtn.style.zIndex = '3000';
+            closeBtn.onclick = () => {
+                document.getElementById('review-area').style.display = 'none';
+                document.body.classList.remove('preview-active');
+                currentZoom = savedZoomBeforePreview;
+                applyZoom();
+                closeBtn.remove();
+                window.scrollTo(0, 0);
+            };
+            document.body.appendChild(closeBtn);
+        }
+        window.scrollTo(0, 0);
+    }
+
+    function launchFireworks() {
+        var duration = 5 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+        var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+            var particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+    }
+
+    startExam();
+</script>
+</body>
+</html>
