@@ -44,12 +44,18 @@ python final_clean_repair.py
 由於專案包含大量 JSON 題庫，在使用 Gemini CLI 或執行大規模同步時，Node.js 可能因預設記憶體限制 (2GB) 而崩潰。針對 8GB 記憶體的主機，建議進行以下設定：
 
 1. **臨時設定 (PowerShell)**：
+   - 在目前的 PowerShell 視窗輸入：
    ```powershell
    $env:NODE_OPTIONS="--max-old-space-size=4096"
    ```
-2. **永久設定 (Windows 系統變數)**：
-   - 新增系統環境變數 `NODE_OPTIONS`，數值設為 `--max-old-space-size=4096`。
-   - 這將允許 Node.js 使用最高 4GB 記憶體，有效防止處理大型 JSON 時發生 Heap Out of Memory 錯誤。
+2. **永久設定 (Windows 系統設定)**：
+   - 按下 `Win + R`，輸入 `sysdm.cpl` 並按 Enter。
+   - 分頁選擇 **「進階」** -> 點擊下方 **「環境變數」**。
+   - 在「系統變數」區塊點擊 **「新增」**。
+     - **變數名稱**：`NODE_OPTIONS`
+     - **變數值**：`--max-old-space-size=4096`
+   - 設定完成後需重啟 VS Code 或終端機。
+   - 這將允許 Node.js 使用最高 4GB 記憶體，防止 Heap Out of Memory 錯誤。
 
 ---
 *註：ITS 認證流出題目編號僅為 1 至 69，其餘為補充練習題。*
