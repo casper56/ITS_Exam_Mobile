@@ -47,15 +47,27 @@ def clean_repair_all():
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
         .q-img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px auto; display: block; }
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
-        .review-item { margin-bottom: 40px; padding: 0; border: none; background: white; page-break-inside: avoid; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+        .review-item { margin-bottom: 40px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .review-q-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; color: #333; }
         .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 20px 0; border-left: 5px solid #198754; background: white; font-size: 1.1rem; }
         .review-exp-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; }
-        .side-nav-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 40px; height: 80px; background: rgba(13, 110, 253, 0.8); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 900; border-radius: 0 40px 40px 0; }
-        .side-nav-next { right: 0; border-radius: 40px 0 0 40px; }
+        @media print { 
+            @page { size: auto; margin: 8mm; }
+            body { background: white !important; font-size: 13px; line-height: 1.4 !important; } 
+            .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; } 
+            #review-area { display: block !important; } 
+            .review-item { margin-bottom: 20px !important; padding-bottom: 15px !important; border-bottom: 1px solid #eee !important; }
+            .review-q-text { font-size: 1rem !important; margin-bottom: 8px !important; }
+            .review-ans { font-size: 0.95rem !important; margin: 10px 0 !important; padding: 5px 10px !important; border-left-width: 4px !important; }
+            .review-exp-box { font-size: 0.9rem !important; padding: 12px !important; border-radius: 6px !important; background: #fafafa !important; }
+            .review-opt-line { margin-bottom: 2px !important; }
+            .q-img { max-width: 300px !important; margin: 10px 0 !important; }
+            h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
+        }
+        .side-nav-btn { position: fixed; top: 50%; left: 0; transform: translateY(-50%); width: 40px; height: 80px; background: rgba(13, 110, 253, 0.8); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; border-radius: 0 40px 40px 0; }
+        .side-nav-next { left: auto; right: 0; border-radius: 40px 0 0 40px; }
         @media (max-width: 992px) { .sidebar { transform: translateX(-100%); } .sidebar.active { transform: translateX(0); } .content-area { margin-left: 0; } .mobile-toggle { display: block !important; } }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
-        @media print { body { background: white !important; } .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; } #review-area { display: block !important; } }
     </style>
 </head>
 <body>
@@ -80,8 +92,8 @@ def clean_repair_all():
         <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">🗑️ 重置進度</button></div>
     </nav>
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-    <div class="side-nav-btn" onclick="prevQuestion()">&#10094;</div>
-    <div class="side-nav-btn side-nav-next" onclick="nextQuestion()">&#10095;</div>
+    <div class="side-nav-btn" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
     <main class="content-area"><div class="container-fluid" style="max-width: 900px;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
@@ -123,7 +135,10 @@ def clean_repair_all():
                 const src = item['image' + p1];
                 return src ? `<img src="${src}" class="q-img">` : match;
             });
-            if (html.includes('●')) html = html.replace(/●/g, '<div class="mb-1">● ') + '</div>';
+            if (html.includes('●')) {
+                const parts = html.split('●').map(p => p.trim()).filter(p => p);
+                return parts.map(p => `<div class="mb-1">● ${p}</div>`).join('');
+            }
             return `<div>${html}</div>`;
         }).join('');
     }
@@ -228,12 +243,22 @@ def clean_repair_all():
 
     function prepareAndPrint() {
         const area = document.getElementById('review-area');
-        area.innerHTML = `<h1 class="text-center mb-5" style="color:#212529">{{DISPLAY_TITLE}} 完整解析講義</h1>`;
+        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">{{DISPLAY_TITLE}} 完整解析講義</h1>`;
         quizData.forEach((item, idx) => {
             const div = document.createElement('div'); div.className = 'review-item';
             const opts = item.quiz || item.options || [];
             let optHtml = opts.map((o, i) => `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
-            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(item.question, item)}</div><div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${item.answer}</div><div class="review-exp-box"><b>解析：</b><br>${processContent(item.explanation, item)}</div>`;
+            
+            const cleanQ = String(item.question).replace(/^\d+\.\s*/, '');
+            let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
+            
+            div.innerHTML = `
+                <div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>
+                ${imgHtml}
+                <div class="review-opts" style="margin-left:20px">${optHtml}</div>
+                <div class="review-ans">正確答案：${item.answer}</div>
+                <div class="review-exp-box"><b>解析：</b><br>${processContent(item.explanation || '暫無解析。', item)}</div>
+            `;
             area.appendChild(div);
         });
         const originalTitle = document.title; document.title = "{{DISPLAY_TITLE}}"; window.print(); document.title = originalTitle;
@@ -244,6 +269,10 @@ def clean_repair_all():
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         
+        // UI 按鈕顯示邏輯
+        const pBtn = document.getElementById('side-btn-prev');
+        if (pBtn) pBtn.style.display = (index === 0) ? 'none' : 'flex';
+
         // Determine Type Label
         let typeLabel = "單選";
         if (opts.some(o => String(o).includes('|'))) typeLabel = "題組";
@@ -265,7 +294,7 @@ def clean_repair_all():
                     <div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div>
                     <div class="answer-section" id="ans-section">
                         <h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${item.answer}</span></h6>
-                        <div class="explanation">${processContent(item.explanation, item)}</div>
+                        <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                     </div>
                 </div>
             </div>
