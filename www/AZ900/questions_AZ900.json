@@ -2436,9 +2436,9 @@
         "type": "multioption",
         "question": "154. 請將 Azure 儲存體服務與適當的描述配對。<br>\n作答區<br>\n(A)用於應用程式之間的可靠傳訊<br>\n(B)可當做 Windows 裝置中的網路共用存取<br>\n(C)可設定成使用封存存取層",
         "options": [
-            "1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體",
-            "1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體",
-            "1.Azure Blob 儲存體|2.Azure 磁碟儲存體|3.Azure 檔案儲存體|4.Azure 佇列儲存體"
+            "Azure Blob|Azure Queue|Azure Table|Azure File",
+            "Azure Blob|Azure Queue|Azure Table|Azure File",
+            "Azure Blob|Azure Queue|Azure Table|Azure File"
         ],
         "answer": [
             4,

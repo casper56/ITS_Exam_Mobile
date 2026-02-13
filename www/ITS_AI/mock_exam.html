@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS AI 模擬考試</title>
+    <title>ITS AI 模擬?�試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
     <style>
@@ -22,10 +22,10 @@
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        code { font-family: Consolas, Monaco, monospace; color: #212529; background-color: #fff; padding: 2px 4px; border-radius: 4px; border: 1px solid #eee; white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; font-size: 0.85rem; }
-        pre { white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important; margin: 0; background-color: #fff; color: #212529; border: none; font-size: 0.85rem; }
+        code { color: inherit !important; background-color: transparent !important; }
+        pre { background-color: transparent !important; border: none !important; }
         
-        /* 預設不隱藏 no-print 類別，只有在預覽時動態隱藏 */
+        /* ?�設不隱??no-print 類別，只?�在?�覽?��??�隱??*/
         .preview-active .no-print { display: none !important; }
         .side-nav-btn {
             position: fixed;
@@ -75,12 +75,12 @@
             .side-nav-btn:hover { width: 40px; }
         }
 
-        /* 列印與預覽錯誤題目樣式 */
+        /* ?�印?��?覽錯誤�??�樣�?*/
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
         .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
         .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
-        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #eee; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
 
         @media print {
             @page { size: auto; margin: 10mm; }
@@ -113,7 +113,7 @@
             }
         }
 
-        /* Zoom 控制按鈕樣式 */
+        /* Zoom ?�制?��?�?? */
         .zoom-controls {
             position: fixed;
             bottom: 30px;
@@ -149,19 +149,19 @@
 
 <!-- Zoom Controls -->
 <div class="zoom-controls no-print">
-    <div class="zoom-btn" onclick="adjustZoom(0.1)" title="放大">➕</div>
-    <div class="zoom-btn" onclick="adjustZoom(-0.1)" title="縮小">➖</div>
+    <div class="zoom-btn" onclick="adjustZoom(0.1)" title="?�大">??/div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)" title="縮�?">??/div>
 </div>
 
 <div id="exam-ui">
     <header class="exam-header d-flex justify-content-between align-items-center">
-        <div><h5 class="m-0">ITS AI 模擬考試</h5><small id="q-progress">1 / 40</small></div>
+        <div><h5 class="m-0">ITS AI 模擬?�試</h5><small id="q-progress">1 / 40</small></div>
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
 
-    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)" title="上一題">&#10094;</div>
-    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)" title="下一題">&#10095;</div>
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)" title="上�?�?>&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)" title="下�?�?>&#10095;</div>
 
     <main class="container-fluid main-content" style="max-width: 100%; margin-top: 80px; padding-left: 15px; padding-right: 15px;">
         <div id="question-area"></div>
@@ -169,23 +169,23 @@
 </div>
 
 <div id="result-screen" class="container-fluid" style="max-width: 100%; margin: 0; padding-left: 15px; padding-right: 15px;">
-    <h2 class="mb-4">考試結束</h2>
+    <h2 class="mb-4">?�試結�?</h2>
     <div class="score-circle" id="final-score">0</div>
-    <p class="lead">答對題數：<span id="correct-count">0</span> / 40</p>
+    <p class="lead">答�?題數�?span id="correct-count">0</span> / 40</p>
     <div id="category-stats" class="mb-4"></div>
     <div id="result-msg" class="mb-4"></div>
     <div class="mt-5 no-print">
-        <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
-        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
-        <button class="btn btn-outline-danger btn-lg me-2" onclick="clearWrongHistory()">🗑️ 清除錯題紀錄</button>
-        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="exportIncorrectPDF()" style="display:none;">💾 匯出錯誤題目 PDF</button>
+        <a href="../index.html" class="btn btn-primary btn-lg me-2">?��???/a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">?�新?�戰</button>
+        <button class="btn btn-outline-danger btn-lg me-2" onclick="clearWrongHistory()">??�?清除?��?紀??/button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="exportIncorrectPDF()" style="display:none;">?�� ?�出?�誤題目 PDF</button>
     </div>
 
-    <!-- 錯誤題目回顧區 (預覽與列印用) -->
+    <!-- ?�誤題目?�顧?� (?�覽?��??�用) -->
     <div id="review-area">
         <div class="d-flex justify-content-between align-items-center mb-4 no-print">
-            <h3 class="m-0">錯誤題目回顧報告</h3>
-            <button class="btn btn-success" onclick="window.print()">🖨️ 列印 / 另存 PDF</button>
+            <h3 class="m-0">?�誤題目?�顧?��?</h3>
+            <button class="btn btn-success" onclick="window.print()">?���??�印 / ?��? PDF</button>
         </div>
         <div id="review-list"></div>
     </div>
@@ -201,7 +201,7 @@
 
     function applyZoom() {
         document.body.style.zoom = currentZoom;
-        // 針對不支援 zoom 的瀏覽器備案
+        // ?��?不支??zoom ?�瀏覽?��?�?
         if (document.body.style.zoom === undefined || document.body.style.zoom === "") {
             document.body.style.transform = `scale(${currentZoom})`;
             document.body.style.transformOrigin = "top center";
@@ -214,10 +214,10 @@
         applyZoom();
     }
 
-    // 自動初始化縮放
+    // ?��??��??�縮??
     window.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth < 600) {
-            currentZoom = 0.85; // 手機版預設縮小一點點
+            currentZoom = 0.85; // ?��??��?設縮小�?點�?
             applyZoom();
         }
     });
@@ -232,16 +232,16 @@
     const WRONG_KEY = 'its_ai_wrong_ids';
 
     function clearWrongHistory() {
-        if (confirm('確定要清除所有累積的錯題紀錄嗎？(清除後將恢復隨機抽題)')) {
+        if (confirm('確�?要�??��??�累積�??��?紀?��?�?清除後�??�復?��??��?)')) {
             localStorage.removeItem(WRONG_KEY);
-            alert('紀錄已清除');
+            alert('紀?�已清除');
             location.reload();
         }
     }
 
     
     function startExam() {
-        const categories = [ 'D1_AI問題定義與倫理', 'D2_資料收集、處理與工程', 'D3_AI演算法與模型訓練', 'D4_應用整合、部署與監控' ];
+        const categories = [ 'D1_AI?��?定義?�倫�?', 'D2_資�??��??��??��?工�?', 'D3_AI演�?法�?模�?訓練', 'D4_?�用?��??�部署�???��' ];
         const wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
         let selected = [];
         let catCounts = {}; 
@@ -267,7 +267,7 @@
             if (selected.length >= 40) break;
             if (selected.some(s => s.id === q.id)) continue;
             const cat = q.category;
-            if (cat === 'D2_資料收集、處理與工程' && catCounts[cat] >= 18) continue;
+            if (cat === 'D2_資�??��??��??��?工�?' && catCounts[cat] >= 18) continue;
             selected.push(q);
             catCounts[cat]++;
         }
@@ -284,7 +284,7 @@
             let secs = timeLeft % 60;
             document.getElementById('timer').innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
             if (timeLeft <= 0) {
-                alert("時間到！系統自動交卷。");
+                alert("?��??��?系統?��?交卷??);
                 submitExam();
             }
         }, 1000);
@@ -304,13 +304,13 @@
         if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
         if (sideNext) {
             sideNext.style.display = 'flex';
-            sideNext.title = index === 39 ? '交卷' : '下一題';
+            sideNext.title = index === 39 ? '交卷' : '下�?�?;
         }
 
         const card = document.createElement('div');
         card.className = 'card question-card';
         
-        let qText = item.question.replace(/●/g, '<br/>●').replace(/^\d+\.\s*/, '');
+        let qText = item.question.replace(/??g, '<br/>??).replace(/^\d+\.\s*/, '');
         
         let html = `
             <div class="question-header">Question ${index + 1} / 40</div>
@@ -328,7 +328,7 @@
             const optStr = String(opt);
             if (optStr.includes('|')) {
                 const subOpts = optStr.split('|');
-                html += `<div class="sub-question-label">選項 ${optIdx + 1}</div>`;
+                html += `<div class="sub-question-label">?��? ${optIdx + 1}</div>`;
                 html += `<div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => {
                     const isSel = (savedAns && savedAns[optIdx] === subIdx);
@@ -383,9 +383,9 @@
     function confirmSubmit() {
         const answeredCount = Object.keys(userAnswers).length;
         if (answeredCount < 50) {
-            if (!confirm(`您還有 ${50 - answeredCount} 題未作答，確定要交卷嗎？`)) return;
+            if (!confirm(`?��???${50 - answeredCount} 題未作�?，確定�?交卷?��?`)) return;
         } else {
-            if (!confirm('確定要交卷嗎？')) return;
+            if (!confirm('確�?要交?��?�?)) return;
         }
         submitExam();
     }
@@ -400,7 +400,7 @@
         let wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
 
         examQuestions.forEach((item, idx) => {
-            const cat = item.category || '未分類';
+            const cat = item.category || '?��?�?;
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0 };
             stats[cat].total++;
 
@@ -425,11 +425,11 @@
                 wrongIds.delete(item.id); // Remove from wrong history if answered correctly
             } else {
                 wrongIds.add(item.id); // Add to wrong history
-                let qText = item.question.replace(/●/g, '<br/>●');
+                let qText = item.question.replace(/??g, '<br/>??);
                 let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 
-                // 生成選項列表 HTML
-                let optionsHTML = '<hr class="my-2"><div class="fw-bold mb-1">選擇：</div>';
+                // ?��??��??�表 HTML
+                let optionsHTML = '<hr class="my-2"><div class="fw-bold mb-1">?��?�?/div>';
                 optionsHTML += '<ul class="list-group list-group-flush mb-3" style="font-size: 0.85rem;">';
                 const options = item.quiz || item.options || [];
                 options.forEach((opt, oIdx) => {
@@ -437,17 +437,17 @@
                 });
                 optionsHTML += '</ul>';
 
-                let expText = item.explanation || '暫無解析。';
+                let expText = item.explanation || '?�無�????;
                 if (Array.isArray(expText)) expText = expText.join('<br/>');
-                expText = expText.replace(/●/g, '<br/>●');
+                expText = expText.replace(/??g, '<br/>??);
 
                 incorrectHTML += `
                     <div class="review-item">
-                        <div class="review-id">題目 ${idx + 1} (原始編號: ${item.id})</div>
+                        <div class="review-id">題目 ${idx + 1} (?��?編�?: ${item.id})</div>
                         <div class="mb-2">${qText}</div>
                         ${optionsHTML}
-                        <div class="review-ans">正確答案：${ansText}</div>
-                        <div class="review-exp"><b>解析：</b><br/>${expText}</div>
+                        <div class="review-ans">�?��答�?�?{ansText}</div>
+                        <div class="review-exp"><b>�??�?/b><br/>${expText}</div>
                     </div>`;
             }
         });
@@ -456,7 +456,7 @@
         localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongIds]));
 
         // Generate Stats HTML
-        let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">各類題數佔比與答對率</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目分類</th><th class="text-center">題數</th><th class="text-center">佔比</th><th class="text-center">答對率</th></tr></thead><tbody>';
+        let statsHTML = '<div class="row justify-content-center"><div class="col-md-10"><div class="card shadow-sm border-0"><div class="card-header bg-dark text-white fw-bold">?��?題數佔�??��?對�?</div><div class="table-responsive"><table class="table table-hover mb-0 text-start align-middle"><thead><tr><th>題目?��?</th><th class="text-center">題數</th><th class="text-center">佔�?</th><th class="text-center">答�???/th></tr></thead><tbody>';
         
         // Sort categories D1, D2, D3...
         const sortedCats = Object.keys(stats).sort();
@@ -490,33 +490,33 @@
         }
 
         if (score >= 70) {
-            document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">恭喜通過！🎉</h4>';
+            document.getElementById('result-msg').innerHTML = '<h4 class="text-success fw-bold">?��??��?！�??/h4>';
             launchFireworks();
         }
-        else document.getElementById('result-msg').innerHTML = '<h4 class="text-danger fw-bold">未達及格分數 (70分)，再接再厲！</h4>';
+        else document.getElementById('result-msg').innerHTML = '<h4 class="text-danger fw-bold">?��??�格?�數 (70??，�??��??��?</h4>';
     }
 
     function exportIncorrectPDF() {
-        // 先顯示回顧區域
+        // ?�顯示�?顧�???
         document.getElementById('review-area').style.display = 'block';
         document.body.classList.add('preview-active');
 
-        // 判斷是否為 PC 版 (簡單判斷是否有觸控或 UserAgent)
+        // ?�斷?�否??PC ??(簡單?�斷?�否?�觸?��? UserAgent)
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         if (!isMobile) {
-            // PC 版直接呼叫系統列印 (使用者可選擇「另存為 PDF」)
+            // PC ?�直?�呼?�系統�???(使用?�可?��??�另存為 PDF??
             setTimeout(() => {
                 window.print();
             }, 500);
         } else {
-            // 手機 App 版維持純文字預覽模式供截圖
+            // ?��? App ?�維?��??��??�覽模�?供截??
             savedZoomBeforePreview = currentZoom;
             currentZoom = 0.7; 
             applyZoom();
             
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '⬅️ 結束預覽 (返回結果)';
+            closeBtn.innerHTML = '⬅�? 結�??�覽 (返�?結�?)';
             closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print';
             closeBtn.style.zIndex = '3000';
             closeBtn.onclick = () => {
@@ -550,3 +550,4 @@
 </script>
 </body>
 </html>
+
