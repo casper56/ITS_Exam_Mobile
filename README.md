@@ -40,5 +40,16 @@ python final_clean_repair.py
 
 此腳本會根據 `www/*/questions_*.json` 自動更新所有考科的 HTML 檔案，包含最新的 JS 邏輯、CSS 樣式與專業標題映射。
 
+## ⚠️ 開發環境效能優化 (避免當機)
+由於專案包含大量 JSON 題庫，在使用 Gemini CLI 或執行大規模同步時，Node.js 可能因預設記憶體限制 (2GB) 而崩潰。針對 8GB 記憶體的主機，建議進行以下設定：
+
+1. **臨時設定 (PowerShell)**：
+   ```powershell
+   $env:NODE_OPTIONS="--max-old-space-size=4096"
+   ```
+2. **永久設定 (Windows 系統變數)**：
+   - 新增系統環境變數 `NODE_OPTIONS`，數值設為 `--max-old-space-size=4096`。
+   - 這將允許 Node.js 使用最高 4GB 記憶體，有效防止處理大型 JSON 時發生 Heap Out of Memory 錯誤。
+
 ---
 *註：ITS 認證流出題目編號僅為 1 至 69，其餘為補充練習題。*
