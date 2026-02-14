@@ -33,6 +33,7 @@ def clean_repair_all():
         .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
         .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
         .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
+        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; }
         .q-node { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff; cursor: pointer; font-size: 0.85rem; }
         .q-node.correct { background-color: #d1e7dd; color: #0f5132; }
         .q-node.incorrect { background-color: #f8d7da; color: #842029; }
@@ -64,9 +65,16 @@ def clean_repair_all():
             .q-img { max-width: 300px !important; margin: 10px 0 !important; }
             h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
         }
-        .side-nav-btn { position: fixed; top: 50%; left: 0; transform: translateY(-50%); width: 40px; height: 80px; background: rgba(13, 110, 253, 0.8); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; border-radius: 0 40px 40px 0; }
+        .side-nav-btn { position: fixed; top: 50%; left: 280px; transform: translateY(-50%); width: 40px; height: 80px; background: rgba(13, 110, 253, 0.8); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; border-radius: 0 40px 40px 0; transition: left 0.3s ease; }
         .side-nav-next { left: auto; right: 0; border-radius: 40px 0 0 40px; }
-        @media (max-width: 992px) { .sidebar { transform: translateX(-100%); } .sidebar.active { transform: translateX(0); } .content-area { margin-left: 0; } .mobile-toggle { display: block !important; } }
+        @media (max-width: 992px) { 
+            .sidebar { transform: translateX(-100%); } 
+            .sidebar.active { transform: translateX(0); } 
+            .content-area { margin-left: 0; } 
+            .mobile-toggle { display: block !important; } 
+            .side-nav-btn#side-btn-prev { left: 0; }
+            .sidebar.active ~ .side-nav-btn#side-btn-prev { left: 280px; }
+        }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
     </style>
 </head>
@@ -148,7 +156,6 @@ def clean_repair_all():
         if (!el || !btn) return;
         const isShow = (forceShow !== null) ? forceShow : (el.style.display !== 'block');
         el.style.display = isShow ? 'block' : 'none';
-        if (isShow) setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100);
     }
 
     function checkAnswer(element, qIdx, optIdx, event) {
@@ -199,6 +206,10 @@ def clean_repair_all():
         if (!userAnswers[qIdx]) userAnswers[qIdx] = {};
         userAnswers[qIdx][optIdx] = subIdx;
         
+        // 移除同題組其他選項的選中樣式
+        element.parentElement.querySelectorAll('.sub-opt-container').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+
         if (subIdx === correctSubIdx) {
             element.classList.add('correct');
             const totalSub = (item.quiz || item.options || []).length;
@@ -265,6 +276,7 @@ def clean_repair_all():
     }
 
     function renderQuestion(index) {
+        window.scrollTo(0, 0);
         currentIndex = index; const item = quizData[index];
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
@@ -314,17 +326,38 @@ def clean_repair_all():
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
         let cIdxs = answers.map(a => parseInt(a) - 1);
-        if (saved !== undefined) {
-            if (typeof saved === 'object' && !Array.isArray(saved)) {
-                for (const [r, c] of Object.entries(saved)) {
-                    const inp = document.getElementById(`o${r}_s${c}`);
-                    if (inp) { inp.checked = true; if(completed) {
-                        const isSubCorr = (parseInt(c)+1) == parseInt(answers[r]);
-                        inp.parentElement.classList.add(isSubCorr ? 'correct' : 'incorrect');
-                        if (!isSubCorr) { const ci = document.getElementById(`o${r}_s${parseInt(answers[r])-1}`); if(ci) ci.parentElement.classList.add('correct'); }
-                    }}
-                }
-            } else if (Array.isArray(saved)) {
+
+        // --- 題組 (multioption) 顯示邏輯強化 ---
+        if (opts.some(o => String(o).includes('|'))) {
+            opts.forEach((opt, r) => {
+                const correctSubIdx = parseInt(answers[r]) - 1;
+                const savedSubIdx = (saved && typeof saved === 'object') ? saved[r] : undefined;
+                
+                opt.split('|').forEach((_, subIdx) => {
+                    const inp = document.getElementById(`o${r}_s${subIdx}`);
+                    if (!inp) return;
+                    const container = inp.parentElement;
+                    
+                    // 1. 恢復曾經填寫的答案
+                    if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) {
+                        inp.checked = true;
+                        container.classList.add('selected');
+                    }
+                    
+                    // 2. 如果已完成，顯示正確(綠)/錯誤(紅)顏色
+                    if (completed) {
+                        if (subIdx === correctSubIdx) {
+                            container.classList.add('correct');
+                        } else if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) {
+                            container.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        } 
+        // --- 單選/複選 顯示邏輯 ---
+        else if (saved !== undefined) {
+            if (Array.isArray(saved)) {
                 saved.forEach(idx => { const inp = document.getElementById(`o${idx}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(idx) ? 'correct' : 'incorrect'); } });
                 if(completed) cIdxs.forEach(ci => { const inp = document.getElementById(`o${ci}`); if (inp) { inp.closest('.option-item').classList.add('correct'); } });
             } else {
@@ -332,6 +365,7 @@ def clean_repair_all():
                 if(completed && !cIdxs.includes(saved)) { const ci = document.getElementById(`o${cIdxs[0]}`); if(ci) ci.closest('.option-item').classList.add('correct'); }
             }
         }
+        
         if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
         updateUI(); Prism.highlightAll(); saveState();
     }
