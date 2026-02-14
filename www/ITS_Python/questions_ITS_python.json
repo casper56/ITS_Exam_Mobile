@@ -1646,8 +1646,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "● 選項 1 和選項 2 的正確答案都是 A，因為單行檔案字串可以用單引號或雙引號來表示。",
-			"<b>若講的是文件字串（docstring） 在 Python 中，是用來記錄函式、類別或模組的說明文件。標準寫法是用：\"\"\"這裡是說明文字\"\"\" , 你也可以用三個單引號 '''...'''，但最常見、PEP 257 推薦的做法是使用三個雙引號</b>",
+            "● 選項 1 正確答案都是 A or B，因為單行檔案字串可以用單引號或雙引號來表示。 但是題目三有提及__doc__ 故此題假設是討論 文件字串",
+		    "<b>若是文件字串（docstring）在Python中是用來記錄函式、類別或模組的說明文件。標準寫法是用：\"\"\"這裡是說明文字\"\"\" , 你也可以用三個單引號'''...'''，但最常見、PEP 257 推薦的做法是使用三個雙引號</b>",
             "● 選項 3 的正確答案是 C，因為可以使用 `cube.__doc__` 來列印函式的檔案字串。",
             "● ITS ： A A B 而 ChatGPT ： D B C"
         ],
@@ -1656,11 +1656,11 @@
     {
         "id": 71,
         "type": "multioption",
-        "question": "71. 【CH06-8】請檢閱下列程式。<pre><code class=\"language-python line-numbers line-hight19\">def petstore(category, species, breed='none'):\n    \"\"\"Display information about a pet.\"\"\"\n    print(f'You have selected an animal from the {category} category.')\n    if breed == 'none':\n        print(f'The {category} you selected is a {species}')\n    else:\n        print(f'The {category} you selected is a {species} {breed}')\nprint(f'The {category} would make a great pet!')\n\ncategory = input('What animal category are you interested in?')\nspecies = input('What species are they from (canine, feline, Scarlet Macaw, Blue and Gold Macaw)?')\nif category == 'dog' or category == 'cat':\n    breed = input('What breed are you interested in?')\n    petstore(category, species, breed)\nelse:\n    petstore(category, species)\n    petstore(breed='Maltese', species='Canine', category='dog')\n    petstore('bird', species='Scarlet Macaw')</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。",
+        "question": "71. 【CH06-8】請檢閱下列程式。<pre><code class=\"language-python line-numbers line-hight19\">def petstore(category, species, breed='none'):\n    \"\"\"Display information about a pet.\"\"\"\n    print(f'You have selected an animal from the {category} category.')\n    if breed == 'none':\n        print(f'The {category} you selected is a {species}')\n    else:\n        print(f'The {category} you selected is a {species} {breed}')\nprint(f'The {category} would make a great pet!')\n\ncategory = input('What animal category are you interested in?')\nspecies = input('What species are they from (canine, feline, Scarlet Macaw, Blue and Gold Macaw)?')\nif category == 'dog' or category == 'cat':\n    breed = input('What breed are you interested in?')\n    petstore(category, species, breed)\nelse:\n    petstore(category, species)\n    petstore(breed='Maltese', species='Canine', category='dog')\n    petstore('bird', species='Scarlet Macaw')</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。<br>題一:此函式會傳回一個值。<br>題二:第 14 行和第 17 行的函式呼叫無效。<br>題三:第 16 行和第 18 行的函式呼叫會產生錯誤。",
         "options": [
-            "此函式會傳回一個值。|Yes|No",
-            "第 14 行和第 17 行的函式呼叫無效。|Yes|No",
-            "第 16 行和第 18 行的函式呼叫會產生錯誤。|Yes|No"
+            "Yes|No",
+            "Yes|No",
+            "Yes|No"
         ],
         "answer": [
             2,
@@ -1740,10 +1740,12 @@
         ],
         "weight": 1,
         "image": null,
+		"image01": "images/74_1.png",
         "explanation": [
             "● 在 Python 中，使用 `from datetime import datetime as dt` 可以將 `datetime` 模組中的 `datetime` 函式匯入並設定為替代名稱 `dt`。",
             "● 選擇 1 是錯誤的，因為它沒有指定要匯入的函式。",
-            "● 選擇 3 和選擇 4 的語法都是錯誤的。"
+            "● 選擇 3 和選擇 4 的語法都是錯誤的。",
+			"from 模組 import 類別 as 別名<br>datetime 模組有[[image01]]"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -1771,7 +1773,7 @@
     },
     {
         "id": 76,
-        "type": "single",
+        "type": "multiple",
         "question": "76. 【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？",
         "options": [
             "random.randrange(11, 21, 1)",
@@ -1888,7 +1890,7 @@
         "explanation": [
             "● 選擇 1 的正確答案是 A 和 B，因為它們都可以用來獲取當前日期。",
             "● 選擇 2 的正確答案是 A，因為 `strftime('%A')` 可以獲取當前的工作日。",
-            "● 選擇 3 的正確答案是 B，因為 `6 - now.weekday()` 可以計算出週剩餘天數。",
+            "● 選擇 3 的正確答案是 B，因為 `6 - now.weekday()` 可以計算出週剩餘天數。Monday now.weekday() 傳回0",
             "● 注意：選項中的字母可能有誤，應該是 `%A` 而不是 `&A`。"
         ],
         "category": "D6_模組與常用工具"
@@ -2041,11 +2043,11 @@
     {
         "id": 87,
         "type": "multioption",
-        "question": "87. 【CH08-6】下列函式會計算使用指數之運算式的值。<pre><code class=\"language-python line-numbers line-hight19\">def calc_power(a, b):\n   return a**b\nbase = input('Enter the number for the base: ')\nexponent = input('Enter the number for the exponent: ')\nresult = calc_power(base, exponent)\nprint('The result is ' + result)</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes，否則請選揮No。",
+        "question": "87. 【CH08-6】下列函式會計算使用指數之運算式的值。<pre><code class=\"language-python line-numbers line-hight19\">def calc_power(a, b):\n   return a**b\nbase = input('Enter the number for the base: ')\nexponent = input('Enter the number for the exponent: ')\nresult = calc_power(base, exponent)\nprint('The result is ' + result)</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes，否則請選揮No。<br>題一:第 2 行會造成執行階段錯誤。<br>題二:第 6 行會造成執行階段錯誤。<br>題三:eval 函式應該用於第 3 和 4 行。",
         "options": [
-            "第 2 行會造成執行階段錯誤。|Yes|No",
-            "第 6 行會造成執行階段錯誤。|Yes|No",
-            "eval 函式應該用於第 3 和 4 行。|Yes|No"
+            "Yes|No",
+            "Yes|No",
+            "Yes|No"
         ],
         "answer": [
             1,
@@ -2064,12 +2066,12 @@
     {
         "id": 88,
         "type": "multioption",
-        "question": "88. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()</code></pre>out.txt 檔案不存在執行程式碼。針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
-        "options": [
-            "此程式碼將正常執行，不會發生錯誤。|Yes|No",
-            "此程式碼將執行，但會產生邏輯錯誤。|Yes|No",
-            "此程式碼將產生執行階段錯誤。|Yes|No",
-            "此程式碼碼將產生語法錯誤。|Yes|No"
+        "question": "88. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()</code></pre>out.txt 檔案不存在執行程式碼。針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。<br><br>題一:此程式碼將正常執行，不會發生錯誤。<br>題二:此程式碼將執行，但會產生邏輯錯誤。<br>題三:此程式碼將產生執行階段錯誤。<br>題四:此程式碼將產生語法錯誤。",
+		"options": [
+            "Yes|No",
+            "Yes|No",
+            "Yes|No",
+            "Yes|No"
         ],
         "answer": [
             2,
@@ -2248,7 +2250,7 @@
         "question": "96. 【CH04-補充】使用 f-String (Python 3.6+) 格式化字串，若變數 `name='Alice'` 和 `age=20`，下列哪種寫法可以正確輸出 `Alice is 20`？",
         "options": [
             "f'{name} is {age}'",
-            "f'{name} is {age}'",
+            "f\"{name} is {age}\"",
             "'{name} is {age}'.format()",
             "f(name, ' is ', age)"
         ],
@@ -3998,5 +4000,26 @@
             "● **語法錯誤 (Syntax Error)**：程式無法執行 (如缺冒號)。<br>● **執行期錯誤 (Runtime Error)**：執行到一半崩潰 (如除以零、變數未定義)。<br>● **邏輯錯誤 (Logic Error)**：程式可以正常執行到底，不會報錯，但**算出來的結果是錯的** (如公式寫錯)。這是最難除錯的類型。"
         ],
         "category": "D2_流程控制與判斷"
+    },
+	{
+        "id": 180,
+        "type": "single",
+        "question": "180.在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？",
+        "options": [
+            "date",
+            "timedelta",
+            "time",
+            "datetime"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+		"image01": "image/180.png",
+        "explanation": [
+            "[image01]"
+		],
+        "category": ""
     }
 ]
