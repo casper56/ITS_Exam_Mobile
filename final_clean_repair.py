@@ -83,8 +83,11 @@ def clean_repair_all():
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0">題目列表</h5></div>
-                <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-0 px-2" style="font-size: 0.75rem;">📄 列印預覽</button>
+                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題目列表</h5></div>
+                <div class="d-flex gap-1">
+                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">列印預覽</button>
+                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">訂正預覽</button>
+                </div>
             </div>
             <div id="progress-stats">✅0 ❌0 🟠0 / {{TOTAL}}</div>
         </div>
@@ -252,10 +255,19 @@ def clean_repair_all():
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
 
-    function prepareAndPrint() {
+    function prepareAndPrint(onlyMistakes = false) {
         const area = document.getElementById('review-area');
-        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">{{DISPLAY_TITLE}} 完整解析講義</h1>`;
-        quizData.forEach((item, idx) => {
+        let title = "{{DISPLAY_TITLE}} 完整解析講義";
+        let targetItems = quizData.map((item, idx) => ({ item, idx }));
+
+        if (onlyMistakes) {
+            targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+            if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+            title = "{{DISPLAY_TITLE}} 訂正解析講義";
+        }
+
+        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+        targetItems.forEach(({ item, idx }) => {
             const div = document.createElement('div'); div.className = 'review-item';
             const opts = item.quiz || item.options || [];
             let optHtml = opts.map((o, i) => `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
@@ -272,7 +284,7 @@ def clean_repair_all():
             `;
             area.appendChild(div);
         });
-        const originalTitle = document.title; document.title = "{{DISPLAY_TITLE}}"; window.print(); document.title = originalTitle;
+        const originalTitle = document.title; document.title = onlyMistakes ? "{{DISPLAY_TITLE}}_Correction" : "{{DISPLAY_TITLE}}"; window.print(); document.title = originalTitle;
     }
 
     function renderQuestion(index) {
@@ -387,13 +399,51 @@ def clean_repair_all():
         dir_path = os.path.join('www', subject_dir)
         json_files = glob.glob(os.path.join(dir_path, 'questions_*.json'))
         if not json_files: continue
-        with open(json_files[0], 'r', encoding='utf-8') as f: quiz_data = json.load(f)
+        
+        json_file_path = json_files[0]
+        with open(json_file_path, 'r', encoding='utf-8') as f: 
+            quiz_data = json.load(f)
+        
+        json_str = json.dumps(quiz_data, ensure_ascii=False)
         display_title = title_map.get(subject_dir, subject_dir.replace('_', ' '))
-        res = html_template.replace('{{DISPLAY_TITLE}}', display_title).replace('{{QUIZ_DATA}}', json.dumps(quiz_data, ensure_ascii=False)).replace('{{CORR_KEY}}', f"{subject_dir.lower()}_correct_v1").replace('{{INCORR_KEY}}', f"{subject_dir.lower()}_incorrect_v1").replace('{{CORR_EDIT_KEY}}', f"{subject_dir.lower()}_corrected_v1").replace('{{INDEX_KEY}}', f"{subject_dir.lower()}_index_v1").replace('{{ANSWERS_KEY}}', f"{subject_dir.lower()}_answers_v1").replace('{{TOTAL}}', str(len(quiz_data))).replace('{{PDF_FILENAME}}', display_title)
-        with open(os.path.join(dir_path, subject_dir + ".html"), 'w', encoding='utf-8') as f: f.write(res)
-        alt_name = os.path.basename(json_files[0]).replace('questions_', '').replace('.json', '.html')
+        
+        # 1. Update Practice HTML Files
+        res = html_template.replace('{{DISPLAY_TITLE}}', display_title).replace('{{QUIZ_DATA}}', json_str).replace('{{CORR_KEY}}', f"{subject_dir.lower()}_correct_v1").replace('{{INCORR_KEY}}', f"{subject_dir.lower()}_incorrect_v1").replace('{{CORR_EDIT_KEY}}', f"{subject_dir.lower()}_corrected_v1").replace('{{INDEX_KEY}}', f"{subject_dir.lower()}_index_v1").replace('{{ANSWERS_KEY}}', f"{subject_dir.lower()}_answers_v1").replace('{{TOTAL}}', str(len(quiz_data))).replace('{{PDF_FILENAME}}', display_title)
+        
+        with open(os.path.join(dir_path, subject_dir + ".html"), 'w', encoding='utf-8') as f: 
+            f.write(res)
+            
+        alt_name = os.path.basename(json_file_path).replace('questions_', '').replace('.json', '.html')
         if alt_name != subject_dir + ".html":
-            with open(os.path.join(dir_path, alt_name), 'w', encoding='utf-8') as f: f.write(res)
+            with open(os.path.join(dir_path, alt_name), 'w', encoding='utf-8') as f: 
+                f.write(res)
+        
+        # 2. Update mock_exam.html (Logic from repair_mock_exam.py)
+        mock_path = os.path.join(dir_path, 'mock_exam.html')
+        if os.path.exists(mock_path):
+            with open(mock_path, 'r', encoding='utf-8', errors='ignore') as f:
+                mock_content = f.read()
+            
+            start_marker = 'const allQuestions ='
+            end_marker = 'let examQuestions = [];'
+            
+            if start_marker in mock_content and end_marker in mock_content:
+                parts = mock_content.split(start_marker)
+                rest = parts[1].split(end_marker, 1)
+                new_mock = parts[0] + start_marker + " " + json_str + ";\n    " + end_marker + rest[1]
+                with open(mock_path, 'w', encoding='utf-8') as f:
+                    f.write(new_mock)
+                print(f"  - Synced mock_exam.html")
+
+        # 3. Update questions_data.js and questions_practice.js if they exist
+        for js_file in ['questions_data.js', 'questions_practice.js']:
+            js_path = os.path.join(dir_path, js_file)
+            if os.path.exists(js_path):
+                var_name = 'const allQuestions =' if js_file == 'questions_data.js' else 'const quizData ='
+                with open(js_path, 'w', encoding='utf-8') as f:
+                    f.write(f"{var_name} {json_str};")
+                print(f"  - Synced {js_file}")
+
         print(f"Refreshed: {display_title}")
 
 if __name__ == "__main__":

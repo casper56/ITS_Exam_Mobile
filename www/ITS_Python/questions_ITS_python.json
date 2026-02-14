@@ -748,11 +748,10 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/32_1.png",
-		"image02": "images/32_2.png",
-		"image03": "images/32_3.png",
+        "image01": "images/32_1.png",
+        "image02": "images/32_2.png",
+        "image03": "images/32_3.png",
         "explanation": [
-		
             "● 在第 5 行的程式碼中，應該使用<br>print('{0: 10} {1: 5.1f} {2: 7.2f}'.format(fields[0], eval(fields[1]), eval(fields[2])))[[image01]][[image02]][[image03]]"
         ],
         "category": "D3_輸入輸出與檔案"
@@ -843,14 +842,12 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/36_1.png",
+        "image01": "images/36_1.png",
         "explanation": [
-           
             "● 選項 1 使用了 `float` 函式來將輸入的字串轉換為浮點數。",
-			"● 選項 2 使用了 `print` 函式來顯示提示訊息。",
+            "● 選項 2 使用了 `print` 函式來顯示提示訊息。",
             "● 選項 3 使用了舊式的格式化方法 `%`。",
-			"[[image01]]"
-            
+            "[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -900,7 +897,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/38_1.png",
+        "image01": "images/38_1.png",
         "explanation": [
             "● 在這個函式中，首先檢查檔案是否存在(if os.path.isfile(file):)，並以唯讀模式開啟檔案(with open(file, 'r') as file:)，並返回第一行的內容(return file.readline())。",
             "● 如果不存在(else:)在則返回 '檔案不存在'(return 'File dose not exist')。[[image01]]"
@@ -922,7 +919,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/39_1.png",
+        "image01": "images/39_1.png",
         "explanation": [
             "● 在這個情況下，使用 `open('file_data', 'a')` 可以以附加模式(append mode)開啟檔案，",
             "如果檔案不存在則會建立它，如果檔案已存在則會將新內容新增到檔案的末尾。[[image01]]"
@@ -944,7 +941,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/40_1.png",
+        "image01": "images/40_1.png",
         "explanation": [
             "● 在這個程式碼中，(程式碼1)和(程式碼2)的條件判斷都是用來檢查讀取的行是否為空行，如果不是空行則進行處理。",
             "● 因此，正確的選擇是 `(程式碼1).if line != '': (程式碼2).if line != '\\n':`。",
@@ -966,7 +963,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/41_1.png",
+        "image01": "images/41_1.png",
         "explanation": [
             "● 在選項 1 中，`os.path.isfile('myFile.txt')` 用來檢查檔案是否存在。",
             "● 在選項 2 中，`print(file.read())` 用來顯示檔案的內容。",
@@ -1013,10 +1010,10 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/43_1.png",
+        "image01": "images/43_1.png",
         "explanation": [
             "● 在這個程式碼中，使用了多個條件判斷來確定學生的成績等級，並根據不同的成績範圍給予相應的字母等級。",
-			"這道題目是關於 Python 的多重條件判斷（if-elif-else 結構）。根據題目提供的成績對照表，等級判斷的邏輯是由高分往下檢查。[[image01]]"
+            "這道題目是關於 Python 的多重條件判斷（if-elif-else 結構）。根據題目提供的成績對照表，等級判斷的邏輯是由高分往下檢查。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1038,13 +1035,13 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/44_1.png",
+        "image01": "images/44_1.png",
         "explanation": [
             "<b>【解析】</b><br>此題的關鍵在於條件判斷的順序。邏輯必須像漏斗一樣，由特殊到一般，或由小到大進行過濾。<br>",
-			"●  優先處理例外 (Slot 1 -> D)：<br>    必須先檢查 `if age is None`。<br><b>重要原因</b>：若先進行數字比較 (如 `age < 13`)，當 `age` 為 `None` 時，Python 會報錯 (TypeError)，因為 `None` 不能與整數比較。<br>",
-			"●  依序過濾年齡 (Slot 2 -> A)：elif age < 13`：先過濾掉 12 歲以下 (普通級)。<br>",
-			"●  中間範圍 (Slot 3 -> B)：elif age < 18`：程式跑到這行時，代表已經大於等於 13 歲了。所以這裡只要檢查是否小於 18，即可涵蓋 13~17 歲 (輔導級)。<br>",
-			"●  剩餘情況 (Slot 4 -> C)：else`：排除掉未知、<13、<18 的情況後，剩下的自然是 18 歲以上 (限制級)。<br>選項 C (`: rating='限制級'`) 補上了 `else` 後面的冒號與執行內容。[[image01]]<br>"
+            "●  優先處理例外 (Slot 1 -> D)：<br>    必須先檢查 `if age is None`。<br><b>重要原因</b>：若先進行數字比較 (如 `age < 13`)，當 `age` 為 `None` 時，Python 會報錯 (TypeError)，因為 `None` 不能與整數比較。<br>",
+            "●  依序過濾年齡 (Slot 2 -> A)：elif age < 13`：先過濾掉 12 歲以下 (普通級)。<br>",
+            "●  中間範圍 (Slot 3 -> B)：elif age < 18`：程式跑到這行時，代表已經大於等於 13 歲了。所以這裡只要檢查是否小於 18，即可涵蓋 13~17 歲 (輔導級)。<br>",
+            "●  剩餘情況 (Slot 4 -> C)：else`：排除掉未知、<13、<18 的情況後，剩下的自然是 18 歲以上 (限制級)。<br>選項 C (`: rating='限制級'`) 補上了 `else` 後面的冒號與執行內容。[[image01]]<br>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1110,7 +1107,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/47_1.png",
+        "image01": "images/47_1.png",
         "explanation": [
             "● 在這個程式碼中，首先檢查 `age` 是否大於等於 5 且 `school` 為真，如果是，則票價為 60 元。",
             "● 接著，如果 `age` 大於等於 5 且 `school` 為假，則進一步檢查 `age` 是否小於等於 17，如果是，則票價為 120 元；否則票價為 180[[image01]]"
@@ -1133,10 +1130,10 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/48_1.png",
+        "image01": "images/48_1.png",
         "explanation": [
             "● 這道題目考的是 Python 的巢狀 if-elif-else 邏輯，用來判斷數字的大小範圍",
-			"在這個程式碼中，使用了多個條件判斷來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，並根據不同的數字範圍給予相應的提示訊息。[[image01]]"
+            "在這個程式碼中，使用了多個條件判斷來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，並根據不同的數字範圍給予相應的提示訊息。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1156,7 +1153,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/49_1.png",
+        "image01": "images/49_1.png",
         "explanation": [
             "● 在這個程式碼中，使用了 while 迴圈來控制猜測的次數，最多允許三次猜測。",
             "● 如果猜測正確，則使用 break 來終止迴圈。",
@@ -1202,7 +1199,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/51_1.png",
+        "image01": "images/51_1.png",
         "explanation": [
             "● 首先檢查 `name` 是否為全大寫，如果是，則印出 'is all upper case.'。",
             "● 接著，如果 `name` 為全小寫，則印出 'is all lower case.'。",
@@ -1245,15 +1242,14 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/53_1.png",
+        "image01": "images/53_1.png",
         "explanation": [
-			"這道題目是關於 巢狀迴圈 (Nested Loop) 的應用，用來產生二維的數據（如九九乘法表）。",
-			"這題的關鍵在於 Python 的 range(start, end) 函式是「包含 start，不包含 end」的。題目要求範圍是 2 到 9，所以 range 的結束值必須設為 10。",
+            "這道題目是關於 巢狀迴圈 (Nested Loop) 的應用，用來產生二維的數據（如九九乘法表）。",
+            "這題的關鍵在於 Python 的 range(start, end) 函式是「包含 start，不包含 end」的。題目要求範圍是 2 到 9，所以 range 的結束值必須設為 10。",
             "● 使用了兩個 for 迴圈來遍歷從 2 到 9 的所有乘法組合。",
             "● 第一個迴圈遍歷列(col)，第二個迴圈遍歷行(row)。",
             "● range(2, 10) 為產生從 2 到 9 的整數序列（注意 Python 的 range 不包含結束值）",
-			" 如果要符合您的記憶（包含 2x1）如果要讓程式跑出「2 一得 2、2 二得 4...」，我們需要修改內層迴圈的起始值，把它從 2 改成 1。[[image01]]"
-			
+            " 如果要符合您的記憶（包含 2x1）如果要讓程式跑出「2 一得 2、2 二得 4...」，我們需要修改內層迴圈的起始值，把它從 2 改成 1。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1275,7 +1271,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/54_1.png",
+        "image01": "images/54_1.png",
         "explanation": [
             "● 使用了 while 迴圈來遍歷從 2 到 100 的所有整數。",
             "● 對於每個整數 `n`，使用 for 迴圈來檢查是否為質數，如果 `n` 可以被任何小於 `n` 的整數整除(餘數為0, 'if n % i == 0:')，則不是質數。",
@@ -1303,7 +1299,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/55_1.png",
+        "image01": "images/55_1.png",
         "explanation": [
             "● 首先定義了一個函式 `search(nums, num)`，該函式接受一個整數清單和一個整數作為引數。",
             "● 接著使用 for 迴圈遍歷清單中的每個整數，檢查是否有比引數整數大的數字。",
@@ -1330,7 +1326,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/56_1.png",
+        "image01": "images/56_1.png",
         "explanation": [
             "<b>【解析】</b><br>此程式採「預設為假」的驗證邏輯，並透過迴圈持續輸入。<br><br><b>1. 迴圈設計 (選項 1, 2)：</b><br>● 答案選擇 `while product_no != ''`，表示當使用者輸入<b>空字串</b>時結束程式。<br>● 為了第一次能進入迴圈，初始變數 `product_no` 必須給予任意非空值 (如 `'sentinel'`)。<br><br><b>2. 驗證旗標 (選項 3, 4)：</b><br>● 每一輪檢查開始前，先將 `valid` 重置為 `False` (預設格式錯誤)。<br>● 唯有通過所有 `if` 條件檢查 (長度正確且為數字)，才在最內層將 `valid` 設為 `True`。[[image01]]"
         ],
@@ -1352,9 +1348,9 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/57_1.png",
+        "image01": "images/57_1.png",
         "explanation": [
-			"這題主要考驗 while 迴圈的控制以及如何手動管理索引（Index）變數。",
+            "這題主要考驗 while 迴圈的控制以及如何手動管理索引（Index）變數。",
             "● 使用了 while 迴圈來遍歷數字清單，並在找到 4 時使用 break 跳出迴圈。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
@@ -1373,11 +1369,10 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/58_1.png",
+        "image01": "images/58_1.png",
         "explanation": [
-			"這道題目主要測試對 Python range() 函式「終止值不包含在內」特性的理解，以及巢狀迴圈的運作邏輯。",
+            "這道題目主要測試對 Python range() 函式「終止值不包含在內」特性的理解，以及巢狀迴圈的運作邏輯。",
             "<b>【解析】</b><br>此程式透過巢狀迴圈來繪製 'E' 字形，外層迴圈控制「列 (Row)」，內層迴圈控制「欄 (Column)」。<br><br><b>1. 外層迴圈 (控制高度/行數)：</b><br>● 題目要求列印 <b>5 行</b>。<br>● `range(start, stop)` 函式是包含 start 但<b>不包含 stop</b>。<br>● 若要產生 `1, 2, 3, 4, 5` 的序列，`stop` 必須設為 <b>6</b>。<br>● 故 (選項 1) 應填入 <b>6</b> (對應選項 D)。<br><br><b>2. 內層迴圈 (控制寬度/星星數)：</b><br>● 題目要求第 1, 3, 5 行需有 <b>4 個星星</b>。<br>● 若要讓內層迴圈執行 4 次 (產生 `1, 2, 3, 4`)，`stop` 必須設為 <b>5</b>。<br>● 故 (選項 2) 應填入 <b>5</b> (對應選項 C)。<br><br><b>【邏輯驗證】</b><br>當 `row` 為 1, 3, 5 時，內層迴圈跑 4 次都會印星 (共4星)。<br>當 `row` 為 2, 4 時，只符合 `elif column == 1`，故只印第 1 顆星。[[image01]]"
-			
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1403,9 +1398,9 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/59_1.png",
+        "image01": "images/59_1.png",
         "explanation": [
-			"這道題目測試的是 Python 的 巢狀條件判斷 (Nested If-Else) 以及正確的關鍵字拼寫。",
+            "這道題目測試的是 Python 的 巢狀條件判斷 (Nested If-Else) 以及正確的關鍵字拼寫。",
             "<b>【解析】</b><br>此程式碼採用<b>巢狀結構 (Nested Structure)</b>，分為「外層」與「內層」邏輯。<br><br><b>1. 外層：檢查數值有效性</b><br>● (選項1) `if`：檢查成績是否在 0~100 的合法範圍內。<br>● (選項6) `else:`：若不符合上述範圍 (如 -5 或 105)，則印出錯誤訊息。<br><br><b>2. 內層：判斷成績等級 (當數值合法時)</b><br>● (選項2) `if`：第一個判斷條件 (>= 90)。<br>● (選項3, 4) `elif`：<b>注意！</b>Python 的語法是 `elif`，而非 C/Java 的 `else if`。用於後續的條件判斷。<br>● (選項5) `else:`：若上述條件皆不成立 (即 < 70)，則判定為不及格。<br><br><b>【語法重點】</b><br>● 條件式開頭必為 `if`。<br>● 中間的條件分支使用 `elif`。<br>● 最後的「其他所有情況」使用 `else:` (結尾需有冒號)。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
@@ -1424,7 +1419,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/60_1.png",
+        "image01": "images/60_1.png",
         "explanation": [
             "<b>【解析】</b><br>1. <b>填空 1 (迴圈迭代)</b>：<br>Python 的 `for` 迴圈語法為 `for 變數 in 容器:`。雖然參數名稱是 `word_list`，但選項 B (`word in letter_list`) 是唯一符合 `for...in` 語法結構的選項 (可能是題目變數名稱誤植)。<br><br>2. <b>填空 2 (成員運算子)</b>：<br>要檢查字串中是否包含某個字元，需使用 `in` 關鍵字。<br>● 語法：`if 子字串 in 母字串:`<br>● 本題要檢查 `letter` 是否在 `word` 中，故選 `letter in word` (選項 D)。<br><br><b>【in 的雙重用途】</b><br>● 在 for 迴圈中：代表「從裡面依序取出」。<br>● 在 if 條件中：代表「檢查是否存在其中」。[[image01]]"
         ],
@@ -1444,7 +1439,7 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/61_1.png",
+        "image01": "images/61_1.png",
         "explanation": [
             "<b>【解析】</b><br>1. <b>迴圈範圍 (選項 1)</b>：<br>要遍歷列表 `scores`，我們需要產生對應的索引值 (0 到 3)。<br>● `len(scores)` 會回傳列表長度 (4)。<br>● `range(len(scores))` 等同於 `range(4)`，會產生索引 `0, 1, 2, 3`，剛好能取出所有分數。<br>● 注意：Python 沒有 `size()` 函式；且若用 `len()+1` 會導致 IndexOutOfRange 錯誤。<br><br>2. <b>平均值 (選項 2)</b>：<br>● 平均公式為「總和除以數量」。<br>● Python 的除法符號是 `/` (會保留小數)，例如 `330 / 4 = 82.5`。<br>● `//` 是整數除法 (捨去小數)，較不精確。[[image01]]"
         ],
@@ -1466,9 +1461,9 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/62_1.png",
+        "image01": "images/62_1.png",
         "explanation": [
-			"這道題目考的是 Python 的 while 迴圈（用於持續執行直到條件改變）以及 for 迴圈（用於遍歷字串內容）。",
+            "這道題目考的是 Python 的 while 迴圈（用於持續執行直到條件改變）以及 for 迴圈（用於遍歷字串內容）。",
             "● 使用了 while 迴圈來持續接收使用者輸入，並使用 for 迴圈來計算字詞的字元數。[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
@@ -1610,7 +1605,7 @@
         "id": 69,
         "type": "multioption",
         "question": "69. 【CH06-6】你設計了以下的函式來計算薪水：<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。<br>題一:getpay() 函式會發生錯誤。<br>題二:getpay(salary = 5000) 不會回傳任何值。<br>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000",
-		"options": [
+        "options": [
             "Yes|No",
             "Yes|No",
             "Yes|No"
@@ -1647,7 +1642,7 @@
         "image": null,
         "explanation": [
             "● 選項 1 正確答案都是 A or B，因為單行檔案字串可以用單引號或雙引號來表示。 但是題目三有提及__doc__ 故此題假設是討論 文件字串",
-		    "<b>若是文件字串（docstring）在Python中是用來記錄函式、類別或模組的說明文件。標準寫法是用：\"\"\"這裡是說明文字\"\"\" , 你也可以用三個單引號'''...'''，但最常見、PEP 257 推薦的做法是使用三個雙引號</b>",
+            "<b>若是文件字串（docstring）在Python中是用來記錄函式、類別或模組的說明文件。標準寫法是用：\"\"\"這裡是說明文字\"\"\" , 你也可以用三個單引號'''...'''，但最常見、PEP 257 推薦的做法是使用三個雙引號</b>",
             "● 選項 3 的正確答案是 C，因為可以使用 `cube.__doc__` 來列印函式的檔案字串。",
             "● ITS ： A A B 而 ChatGPT ： D B C"
         ],
@@ -1740,12 +1735,12 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "images/74_1.png",
+        "image01": "images/74_1.png",
         "explanation": [
             "● 在 Python 中，使用 `from datetime import datetime as dt` 可以將 `datetime` 模組中的 `datetime` 函式匯入並設定為替代名稱 `dt`。",
             "● 選擇 1 是錯誤的，因為它沒有指定要匯入的函式。",
             "● 選擇 3 和選擇 4 的語法都是錯誤的。",
-			"from 模組 import 類別 as 別名<br>datetime 模組有[[image01]]"
+            "from 模組 import 類別 as 別名<br>datetime 模組有[[image01]]"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -2067,7 +2062,7 @@
         "id": 88,
         "type": "multioption",
         "question": "88. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()</code></pre>out.txt 檔案不存在執行程式碼。針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。<br><br>題一:此程式碼將正常執行，不會發生錯誤。<br>題二:此程式碼將執行，但會產生邏輯錯誤。<br>題三:此程式碼將產生執行階段錯誤。<br>題四:此程式碼將產生語法錯誤。",
-		"options": [
+        "options": [
             "Yes|No",
             "Yes|No",
             "Yes|No",
@@ -3472,7 +3467,7 @@
             "3, 0.1, 6"
         ],
         "answer": [
-            2
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3512,7 +3507,7 @@
             "True, False, False"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3552,7 +3547,7 @@
             "finally"
         ],
         "answer": [
-            3
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3572,7 +3567,7 @@
             "A, B"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3592,7 +3587,7 @@
             "self.assert(result == 100)"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3612,7 +3607,7 @@
             "return ValueError('Age cannot be negative')"
         ],
         "answer": [
-            2
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3632,7 +3627,7 @@
             "在函式內部使用 `return \"說明文字\"`"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3652,7 +3647,7 @@
             "StudentName"
         ],
         "answer": [
-            3
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3672,7 +3667,7 @@
             "分號 `;`"
         ],
         "answer": [
-            2
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3692,7 +3687,7 @@
             "continue"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3712,7 +3707,7 @@
             "註解只能寫在程式碼的上方，不能寫在行尾"
         ],
         "answer": [
-            2
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3732,7 +3727,7 @@
             "1 2 3"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3752,7 +3747,7 @@
             "Python 的迴圈不支援 else 語法"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3792,7 +3787,7 @@
             "[] (空清單)"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3852,7 +3847,7 @@
             "它是一個 Python 保留字，沒有實際意義"
         ],
         "answer": [
-            2
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3872,7 +3867,7 @@
             "self.parent.__init__()"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3892,7 +3887,7 @@
             "使用 @private 裝飾器"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3912,7 +3907,7 @@
             "s = class Student()"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3932,7 +3927,7 @@
             "Object"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3972,7 +3967,7 @@
             "同時印出 'General Error' 和 'Value Error'"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3992,7 +3987,7 @@
             "試圖除以零 (ZeroDivisionError)"
         ],
         "answer": [
-            1
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4001,7 +3996,7 @@
         ],
         "category": "D2_流程控制與判斷"
     },
-	{
+    {
         "id": 180,
         "type": "single",
         "question": "180.在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？",
@@ -4016,10 +4011,10 @@
         ],
         "weight": 1,
         "image": null,
-		"image01": "image/180.png",
+        "image01": "images/180.png",
         "explanation": [
-            "[image01]"
-		],
-        "category": ""
+            "[[image01]]"
+        ],
+        "category": "D6_模組與常用工具"
     }
 ]

@@ -73,8 +73,11 @@
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0">題目列表</h5></div>
-                <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-0 px-2" style="font-size: 0.75rem;">📄 列印預覽</button>
+                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題目列表</h5></div>
+                <div class="d-flex gap-1">
+                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">列印預覽</button>
+                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">訂正預覽</button>
+                </div>
             </div>
             <div id="progress-stats">✅0 ❌0 🟠0 / 114</div>
         </div>
@@ -242,10 +245,19 @@
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
 
-    function prepareAndPrint() {
+    function prepareAndPrint(onlyMistakes = false) {
         const area = document.getElementById('review-area');
-        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">ITS Artificial Intelligence 完整解析講義</h1>`;
-        quizData.forEach((item, idx) => {
+        let title = "ITS Artificial Intelligence 完整解析講義";
+        let targetItems = quizData.map((item, idx) => ({ item, idx }));
+
+        if (onlyMistakes) {
+            targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+            if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+            title = "ITS Artificial Intelligence 訂正解析講義";
+        }
+
+        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+        targetItems.forEach(({ item, idx }) => {
             const div = document.createElement('div'); div.className = 'review-item';
             const opts = item.quiz || item.options || [];
             let optHtml = opts.map((o, i) => `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
@@ -262,7 +274,7 @@
             `;
             area.appendChild(div);
         });
-        const originalTitle = document.title; document.title = "ITS Artificial Intelligence"; window.print(); document.title = originalTitle;
+        const originalTitle = document.title; document.title = onlyMistakes ? "ITS Artificial Intelligence_Correction" : "ITS Artificial Intelligence"; window.print(); document.title = originalTitle;
     }
 
     function renderQuestion(index) {
