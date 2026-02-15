@@ -55,7 +55,7 @@
     </header>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)" title="上一題">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)" title="下一題">&#10095;</div>
-    <main class="container-fluid main-content" style="max-width: 1200px; width: calc(100% - 60px); margin-top: 80px; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto;"><div id="question-area"></div></main>
+    <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto;"><div id="question-area"></div></main>
 </div>
 <div id="result-screen" class="container-fluid" style="max-width: 100%; margin: 0; padding-left: 15px; padding-right: 15px;">
     <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
@@ -78,6 +78,8 @@
     const EXAM_LIMIT = 40, WRONG_KEY = 'az900_wrong_ids';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
 
+    
+    
     
     
     
