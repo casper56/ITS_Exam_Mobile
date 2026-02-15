@@ -14,7 +14,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「透明度 (Transparency)」準則要求 AI 系統應具備可解釋性，這包括公開說明用於訓練（定型）模型的資料來源、演演算法邏輯、系統限制，以及如何對預測結果負責。 "
+        "explanation": "「透明度 (Transparency)」準則要求 AI 系統應具備可解釋性，這包括公開說明用於訓練（定型）模型的資料來源、演演算法邏輯、系統限制，以及如何對預測結果負責。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 2,
@@ -31,7 +32,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「包容性 (Inclusivity)」旨在確保 AI 技術能服務所有人，不論其背景、身體能力或語言特徵。識別並消除阻礙特定群組使用的屏障，旨在實現技術的普及與平等。 "
+        "explanation": "「包容性 (Inclusivity)」旨在確保 AI 技術能服務所有人，不論其背景、身體能力或語言特徵。識別並消除阻礙特定群組使用的屏障，旨在實現技術的普及與平等。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 3,
@@ -48,7 +50,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 為「聊天機器人」，涉及文字對話理解，屬自然語言處理 (4)；B 為「影像人物識別」，屬電腦視覺 (2)；C 為「評論情緒分析」，屬自然語言處理 (4)。順序對應為 4-2-4。"
+        "explanation": "A 為「聊天機器人」，涉及文字對話理解，屬自然語言處理 (4)；B 為「影像人物識別」，屬電腦視覺 (2)；C 為「評論情緒分析」，屬自然語言處理 (4)。順序對應為 4-2-4。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 4,
@@ -65,7 +68,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「公平性 (Fairness)」強調 AI 系統應平等對待所有人。若訓練資料包含社會偏差（如性別或種族偏見），模型會學到並放大這些不公，這違反了公平性準則。 "
+        "explanation": "「公平性 (Fairness)」強調 AI 系統應平等對待所有人。若訓練資料包含社會偏差（如性別或種族偏見），模型會學到並放大這些不公，這違反了公平性準則。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 5,
@@ -82,7 +86,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在 AI-900 考題邏輯中，將偵測情緒突然惡化或偏離正常的行為模式，常被歸類為「異常偵測 (Anomaly Detection)」。"
+        "explanation": "在 AI-900 考題邏輯中，將偵測情緒突然惡化或偏離正常的行為模式，常被歸類為「異常偵測 (Anomaly Detection)」。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 6,
@@ -99,7 +104,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "識別物體的「形狀」或「類別」是電腦視覺 (Computer Vision) 的核心功能。 "
+        "explanation": "識別物體的「形狀」或「類別」是電腦視覺 (Computer Vision) 的核心功能。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 7,
@@ -116,7 +122,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "預測「會/不會」（二元結果）是一個典型的分類 (Classification) 問題。 "
+        "explanation": "預測「會/不會」（二元結果）是一個典型的分類 (Classification) 問題。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 8,
@@ -133,7 +140,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "確保系統在面臨異常或不完整資料時不提供不正確的預測，維護系統穩定性，屬於「可靠性與安全性 (Reliability and Safety)」。"
+        "explanation": "確保系統在面臨異常或不完整資料時不提供不正確的預測，維護系統穩定性，屬於「可靠性與安全性 (Reliability and Safety)」。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 9,
@@ -150,7 +158,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「透明度」要求系統決策過程可被理解。提供開發檔案說明程式碼與模型邏輯，符合此準則。 "
+        "explanation": "「透明度」要求系統決策過程可被理解。提供開發檔案說明程式碼與模型邏輯，符合此準則。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 10,
@@ -167,7 +176,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語音轉文字（Speech-to-Text）處理人類語言，屬於自然語言處理 (NLP)。 "
+        "explanation": "語音轉文字（Speech-to-Text）處理人類語言，屬於自然語言處理 (NLP)。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 11,
@@ -184,7 +194,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 記錄流程供核實屬「透明度 (6)」；B 客戶隱私屬「隱私權和安全性 (4)」；C 輔助技術支援屬「包容性 (3)」。順序為 6-4-3。 "
+        "explanation": "A 記錄流程供核實屬「透明度 (6)」；B 客戶隱私屬「隱私權和安全性 (4)」；C 輔助技術支援屬「包容性 (3)」。順序為 6-4-3。 ",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 12,
@@ -201,7 +212,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "從文字檔案中進行「關鍵字擷取」與「文字摘要」是自然語言處理 (NLP) 的核心功能。"
+        "explanation": "從文字檔案中進行「關鍵字擷取」與「文字摘要」是自然語言處理 (NLP) 的核心功能。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 13,
@@ -218,7 +230,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「易於理解」對應了「透明度」，即 AI 系統不應是完全無法解釋的「黑盒子」。"
+        "explanation": "「易於理解」對應了「透明度」，即 AI 系統不應是完全無法解釋的「黑盒子」。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 14,
@@ -235,7 +248,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "理解語音查詢、檢索內容並回答，這整套流程屬於自然語言處理 (NLP)。 "
+        "explanation": "理解語音查詢、檢索內容並回答，這整套流程屬於自然語言處理 (NLP)。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 15,
@@ -252,7 +266,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「一致的作業」與「生命週期安全」直接對應「可靠性與安全性」。"
+        "explanation": "「一致的作業」與「生命週期安全」直接對應「可靠性與安全性」。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 16,
@@ -269,7 +284,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "為了確保「公平性」並減少偏差，訓練資料必須準確代表目標群體（英國駕駛者）的特徵分佈。"
+        "explanation": "為了確保「公平性」並減少偏差，訓練資料必須準確代表目標群體（英國駕駛者）的特徵分佈。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 17,
@@ -286,7 +302,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「知識採礦 (Knowledge Mining)」專門處理如何從大量非結構化資料（如合約、檔案、圖片）中自動識別實體並建立關聯結構。"
+        "explanation": "「知識採礦 (Knowledge Mining)」專門處理如何從大量非結構化資料（如合約、檔案、圖片）中自動識別實體並建立關聯結構。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 18,
@@ -303,7 +320,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "實作內容篩選器以防範有害輸出，旨在保護使用者安全與隱私，屬於「隱私權與安全性」。"
+        "explanation": "實作內容篩選器以防範有害輸出，旨在保護使用者安全與隱私，屬於「隱私權與安全性」。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 19,
@@ -320,7 +338,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「透明度」與「包容性」皆為微軟責任 AI 的六大準則。"
+        "explanation": "「透明度」與「包容性」皆為微軟責任 AI 的六大準則。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 20,
@@ -337,7 +356,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「文字生成影像 (Text-to-Image)」是生成式 AI (Generative AI) 的典型案例（如 DALL-E）。"
+        "explanation": "「文字生成影像 (Text-to-Image)」是生成式 AI (Generative AI) 的典型案例（如 DALL-E）。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 21,
@@ -354,7 +374,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「可靠性與安全性」及「隱私權與安全性」是責任 AI 的支柱。"
+        "explanation": "「可靠性與安全性」及「隱私權與安全性」是責任 AI 的支柱。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 22,
@@ -371,7 +392,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 創作內容屬生成式 AI (2)；B 文書處理屬 NLP (4)；C 檔案影像文字提取 (OCR) 屬電腦視覺 (1)。順序為 2-4-1。"
+        "explanation": "A 創作內容屬生成式 AI (2)；B 文書處理屬 NLP (4)；C 檔案影像文字提取 (OCR) 屬電腦視覺 (1)。順序為 2-4-1。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 23,
@@ -388,7 +410,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "與聊天機器人的所有文字互動皆屬於自然語言處理 (NLP)。"
+        "explanation": "與聊天機器人的所有文字互動皆屬於自然語言處理 (NLP)。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 24,
@@ -405,7 +428,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 表單結構化資料提取屬檔案智慧服務 (1)；B 文字內容生成屬生成式 AI (3)；C 影像內容識別屬電腦視覺 (2)。順序為 1-3-2。"
+        "explanation": "A 表單結構化資料提取屬檔案智慧服務 (1)；B 文字內容生成屬生成式 AI (3)；C 影像內容識別屬電腦視覺 (2)。順序為 1-3-2。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 25,
@@ -422,7 +446,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料收集必須合法且獲得授權。未經許可使用私人資料屬於隱私權與安全性的違規。"
+        "explanation": "資料收集必須合法且獲得授權。未經許可使用私人資料屬於隱私權與安全性的違規。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 26,
@@ -439,7 +464,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 分組相似實體屬叢集 (3)；B 預測數值量屬迴歸 (2)；C 預測二元標籤（是/否）屬分類 (1)。順序為 3-2-1。 "
+        "explanation": "A 分組相似實體屬叢集 (3)；B 預測數值量屬迴歸 (2)；C 預測二元標籤（是/否）屬分類 (1)。順序為 3-2-1。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 27,
@@ -456,7 +482,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「售價」是連續的數值。預測連續型數值的機器學習任務稱為「迴歸 (Regression)」。 "
+        "explanation": "「售價」是連續的數值。預測連續型數值的機器學習任務稱為「迴歸 (Regression)」。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 28,
@@ -473,7 +500,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "銷售「數量」是連續型數值，對應迴歸任務。"
+        "explanation": "銷售「數量」是連續型數值，對應迴歸任務。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 29,
@@ -490,7 +518,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「族群規模」為數值，預測數值即選用迴歸。 "
+        "explanation": "「族群規模」為數值，預測數值即選用迴歸。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 30,
@@ -507,7 +536,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「數量」是數值，預測連續數值的工作屬於迴歸。"
+        "explanation": "「數量」是數值，預測連續數值的工作屬於迴歸。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 31,
@@ -524,7 +554,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在沒有既定標籤的情況下，將具有相似特徵的資料進行分組，這稱為「叢集 (Clustering)」。 "
+        "explanation": "在沒有既定標籤的情況下，將具有相似特徵的資料進行分組，這稱為「叢集 (Clustering)」。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 32,
@@ -541,7 +572,8 @@
         ],
         "weight": 1,
         "image": "images/q32.jpg",
-        "explanation": "輸入資料（質量、溫度）為「特徵 (Feature)」；預測目標（品質測試）為「標籤 (Label)」。選項 C 指溫度為標籤是錯誤的。順序 1-1-2。"
+        "explanation": "輸入資料（質量、溫度）為「特徵 (Feature)」；預測目標（品質測試）為「標籤 (Label)」。選項 C 指溫度為標籤是錯誤的。順序 1-1-2。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 33,
@@ -558,7 +590,8 @@
         ],
         "weight": 1,
         "image": "images/q33.jpg",
-        "explanation": "「家庭收入」是預測依據，屬特徵 (1)；「房價類別」是預測目標，屬標籤 (2)。"
+        "explanation": "「家庭收入」是預測依據，屬特徵 (1)；「房價類別」是預測目標，屬標籤 (2)。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 34,
@@ -575,7 +608,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "應將原始資料集的「資料列（Records）」隨機分割，一部分用於訓練模型，另一部分用於評估模型效能。"
+        "explanation": "應將原始資料集的「資料列（Records）」隨機分割，一部分用於訓練模型，另一部分用於評估模型效能。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 35,
@@ -592,7 +626,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "評估模型時必須使用模型未曾看過的「測試資料集」，才能真實反映模型效能。"
+        "explanation": "評估模型時必須使用模型未曾看過的「測試資料集」，才能真實反映模型效能。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 36,
@@ -609,7 +644,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「標籤 (Label)」是想要預測的目標結果。預測「費用」，則歷史資料中的「車費」即為標籤。 "
+        "explanation": "「標籤 (Label)」是想要預測的目標結果。預測「費用」，則歷史資料中的「車費」即為標籤。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 37,
@@ -626,7 +662,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "識別客層即將具有相似行為特徵（RFM）的客戶分組，屬「叢集」。"
+        "explanation": "識別客層即將具有相似行為特徵（RFM）的客戶分組，屬「叢集」。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 38,
@@ -643,7 +680,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "正確流程為：1 內嵌 -> 5 分割 -> 2 定型 -> 3 評估。"
+        "explanation": "正確流程為：1 內嵌 -> 5 分割 -> 2 定型 -> 3 評估。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 39,
@@ -660,7 +698,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在設計工具中，您可以點選模組的輸出點並選擇「Visualize (視覺化)」，以直觀檢視資料行中的數值分佈與統計特性。"
+        "explanation": "在設計工具中，您可以點選模組的輸出點並選擇「Visualize (視覺化)」，以直觀檢視資料行中的數值分佈與統計特性。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 40,
@@ -677,7 +716,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「分割資料 (Split Data)」模組專門用於將一個大資料集拆分為訓練集與測試/驗證集。"
+        "explanation": "「分割資料 (Split Data)」模組專門用於將一個大資料集拆分為訓練集與測試/驗證集。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 41,
@@ -694,7 +734,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「混淆矩陣 (Confusion Matrix)」是一個矩陣，顯示模型預測類別與實際類別的對照"
+        "explanation": "「混淆矩陣 (Confusion Matrix)」是一個矩陣，顯示模型預測類別與實際類別的對照",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 42,
@@ -711,7 +752,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "迴歸的目標是預測具體、連續的數值。"
+        "explanation": "迴歸的目標是預測具體、連續的數值。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 43,
@@ -728,7 +770,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在模型定型（訓練）過程中，會保留一部分資料不參與訓練，專門用來平衡並驗證定型結果。 "
+        "explanation": "在模型定型（訓練）過程中，會保留一部分資料不參與訓練，專門用來平衡並驗證定型結果。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 44,
@@ -745,7 +788,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "設計工具是低程式碼工具，透過拖放模組到畫布並連線來建立運算管線。"
+        "explanation": "設計工具是低程式碼工具，透過拖放模組到畫布並連線來建立運算管線。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 45,
@@ -762,7 +806,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「作業 (Job)」是 Azure ML 執行任務的基本單位。"
+        "explanation": "「作業 (Job)」是 Azure ML 執行任務的基本單位。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 46,
@@ -779,7 +824,8 @@
         ],
         "weight": 1,
         "image": "images/q46.jpg",
-        "explanation": "預測目標 ColumnE 是數值，因此此任務屬於迴歸。 "
+        "explanation": "預測目標 ColumnE 是數值，因此此任務屬於迴歸。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 47,
@@ -796,7 +842,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在啟動自動化 ML 之前，必須先將資料註冊為「資料集 (Data Asset)」。"
+        "explanation": "在啟動自動化 ML 之前，必須先將資料註冊為「資料集 (Data Asset)」。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 48,
@@ -813,7 +860,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "調整判斷閾值 (Threshold) 可以改變模型的決策標準。若要減少誤報（誤判為真），需提高判定為「真」的標準。"
+        "explanation": "調整判斷閾值 (Threshold) 可以改變模型的決策標準。若要減少誤報（誤判為真），需提高判定為「真」的標準。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 49,
@@ -830,7 +878,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「模型解釋性」能讓使用者瞭解模型特徵如何影響預測，符合透明度準則。"
+        "explanation": "「模型解釋性」能讓使用者瞭解模型特徵如何影響預測，符合透明度準則。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 50,
@@ -847,7 +896,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "將訓練好的模型進行「註冊 (Register Model)」後，系統會自動賦予版本號進行管理。"
+        "explanation": "將訓練好的模型進行「註冊 (Register Model)」後，系統會自動賦予版本號進行管理。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 51,
@@ -864,7 +914,8 @@
         ],
         "weight": 1,
         "image": "images/q51.jpg",
-        "explanation": "A 選擇特徵資料行 (4) -> B 分割資料 (5) -> C 定型模型（價格屬迴歸，故選線性迴歸 3）。"
+        "explanation": "A 選擇特徵資料行 (4) -> B 分割資料 (5) -> C 定型模型（價格屬迴歸，故選線性迴歸 3）。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 52,
@@ -881,7 +932,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "題目已給出「客戶型別標籤」且目的是預測類別，這屬於監督式學習中的分類。"
+        "explanation": "題目已給出「客戶型別標籤」且目的是預測類別，這屬於監督式學習中的分類。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 53,
@@ -898,7 +950,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AKS 是建議用於生產級部署、可高度縮放的推斷計算目標。"
+        "explanation": "AKS 是建議用於生產級部署、可高度縮放的推斷計算目標。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 54,
@@ -915,7 +968,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "能量值（千焦耳）是連續數值，預測數值的工作皆屬迴歸。"
+        "explanation": "能量值（千焦耳）是連續數值，預測數值的工作皆屬迴歸。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 55,
@@ -932,7 +986,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "無論進行何種機器學習任務，第一個物理步驟永遠是獲取並載入資料集。 "
+        "explanation": "無論進行何種機器學習任務，第一個物理步驟永遠是獲取並載入資料集。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 56,
@@ -949,7 +1004,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「分割資料 (Split Data)」模組的功能是將一份資料按比例隨機拆分為訓練組與驗證/評分組。"
+        "explanation": "「分割資料 (Split Data)」模組的功能是將一份資料按比例隨機拆分為訓練組與驗證/評分組。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 57,
@@ -966,7 +1022,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在機器學習術語中，輸入變數 (X) 被稱為特徵 (Features)，預測目標 (Y) 則稱為標籤 (Label)。"
+        "explanation": "在機器學習術語中，輸入變數 (X) 被稱為特徵 (Features)，預測目標 (Y) 則稱為標籤 (Label)。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 58,
@@ -983,7 +1040,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "隨機抽取的子集（模型在訓練時未見過的）被用來評估模型表現，這稱為驗證 (Validation)。"
+        "explanation": "隨機抽取的子集（模型在訓練時未見過的）被用來評估模型表現，這稱為驗證 (Validation)。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 59,
@@ -1000,7 +1058,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "要進行準確度驗證，Jasper 必須先分割出一份獨立於訓練集之外的測試集。"
+        "explanation": "要進行準確度驗證，Jasper 必須先分割出一份獨立於訓練集之外的測試集。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 60,
@@ -1017,7 +1076,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "雖然銷售額是數值，但針對具時間連續性的銷量預測，「預測時間序列 (Forecasting)」是更精確的 AutoML 選項。"
+        "explanation": "雖然銷售額是數值，但針對具時間連續性的銷量預測，「預測時間序列 (Forecasting)」是更精確的 AutoML 選項。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 61,
@@ -1034,7 +1094,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 為迴歸 (2)；B 為分類 (1)；C 為叢集 (3)。組合順序 2-1-3。 "
+        "explanation": "A 為迴歸 (2)；B 為分類 (1)；C 為叢集 (3)。組合順序 2-1-3。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 62,
@@ -1051,7 +1112,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在不重練模型的情況下，改變預測結果分佈最快的方法是調整「分類閾值 (Threshold)」。降低門檻可以減少遺漏的負面案例（但會增加誤判為真的情況）。"
+        "explanation": "在不重練模型的情況下，改變預測結果分佈最快的方法是調整「分類閾值 (Threshold)」。降低門檻可以減少遺漏的負面案例（但會增加誤判為真的情況）。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 63,
@@ -1068,7 +1130,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "必須先跑完推論並獲得預測結果，對比實際值後才能計算並檢閱評估計量。 "
+        "explanation": "必須先跑完推論並獲得預測結果，對比實際值後才能計算並檢閱評估計量。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 64,
@@ -1085,7 +1148,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「加班時數」是連續的數值。預測此標籤的工作屬於迴歸。"
+        "explanation": "「加班時數」是連續的數值。預測此標籤的工作屬於迴歸。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 65,
@@ -1102,7 +1166,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「描述影像 (Describe Image)」功能會利用自然語言生成一段簡短的標題句來解釋影像中的場景。"
+        "explanation": "「描述影像 (Describe Image)」功能會利用自然語言生成一段簡短的標題句來解釋影像中的場景。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 66,
@@ -1119,7 +1184,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "臉部偵測可以識別臉部特徵並提取「配件 (Accessories)」屬性（如是否佩戴眼鏡）。"
+        "explanation": "臉部偵測可以識別臉部特徵並提取「配件 (Accessories)」屬性（如是否佩戴眼鏡）。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 67,
@@ -1136,7 +1202,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "辨識並提取影像中的「文字」字元，正是 OCR 的核心功能。"
+        "explanation": "辨識並提取影像中的「文字」字元，正是 OCR 的核心功能。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 68,
@@ -1153,7 +1220,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「物件偵測 (Object Detection)」負責找到物體並標出邊界框座標（位置）。"
+        "explanation": "「物件偵測 (Object Detection)」負責找到物體並標出邊界框座標（位置）。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 69,
@@ -1170,7 +1238,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "識別特定「人物」的身分是屬於臉部辨識 (Face Recognition) 的範疇。"
+        "explanation": "識別特定「人物」的身分是屬於臉部辨識 (Face Recognition) 的範疇。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 70,
@@ -1187,7 +1256,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 為影像分類/描述 (1)；B 為 OCR (3)；C 為物件偵測 (2)。順序為 1-3-2。"
+        "explanation": "A 為影像分類/描述 (1)；B 為 OCR (3)；C 為物件偵測 (2)。順序為 1-3-2。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 71,
@@ -1204,7 +1274,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「號碼」是文字資料，識別影像中的文字資料需使用 OCR。"
+        "explanation": "「號碼」是文字資料，識別影像中的文字資料需使用 OCR。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 72,
@@ -1221,7 +1292,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Azure 的 OCR 服務在辨識印刷體與手寫文字方面皆具備高準確度。"
+        "explanation": "Azure 的 OCR 服務在辨識印刷體與手寫文字方面皆具備高準確度。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 73,
@@ -1238,7 +1310,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "辨識影片內容物並計算數量是電腦視覺的工作負載。"
+        "explanation": "辨識影片內容物並計算數量是電腦視覺的工作負載。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 74,
@@ -1255,7 +1328,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "物件偵測能提供物體的座標座標，這是在估計物體間距時必要的基礎資訊。"
+        "explanation": "物件偵測能提供物體的座標座標，這是在估計物體間距時必要的基礎資訊。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 75,
@@ -1272,7 +1346,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Azure AI 視覺 (Vision) 內建有預先定型好的「名人偵測」功能。"
+        "explanation": "Azure AI 視覺 (Vision) 內建有預先定型好的「名人偵測」功能。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 76,
@@ -1289,7 +1364,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "辨識特定人物身分本質上屬於臉部辨識 (Face Recognition)。 "
+        "explanation": "辨識特定人物身分本質上屬於臉部辨識 (Face Recognition)。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 77,
@@ -1306,7 +1382,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「特有的小工具」需要透過「自訂視覺 (Custom Vision)」來訓練專屬模型，而「找位置」則是物件偵測的任務。"
+        "explanation": "「特有的小工具」需要透過「自訂視覺 (Custom Vision)」來訓練專屬模型，而「找位置」則是物件偵測的任務。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 78,
@@ -1323,7 +1400,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自訂視覺 (Custom Vision) 即是讓使用者上傳自有影像並定製專屬模型的服務。"
+        "explanation": "自訂視覺 (Custom Vision) 即是讓使用者上傳自有影像並定製專屬模型的服務。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 79,
@@ -1340,7 +1418,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "對臉部影像的品質屬性（曝光、模糊度等）進行評估屬於分析階段。 "
+        "explanation": "對臉部影像的品質屬性（曝光、模糊度等）進行評估屬於分析階段。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 80,
@@ -1357,7 +1436,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "涉及「特定物體」且需使用「自有影像」進行模型定型，必選自訂視覺。"
+        "explanation": "涉及「特定物體」且需使用「自有影像」進行模型定型，必選自訂視覺。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 81,
@@ -1374,7 +1454,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "檔案智慧服務 (Document Intelligence) 內建有專門針對「身分證件 (ID)」的預建模型。"
+        "explanation": "檔案智慧服務 (Document Intelligence) 內建有專門針對「身分證件 (ID)」的預建模型。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 82,
@@ -1391,7 +1472,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "檔案智慧服務可以分析檔案結構並結合 NLP 技術來標記包含信用卡號或個資的敏感檔案。"
+        "explanation": "檔案智慧服務可以分析檔案結構並結合 NLP 技術來標記包含信用卡號或個資的敏感檔案。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 83,
@@ -1408,7 +1490,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "臉部辨識（影像分析）是電腦視覺的核心應用之一。"
+        "explanation": "臉部辨識（影像分析）是電腦視覺的核心應用之一。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 84,
@@ -1425,7 +1508,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "產生影像的自動描述（Captioning）是視覺服務內建的核心分析能力。"
+        "explanation": "產生影像的自動描述（Captioning）是視覺服務內建的核心分析能力。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 85,
@@ -1442,7 +1526,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "解題分析：處理特定且非通用的「自有品牌」影像標記，首選自訂視覺。"
+        "explanation": "解題分析：處理特定且非通用的「自有品牌」影像標記，首選自訂視覺。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 86,
@@ -1459,7 +1544,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "召回率 (Recall) 衡量「在所有實際正確的樣本中，被模型正確找出的比例」。 "
+        "explanation": "召回率 (Recall) 衡量「在所有實際正確的樣本中，被模型正確找出的比例」。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 87,
@@ -1476,7 +1562,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "(有爭議) 依據該考試版本題庫的標準答案為 350 MB。 "
+        "explanation": "(有爭議) 依據該考試版本題庫的標準答案為 350 MB。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 88,
@@ -1493,7 +1580,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "視覺服務的「讀取 (Read)」功能具備強大的 OCR 能力，可擷取手寫及印刷內容。"
+        "explanation": "視覺服務的「讀取 (Read)」功能具備強大的 OCR 能力，可擷取手寫及印刷內容。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 89,
@@ -1510,7 +1598,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Azure AI 電腦視覺內建有「品牌偵測 (Brand Detection)」功能。 "
+        "explanation": "Azure AI 電腦視覺內建有「品牌偵測 (Brand Detection)」功能。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 90,
@@ -1527,7 +1616,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "辨識車牌上的文字與號碼屬於文字識別 (OCR) 的工作。"
+        "explanation": "辨識車牌上的文字與號碼屬於文字識別 (OCR) 的工作。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 91,
@@ -1544,7 +1634,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Azure AI 檔案智慧服務是「Azure AI 服務 (原認知服務)」家族的一員。"
+        "explanation": "Azure AI 檔案智慧服務是「Azure AI 服務 (原認知服務)」家族的一員。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 92,
@@ -1561,7 +1652,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "預建模型僅支援標準格式，自訂模型可以處理企業特有的不規則表格佈局。"
+        "explanation": "預建模型僅支援標準格式，自訂模型可以處理企業特有的不規則表格佈局。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 93,
@@ -1578,7 +1670,8 @@
         ],
         "weight": 1,
         "image": "images/q93.jpg",
-        "explanation": "框線」標註物體位置是物件偵測的核心特徵。 "
+        "explanation": "框線」標註物體位置是物件偵測的核心特徵。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 94,
@@ -1595,7 +1688,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "特定產品需自訂視覺，而座標點位屬於物件偵測的工作。"
+        "explanation": "特定產品需自訂視覺，而座標點位屬於物件偵測的工作。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 95,
@@ -1612,7 +1706,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "檔案智慧服務提供針對法律合約 (Contracts) 的專屬預建模型。 "
+        "explanation": "檔案智慧服務提供針對法律合約 (Contracts) 的專屬預建模型。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 96,
@@ -1629,7 +1724,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透過臉部表情判讀情緒（困擾、快樂等）屬於「臉部分析」中的情緒屬性分析。"
+        "explanation": "透過臉部表情判讀情緒（困擾、快樂等）屬於「臉部分析」中的情緒屬性分析。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 97,
@@ -1646,7 +1742,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "擷取重點片語後，可以透過比對片語的相似性來判斷檔案的主題一致性。 "
+        "explanation": "擷取重點片語後，可以透過比對片語的相似性來判斷檔案的主題一致性。 ",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 98,
@@ -1663,7 +1760,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「意圖 (Intent)」辨識是語言服務中 CLU (交談語言理解) 的核心功能。"
+        "explanation": "「意圖 (Intent)」辨識是語言服務中 CLU (交談語言理解) 的核心功能。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 99,
@@ -1680,7 +1778,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "文字內容分類是 NLP 的標準應用情境。"
+        "explanation": "文字內容分類是 NLP 的標準應用情境。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 100,
@@ -1697,7 +1796,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "這類具備互動性質且能跨管道應對的方案統稱為聊天機器人 (Chatbot)。 "
+        "explanation": "這類具備互動性質且能跨管道應對的方案統稱為聊天機器人 (Chatbot)。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 101,
@@ -1714,7 +1814,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "問題解答服務主要功能為資料檢索與對話回應，不具備邏輯執行（登記或開號）能力。"
+        "explanation": "問題解答服務主要功能為資料檢索與對話回應，不具備邏輯執行（登記或開號）能力。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 102,
@@ -1731,7 +1832,8 @@
         ],
         "weight": 1,
         "image": "images/q102.jpg",
-        "explanation": "識別並分類文字中的實體專案（日期、地點、人名、數值）即為實體辨識 (NER)。"
+        "explanation": "識別並分類文字中的實體專案（日期、地點、人名、數值）即為實體辨識 (NER)。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 103,
@@ -1748,7 +1850,8 @@
         ],
         "weight": 1,
         "image": "images/q103.jpg",
-        "explanation": "供使用者對話輸入介面並回覆的互動系統即為聊天機器人。 "
+        "explanation": "供使用者對話輸入介面並回覆的互動系統即為聊天機器人。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 104,
@@ -1765,7 +1868,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 與 C 涉及音訊轉換，屬語音服務 (1)；B 涉及語義理解，屬語言服務 (2)。"
+        "explanation": "A 與 C 涉及音訊轉換，屬語音服務 (1)；B 涉及語義理解，屬語言服務 (2)。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 105,
@@ -1782,7 +1886,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "當地語言展示」涉及文字翻譯服務 "
+        "explanation": "當地語言展示」涉及文字翻譯服務 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 106,
@@ -1799,7 +1904,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 滿意度屬情感分析 (4)；B 重要資訊屬關鍵片語 (2)；C 關鍵日期屬實體辨識 (1)。順序 4-2-1。 "
+        "explanation": "A 滿意度屬情感分析 (4)；B 重要資訊屬關鍵片語 (2)；C 關鍵日期屬實體辨識 (1)。順序 4-2-1。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 107,
@@ -1816,7 +1922,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Power Virtual Agents（現 Copilot Studio）是微軟主打的無程式碼對話 AI 平臺。"
+        "explanation": "Power Virtual Agents（現 Copilot Studio）是微軟主打的無程式碼對話 AI 平臺。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 108,
@@ -1833,7 +1940,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "電話號碼具備固定模式，最適合使用 Regex（規則運算式）進行精準提取。"
+        "explanation": "電話號碼具備固定模式，最適合使用 Regex（規則運算式）進行精準提取。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 109,
@@ -1850,7 +1958,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「問題解答 (Question Answering)」是語言服務的子集。"
+        "explanation": "「問題解答 (Question Answering)」是語言服務的子集。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 110,
@@ -1867,7 +1976,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "閒聊 (Chit-chat)」功能提供各種預設人設，讓機器人更擬人化。"
+        "explanation": "閒聊 (Chit-chat)」功能提供各種預設人設，讓機器人更擬人化。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 111,
@@ -1884,7 +1994,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "使用者實際說出的句子，在語言服務中稱為「表達 (Utterance)」。 "
+        "explanation": "使用者實際說出的句子，在語言服務中稱為「表達 (Utterance)」。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 112,
@@ -1901,7 +2012,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "問題解答服務支援解析 PDF、Word、Excel 及 HTML 格式的檔案。 "
+        "explanation": "問題解答服務支援解析 PDF、Word、Excel 及 HTML 格式的檔案。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 113,
@@ -1918,7 +2030,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在交談語言理解中，將垃圾語句或無關請求放入「None (無)」意圖，可以幫助模型正確地拒絕超出範圍的指令。"
+        "explanation": "在交談語言理解中，將垃圾語句或無關請求放入「None (無)」意圖，可以幫助模型正確地拒絕超出範圍的指令。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 114,
@@ -1935,7 +2048,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「主動式學習 (Active Learning)」會建議新的問答對或最佳化現有對應，實現持續最佳化。"
+        "explanation": "「主動式學習 (Active Learning)」會建議新的問答對或最佳化現有對應，實現持續最佳化。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 115,
@@ -1952,7 +2066,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "擷取文字中的重點主題應使用關鍵片語擷取功能。"
+        "explanation": "擷取文字中的重點主題應使用關鍵片語擷取功能。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 116,
@@ -1969,7 +2084,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "文字轉語音 (Text-to-Speech) 即是語音合成工作負載。"
+        "explanation": "文字轉語音 (Text-to-Speech) 即是語音合成工作負載。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 117,
@@ -1986,7 +2102,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "大語言模型內容生成。 "
+        "explanation": "大語言模型內容生成。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 118,
@@ -2003,7 +2120,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "DALL-E 專門負責「文字生圖」的任務。 "
+        "explanation": "DALL-E 專門負責「文字生圖」的任務。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 119,
@@ -2020,7 +2138,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Codex 是專門為程式碼理解與生成定型的模型，支撐了 GitHub Copilot。"
+        "explanation": "Codex 是專門為程式碼理解與生成定型的模型，支撐了 GitHub Copilot。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 120,
@@ -2037,7 +2156,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "存在懲罰 (Presence Penalty)」能降低模型重複使用相同 Token 的機率，進而增加多樣性。 "
+        "explanation": "存在懲罰 (Presence Penalty)」能降低模型重複使用相同 Token 的機率，進而增加多樣性。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 121,
@@ -2054,7 +2174,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像生成專屬模型。"
+        "explanation": "影像生成專屬模型。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 122,
@@ -2071,7 +2192,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GPT-4 具備極強的邏輯推理能力，是撰寫程式碼的最佳模型。"
+        "explanation": "GPT-4 具備極強的邏輯推理能力，是撰寫程式碼的最佳模型。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 123,
@@ -2088,7 +2210,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Azure OpenAI 的管理與測試入口。 "
+        "explanation": "Azure OpenAI 的管理與測試入口。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 124,
@@ -2105,7 +2228,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Fine-tuning（微調）是指在基礎模型上使用特有資料進一步定型。"
+        "explanation": "Fine-tuning（微調）是指在基礎模型上使用特有資料進一步定型。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 125,
@@ -2122,7 +2246,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透過 RAG（檢索增強生成）提供「基礎知識資料 (Grounding)」，可以彌補模型訓練時點之後的資訊缺失。"
+        "explanation": "透過 RAG（檢索增強生成）提供「基礎知識資料 (Grounding)」，可以彌補模型訓練時點之後的資訊缺失。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 126,
@@ -2139,7 +2264,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "提供情境資訊供模型參考，這就是 Grounding 概念。"
+        "explanation": "提供情境資訊供模型參考，這就是 Grounding 概念。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 127,
@@ -2156,7 +2282,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "溫度 (Temperature) 數值越高，輸出的隨機性與多樣化程度越高。 "
+        "explanation": "溫度 (Temperature) 數值越高，輸出的隨機性與多樣化程度越高。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 128,
@@ -2173,7 +2300,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透過良好的系統指令設定與資料引導來控制模型回答。"
+        "explanation": "透過良好的系統指令設定與資料引導來控制模型回答。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 129,
@@ -2190,7 +2318,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "過濾機制。"
+        "explanation": "過濾機制。",
+        "category": "D5_生成式 AI 基本原理"
     },
     {
         "id": 130,
@@ -2207,7 +2336,8 @@
         ],
         "weight": 1,
         "image": "images/q130.jpg",
-        "explanation": "引數中包含尺寸 (size) 與風格 (style)，明顯為影像生成需求。"
+        "explanation": "引數中包含尺寸 (size) 與風格 (style)，明顯為影像生成需求。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 131,
@@ -2224,7 +2354,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "文字總結與摘要屬文字大模型優勢。"
+        "explanation": "文字總結與摘要屬文字大模型優勢。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 132,
@@ -2241,7 +2372,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "「內嵌 (Embeddings)」是將語言數位化後具備語義座標的向量表示。"
+        "explanation": "「內嵌 (Embeddings)」是將語言數位化後具備語義座標的向量表示。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 133,
@@ -2258,7 +2390,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "安全過濾器設定。"
+        "explanation": "安全過濾器設定。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 134,
@@ -2275,7 +2408,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "A 判斷類別屬分類 (1)；B 重點提煉屬摘要 (2)；C 內容創作屬產生 (3)。順序為 1-2-3。 "
+        "explanation": "A 判斷類別屬分類 (1)；B 重點提煉屬摘要 (2)；C 內容創作屬產生 (3)。順序為 1-2-3。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 135,
@@ -2296,7 +2430,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "六大準則為：公平性、包容性、可靠性與安全性、隱私權與安全性、透明度、權責。"
+        "explanation": "六大準則為：公平性、包容性、可靠性與安全性、隱私權與安全性、透明度、權責。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 136,
@@ -2316,7 +2451,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "(2) 與 (4) 皆涉及機器對人類口語或書面語言的理解與應對。 "
+        "explanation": "(2) 與 (4) 皆涉及機器對人類口語或書面語言的理解與應對。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 137,
@@ -2336,7 +2472,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "治理（委員會）與技術驗證（評估程式）是實踐責任 AI 的關鍵行政與技術環節。"
+        "explanation": "治理（委員會）與技術驗證（評估程式）是實踐責任 AI 的關鍵行政與技術環節。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 138,
@@ -2356,7 +2493,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "外部應用程式呼叫 API 必須持有正確的伺服器網址 (Endpoint) 與許可權金鑰 (Key)。"
+        "explanation": "外部應用程式呼叫 API 必須持有正確的伺服器網址 (Endpoint) 與許可權金鑰 (Key)。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 139,
@@ -2376,7 +2514,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "OCR (2) 與 臉部偵測 (4) 均為電腦視覺的標準特徵功能。"
+        "explanation": "OCR (2) 與 臉部偵測 (4) 均為電腦視覺的標準特徵功能。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 140,
@@ -2396,7 +2535,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像屬性分析（色彩）與圖形辨識（商標）均屬視覺服務領域。"
+        "explanation": "影像屬性分析（色彩）與圖形辨識（商標）均屬視覺服務領域。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 141,
@@ -2416,7 +2556,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "針對發票與收據的欄位化提取是該服務的強項。"
+        "explanation": "針對發票與收據的欄位化提取是該服務的強項。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 142,
@@ -2436,7 +2577,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "(1) 與 (2) 均是將文字訊號轉為音訊播放，屬於語音合成。 "
+        "explanation": "(1) 與 (2) 均是將文字訊號轉為音訊播放，屬於語音合成。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 143,
@@ -2457,7 +2599,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "知識庫可以經由檔案匯入、URL 爬取或手動建檔來填充。"
+        "explanation": "知識庫可以經由檔案匯入、URL 爬取或手動建檔來填充。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 144,
@@ -2478,7 +2621,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Transformer 架構的核心機制：將詞彙轉為 Token、計算彼此關聯強度（注意力），最後預測機率最高的下一個詞彙。"
+        "explanation": "Transformer 架構的核心機制：將詞彙轉為 Token、計算彼此關聯強度（注意力），最後預測機率最高的下一個詞彙。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 145,
@@ -2498,7 +2642,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "以 GPT 與 DALL-E 為代表 "
+        "explanation": "以 GPT 與 DALL-E 為代表 ",
+        "category": "D5_生成式 AI 基本原理"
     },
     {
         "id": 146,
@@ -2518,7 +2663,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "DALL-E 主攻生成與影像編輯。 "
+        "explanation": "DALL-E 主攻生成與影像編輯。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 147,
@@ -2538,7 +2684,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "主要的開發介面方式。"
+        "explanation": "主要的開發介面方式。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 148,
@@ -2558,7 +2705,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "大模型存在幻覺風險 (3)，需透過 RAG 方式限制範圍 (2)。 "
+        "explanation": "大模型存在幻覺風險 (3)，需透過 RAG 方式限制範圍 (2)。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 149,
@@ -2578,7 +2726,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GPT-4 與 GitHub Copilot 是處理程式碼邏輯的專用資源。"
+        "explanation": "GPT-4 與 GitHub Copilot 是處理程式碼邏輯的專用資源。",
+        "category": "D5_生成式 AI 基本原理"
     },
     {
         "id": 150,
@@ -2598,7 +2747,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像生成與文字生成各代表一個型別。"
+        "explanation": "影像生成與文字生成各代表一個型別。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 151,
@@ -2618,7 +2768,8 @@
         ],
         "weight": 1,
         "image": "images/q151.jpg",
-        "explanation": "名字與姓氏與收入無邏輯相關；收入範圍是目標「標籤」；因此，教育程度與年齡是有效的「特徵」。"
+        "explanation": "名字與姓氏與收入無邏輯相關；收入範圍是目標「標籤」；因此，教育程度與年齡是有效的「特徵」。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 152,
@@ -2633,7 +2784,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "內容審核（Content Moderation）是自然語言處理（NLP）的一項重要功能，用於辨識並過濾文字中的不當內容或不雅言論。"
+        "explanation": "內容審核（Content Moderation）是自然語言處理（NLP）的一項重要功能，用於辨識並過濾文字中的不當內容或不雅言論。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 153,
@@ -2648,7 +2800,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "辨識影像或圖片中的視覺元素（如品牌標誌、物體或場景）屬於「電腦視覺（Computer Vision）」的範疇，而非自然語言處理。"
+        "explanation": "辨識影像或圖片中的視覺元素（如品牌標誌、物體或場景）屬於「電腦視覺（Computer Vision）」的範疇，而非自然語言處理。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 154,
@@ -2663,7 +2816,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "這屬於自然語言處理中的「情感分析（Sentiment Analysis）」，用於偵測文字內容所表達的情緒偏向（正面、負面或中性）。"
+        "explanation": "這屬於自然語言處理中的「情感分析（Sentiment Analysis）」，用於偵測文字內容所表達的情緒偏向（正面、負面或中性）。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 155,
@@ -2678,7 +2832,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "預測連續性的數值（如房價）屬於機器學習中的「迴歸（Regression）」工作負載，而非異常偵測。"
+        "explanation": "預測連續性的數值（如房價）屬於機器學習中的「迴歸（Regression）」工作負載，而非異常偵測。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 156,
@@ -2693,7 +2848,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "異常偵測（Anomaly Detection）的核心作用就是識別偏離常態模式的異常事件，這常用於信用卡欺詐偵測或不尋常的系統登入活動。"
+        "explanation": "異常偵測（Anomaly Detection）的核心作用就是識別偏離常態模式的異常事件，這常用於信用卡欺詐偵測或不尋常的系統登入活動。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 157,
@@ -2708,7 +2864,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "預測資料屬於哪一個預定義的類別（如：罹病或健康、是或否）屬於「分類（Classification）」工作負載。"
+        "explanation": "預測資料屬於哪一個預定義的類別（如：罹病或健康、是或否）屬於「分類（Classification）」工作負載。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 158,
@@ -2723,7 +2880,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "交談式 AI（Conversational AI）是指能讓人類與電腦進行對話互動的技術，智慧助理即為其典型應用。"
+        "explanation": "交談式 AI（Conversational AI）是指能讓人類與電腦進行對話互動的技術，智慧助理即為其典型應用。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 159,
@@ -2738,7 +2896,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "自動產生字幕屬於語音轉文字（Speech-to-Text）技術，屬於語音服務範疇，並不具備交談式 AI 的雙向互動特性。"
+        "explanation": "自動產生字幕屬於語音轉文字（Speech-to-Text）技術，屬於語音服務範疇，並不具備交談式 AI 的雙向互動特性。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 160,
@@ -2753,7 +2912,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "迴歸屬於監督式學習（Supervised Learning），定型模型時必須使用包含已知正確結果（標籤）的資料集。"
+        "explanation": "迴歸屬於監督式學習（Supervised Learning），定型模型時必須使用包含已知正確結果（標籤）的資料集。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 161,
@@ -2768,7 +2928,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "分類是用來預測離散的類別標籤（如：貓或狗）；預測連續數值的工作應使用迴歸。 "
+        "explanation": "分類是用來預測離散的類別標籤（如：貓或狗）；預測連續數值的工作應使用迴歸。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 162,
@@ -2783,7 +2944,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "叢集（Clustering）是一種非監督式學習，旨在將資料中相似的實體自動歸類為同一個群組。 "
+        "explanation": "叢集（Clustering）是一種非監督式學習，旨在將資料中相似的實體自動歸類為同一個群組。 ",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 163,
@@ -2798,7 +2960,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "迴歸模型的預測目標（標籤）必須是連續的數值。 "
+        "explanation": "迴歸模型的預測目標（標籤）必須是連續的數值。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 164,
@@ -2813,7 +2976,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "叢集屬於非監督式學習（Unsupervised Learning），不需要事先提供標籤，模型會自行學習資料間的相似度。 "
+        "explanation": "叢集屬於非監督式學習（Unsupervised Learning），不需要事先提供標籤，模型會自行學習資料間的相似度。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 165,
@@ -2828,7 +2992,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "分類模型的標籤通常是類別名稱（文字），雖然可以轉換成數值進行運算，但其本質是分類標籤而非數值量。"
+        "explanation": "分類模型的標籤通常是類別名稱（文字），雖然可以轉換成數值進行運算，但其本質是分類標籤而非數值量。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 166,
@@ -2843,7 +3008,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這是設計工具（Designer）的核心定義，提供視覺化的畫布介面讓使用者透過模組串接來完成機器學習管線。 "
+        "explanation": "這是設計工具（Designer）的核心定義，提供視覺化的畫布介面讓使用者透過模組串接來完成機器學習管線。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 167,
@@ -2858,7 +3024,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "在設計工具中，使用者可以將正在進行的工作儲存為管線草稿，隨時繼續編輯。"
+        "explanation": "在設計工具中，使用者可以將正在進行的工作儲存為管線草稿，隨時繼續編輯。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 168,
@@ -2873,7 +3040,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure Machine Learning 設計工具主要支援透過 Python 與 R 指令碼模組來執行自訂函式。 "
+        "explanation": "Azure Machine Learning 設計工具主要支援透過 Python 與 R 指令碼模組來執行自訂函式。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 169,
@@ -2888,7 +3056,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "自動化 ML（AutoML）是自動選取演演算法與調整引數的封閉式流程，不支援在其中直接插入自訂 Python 程式碼。"
+        "explanation": "自動化 ML（AutoML）是自動選取演演算法與調整引數的封閉式流程，不支援在其中直接插入自訂 Python 程式碼。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 170,
@@ -2903,7 +3072,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "AutoML 的設計初衷即為「低程式碼/無程式碼」，讓不具備深厚程式背景的使用者也能訓練出高品質模型。"
+        "explanation": "AutoML 的設計初衷即為「低程式碼/無程式碼」，讓不具備深厚程式背景的使用者也能訓練出高品質模型。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 171,
@@ -2918,7 +3088,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這是「設計工具 (Designer)」的功能特點，而非自動化 ML 的操作方式。"
+        "explanation": "這是「設計工具 (Designer)」的功能特點，而非自動化 ML 的操作方式。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 172,
@@ -2933,7 +3104,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "透過相似性（如使用量分佈）將物件自動分類到不同群組，是叢集模型的標準應用場景。"
+        "explanation": "透過相似性（如使用量分佈）將物件自動分類到不同群組，是叢集模型的標準應用場景。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 173,
@@ -2948,7 +3120,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "解題分析：將特徵相似的人群自動歸類，屬於叢集分析。"
+        "explanation": "解題分析：將特徵相似的人群自動歸類，屬於叢集分析。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 174,
@@ -2963,7 +3136,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這屬於預測「預定義的類別」（輕、中、重度），應屬於「多類別分類（Multiclass Classification）」。"
+        "explanation": "這屬於預測「預定義的類別」（輕、中、重度），應屬於「多類別分類（Multiclass Classification）」。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 175,
@@ -2978,7 +3152,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "物件偵測除了辨識物體類別，還能標註物體在影像中的座標位置（邊界框）。"
+        "explanation": "物件偵測除了辨識物體類別，還能標註物體在影像中的座標位置（邊界框）。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 176,
@@ -2993,7 +3168,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "物件偵測能夠在同一張影像中找出並標註多個相同或不同類別的物體。"
+        "explanation": "物件偵測能夠在同一張影像中找出並標註多個相同或不同類別的物體。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 177,
@@ -3008,7 +3184,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "物件偵測可以經由訓練識別各類不同視覺特徵的缺陷或物體。"
+        "explanation": "物件偵測可以經由訓練識別各類不同視覺特徵的缺陷或物體。",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 178,
@@ -3023,7 +3200,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "命名實體辨識（NER）的功能是識別文字中屬於特定類別的實體，如：人名、組織、日期與時間等。"
+        "explanation": "命名實體辨識（NER）的功能是識別文字中屬於特定類別的實體，如：人名、組織、日期與時間等。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 179,
@@ -3038,7 +3216,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "關鍵片語擷取（Key Phrase Extraction）用於分析非結構化文字，並列出代表檔案重點的主要字詞或片語。"
+        "explanation": "關鍵片語擷取（Key Phrase Extraction）用於分析非結構化文字，並列出代表檔案重點的主要字詞或片語。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 180,
@@ -3053,7 +3232,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "擷取特定類別（如：城市、地名）的工作應屬於「命名實體辨識（NER）」而非關鍵片語擷取。"
+        "explanation": "擷取特定類別（如：城市、地名）的工作應屬於「命名實體辨識（NER）」而非關鍵片語擷取。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 181,
@@ -3068,7 +3248,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "使用者可以使用如 Power Virtual Agents 等無程式碼工具，或 Bot Service 提供的範本來建立機器人。 "
+        "explanation": "使用者可以使用如 Power Virtual Agents 等無程式碼工具，或 Bot Service 提供的範本來建立機器人。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 182,
@@ -3083,7 +3264,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure Bot Service 是微軟提供的雲端平臺，專門用於開發、釋出及裝載對話機器人。 "
+        "explanation": "Azure Bot Service 是微軟提供的雲端平臺，專門用於開發、釋出及裝載對話機器人。 ",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 183,
@@ -3098,7 +3280,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure Bot Service 支援多種管道（Channels），Microsoft Teams 是其最常用且主要支援的對接管道之一。"
+        "explanation": "Azure Bot Service 支援多種管道（Channels），Microsoft Teams 是其最常用且主要支援的對接管道之一。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 184,
@@ -3113,7 +3296,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "引數 from=it 代表輸入語言是「義大利文」，而非英文。 "
+        "explanation": "引數 from=it 代表輸入語言是「義大利文」，而非英文。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 185,
@@ -3128,7 +3312,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "引數 from=en 正確標記了輸入語言為英文，to=fr&to=it 則代表輸出為法文與義大利文。"
+        "explanation": "引數 from=en 正確標記了輸入語言為英文，to=fr&to=it 則代表輸出為法文與義大利文。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 186,
@@ -3143,7 +3328,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure AI 翻譯工具（Translator）支援多語言間的文字與檔案自動翻譯。"
+        "explanation": "Azure AI 翻譯工具（Translator）支援多語言間的文字與檔案自動翻譯。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 187,
@@ -3158,7 +3344,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "結合語音轉文字（Speech-to-Text）服務後，機器人即可處理語音輸入。"
+        "explanation": "結合語音轉文字（Speech-to-Text）服務後，機器人即可處理語音輸入。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 188,
@@ -3173,7 +3360,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "一個後端機器人可以透過 Azure Bot Service 同時對接到多個通訊管道（如：Web, Teams, Facebook 等）。 "
+        "explanation": "一個後端機器人可以透過 Azure Bot Service 同時對接到多個通訊管道（如：Web, Teams, Facebook 等）。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 189,
@@ -3188,7 +3376,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "現代機器人常使用混合模式，即結合 NLP 的開放對話與按鈕選單（如：調適型卡片）來引導使用者。"
+        "explanation": "現代機器人常使用混合模式，即結合 NLP 的開放對話與按鈕選單（如：調適型卡片）來引導使用者。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 190,
@@ -3203,7 +3392,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "問題解答（Question Answering）僅能查詢與其知識庫關聯的資料，不能直接執行 SQL 查詢關聯式資料庫。 "
+        "explanation": "問題解答（Question Answering）僅能查詢與其知識庫關聯的資料，不能直接執行 SQL 查詢關聯式資料庫。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 191,
@@ -3218,7 +3408,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "問題解答的核心功能就是從知識庫中匹配相似的問題，並回傳預設好的標準答案。 "
+        "explanation": "問題解答的核心功能就是從知識庫中匹配相似的問題，並回傳預設好的標準答案。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 192,
@@ -3233,7 +3424,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "專門判斷「意圖（Intent）」的服務是「交談語言理解 (CLU)」。 "
+        "explanation": "專門判斷「意圖（Intent）」的服務是「交談語言理解 (CLU)」。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 193,
@@ -3248,7 +3440,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這屬於語言服務中的「語言偵測」功能。"
+        "explanation": "這屬於語言服務中的「語言偵測」功能。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 194,
@@ -3263,7 +3456,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "偵測影像中的筆跡或簽名位置應屬於「Azure AI 檔案智慧服務」的範疇。 "
+        "explanation": "偵測影像中的筆跡或簽名位置應屬於「Azure AI 檔案智慧服務」的範疇。 ",
+        "category": "D3_電腦視覺工作負載"
     },
     {
         "id": 195,
@@ -3278,7 +3472,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這是「命名實體辨識 (NER)」的功能。 "
+        "explanation": "這是「命名實體辨識 (NER)」的功能。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 196,
@@ -3293,7 +3488,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "語音轉文字服務可以即時或非即時地將語音訊號轉化為書面文字。"
+        "explanation": "語音轉文字服務可以即時或非即時地將語音訊號轉化為書面文字。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 197,
@@ -3308,7 +3504,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "文字紀錄產生後，可以利用語言服務的 NER 功能進一步分析其中的關鍵資訊。 "
+        "explanation": "文字紀錄產生後，可以利用語言服務的 NER 功能進一步分析其中的關鍵資訊。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 198,
@@ -3323,7 +3520,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這屬於語音服務中的「語音翻譯 (Speech Translation)」功能。"
+        "explanation": "這屬於語音服務中的「語音翻譯 (Speech Translation)」功能。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 199,
@@ -3338,7 +3536,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這屬於語言服務提供的基本 NLP 分析功能之一。 "
+        "explanation": "這屬於語言服務提供的基本 NLP 分析功能之一。 ",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 200,
@@ -3353,7 +3552,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "根據提示語生成內容屬於「生成式 AI（如 Azure OpenAI）」的工作，傳統語言服務主要在於「分析」而非創作。"
+        "explanation": "根據提示語生成內容屬於「生成式 AI（如 Azure OpenAI）」的工作，傳統語言服務主要在於「分析」而非創作。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 201,
@@ -3368,7 +3568,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "可以利用「情感分析」功能來偵測社群媒體上公眾對於特定話題的正面或負面反應。"
+        "explanation": "可以利用「情感分析」功能來偵測社群媒體上公眾對於特定話題的正面或負面反應。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 202,
@@ -3383,7 +3584,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這屬於交談式 AI 結合語音技術的典型運作模式。"
+        "explanation": "這屬於交談式 AI 結合語音技術的典型運作模式。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 203,
@@ -3398,7 +3600,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Teams 是微軟支援機器人互動的核心通訊介面。"
+        "explanation": "Teams 是微軟支援機器人互動的核心通訊介面。",
+        "category": "D1_AI 工作負載、考量與責任 AI"
     },
     {
         "id": 204,
@@ -3413,7 +3616,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "網頁聊天介面（Web Chat）是部署機器人最基本且廣泛的方式。"
+        "explanation": "網頁聊天介面（Web Chat）是部署機器人最基本且廣泛的方式。",
+        "category": "D4_自然語言處理 (NLP) 工作負載"
     },
     {
         "id": 205,
@@ -3428,7 +3632,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "GPT-3.5 是一個文字大型語言模型。語音轉文字是由 Whisper 模型或 Azure 語音服務處理。"
+        "explanation": "GPT-3.5 是一個文字大型語言模型。語音轉文字是由 Whisper 模型或 Azure 語音服務處理。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 206,
@@ -3443,7 +3648,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這就是內嵌（Embeddings）模型的定義，將文字語義對映到數值向量空間。"
+        "explanation": "這就是內嵌（Embeddings）模型的定義，將文字語義對映到數值向量空間。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 207,
@@ -3458,7 +3664,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "DALL-E 是一個生成式模型，專門用於「文生圖」。"
+        "explanation": "DALL-E 是一個生成式模型，專門用於「文生圖」。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 208,
@@ -3473,7 +3680,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "這是 Transformer 模型架構的基本組成部分。 "
+        "explanation": "這是 Transformer 模型架構的基本組成部分。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 209,
@@ -3488,7 +3696,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "自我注意力（Self-attention）是 Transformer 能夠理解長距離詞語關聯的核心機制。"
+        "explanation": "自我注意力（Self-attention）是 Transformer 能夠理解長距離詞語關聯的核心機制。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 210,
@@ -3503,7 +3712,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "架構中是「編碼（Encoding）」與「解碼（Decoding）」，並非資訊安全中的加密。"
+        "explanation": "架構中是「編碼（Encoding）」與「解碼（Decoding）」，並非資訊安全中的加密。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 211,
@@ -3518,7 +3728,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "即便使用微軟提供的預訓練模型（如 Azure AI 服務），只要在實作過程中落實過濾、監控與透明度，亦能符合責任 AI 準則。"
+        "explanation": "即便使用微軟提供的預訓練模型（如 Azure AI 服務），只要在實作過程中落實過濾、監控與透明度，亦能符合責任 AI 準則。",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 212,
@@ -3533,7 +3744,8 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure OpenAI 提供的 GPT、DALL-E 等模型都是已經由大量資料預先訓練好的基礎模型。 "
+        "explanation": "Azure OpenAI 提供的 GPT、DALL-E 等模型都是已經由大量資料預先訓練好的基礎模型。 ",
+        "category": "D2_機器學習基本原理"
     },
     {
         "id": 213,
@@ -3548,6 +3760,7 @@
         ],
         "weight": 1,
         "image": "",
-        "explanation": "Azure OpenAI 提供微調（Fine-tuning）功能，允許使用者使用特定領域的資料來最佳化模型的表現。"
+        "explanation": "Azure OpenAI 提供微調（Fine-tuning）功能，允許使用者使用特定領域的資料來最佳化模型的表現。",
+        "category": "D2_機器學習基本原理"
     }
 ]

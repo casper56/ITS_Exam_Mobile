@@ -14,7 +14,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 可根據輸入創造新資料，如文字、影象、影片。"
+        "explanation": "生成式 AI 可根據輸入創造新資料，如文字、影象、影片。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 2,
@@ -31,7 +32,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Transformer 是 GPT 背後的主體架構，專長於語言建模。"
+        "explanation": "Transformer 是 GPT 背後的主體架構，專長於語言建模。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 3,
@@ -48,7 +50,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "LLM 可用於對話生成，例如 ChatGPT。"
+        "explanation": "LLM 可用於對話生成，例如 ChatGPT。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 4,
@@ -65,7 +68,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "預訓練可讓模型先學會語言結構與語意。"
+        "explanation": "預訓練可讓模型先學會語言結構與語意。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 5,
@@ -82,7 +86,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "LLM 可處理自然語言理解與產生。"
+        "explanation": "LLM 可處理自然語言理解與產生。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 6,
@@ -99,7 +104,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "NLP 是 Natural Language Processing 的縮寫。"
+        "explanation": "NLP 是 Natural Language Processing 的縮寫。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 7,
@@ -116,7 +122,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Token 是 LLM 分割語句的單位。"
+        "explanation": "Token 是 LLM 分割語句的單位。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 8,
@@ -133,7 +140,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "BERT 是雙向語言理解模型，基於 Transformer 架構。"
+        "explanation": "BERT 是雙向語言理解模型，基於 Transformer 架構。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 9,
@@ -150,7 +158,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "LLM 主要使用網路內文、論文等非結構化資料。"
+        "explanation": "LLM 主要使用網路內文、論文等非結構化資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 10,
@@ -167,7 +176,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 是透過統計預測組合內容，不是真正的創造。"
+        "explanation": "生成式 AI 是透過統計預測組合內容，不是真正的創造。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 11,
@@ -184,7 +194,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "Fine-tuning 是將預訓練模型在特定資料集上微調，以提升任務表現。"
+        "explanation": "Fine-tuning 是將預訓練模型在特定資料集上微調，以提升任務表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 12,
@@ -201,7 +212,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語意嵌入是把文字轉為數值向量，供模型分析。"
+        "explanation": "語意嵌入是把文字轉為數值向量，供模型分析。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 13,
@@ -218,7 +230,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "ChatGPT 能根據提示自動產生程式碼。"
+        "explanation": "ChatGPT 能根據提示自動產生程式碼。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 14,
@@ -235,7 +248,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "提示詞（Prompt）設計會直接影響輸出內容。"
+        "explanation": "提示詞（Prompt）設計會直接影響輸出內容。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 15,
@@ -252,7 +266,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "Inference 是模型實際應用時產出輸出的過程。"
+        "explanation": "Inference 是模型實際應用時產出輸出的過程。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 16,
@@ -269,7 +284,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "過擬合會讓模型在新資料上表現不佳。"
+        "explanation": "過擬合會讓模型在新資料上表現不佳。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 17,
@@ -286,7 +302,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "Transformer 利用自注意力機制捕捉長距離依賴。"
+        "explanation": "Transformer 利用自注意力機制捕捉長距離依賴。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 18,
@@ -303,7 +320,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt Engineering 是改善輸入語句以獲得理想結果。"
+        "explanation": "Prompt Engineering 是改善輸入語句以獲得理想結果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 19,
@@ -320,7 +338,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "數位硬體設計檔不常作為生成式 AI 輸入。"
+        "explanation": "數位硬體設計檔不常作為生成式 AI 輸入。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 20,
@@ -337,7 +356,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Zero-shot 是模型能在沒見過任務資料下完成任務。"
+        "explanation": "Zero-shot 是模型能在沒見過任務資料下完成任務。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 21,
@@ -354,7 +374,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "產生式 AI 可用於生成病理影像協助診斷。"
+        "explanation": "產生式 AI 可用於生成病理影像協助診斷。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 22,
@@ -371,7 +392,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "蒸餾是把大型模型知識轉移到小模型。"
+        "explanation": "蒸餾是把大型模型知識轉移到小模型。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 23,
@@ -388,7 +410,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "偏見來自訓練資料中的不公平現象。"
+        "explanation": "偏見來自訓練資料中的不公平現象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 24,
@@ -405,7 +428,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "強化學習透過環境回應學習最佳行動策略。"
+        "explanation": "強化學習透過環境回應學習最佳行動策略。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 25,
@@ -422,7 +446,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "產生對抗網路（GAN）適合產生影象。"
+        "explanation": "產生對抗網路（GAN）適合產生影象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 26,
@@ -439,7 +464,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自注意力幫助模型在處理序列時，抓住遠距離詞彙間的關聯。"
+        "explanation": "自注意力幫助模型在處理序列時，抓住遠距離詞彙間的關聯。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 27,
@@ -456,7 +482,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料增強是透過修改原始資料創造新樣本。"
+        "explanation": "資料增強是透過修改原始資料創造新樣本。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 28,
@@ -473,7 +500,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GPT-3 約有 175 億引數。"
+        "explanation": "GPT-3 約有 175 億引數。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 29,
@@ -490,7 +518,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型蒸餾將大模型知識轉移到小模型，降低延遲。"
+        "explanation": "模型蒸餾將大模型知識轉移到小模型，降低延遲。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 30,
@@ -507,7 +536,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語言模型根據前後文預測後續詞彙。"
+        "explanation": "語言模型根據前後文預測後續詞彙。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 31,
@@ -524,7 +554,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "梯度消失會使深層網路訓練受阻。"
+        "explanation": "梯度消失會使深層網路訓練受阻。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 32,
@@ -541,7 +572,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AI 可持續提供即時回應，減少人力負擔。"
+        "explanation": "AI 可持續提供即時回應，減少人力負擔。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 33,
@@ -558,7 +590,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "訓練集用於模型學習，驗證集調參，測試集評估。"
+        "explanation": "訓練集用於模型學習，驗證集調參，測試集評估。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 34,
@@ -575,7 +608,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GAN 有產生器與判別器相互博弈。"
+        "explanation": "GAN 有產生器與判別器相互博弈。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 35,
@@ -592,7 +626,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多模態 AI 能融合多種感官輸入。"
+        "explanation": "多模態 AI 能融合多種感官輸入。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 36,
@@ -609,7 +644,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "降低偏差常會增加方差，需取得平衡。"
+        "explanation": "降低偏差常會增加方差，需取得平衡。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 37,
@@ -626,7 +662,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "正則化與資料增強能有效避免過擬合。"
+        "explanation": "正則化與資料增強能有效避免過擬合。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 38,
@@ -643,7 +680,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 可協助自動批改和教學輔助。"
+        "explanation": "生成式 AI 可協助自動批改和教學輔助。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 39,
@@ -660,7 +698,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "新系統初期資料不足，難以產生有效預測。"
+        "explanation": "新系統初期資料不足，難以產生有效預測。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 40,
@@ -677,7 +716,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "倫理 AI 強調道德標準與社會責任。"
+        "explanation": "倫理 AI 強調道德標準與社會責任。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 41,
@@ -694,7 +734,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AI 輔助但無法完全取代專業律師。"
+        "explanation": "AI 輔助但無法完全取代專業律師。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 42,
@@ -711,7 +752,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "同態加密允許加密資料上計算。"
+        "explanation": "同態加密允許加密資料上計算。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 43,
@@ -728,7 +770,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "可解釋性讓使用者知道模型決策原因。"
+        "explanation": "可解釋性讓使用者知道模型決策原因。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 44,
@@ -745,7 +788,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "負責任 AI 強調道德與法律遵守。"
+        "explanation": "負責任 AI 強調道德與法律遵守。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 45,
@@ -762,7 +806,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "偏見會影響模型決策的公正性。"
+        "explanation": "偏見會影響模型決策的公正性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 46,
@@ -779,7 +824,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "ASR 專門處理語音識別轉文字。"
+        "explanation": "ASR 專門處理語音識別轉文字。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 47,
@@ -796,7 +842,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "OCR 用於將圖片中的文字轉為數位文字。"
+        "explanation": "OCR 用於將圖片中的文字轉為數位文字。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 48,
@@ -813,7 +860,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "能保持上下文的多次互動對話系統。"
+        "explanation": "能保持上下文的多次互動對話系統。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 49,
@@ -830,7 +878,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "TTS 將文字合成語音輸出。"
+        "explanation": "TTS 將文字合成語音輸出。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 50,
@@ -847,7 +896,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型大小非倫理問題，但偏見、版權、假訊息是。"
+        "explanation": "模型大小非倫理問題，但偏見、版權、假訊息是。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 51,
@@ -864,7 +914,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "標註是為了讓模型知道每筆資料的正確答案。"
+        "explanation": "標註是為了讓模型知道每筆資料的正確答案。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 52,
@@ -881,7 +932,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "泛化能力是衡量模型在新資料上的適應力。"
+        "explanation": "泛化能力是衡量模型在新資料上的適應力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 53,
@@ -898,7 +950,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Transformer、GAN、VAE 都是產生模型常見架構。"
+        "explanation": "Transformer、GAN、VAE 都是產生模型常見架構。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 54,
@@ -915,7 +968,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多工學習透過共享資訊提升多個任務表現。"
+        "explanation": "多工學習透過共享資訊提升多個任務表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 55,
@@ -932,7 +986,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Perplexity 越低表示模型預測越準確。"
+        "explanation": "Perplexity 越低表示模型預測越準確。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 56,
@@ -949,7 +1004,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "硬碟容量通常不是生成式 AI 的瓶頸。"
+        "explanation": "硬碟容量通常不是生成式 AI 的瓶頸。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 57,
@@ -966,7 +1022,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "反向傳播用於更新模型引數。"
+        "explanation": "反向傳播用於更新模型引數。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 58,
@@ -983,7 +1040,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "微調可使模型更適應特定任務。"
+        "explanation": "微調可使模型更適應特定任務。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 59,
@@ -1000,7 +1058,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "較高溫度值可增加產生內容的多樣性。"
+        "explanation": "較高溫度值可增加產生內容的多樣性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 60,
@@ -1017,7 +1076,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "零樣本學習指模型可應對未見過的任務。"
+        "explanation": "零樣本學習指模型可應對未見過的任務。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 61,
@@ -1034,7 +1094,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GDPR 是歐盟的資料保護法規。"
+        "explanation": "GDPR 是歐盟的資料保護法規。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 62,
@@ -1051,7 +1112,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多元資料有助於減少偏見。"
+        "explanation": "多元資料有助於減少偏見。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 63,
@@ -1068,7 +1130,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料漂移（Data Drift） 是指模型部署到生產環境後，輸入資料的分佈發生改變，與當初訓練模型時所使用的資料分佈不同，這可能會導致模型的效能下降。"
+        "explanation": "資料漂移（Data Drift） 是指模型部署到生產環境後，輸入資料的分佈發生改變，與當初訓練模型時所使用的資料分佈不同，這可能會導致模型的效能下降。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 64,
@@ -1085,7 +1148,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語音助手需理解語言意圖。"
+        "explanation": "語音助手需理解語言意圖。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 65,
@@ -1102,7 +1166,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AI 黑盒問題是模型決策難以解釋。"
+        "explanation": "AI 黑盒問題是模型決策難以解釋。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 66,
@@ -1119,7 +1184,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "去識別化保護隱私。"
+        "explanation": "去識別化保護隱私。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 67,
@@ -1136,7 +1202,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "偏微分方程用於模擬和預測。"
+        "explanation": "偏微分方程用於模擬和預測。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 68,
@@ -1153,7 +1220,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人工智慧倫理強調負責任使用。"
+        "explanation": "人工智慧倫理強調負責任使用。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 69,
@@ -1170,7 +1238,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "調優是改善模型表現。"
+        "explanation": "調優是改善模型表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 70,
@@ -1187,7 +1256,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "模型可能產生錯誤資訊。"
+        "explanation": "模型可能產生錯誤資訊。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 71,
@@ -1204,7 +1274,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "聯邦學習允許不同裝置本地訓練模型。"
+        "explanation": "聯邦學習允許不同裝置本地訓練模型。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 72,
@@ -1221,7 +1292,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "產生模型可產生內文、影象等新內容。"
+        "explanation": "產生模型可產生內文、影象等新內容。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 73,
@@ -1238,7 +1310,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "偏見主要來自資料。"
+        "explanation": "偏見主要來自資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 74,
@@ -1255,7 +1328,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "壓縮技術能降低模型執行成本。"
+        "explanation": "壓縮技術能降低模型執行成本。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 75,
@@ -1272,7 +1346,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "產生內容版權尚未有明確法律規範。"
+        "explanation": "產生內容版權尚未有明確法律規範。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 76,
@@ -1289,7 +1364,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料標準化是確保資料格式一致，利於模型訓練。"
+        "explanation": "資料標準化是確保資料格式一致，利於模型訓練。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 77,
@@ -1306,7 +1382,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語意理解是 AI 理解語言深層含義的能力。"
+        "explanation": "語意理解是 AI 理解語言深層含義的能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 78,
@@ -1323,7 +1400,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型漂移會導致預測不準確。"
+        "explanation": "模型漂移會導致預測不準確。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 79,
@@ -1340,7 +1418,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "語音辨識技術用於語音轉文字。"
+        "explanation": "語音辨識技術用於語音轉文字。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 80,
@@ -1357,7 +1436,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型監控確保模型持續有效。"
+        "explanation": "模型監控確保模型持續有效。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 81,
@@ -1374,7 +1454,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型更新能改善效能或適應新資料。"
+        "explanation": "模型更新能改善效能或適應新資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 82,
@@ -1391,7 +1472,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透明度有助於建立使用者信任。"
+        "explanation": "透明度有助於建立使用者信任。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 83,
@@ -1408,7 +1490,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "隱私保護計算保護資料隱私同時允許分析。"
+        "explanation": "隱私保護計算保護資料隱私同時允許分析。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 84,
@@ -1425,7 +1508,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "公平性指避免模型帶來偏見。"
+        "explanation": "公平性指避免模型帶來偏見。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 85,
@@ -1442,7 +1526,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人機協作強調 AI 與人類合作。"
+        "explanation": "人機協作強調 AI 與人類合作。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 86,
@@ -1459,7 +1544,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "法律風險關乎使用合規與責任歸屬。"
+        "explanation": "法律風險關乎使用合規與責任歸屬。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 87,
@@ -1476,7 +1562,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成結果須謹慎驗證。"
+        "explanation": "生成結果須謹慎驗證。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 88,
@@ -1493,7 +1580,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料倫理確保資料使用公正且負責。"
+        "explanation": "資料倫理確保資料使用公正且負責。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 89,
@@ -1510,7 +1598,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "深度學習是多層網路結構的機器學習。"
+        "explanation": "深度學習是多層網路結構的機器學習。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 90,
@@ -1527,7 +1616,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "偏見偵測幫助改善模型公平性。"
+        "explanation": "偏見偵測幫助改善模型公平性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 91,
@@ -1544,7 +1634,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "NLG 讓機器產生人類語言。"
+        "explanation": "NLG 讓機器產生人類語言。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 92,
@@ -1561,7 +1652,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "超引數如學習率、批次大小影響訓練效果。"
+        "explanation": "超引數如學習率、批次大小影響訓練效果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 93,
@@ -1578,7 +1670,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自監督用部分資料自動標註訓練。"
+        "explanation": "自監督用部分資料自動標註訓練。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 94,
@@ -1595,7 +1688,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "法律尚未明確界定 AI 決策責任。"
+        "explanation": "法律尚未明確界定 AI 決策責任。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 95,
@@ -1612,7 +1706,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "清理是提升資料質量的步驟。"
+        "explanation": "清理是提升資料質量的步驟。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 96,
@@ -1629,7 +1724,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "評估公平性確保模型對各族群公平。"
+        "explanation": "評估公平性確保模型對各族群公平。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 97,
@@ -1646,7 +1742,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "驗證防止假資訊與錯誤。"
+        "explanation": "驗證防止假資訊與錯誤。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 98,
@@ -1663,7 +1760,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 模仿而非自主創作。"
+        "explanation": "生成式 AI 模仿而非自主創作。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 99,
@@ -1680,7 +1778,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "可擴充套件性確保模型可支援擴大應用。"
+        "explanation": "可擴充套件性確保模型可支援擴大應用。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 100,
@@ -1697,7 +1796,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AI 輸出需有人工監督，以避免錯誤資訊或不當內容。"
+        "explanation": "AI 輸出需有人工監督，以避免錯誤資訊或不當內容。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 101,
@@ -1714,7 +1814,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在影象產生提示（prompt）設計中，使用完整的自然語句比單一關鍵詞或雜亂描述更能幫助模型理解使用者的具體意圖，進而產生更一致且符合預期的影象。"
+        "explanation": "在影象產生提示（prompt）設計中，使用完整的自然語句比單一關鍵詞或雜亂描述更能幫助模型理解使用者的具體意圖，進而產生更一致且符合預期的影象。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 102,
@@ -1731,7 +1832,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "CoT 透過提示模型輸出中間思考步驟進行多步推理，可提升邏輯表現。"
+        "explanation": "CoT 透過提示模型輸出中間思考步驟進行多步推理，可提升邏輯表現。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 103,
@@ -1748,7 +1850,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "最佳化包括 few‑shot 提示、meta prompting、梯度改善與 adversarial 等；D 非最佳化策略。"
+        "explanation": "最佳化包括 few‑shot 提示、meta prompting、梯度改善與 adversarial 等；D 非最佳化策略。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 104,
@@ -1765,7 +1868,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資深使用者提醒「模型更重視 prompt 開頭的幾個詞」，故應首要放 image type、subject 。"
+        "explanation": "資深使用者提醒「模型更重視 prompt 開頭的幾個詞」，故應首要放 image type、subject 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 105,
@@ -1782,7 +1886,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Microsoft 提到「要包含動作、主體、風格、背景、光線」等至少 6 項關鍵描述。"
+        "explanation": "Microsoft 提到「要包含動作、主體、風格、背景、光線」等至少 6 項關鍵描述。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 106,
@@ -1799,7 +1904,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AWS 提供「單一 API 呼叫便可測試不同模型的 prompt performance」，減少手動調整。"
+        "explanation": "AWS 提供「單一 API 呼叫便可測試不同模型的 prompt performance」，減少手動調整。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 107,
@@ -1816,7 +1922,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "meta‑prompting 即是讓模型「產生或改善 prompt 自身」的技術。"
+        "explanation": "meta‑prompting 即是讓模型「產生或改善 prompt 自身」的技術。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 108,
@@ -1833,7 +1940,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "Stable Diffusion 使用 CLIP 內文編碼器將 prompt 轉為潛在嵌入向量。"
+        "explanation": "Stable Diffusion 使用 CLIP 內文編碼器將 prompt 轉為潛在嵌入向量。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 109,
@@ -1850,7 +1958,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "BATprompt 使用 adversarial training 產生對抗式 prompt，以提升 robustness。"
+        "explanation": "BATprompt 使用 adversarial training 產生對抗式 prompt，以提升 robustness。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 110,
@@ -1867,7 +1976,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "OpenAI 指出「推薦使用最新最強模型，因為較容易進行 prompt 工程」。"
+        "explanation": "OpenAI 指出「推薦使用最新最強模型，因為較容易進行 prompt 工程」。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 111,
@@ -1884,7 +1994,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt engineering 是構造提示語句以產生最佳輸出。"
+        "explanation": "Prompt engineering 是構造提示語句以產生最佳輸出。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 112,
@@ -1901,7 +2012,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Zero-shot prompting 是指在沒有任何範例的情況下，直接提示模型進行推理或生成。"
+        "explanation": "Zero-shot prompting 是指在沒有任何範例的情況下，直接提示模型進行推理或生成。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 113,
@@ -1918,7 +2030,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "One-shot prompting 是指提供單一範例以引導模型生成。"
+        "explanation": "One-shot prompting 是指提供單一範例以引導模型生成。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 114,
@@ -1935,7 +2048,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Few-shot prompting 通常用兩到少量（如 2–10）範例，以幫助模型學習。"
+        "explanation": "Few-shot prompting 通常用兩到少量（如 2–10）範例，以幫助模型學習。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 115,
@@ -1952,7 +2066,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "範例幫助模型識別模式，提高輸出品質。"
+        "explanation": "範例幫助模型識別模式，提高輸出品質。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 116,
@@ -1969,7 +2084,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CLIP 訓練文字與影象共享嵌入空間，實現跨模態理解。"
+        "explanation": "CLIP 訓練文字與影象共享嵌入空間，實現跨模態理解。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 117,
@@ -1986,7 +2102,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Diffusion 模型透過逐步去噪從隨機 noise 還原影象。"
+        "explanation": "Diffusion 模型透過逐步去噪從隨機 noise 還原影象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 118,
@@ -2003,7 +2120,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt 工程可含指令、範例、Chain‑of‑Thought、角色設定等 。"
+        "explanation": "Prompt 工程可含指令、範例、Chain‑of‑Thought、角色設定等 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 119,
@@ -2020,7 +2138,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "目的是構造有效提示，最佳化 output 品質 。"
+        "explanation": "目的是構造有效提示，最佳化 output 品質 。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 120,
@@ -2037,7 +2156,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Zero-shot prompting 最常用於那些不易提供範例的任務，已熟悉、簡單任務，如情緒分類。"
+        "explanation": "Zero-shot prompting 最常用於那些不易提供範例的任務，已熟悉、簡單任務，如情緒分類。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 121,
@@ -2054,7 +2174,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Few‑shot 是一種 In‑Context Learning，透過提示中的範例學習。"
+        "explanation": "Few‑shot 是一種 In‑Context Learning，透過提示中的範例學習。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 122,
@@ -2071,7 +2192,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透過範例，可以讓模型模仿效格式與風格。"
+        "explanation": "透過範例，可以讓模型模仿效格式與風格。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 123,
@@ -2088,7 +2210,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CLIP 是由 OpenAI 開發的模型。"
+        "explanation": "CLIP 是由 OpenAI 開發的模型。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 124,
@@ -2105,7 +2228,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CoT 在超過 ~100B 引數的大型模型上效果最佳，小型模型效果差。"
+        "explanation": "CoT 在超過 ~100B 引數的大型模型上效果最佳，小型模型效果差。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 125,
@@ -2122,7 +2246,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "加入類似 “Let’s think step-by-step.” 的引導語可啟用零-shot 推理。"
+        "explanation": "加入類似 “Let’s think step-by-step.” 的引導語可啟用零-shot 推理。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 126,
@@ -2139,7 +2264,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt chaining 是將多個提示串聯起來，以便模型能夠更好地理解上下文。"
+        "explanation": "Prompt chaining 是將多個提示串聯起來，以便模型能夠更好地理解上下文。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 127,
@@ -2156,7 +2282,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Auto‑CoT、few‑shot、zero‑shot 都是 CoT 方法，無「Token‑compression CoT」。"
+        "explanation": "Auto‑CoT、few‑shot、zero‑shot 都是 CoT 方法，無「Token‑compression CoT」。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 128,
@@ -2173,7 +2300,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "資料指出 prompt engineer 不需技術背景，需溝通、分析與問題解決能力。"
+        "explanation": "資料指出 prompt engineer 不需技術背景，需溝通、分析與問題解決能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 129,
@@ -2190,7 +2318,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt injection 是安全漏洞，會令模型執行非預期指令 。"
+        "explanation": "Prompt injection 是安全漏洞，會令模型執行非預期指令 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 130,
@@ -2207,7 +2336,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在 prompt 中加入角色設定可以引導模型生成更符合該角色風格的內容。"
+        "explanation": "在 prompt 中加入角色設定可以引導模型生成更符合該角色風格的內容。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 131,
@@ -2224,7 +2354,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Analogical prompting 可以與 Auto‑CoT 結合，以提高推理效果，擴充多樣性與 reasoning 表現。"
+        "explanation": "Analogical prompting 可以與 Auto‑CoT 結合，以提高推理效果，擴充多樣性與 reasoning 表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 132,
@@ -2241,7 +2372,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Contrastive CoT 主要用於提供錯誤與正確推理的對比，強化模型辨別邏輯，以幫助模型學習更精確的推理方式。"
+        "explanation": "Contrastive CoT 主要用於提供錯誤與正確推理的對比，強化模型辨別邏輯，以幫助模型學習更精確的推理方式。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 133,
@@ -2258,7 +2390,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Tabular CoT 是將推理步驟以表格形式呈現 Chain‑of‑Thought ，便於理解與分析。"
+        "explanation": "Tabular CoT 是將推理步驟以表格形式呈現 Chain‑of‑Thought ，便於理解與分析。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 134,
@@ -2275,7 +2408,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "某些模型允許影象輸入作為附加 prompt 引導產生。"
+        "explanation": "某些模型允許影象輸入作為附加 prompt 引導產生。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 135,
@@ -2292,7 +2426,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Auto‑CoT 已強調範例要多樣以防 overfit 。"
+        "explanation": "Auto‑CoT 已強調範例要多樣以防 overfit 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 136,
@@ -2309,7 +2444,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Prompt 應設計角色、語氣、前後文與輸出格式等。"
+        "explanation": "Prompt 應設計角色、語氣、前後文與輸出格式等。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 137,
@@ -2326,7 +2462,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Adversarial prompt 是指故意設計的輸入，以引導模型產生錯誤或不當的輸出。"
+        "explanation": "Adversarial prompt 是指故意設計的輸入，以引導模型產生錯誤或不當的輸出。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 138,
@@ -2343,7 +2480,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Auto‑CoT 的流程不包括人為撰寫所有範例，它強調自動產生範例，不需人工撰寫。"
+        "explanation": "Auto‑CoT 的流程不包括人為撰寫所有範例，它強調自動產生範例，不需人工撰寫。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 139,
@@ -2360,7 +2498,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "帶入推理步驟有助提高準確率與可解釋性，不但改善準確度也利於 debugging。"
+        "explanation": "帶入推理步驟有助提高準確率與可解釋性，不但改善準確度也利於 debugging。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 140,
@@ -2377,7 +2516,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "prompt chaining 聚焦流程與前後文延續，並非安全防護手段。"
+        "explanation": "prompt chaining 聚焦流程與前後文延續，並非安全防護手段。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 141,
@@ -2394,7 +2534,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Self‑Consistency 透過生成多條推理鏈並選擇最常見答案，再整合最常見的結果，來提高最終輸出的可靠性與一致性與準確性 。"
+        "explanation": "Self‑Consistency 透過生成多條推理鏈並選擇最常見答案，再整合最常見的結果，來提高最終輸出的可靠性與一致性與準確性 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 142,
@@ -2411,7 +2552,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "ToT 透過多路徑探索與回溯機制，提升問題解決能力。"
+        "explanation": "ToT 透過多路徑探索與回溯機制，提升問題解決能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 143,
@@ -2428,7 +2570,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Auto‑CoT 自動生成多樣推理鏈作為 few‑shot 範例，不需全人工撰寫。"
+        "explanation": "Auto‑CoT 自動生成多樣推理鏈作為 few‑shot 範例，不需全人工撰寫。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 144,
@@ -2445,7 +2588,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CoT‑GCG (greedy coordinate gradient) 方法透過結合 CoT 與梯度座標，提升對模型的誘導攻擊能力。"
+        "explanation": "CoT‑GCG (greedy coordinate gradient) 方法透過結合 CoT 與梯度座標，提升對模型的誘導攻擊能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 145,
@@ -2462,7 +2606,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "該分類未把 prompt 加密納入，主要涵蓋 context manipulation, spoofing 等策略。"
+        "explanation": "該分類未把 prompt 加密納入，主要涵蓋 context manipulation, spoofing 等策略。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 146,
@@ -2479,7 +2624,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "WARP 方法透過對詞層的 adversarial reprogramming 調整，用少量引數重定義輸入引導模型，並自動產生 CoT，從而降低推理時間。"
+        "explanation": "WARP 方法透過對詞層的 adversarial reprogramming 調整，用少量引數重定義輸入引導模型，並自動產生 CoT，從而降低推理時間。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 147,
@@ -2496,7 +2642,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CoOp 與 CoCoOp 為 VLM 的前後文改善技術，使其在下游任務更精準。"
+        "explanation": "CoOp 與 CoCoOp 為 VLM 的前後文改善技術，使其在下游任務更精準。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 148,
@@ -2513,7 +2660,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "隱藏在影象內的 prompt injection 攻擊屬於 Cross‑modal adversarial injection 型態，構成跨模態攻擊。"
+        "explanation": "隱藏在影象內的 prompt injection 攻擊屬於 Cross‑modal adversarial injection 型態，構成跨模態攻擊。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 149,
@@ -2530,7 +2678,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "應保留人類監控，避免 AI 無限制採取行動 。"
+        "explanation": "應保留人類監控，避免 AI 無限制採取行動 。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 150,
@@ -2547,7 +2696,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "OWASP 2025 明列 prompt injection 為 LLM 安全十大風險之一。"
+        "explanation": "OWASP 2025 明列 prompt injection 為 LLM 安全十大風險之一。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 151,
@@ -2564,7 +2714,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Harvard 指出 Generative AI 的 Adversarial attack 型態特別令人憂心，因為這類攻擊能夠有效地操縱模型輸出，造成潛在的安全風險。"
+        "explanation": "Harvard 指出 Generative AI 的 Adversarial attack 型態特別令人憂心，因為這類攻擊能夠有效地操縱模型輸出，造成潛在的安全風險。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 152,
@@ -2581,7 +2732,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "匯入 multiple CoT 路徑與 self‑consistency 結合能強化模型泛化及錯誤判別能力與錯誤拒絕能力。"
+        "explanation": "匯入 multiple CoT 路徑與 self‑consistency 結合能強化模型泛化及錯誤判別能力與錯誤拒絕能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 153,
@@ -2598,7 +2750,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "ReAct 技術結合了 Chain‑of‑Thought 與 action executor 的能力，結合 CoT 推理流程與執行操作，可人工/AI混合決策，能夠在生成過程中引入外部行動，提升模型的推理能力與靈活性。"
+        "explanation": "ReAct 技術結合了 Chain‑of‑Thought 與 action executor 的能力，結合 CoT 推理流程與執行操作，可人工/AI混合決策，能夠在生成過程中引入外部行動，提升模型的推理能力與靈活性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 154,
@@ -2615,7 +2768,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式模型經常使用未標記的資料進行訓練，例如GAN與VAEs，多利用大量未標記的資料學習資料分佈。"
+        "explanation": "生成式模型經常使用未標記的資料進行訓練，例如GAN與VAEs，多利用大量未標記的資料學習資料分佈。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 155,
@@ -2632,7 +2786,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在語言模型安全中，taxonomy of adversarial prompt engineering 的目的是建立清楚分類以制定防禦策略，進而提升模型的安全性與穩定性。"
+        "explanation": "在語言模型安全中，taxonomy of adversarial prompt engineering 的目的是建立清楚分類以制定防禦策略，進而提升模型的安全性與穩定性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 156,
@@ -2649,7 +2804,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Promptingguide.ai 提及 adversarial prompting 專注於識別與防範 adversarial prompts，以提升模型的安全性與穩定性。"
+        "explanation": "Promptingguide.ai 提及 adversarial prompting 專注於識別與防範 adversarial prompts，以提升模型的安全性與穩定性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 157,
@@ -2666,7 +2822,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Wired 建議的防禦機制不包括啟用 autonomous self‑worm replication，允許 worm 自動傳播，因為這可能會導致安全風險。"
+        "explanation": "Wired 建議的防禦機制不包括啟用 autonomous self‑worm replication，允許 worm 自動傳播，因為這可能會導致安全風險。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 158,
@@ -2683,7 +2840,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 的核心能力在於從大量資料中學習模式，並利用這些模式創造出全新的、前所未有的內容，而不僅僅是複製或分析現有內容。"
+        "explanation": "生成式 AI 的核心能力在於從大量資料中學習模式，並利用這些模式創造出全新的、前所未有的內容，而不僅僅是複製或分析現有內容。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 159,
@@ -2700,7 +2858,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 影象生成、文字創作和音樂作曲都是生成式 AI 的典型應用，因為它們都涉及創造新的內容。<br>\n● 資料庫查詢最佳化主要屬於資料庫管理和效能調優的範疇，與生成式 AI 的內容生成性質不同。"
+        "explanation": "● 影象生成、文字創作和音樂作曲都是生成式 AI 的典型應用，因為它們都涉及創造新的內容。<br>\n● 資料庫查詢最佳化主要屬於資料庫管理和效能調優的範疇，與生成式 AI 的內容生成性質不同。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 160,
@@ -2717,7 +2876,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成對抗網路 (GAN) 是生成式 AI 領域中最具代表性的模型之一，由生成器和判別器兩部分組成，透過對抗訓練來生成逼真的資料。<br>\n● 雖然 CNN 和 RNN 也可能應用於生成任務的某些部分，但 GAN 是專為生成內容而設計的。"
+        "explanation": "● 生成對抗網路 (GAN) 是生成式 AI 領域中最具代表性的模型之一，由生成器和判別器兩部分組成，透過對抗訓練來生成逼真的資料。<br>\n● 雖然 CNN 和 RNN 也可能應用於生成任務的某些部分，但 GAN 是專為生成內容而設計的。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 161,
@@ -2734,7 +2894,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在 GAN 中，生成器負責從隨機雜訊中生成新的資料樣本（如影象、文字等），目標是讓這些樣本盡可能地逼真，以欺騙判別器。"
+        "explanation": "在 GAN 中，生成器負責從隨機雜訊中生成新的資料樣本（如影象、文字等），目標是讓這些樣本盡可能地逼真，以欺騙判別器。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 162,
@@ -2751,7 +2912,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 判別器的工作是接收真實資料和生成器生成的假資料，並嘗試區分兩者。<br>\n● 它的目標是準確地判斷輸入資料是真實的還是合成的。"
+        "explanation": "● 判別器的工作是接收真實資料和生成器生成的假資料，並嘗試區分兩者。<br>\n● 它的目標是準確地判斷輸入資料是真實的還是合成的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 163,
@@ -2768,7 +2930,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 擴散模型近年來在影象和音訊生成方面表現出色，能夠產生令人驚嘆的高質量、高多樣性內容。<br>\n● 雖然它們的計算成本相對較高，但其生成品質是主要優勢。"
+        "explanation": "● 擴散模型近年來在影象和音訊生成方面表現出色，能夠產生令人驚嘆的高質量、高多樣性內容。<br>\n● 雖然它們的計算成本相對較高，但其生成品質是主要優勢。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 164,
@@ -2785,7 +2948,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 大型語言模型 (LLM) 專門用於處理和生成人類語言，因此屬於文字生成模型。<br>\n● 它們可以進行寫作、摘要、翻譯等任務。"
+        "explanation": "● 大型語言模型 (LLM) 專門用於處理和生成人類語言，因此屬於文字生成模型。<br>\n● 它們可以進行寫作、摘要、翻譯等任務。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 165,
@@ -2802,7 +2966,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 的快速發展是多方面因素共同作用的結果，包括新穎的演演算法（如 GANs、Transformers）、強大的計算資源（GPU、TPU）以及可用於訓練模型的海量資料。"
+        "explanation": "生成式 AI 的快速發展是多方面因素共同作用的結果，包括新穎的演演算法（如 GANs、Transformers）、強大的計算資源（GPU、TPU）以及可用於訓練模型的海量資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 166,
@@ -2819,7 +2984,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成對抗網路 (GAN) 是生成逼真的人臉影象的主要技術之一。<br>\n● 它透過對抗訓練的方式，讓生成器和判別器相互競爭，最終生成高質量的影象。<br>\n● GAN 在生成逼真的人臉影象方面取得了顯著的成就，例如 StyleGAN 系列模型。"
+        "explanation": "● 生成對抗網路 (GAN) 是生成逼真的人臉影象的主要技術之一。<br>\n● 它透過對抗訓練的方式，讓生成器和判別器相互競爭，最終生成高質量的影象。<br>\n● GAN 在生成逼真的人臉影象方面取得了顯著的成就，例如 StyleGAN 系列模型。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 167,
@@ -2836,7 +3002,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "模型崩潰是 GAN 訓練中的一個常見問題，指生成器在訓練過程中陷入一個區域性最優解，導致其只能生成非常有限的幾種樣本，缺乏多樣性和真實性。"
+        "explanation": "模型崩潰是 GAN 訓練中的一個常見問題，指生成器在訓練過程中陷入一個區域性最優解，導致其只能生成非常有限的幾種樣本，缺乏多樣性和真實性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 168,
@@ -2853,7 +3020,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "DALL-E 是一個由 OpenAI 開發的影象生成模型，能夠根據文字描述生成獨特的影象。"
+        "explanation": "DALL-E 是一個由 OpenAI 開發的影象生成模型，能夠根據文字描述生成獨特的影象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 169,
@@ -2870,7 +3038,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "生成式 AI 可能會提升創造力和生產力、導致部分職業自動化以及助長虛假資訊傳播，但其通常會增加而非降低計算成本，尤其是在訓練和執行大型模型時。"
+        "explanation": "生成式 AI 可能會提升創造力和生產力、導致部分職業自動化以及助長虛假資訊傳播，但其通常會增加而非降低計算成本，尤其是在訓練和執行大型模型時。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 170,
@@ -2887,7 +3056,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "風格轉移是一種將一張影象的內容（如物體、場景）與另一張影象的藝術風格（如梵谷的星夜風格）相結合的技術。"
+        "explanation": "風格轉移是一種將一張影象的內容（如物體、場景）與另一張影象的藝術風格（如梵谷的星夜風格）相結合的技術。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 171,
@@ -2904,7 +3074,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 可以大大加速遊戲開發過程，自動生成遊戲環境、角色模型、NPC 對話、任務情節等，豐富遊戲內容。"
+        "explanation": "生成式 AI 可以大大加速遊戲開發過程，自動生成遊戲環境、角色模型、NPC 對話、任務情節等，豐富遊戲內容。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 172,
@@ -2921,7 +3092,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "● FID 和 Inception Score 是評估影象生成模型品質和多樣性的常用指標。<br>\n● BLEU Score 則用於評估機器翻譯和文字生成任務的品質。<br>\n● RMSE 是一種用於回歸任務的誤差度量，不常用於評估生成式 AI 的輸出。"
+        "explanation": "● FID 和 Inception Score 是評估影象生成模型品質和多樣性的常用指標。<br>\n● BLEU Score 則用於評估機器翻譯和文字生成任務的品質。<br>\n● RMSE 是一種用於回歸任務的誤差度量，不常用於評估生成式 AI 的輸出。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 173,
@@ -2938,7 +3110,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "自注意力機制允許模型在處理輸入序列時，根據不同部分之間的關係動態調整注意力權重，從而捕捉長距離依賴關係。"
+        "explanation": "自注意力機制允許模型在處理輸入序列時，根據不同部分之間的關係動態調整注意力權重，從而捕捉長距離依賴關係。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 174,
@@ -2955,7 +3128,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GPT-3 (Generative Pre-trained Transformer 3) 是一個由 OpenAI 開發的文字生成模型，能夠根據輸入的提示生成連貫且具有上下文的文字。"
+        "explanation": "GPT-3 (Generative Pre-trained Transformer 3) 是一個由 OpenAI 開發的文字生成模型，能夠根據輸入的提示生成連貫且具有上下文的文字。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 175,
@@ -2972,7 +3146,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多模態生成是指模型能夠處理並生成多種不同模態的資料，例如根據文字描述生成影象，或者根據影象生成文字描述。"
+        "explanation": "多模態生成是指模型能夠處理並生成多種不同模態的資料，例如根據文字描述生成影象，或者根據影象生成文字描述。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 176,
@@ -2989,7 +3164,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在生成式 AI 模型中，「溫度 (Temperature)」引數通常用於控制生成文字的隨機性和多樣性。<br>\n● 較高的溫度值會導致生成的文字更加隨機和多樣化。<br>\n● 較低的溫度值則會使生成的文字更加保守和一致。"
+        "explanation": "● 在生成式 AI 模型中，「溫度 (Temperature)」引數通常用於控制生成文字的隨機性和多樣性。<br>\n● 較高的溫度值會導致生成的文字更加隨機和多樣化。<br>\n● 較低的溫度值則會使生成的文字更加保守和一致。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 177,
@@ -3006,7 +3182,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI 可以用於自動作曲、為歌曲填詞以及生成新的音色。<br>\n● 語音辨識屬於AI的理解範疇，而非生成範疇。"
+        "explanation": "● 生成式 AI 可以用於自動作曲、為歌曲填詞以及生成新的音色。<br>\n● 語音辨識屬於AI的理解範疇，而非生成範疇。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 178,
@@ -3023,7 +3200,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "● 卷積神經網路是影象處理的基礎，VAE 和 GAN 都可以用於風格轉移。<br>\n● 迴圈神經網路主要用於序列資料（如文字、時間序列），不直接用於影象風格轉移。"
+        "explanation": "● 卷積神經網路是影象處理的基礎，VAE 和 GAN 都可以用於風格轉移。<br>\n● 迴圈神經網路主要用於序列資料（如文字、時間序列），不直接用於影象風格轉移。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 179,
@@ -3040,7 +3218,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影象修復是指利用生成式 AI 演演算法，根據影象的周圍內容智慧地推斷並填補影象中被遮擋、損壞或缺失的區域。"
+        "explanation": "影象修復是指利用生成式 AI 演演算法，根據影象的周圍內容智慧地推斷並填補影象中被遮擋、損壞或缺失的區域。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 180,
@@ -3057,7 +3236,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "如果判別器過於強大，它會輕易地識別出生成器生成的假資料，導致生成器得不到有效的梯度訊號來改進自身，從而無法有效地學習生成逼真的資料。"
+        "explanation": "如果判別器過於強大，它會輕易地識別出生成器生成的假資料，導致生成器得不到有效的梯度訊號來改進自身，從而無法有效地學習生成逼真的資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 181,
@@ -3074,7 +3254,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "RAG 結合了資訊檢索和生成模型，使 LLM 能夠從外部知識庫中檢索相關資訊，並以此為基礎生成更準確、事實性更強的回答，減少「幻覺」現象。"
+        "explanation": "RAG 結合了資訊檢索和生成模型，使 LLM 能夠從外部知識庫中檢索相關資訊，並以此為基礎生成更準確、事實性更強的回答，減少「幻覺」現象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 182,
@@ -3091,7 +3272,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "● GAN 是無監督學習，不需要大量的標註資料，因此資料標註成本通常不是其主要挑戰。<br>\n● 其主要挑戰包括模型崩潰、訓練不穩定性以及難以客觀評估生成品質。"
+        "explanation": "● GAN 是無監督學習，不需要大量的標註資料，因此資料標註成本通常不是其主要挑戰。<br>\n● 其主要挑戰包括模型崩潰、訓練不穩定性以及難以客觀評估生成品質。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 183,
@@ -3108,7 +3290,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 神經風格轉移的靈感來源於人類大腦對內容和風格的區分能力。<br>\n● 這種技術利用深度學習模型來提取影象的內容特徵和風格特徵，並將其結合以生成新的影象。"
+        "explanation": "● 神經風格轉移的靈感來源於人類大腦對內容和風格的區分能力。<br>\n● 這種技術利用深度學習模型來提取影象的內容特徵和風格特徵，並將其結合以生成新的影象。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 184,
@@ -3125,7 +3308,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GANs 和擴散模型（如 Stable Diffusion、DALL-E 2）在生成高解析度和逼真影象方面取得了突破性的進展。"
+        "explanation": "GANs 和擴散模型（如 Stable Diffusion、DALL-E 2）在生成高解析度和逼真影象方面取得了突破性的進展。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 185,
@@ -3142,7 +3326,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "超解析度技術旨在從低解析度影象生成高解析度影象，並在此過程中恢復細節和清晰度，從而使影象看起來更清晰、細節更豐富。"
+        "explanation": "超解析度技術旨在從低解析度影象生成高解析度影象，並在此過程中恢復細節和清晰度，從而使影象看起來更清晰、細節更豐富。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 186,
@@ -3159,7 +3344,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "條件化是指在生成式 AI 模型中，透過提供額外的輸入資訊（如文字描述、影象標籤、音訊風格等），來引導模型生成符合特定條件的內容。"
+        "explanation": "條件化是指在生成式 AI 模型中，透過提供額外的輸入資訊（如文字描述、影象標籤、音訊風格等），來引導模型生成符合特定條件的內容。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 187,
@@ -3176,7 +3362,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在情緒分析中，RNN的多對一架構能夠有效地處理長文字輸入，因為輸入是多個時間步（多個詞）而將其對映到單一的情感標籤上。"
+        "explanation": "在情緒分析中，RNN的多對一架構能夠有效地處理長文字輸入，因為輸入是多個時間步（多個詞）而將其對映到單一的情感標籤上。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 188,
@@ -3193,7 +3380,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Transformer 模型作為一種神經網路架構，透過自注意力機制提高了文字處理與生成的能力，並在多種生成式 AI 任務中取得了顯著的效果。"
+        "explanation": "Transformer 模型作為一種神經網路架構，透過自注意力機制提高了文字處理與生成的能力，並在多種生成式 AI 任務中取得了顯著的效果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 189,
@@ -3210,7 +3398,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成對抗網路（GAN）由兩個主要部分組成：生成器（Generator）負責生成假資料，而判別器（Discriminator）則負責區分真實資料與假資料。這種對抗性訓練使得生成器能夠生成越來越真實的資料。"
+        "explanation": "生成對抗網路（GAN）由兩個主要部分組成：生成器（Generator）負責生成假資料，而判別器（Discriminator）則負責區分真實資料與假資料。這種對抗性訓練使得生成器能夠生成越來越真實的資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 190,
@@ -3227,7 +3416,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Runway Gen-2 主要應用於影片生成，利用生成式 AI 技術建立高品質的影片內容。"
+        "explanation": "Runway Gen-2 主要應用於影片生成，利用生成式 AI 技術建立高品質的影片內容。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 191,
@@ -3244,7 +3434,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "監督式學習通常用於有標註的資料集，而無人機自動導航學習未知環境涉及到的是強化學習的應用，這通常不在監督式學習的範疇內。"
+        "explanation": "監督式學習通常用於有標註的資料集，而無人機自動導航學習未知環境涉及到的是強化學習的應用，這通常不在監督式學習的範疇內。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 192,
@@ -3261,7 +3452,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI 模型的「損失函式」數值代表預測結果與實際結果之間的誤差大小。<br>\n● 損失函式的目的是衡量模型生成內容的品質，並指導模型在訓練過程中進行調整。"
+        "explanation": "● 生成式 AI 模型的「損失函式」數值代表預測結果與實際結果之間的誤差大小。<br>\n● 損失函式的目的是衡量模型生成內容的品質，並指導模型在訓練過程中進行調整。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 193,
@@ -3278,7 +3470,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "企業在使用 AI 生成內容進行行銷時，必須遵守 GDPR（歐盟一般資料保護規則），以確保使用者的個人資料受到保護。"
+        "explanation": "企業在使用 AI 生成內容進行行銷時，必須遵守 GDPR（歐盟一般資料保護規則），以確保使用者的個人資料受到保護。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 194,
@@ -3295,7 +3488,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "GAN（生成對抗網路）因其生成高品質影象的能力，最容易被用於生成 Deepfake（深偽技術）。"
+        "explanation": "GAN（生成對抗網路）因其生成高品質影象的能力，最容易被用於生成 Deepfake（深偽技術）。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 195,
@@ -3312,7 +3506,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "神經常微分方程（Neural ODEs, Neural Ordinary Differential Equations） 的核心優勢是能夠在連續時間上建模資料變化，而不是像傳統 RNN 或 LSTM 那樣使用離散時間步長。"
+        "explanation": "神經常微分方程（Neural ODEs, Neural Ordinary Differential Equations） 的核心優勢是能夠在連續時間上建模資料變化，而不是像傳統 RNN 或 LSTM 那樣使用離散時間步長。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 196,
@@ -3329,7 +3524,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "注意力機制（Attention Mechanism） 最初是在 機器翻譯（Machine Translation） 的領域中被提出和應用的。"
+        "explanation": "注意力機制（Attention Mechanism） 最初是在 機器翻譯（Machine Translation） 的領域中被提出和應用的。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 197,
@@ -3346,7 +3542,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "深度機率圖模型（Deep Probabilistic Graphical Models）結合了深度學習和機率圖模型的優勢，能夠更好地處理不確定性和複雜性。"
+        "explanation": "深度機率圖模型（Deep Probabilistic Graphical Models）結合了深度學習和機率圖模型的優勢，能夠更好地處理不確定性和複雜性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 198,
@@ -3363,7 +3560,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "AI的資料飢餓問題指的是在訓練AI模型時，所需的高質量訓練資料不足，這會限制模型的效能和泛化能力。"
+        "explanation": "AI的資料飢餓問題指的是在訓練AI模型時，所需的高質量訓練資料不足，這會限制模型的效能和泛化能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 199,
@@ -3380,7 +3578,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "量子機器學習 (Quantum Machine Learning) 利用量子計算的特性，能夠在某些情況下顯著降低能源消耗，這是其潛在優勢之一。"
+        "explanation": "量子機器學習 (Quantum Machine Learning) 利用量子計算的特性，能夠在某些情況下顯著降低能源消耗，這是其潛在優勢之一。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 200,
@@ -3397,7 +3596,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自適應神經網路 (Adaptive Neural Networks) 能夠根據輸入資料的特性動態調整其結構，這使得它們在處理複雜問題時更加靈活和高效。"
+        "explanation": "自適應神經網路 (Adaptive Neural Networks) 能夠根據輸入資料的特性動態調整其結構，這使得它們在處理複雜問題時更加靈活和高效。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 201,
@@ -3414,7 +3614,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "可微分程式設計（Differentiable Programming） 是一種將程式設計與自動微分（Automatic Differentiation）結合的正規化，它的核心革新之處在於能夠對整個程式進行端到端的梯度最佳化。"
+        "explanation": "可微分程式設計（Differentiable Programming） 是一種將程式設計與自動微分（Automatic Differentiation）結合的正規化，它的核心革新之處在於能夠對整個程式進行端到端的梯度最佳化。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 202,
@@ -3431,7 +3632,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 模型能從資料中學習模式，並隨著資料量與經驗增加持續改進表現，無需明確的規則程式設計。<br>\n● 這與傳統程式設計的差異在於：機器學習依賴「資料」而非「手寫邏輯」來驅動決策與預測。"
+        "explanation": "● 模型能從資料中學習模式，並隨著資料量與經驗增加持續改進表現，無需明確的規則程式設計。<br>\n● 這與傳統程式設計的差異在於：機器學習依賴「資料」而非「手寫邏輯」來驅動決策與預測。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 203,
@@ -3448,7 +3650,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "神經邏輯機器（Neural Logic Machines）結合了邏輯推理和神經網路的優勢，能夠在處理複雜問題時提供更強的表現。"
+        "explanation": "神經邏輯機器（Neural Logic Machines）結合了邏輯推理和神經網路的優勢，能夠在處理複雜問題時提供更強的表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 204,
@@ -3465,7 +3668,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "圖表示學習（Graph Representation Learning）中的同質性是指相鄰節點之間的相似性，這使得模型能夠更好地捕捉圖結構中的潛在模式。"
+        "explanation": "圖表示學習（Graph Representation Learning）中的同質性是指相鄰節點之間的相似性，這使得模型能夠更好地捕捉圖結構中的潛在模式。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 205,
@@ -3482,7 +3686,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在多工表示學習（Multi-task Representation Learning） 中，模型的目標是同時學習多個任務的表示（features/embeddings），讓不同任務能夠互相幫助。<br>\n● 挑戰的核心在於：如何在任務之間有效地共享有用的特徵，同時避免任務之間的幹擾（負遷移）。"
+        "explanation": "● 在多工表示學習（Multi-task Representation Learning） 中，模型的目標是同時學習多個任務的表示（features/embeddings），讓不同任務能夠互相幫助。<br>\n● 挑戰的核心在於：如何在任務之間有效地共享有用的特徵，同時避免任務之間的幹擾（負遷移）。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 206,
@@ -3499,7 +3704,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "● 在神經架構進化（Neural Architecture Evolution）中，模型的目標是自動探索和最佳化神經網路的結構，以提高效能和效率。<br>\n● 這一過程通常涉及到使用進化演算法或其他自動化技術來調整網路的拓撲結構，從而實現更好的效果。"
+        "explanation": "● 在神經架構進化（Neural Architecture Evolution）中，模型的目標是自動探索和最佳化神經網路的結構，以提高效能和效率。<br>\n● 這一過程通常涉及到使用進化演算法或其他自動化技術來調整網路的拓撲結構，從而實現更好的效果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 207,
@@ -3516,7 +3722,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在機器人學中，三大法則是由科幻作家艾薩克·阿西莫夫（Isaac Asimov）提出的，這些法則旨在確保機器人對人類的安全和服務。<br>\n● 這些法則包括：1) 機器人不得傷害人類；2) 機器人必須服從人類的命令；3) 機器人必須保護自己的存在。"
+        "explanation": "● 在機器人學中，三大法則是由科幻作家艾薩克·阿西莫夫（Isaac Asimov）提出的，這些法則旨在確保機器人對人類的安全和服務。<br>\n● 這些法則包括：1) 機器人不得傷害人類；2) 機器人必須服從人類的命令；3) 機器人必須保護自己的存在。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 208,
@@ -3533,7 +3740,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在迴圈神經網路（RNN）中，特別適合處理序列資料，因為它們能夠捕捉時間序列中的長期依賴關係。<br>\n● RNN 透過將前一時間步的隱藏狀態傳遞到當前時間步，從而實現對序列資訊的記憶和利用。"
+        "explanation": "● 在迴圈神經網路（RNN）中，特別適合處理序列資料，因為它們能夠捕捉時間序列中的長期依賴關係。<br>\n● RNN 透過將前一時間步的隱藏狀態傳遞到當前時間步，從而實現對序列資訊的記憶和利用。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 209,
@@ -3550,7 +3758,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "● 在稀疏學習（Sparse Learning）中，主要作用是提高模型效率，透過引入稀疏性來減少計算量和記憶體使用。<br>\n● 這使得模型在處理大規模資料時更加高效，並且能夠在保持效能的同時降低資源消耗。"
+        "explanation": "● 在稀疏學習（Sparse Learning）中，主要作用是提高模型效率，透過引入稀疏性來減少計算量和記憶體使用。<br>\n● 這使得模型在處理大規模資料時更加高效，並且能夠在保持效能的同時降低資源消耗。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 210,
@@ -3567,7 +3776,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在神經程式設計（Neural Programming）中，主要目標是學習程式邏輯結構，透過自動化的方式生成和最佳化程式碼。<br>\n● 這使得開發者能夠更高效地建立和維護複雜的程式系統。"
+        "explanation": "● 在神經程式設計（Neural Programming）中，主要目標是學習程式邏輯結構，透過自動化的方式生成和最佳化程式碼。<br>\n● 這使得開發者能夠更高效地建立和維護複雜的程式系統。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 211,
@@ -3584,7 +3794,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 大規模運算能力是深度學習發展的關鍵因素之一，因為深度學習模型通常需要大量的計算資源來進行訓練和推理。<br>\n● 隨著硬體技術的進步，特別是 GPU 和 TPU 的發展，使得訓練大型深度學習模型變得更加可行。"
+        "explanation": "● 大規模運算能力是深度學習發展的關鍵因素之一，因為深度學習模型通常需要大量的計算資源來進行訓練和推理。<br>\n● 隨著硬體技術的進步，特別是 GPU 和 TPU 的發展，使得訓練大型深度學習模型變得更加可行。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 212,
@@ -3601,7 +3812,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在語意分割（Semantic Segmentation）任務中，我們需要對影象中的每一個畫素進行分類，也就是進行密集預測（dense prediction）。"
+        "explanation": "在語意分割（Semantic Segmentation）任務中，我們需要對影象中的每一個畫素進行分類，也就是進行密集預測（dense prediction）。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 213,
@@ -3618,7 +3830,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在生成式AI系統中，穩定性通常與自治邊界理論的動態穩定性最為接近，因為這一理論強調系統在面對不確定性和變化時的自我調整能力。"
+        "explanation": "在生成式AI系統中，穩定性通常與自治邊界理論的動態穩定性最為接近，因為這一理論強調系統在面對不確定性和變化時的自我調整能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 214,
@@ -3635,7 +3848,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在生成式AI系統中，複雜性通常與自組織臨界態最為接近，因為這一概念強調系統在面對不確定性和變化時的自我調整能力。"
+        "explanation": "在生成式AI系統中，複雜性通常與自組織臨界態最為接近，因為這一概念強調系統在面對不確定性和變化時的自我調整能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 215,
@@ -3652,7 +3866,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在生成式AI系統中，主要商業價值通常體現在提高生產效率上，因為這一技術能夠自動化許多繁瑣的任務，從而釋放人力資源，提升整體工作效率。"
+        "explanation": "在生成式AI系統中，主要商業價值通常體現在提高生產效率上，因為這一技術能夠自動化許多繁瑣的任務，從而釋放人力資源，提升整體工作效率。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 216,
@@ -3669,7 +3884,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式AI旨在透過自動化和智慧化工具，輔助並擴充人類的認知和創造力，而非完全取代人類或只追求純技術突破。它是人機協作的助力，讓人類能做得更多、更好。"
+        "explanation": "生成式AI旨在透過自動化和智慧化工具，輔助並擴充人類的認知和創造力，而非完全取代人類或只追求純技術突破。它是人機協作的助力，讓人類能做得更多、更好。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 217,
@@ -3686,7 +3902,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "產生式 AI 模型（例如變分自編碼器 VAE、生成對抗網路 GAN 及許多基於機率的產生模型）通常利用機率模型和變分推斷（Variational Inference）來學習資料的潛在分佈。"
+        "explanation": "產生式 AI 模型（例如變分自編碼器 VAE、生成對抗網路 GAN 及許多基於機率的產生模型）通常利用機率模型和變分推斷（Variational Inference）來學習資料的潛在分佈。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 218,
@@ -3703,7 +3920,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI 系統具有高度非平衡、動態且隨機的特性，其行為類似於物理學中非平衡熱力學系統。<br>\n● 漲落耗散定理（Fluctuation-Dissipation Theorem）：描述系統如何在隨機擾動（漲落）與耗散過程中產生熵，對應產生式 AI 中隨機生成與學習調整的過程。<br>\n● 這種熵產生和動態平衡的過程最貼近生成式 AI 系統的「熱力學類比」。"
+        "explanation": "● 生成式 AI 系統具有高度非平衡、動態且隨機的特性，其行為類似於物理學中非平衡熱力學系統。<br>\n● 漲落耗散定理（Fluctuation-Dissipation Theorem）：描述系統如何在隨機擾動（漲落）與耗散過程中產生熵，對應產生式 AI 中隨機生成與學習調整的過程。<br>\n● 這種熵產生和動態平衡的過程最貼近生成式 AI 系統的「熱力學類比」。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 219,
@@ -3720,7 +3938,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI 處理的高維資料通常存在於複雜且非線性的流形結構中。拓撲資料分析（Topological Data Analysis, TDA） 尤其是 持續同調（Persistent Homology） 技術，能夠捕捉資料在不同尺度上的拓撲特徵，幫助理解高維流形的形狀與結構。<br>\n● 這種方法能夠揭示資料的內在結構，並提供對高維資料流形的深入理解，這在生成式 AI 中尤為重要。<br>\n● 因此，拓撲資料分析的持續同調最接近於生成式 AI 中對高維資料流形的建模與理解。<br>\n● 這種方法最接近生成式 AI 中對高維資料流形的建模與理解。"
+        "explanation": "● 生成式 AI 處理的高維資料通常存在於複雜且非線性的流形結構中。拓撲資料分析（Topological Data Analysis, TDA） 尤其是 持續同調（Persistent Homology） 技術，能夠捕捉資料在不同尺度上的拓撲特徵，幫助理解高維流形的形狀與結構。<br>\n● 這種方法能夠揭示資料的內在結構，並提供對高維資料流形的深入理解，這在生成式 AI 中尤為重要。<br>\n● 因此，拓撲資料分析的持續同調最接近於生成式 AI 中對高維資料流形的建模與理解。<br>\n● 這種方法最接近生成式 AI 中對高維資料流形的建模與理解。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 220,
@@ -3737,7 +3956,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI 模型（如 GAN、VAE、Transformer 等）在訓練或推理過程中，經常會表現出系統行為的劇烈變化。<br>\n● 例如：模型突然從「不產生有意義內容」跳躍到「產出高品質樣本」<br>\n● 訓練中某些超引數微小變化導致結果大幅不同。<br>\n● 這種現象在物理與數學中稱為相變（Phase Transition），其特性與 非線性動力學中的分岔理論（Bifurcation Theory） 非常相似<br>\n—— 當系統引數達到臨界點時，動態行為突然改變或轉向新的穩定狀態。"
+        "explanation": "● 生成式 AI 模型（如 GAN、VAE、Transformer 等）在訓練或推理過程中，經常會表現出系統行為的劇烈變化。<br>\n● 例如：模型突然從「不產生有意義內容」跳躍到「產出高品質樣本」<br>\n● 訓練中某些超引數微小變化導致結果大幅不同。<br>\n● 這種現象在物理與數學中稱為相變（Phase Transition），其特性與 非線性動力學中的分岔理論（Bifurcation Theory） 非常相似<br>\n—— 當系統引數達到臨界點時，動態行為突然改變或轉向新的穩定狀態。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 221,
@@ -3754,7 +3974,8 @@
         ],
         "weight": 5,
         "image": null,
-        "explanation": "● 在生成式 AI 模型（如 VAE、GAN、Diffusion models）中，模型通常是用來學習資料的機率分佈。<br>\n● 而訓練的核心目標之一是：衡量與最小化模型產生分佈與真實資料分佈之間的差距。<br>\n● 這種差距的常見度量方式是：✅ 相對熵（Relative Entropy）或 KL 散度（Kullback–Leibler divergence）<br>\n● 它不是對稱的距離，但非常適合用來衡量兩個機率分佈之間的差異。<br>\n● 在 VAE 中，KL 散度是損失函式的重要組成部分。"
+        "explanation": "● 在生成式 AI 模型（如 VAE、GAN、Diffusion models）中，模型通常是用來學習資料的機率分佈。<br>\n● 而訓練的核心目標之一是：衡量與最小化模型產生分佈與真實資料分佈之間的差距。<br>\n● 這種差距的常見度量方式是：✅ 相對熵（Relative Entropy）或 KL 散度（Kullback–Leibler divergence）<br>\n● 它不是對稱的距離，但非常適合用來衡量兩個機率分佈之間的差異。<br>\n● 在 VAE 中，KL 散度是損失函式的重要組成部分。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 222,
@@ -3771,7 +3992,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 生成式 AI（如 GPT、DALL·E、Stable Diffusion 等）最令人驚嘆的能力在於：能夠產生全新、原創性的內容，包括文字、影象、音樂、程式碼等，模擬出近似人類創意的結果。<br>\n● 這種能力不僅突破了傳統 AI 的分類與識別限制，也在藝術、寫作、設計等領域展現出巨大的潛力與價值。"
+        "explanation": "● 生成式 AI（如 GPT、DALL·E、Stable Diffusion 等）最令人驚嘆的能力在於：能夠產生全新、原創性的內容，包括文字、影象、音樂、程式碼等，模擬出近似人類創意的結果。<br>\n● 這種能力不僅突破了傳統 AI 的分類與識別限制，也在藝術、寫作、設計等領域展現出巨大的潛力與價值。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 223,
@@ -3788,7 +4010,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多模態學習是生成式 AI 的前沿技術發展方向之一，其核心在於融合多種資料型態（模態），如文字、影象、語音、影片、感測資料等進行理解與產生。"
+        "explanation": "多模態學習是生成式 AI 的前沿技術發展方向之一，其核心在於融合多種資料型態（模態），如文字、影象、語音、影片、感測資料等進行理解與產生。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 224,
@@ -3805,7 +4028,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在生成式 AI 的多模態整合中，AI 系統不只是簡單地把不同模態（如文字、影象、聲音）拼在一起，而是要：在不同模態間建立語意關聯與共同理解，實現互補與協同的資訊學習。<br>\n這正符合 協同學習理論（Co-learning Theory） 的核心精神。"
+        "explanation": "在生成式 AI 的多模態整合中，AI 系統不只是簡單地把不同模態（如文字、影象、聲音）拼在一起，而是要：在不同模態間建立語意關聯與共同理解，實現互補與協同的資訊學習。<br>\n這正符合 協同學習理論（Co-learning Theory） 的核心精神。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 225,
@@ -3822,7 +4046,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 模型的效能理論邊界，尤其是在高維空間中學習與產生資料的能力，主要受到資訊幾何學（Information Geometry）所描述的樣本複雜度（Sample Complexity）所決定。"
+        "explanation": "生成式 AI 模型的效能理論邊界，尤其是在高維空間中學習與產生資料的能力，主要受到資訊幾何學（Information Geometry）所描述的樣本複雜度（Sample Complexity）所決定。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 226,
@@ -3839,7 +4064,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 模型的學習動態可以用機率微分幾何（Probabilistic Differential Geometry）來描述，這是一種結合了機率論與微分幾何的理論框架，能夠有效捕捉模型在高維空間中的學習過程與結構特徵。"
+        "explanation": "生成式 AI 模型的學習動態可以用機率微分幾何（Probabilistic Differential Geometry）來描述，這是一種結合了機率論與微分幾何的理論框架，能夠有效捕捉模型在高維空間中的學習過程與結構特徵。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 227,
@@ -3856,7 +4082,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 技術的主要發展驅動因素是深度學習和大資料。深度學習提供了強大的模型架構和訓練方法，而大資料則為模型提供了豐富的訓練資料，這兩者的結合推動了生成式 AI 的快速發展。"
+        "explanation": "生成式 AI 技術的主要發展驅動因素是深度學習和大資料。深度學習提供了強大的模型架構和訓練方法，而大資料則為模型提供了豐富的訓練資料，這兩者的結合推動了生成式 AI 的快速發展。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 228,
@@ -3873,7 +4100,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式 AI 模型的動態特性最接近遍歷性理論的軌跡不變性，這意味著在不同的初始條件下，模型的學習過程會遵循相似的軌跡，並最終收斂到相似的結果。"
+        "explanation": "生成式 AI 模型的動態特性最接近遍歷性理論的軌跡不變性，這意味著在不同的初始條件下，模型的學習過程會遵循相似的軌跡，並最終收斂到相似的結果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 229,
@@ -3890,7 +4118,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "以企業資料訓練全新的大語言模型，因為這需要大量的資源和專業知識，對於一般企業來說並不現實。"
+        "explanation": "以企業資料訓練全新的大語言模型，因為這需要大量的資源和專業知識，對於一般企業來說並不現實。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 230,
@@ -3907,7 +4136,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成式對話系統的主要目標是生成與人類對話相似的內容，這需要模型具備理解語境、情感和意圖的能力。"
+        "explanation": "生成式對話系統的主要目標是生成與人類對話相似的內容，這需要模型具備理解語境、情感和意圖的能力。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 231,
@@ -3924,7 +4154,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "基於學習風格，機器學習被分成四類：監督式學習、非監督式學習、半監督式學習和強化學習。"
+        "explanation": "基於學習風格，機器學習被分成四類：監督式學習、非監督式學習、半監督式學習和強化學習。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 232,
@@ -3941,7 +4172,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "電腦神經元儲存各種刺激訊號是以數值表示，我們常用權重w的大小來表示輸入訊號不同的強度。"
+        "explanation": "電腦神經元儲存各種刺激訊號是以數值表示，我們常用權重w的大小來表示輸入訊號不同的強度。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 233,
@@ -3958,7 +4190,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CNN的架構包含卷積層、池化層、全連線層等，並不包含遺忘層。"
+        "explanation": "CNN的架構包含卷積層、池化層、全連線層等，並不包含遺忘層。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 234,
@@ -3975,7 +4208,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "迴歸和分類演演算法都是監督式學習的一部分，因為它們都依賴於標記資料進行訓練。"
+        "explanation": "迴歸和分類演演算法都是監督式學習的一部分，因為它們都依賴於標記資料進行訓練。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 235,
@@ -3992,7 +4226,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K-平均演演算法（k-means clustering）是一種非監督式學習演演算法，訓練資料不需要標籤。"
+        "explanation": "K-平均演演算法（k-means clustering）是一種非監督式學習演演算法，訓練資料不需要標籤。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 236,
@@ -4009,7 +4244,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 非監督式學習不需要人力事先處理標籤，因此不需要大量人力。<br>\n● 相對於監督式學習，非監督式學習通常需要更多的計算資源，但不需要人力標記資料。"
+        "explanation": "● 非監督式學習不需要人力事先處理標籤，因此不需要大量人力。<br>\n● 相對於監督式學習，非監督式學習通常需要更多的計算資源，但不需要人力標記資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 237,
@@ -4026,7 +4262,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在支援向量機（SVM, Support Vector Machine） 中，目標是最大化分類超平面與最近的資料點（即支援向量）之間的距離（稱為 margin），這樣可以提升分類的泛化能力。<br>\n● 👉 正確的目標是讓點離分類線「越遠越好」，特別是邊界上最近的幾個點（即支援向量）。"
+        "explanation": "● 在支援向量機（SVM, Support Vector Machine） 中，目標是最大化分類超平面與最近的資料點（即支援向量）之間的距離（稱為 margin），這樣可以提升分類的泛化能力。<br>\n● 👉 正確的目標是讓點離分類線「越遠越好」，特別是邊界上最近的幾個點（即支援向量）。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 238,
@@ -4043,7 +4280,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 在決策樹中，特點是每個決策階段都相當的明確清楚（不是YES就是NO）。<br>\n● 👉 決策樹容易發生過度擬合，特別是在樹的深度較大時。"
+        "explanation": "● 在決策樹中，特點是每個決策階段都相當的明確清楚（不是YES就是NO）。<br>\n● 👉 決策樹容易發生過度擬合，特別是在樹的深度較大時。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 239,
@@ -4060,7 +4298,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K-平均演演算法（K-means clustering）是一種非監督式學習演演算法，用於將資料分成不同的群集，而不需要事先標記資料。"
+        "explanation": "K-平均演演算法（K-means clustering）是一種非監督式學習演演算法，用於將資料分成不同的群集，而不需要事先標記資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 240,
@@ -4077,7 +4316,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "中繼閥門(Relay Gate) 不是 LSTM 模型內的閥門。LSTM 模型內的閥門包括遺忘閥門(Forget Gate)、輸入閥門(Input Gate) 和 輸出閥門(Output Gate)。"
+        "explanation": "中繼閥門(Relay Gate) 不是 LSTM 模型內的閥門。LSTM 模型內的閥門包括遺忘閥門(Forget Gate)、輸入閥門(Input Gate) 和 輸出閥門(Output Gate)。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 241,
@@ -4094,7 +4334,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "神經元需要 bias 的原因是增加分類的能力。透過引入 bias，神經元可以更好地適應資料，從而提高模型的表現。"
+        "explanation": "神經元需要 bias 的原因是增加分類的能力。透過引入 bias，神經元可以更好地適應資料，從而提高模型的表現。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 242,
@@ -4111,7 +4352,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "神經網路的輸入可以是向量、文字、圖形等多種形式，因此選擇「以上皆是」是正確的。"
+        "explanation": "神經網路的輸入可以是向量、文字、圖形等多種形式，因此選擇「以上皆是」是正確的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 243,
@@ -4128,7 +4370,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "多層神經網路的輸入可以是圖片或文字，但不僅限於此，因此選擇「多層神經網路的輸入是圖片或文字」是正確的。"
+        "explanation": "多層神經網路的輸入可以是圖片或文字，但不僅限於此，因此選擇「多層神經網路的輸入是圖片或文字」是正確的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 244,
@@ -4145,7 +4388,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "監督式學習的特點是訓練資料需要標籤，因此選擇「從資料中自行探索出潛在的特徵」是錯誤的。"
+        "explanation": "監督式學習的特點是訓練資料需要標籤，因此選擇「從資料中自行探索出潛在的特徵」是錯誤的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 245,
@@ -4162,7 +4406,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "強化學習的特點是需要定義狀態(State)、時間(Time)與相對應的行動(Action)，因此選擇「不需要定義狀態(State)，只需要定義時間(Time)與相對應的行動(Action)」是錯誤的。"
+        "explanation": "強化學習的特點是需要定義狀態(State)、時間(Time)與相對應的行動(Action)，因此選擇「不需要定義狀態(State)，只需要定義時間(Time)與相對應的行動(Action)」是錯誤的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 246,
@@ -4179,7 +4424,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 機器學習（Machine Learning, ML）是人工智慧（Artificial Intelligence, AI）的子集，專注於讓機器從資料中學習。<br>\n● 深度學習（Deep Learning, DL）則是機器學習的一個分支，使用多層神經網路來進行更複雜的學習任務。<br>\n● 因此，正確的順序是：人工智慧、機器學習、深度學習。"
+        "explanation": "● 機器學習（Machine Learning, ML）是人工智慧（Artificial Intelligence, AI）的子集，專注於讓機器從資料中學習。<br>\n● 深度學習（Deep Learning, DL）則是機器學習的一個分支，使用多層神經網路來進行更複雜的學習任務。<br>\n● 因此，正確的順序是：人工智慧、機器學習、深度學習。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 247,
@@ -4196,7 +4442,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 半監督學習是一種結合了監督式學習和非監督式學習的方法，通常使用較少的標記資料和大量的未標記資料進行訓練。<br>\n● 因此，選擇「半監督學習相對監督學習使用較多資料標籤訓練模型」是錯誤的。"
+        "explanation": "● 半監督學習是一種結合了監督式學習和非監督式學習的方法，通常使用較少的標記資料和大量的未標記資料進行訓練。<br>\n● 因此，選擇「半監督學習相對監督學習使用較多資料標籤訓練模型」是錯誤的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 248,
@@ -4213,7 +4460,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● K-means 是一種非監督式學習演演算法，主要用於資料分群。<br>\n● 因此，選擇「K-means 演演算法行時，通常須要計算各個群中心之間的距離」是錯誤的。"
+        "explanation": "● K-means 是一種非監督式學習演演算法，主要用於資料分群。<br>\n● 因此，選擇「K-means 演演算法行時，通常須要計算各個群中心之間的距離」是錯誤的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 249,
@@ -4230,7 +4478,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 將影像轉成灰階影像格式並不是必須的，許多深度學習網路可以直接處理彩色影像。<br>\n● 因此，「一定要轉成灰階影像格式才能輸入深度學習網路中學習」是錯誤的。"
+        "explanation": "● 將影像轉成灰階影像格式並不是必須的，許多深度學習網路可以直接處理彩色影像。<br>\n● 因此，「一定要轉成灰階影像格式才能輸入深度學習網路中學習」是錯誤的。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 250,
@@ -4247,7 +4496,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像物件分類的應用主要是辨識影像中的特定物件，例如交通號誌、行人、車輛等。"
+        "explanation": "影像物件分類的應用主要是辨識影像中的特定物件，例如交通號誌、行人、車輛等。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 251,
@@ -4264,7 +4514,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 影像生成技術的應用主要是創造新的影像內容，而非僅僅分析或辨識現有影像中的物件。<br>\n● 因此，「偵測影像上是否有交通號誌」是錯誤的。"
+        "explanation": "● 影像生成技術的應用主要是創造新的影像內容，而非僅僅分析或辨識現有影像中的物件。<br>\n● 因此，「偵測影像上是否有交通號誌」是錯誤的。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 252,
@@ -4281,7 +4532,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 訓練策略在深度學習中是非常重要的一環，選擇合適的訓練策略可以顯著提高模型的效能。<br>\n● 因此，「訓練策略不是重要的一環」是錯誤的。"
+        "explanation": "● 訓練策略在深度學習中是非常重要的一環，選擇合適的訓練策略可以顯著提高模型的效能。<br>\n● 因此，「訓練策略不是重要的一環」是錯誤的。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 253,
@@ -4298,7 +4550,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "目標物定位（Object Localization） 是用來找出影像中感興趣物件的位置與邊界，例如畫出物體的邊框或區域，是正確答案。"
+        "explanation": "目標物定位（Object Localization） 是用來找出影像中感興趣物件的位置與邊界，例如畫出物體的邊框或區域，是正確答案。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 254,
@@ -4315,7 +4568,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 將無標記照片透過CNN進行影象分析，提取每種情緒特徵，即可建構出一套情緒辨識系統。這句是錯的。<br>\n● 這句話的錯誤在於：「無標記照片」與「建構情緒辨識系統」之間的矛盾。<br>\n● 建立情緒辨識系統（例如使用 CNN）屬於監督式學習。<br>\n● 監督式學習需要大量「已標記」（有標示情緒類別）的資料，讓模型學習每種情緒的特徵。<br>\n● 如果資料是「無標記」的，模型無法知道哪些特徵對應哪些情緒，就無法有效進行訓練。"
+        "explanation": "● 將無標記照片透過CNN進行影象分析，提取每種情緒特徵，即可建構出一套情緒辨識系統。這句是錯的。<br>\n● 這句話的錯誤在於：「無標記照片」與「建構情緒辨識系統」之間的矛盾。<br>\n● 建立情緒辨識系統（例如使用 CNN）屬於監督式學習。<br>\n● 監督式學習需要大量「已標記」（有標示情緒類別）的資料，讓模型學習每種情緒的特徵。<br>\n● 如果資料是「無標記」的，模型無法知道哪些特徵對應哪些情緒，就無法有效進行訓練。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 255,
@@ -4332,7 +4586,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Jieba 是一個專門用於中文斷詞的工具，能夠有效地將中文句子切分成詞語。"
+        "explanation": "Jieba 是一個專門用於中文斷詞的工具，能夠有效地將中文句子切分成詞語。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 256,
@@ -4349,7 +4604,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Decoder 是 seq2seq 架構中的一部分，負責將 context vector 轉換成可理解的文字。Encoder 則是將輸入文字轉換為 context vector 的部分。"
+        "explanation": "Decoder 是 seq2seq 架構中的一部分，負責將 context vector 轉換成可理解的文字。Encoder 則是將輸入文字轉換為 context vector 的部分。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 257,
@@ -4366,7 +4622,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "IBM Watson 是一個強大的問答系統，能夠理解和處理自然語言問題，並提供相應的答案。"
+        "explanation": "IBM Watson 是一個強大的問答系統，能夠理解和處理自然語言問題，並提供相應的答案。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 258,
@@ -4383,7 +4640,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "LSTM（長短期記憶網路）是為瞭解決 RNN（迴圈神經網路）在處理長序列時出現的梯度消失問題。"
+        "explanation": "LSTM（長短期記憶網路）是為瞭解決 RNN（迴圈神經網路）在處理長序列時出現的梯度消失問題。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 259,
@@ -4400,7 +4658,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "Jieba 的三種分詞模式為精確模式、全模式和搜尋引擎模式，並不包括半自動搜尋模式。"
+        "explanation": "Jieba 的三種分詞模式為精確模式、全模式和搜尋引擎模式，並不包括半自動搜尋模式。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 260,
@@ -4417,7 +4676,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "設計對話是建置聊天機器人的第一步，這一步驟需要考慮使用者需求、對話流程和系統功能等因素。"
+        "explanation": "設計對話是建置聊天機器人的第一步，這一步驟需要考慮使用者需求、對話流程和系統功能等因素。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 261,
@@ -4434,7 +4694,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "BERT（Bidirectional Encoder Representations from Transformers）是 Google 對於 NLP 領域研發的模型，能夠有效地處理各種自然語言處理任務。"
+        "explanation": "BERT（Bidirectional Encoder Representations from Transformers）是 Google 對於 NLP 領域研發的模型，能夠有效地處理各種自然語言處理任務。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 262,
@@ -4451,7 +4712,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 抽取式摘要（Extractive Summarization）是從原始文字中挑選關鍵句子或片段組成摘要。它不會產生原文中沒有的新句子或詞彙。<br>\n● 抽象式摘要（Abstractive Summarization）會重新表達意思、使用新句子或不同詞彙，甚至產生原文中沒有出現的語句，較類似人類的摘要方式。"
+        "explanation": "● 抽取式摘要（Extractive Summarization）是從原始文字中挑選關鍵句子或片段組成摘要。它不會產生原文中沒有的新句子或詞彙。<br>\n● 抽象式摘要（Abstractive Summarization）會重新表達意思、使用新句子或不同詞彙，甚至產生原文中沒有出現的語句，較類似人類的摘要方式。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 263,
@@ -4468,7 +4730,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 問答系統：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n● 任務導向型對話系統：旨在完成特定任務，如預訂機票或訂餐。<br>\n● 閒聊系統：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n● 推薦系統：根據使用者的偏好和行為提供個性化的建議。<br>\n<br>\n因此，「(3) 閒聊系統」無法針對特定領域進行對談。"
+        "explanation": "● 問答系統：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n● 任務導向型對話系統：旨在完成特定任務，如預訂機票或訂餐。<br>\n● 閒聊系統：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n● 推薦系統：根據使用者的偏好和行為提供個性化的建議。<br>\n<br>\n因此，「(3) 閒聊系統」無法針對特定領域進行對談。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 264,
@@ -4485,7 +4748,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CKIP（Chinese Knowledge and Information Processing）是中文斷詞工具，能夠有效地進行中文文字的斷詞處理。"
+        "explanation": "CKIP（Chinese Knowledge and Information Processing）是中文斷詞工具，能夠有效地進行中文文字的斷詞處理。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 265,
@@ -4502,7 +4766,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "CNN（卷積神經網路）主要用於影象處理，對於文字資料的情感分析並不是最常用的技術。"
+        "explanation": "CNN（卷積神經網路）主要用於影象處理，對於文字資料的情感分析並不是最常用的技術。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 266,
@@ -4519,7 +4784,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "問答機器人的實行步驟應該是：<br>\n1. 使用者輸入資料（3）<br>\n2. 分析使用者意圖（1）<br>\n3. 抓取關鍵引數（2）<br>\n4. 輸出回答（4）<br>\n因此正確的順序是 3124。"
+        "explanation": "問答機器人的實行步驟應該是：<br>\n1. 使用者輸入資料（3）<br>\n2. 分析使用者意圖（1）<br>\n3. 抓取關鍵引數（2）<br>\n4. 輸出回答（4）<br>\n因此正確的順序是 3124。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 267,
@@ -4536,7 +4802,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "聊天機器人的功能簡單分為四項：<br>\n1. 問答系統：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n2. 任務導向型對話系統：旨在完成特定任務，如預訂機票或訂餐。<br>\n3. 閒聊系統：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n4. 情感系統：專注於識別和理解使用者的情感狀態。<br>\n<br>\n因此，「情感系統」並不是聊天機器人的基本功能之一。"
+        "explanation": "聊天機器人的功能簡單分為四項：<br>\n1. 問答系統：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n2. 任務導向型對話系統：旨在完成特定任務，如預訂機票或訂餐。<br>\n3. 閒聊系統：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n4. 情感系統：專注於識別和理解使用者的情感狀態。<br>\n<br>\n因此，「情感系統」並不是聊天機器人的基本功能之一。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 268,
@@ -4553,7 +4820,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "聊天機器人的功能簡單分為四項：<br>\n1. 問答型別：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n2. 任務導向型別：旨在完成特定任務，如預訂機票或訂餐。<br>\n3. 閒聊型別：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n4. 主動推薦型別：根據使用者的偏好和行為提供個性化的建議。<br>\n<br>\n因此，「問答型別」功能主要是以知識取得為主。"
+        "explanation": "聊天機器人的功能簡單分為四項：<br>\n1. 問答型別：專注於回答使用者的問題，通常基於知識庫或文件進行查詢。<br>\n2. 任務導向型別：旨在完成特定任務，如預訂機票或訂餐。<br>\n3. 閒聊型別：設計用來進行輕鬆的對話，通常不針對特定任務。<br>\n4. 主動推薦型別：根據使用者的偏好和行為提供個性化的建議。<br>\n<br>\n因此，「問答型別」功能主要是以知識取得為主。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 269,
@@ -4570,7 +4838,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "館藏查詢系統主要是基於資料庫的查詢系統，並不涉及大資料和人工智慧的技術應用。"
+        "explanation": "館藏查詢系統主要是基於資料庫的查詢系統，並不涉及大資料和人工智慧的技術應用。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 270,
@@ -4587,7 +4856,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "機器學習是訓練 AI 執行編曲寫詞的工作中最有可能利用的人工智慧特性。"
+        "explanation": "機器學習是訓練 AI 執行編曲寫詞的工作中最有可能利用的人工智慧特性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 271,
@@ -4604,7 +4874,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "目前的 AI 技術在文字情感分析上能夠找到關鍵詞並參考統計資料來分析情緒，但仍然有可能出錯，特別是在處理複雜或含有諷刺的文字時。"
+        "explanation": "目前的 AI 技術在文字情感分析上能夠找到關鍵詞並參考統計資料來分析情緒，但仍然有可能出錯，特別是在處理複雜或含有諷刺的文字時。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 272,
@@ -4621,7 +4892,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "圖形解析並不是現有文字情感分析的主要途徑之一。"
+        "explanation": "圖形解析並不是現有文字情感分析的主要途徑之一。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 273,
@@ -4638,7 +4910,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "透過以往審判資料進行學習，分析具有哪種特性的人會反覆地犯罪，是一種正確的方法。"
+        "explanation": "透過以往審判資料進行學習，分析具有哪種特性的人會反覆地犯罪，是一種正確的方法。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 274,
@@ -4655,7 +4928,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "TensorFlow 主要是使用 Python 語言進行開發，其他語言如 C++ 和 CUDA 主要用於效能最佳化和底層實現，而 .NET Framework 並不是 TensorFlow 的主要開發語言。"
+        "explanation": "TensorFlow 主要是使用 Python 語言進行開發，其他語言如 C++ 和 CUDA 主要用於效能最佳化和底層實現，而 .NET Framework 並不是 TensorFlow 的主要開發語言。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 275,
@@ -4672,7 +4946,8 @@
         ],
         "weight": 2,
         "image": null,
-        "explanation": "卷積神經網路無法被用於自然語言處理的說法是錯誤的，因為卷積神經網路也可以應用於文字資料的處理。"
+        "explanation": "卷積神經網路無法被用於自然語言處理的說法是錯誤的，因為卷積神經網路也可以應用於文字資料的處理。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 276,
@@ -4689,7 +4964,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "協助從事家庭中重複性質高的工作，減少勞動成本，並不是聊天機器人商業應用的主要原因。聊天機器人主要是用於商業銷售、客戶服務和資料分析等方面，而不是專注於家庭工作。"
+        "explanation": "協助從事家庭中重複性質高的工作，減少勞動成本，並不是聊天機器人商業應用的主要原因。聊天機器人主要是用於商業銷售、客戶服務和資料分析等方面，而不是專注於家庭工作。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 277,
@@ -4706,7 +4982,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "使用者提出問題，斷詞解析，產生關鍵字，搜尋資料集，排序答覆，回饋使用者，這是 QA 機器人提問時的實際運作情況。"
+        "explanation": "使用者提出問題，斷詞解析，產生關鍵字，搜尋資料集，排序答覆，回饋使用者，這是 QA 機器人提問時的實際運作情況。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 278,
@@ -4723,7 +5000,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "穿戴式裝置能提供被保險人健康方面的資訊，透過收集生理資料來協助健康管理。"
+        "explanation": "穿戴式裝置能提供被保險人健康方面的資訊，透過收集生理資料來協助健康管理。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 279,
@@ -4740,7 +5018,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 人工智慧（AI）確實可以協助簡化流程與辨識部分風險，例如加速理賠、識別詐騙、風險預測等。<br>\n● 但說「防範任何風險」是一個過度誇張且不實際的說法。<br>\n👉 在現實中，AI 無法防止所有風險，只能降低部分風險或提供風險預警與輔助判斷。<br>\n● 風險管理依然需要專業知識、人為判斷與制度配合。"
+        "explanation": "● 人工智慧（AI）確實可以協助簡化流程與辨識部分風險，例如加速理賠、識別詐騙、風險預測等。<br>\n● 但說「防範任何風險」是一個過度誇張且不實際的說法。<br>\n👉 在現實中，AI 無法防止所有風險，只能降低部分風險或提供風險預警與輔助判斷。<br>\n● 風險管理依然需要專業知識、人為判斷與制度配合。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 280,
@@ -4757,7 +5036,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "減少農作物的生長週期並不是人工智慧搭配自動化機械應用於農業上的主要成果。人工智慧和自動化機械主要是用來提高效率、降低成本、提升品質和選擇最佳的栽種時機，而不是直接縮短生長週期。"
+        "explanation": "減少農作物的生長週期並不是人工智慧搭配自動化機械應用於農業上的主要成果。人工智慧和自動化機械主要是用來提高效率、降低成本、提升品質和選擇最佳的栽種時機，而不是直接縮短生長週期。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 281,
@@ -4774,7 +5054,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 基於熱門度的推薦是針對新使用者的一種常見技術，因為它不需要使用者的歷史資料，而是根據整體使用者的行為來推薦最受歡迎的商品。<br>\n● 這樣可以在沒有使用者偏好資料的情況下提供初步的推薦。"
+        "explanation": "● 基於熱門度的推薦是針對新使用者的一種常見技術，因為它不需要使用者的歷史資料，而是根據整體使用者的行為來推薦最受歡迎的商品。<br>\n● 這樣可以在沒有使用者偏好資料的情況下提供初步的推薦。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 282,
@@ -4791,7 +5072,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "協同過濾能過濾難以自動分析的資訊，如藝術品，音樂，但給新的使用者推薦品質較佳的說法並不正確。"
+        "explanation": "協同過濾能過濾難以自動分析的資訊，如藝術品，音樂，但給新的使用者推薦品質較佳的說法並不正確。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 283,
@@ -4808,7 +5090,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "基於時間上下文的資訊是指根據不同時間段（如早中晚）來推薦適合的食物或優惠券。這種推薦方式考慮了用餐習慣和時間因素，能夠提供更符合使用者需求的建議。"
+        "explanation": "基於時間上下文的資訊是指根據不同時間段（如早中晚）來推薦適合的食物或優惠券。這種推薦方式考慮了用餐習慣和時間因素，能夠提供更符合使用者需求的建議。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 284,
@@ -4825,7 +5108,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "通訊軟體 Line 的購物平臺推薦系統利用人工智慧分析使用者的購物行為和偏好，提供個性化的商品推薦。"
+        "explanation": "通訊軟體 Line 的購物平臺推薦系統利用人工智慧分析使用者的購物行為和偏好，提供個性化的商品推薦。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 285,
@@ -4842,7 +5126,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "增加人力的需求量並不是人工智慧用於購物平臺的客戶分析所帶來的好處。相反地，人工智慧的應用通常是為了減少人力需求，提高效率和降低成本。"
+        "explanation": "增加人力的需求量並不是人工智慧用於購物平臺的客戶分析所帶來的好處。相反地，人工智慧的應用通常是為了減少人力需求，提高效率和降低成本。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 286,
@@ -4859,7 +5144,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人口資訊並不是預測顧客喜好所需要的資訊。預測顧客喜好通常需要分析瀏覽資料、購物車和社群媒體等資訊。"
+        "explanation": "人口資訊並不是預測顧客喜好所需要的資訊。預測顧客喜好通常需要分析瀏覽資料、購物車和社群媒體等資訊。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 287,
@@ -4876,7 +5162,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "靠結構化的的資料精準行銷並不是 AI 人工智慧於銀行業的應用機會。相反地，人工智慧的應用通常是為了提高行銷效率和精準度。"
+        "explanation": "靠結構化的的資料精準行銷並不是 AI 人工智慧於銀行業的應用機會。相反地，人工智慧的應用通常是為了提高行銷效率和精準度。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 288,
@@ -4893,7 +5180,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "保險科技（InsurTech）是指保險業運用新創科技技術來設計產品與服務，改善核保、理賠、精算、風險管理及法律遵循等流程，提升客戶體驗並創造新的行銷模式。"
+        "explanation": "保險科技（InsurTech）是指保險業運用新創科技技術來設計產品與服務，改善核保、理賠、精算、風險管理及法律遵循等流程，提升客戶體驗並創造新的行銷模式。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 289,
@@ -4910,7 +5198,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "保險業核保員的工作雖然複雜，但仍然可以利用 AI 技術來輔助進行風險評估和決策。相反地，人工智慧的應用通常是為了提高效率和準確性。"
+        "explanation": "保險業核保員的工作雖然複雜，但仍然可以利用 AI 技術來輔助進行風險評估和決策。相反地，人工智慧的應用通常是為了提高效率和準確性。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 290,
@@ -4927,7 +5216,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人工智慧信用評分可應用在無聯徵資料或少與銀行往來客戶的評分。相反地，保險業核保員的工作雖然複雜，但仍然可以利用 AI 技術來輔助進行風險評估和決策。"
+        "explanation": "人工智慧信用評分可應用在無聯徵資料或少與銀行往來客戶的評分。相反地，保險業核保員的工作雖然複雜，但仍然可以利用 AI 技術來輔助進行風險評估和決策。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 291,
@@ -4944,7 +5234,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "瞭解客戶是理財機器人服務流程的第一步驟，透過瞭解客戶的需求、風險承受能力及投資目標，才能提供適合的投資建議。"
+        "explanation": "瞭解客戶是理財機器人服務流程的第一步驟，透過瞭解客戶的需求、風險承受能力及投資目標，才能提供適合的投資建議。",
+        "category": "D4_倫理、風險與負責任 AI"
     },
     {
         "id": 292,
@@ -4961,7 +5252,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 指靜脈辨識是透過靜脈血管流動時的跳動律感，建立辨識模組。<br>\n● 這個敘述是錯誤的，因為指靜脈辨識是透過手指內部的靜脈圖案來進行辨識，而不是透過血管流動時的跳動律感。<br>\n● 正確的描述應該是透過手指內部靜脈的獨特圖案來建立辨識模組。"
+        "explanation": "● 指靜脈辨識是透過靜脈血管流動時的跳動律感，建立辨識模組。<br>\n● 這個敘述是錯誤的，因為指靜脈辨識是透過手指內部的靜脈圖案來進行辨識，而不是透過血管流動時的跳動律感。<br>\n● 正確的描述應該是透過手指內部靜脈的獨特圖案來建立辨識模組。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 293,
@@ -4978,7 +5270,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "投資組合能夠全自動化調整並不是理財機器人的一個特點。理財機器人通常需要根據市場變化和客戶需求進行調整，而不是完全自動化。"
+        "explanation": "投資組合能夠全自動化調整並不是理財機器人的一個特點。理財機器人通常需要根據市場變化和客戶需求進行調整，而不是完全自動化。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 294,
@@ -4995,7 +5288,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人工智慧的技術，可以結合各種外部資訊，進行精準行銷，主要是應用在資料分析的領域。"
+        "explanation": "人工智慧的技術，可以結合各種外部資訊，進行精準行銷，主要是應用在資料分析的領域。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 295,
@@ -5012,7 +5306,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "第二次工業革命帶來的生產流程取代，主要是透過自動化技術來實現的。"
+        "explanation": "第二次工業革命帶來的生產流程取代，主要是透過自動化技術來實現的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 296,
@@ -5029,7 +5324,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "增強學習是一種機器學習技術，特別適合用於需要自主學習和決策的場景，如倉儲機器人拾取掉落商品的情況。"
+        "explanation": "增強學習是一種機器學習技術，特別適合用於需要自主學習和決策的場景，如倉儲機器人拾取掉落商品的情況。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 297,
@@ -5046,7 +5342,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像辨識技術能夠有效地分析和處理 AOI 系統所捕捉的影像資料，進而提高檢查的準確性和效率。"
+        "explanation": "影像辨識技術能夠有效地分析和處理 AOI 系統所捕捉的影像資料，進而提高檢查的準確性和效率。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 298,
@@ -5063,7 +5360,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自然語言處理技術在工業人工智慧 (IAI) 領域中並不常用，主要是因為 IAI 更加專注於影像辨識、聲音辨識和機器學習等技術。"
+        "explanation": "自然語言處理技術在工業人工智慧 (IAI) 領域中並不常用，主要是因為 IAI 更加專注於影像辨識、聲音辨識和機器學習等技術。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 299,
@@ -5080,7 +5378,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "機器人 (robot) 的特徵包括人造產物、能自主運作、任務導向的機能和有眾多的機電裝置。"
+        "explanation": "機器人 (robot) 的特徵包括人造產物、能自主運作、任務導向的機能和有眾多的機電裝置。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 300,
@@ -5097,7 +5396,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "工業用機器人和家用機器人都可以是固定式或可移動的，這取決於其設計和應用需求。並非所有工業用機器人都是固定式的，也不是所有家用機器人都可以移動。"
+        "explanation": "工業用機器人和家用機器人都可以是固定式或可移動的，這取決於其設計和應用需求。並非所有工業用機器人都是固定式的，也不是所有家用機器人都可以移動。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 301,
@@ -5114,7 +5414,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "不論哪種機器人目前的售價與使用成本都太高，這導致機器人並不普及這句話以「不論哪種機器人」為前提，過於以偏概全，忽略了某些型別的服務型機器人（如：掃地機器人、機器寵物、智慧音箱等）其實已經在家庭與日常生活中相當普及且價格親民"
+        "explanation": "不論哪種機器人目前的售價與使用成本都太高，這導致機器人並不普及這句話以「不論哪種機器人」為前提，過於以偏概全，忽略了某些型別的服務型機器人（如：掃地機器人、機器寵物、智慧音箱等）其實已經在家庭與日常生活中相當普及且價格親民",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 302,
@@ -5131,7 +5432,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "遙控裝置並不是構成機器人的重要部分，機器人主要由感測器、計算單元和驅動器等元件組成。"
+        "explanation": "遙控裝置並不是構成機器人的重要部分，機器人主要由感測器、計算單元和驅動器等元件組成。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 303,
@@ -5148,7 +5450,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "智慧機器人能透過人工智慧技術進行學習與判斷，具備「自主學習與適應」能力，這是與傳統自動化機器人（僅根據預設流程執行動作）最大的區別。"
+        "explanation": "智慧機器人能透過人工智慧技術進行學習與判斷，具備「自主學習與適應」能力，這是與傳統自動化機器人（僅根據預設流程執行動作）最大的區別。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 304,
@@ -5165,7 +5468,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "雖然傳統 RPA 不依賴 AI ，但現代的智慧型 RPA（ Intelligent RPA 或 IPA ）會結合人工智慧，如 OCR 、自然語言處理（ NLP ）、機器學習等，使其能處理半結構或非結構的資料，更靈活應對複雜情境。因此這個說法 不正確且過時。"
+        "explanation": "雖然傳統 RPA 不依賴 AI ，但現代的智慧型 RPA（ Intelligent RPA 或 IPA ）會結合人工智慧，如 OCR 、自然語言處理（ NLP ）、機器學習等，使其能處理半結構或非結構的資料，更靈活應對複雜情境。因此這個說法 不正確且過時。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 305,
@@ -5182,7 +5486,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "結合 AI 的 RPA 程式可以與舊有老舊系統結合，透過 API 或其他介面進行資料交換和互動。"
+        "explanation": "結合 AI 的 RPA 程式可以與舊有老舊系統結合，透過 API 或其他介面進行資料交換和互動。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 306,
@@ -5199,7 +5504,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "決策樹是一種監督式學習方法，常用於分類和回歸問題。"
+        "explanation": "決策樹是一種監督式學習方法，常用於分類和回歸問題。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 307,
@@ -5216,7 +5522,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 題目中提到：<br>\n-「使用者事前沒有給予任何標籤」 → 意味著資料是未標記的（Unlabeled）<br>\n-「試圖區隔喜好相似的使用者群組」 → 表示你想做的是分群（Clustering）<br>\n● 這是典型的非監督式學習應用場景，常見方法如：<br>\n- K-Means<br>\n- DBSCAN<br>\n- 階層式分群（Hierarchical Clustering）"
+        "explanation": "● 題目中提到：<br>\n-「使用者事前沒有給予任何標籤」 → 意味著資料是未標記的（Unlabeled）<br>\n-「試圖區隔喜好相似的使用者群組」 → 表示你想做的是分群（Clustering）<br>\n● 這是典型的非監督式學習應用場景，常見方法如：<br>\n- K-Means<br>\n- DBSCAN<br>\n- 階層式分群（Hierarchical Clustering）",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 308,
@@ -5233,7 +5540,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 題目中提到：<br>\n-「購買烤肉架和啤酒的人也傾向於購買牛排」 → 意味著這些商品之間存在關聯性<br>\n-「希望將這些商品放在彼此靠近的位置」 → 表示你想做的是關聯規則學習（Association Rule Learning）<br>\n● 這是典型的非監督式學習應用場景，常見方法如：<br>\n- Apriori 演演算法<br>\n- FP-Growth 演演算法<br>\n- Eclat 演演算法"
+        "explanation": "● 題目中提到：<br>\n-「購買烤肉架和啤酒的人也傾向於購買牛排」 → 意味著這些商品之間存在關聯性<br>\n-「希望將這些商品放在彼此靠近的位置」 → 表示你想做的是關聯規則學習（Association Rule Learning）<br>\n● 這是典型的非監督式學習應用場景，常見方法如：<br>\n- Apriori 演演算法<br>\n- FP-Growth 演演算法<br>\n- Eclat 演演算法",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 309,
@@ -5250,7 +5558,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "迴歸是一種監督式學習方法，適用於預測連續數值的問題，如汽車銷售量。透過給定的特徵（如行銷費用）來預測目標數值（汽車銷售量）。"
+        "explanation": "迴歸是一種監督式學習方法，適用於預測連續數值的問題，如汽車銷售量。透過給定的特徵（如行銷費用）來預測目標數值（汽車銷售量）。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 310,
@@ -5267,7 +5576,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "過度擬合是指模型在訓練資料上表現良好，但在未見過的資料上表現不佳的現象。這通常是因為模型過於複雜，捕捉到了訓練資料中的噪聲而非真正的趨勢。"
+        "explanation": "過度擬合是指模型在訓練資料上表現良好，但在未見過的資料上表現不佳的現象。這通常是因為模型過於複雜，捕捉到了訓練資料中的噪聲而非真正的趨勢。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 311,
@@ -5284,7 +5594,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "支援向量機的優點包括：<br>\n- 能夠處理高維度資料<br>\n- 在樣本數量不足的情況下，仍能保持良好的分類效果<br>\n- 透過核函式（ Kernel Function ）能夠有效地處理非線性問題<br>\n- 只需要支援向量（即邊界上的樣本）來建立分類模型<br>\n<br>\n然而，當特徵數目多於樣本數目時，支援向量機的效果可能不如其他方法（如決策樹或隨機森林）。因此，特徵數目多於樣本數目，則效果較佳的說法是錯誤的。"
+        "explanation": "支援向量機的優點包括：<br>\n- 能夠處理高維度資料<br>\n- 在樣本數量不足的情況下，仍能保持良好的分類效果<br>\n- 透過核函式（ Kernel Function ）能夠有效地處理非線性問題<br>\n- 只需要支援向量（即邊界上的樣本）來建立分類模型<br>\n<br>\n然而，當特徵數目多於樣本數目時，支援向量機的效果可能不如其他方法（如決策樹或隨機森林）。因此，特徵數目多於樣本數目，則效果較佳的說法是錯誤的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 312,
@@ -5301,7 +5612,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "K最近鄰居演演算法的可解釋性較差，因為它是基於距離的度量進行分類，難以提供明確的決策邊界。"
+        "explanation": "K最近鄰居演演算法的可解釋性較差，因為它是基於距離的度量進行分類，難以提供明確的決策邊界。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 313,
@@ -5318,7 +5630,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K平均分群（K-means）主要用於數值型資料，對於類別型資料的處理能力較弱，因此「可以處理類別型資料」的說法是不正確的。"
+        "explanation": "K平均分群（K-means）主要用於數值型資料，對於類別型資料的處理能力較弱，因此「可以處理類別型資料」的說法是不正確的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 314,
@@ -5335,7 +5648,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K-最近鄰居(KNN)的運作模式為：<br>\n(1) 距離計算：計算待分類樣本與所有訓練樣本的距離。<br>\n(2) 找近鄰：根據距離選擇最近的K個鄰居。<br>\n(3) 做分類：根據K個鄰居的標籤進行投票，決定待分類樣本的標籤。"
+        "explanation": "K-最近鄰居(KNN)的運作模式為：<br>\n(1) 距離計算：計算待分類樣本與所有訓練樣本的距離。<br>\n(2) 找近鄰：根據距離選擇最近的K個鄰居。<br>\n(3) 做分類：根據K個鄰居的標籤進行投票，決定待分類樣本的標籤。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 315,
@@ -5352,7 +5666,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K-最近鄰居(KNN)計算測試物件與訓練集中所有物件的距離所用的距離計演算法，最常使用的是歐幾裡得距離。"
+        "explanation": "K-最近鄰居(KNN)計算測試物件與訓練集中所有物件的距離所用的距離計演算法，最常使用的是歐幾裡得距離。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 316,
@@ -5369,7 +5684,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "K-means演演算法的缺點包括：<br>\n- 對於異常點和雜訊非常敏感，可能會影響最終的分群結果。<br>\n- 需要預先指定K值，且不同的K值可能會導致不同的分群結果。<br>\n- 只能找到凸形的群集，對於非凸形的群集效果較差。<br>\n<br>\n因此，「若群中含有異常點，對均值偏離影響不大」的說法是不正確的。"
+        "explanation": "K-means演演算法的缺點包括：<br>\n- 對於異常點和雜訊非常敏感，可能會影響最終的分群結果。<br>\n- 需要預先指定K值，且不同的K值可能會導致不同的分群結果。<br>\n- 只能找到凸形的群集，對於非凸形的群集效果較差。<br>\n<br>\n因此，「若群中含有異常點，對均值偏離影響不大」的說法是不正確的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 317,
@@ -5386,7 +5702,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "支援向量機(SVM)的優點包括：<br>\n- 能夠處理高維度資料<br>\n- 在樣本數量不足的情況下，仍能保持良好的分類效果<br>\n- 透過核函式（ Kernel Function ）能夠有效地處理非線性問題<br>\n- 只需要支援向量（即邊界上的樣本）來建立分類模型<br>\n<br>\n然而，當維度過高時，支援向量機的運算負擔可能會增加，因此「維度過高也不容易造成運算上的負擔」的說法是不正確的。"
+        "explanation": "支援向量機(SVM)的優點包括：<br>\n- 能夠處理高維度資料<br>\n- 在樣本數量不足的情況下，仍能保持良好的分類效果<br>\n- 透過核函式（ Kernel Function ）能夠有效地處理非線性問題<br>\n- 只需要支援向量（即邊界上的樣本）來建立分類模型<br>\n<br>\n然而，當維度過高時，支援向量機的運算負擔可能會增加，因此「維度過高也不容易造成運算上的負擔」的說法是不正確的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 318,
@@ -5403,7 +5720,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "KNN演演算法的缺點包括：<br>\n- 計算量大：KNN需要計算測試樣本與所有訓練樣本的距離，當訓練樣本數量龐大時，計算量會非常大。<br>\n- 記憶體開銷大：KNN需要儲存所有訓練樣本，當訓練樣本數量龐大時，記憶體開銷也會很大。<br>\n- 可解釋性差：KNN無法提供像決策樹那樣的規則，難以解釋分類結果。<br>\n- 對於多分類問題的表現較SVM差：在多分類問題上，KNN的表現通常不如支援向量機。<br>\n<br>\n因此，「對於多分類問題的表現較SVM差」的說法是不正確的，因為KNN在多分類問題上通常表現不如支援向量機。"
+        "explanation": "KNN演演算法的缺點包括：<br>\n- 計算量大：KNN需要計算測試樣本與所有訓練樣本的距離，當訓練樣本數量龐大時，計算量會非常大。<br>\n- 記憶體開銷大：KNN需要儲存所有訓練樣本，當訓練樣本數量龐大時，記憶體開銷也會很大。<br>\n- 可解釋性差：KNN無法提供像決策樹那樣的規則，難以解釋分類結果。<br>\n- 對於多分類問題的表現較SVM差：在多分類問題上，KNN的表現通常不如支援向量機。<br>\n<br>\n因此，「對於多分類問題的表現較SVM差」的說法是不正確的，因為KNN在多分類問題上通常表現不如支援向量機。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 319,
@@ -5420,7 +5738,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "RNN（Recurrent Neural Network）是一種專門設計用來處理序列資料的神經網路架構，特別適合於學習自然語言等具有時間序列特性的資料。傳統神經網路通常無法有效處理這類資料，因為它們無法捕捉到時間上的依賴性。"
+        "explanation": "RNN（Recurrent Neural Network）是一種專門設計用來處理序列資料的神經網路架構，特別適合於學習自然語言等具有時間序列特性的資料。傳統神經網路通常無法有效處理這類資料，因為它們無法捕捉到時間上的依賴性。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 320,
@@ -5437,7 +5756,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Face ID是iPhone手機上搭載的人臉辨識系統，使用者可以透過面部辨識來解鎖手機或進行身份驗證。"
+        "explanation": "Face ID是iPhone手機上搭載的人臉辨識系統，使用者可以透過面部辨識來解鎖手機或進行身份驗證。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 321,
@@ -5454,7 +5774,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "玉山銀行的「小i」是國內第一個建置在 LINE 和 Facebook 等社群軟體之金融顧問。"
+        "explanation": "玉山銀行的「小i」是國內第一個建置在 LINE 和 Facebook 等社群軟體之金融顧問。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 322,
@@ -5471,7 +5792,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "智慧音箱和人們進行溝通時，主要使用的核心技術包括語音辨識、自然語言處理和機器學習，而影象辨識並不是核心技術之一。"
+        "explanation": "智慧音箱和人們進行溝通時，主要使用的核心技術包括語音辨識、自然語言處理和機器學習，而影象辨識並不是核心技術之一。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 323,
@@ -5488,7 +5810,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "小冰是微軟推出的人工智慧聊天機器人，主要用於與使用者進行對話和互動。"
+        "explanation": "小冰是微軟推出的人工智慧聊天機器人，主要用於與使用者進行對話和互動。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 324,
@@ -5505,7 +5828,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "中國的天網智慧監控系統主要使用影象辨識技術來進行人臉識別和行為分析。"
+        "explanation": "中國的天網智慧監控系統主要使用影象辨識技術來進行人臉識別和行為分析。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 325,
@@ -5522,7 +5846,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 弱人工智慧（ Weak AI ）：專門針對特定任務設計的 AI ，例如玩圍棋、下棋、語音辨識、推薦系統等。它沒有自我意識、不具備通用智慧型，只能在它訓練的範圍內運作。<br>\n● AlphaGo 是一個專門設計來下圍棋的 AI 系統，儘管它表現非常強大，擊敗了世界冠軍，但它無法應對非圍棋的任務，因此屬於弱人工智慧。"
+        "explanation": "● 弱人工智慧（ Weak AI ）：專門針對特定任務設計的 AI ，例如玩圍棋、下棋、語音辨識、推薦系統等。它沒有自我意識、不具備通用智慧型，只能在它訓練的範圍內運作。<br>\n● AlphaGo 是一個專門設計來下圍棋的 AI 系統，儘管它表現非常強大，擊敗了世界冠軍，但它無法應對非圍棋的任務，因此屬於弱人工智慧。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 326,
@@ -5539,7 +5864,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "iPhone 手機的 Face ID 是使用深度學習技術來進行人臉辨識的。"
+        "explanation": "iPhone 手機的 Face ID 是使用深度學習技術來進行人臉辨識的。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 327,
@@ -5556,7 +5882,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Amazon Go 是全球電商龍頭 Amazon 推出的無人商店，顧客可以透過手機應用程式進行購物，無需排隊結帳。"
+        "explanation": "Amazon Go 是全球電商龍頭 Amazon 推出的無人商店，顧客可以透過手機應用程式進行購物，無需排隊結帳。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 328,
@@ -5573,7 +5900,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Google 無人車能夠辨識車輛、行人、號誌和樹木，是因為使用到神經網路模型。"
+        "explanation": "Google 無人車能夠辨識車輛、行人、號誌和樹木，是因為使用到神經網路模型。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 329,
@@ -5590,7 +5918,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人工智慧的發展最早可追溯到具有學習能力的神經網路模型被提出。"
+        "explanation": "人工智慧的發展最早可追溯到具有學習能力的神經網路模型被提出。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 330,
@@ -5607,7 +5936,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "突變期不是人工智慧發展所歷經的主要階段。"
+        "explanation": "突變期不是人工智慧發展所歷經的主要階段。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 331,
@@ -5624,7 +5954,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "提出具備學習能力的神經網路架構是 1943 年 Warren McCulloch 和 Walter Pitts 兩位學者發表之論文的重要成果。"
+        "explanation": "提出具備學習能力的神經網路架構是 1943 年 Warren McCulloch 和 Walter Pitts 兩位學者發表之論文的重要成果。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 332,
@@ -5641,7 +5972,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "圖靈測試是判斷機器是否具備「智慧」可跟人類進行對話的測試。"
+        "explanation": "圖靈測試是判斷機器是否具備「智慧」可跟人類進行對話的測試。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 333,
@@ -5658,7 +5990,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "定義人工智慧為一門新學科是1956年達特茅斯(Dartmouth)會議的一項重要決定。"
+        "explanation": "定義人工智慧為一門新學科是1956年達特茅斯(Dartmouth)會議的一項重要決定。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 334,
@@ -5675,7 +6008,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "John McCarthy 是設計出應用於人工智慧的 LISP 程式語言的學者。"
+        "explanation": "John McCarthy 是設計出應用於人工智慧的 LISP 程式語言的學者。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 335,
@@ -5692,7 +6026,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "當時參與人工智慧發展的人員太少並不是人工智慧的發展進入第一個寒冬的原因。"
+        "explanation": "當時參與人工智慧發展的人員太少並不是人工智慧的發展進入第一個寒冬的原因。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 336,
@@ -5709,7 +6044,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "專家系統無法從經驗中學習是專家系統發展的限制之一。"
+        "explanation": "專家系統無法從經驗中學習是專家系統發展的限制之一。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 337,
@@ -5726,7 +6062,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "AlphaGo 是一個專門為下圍棋所設計的人工智慧系統，雖然它使用了深度學習技術，但並不涉及自然語言處理技術。其他選項如「華生」超級電腦、蘋果公司的 Siri 語音助理軟體和臉書的聊天機器人都使用了自然語言處理技術。"
+        "explanation": "AlphaGo 是一個專門為下圍棋所設計的人工智慧系統，雖然它使用了深度學習技術，但並不涉及自然語言處理技術。其他選項如「華生」超級電腦、蘋果公司的 Siri 語音助理軟體和臉書的聊天機器人都使用了自然語言處理技術。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 338,
@@ -5743,7 +6080,8 @@
         ],
         "weight": 3,
         "image": null,
-        "explanation": "AlphaGo Zero 使利用強化學習進行自我訓練，使得其能力遠超過 AlphaGo 和 AlphaGo Master。"
+        "explanation": "AlphaGo Zero 使利用強化學習進行自我訓練，使得其能力遠超過 AlphaGo 和 AlphaGo Master。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 339,
@@ -5760,7 +6098,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "QA機器人並不是影像處理的種類。"
+        "explanation": "QA機器人並不是影像處理的種類。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 340,
@@ -5777,7 +6116,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人臉辨識（ Facial Recognition ）分析的是影像資料，不是處理文字或語音內容。屬於電腦視覺（ Computer Vision ）領域，不屬於 NLP。"
+        "explanation": "人臉辨識（ Facial Recognition ）分析的是影像資料，不是處理文字或語音內容。屬於電腦視覺（ Computer Vision ）領域，不屬於 NLP。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 341,
@@ -5794,7 +6134,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 基於內容的推薦系統（ Content-Based Recommendation ），主要是分析使用者過去喜歡的物品特徵，再找出相似的其他物品推薦。<br>\n● 以下是基於內容推薦常見的步驟：特徵學習、物品表示、生成推薦列表。"
+        "explanation": "● 基於內容的推薦系統（ Content-Based Recommendation ），主要是分析使用者過去喜歡的物品特徵，再找出相似的其他物品推薦。<br>\n● 以下是基於內容推薦常見的步驟：特徵學習、物品表示、生成推薦列表。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 342,
@@ -5811,7 +6152,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "● 語意分割確實會為影象中的每個畫素分配類別 ID，但它與「影象分類」的概念有所不同。<br>\n● 影象分類 (Image Classification) 的目標是判斷整張圖片屬於哪個類別（例如：這張圖片是貓，那張圖片是狗）。它給出的是一個單一的、全域性性的標籤。<br>\n● 語意分割 (Semantic Segmentation) 則更為精細，它旨在為影象中的每個畫素分配一個類別標籤。<br>\n 這意味著它不僅知道圖片中有哪些物體，還能精確描繪出每個物體的輪廓，將屬於同一類別的所有畫素歸為一組。<br>\n 例如，在一張有許多貓的圖片中，語意分割會將所有屬於「貓」的畫素都標記為「貓」，而不會區分這是第一隻貓還是第二隻貓。<br>\n● 因此，語意分割不是簡單的影象分類，而是一種更細粒度的畫素級分類。"
+        "explanation": "● 語意分割確實會為影象中的每個畫素分配類別 ID，但它與「影象分類」的概念有所不同。<br>\n● 影象分類 (Image Classification) 的目標是判斷整張圖片屬於哪個類別（例如：這張圖片是貓，那張圖片是狗）。它給出的是一個單一的、全域性性的標籤。<br>\n● 語意分割 (Semantic Segmentation) 則更為精細，它旨在為影象中的每個畫素分配一個類別標籤。<br>\n 這意味著它不僅知道圖片中有哪些物體，還能精確描繪出每個物體的輪廓，將屬於同一類別的所有畫素歸為一組。<br>\n 例如，在一張有許多貓的圖片中，語意分割會將所有屬於「貓」的畫素都標記為「貓」，而不會區分這是第一隻貓還是第二隻貓。<br>\n● 因此，語意分割不是簡單的影象分類，而是一種更細粒度的畫素級分類。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 343,
@@ -5828,7 +6170,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "爬蟲可以爬取文字和圖片，但在處理圖片時可能需要額外的技術，例如影象識別。"
+        "explanation": "爬蟲可以爬取文字和圖片，但在處理圖片時可能需要額外的技術，例如影象識別。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 344,
@@ -5845,7 +6188,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "TF-IDF（Term Frequency-Inverse Document Frequency）是一種用於文字挖掘的統計方法，主要用於評估一個詞語對於一個檔案集或一個語料庫中的其中一份檔案的重要程度。它並不是一種圖片處理技術。"
+        "explanation": "TF-IDF（Term Frequency-Inverse Document Frequency）是一種用於文字挖掘的統計方法，主要用於評估一個詞語對於一個檔案集或一個語料庫中的其中一份檔案的重要程度。它並不是一種圖片處理技術。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 345,
@@ -5862,7 +6206,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "影像處理-文字情感分析是錯誤的分類，因為文字情感分析屬於自然語言處理的範疇，而非影像處理。"
+        "explanation": "影像處理-文字情感分析是錯誤的分類，因為文字情感分析屬於自然語言處理的範疇，而非影像處理。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 346,
@@ -5879,7 +6224,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "YouTube 自動字幕產生器是基於語音識別技術，主要用於處理音訊資料，而非影像資料。"
+        "explanation": "YouTube 自動字幕產生器是基於語音識別技術，主要用於處理音訊資料，而非影像資料。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 347,
@@ -5896,7 +6242,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "臺灣的海關出入境設有快速通關，這個通道主要利用人臉辨識技術來進行身份驗證。"
+        "explanation": "臺灣的海關出入境設有快速通關，這個通道主要利用人臉辨識技術來進行身份驗證。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 348,
@@ -5913,7 +6260,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人臉辨識的流程為：(1)相機拍攝臉部照片，(3)將每張照片標記好相對人名，(4)利用 CNN 來對分類人臉進行訓練，(2)藉由五官的各種角度進行表情的特徵比對。"
+        "explanation": "人臉辨識的流程為：(1)相機拍攝臉部照片，(3)將每張照片標記好相對人名，(4)利用 CNN 來對分類人臉進行訓練，(2)藉由五官的各種角度進行表情的特徵比對。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 349,
@@ -5930,7 +6278,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "卡米狗是一個人工智慧聊天機器人的應用案例。"
+        "explanation": "卡米狗是一個人工智慧聊天機器人的應用案例。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 350,
@@ -5947,7 +6296,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "現今聊天機器人會遇到的困難點主要是瞭解語意。雖然斷詞斷句、語音轉文字和意圖瞭解也是重要的技術挑戰，但最核心的問題在於如何正確理解使用者的語意。"
+        "explanation": "現今聊天機器人會遇到的困難點主要是瞭解語意。雖然斷詞斷句、語音轉文字和意圖瞭解也是重要的技術挑戰，但最核心的問題在於如何正確理解使用者的語意。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 351,
@@ -5964,7 +6314,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "目前人工智慧在醫療方面的應用，主要是協助診斷及醫療，但在處理非常態性的事情上，能力仍然不及人類。"
+        "explanation": "目前人工智慧在醫療方面的應用，主要是協助診斷及醫療，但在處理非常態性的事情上，能力仍然不及人類。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 352,
@@ -5981,7 +6332,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "斷詞是將句子切分成一個個的詞語，這樣機器才能更容易理解句子的結構和意思。"
+        "explanation": "斷詞是將句子切分成一個個的詞語，這樣機器才能更容易理解句子的結構和意思。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 353,
@@ -5998,7 +6350,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "情緒翻譯並不是機器翻譯的類別，機器翻譯主要是針對語言文字的翻譯，而情緒翻譯則涉及到對情感的理解和表達。"
+        "explanation": "情緒翻譯並不是機器翻譯的類別，機器翻譯主要是針對語言文字的翻譯，而情緒翻譯則涉及到對情感的理解和表達。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 354,
@@ -6015,7 +6368,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "無當前使用者的資訊也能即時推薦過去其他使用者也喜愛的商品。"
+        "explanation": "無當前使用者的資訊也能即時推薦過去其他使用者也喜愛的商品。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 355,
@@ -6032,7 +6386,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "分群通常是用於資料分析和機器學習中的一種技術，而不是影像處理的功能。影像處理的功能包括目標物定位、目標物偵測和畫面分割等。"
+        "explanation": "分群通常是用於資料分析和機器學習中的一種技術，而不是影像處理的功能。影像處理的功能包括目標物定位、目標物偵測和畫面分割等。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 356,
@@ -6049,7 +6404,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "雲端運算(Cloud Computing)並不直接屬於人工智慧領域，而是提供了支援人工智慧運算的基礎設施。"
+        "explanation": "雲端運算(Cloud Computing)並不直接屬於人工智慧領域，而是提供了支援人工智慧運算的基礎設施。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 357,
@@ -6066,7 +6422,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "卷積神經網路（ Convolutional Neural Network, CNN ）最適合用於影像識別問題。"
+        "explanation": "卷積神經網路（ Convolutional Neural Network, CNN ）最適合用於影像識別問題。",
+        "category": "D3_多模態生成技術"
     },
     {
         "id": 358,
@@ -6083,7 +6440,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "人工智慧生成內容（Artificial Intelligence Generated Content）是 AIGC 的正確解釋。其他選項均不正確。"
+        "explanation": "人工智慧生成內容（Artificial Intelligence Generated Content）是 AIGC 的正確解釋。其他選項均不正確。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 359,
@@ -6100,7 +6458,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "基礎模型是經過海量資料訓練的 AI 模型，具備強大的通用能力，可以作為許多特定應用（如文字生成、影象生成）的基礎，並透過微調來適應不同的下游任務。"
+        "explanation": "基礎模型是經過海量資料訓練的 AI 模型，具備強大的通用能力，可以作為許多特定應用（如文字生成、影象生成）的基礎，並透過微調來適應不同的下游任務。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 360,
@@ -6117,7 +6476,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "在 GANs 的訓練過程中，生成器的目標是盡可能生成讓鑑別器無法區分真偽的資料。"
+        "explanation": "在 GANs 的訓練過程中，生成器的目標是盡可能生成讓鑑別器無法區分真偽的資料。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 361,
@@ -6134,7 +6494,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "自注意力機制（Self-Attention Mechanism）是 Transformer 模型在自然語言處理領域取得巨大成功的關鍵技術之一。"
+        "explanation": "自注意力機制（Self-Attention Mechanism）是 Transformer 模型在自然語言處理領域取得巨大成功的關鍵技術之一。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 362,
@@ -6151,7 +6512,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "長短期記憶網路 (LSTM) 在文字生成方面表現出色，尤其擅長處理長序列資料，並能記住較早的資訊。"
+        "explanation": "長短期記憶網路 (LSTM) 在文字生成方面表現出色，尤其擅長處理長序列資料，並能記住較早的資訊。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 363,
@@ -6168,7 +6530,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "變分自編碼器 (Variational Autoencoder, VAE) 是一種常用於從低維潛在空間生成高維資料的模型，特別是在影象生成任務中。"
+        "explanation": "變分自編碼器 (Variational Autoencoder, VAE) 是一種常用於從低維潛在空間生成高維資料的模型，特別是在影象生成任務中。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 364,
@@ -6185,7 +6548,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "注意力機制 (Attention Mechanism) 是一種使得大型語言模型能夠在處理長文字時，更好地理解上下文和語義的技術。"
+        "explanation": "注意力機制 (Attention Mechanism) 是一種使得大型語言模型能夠在處理長文字時，更好地理解上下文和語義的技術。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 365,
@@ -6202,7 +6566,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Midjourney 是一個基於 AI 的影象生成工具，以其獨特的藝術風格和生成高品質影象的能力而廣受歡迎。"
+        "explanation": "Midjourney 是一個基於 AI 的影象生成工具，以其獨特的藝術風格和生成高品質影象的能力而廣受歡迎。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 366,
@@ -6219,7 +6584,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Sora 是 OpenAI 推出的一個文字到影片生成模型，能夠根據文字描述生成逼真且連貫的短影片。"
+        "explanation": "Sora 是 OpenAI 推出的一個文字到影片生成模型，能夠根據文字描述生成逼真且連貫的短影片。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 367,
@@ -6236,7 +6602,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Eliza 是在 1966 年被創造出來的，並被廣泛認為是第一個聊天機器人。"
+        "explanation": "Eliza 是在 1966 年被創造出來的，並被廣泛認為是第一個聊天機器人。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     },
     {
         "id": 368,
@@ -6253,7 +6620,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "後向傳播演算法 (Backpropagation) 是由 Geoffrey Hinton 在 1986 年提出的，對深度學習和神經網路的發展起到了關鍵作用。"
+        "explanation": "後向傳播演算法 (Backpropagation) 是由 Geoffrey Hinton 在 1986 年提出的，對深度學習和神經網路的發展起到了關鍵作用。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 369,
@@ -6270,7 +6638,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "生成對抗網路 (GAN) 的概念是由 Ian Goodfellow 在 2014 年提出的，對生成式模型的發展產生了深遠的影響。"
+        "explanation": "生成對抗網路 (GAN) 的概念是由 Ian Goodfellow 在 2014 年提出的，對生成式模型的發展產生了深遠的影響。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 370,
@@ -6287,7 +6656,8 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Transformer模型是由Vaswani等人在2017年提出的，並對自然語言處理領域產生了革命性影響。"
+        "explanation": "Transformer模型是由Vaswani等人在2017年提出的，並對自然語言處理領域產生了革命性影響。",
+        "category": "D1_生成式 AI 基本概念"
     },
     {
         "id": 371,
@@ -6304,6 +6674,7 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "ChatGPT 於 2022 年末由 OpenAI 公開釋出，其強大的對話和文字生成能力迅速引起全球關注，並引發了生成式 AI 的熱潮。"
+        "explanation": "ChatGPT 於 2022 年末由 OpenAI 公開釋出，其強大的對話和文字生成能力迅速引起全球關注，並引發了生成式 AI 的熱潮。",
+        "category": "D2_大型語言模型 (LLM) 應用"
     }
 ]
