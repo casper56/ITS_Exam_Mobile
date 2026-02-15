@@ -85,23 +85,21 @@
     
     
     
+    
+    
+    
     function initExam() {
         if (!allQuestions || allQuestions.length === 0) { console.error("題庫資料載入失敗！"); return; }
         
-        // --- V3.3 智能抽題配置 ---
         const isITS_AI = window.location.href.includes('ITS_AI');
         const is900Series = window.location.href.includes('AZ900') || window.location.href.includes('AI900');
         const isPython = window.location.href.includes('ITS_Python');
         
         const CUTOFF = isITS_AI ? 118 : (is900Series ? 100 : 69);
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.9); // 90% 官方題
-        const MIN_PER_CAT_PCT = 0.05; // 5% 下限
-        const MAX_PER_CAT_PCT = isPython ? 0.30 : 0.25; // Python 30% 上限, 其他 25%
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); // 提升至 92%
+        const MIN_PER_CAT_PCT = 0.05; 
+        const MAX_PER_CAT_PCT = isPython ? 0.40 : 0.40; // 統一提升至 40% 上限
         
-        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
-        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
-
-        // 1. 分類歸一化 (Normalization)
         const categories = {};
         const catNameMap = {}; 
         
@@ -120,81 +118,34 @@
             categories[cat].push(q);
         });
 
-        // 2. 智能抽題
         let selected = [], usedIds = new Set();
-        const sortedCatNames = Object.keys(categories).sort();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
 
-        // 第一階段：確保每個分類至少有 MIN_PER_CAT 題 (優先從官方題抽)
-        sortedCatNames.forEach(cat => {
-            const catAll = categories[cat].sort(() => 0.5 - Math.random());
-            const catOff = catAll.filter(q => q.id <= CUTOFF);
-            const catSupp = catAll.filter(q => q.id > CUTOFF);
-            
-            let pickedInCat = 0;
-            // 先抽官方題滿足下限
-            for (let i = 0; i < catOff.length && pickedInCat < MIN_PER_CAT; i++) {
-                selected.push(catOff[i]);
-                usedIds.add(catOff[i].id);
-                pickedInCat++;
-            }
-            // 若官方題不足，用補充題補足下限
-            if (pickedInCat < MIN_PER_CAT) {
-                for (let i = 0; i < catSupp.length && pickedInCat < MIN_PER_CAT; i++) {
-                    selected.push(catSupp[i]);
-                    usedIds.add(catSupp[i].id);
-                    pickedInCat++;
-                }
+        // A. 每個分類保底 (優先官方)
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
             }
         });
 
-        // 第二階段：補足官方題至 TARGET_OFF_COUNT (同時遵守 MAX_PER_CAT)
-        const allRemainingOff = allQuestions
-            .filter(q => q.id <= CUTOFF && !usedIds.has(q.id))
-            .sort(() => 0.5 - Math.random());
-
-        for (let q of allRemainingOff) {
-            let currentOffCount = selected.filter(s => s.id <= CUTOFF).length;
-            if (currentOffCount >= TARGET_OFF_COUNT) break;
-            
-            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
-            let prefix = (m ? m[1] : q.category || '一般');
-            let pickedInCat = selected.filter(s => {
-                let sm = (s.category ? s.category.match(/^(D\d+)/) : null);
-                return (sm ? sm[1] : s.category || '一般') === prefix;
-            }).length;
-
-            if (pickedInCat < MAX_PER_CAT) {
-                selected.push(q);
-                usedIds.add(q.id);
-            }
+        // B. 補足 92% 官方題 (遵守 40% 上限)
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
         }
 
-        // 第三階段：補足總題數至 EXAM_LIMIT (優先抽官方題，再抽補充題)
-        const finalPool = allQuestions
-            .filter(q => !usedIds.has(q.id))
-            .sort((a, b) => {
-                const aIsOff = a.id <= CUTOFF ? 1 : 0;
-                const bIsOff = b.id <= CUTOFF ? 1 : 0;
-                return (bIsOff - aIsOff) || (0.5 - Math.random());
-            });
+        // C. 補滿總數 (官方優先)
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
 
-        for (let q of finalPool) {
-            if (selected.length >= EXAM_LIMIT) break;
-            
-            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
-            let prefix = (m ? m[1] : q.category || '一般');
-            let pickedInCat = selected.filter(s => {
-                let sm = (s.category ? s.category.match(/^(D\d+)/) : null);
-                return (sm ? sm[1] : s.category || '一般') === prefix;
-            }).length;
-
-            if (pickedInCat < MAX_PER_CAT) {
-                selected.push(q);
-                usedIds.add(q.id);
-            }
-        }
-
-        // 隨機打亂最終題目並渲染
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
@@ -616,7 +567,7 @@
     "weight": 1,
     "image": null,
     "type": "single",
-    "category": "D2_物件導向程式設計"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 13,
@@ -1541,7 +1492,7 @@
     "weight": 1,
     "image": null,
     "type": "single",
-    "category": "D2_物件導向程式設計"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 49,
@@ -1567,7 +1518,7 @@
     "image": null,
     "image01": "images/id49.png",
     "type": "single",
-    "category": "D2_物件導向程式設計"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 50,
@@ -1608,7 +1559,7 @@
     "weight": 1,
     "image": null,
     "type": "single",
-    "category": "D2_物件導向程式設計"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 51,
@@ -1634,7 +1585,7 @@
     "weight": 1,
     "image": null,
     "type": "single",
-    "category": "D2_物件導向程式設計"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 52,
@@ -2988,7 +2939,7 @@
       "(請參考下圖：封裝保險箱圖解)",
       "[[image01]]"
     ],
-    "category": "D1_核心程式設計概念"
+    "category": "D2_物件導向程式設計"
   },
   {
     "id": 111,
@@ -3362,7 +3313,7 @@
       "<b>2. 正確答案的邏輯</b>",
       "二分搜尋法的核心在於「折半查找」，其前提是資料必須是有序的（由小到大或由大到小），否則無法判斷目標在左側還是右側。"
     ],
-    "category": "D1_核心程式設計概念"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 126,
@@ -3389,7 +3340,7 @@
       "<b>2. 正確答案的邏輯</b>",
       "關鍵字「<b>比較相鄰元素</b>」與「<b>交換</b>」是氣泡排序法最典型的識別特徵。"
     ],
-    "category": "D1_核心程式設計概念"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 127,
@@ -3416,7 +3367,7 @@
       "<b>2. 正確答案的邏輯</b>",
       "考試中常考「單向 vs 雙向」。只要看到<b>單向 (One-way)</b> 且<b>不可逆</b>，指的就是雜湊 (Hashing)。"
     ],
-    "category": "D1_核心程式設計概念"
+    "category": "D3_一般軟體開發"
   },
   {
     "id": 128,

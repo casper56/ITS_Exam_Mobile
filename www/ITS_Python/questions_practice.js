@@ -3088,7 +3088,7 @@ const quizData = [
     "explanation": [
       "本題考查 Python 對負數進行除法與取餘數的規則。<br><br><b>【解析】</b><br>1. <b>`a = 13 % 5`</b>：<br>   13 除以 5，商 2 餘 3。結果為 <b>3</b>。<br><br>2. <b>`c = -13 // 5` (地板除法)</b>：<br>   Python 的 `//` 是<b>向負無限大方向取整</b> (Floor Division)。<br>   -13 ÷ 5 = -2.6，向負無限大取整後為 <b>-3</b>。<br><br>3. <b>`b = -13 % 5` (取餘數)</b>：<br>   公式為：<code>a % b = a - (b * (a // b))</code>。<br>   代入數值：<code>-13 - (5 * (-3)) = -13 - (-15) = -13 + 15 = 2</code>。<br>   或者記憶口訣：<b>Python 取餘數的符號永遠與除數 (後者) 相同</b>。因為除數 5 是正數，餘數必為正數 <b>2</b>。<br><br>故輸出為 <code>3 2 -3</code>，選 (B)。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 135,
@@ -3109,7 +3109,7 @@ const quizData = [
     "explanation": [
       "此題模擬了一個類似佇列 (Queue) 的消去過程：正數入列，負數則從隊頭開始抵銷正數。<br><br><b>【執行步驟追蹤】</b><br>1. <code>s</code> 為輸入列表，<code>q</code> 為正數佇列，<code>h</code> 指向 <code>q</code> 目前有效的開頭索引。<br>2. <b>遇到 1, 1</b>：<code>q=[1, 1]</code>。<br>3. <b>遇到 -3</b>：抵銷 <code>q[0]</code> (1) 剩 -2，<code>h=1</code>；再抵銷 <code>q[1]</code> (1) 剩 -1，<code>h=2</code>。<code>q</code> 有效部分為空。<br>4. <b>遇到 2, 4</b>：<code>q=[1, 1, 2, 4]</code> (有效部分: 2, 4)，<code>h=2</code>。<br>5. <b>遇到 -1</b>：抵銷 <code>q[2]</code> (2) 剩 1，<code>h=3</code>。<code>v</code> 變正數，停止抵銷。<br>6. <b>遇到 2, 3</b>：<code>q=[..., 4, 2, 3]</code> (有效部分: 4, 2, 3)，<code>h=3</code>。<br>7. <b>遇到 -5</b>：抵銷 <code>q[3]</code> (4) 剩 -1，<code>h=4</code>；再抵銷 <code>q[4]</code> (2) 剩 1，<code>h=5</code>。停止。<br>8. <b>遇到 2</b>：<code>q=[..., 3, 2]</code> (有效部分: 3, 2)，<code>h=5</code>。<br>9. <b>遇到 -1</b>：抵銷 <code>q[5]</code> (3) 剩 2，<code>h=6</code>。停止。<br>10. <b>遇到 1</b>：<code>q=[..., 2, 1]</code> (有效部分: 2, 1)，<code>h=6</code>。<br><br>最後 <code>q[h:]</code> 即 <code>q[6:]</code>，內容為 <code>[2, 1]</code>，總和為 3。故選 (B)。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 136,
@@ -3129,7 +3129,7 @@ const quizData = [
     "explanation": [
       "此題模擬佇列 (Queue) 行為：<br>1. 遇到正數時，將數字轉為字串並加入清單 `q` (Enqueue)。<br>2. 遇到負數時，從清單 `q` 的 `h` 位置取出字串並串接到 `s`，同時將 `h` 加 1 (Dequeue)。<br><br><b>【執行過程】</b><br>● 入列: '3', '12'<br>● 出列: '3' (s='3')<br>● 入列: '765', '23'<br>● 出列: '12' (s='312')<br>● 出列: '765' (s='312765')<br><br>故結果為 312765。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 137,
@@ -3150,7 +3150,7 @@ const quizData = [
     "explanation": [
       "此題模擬正負數抵銷的過程：正數入列，負數則從隊尾取出正數進行抵銷。<br><br><b>【關鍵邏輯】</b><br>當遇到負數 <code>v</code> 時，會不斷從 <code>q</code> 尾端 <code>pop()</code> 出正數加到 <code>v</code> 上，直到 <code>v</code> 變成非負數 (>=0) 或 <code>q</code> 變空為止。<b>注意：抵銷後若 <code>v</code> 變為正數，該數值會被捨棄，不會加回 <code>q</code>。</b><br><br><b>【執行追蹤】</b><br>1. <code>1, 1</code> 入列 -> <code>q=[1, 1]</code><br>2. <code>-3</code> 抵銷 -> <code>pop</code> 1 (剩-2), <code>pop</code> 1 (剩-1)。<code>q=[]</code><br>3. <code>3, 4</code> 入列 -> <code>q=[3, 4]</code><br>4. <code>-1</code> 抵銷 -> <code>pop</code> 4 (剩3)。停止 (3>=0)。<code>q=[3]</code><br>5. <code>2, 3</code> 入列 -> <code>q=[3, 2, 3]</code><br>6. <code>-5</code> 抵銷 -> <code>pop</code> 3 (剩-2), <code>pop</code> 2 (剩0)。停止 (0>=0)。<code>q=[3]</code><br>7. <code>2, 1</code> 入列 -> <code>q=[3, 2, 1]</code><br>8. <code>-1</code> 抵銷 -> <code>pop</code> 1 (剩0)。停止。<code>q=[3, 2]</code><br><br>最後 <code>sum([3, 2])</code> 為 5。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 138,
@@ -3171,7 +3171,7 @@ const quizData = [
     "explanation": [
       "本題考查 Python 3 中列表生成式 (List Comprehension) 的變數範圍規則。<br><br>1. <code>s = input()</code>：讀取第一行，<code>s</code> 為 <code>'hello py'</code>。<br>2. <code>a = [s for s in input().split()]</code>：讀取第二行並切割為 <code>['123', '45']</code>。雖然生成式內部使用了變數名稱 <code>s</code>，但在 Python 3 中，這被視為區域變數，<b>不會覆蓋</b>外部原本的變數 <code>s</code>。<br>3. 列表內容為字串，故輸出時會帶有引號。<br>4. 最後 <code>print(s, a)</code> 輸出外部的 <code>s</code> 和列表 <code>a</code>，即 <code>hello py ['123', '45']</code>。<br><br>註：若是 Python 2，變數 <code>s</code> 會被洩漏並覆蓋，輸出結果會不同，但 ITS 考試以 Python 3 為主。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 139,
@@ -3192,7 +3192,7 @@ const quizData = [
     "explanation": [
       "本題考查 input 讀取、split 切割、int 型別轉換以及列表解包 (List Unpacking)。<br><br><b>【解析步驟】</b><br>1. <code>input().split()</code> 將輸入字串 \"100 45\" 切割成列表 <code>['100', '45']</code>。<br>2. 列表生成式將元素轉為整數，得到 <code>[100, 45]</code>。<br>3. <code>a, b = ...</code> 將列表解包，<code>a</code> 變成整數 100，<code>b</code> 變成整數 45。<br>4. <code>print(a + b)</code> 執行數學加法 100 + 45 = 145。<br><br>若未進行 int 轉換直接相加，結果才會是字串串接的 \"10045\" (選項 A)。本題有轉 int，故選 (C)。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 140,
@@ -3213,7 +3213,7 @@ const quizData = [
     "explanation": [
       "本題考查 Python 的解包 (Unpacking) 規則。<br><br><b>【解析】</b><br>1. 輸入 `100 45 25` 經過處理後會變成包含 3 個元素的列表 `[100, 45, 25]`。<br>2. 左側只有 `a, b` 兩個變數。<br>3. 當右側值的數量 (3個) 多於左側變數的數量 (2個) 時，Python 無法自動決定如何分配，因此會丟擲 `ValueError: too many values to unpack`。<br><br>若要避免錯誤，需使用 `*b` (Extended Iterable Unpacking) 或確保數量一致。故本題為執行錯誤，選 (E)。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 141,
@@ -3234,7 +3234,7 @@ const quizData = [
     "explanation": [
       "本題考查 <code>ord()</code> 與 <code>chr()</code> 的轉換。<br><br><b>【解析】</b><br>1. <code>a[3]</code>='e', <code>a[1]</code>='a'。<br>2. <code>b = ord('e') - ord('a')</code>，即 'e' 與 'a' 的距離，結果為 4。<br>3. <code>ord('f') + 4</code>，即 'f' 往後推 4 個字母：g, h, i, j。<br>4. <code>chr()</code> 轉回字元得到 'j'。<br>5. 字串串接 \"fake\" + \"j\" = \"fakej\"。<br><br>故選 (B)。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 142,
@@ -3254,7 +3254,7 @@ const quizData = [
     "explanation": [
       "本題考查字串切片的步長 (Step) 與方向。<br><br><b>【解析】</b><br>語法為 <code>s[start:end:step]</code>。<br>當 step 為負數 (<code>-2</code>) 時，表示<b>從後往前</b>每隔 2 個字元取一次。<br>1. 取最後一個 'g' (索引 -1)<br>2. 往前跳 2 格取 'e' (索引 -3)<br>3. 往前跳 2 格取 'c' (索引 -5)<br>4. 往前跳 2 格取 'a' (索引 -7)<br>結果為 <code>'geca'</code>。<br><br>ITS 較少考這種負數步長，但 APCS 必考。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 143,
@@ -3274,7 +3274,7 @@ const quizData = [
     "explanation": [
       "本題考查遞迴 (Recursion) 的執行流程。<br><br><b>【追蹤過程】</b><br>1. 呼叫 <code>f(3)</code>：回傳 <code>3 + f(2)</code><br>2. 呼叫 <code>f(2)</code>：回傳 <code>2 + f(1)</code><br>3. 呼叫 <code>f(1)</code>：回傳 <code>1 + f(0)</code><br>4. 呼叫 <code>f(0)</code>：遇到終止條件 (n==0)，回傳 <code>0</code><br><br><b>【回溯計算】</b><br><code>f(1) = 1 + 0 = 1</code><br><code>f(2) = 2 + 1 = 3</code><br><code>f(3) = 3 + 3 = 6</code><br><br>這其實就是在計算 0+1+2+3 的總和。"
     ],
-    "category": "D2_流程控制"
+    "category": "D2_流程控制與判斷"
   },
   {
     "id": 144,
@@ -3294,7 +3294,7 @@ const quizData = [
     "explanation": [
       "本題考查巢狀迴圈 (Nested Loop) 的執行次數計算。<br><br><b>【解析】</b><br>外層迴圈 <code>i</code> 從 1 跑到 4。<br>內層迴圈 <code>j</code> 從 <code>i</code> 跑到 4。<br>● i=1 時: j=1,2,3,4 (共 4 次)<br>● i=2 時: j=2,3,4 (共 3 次)<br>● i=3 時: j=3,4 (共 2 次)<br>● i=4 時: j=4 (共 1 次)<br><br>總次數 <code>cnt = 4 + 3 + 2 + 1 = 10</code>。<br><br>這類題目考驗您是否能冷靜地追蹤變數變化，是 APCS 的核心考題。"
     ],
-    "category": "D3_輸入與輸出"
+    "category": "D3_輸入輸出與檔案"
   },
   {
     "id": 145,
