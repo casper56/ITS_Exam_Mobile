@@ -549,28 +549,37 @@ def clean_repair_all():
         # 2. Update mock_exam.html
         mock_path = os.path.join(dir_path, 'mock_exam.html')
         if os.path.exists(mock_path):
-            with open(mock_path, 'r', encoding='utf-8', errors='ignore') as f:
-                mock_content = f.read()
-            
-            # 使用字串替換而非 regex 以避免轉義錯誤
-            # 尋找 initExam 函數的起始與結束位置
-            start_idx = mock_content.find('function initExam() {')
-            end_marker_str = '    function startTimer'
-            end_idx = mock_content.find(end_marker_str)
-            
-            if start_idx != -1 and end_idx != -1:
-                mock_content = mock_content[:start_idx] + logic_code + "\n\n" + mock_content[end_idx:]
+            try:
+                with open(mock_path, 'r', encoding='utf-8') as f:
+                    mock_content = f.read()
+                
+                # 使用字串替換而非 regex 以避免轉義錯誤
+                # 尋找 initExam 函數的起始與結束位置
+                start_marker_fn = 'function initExam() {'
+                end_marker_str = '    function startTimer'
+                
+                start_idx = mock_content.find(start_marker_fn)
+                end_idx = mock_content.find(end_marker_str)
+                
+                if start_idx != -1 and end_idx != -1:
+                    mock_content = mock_content[:start_idx] + logic_code + "\n\n" + mock_content[end_idx:]
+                else:
+                    print(f"  [!] Warning: Could not find logic markers in {mock_path}")
 
-            start_marker = 'const allQuestions ='
-            end_marker = 'let examQuestions = [];'
-            
-            if start_marker in mock_content and end_marker in mock_content:
-                parts = mock_content.split(start_marker)
-                rest = parts[1].split(end_marker, 1)
-                new_mock = parts[0] + start_marker + " " + json_str + ";\n    " + end_marker + rest[1]
-                with open(mock_path, 'w', encoding='utf-8') as f:
-                    f.write(new_mock)
-                print(f"  - Synced mock_exam.html with V3.3 Balanced Logic")
+                start_marker = 'const allQuestions ='
+                end_marker = 'let examQuestions = [];'
+                
+                if start_marker in mock_content and end_marker in mock_content:
+                    parts = mock_content.split(start_marker)
+                    rest = parts[1].split(end_marker, 1)
+                    new_mock = parts[0] + start_marker + " " + json_str + ";\n    " + end_marker + rest[1]
+                    with open(mock_path, 'w', encoding='utf-8') as f:
+                        f.write(new_mock)
+                    print(f"  - Synced mock_exam.html with V3.3 Balanced Logic")
+                else:
+                    print(f"  [!] Warning: Could not find data markers in {mock_path}")
+            except Exception as e:
+                print(f"  [X] Error processing {mock_path}: {e}")
 
         # 3. Update questions_data.js and questions_practice.js if they exist
         for js_file in ['questions_data.js', 'questions_practice.js']:

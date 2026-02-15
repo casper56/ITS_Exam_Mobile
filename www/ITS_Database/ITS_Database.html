@@ -123,7 +123,7 @@
     "explanation": "這題的關鍵在於確保兩個資料表之間的「關聯」與「資料完整性」。外<br>\n部索引鍵 (Foreign Key) 的核心用途，就是建立一個資料表(例如 Sales)對另一個資<br>\n料表(例如 SalesPerson)的參考，強制參考的資料必須存在。如此一來，可以防止在<br>\nSales 資料表中新增一筆不存在的銷售人員所賣出的訂單，確保了資料的正確性與<br>\n一致性。<br>\n(A) 叢集索引是定義資料在磁碟上的實體儲存順序，與資料關聯的正確性無關。<br>\n(C) 主索引鍵是用來確保「自己資料表」中每一筆資料的唯一性，而非用於關聯兩個<br>\n不同的資料表。<br>\n(D) 非叢集索引是用來加速查詢，與資料關聯的正確性無關。在這個案例中，它能<br>\n確保 Sales 資料表中的每一筆記錄都對應到 SalesPerson 資料表中一個實際存在的<br>\n銷售人員",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 2,
@@ -143,7 +143,7 @@
     "explanation": "複合主索引鍵 (Composite Primary Key) 是由兩個或多個欄位組成的索引鍵，用於<br>\n唯一識別資料表中的每一筆記錄。<br>\n為了關聯 Chapter 和 Language 這兩個資料表，我們需要選取它們各自的主索引鍵<br>\n，也就是 ChapterId 和 LanguageId，作為新資料表 ChapterLanguage 的複合主<br>\n索引鍵。",
     "image": null,
     "type": "multiple",
-    "category": "D1_資料型別與運算子",
+    "category": "D1_資料庫概念",
     "image01": "images/2_1.png",
     "image02": "images/2_2.png"
   },
@@ -162,7 +162,7 @@
     "explanation": "①錯誤 (X): 資料表中欄位的每個值不一定都是唯一的。只有主索引鍵或設定唯一條<br>\n件約束的欄位才需要是唯一的。<br>\n②正確 (〇): 在關聯式資料庫中，每個資料列 (Row) 必須是唯一的，這是由主索引鍵<br>\n確保的。<br>\n③正確 (〇): 資料表中的每個資料行 (Column) 名稱必須是唯一的，以避免在查詢和<br>\n操作時產生歧義。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 4,
@@ -180,7 +180,7 @@
     "explanation": "為了確保 Employee 資料表中的員工記錄只能關聯到 Department 資料表中一個現<br>\n有的部門，需要在 Employee 資料表上建立一個外部索引鍵，該索引鍵參照<br>\nDepartment 資料表的主索引鍵。<br>\n這會強制實施部門與員工之間的一對多關聯性，確保每位員工都分配給一個有效的<br>\n部門。<br>\nCH02",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 5,
@@ -197,7 +197,7 @@
     "explanation": "ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。<br>\n正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 6,
@@ -214,7 +214,7 @@
     "explanation": "檢視表 (View) 是一個虛擬資料表，它不儲存實際資料，而是根據其定義的查詢動態<br>\n產生結果集。<br>\n當您從基礎資料表 Product 中刪除所有 Furniture 類別的產品時，檢視表在下次被<br>\n查詢時將找不到任何符合條件的資料，因此結果集將會清空。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 7,
@@ -231,7 +231,7 @@
     "explanation": "函式 (Function) 必須傳回一個值，而預存程式 (Stored Procedure) 則不一定需要。<br>\n預存程式可以執行多個 SQL 陳述式，並可以傳回多個結果集或沒有任何結果。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 8,
@@ -248,7 +248,7 @@
     "explanation": "COUNT(*) 是一個聚合函式，用於計算資料表中的所有資料列數目，包括包含<br>\nNULL 值的資料列。<br>\nCOUNT(rows) 和 SUM(*) 不是標準的 SQL 語法，SELECT * FROM Employee 則是<br>\n返回所有資料列和欄位，而不是資料列的數量。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 9,
@@ -266,7 +266,7 @@
     "explanation": "串聯刪除 (Cascade Delete) 是外部索引鍵約束的一個屬性。當我們在定義外部索引<br>\n鍵時，可以設定 ON DELETE CASCADE。<br>\n這表示當主資料表（父資料表，如 order）中的一筆資料被刪除時，參考到這筆資<br>\n料的從屬資料表（子資料表，如 orderltem）中的所有對應資料列也會被自動刪除<br>\n，以維持資料的參考完整性。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 10,
@@ -283,7 +283,7 @@
     "explanation": "複合鍵 (Composite Key) 是指由兩個或多個欄位共同組成的主索引鍵。其建立語法<br>\n是在所有欄位定義完之後，使用 PRIMARY KEY (欄位1, 欄位2, ...) 的形式來指定。<br>\n選項 (A) 正確地使用了此語法。<br>\n(B) 和 (D) 的語法是錯誤的，一個資料表只能有一個主索引鍵。<br>\n(C) 的語法不完整，PRIMARY KEY 後面沒有指定任何欄位。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 11,
@@ -300,7 +300,7 @@
     "explanation": "當一個已經存在資料的資料表要新增一個設定為 NOT NULL (不允許空值) 的欄位時<br>\n，資料庫會遇到一個問題：對於那些已經存在的資料列，這個新欄位的值應該是什<br>\n麼？因為不允許是 NULL，所以必須為這些舊資料列提供一個預設值。如果沒有使<br>\n用 DEFAULT 關鍵字指定一個預設值，這個 ALTER TABLE 操作就會失敗。如果資料<br>\n表是空的，這個操作則會成功。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 12,
@@ -317,7 +317,7 @@
     "explanation": "在處理金錢、貨幣等需要高精確度的數值時，應該使用 decimal (或 numeric,<br>\nmoney) 這類固定小數點的資料型別。這可以避免使用 float 等浮點數資料型別時可<br>\n能發生的微小誤差，確保財務計算的準確性。<br>\n(A) binary 用於儲存二進位資料。<br>\n(B) bit 用於儲存 0 或 1 的布林值。<br>\n(D) varchar 用於儲存字串。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 13,
@@ -334,7 +334,7 @@
     "explanation": "建立資料表的標準 SQL 語法是 CREATE TABLE 資料表名稱 (欄位1 資料型態, 欄位2<br>\n資料型態, ...);。選項 (A) 完全符合這個語法結構。<br>\n(B) 缺少了 TABLE 關鍵字。<br>\n(C) 和 (D) 的括號位置不正確。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子",
+    "category": "D1_資料庫概念",
     "image01": "images/9_3.png"
   },
   {
@@ -352,7 +352,7 @@
     "explanation": "建立檢視表的完整語法是 CREATE VIEW 檢視表名稱 AS SELECT 欄位... FROM 資料<br>\n表... WHERE 條件...;。<br>\n因此，正確的順序是：",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 15,
@@ -369,7 +369,7 @@
     "explanation": "① 正確(○): 預存程式是一系列的 SQL 陳述式集合，當然可以包含 DELETE 陳述式<br>\n來刪除資料。<br>\n② 正確(○): 這是函式與預存程式最主要的區別之一。函式被設計來計算並傳回一個<br>\n值。<br>\n③ 錯誤(X): 預存程式「可以」透過輸出引數或傳回碼來傳回值，但並非「必須」。<br>\n它可以只執行操作而不傳回任何東西。<br>\n因此，順序為 ○、○、X。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 16,
@@ -386,7 +386,7 @@
     "explanation": "TRUNCATE TABLE 指令用於快速刪除一個資料表中的所有資料列。與 DELETE 不同<br>\n，TRUNCATE 通常是一個最小化日誌記錄的操作，它不會為每一筆被刪除的資料列<br>\n寫入交易日誌，因此執行速度非常快。但這也意味著它通常不能被輕易地復原<br>\n(rollback)，且不會觸發 DELETE 觸發器。<br>\n(A) ALTER TABLE 用於修改資料表結構。<br>\n(B) DROP TABLE 會刪除整個資料表，包括其結構和資料。",
     "image": null,
     "type": "single",
-    "category": "D1_資料型別與運算子"
+    "category": "D1_資料庫概念"
   },
   {
     "id": 17,
@@ -403,7 +403,7 @@
     "explanation": "條件約束 (Constraint) 是資料庫用來強制執行資料完整性規則的主要機制。它包含<br>\n了多種型別，例如：<br>\n* NOT NULL: 確保欄位不能是空值。<br>\n* UNIQUE: 確保欄位中的值是唯一的。<br>\n* PRIMARY KEY: 主索引鍵約束 (是 NOT NULL 和 UNIQUE 的結合)。<br>\n* FOREIGN KEY: 外部索引鍵約束，確保參考完整性。<br>\n* CHECK: 確保欄位中的值符合指定的條件。<br>\n這些約束共同確保了輸入資料的有效性。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 18,
@@ -420,7 +420,7 @@
     "explanation": "檢視表、資料表、索引等都屬於資料庫的「物件」。<br>\n要移除這些物件，應使用 DDL (資料定義語言) 中的 DROP 指令。其標準語法為<br>\nDROP VIEW 檢視表名稱;。<br>\n(A) 和 (B) 的 DELETE 是 DML (資料操作語言)，用於刪除資料表中的「資料列」，<br>\n而不是物件本身。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 19,
@@ -437,7 +437,7 @@
     "explanation": "預存程式 (Stored Procedure) 有多個優點，其中最主要的一個是「提升效能」。因<br>\n為預存程式是預先編譯好並儲存在資料庫伺服器上，當被呼叫時，資料庫無需重新<br>\n解析和編譯 SQL 陳述式，減少了網路傳輸量和伺服器的處理負擔，從而提升了執行<br>\n效率。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 20,
@@ -454,7 +454,7 @@
     "explanation": "外部索引鍵是一個資料表的「條件約束」，屬於資料表結構的一部分。要修改資料<br>\n表的結構（包括新增、刪除或修改條件約束），都必須使用 ALTER TABLE 陳述式。<br>\n通常的語法會是 ALTER TABLE 資料表名稱 DROP CONSTRAINT 約束名稱;。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 21,
@@ -471,7 +471,7 @@
     "explanation": "在標準 SQL 中，要從資料表中移除一個資料行，應使用 ALTER TABLE 陳述式搭配<br>\nDROP COLUMN 子句。選項 (A) 是最標準且正確的語法。<br>\nREMOVE 或 DELETE 都不是用來刪除資料行的標準關鍵字。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 22,
@@ -488,7 +488,7 @@
     "explanation": "DDL (資料定義語言) 用於定義或管理資料庫物件的結構。要「刪除整個資料表」（<br>\n包括其結構、資料和相關索引），應使用 DROP 關鍵字。語法為 DROP TABLE 資<br>\n料表名稱;。<br>\n(A) ALTER 用於修改結構。<br>\n(B) TRUNCATE 用於刪除所有資料，但保留結構。<br>\n(D) DELETE 是 DML，用於刪除資料列，同樣保留結構。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 23,
@@ -505,7 +505,7 @@
     "explanation": "* StudentName: 儲存姓名，是字元字串，應使用 VARCHAR (C) 或 CHAR (F)。<br>\nVARCHAR 更常用，因為它是可變長度。<br>\n* GradeLevel: 儲存年級，是整數，應使用 INT (E)。<br>\n* DaysAbsent: 儲存缺席天數，需要支援小數（如 2.5），應使用 DECIMAL (B)。<br>\n組合起來，最合理的選擇是 VARCHAR, INT, DECIMAL，對應到 (C), (E), (B)。所以<br>\n答案是 (A)。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷",
+    "category": "D2_資料庫設計",
     "image01": "images/19_4.png"
   },
   {
@@ -524,7 +524,7 @@
     "explanation": "在 CREATE TABLE 陳述式中，我們定義資料表的欄位以及確保資料完整性的規則。<br>\n* CONSTRAINT (B) 是用來定義各種約束的通用關鍵字，例如 CHECK, UNIQUE,<br>\nPRIMARY KEY, FOREIGN KEY。<br>\n* PRIMARY KEY (C) 是最重要的一種約束，可以直接在欄位後定義，也可以透過<br>\nCONSTRAINT 關鍵字來定義。<br>\n(A) ORDER BY 用於 SELECT 查詢的排序。<br>\n(D) INSERT INTO 用於新增資料。",
     "image": null,
     "type": "multiple",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 25,
@@ -541,7 +541,7 @@
     "explanation": "題目的要求是「按照字母順序排列」。<br>\n在 SQL 中，要對查詢結果進行排序，必須使用 ORDER BY 子句。因此，在建立檢<br>\n視表的 SELECT 陳述式中，需要包含 ORDER BY Name。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 26,
@@ -558,7 +558,7 @@
     "explanation": "預存程式 (Stored Procedure) 就是被設計來儲存一系列可重複使用的 SQL 陳述式。<br>\n它可以接受引數、執行複雜的邏輯、並可由使用者或應用程式「手動呼叫」。這完<br>\n全符合題目的需求。<br>\n(B) 函式主要用於傳回單一值。<br>\n(C) 檢視表主要用於簡化查詢。<br>\n(D) 觸發程式是自動執行的，不能手動呼叫。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 27,
@@ -579,7 +579,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 28,
@@ -596,7 +596,7 @@
     "explanation": "在 FROM 子句中直接列出多個資料表，而沒有使用 WHERE 或 JOIN...ON 子句來指<br>\n定它們之間的關聯條件時，資料庫會執行交叉聯結，產生笛卡兒乘積。<br>\n這是比較舊的 SQL-89 語法，現在建議使用明確的 CROSS JOIN 關鍵字。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 29,
@@ -618,7 +618,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 30,
@@ -635,7 +635,7 @@
     "explanation": "這題的需求是 A「或」B，也就是符合 A 或 B任一條件的學生都要顯示，所以要用<br>\nOR。<br>\n條件是 enrollment_date >= '2020-06-01' OR (academic_status='Graduated'<br>\nAND graduation_date >= '2020-01-01')。<br>\n同時，要求最新的註冊日期排在最前面，所以要用 ORDER BY enrollment_date<br>\nDESC (DESC 代表遞減排序)。選項 (C) 的邏輯最符合這些要求。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 31,
@@ -652,7 +652,7 @@
     "explanation": "這題的關鍵是要對「彙總函式的結果」進行篩選。<br>\nWHERE 子句是在分組和彙總「之前」對個別資料列進行篩選。<br>\n而 HAVING 子句則是在 GROUP BY 分組和彙總「之後」對分組結果進行篩選。因<br>\n為我們要篩選的是 COUNT(orderID) < 50，所以必須使用 HAVING 子句。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 32,
@@ -677,7 +677,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷",
+    "category": "D2_資料庫設計",
     "image01": "images/6_5.png"
   },
   {
@@ -695,7 +695,7 @@
     "explanation": "現代的 SQL (SQL-92 標準) 建議使用明確的 JOIN 語法。JOIN 的關聯條件應該使用<br>\nON 關鍵字來指定，而不是放在 WHERE 子句中。OUTER JOIN 是一個不完整的語<br>\n法，應該明確指定是 LEFT OUTER JOIN, RIGHT OUTER JOIN 還是 FULL OUTER<br>\nJOIN。但此題的重點在於 JOIN 的語法結構，正確的結構是 FROM table1 JOIN<br>\ntable2 ON table1.key = table2.key。選項 (B) 是唯一符合此結構的。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 34,
@@ -712,7 +712,7 @@
     "explanation": "在大多數的 SQL 資料庫系統中（如 SQL Server），當你使用 + 運運算元來串接字串<br>\n時，只要其中任何一個部分是 NULL，整個串接的結果就會是 NULL。因此，如果<br>\nPrefix 或 FirstName 欄位中有任何一筆資料是 NULL，該筆資料列的查詢結果就會<br>\n是 NULL。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 35,
@@ -729,7 +729,7 @@
     "explanation": "INTERSECT (交集) 運運算元會比較兩個 SELECT 陳述式的結果集，並只傳回在「兩個」<br>\n結果集中都存在的資料列。它會自動移除重複的資料列。<br>\n(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。",
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷"
+    "category": "D2_資料庫設計"
   },
   {
     "id": 36,
@@ -752,7 +752,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D2_流程控制與判斷",
+    "category": "D2_資料庫設計",
     "image01": "images/10_6.png"
   },
   {
@@ -770,7 +770,7 @@
     "explanation": "UNION (聯集) 運運算元就是用來將兩個或多個 SELECT 陳述式的結果集合併成一個單<br>\n一的結果集。UNION 預設會移除重複的資料列。如果想要保留所有重複的資料列<br>\n，可以使用 UNION ALL。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 38,
@@ -787,7 +787,7 @@
     "explanation": "這個描述最精確地對應到 LEFT OUTER JOIN (左外部聯結)，假設 customer 是左邊<br>\n的資料表。它會傳回所有左邊資料表(customer)的紀錄，以及右邊資料表(order)中<br>\n匹配的紀錄。如果某個客戶沒有訂單，則訂單相關的欄位會顯示為 NULL。而 FULL<br>\nOUTER JOIN (完全外部聯結) 會包含 LEFT JOIN 的所有結果，再加上「有訂單但沒<br>\n有對應客戶」的紀錄（在有外部索引鍵約束下，這種情況不應發生）。在此選擇題<br>\n中，完全外部聯結 是最接近且包含所需結果的選項。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 39,
@@ -804,7 +804,7 @@
     "explanation": "關聯式資料庫的理論基礎是集合論，集合中的元素是沒有固定順序的。因此，如果<br>\n一個 SELECT 查詢沒有明確使用 ORDER BY 子句來指定排序方式，資料庫回傳資料<br>\n的順序是「不被保證的」。它可能會因為查詢計畫、索引、或資料的實體儲存方式<br>\n而改變，所以是無法預測的。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 40,
@@ -821,7 +821,7 @@
     "explanation": "LIKE 運運算元專門用於字串的比對，可以搭配萬用字元來進行模糊搜尋。<br>\n* %: 代表零個或多個任意字元。<br>\n* _: 代表一個任意字元。<br>\n例如 WHERE ProductName LIKE '%apple%' 可以找出名稱中包含 'apple' 的所有<br>\n產品。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 41,
@@ -838,7 +838,7 @@
     "explanation": "要同時排除 TX 和 AZ，條件必須是「州不等於 TX」『而且』「州不等於 AZ」。所<br>\n以必須使用 AND 來連線這兩個條件。如果使用 OR，那麼德州的訂單會因為「不等<br>\n於 AZ」而滿足條件被選出來，反之亦然，這就不對了。正確的邏輯是 WHERE<br>\nship_state <> 'TX' AND ship_state <> 'AZ'，或是 WHERE ship_state NOT IN<br>\n('TX', 'AZ')。選項 (B) 的 NOT ... AND NOT ... 在邏輯上是正確的。<br>\nCH04",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 42,
@@ -855,7 +855,7 @@
     "explanation": "DELETE FROM [資料表名稱] 陳述式如果沒有加上 WHERE 子句來指定條件，它的<br>\n預設行為就是刪除該資料表中的「所有」資料列。這個操作不會影響資料表的結構<br>\n定義。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 43,
@@ -872,7 +872,7 @@
     "explanation": "選項 (A) 完全符合這個語法。刪除特定資料列的標準 SQL 語法是 DELETE FROM [<br>\n資料表名稱] WHERE [條件];。<br>\n(B) DELETE 後面不需指定欄位名稱。<br>\n(C) 和 (D) 的語法完全錯誤，混用了 UPDATE 和 DELETE。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 44,
@@ -890,7 +890,7 @@
     "explanation": "主索引鍵 (Primary Key) 的最重要特性就是它的值在資料表中必須是「唯一的」。<br>\n資料表中已經存在一筆ProductID為 3296 的紀錄。<br>\n當我們試圖再INSERT (插入) 一筆ProductID 同樣為 3296 的新紀錄時，就違反了主<br>\n索引鍵的唯一性約束，資料庫會拒絕此操作並回報錯誤。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/3_7.png"
   },
   {
@@ -909,7 +909,7 @@
     "explanation": "1.INSERT INTO [資料表名稱] VALUES (值1, 值2, ...);：這種語法不指定欄位名稱，<br>\n但提供的值必須與資料表中欄位的「原始順序」完全對應。選項 (A) 符合此語法。<br>\n2.INSERT INTO [資料表名稱] (欄位1, 欄位2, ...) VALUES (值1, 值2, ...);：這種語法明<br>\n確指定要插入的欄位及其對應的值，更為安全和清晰。選項 (C) 符合此語法。<br>\n選項 (D) 使用 UPDATE，是用於修改現有資料，而非插入新資料。",
     "image": null,
     "type": "multiple",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/4_8.png",
     "image02": "images/4_9.png"
   },
@@ -928,7 +928,7 @@
     "explanation": "修改現有資料的標準 SQL 語法是 UPDATE [資料表名稱] SET [欄位名稱] = [新值]<br>\nWHERE [條件];。<br>\n*UPDATE Volunteer: 指定要更新的資料表。<br>\n*SET GivenName = 'Kimberly': 指定要將 GivenName 欄位的值設定為 'Kimberly'。<br>\n*WHERE GivenName = 'Tia': 指定要更新的是哪一筆紀錄。<br>\n選項 (A) 完全符合此語法。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/5_10.png"
   },
   {
@@ -946,7 +946,7 @@
     "explanation": "DML (Data Manipulation Language) 主要用於處理資料表中的「資料」，包括查<br>\n詢和修改。常見的 DML 陳述式有 SELECT, INSERT, UPDATE, DELETE。<br>\n(B) INSERT 是標準的 DML 陳述式，用於新增資料。<br>\n(C) ALTER TABLE 是 DDL (Data Definition Language)，用於修改資料庫物件的結<br>\n構。<br>\n(A) 和 (D) 的 SELECT 也是 DML (或稱 DQL, Data Query Language)。但 INSERT<br>\n是更典型的「操作」語言。在此選項中，B 是最明確的 DML 範例。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案"
+    "category": "D3_資料操作"
   },
   {
     "id": 48,
@@ -963,7 +963,7 @@
     "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 ‘LIKE’ 運運算元搭配萬用字<br>\n元 ‘%’。’%’ 代表零個或多個任意字元。所以 ‘LIKE '%chocolate%'‘ 的意<br>\n思是，只要 ‘ItemDescription’ 欄位中的任何位置出現 'chocolate' 這個詞，不<br>\n論前後是否有其他文字，都符合條件。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/7_11.png",
     "image02": "images/7_12.png"
   },
@@ -982,7 +982,7 @@
     "explanation": "要在一個字串中搜尋是否「包含」某個子字串，應使用 LIKE 運運算元搭配萬用字元 %。<br>\n% 代表零個或多個任意字元。所以 LIKE '%chocolate%' 的意思是，只要<br>\nItemDescription 欄位中的任何位置出現 'chocolate' 這個詞，不論前後是否有其他<br>\n文字，都符合條件。",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/8_13.png"
   },
   {
@@ -1000,7 +1000,7 @@
     "explanation": "這個查詢需要組合多個條件：",
     "image": null,
     "type": "single",
-    "category": "D3_輸入輸出與檔案",
+    "category": "D3_資料操作",
     "image01": "images/9_14.png"
   },
   {
@@ -1018,7 +1018,7 @@
     "explanation": "雖然題目中的 CREATE TABLE 陳述式沒有明確將 RoadID 宣告為 PRIMARY KEY 或<br>\nUNIQUE，但在資料庫設計的常規中，像 RoadID 這樣的欄位通常是作為唯一識別<br>\n碼的。題目很可能在測驗這個隱含的認知。如果 RoadID 具有唯一性約束，那麼插<br>\n入一個已經存在的 ID (1234) 就會導致錯誤。這是最可能的情境。<br>\n(如果嚴格按照給定的 DDL，沒有唯一約束，則答案會是 (B)，但這通常不是這類問<br>\n題的考點)。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解",
+    "category": "D4_資料庫物件",
     "image01": "images/10_15.png"
   },
   {
@@ -1036,7 +1036,7 @@
     "explanation": "將一個查詢的結果集插入到另一個已存在的資料表，標準的 SQL 語法是 INSERT<br>\nINTO [目標資料表] SELECT ... FROM [來源資料表];。<br>\n選項 (B) 完全符合這個語法。<br>\n(D)SELECT INTO 是某些資料庫系統（如 SQL Server）支援的語法，可以用來「建<br>\n立新資料表並插入資料」，但 ‘INSERT INTO ... SELECT’ 是更通用的標準語法。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解"
+    "category": "D4_資料庫物件"
   },
   {
     "id": 53,
@@ -1053,7 +1053,7 @@
     "explanation": "這是一個標準的資料更新操作。語法為 UPDATE [資料表名稱] SET [欄位] = [新值]<br>\nWHERE [條件];。<br>\n選項 (B) 的語法完全正確，它指定了要更新 Product 資料表，將 ProductCategory<br>\n設定為 43，條件是 ProductDescription 為 'spoon'。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解"
+    "category": "D4_資料庫物件"
   },
   {
     "id": 54,
@@ -1070,7 +1070,7 @@
     "explanation": "這是在測驗資料庫交易的「原子性 (Atomicity)」原則。原子性確保交易中的所有操<br>\n作要麼「全部完成」，要麼「全部不做」。<br>\n如果一個交易在執行的過程中失敗了，資料庫系統會執行「復原 (Rollback)」，將<br>\n所有已經完成的操作全部撤銷，使資料庫回到交易開始之前的狀態。<br>\n因此，那已經被刪除的 40 筆資料列會被還原，最終結果是沒有任何資料列被刪除。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解"
+    "category": "D4_資料庫物件"
   },
   {
     "id": 55,
@@ -1087,7 +1087,7 @@
     "explanation": "在 SQL 中，要判斷一個欄位的值是否為 NULL，不能使用等於 (=) 或不等於 (<>)<br>\n運運算元。必須使用專門的 IS NULL 或 IS NOT NULL 來判斷。因此，要找出電話號<br>\n碼為空的紀錄，條件應該是 WHERE Phone IS NULL。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解"
+    "category": "D4_資料庫物件"
   },
   {
     "id": 56,
@@ -1110,7 +1110,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解",
+    "category": "D4_資料庫物件",
     "image01": "images/15_16.png"
   },
   {
@@ -1135,7 +1135,7 @@
     ],
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解",
+    "category": "D4_資料庫物件",
     "image01": "images/16_17.png"
   },
   {
@@ -1153,7 +1153,7 @@
     "explanation": "這題是在測驗彙總函式 (Aggregate Functions) 的使用：<br>\n*訂單總數: COUNT(ID) 或 COUNT(*)<br>\n*平均單行商品總計: AVG(LineltemTotal)<br>\n*最高單行商品總計: MAX(LineltemTotal)<br>\n*所有訂購商品的總計: SUM(LineltemTotal)<br>\n選項 (A) 正確地使用了這四個彙總函式。",
     "image": null,
     "type": "single",
-    "category": "D4_函式與註解",
+    "category": "D4_資料庫物件",
     "image01": "images/17_18.png"
   },
   {
@@ -1171,7 +1171,7 @@
     "explanation": "在標準 SQL 查詢中，子句的執行順序是固定的：FROM -> WHERE -> GROUP BY<br>\n-> HAVING -> SELECT -> ORDER BY。這個查詢將 ORDER BY 子句放在了<br>\nGROUP BY 子句的前面，這違反了 SQL 的語法規則，因此會產生錯誤。將<br>\nORDERBY 子句移除，或將它移動到整個查詢的最後面，就可以修正這個語法錯誤。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 60,
@@ -1188,7 +1188,7 @@
     "explanation": "LEFT OUTER JOIN (左外部聯結) 會傳回左邊資料表 (Cars) 的「所有」資料列，無論<br>\n在右邊資料表 (Colors) 中是否有匹配的紀錄。Cars 資料表中有 3 筆資料列，所以這<br>\n個查詢的結果集一定會有 3 筆資料列。對於 ColorID 無法在 Colors 中找到匹配的<br>\n紀錄（如 Truck 的 ColorID 是 NULL），其對應的 Colors 資料表欄位將會以 NULL<br>\n值顯示。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image01": "images/19_19.png",
     "image02": "images/19_20.png"
   },
@@ -1207,7 +1207,7 @@
     "explanation": "要將一個數值提高 6%，就是將原來的數值乘以 1.06。更新資料的語法是 UPDATE<br>\n[資料表] SET [欄位] = [新值] WHERE [條件]。<br>\n因此，正確的陳述式是 UPDATE Products SET Price = Price * 1.06 WHERE<br>\nItemNumber = 1。<br>\nCH05",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image01": "images/20_21.png"
   },
   {
@@ -1226,7 +1226,7 @@
     "explanation": "功能相依 (Functional Dependency) 是資料庫正規化的核心概念。如果我們知道屬<br>\n性 A 的值，就可以唯一地確定屬性 B 的值，那麼我們就說「B 功能相依於 A」(記為<br>\nA -> B)。在這個例子中，只要知道 ProductID，就可以確定它的<br>\nProductCategory。因此，ProductCategory 功能相依於 ProductID。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image01": "images/1_22.png"
   },
   {
@@ -1244,7 +1244,7 @@
     "explanation": "在 SQL 中，管理許可權的指令是 GRANT (授予許可權) 和 REVOKE(撤銷許可權)。<br>\n要撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是 REVOKE<br>\nSELECT ON [物件名稱] FROM [使用者或角色];。<br>\n選項 (D) 完全符合此語法。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 64,
@@ -1262,7 +1262,7 @@
     "explanation": "(A) 叢集索引決定了資料的實體儲存順序。當查詢需要回傳大量資料，特別是連續範<br>\n圍的資料時，因為資料都實體上儲存在一起，<br>\n可以減少磁碟 I/O，從而提升效能。<br>\n(B) 因為資料是按照叢集索引的鍵值排序儲存的，所以對於<br>\n循序存取（例如範圍查詢 WHERE ID BETWEEN 100 AND 200 或 ORDER BY 叢集<br>\n索引鍵）的效能提升最為顯著。",
     "image": null,
     "type": "multiple",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 65,
@@ -1279,7 +1279,7 @@
     "explanation": "第三正規形式 (3NF) 的要求是，非主鍵的任何屬性都不能相依於非主鍵的屬性，也<br>\n就是要消除「遞移相依性」。<br>\n在這個資料表中，主鍵是 ID。<br>\n* ID -> PetID (ID 可以決定是哪隻寵物)<br>\n* PetID -> Birthdate (寵物的 ID 可以決定它的生日)<br>\n因此，產生了 ID -> PetID -> Birthdate 的遞移相依關係。Birthdate 這個非主鍵屬<br>\n性，它不直接相依於主鍵 ID，而是透過另一個非主鍵屬性 PetID 來決定。這就違反<br>\n了 3NF。因此，Birthdate 欄位是問題所在。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image01": "images/4_23.png"
   },
   {
@@ -1297,7 +1297,7 @@
     "explanation": "在大多數的資料庫系統中，當你為一個欄位或一組欄位建立 PRIMARY KEY (主索引<br>\n鍵) 或 UNIQUE (唯一) 約束時，資料庫會「自動」為其建立一個索引，以確保鍵值<br>\n的唯一性並加速查詢。因此，選項 (A) 在建立主索引鍵的同時，也隱含地建立了一<br>\n個索引。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 67,
@@ -1315,7 +1315,7 @@
     "explanation": "第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。",
     "image": null,
     "type": "multiple",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 68,
@@ -1332,7 +1332,7 @@
     "explanation": "解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'<br>\n這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 69,
@@ -1349,7 +1349,7 @@
     "explanation": "①正確(○): 完整備份 (Full Backup) 就是對整個資料庫（包括資料、物件、結構）進行一次完整的複製。<br>\n②錯誤(X): 交易記錄備份 (Transaction Log Backup) 只備份自上次交易記錄備份以來的所有交易紀錄，而不是資料庫中的所有資料。它用於時間點復原。<br>\n③正確(X): 差異備份 (Differential Backup) 會備份自「上一次完整備份」以來所有變更過的資料。(題目中的「之前」應為「之後」的筆誤)。<br>\n④正確(○): 當資料庫非常大時，可以只備份或還原特定的檔案或檔案群組，增加管理的彈性。<br>\n因此，順序為 ○、X、X、○。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 70,
@@ -1366,7 +1366,7 @@
     "explanation": "第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。<br>\n在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 71,
@@ -1383,7 +1383,7 @@
     "explanation": "CHECK 條件約束用於限制欄位中可接受的值範圍。<br>\n您可以定義一個表示式 (例如：Age >= 18)，資料庫會自動檢查所有新增或修改的資料是否符合此條件。<br>\n(A) 主鍵用於唯一識別。(B) 外來鍵用於關聯資料表。(C) UNIQUE 用於確保不重複。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 72,
@@ -1400,7 +1400,7 @@
     "explanation": "交易管理中，COMMIT 指令用於將交易中的所有更動「永久儲存」到資料庫中。<br>\n(A) ROLLBACK 是在發生錯誤或後悔時，將資料復原到交易開始前的狀態。<br>\n(C) SAVEPOINT 是在交易中設定檢查點，以便部分復原。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 73,
@@ -1417,7 +1417,7 @@
     "explanation": "SQL 注入 (SQL Injection) 是一種常見的資料庫安全漏洞。<br>\n攻擊者透過輸入惡意的 SQL 語法片段，欺騙資料庫執行非預期的指令 (例如繞過登入驗證或刪除資料)。<br>\n防範方法包含使用引數化查詢 (Parameterized Queries) 等。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 74,
@@ -1434,7 +1434,7 @@
     "explanation": "GRANT 是用來授予許可權的標準指令。<br>\n語法為：GRANT [許可權列表] ON [物件] TO [使用者];。<br>\n選項 (A) 明確授予了查詢 (SELECT) 和修改 (UPDATE) 的許可權，且未授予刪除許可權，符合需求。",
     "image": null,
     "type": "single",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 75,
@@ -1452,7 +1452,7 @@
     "weight": 1,
     "image": null,
     "explanation": "在 SELECT 陳述式中，`DISTINCT` 關鍵字用於從結果集中移除重複的資料列，只傳回唯一的值。<br>\n`UNIQUE` 是用於建立資料表時的條件約束 (Constraint)，而非查詢關鍵字。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 76,
@@ -1470,7 +1470,7 @@
     "weight": 1,
     "image": null,
     "explanation": "SQL 的 `LIKE` 運運算元中：<br>\n● `_` (底線) 代表 **這位置只有 1 個任意字元**。<br>\n● `%` (百分比) 代表 **0 個或多個任意字元**。<br>\n因為題目強調「中間的字母只有一個」，所以 `T_m` 是正確答案（會符合 Tim, Tom, Tam，但不會符合 Team）。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 77,
@@ -1488,7 +1488,7 @@
     "weight": 1,
     "image": null,
     "explanation": "SQL 允許對多個欄位進行排序。排序優先順序由左至右。<br>\n1. 先排 `Department ASC` (升冪)。<br>\n2. 當部門相同時，再排 `Salary DESC` (降冪)。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 78,
@@ -1506,7 +1506,7 @@
     "weight": 1,
     "image": null,
     "explanation": "● **角色 (Role)** 是一組許可權的集合。最佳實務是將許可權授予「角色」，然後將使用者加入該角色。<br>\n這樣當人員異動時，只需調整角色的成員，而不用逐一修改許可權設定。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 79,
@@ -1524,7 +1524,7 @@
     "weight": 1,
     "image": null,
     "explanation": "根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 80,
@@ -1542,7 +1542,7 @@
     "weight": 1,
     "image": null,
     "explanation": "根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 81,
@@ -1560,7 +1560,7 @@
     "weight": 1,
     "image": null,
     "explanation": "根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 82,
@@ -1578,7 +1578,7 @@
     "weight": 1,
     "image": null,
     "explanation": "根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 83,
@@ -1596,7 +1596,7 @@
     "weight": 1,
     "image": null,
     "explanation": "根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。",
-    "category": "D5_錯誤處理與測試"
+    "category": "D5_資料庫管理"
   },
   {
     "id": 84,
@@ -1612,7 +1612,7 @@
     ],
     "explanation": "UNION 會自動執行 DISTINCT 並移除重複項；而 UNION ALL 則直接合併，不進行重複檢查，因此效能較快並保留重複列。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1629,7 +1629,7 @@
     ],
     "explanation": "CROSS JOIN 會產生笛卡兒積 (Cartesian Product)，若 A 表有 10 行，B 表有 5 行，結果集將會有 50 行。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1646,7 +1646,7 @@
     ],
     "explanation": "當資料表需要與自身進行關聯時（例如員工與主管都在同一張表），稱為 SELF JOIN (自我連接)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1663,7 +1663,7 @@
     ],
     "explanation": "TRUNCATE 會移除所有資料並將識別值 (Identity) 重設為初始值，且無法帶 WHERE。DELETE 則是逐行刪除，不會重設識別值。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1680,7 +1680,7 @@
     ],
     "explanation": "1NF 要求資料表的每個屬性都是不可再分的原子值，且不允許有重複組 (Repeating Groups)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1697,7 +1697,7 @@
     ],
     "explanation": "2NF 的核心是消除「部分相依」，要求非主鍵欄位必須完全相依於整個主鍵 (特別是在複合主鍵的情況下)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1714,7 +1714,7 @@
     ],
     "explanation": "3NF 要求非主鍵屬性之間不應存在相依關係，即消除「非鍵值對非鍵值」的遞移相依。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1731,7 +1731,7 @@
     ],
     "explanation": "原子性 (Atomicity) 確保事務是不可分割的最小單元，若其中一個步驟失敗，整個事務都會回復 (Rollback)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1748,7 +1748,7 @@
     ],
     "explanation": "髒讀 (Dirty Read) 發生在一個事務讀取了另一個尚未提交事務的資料，若後者隨後復原，則讀到的資料是錯誤的。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1765,7 +1765,7 @@
     ],
     "explanation": "叢集索引決定了資料列在磁碟上的物理排序，因此一張資料表只能有一個叢集索引（通常就是主鍵）。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1782,7 +1782,7 @@
     ],
     "explanation": "非叢集索引就像書末的索引，它存儲了索引鍵與指向實際資料所在位置的指標 (RID 或 Clustered Key)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1799,7 +1799,7 @@
     ],
     "explanation": "文件資料庫（如 MongoDB）使用類似 JSON 的格式存儲，具備 Schema-less 的特性，適合非結構化資料。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1816,7 +1816,7 @@
     ],
     "explanation": "鍵值對資料庫（如 Redis）透過唯一鍵來極速存取對應的值，常用於提升 Web 效能的快取層。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1833,7 +1833,7 @@
     ],
     "explanation": "差異備份是針對上次「完整備份」後的累積變更；而增量備份則是針對「任何類型上次備份」後的變更。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1850,7 +1850,7 @@
     ],
     "explanation": "正規化是「資料庫設計」階段的工作，預存程序是執行邏輯的物件，無法自動修正設計錯誤的表結構。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1867,7 +1867,7 @@
     ],
     "explanation": "WHERE 子句無法處理聚合函數；HAVING 子句則是專門用來對 GROUP BY 產生的群組結果進行篩選。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1884,7 +1884,7 @@
     ],
     "explanation": "資料字典 (Data Dictionary) 或系統目錄 (System Catalog) 存儲了資料庫的所有元數據 (Metadata)。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1901,7 +1901,7 @@
     ],
     "explanation": "死鎖 (Deadlock) 是併發控制中常見的僵局現象，資料庫管理系統通常會自動偵測並犧牲其中一個事務來解開僵局。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1918,7 +1918,7 @@
     ],
     "explanation": "外部索引鍵 (Foreign Key) 用於建立兩表間的連結，確保子表中的值在父表中必須存在，這就是參考完整性。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   },
   {
@@ -1935,7 +1935,7 @@
     ],
     "explanation": "子查詢是巢狀在另一個查詢中的查詢，它可以返回標量值 (Scalar) 或表格，並可用於 SELECT、FROM、WHERE 等多個位置。",
     "type": "single",
-    "category": "D5_錯誤處理與測試",
+    "category": "D5_資料庫管理",
     "image": null
   }
 ];
