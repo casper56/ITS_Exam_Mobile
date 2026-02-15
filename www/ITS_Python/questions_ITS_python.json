@@ -2,7 +2,7 @@
     {
         "id": 1,
         "type": "multioption",
-        "question": "1. 【CH01-1】資料型態的檢視：<br>\n你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。<br>\n輸出結果必須盡可能精準。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<br>\n其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。<br>\n<pre><code class=\"language-python line-numbers line-hight19\">#步速計算器\ndistance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))\n# convert to kilometers\ndistance_kms = distance / 1000\n#輸入已用時間(分鐘)\ntime_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))\n#輸入已用秒數\ntime_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))\ntime time_minute*60+time_se_sec\npace = time / distance_kms\n#平均速度\nprint(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre><br>\n以上空格分別要填入的函式名為：",
+        "question": "1. 【CH01-1】<span style='color: blue'>資料型態的檢視</span>：<br>\n你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。<br>\n輸出結果必須盡可能精準。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<br>\n其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。<br>\n<pre><code class=\"language-python line-numbers line-hight19\">#步速計算器\ndistance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))\n# convert to kilometers\ndistance_kms = distance / 1000\n#輸入已用時間(分鐘)\ntime_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))\n#輸入已用秒數\ntime_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))\ntime time_minute*60+time_se_sec\npace = time / distance_kms\n#平均速度\nprint(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre><br>\n以上空格分別要填入的函式名為：",
         "options": [
             "int|string|float",
             "int|string|float",

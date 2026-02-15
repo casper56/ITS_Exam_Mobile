@@ -22,7 +22,7 @@
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        code { background-color: transparent !important; }
+        code, pre code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; }
         .preview-active .no-print { display: none !important; }
         .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1060; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; }
@@ -86,6 +86,17 @@
 
     function startTimer() { timerInterval = setInterval(() => { timeLeft--; let mins = Math.floor(timeLeft / 60), secs = timeLeft % 60; document.getElementById('timer').innerText = `${mins}:${secs.toString().padStart(2, '0')}`; if (timeLeft <= 0) { alert("時間到！系統自動交卷。"); submitExam(); } }, 1000); }
 
+    function processContent(content, item) {
+        if (!content) return '';
+        let html = String(content);
+        html = html.replace(/^\d+\.\s*/, '');
+        html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const src = item['image' + p1] || item['image0' + p1]; // Try both formats
+            return src ? `<img src="${src}" style="max-width:100%; border-radius:4px; margin: 10px 0;">` : match;
+        });
+        return html.replace(/●/g, '<br/>●');
+    }
+
     function renderQuestion(index, scrollTop = true) {
         currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); container.innerHTML = '';
         document.getElementById('q-progress').innerText = `${index + 1} / ${examQuestions.length}`;
@@ -93,7 +104,7 @@
         if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
         if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
         const card = document.createElement('div'); card.className = 'card question-card';
-        let qText = item.question.replace(/●/g, '<br/>●').replace(/^\d+\.\s*/, '');
+        let qText = processContent(item.question, item);
         let html = `<div class="question-header">Question ${index + 1} / 50</div><div class="question-body"><div class="mb-4">${qText}</div>`;
         if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
         const optionsRaw = item.quiz || item.options || [];
