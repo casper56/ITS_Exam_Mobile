@@ -129,85 +129,168 @@
             examQuestions.push(...extra.slice(0, EXAM_LIMIT - examQuestions.length));
         }
 
-        renderQuestion(0); startTimer();
+        renderQuestion(0);
+        startTimer();
     }
 
-    function startTimer() { timerInterval = setInterval(() => { timeLeft--; let mins = Math.floor(timeLeft / 60), secs = timeLeft % 60; document.getElementById('timer').innerText = `${mins}:${secs.toString().padStart(2, '0')}`; if (timeLeft <= 0) { alert("時間到！系統自動交卷。"); submitExam(); } }, 1000); }
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer').innerText = mins + ":" + secs.toString().padStart(2, '0');
+            if (timeLeft <= 0) {
+                alert("時間到！系統自動交卷。");
+                submitExam();
+            }
+        }, 1000);
+    }
 
     function processContent(content, item) {
         if (!content) return '';
         let html = String(content);
         html = html.replace(/^\d+\.\s*/, '');
         html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-            const src = item['image' + p1] || item['image0' + p1]; // Try both formats
+            const src = item['image' + p1] || item['image0' + p1];
             return src ? `<img src="${src}" style="max-width:100%; border-radius:4px; margin: 10px 0;">` : match;
         });
         return html.replace(/●/g, '<br/>●');
     }
 
     function renderQuestion(index, scrollTop = true) {
-        currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); container.innerHTML = '';
-        document.getElementById('q-progress').innerText = `${index + 1} / ${examQuestions.length}`;
-        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
-        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
-        if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
-        const card = document.createElement('div'); card.className = 'card question-card';
+        currentIndex = index;
+        const item = examQuestions[index];
+        const container = document.getElementById('question-area');
+        container.innerHTML = '';
+        
+        document.getElementById('q-progress').innerText = (index + 1) + " / " + examQuestions.length;
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        
+        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
+        if (sideNext) {
+            sideNext.style.display = 'flex';
+            sideNext.title = (index === (examQuestions.length - 1)) ? '交卷' : '下一題';
+        }
+
+        const card = document.createElement('div');
+        card.className = 'card question-card';
         let qText = processContent(item.question, item);
-        let html = `<div class="question-header">Question ${index + 1} / 50</div><div class="question-body"><div class="mb-4">${qText}</div>`;
-        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        let html = `
+            <div class="question-header">Question ${index + 1} / ${examQuestions.length}</div>
+            <div class="question-body">
+                <div class="mb-4">${qText}</div>
+        `;
+        
+        if (item.image) {
+            html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        }
+
         const optionsRaw = item.quiz || item.options || [];
         const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
         const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
-        html += '<div class="mt-3">';
         
+        html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
             if (optStr.includes('|')) {
-                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
-                subOpts.forEach((sub, subIdx) => { const isSel = (savedAns && savedAns[optIdx] === subIdx); html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})">(${subIdx+1}) ${sub}</div>`; });
+                const subOpts = optStr.split('|');
+                html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => {
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx);
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})">(${subIdx+1}) ${sub}</div>`;
+                });
                 html += `</div>`;
             } else {
                 const isSel = (userAnswers[index] === optIdx);
                 html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})">${optIdx + 1}. ${optStr}</div>`;
             }
         });
-        html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
-        if (scrollTop) window.scrollTo(0, 0); Prism.highlightAll();
+        
+        html += '</div></div>';
+        card.innerHTML = html;
+        container.appendChild(card);
+        if (scrollTop) window.scrollTo(0, 0);
+        if (typeof Prism !== 'undefined') Prism.highlightAll();
     }
 
-    function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
-    function selectOption(optIdx) { userAnswers[currentIndex] = optIdx; renderQuestion(currentIndex, false); }
-    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
-    function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
+    function changeQuestion(step) {
+        if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) {
+            renderQuestion(currentIndex + step);
+        } else if (currentIndex + step >= examQuestions.length) {
+            confirmSubmit();
+        }
+    }
+
+    function selectOption(optIdx) {
+        userAnswers[currentIndex] = optIdx;
+        renderQuestion(currentIndex, false);
+    }
+
+    function selectSub(qIdx, subIdx) {
+        if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') {
+            userAnswers[currentIndex] = {};
+        }
+        userAnswers[currentIndex][qIdx] = subIdx;
+        renderQuestion(currentIndex, false);
+    }
+
+    function confirmSubmit() {
+        if (confirm("確定要交卷嗎？")) {
+            submitExam();
+        }
+    }
 
     function submitExam() {
-        clearInterval(timerInterval); document.getElementById('exam-ui').style.display = 'none'; document.getElementById('result-screen').style.display = 'block';
-        let correctCount = 0, stats = {}, incorrectHTML = '';
+        clearInterval(timerInterval);
+        document.getElementById('exam-ui').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        
+        let correctCount = 0;
+        let stats = {};
+        let incorrectHTML = '';
         let wrongIds = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+
         examQuestions.forEach((item, idx) => {
-            const cat = item.category || '未分類'; if (!stats[cat]) stats[cat] = { total: 0, correct: 0 }; stats[cat].total++;
-            const userAns = userAnswers[idx]; let isCorrect = false;
+            const cat = item.category || '未分類';
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0 };
+            stats[cat].total++;
+
+            const userAns = userAnswers[idx];
+            let isCorrect = false;
+
             if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
                 isCorrect = answers.every((a, i) => userAns && (parseInt(a) - 1) === userAns[i]);
             } else if (item.type === 'multiple') {
                 const answers = item.answer.map(a => parseInt(a) - 1);
                 isCorrect = Array.isArray(userAns) && userAns.length === answers.length && userAns.every(val => answers.includes(val));
-            } else { isCorrect = userAns === (parseInt(item.answer) - 1); }
-            if (isCorrect) { correctCount++; stats[cat].correct++; wrongIds.delete(item.id); }
-            else {
-                wrongIds.add(item.id); let qText = item.question.replace(/●/g, '<br/>●');
+            } else {
+                isCorrect = userAns === (parseInt(item.answer) - 1);
+            }
+
+            if (isCorrect) {
+                correctCount++;
+                stats[cat].correct++;
+                wrongIds.delete(item.id);
+            } else {
+                wrongIds.add(item.id);
+                let qText = processContent(item.question, item);
                 let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 let optionsHTML = '<hr class="my-2"><div class="fw-bold mb-1">選擇：</div><ul class="list-group list-group-flush mb-3" style="font-size: 0.85rem;">';
-                (item.quiz || item.options || []).forEach((opt, oIdx) => { optionsHTML += `<li class="list-group-item p-1" style="background: transparent; border: none;">${oIdx + 1}. ${opt}</li>`; });
+                (item.quiz || item.options || []).forEach((opt, oIdx) => {
+                    optionsHTML += `<li class="list-group-item p-1" style="background: transparent; border: none;">${oIdx + 1}. ${opt}</li>`;
+                });
                 optionsHTML += '</ul>';
-                let expText = item.explanation || '暫無解析。'; if (Array.isArray(expText)) expText = expText.join('<br/>'); expText = expText.replace(/●/g, '<br/>●');
+                let expText = processContent(item.explanation || '暫無解析。', item);
                 incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (原始編號: ${item.id})</div><div class="mb-2">${qText}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${expText}</div></div>`;
             }
         });
+
         document.getElementById('final-score').innerText = Math.round((correctCount / examQuestions.length) * 100);
         document.getElementById('correct-count').innerText = correctCount;
         localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongIds]));
+        
         let catHTML = '<h5 class="text-center mb-3">各類題數佔比與答對率</h5><div class="table-responsive"><table class="table table-bordered table-striped table-hover align-middle"><thead><tr class="table-light"><th>題目分類</th><th class="text-center" style="width:80px">題數</th><th class="text-center" style="width:80px">佔比</th><th class="text-center" style="width:150px">答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
         for (let cat of sortedCats) {
@@ -231,14 +314,47 @@
         }
         catHTML += '</tbody></table></div>';
         document.getElementById('category-stats').innerHTML = catHTML;
-        if (correctCount < examQuestions.length) { document.getElementById('btn-export-pdf').style.display = 'inline-block'; document.getElementById('review-list').innerHTML = incorrectHTML; }
+
+        if (correctCount < examQuestions.length) {
+            document.getElementById('btn-export-pdf').style.display = 'inline-block';
+            document.getElementById('review-list').innerHTML = incorrectHTML;
+        }
     }
 
-    function clearWrongHistory() { if (confirm("確定要清除所有科目的錯題紀錄嗎？")) { localStorage.removeItem(WRONG_KEY); alert("已清除紀錄。"); location.reload(); } }
+    function clearWrongHistory() {
+        if (confirm("確定要清除所有科目的錯題紀錄嗎？")) {
+            localStorage.removeItem(WRONG_KEY);
+            alert("已清除紀錄。");
+            location.reload();
+        }
+    }
 
-    function exportIncorrectPDF() { document.getElementById('review-area').style.display = 'block'; document.body.classList.add('preview-active'); if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { setTimeout(() => { window.print(); }, 500); } else { savedZoomBeforePreview = currentZoom; currentZoom = 0.7; applyZoom(); const closeBtn = document.createElement('button'); closeBtn.innerHTML = '⬅️ 結束預覽'; closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print'; closeBtn.onclick = () => { document.getElementById('review-area').style.display = 'none'; document.body.classList.remove('preview-active'); currentZoom = savedZoomBeforePreview; applyZoom(); closeBtn.remove(); }; document.body.appendChild(closeBtn); } }
+    function exportIncorrectPDF() {
+        document.getElementById('review-area').style.display = 'block';
+        document.body.classList.add('preview-active');
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            setTimeout(() => { window.print(); }, 500);
+        } else {
+            savedZoomBeforePreview = currentZoom;
+            currentZoom = 0.7;
+            applyZoom();
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '⬅️ 結束預覽';
+            closeBtn.className = 'btn btn-dark btn-lg fixed-bottom m-3 no-print';
+            closeBtn.onclick = () => {
+                document.getElementById('review-area').style.display = 'none';
+                document.body.classList.remove('preview-active');
+                currentZoom = savedZoomBeforePreview;
+                applyZoom();
+                closeBtn.remove();
+            };
+            document.body.appendChild(closeBtn);
+        }
+    }
 
-    let currentZoom = 1.0; function applyZoom() { document.body.style.zoom = currentZoom; } function adjustZoom(delta) { currentZoom += delta; applyZoom(); }
+    let currentZoom = 1.0;
+    function applyZoom() { document.body.style.zoom = currentZoom; }
+    function adjustZoom(delta) { currentZoom += delta; applyZoom(); }
     window.onload = initExam;
 </script>
 </body>
