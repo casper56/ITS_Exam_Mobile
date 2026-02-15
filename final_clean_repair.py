@@ -6,8 +6,133 @@ import time
 
 def clean_repair_all():
     subject_dirs = [d for d in os.listdir('www') if os.path.isdir(os.path.join('www', d)) and d != 'assets']
-    title_map = { "AI900": "Microsoft AI-900", "AZ900": "Microsoft AZ-900", "Generative_AI": "Generative AI Foundations", "ITS_AI": "ITS Artificial Intelligence", "ITS_Database": "ITS Database Administration", "ITS_Python": "ITS Python Programming", "ITS_softdevelop": "ITS Software Development" }
+    title_map = { 
+        "AI900": "Microsoft AI-900", 
+        "AZ900": "Microsoft AZ-900", 
+        "Generative_AI": "Generative AI Foundations", 
+        "ITS_AI": "ITS Artificial Intelligence", 
+        "ITS_Database": "ITS Database Administration", 
+        "ITS_Python": "ITS Python Programming", 
+        "ITS_softdevelop": "ITS Software Development" 
+    }
 
+    # 標準 V3.3 抽題邏輯碼 (使用普通字串減少轉義問題)
+    logic_code = r"""
+    function initExam() {
+        if (!allQuestions || allQuestions.length === 0) { console.error("題庫資料載入失敗！"); return; }
+        
+        // --- V3.3 智能抽題配置 ---
+        const isITS_AI = window.location.href.includes('ITS_AI');
+        const is900Series = window.location.href.includes('AZ900') || window.location.href.includes('AI900');
+        const isPython = window.location.href.includes('ITS_Python');
+        
+        const CUTOFF = isITS_AI ? 118 : (is900Series ? 100 : 69);
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.9); // 90% 官方題
+        const MIN_PER_CAT_PCT = 0.05; // 5% 下限
+        const MAX_PER_CAT_PCT = isPython ? 0.30 : 0.25; // Python 30% 上限, 其他 25%
+        
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        // 1. 分類歸一化 (Normalization)
+        const categories = {};
+        const catNameMap = {}; 
+        
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let m = fullCat.match(/^(D\d+)/);
+            let prefix = (m ? m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        // 2. 智能抽題
+        let selected = [], usedIds = new Set();
+        const sortedCatNames = Object.keys(categories).sort();
+
+        // 第一階段：確保每個分類至少有 MIN_PER_CAT 題 (優先從官方題抽)
+        sortedCatNames.forEach(cat => {
+            const catAll = categories[cat].sort(() => 0.5 - Math.random());
+            const catOff = catAll.filter(q => q.id <= CUTOFF);
+            const catSupp = catAll.filter(q => q.id > CUTOFF);
+            
+            let pickedInCat = 0;
+            // 先抽官方題滿足下限
+            for (let i = 0; i < catOff.length && pickedInCat < MIN_PER_CAT; i++) {
+                selected.push(catOff[i]);
+                usedIds.add(catOff[i].id);
+                pickedInCat++;
+            }
+            // 若官方題不足，用補充題補足下限
+            if (pickedInCat < MIN_PER_CAT) {
+                for (let i = 0; i < catSupp.length && pickedInCat < MIN_PER_CAT; i++) {
+                    selected.push(catSupp[i]);
+                    usedIds.add(catSupp[i].id);
+                    pickedInCat++;
+                }
+            }
+        });
+
+        // 第二階段：補足官方題至 TARGET_OFF_COUNT (同時遵守 MAX_PER_CAT)
+        const allRemainingOff = allQuestions
+            .filter(q => q.id <= CUTOFF && !usedIds.has(q.id))
+            .sort(() => 0.5 - Math.random());
+
+        for (let q of allRemainingOff) {
+            let currentOffCount = selected.filter(s => s.id <= CUTOFF).length;
+            if (currentOffCount >= TARGET_OFF_COUNT) break;
+            
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let pickedInCat = selected.filter(s => {
+                let sm = (s.category ? s.category.match(/^(D\d+)/) : null);
+                return (sm ? sm[1] : s.category || '一般') === prefix;
+            }).length;
+
+            if (pickedInCat < MAX_PER_CAT) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // 第三階段：補足總題數至 EXAM_LIMIT (優先抽官方題，再抽補充題)
+        const finalPool = allQuestions
+            .filter(q => !usedIds.has(q.id))
+            .sort((a, b) => {
+                const aIsOff = a.id <= CUTOFF ? 1 : 0;
+                const bIsOff = b.id <= CUTOFF ? 1 : 0;
+                return (bIsOff - aIsOff) || (0.5 - Math.random());
+            });
+
+        for (let q of finalPool) {
+            if (selected.length >= EXAM_LIMIT) break;
+            
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let pickedInCat = selected.filter(s => {
+                let sm = (s.category ? s.category.match(/^(D\d+)/) : null);
+                return (sm ? sm[1] : s.category || '一般') === prefix;
+            }).length;
+
+            if (pickedInCat < MAX_PER_CAT) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // 隨機打亂最終題目並渲染
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    }"""
+
+    # 練習模式模板
     html_template = r"""<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -407,7 +532,7 @@ def clean_repair_all():
         with open(json_file_path, 'r', encoding='utf-8') as f: 
             quiz_data = json.load(f)
         
-        json_str = json.dumps(quiz_data, ensure_ascii=False)
+        json_str = json.dumps(quiz_data, ensure_ascii=False, indent=2)
         display_title = title_map.get(subject_dir, subject_dir.replace('_', ' '))
         
         # 1. Update Practice HTML Files
@@ -427,6 +552,15 @@ def clean_repair_all():
             with open(mock_path, 'r', encoding='utf-8', errors='ignore') as f:
                 mock_content = f.read()
             
+            # 使用字串替換而非 regex 以避免轉義錯誤
+            # 尋找 initExam 函數的起始與結束位置
+            start_idx = mock_content.find('function initExam() {')
+            end_marker_str = '    function startTimer'
+            end_idx = mock_content.find(end_marker_str)
+            
+            if start_idx != -1 and end_idx != -1:
+                mock_content = mock_content[:start_idx] + logic_code + "\n\n" + mock_content[end_idx:]
+
             start_marker = 'const allQuestions ='
             end_marker = 'let examQuestions = [];'
             
@@ -436,7 +570,7 @@ def clean_repair_all():
                 new_mock = parts[0] + start_marker + " " + json_str + ";\n    " + end_marker + rest[1]
                 with open(mock_path, 'w', encoding='utf-8') as f:
                     f.write(new_mock)
-                print(f"  - Synced mock_exam.html")
+                print(f"  - Synced mock_exam.html with V3.3 Balanced Logic")
 
         # 3. Update questions_data.js and questions_practice.js if they exist
         for js_file in ['questions_data.js', 'questions_practice.js']:
