@@ -10,7 +10,7 @@
             "K-Means叢集"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -28,7 +28,7 @@
             "高動態範圍"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -46,7 +46,7 @@
             "以上皆是"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -64,7 +64,7 @@
             "以上皆是"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 5,
         "image": null,
@@ -82,7 +82,7 @@
             "以上皆是"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -100,7 +100,7 @@
             "決策樹會根據資料點的特徵計算其間的相似之處,以便將資料點區分為兩個以上各自具備相似特徵的群組。"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -118,7 +118,7 @@
             "電子郵件垃圾郵件篩選器。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -136,7 +136,7 @@
             "模型可以每週更新。"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -154,7 +154,7 @@
             "由於所有折扣類別都已經有充足的代表性訓練資料,因此無論使用哪種機器學習演演算法,都能快速學會正確的折扣類別。"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -172,7 +172,7 @@
             "機器翻譯"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -190,7 +190,7 @@
             "非監督式學習、叢集"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -208,7 +208,7 @@
             "非監督式學習"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 3,
         "image": null,
@@ -226,7 +226,7 @@
             "非監督式學習"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -244,7 +244,7 @@
             "為了訓練他們的應用AI與資料工程的技能"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -262,7 +262,7 @@
             "因為其他組織可能會想購買這套AI系統"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -280,7 +280,7 @@
             "負責改良產品軟體外觀及風格的UI設計師"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -298,7 +298,7 @@
             "收集該學校過去十年的資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -316,7 +316,7 @@
             "非監督式學習、叢集"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -334,7 +334,7 @@
             "在農場上能看到的所有物件的影象,包含工具、家畜、作物等,這樣機器人才能辨識在自己工作的農場上可能遇到的所有物件"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -352,7 +352,7 @@
             "增強式偏差"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -370,7 +370,7 @@
             "極端值"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": "images/21.png",
@@ -388,7 +388,7 @@
             "股票價格預測"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -406,7 +406,7 @@
             "股票價格預測"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -424,7 +424,7 @@
             "股票價格預測"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -442,7 +442,7 @@
             "股票價格預測"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -460,7 +460,7 @@
             "只保留數字特徵(例如客戶年齡),因為AI只會處理數字"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -477,7 +477,7 @@
             "表格 C"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -504,7 +504,7 @@
             "使用所有資料訓練模型,再用其中一部分資料進行測試"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -522,7 +522,7 @@
             "AI2,因為其準確率為80%"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": "images/33.png",
@@ -539,9 +539,9 @@
             "低度擬合|模型最佳|過度擬合"
         ],
         "answer": [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -570,7 +570,7 @@
             "因素"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 3,
         "image": "images/37.png",
@@ -588,7 +588,7 @@
             "精確率"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -606,7 +606,7 @@
             "BLEU"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -624,7 +624,7 @@
             "準確率是指測量值與「真」值之間的差距;精確率是指測量值彼此之間的差距。"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -642,7 +642,7 @@
             "從訓練資料集中隨機移除部分觀測資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -660,7 +660,7 @@
             "他們選擇的特徵集太小,因此導致過度擬合"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -678,7 +678,7 @@
             "資料模型、偵錯記錄檔、變更要求"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -696,7 +696,7 @@
             "介紹測試方法,以便讓保全人員測試AI的準確率"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -714,7 +714,7 @@
             "AI在生產環境中所做的預測數"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -732,7 +732,7 @@
             "混淆矩陣 (Confusion matrix)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -750,7 +750,7 @@
             "資源成本"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -768,7 +768,7 @@
             "您用更多具備不同照明條件的貓、狗、兔子的影象重新訓練AI"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -786,7 +786,7 @@
             "將使用舊演演算法時每年最忙碌的購物日銷售量,與第一天啟用新演演算法的銷售量進行比較"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -804,7 +804,7 @@
             "保留適當數量的伺服器執行個體,當有迫在眉睫的重大情況時即可使用"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -822,7 +822,7 @@
             "AI是否使用了可解釋的演演算法"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -840,7 +840,7 @@
             "由於輸入資料已有標記,因此這款應用程式最適合使用監督式學習模型"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -858,7 +858,7 @@
             "元學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -876,7 +876,7 @@
             "透過某人的腦部MRI掃描影象,判斷對方是否罹患疾病"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -894,7 +894,7 @@
             "根據鄰近地區的類似房屋提出售屋目標價格"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -912,7 +912,7 @@
             "因為輸出值是一組量化值"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -930,7 +930,7 @@
             "您的長期計畫包含組成一支世界級技術隊,能夠隨著業務需求的改變以及業界的演進快速地轉變技術策略"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -948,7 +948,7 @@
             "確認專案經理瞭解每位工程師目前負責的詳細工作"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -966,7 +966,7 @@
             "公用資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -984,7 +984,7 @@
             "請顧客提供使用者名稱,然後將他們的時間軸編目"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1002,7 +1002,7 @@
             "資料集可能缺少某些資訊,並因此影響模型的效能"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1020,7 +1020,7 @@
             "為資料集中每個唯一字詞指派多個類別值"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1038,7 +1038,7 @@
             "盡可能多使用與客戶私人特色相關的特徵,例如性別和種族"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1056,7 +1056,7 @@
             "負責改良產品軟體外觀及風格的UI設計師"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1074,7 +1074,7 @@
             "在特徵集中未重複的特徵"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1092,7 +1092,7 @@
             "車門數量"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1110,7 +1110,7 @@
             "移除有缺少值的特徵"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1128,7 +1128,7 @@
             "20%作為測試資料,100%作為訓練資料,然後重複訓練數次"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1146,7 +1146,7 @@
             "用於描述資料流程、輸入值和輸出值、儲存點、子流程的圖表"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1164,7 +1164,7 @@
             "線性迴歸適用於解決迴歸問題。邏輯迴歸適用於解決分類問題"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -1182,7 +1182,7 @@
             "具有精細層級的資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 3,
         "image": null,
@@ -1200,7 +1200,7 @@
             "測試集中的資料太少"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1218,7 +1218,7 @@
             "用正確預測數減去錯誤預測數"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1236,7 +1236,7 @@
             "模型在測試集的表現不佳,顯示為低偏差"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1254,7 +1254,7 @@
             "貴公司的人力資源專家"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1272,7 +1272,7 @@
             "訓練這個AI模型使用的歷史資料量,以及模型的調整方式"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1290,7 +1290,7 @@
             "DAECB"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image01": "images/93.png",
@@ -1310,8 +1310,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 3,
         "image": null,
@@ -1331,8 +1331,8 @@
             "負責採購及維護造影機械裝置的醫院CFO"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1352,8 +1352,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1371,8 +1371,8 @@
             "即使沒有網際網路連線也依然能夠存取"
         ],
         "answer": [
-            "B",
-            "C"
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1390,8 +1390,8 @@
             "即使沒有網際網路連線也依然能夠存取"
         ],
         "answer": [
-            "A",
-            "D"
+            1,
+            4
         ],
         "weight": 1,
         "image": null,
@@ -1411,8 +1411,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image01": "images/99.png",
@@ -1432,8 +1432,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1453,9 +1453,9 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1475,8 +1475,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1496,8 +1496,8 @@
             "以上皆是"
         ],
         "answer": [
-            "C",
-            "D"
+            3,
+            4
         ],
         "weight": 3,
         "image": null,
@@ -1517,9 +1517,9 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1539,9 +1539,9 @@
             "從網路上抓取資料"
         ],
         "answer": [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1561,8 +1561,8 @@
             "以上皆是"
         ],
         "answer": [
-            "B",
-            "C"
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1574,8 +1574,8 @@
         "type": "multiple",
         "question": "109. 下列哪兩種問題可以使用決策樹演算法解決?(請選擇2個答案。)<br>(1)分類<br>(2)回歸<br>(3)叢集<br>(4)增強式學習<br>(5)文字產生<br>(6)以上皆是",
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1603,9 +1603,9 @@
             "主成分分析"
         ],
         "answer": [
-            "B",
-            "C",
-            "E"
+            2,
+            3,
+            5
         ],
         "weight": 1,
         "image": null,
@@ -1625,8 +1625,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1646,8 +1646,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1667,8 +1667,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1688,8 +1688,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1709,8 +1709,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1730,8 +1730,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1751,8 +1751,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1772,8 +1772,8 @@
             "以上皆是"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1790,7 +1790,7 @@
             "表格 C"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image01": "images/28.png",
@@ -1807,7 +1807,7 @@
             "模型圖形 3"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image01": "images/34.png",
@@ -1824,7 +1824,7 @@
             "模型圖形 3"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image01": "images/34.png",
@@ -1841,7 +1841,7 @@
             "模型圖形 3"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image01": "images/34.png",
@@ -1859,7 +1859,7 @@
             "訓練AI演演算法時使用顧客資料是否足夠"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1877,7 +1877,7 @@
             "知識探勘 (Knowledge Mining)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1895,7 +1895,7 @@
             "光學字元辨識 (OCR)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1913,7 +1913,7 @@
             "關鍵短語擷取 (Key Phrase Extraction)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1931,7 +1931,7 @@
             "透明度 (Transparency)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1949,7 +1949,7 @@
             "移除特徵 B"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1967,7 +1967,7 @@
             "準確率 (Accuracy)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1985,7 +1985,7 @@
             "它無法部署模型，只能用於訓練"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2003,7 +2003,7 @@
             "使用 ZIP 壓縮檔複製程式碼"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2021,7 +2021,7 @@
             "自動生成檔案的摘要"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2039,7 +2039,7 @@
             "它不具備任何隱藏層 (Hidden Layer)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2057,7 +2057,7 @@
             "兩者都是實體"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2075,7 +2075,7 @@
             "光學字元辨識 (OCR)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2093,7 +2093,7 @@
             "公平性 (Fairness)"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2111,7 +2111,7 @@
             "迴歸模型通常使用混淆矩陣 (Confusion Matrix) 來評估"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2129,7 +2129,7 @@
             "文字轉語音 -> 翻譯語音 -> 語音轉文字"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,

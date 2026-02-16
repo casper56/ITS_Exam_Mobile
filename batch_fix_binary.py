@@ -1,13 +1,16 @@
-
 import json
 import os
-import glob
 
-def clean_repair_all():
-    subject_dirs = [d for d in os.listdir('www') if os.path.isdir(os.path.join('www', d)) and d != 'assets']
-    
-    # V3.4.3 專業比例版模板 (包含完整比例分配邏輯)
-    html_top = r"""<!DOCTYPE html>
+subjects = [
+    {'dir': 'www/AI900', 'json': 'questions_AI900.json', 'title': 'AI-900 模擬考試'},
+    {'dir': 'www/AZ900', 'json': 'questions_AZ900.json', 'title': 'AZ-900 模擬考試'},
+    {'dir': 'www/Generative_AI', 'json': 'questions_Generative_AI_Foundations.json', 'title': 'Generative AI 模擬考試'},
+    {'dir': 'www/ITS_AI', 'json': 'questions_ITS_AI.json', 'title': 'ITS AI 模擬考試'},
+    {'dir': 'www/ITS_Database', 'json': 'questions_ITS_Database.json', 'title': 'ITS Database 模擬考試'},
+    {'dir': 'www/ITS_softdevelop', 'json': 'questions_ITS_csharp.json', 'title': 'ITS Software Development 模擬考試'}
+]
+
+html_top_raw = r"""<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -104,13 +107,12 @@ def clean_repair_all():
 
     const allQuestions = """
 
-    html_bottom = r"""
+html_bottom_raw = r"""
     function startTimer() {
         timerInterval = setInterval(() => {
             timeLeft--;
             const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-            const el = document.getElementById('timer');
-            if (el) el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
             if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
         }, 1000);
     }
@@ -136,71 +138,17 @@ def clean_repair_all():
 
     function initExam() {
         if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
-            console.error("題庫資料載入失敗！"); return;
+            console.error("allQuestions is empty!");
+            return;
         }
-        const isITS_AI = window.location.href.includes('ITS_AI');
-        const is900Series = window.location.href.includes('AZ900') || window.location.href.includes('AI900');
-        const isPython = window.location.href.includes('ITS_Python');
-        
-        const CUTOFF = isITS_AI ? 118 : (is900Series ? 100 : 69);
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); 
-        
-        const categories = {};
-        const catNameMap = {}; 
-        allQuestions.forEach(q => {
-            let fullCat = q.category || '一般';
-            let m = fullCat.match(/^(D\d+)/);
-            let prefix = (m ? m[1] : fullCat);
-            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
-        });
-        allQuestions.forEach(q => {
-            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
-            let prefix = (m ? m[1] : q.category || '一般');
-            let cat = catNameMap[prefix];
-            if (!categories[cat]) categories[cat] = [];
-            categories[cat].push(q);
-        });
-
-        let selected = [], usedIds = new Set();
-        const catNames = Object.keys(categories).sort();
-        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * 0.05));
-        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * 0.40);
-
-        // A. 每個分類保底 (優先官方題)
-        catNames.forEach(cat => {
-            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
-            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
-            for (let i = 0; i < MIN_PER_CAT; i++) {
-                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
-                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
-            }
-        });
-
-        // B. 補足 92% 官方題 (遵守 40% 上限)
-        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
-        for (let q of offPool) {
-            if (selected.length >= TARGET_OFF_COUNT) break;
-            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
-            if (!qCat) continue;
-            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
-            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
-        }
-
-        // C. 補滿總數 (官方優先)
-        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
-        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
-
-        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+        examQuestions = shuffled.slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
 
     function renderQuestion(index, scrollTop = true) {
-        currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); 
-        if (!container) return;
-        container.innerHTML = '';
-        const progressEl = document.getElementById('q-progress');
-        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
-        
+        currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); container.innerHTML = '';
+        document.getElementById('q-progress').innerText = `${index + 1} / ${examQuestions.length}`;
         const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
         if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
         if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
@@ -250,11 +198,7 @@ def clean_repair_all():
     function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
 
     function submitExam() {
-        clearInterval(timerInterval); 
-        const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
-        if (ui) ui.style.display = 'none';
-        if (rs) rs.style.display = 'block';
-        
+        clearInterval(timerInterval); document.getElementById('exam-ui').style.display = 'none'; document.getElementById('result-screen').style.display = 'block';
         let correctCount = 0, stats = {}, incorrectHTML = '';
         
         const catNameMap = {};
@@ -300,9 +244,8 @@ def clean_repair_all():
         });
         
         const score = Math.round((correctCount / examQuestions.length) * 100);
-        const scoreEl = document.getElementById('final-score'), cEl = document.getElementById('correct-count');
-        if (scoreEl) scoreEl.innerText = score;
-        if (cEl) cEl.innerText = correctCount;
+        document.getElementById('final-score').innerText = score;
+        document.getElementById('correct-count').innerText = correctCount;
         
         let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th>分類</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
@@ -310,9 +253,7 @@ def clean_repair_all():
             let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
             catHTML += `<tr><td>${cat}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
-        catHTML += '</tbody></table>'; 
-        const csEl = document.getElementById('category-stats'), rlEl = document.getElementById('review-list');
-        if (csEl) csEl.innerHTML = catHTML;
+        catHTML += '</tbody></table>'; document.getElementById('category-stats').innerHTML = catHTML;
 
         let reportSummary = `
             <div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;">
@@ -324,24 +265,7 @@ def clean_repair_all():
                 <div class="mt-3">${catHTML}</div>
             </div>
         `;
-        if (rlEl) rlEl.innerHTML = reportSummary + incorrectHTML;
-        
-        try {
-            let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
-            examQuestions.forEach((q, idx) => {
-                const userAns = userAnswers[idx];
-                const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
-                let isCorr = false;
-                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) {
-                    isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
-                } else if (q.type === 'multiple') {
-                    const cIdxs = answers.map(a => parseAnswerToIndex(a));
-                    isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v));
-                } else { isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer); }
-                if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
-            });
-            localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
-        } catch(e) {}
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
     }
 
     initExam();
@@ -349,22 +273,26 @@ def clean_repair_all():
 </body>
 </html>"""
 
-    for subj_dir in subject_dirs:
-        try:
-            json_files = glob.glob(os.path.join('www', subj_dir, 'questions_*.json'))
-            if not json_files: continue
-            with open(json_files[0], 'rb') as f: json_bytes = f.read()
-            title = subj_dir.replace('_', ' ') + " 模擬考試"
-            if subj_dir == 'ITS_softdevelop': title = "ITS Software Development 模擬考試"
-            mock_path = os.path.join('www', subj_dir, 'mock_v34.html')
-            with open(mock_path, 'wb') as f:
-                f.write(html_top.replace('REPLACE_TITLE', title).encode('utf-8'))
-                f.write(json_bytes.replace(b'</script>', b'<\\/script>'))
-                f.write(b";")
-                f.write(html_bottom.encode('utf-8'))
-            print(f"V3.4.3 Refreshed (Full Logic): {mock_path}")
-        except Exception as e:
-            print(f"Failed {subj_dir}: {e}")
+for subj in subjects:
+    try:
+        json_file = os.path.join(subj['dir'], subj['json'])
+        if not os.path.exists(json_file): continue
+            
+        with open(json_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        j_str = json.dumps(data, ensure_ascii=False, indent=2)
+        
+        mock_path = os.path.join(subj['dir'], 'mock_exam.html')
+        
+        with open(mock_path, 'wb') as f:
+            f.write(html_top_raw.replace('REPLACE_TITLE', subj['title']).encode('utf-8'))
+            f.write(j_str.encode('utf-8'))
+            f.write(b";")
+            f.write(html_bottom_raw.encode('utf-8'))
+            
+        print(f"Verified Binary Write: {mock_path}")
+        
+    except Exception as e:
+        print(f"Error processing {subj['dir']}: {e}")
 
-if __name__ == "__main__":
-    clean_repair_all()
+print("Ultimate binary-safe rebuild completed!")

@@ -10,7 +10,7 @@
             "透明性"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -28,7 +28,7 @@
             "包容性"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -46,7 +46,7 @@
             "432"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -64,7 +64,7 @@
             "透明度"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -82,7 +82,7 @@
             "電腦視覺答案："
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -100,7 +100,7 @@
             "異常偵測答案："
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -118,7 +118,7 @@
             "以上皆非"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -136,7 +136,7 @@
             "透明度"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -154,7 +154,7 @@
             "確定所有視覺效果都有可供螢幕助讀程式讀取的相關聯文字。"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -172,7 +172,7 @@
             "生成式 AI 工作負載"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -190,7 +190,7 @@
             "243"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -208,7 +208,7 @@
             "自然語言處理"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -226,7 +226,7 @@
             "AI 系統必須將個人詳細資料公開"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -244,7 +244,7 @@
             "知識採礦"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -262,7 +262,7 @@
             "包容性"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -280,7 +280,7 @@
             "取得代表英國人口的定型樣本"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -298,7 +298,7 @@
             "異常偵測"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -316,7 +316,7 @@
             "透明度"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -334,7 +334,7 @@
             "AI 系統必須將個人詳細資料公開"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -352,7 +352,7 @@
             "Azure Al 檔案智慧服務"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -370,7 +370,7 @@
             "AI 系統應該保障開發人員的利益"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -388,7 +388,7 @@
             "341"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -406,7 +406,7 @@
             "預測"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -424,7 +424,7 @@
             "243"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -442,7 +442,7 @@
             "包容性"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -460,7 +460,7 @@
             "231"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -478,7 +478,7 @@
             "以上皆非"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -496,7 +496,7 @@
             "以上皆非"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -514,7 +514,7 @@
             "以上皆非"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -532,7 +532,7 @@
             "以上皆非"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -550,7 +550,7 @@
             "以上皆非"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -568,7 +568,7 @@
             "222"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q32.jpg",
@@ -586,7 +586,7 @@
             "以上皆非"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q33.jpg",
@@ -604,7 +604,7 @@
             "將資料隨機分割為訓練資料列和評估資料列"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -622,7 +622,7 @@
             "使用原始資料集進行定型和評估。"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -640,7 +640,7 @@
             "各計程車行程的單程 ID"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -658,7 +658,7 @@
             "正規化"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -676,7 +676,7 @@
             "2534"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -694,7 +694,7 @@
             "評估結果視覺化特徵"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -712,7 +712,7 @@
             "新增資料列"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -730,7 +730,7 @@
             "閾值"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -748,7 +748,7 @@
             "文字"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -766,7 +766,7 @@
             "模型定型"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -784,7 +784,7 @@
             "使用 Code First 筆記本體驗"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -802,7 +802,7 @@
             "Azure Machine Learning 作業"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -820,7 +820,7 @@
             "以上皆非"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q46.jpg",
@@ -838,7 +838,7 @@
             "Machine Learning 設計工具管線"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -856,7 +856,7 @@
             "在定型資料中納入測試資料"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -874,7 +874,7 @@
             "將主要計量設為 精確度"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -892,7 +892,7 @@
             "註冊訓練資料"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -910,7 +910,7 @@
             "315"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q51.jpg",
@@ -928,7 +928,7 @@
             "-"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -946,7 +946,7 @@
             "Azure Logic Apps"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -964,7 +964,7 @@
             "以上皆非"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -982,7 +982,7 @@
             "建立分類模型"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1000,7 +1000,7 @@
             "調整數值變數,將它們保持在一致的數值範圍內"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1018,7 +1018,7 @@
             "執行個體"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1036,7 +1036,7 @@
             "驗證"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1054,7 +1054,7 @@
             "使用臨床資料驗證模型"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1072,7 +1072,7 @@
             "迴歸"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1090,7 +1090,7 @@
             "312"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1108,7 +1108,7 @@
             "使用其他機器學習模型"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1126,7 +1126,7 @@
             "選擇模型的型別之前"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1144,7 +1144,7 @@
             "-"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1162,7 +1162,7 @@
             "找出感興趣的區域"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1180,7 +1180,7 @@
             "臉部服務中的 驗證】作業"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1198,7 +1198,7 @@
             "光學字元辨識(OCR)"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1216,7 +1216,7 @@
             "光學字元辨識(OCR)"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1234,7 +1234,7 @@
             "語言"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1252,7 +1252,7 @@
             "231"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1270,7 +1270,7 @@
             "臉部辨識"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1288,7 +1288,7 @@
             "影像分類"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1306,7 +1306,7 @@
             "電腦視覺"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1324,7 +1324,7 @@
             "光學字元辨識"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1342,7 +1342,7 @@
             "Azure Machine Learning"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1360,7 +1360,7 @@
             "光學字元辨識"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1378,7 +1378,7 @@
             "Azure Al 自訂視覺分類"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1396,7 +1396,7 @@
             "媒體用影片分析器"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1414,7 +1414,7 @@
             "-"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1432,7 +1432,7 @@
             "Azure Al 自訂視覺"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1450,7 +1450,7 @@
             "Azure Al 檔案智慧服務"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1468,7 +1468,7 @@
             "-"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1486,7 +1486,7 @@
             "建議對內送電子郵件的自動化回覆"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1504,7 +1504,7 @@
             "Azure Machine Learning"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1522,7 +1522,7 @@
             "Azure Al 語言"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1540,7 +1540,7 @@
             "-"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1558,7 +1558,7 @@
             "100 MB"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1576,7 +1576,7 @@
             "擷取檔案中的關鍵片語"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1594,7 +1594,7 @@
             "臉部"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1612,7 +1612,7 @@
             "影像描述"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1630,7 +1630,7 @@
             "Azure Al 視覺"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1648,7 +1648,7 @@
             "自訂模型比預建模型便宜。"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1666,7 +1666,7 @@
             "影像分類"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q93.jpg",
@@ -1684,7 +1684,7 @@
             "Azure Al 視覺讀取"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1702,7 +1702,7 @@
             "一般檔案"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1720,7 +1720,7 @@
             "光學字元辨識(OCR)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1738,7 +1738,7 @@
             "根據音軌為影片產生字幕"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1756,7 +1756,7 @@
             "Azure Al 語言"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1774,7 +1774,7 @@
             "預測哪個網站的瀏覽者會執行交易。"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1792,7 +1792,7 @@
             "電腦視覺"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1810,7 +1810,7 @@
             "登記客訴內容"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1828,7 +1828,7 @@
             "實體辨識"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": "images/q102.jpg",
@@ -1846,7 +1846,7 @@
             "電腦視覺應用程式"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "images/q103.jpg",
@@ -1864,7 +1864,7 @@
             "221"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1882,7 +1882,7 @@
             "關鍵片語擷取"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1900,7 +1900,7 @@
             "431"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1918,7 +1918,7 @@
             "-"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1936,7 +1936,7 @@
             "清單"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1954,7 +1954,7 @@
             "Azure Al 檔案智慧服務"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1972,7 +1972,7 @@
             "建立多回合問題"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1990,7 +1990,7 @@
             "表達"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2008,7 +2008,7 @@
             "ZIP"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2026,7 +2026,7 @@
             "將語句新增至「None (無)」意圖。"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2044,7 +2044,7 @@
             "關鍵片語擷取"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2062,7 +2062,7 @@
             "實體辨識"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2080,7 +2080,7 @@
             "語音辨識"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2098,7 +2098,7 @@
             "Azure Machine Learning"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2116,7 +2116,7 @@
             "Codex"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2134,7 +2134,7 @@
             "IntelliSense"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2152,7 +2152,7 @@
             "停止序列"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2170,7 +2170,7 @@
             "Codex"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2188,7 +2188,7 @@
             "icrosoft-swinv2-base-patch4-window12-192-22k"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2206,7 +2206,7 @@
             "GitHub Copilot"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2224,7 +2224,7 @@
             "基礎知識"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2242,7 +2242,7 @@
             "修改系統訊息"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2260,7 +2260,7 @@
             "基礎知識資料"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2278,7 +2278,7 @@
             "溫度"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2296,7 +2296,7 @@
             "使用者體驗"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2314,7 +2314,7 @@
             "提示工程"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2332,7 +2332,7 @@
             "Whisper"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "images/q130.jpg",
@@ -2350,7 +2350,7 @@
             "Whisper"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2368,7 +2368,7 @@
             "轉換器"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2386,7 +2386,7 @@
             "變更 Azure OpenAI 服務所使用的模型"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2404,7 +2404,7 @@
             "231"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2424,9 +2424,9 @@
             "可靠性和安全性"
         ],
         "answer": [
-            4,
-            5,
-            6
+            "D",
+            "E",
+            "F"
         ],
         "weight": 1,
         "image": null,
@@ -2446,8 +2446,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            4
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2467,8 +2467,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            4
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2488,8 +2488,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            3
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2509,8 +2509,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            4
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": "",
@@ -2530,8 +2530,8 @@
             "以上皆是"
         ],
         "answer": [
-            1,
-            5
+            "A",
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -2551,8 +2551,8 @@
             "以上皆是"
         ],
         "answer": [
-            1,
-            2
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2572,8 +2572,8 @@
             "以上皆是"
         ],
         "answer": [
-            1,
-            2
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2593,9 +2593,9 @@
             "以上皆是"
         ],
         "answer": [
-            1,
-            2,
-            4
+            "A",
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2615,9 +2615,9 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            3,
-            4
+            "B",
+            "C",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2637,8 +2637,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            3
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2658,8 +2658,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            3
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2679,8 +2679,8 @@
             "以上皆是"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2700,8 +2700,8 @@
             "以上皆是"
         ],
         "answer": [
-            2,
-            3
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2721,8 +2721,8 @@
             "以上皆是"
         ],
         "answer": [
-            3,
-            4
+            "C",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2742,8 +2742,8 @@
             "電腦視覺"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2763,8 +2763,8 @@
             "以上皆是"
         ],
         "answer": [
-            3,
-            5
+            "C",
+            "E"
         ],
         "weight": 1,
         "image": "images/q151.jpg",
@@ -2780,7 +2780,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2796,7 +2796,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2812,7 +2812,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2828,7 +2828,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2844,7 +2844,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2860,7 +2860,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -2876,7 +2876,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2892,7 +2892,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -2908,7 +2908,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -2924,7 +2924,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -2940,7 +2940,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -2956,7 +2956,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -2972,7 +2972,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -2988,7 +2988,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3004,7 +3004,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3020,7 +3020,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3036,7 +3036,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3052,7 +3052,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3068,7 +3068,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3084,7 +3084,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3100,7 +3100,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3116,7 +3116,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3132,7 +3132,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3148,7 +3148,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3164,7 +3164,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3180,7 +3180,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3196,7 +3196,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3212,7 +3212,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3228,7 +3228,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3244,7 +3244,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3260,7 +3260,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3276,7 +3276,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3292,7 +3292,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3308,7 +3308,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3324,7 +3324,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3340,7 +3340,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3356,7 +3356,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3372,7 +3372,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3388,7 +3388,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3404,7 +3404,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3420,7 +3420,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3436,7 +3436,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3452,7 +3452,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3468,7 +3468,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3484,7 +3484,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3500,7 +3500,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3516,7 +3516,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3532,7 +3532,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3548,7 +3548,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3564,7 +3564,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3580,7 +3580,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3596,7 +3596,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3612,7 +3612,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3628,7 +3628,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3644,7 +3644,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3660,7 +3660,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3676,7 +3676,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3692,7 +3692,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3708,7 +3708,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3724,7 +3724,7 @@
             "❌"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": "",
@@ -3740,7 +3740,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",
@@ -3756,7 +3756,7 @@
             "❌"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": "",

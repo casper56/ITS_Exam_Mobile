@@ -10,7 +10,7 @@
             "僅能處理數值資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -28,7 +28,7 @@
             "LSTM"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -46,7 +46,7 @@
             "指紋辨識"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -64,7 +64,7 @@
             "提高演演算法速度"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -82,7 +82,7 @@
             "只能用於分類任務"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -100,7 +100,7 @@
             "神經語音預測"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -118,7 +118,7 @@
             "語言模型處理的最小單位"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -136,7 +136,7 @@
             "遞迴神經網路"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -154,7 +154,7 @@
             "影象與影片資料"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -172,7 +172,7 @@
             "巨量資料運算提升速度"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -190,7 +190,7 @@
             "重新蒐集資料"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 5,
         "image": null,
@@ -208,7 +208,7 @@
             "提高模型引數"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -226,7 +226,7 @@
             "手勢追蹤"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -244,7 +244,7 @@
             "使用者裝置"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -262,7 +262,7 @@
             "資料標註階段"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -280,7 +280,7 @@
             "模型引數過少"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -298,7 +298,7 @@
             "迴圈神經元"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -316,7 +316,7 @@
             "模型架構調整"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -334,7 +334,7 @@
             "數位硬體設計檔"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -352,7 +352,7 @@
             "模型無法應用於新任務"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -370,7 +370,7 @@
             "病歷管理系統"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -388,7 +388,7 @@
             "增加模型複雜度"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -406,7 +406,7 @@
             "電源問題"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -424,7 +424,7 @@
             "基因演演算法"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -442,7 +442,7 @@
             "LSTM"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 3,
         "image": null,
@@ -460,7 +460,7 @@
             "處理圖片輸入"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -478,7 +478,7 @@
             "模型壓縮技術"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -496,7 +496,7 @@
             "1 兆"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -514,7 +514,7 @@
             "提高學習率"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -532,7 +532,7 @@
             "影片產生"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -550,7 +550,7 @@
             "資料遺失"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -568,7 +568,7 @@
             "只能回覆簡單問題"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -586,7 +586,7 @@
             "不同模型的資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -604,7 +604,7 @@
             "資料庫技術"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -622,7 +622,7 @@
             "單一演演算法"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -640,7 +640,7 @@
             "資料前處理方法"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 5,
         "image": null,
@@ -658,7 +658,7 @@
             "增加學習率"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -676,7 +676,7 @@
             "教師薪資管理"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -694,7 +694,7 @@
             "模型過大"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -712,7 +712,7 @@
             "只關注效能"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -730,7 +730,7 @@
             "法律檔案分類"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -748,7 +748,7 @@
             "池化層"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 5,
         "image": null,
@@ -766,7 +766,7 @@
             "訓練資料大小"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -784,7 +784,7 @@
             "不受監管"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -802,7 +802,7 @@
             "演演算法速度慢"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -820,7 +820,7 @@
             "OCR"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 5,
         "image": null,
@@ -838,7 +838,7 @@
             "模型訓練"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -856,7 +856,7 @@
             "單輪分類"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -874,7 +874,7 @@
             "自然語言理解"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -892,7 +892,7 @@
             "假資訊傳播"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -910,7 +910,7 @@
             "訓練模型"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -928,7 +928,7 @@
             "訓練時間"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -946,7 +946,7 @@
             "以上皆是"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -964,7 +964,7 @@
             "多資料庫整合"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -982,7 +982,7 @@
             "訓練資料量"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1000,7 +1000,7 @@
             "計算機硬碟容量"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -1018,7 +1018,7 @@
             "資料預處理"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1036,7 +1036,7 @@
             "資料清洗"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1054,7 +1054,7 @@
             "提高學習率"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1072,7 +1072,7 @@
             "訓練資料全為零"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1090,7 +1090,7 @@
             "HTML"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1108,7 +1108,7 @@
             "模型架構改變"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1126,7 +1126,7 @@
             "硬體故障"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1144,7 +1144,7 @@
             "硬體控制"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1162,7 +1162,7 @@
             "模型訓練失敗"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1180,7 +1180,7 @@
             "資料備份"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1198,7 +1198,7 @@
             "計算速度提升"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 5,
         "image": null,
@@ -1216,7 +1216,7 @@
             "法律規範"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1234,7 +1234,7 @@
             "模型部署"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1252,7 +1252,7 @@
             "無法擴充"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -1270,7 +1270,7 @@
             "雲端服務"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1288,7 +1288,7 @@
             "儲存資料"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1306,7 +1306,7 @@
             "訓練時間不足"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1324,7 +1324,7 @@
             "模型加密"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1342,7 +1342,7 @@
             "使用者無權使用"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1360,7 +1360,7 @@
             "刪除資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1378,7 +1378,7 @@
             "文字產生"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1396,7 +1396,7 @@
             "硬體故障"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1414,7 +1414,7 @@
             "影片生成"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1432,7 +1432,7 @@
             "監控使用者"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1450,7 +1450,7 @@
             "模型壓縮"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1468,7 +1468,7 @@
             "AI 模型大小"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1486,7 +1486,7 @@
             "資料刪除"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1504,7 +1504,7 @@
             "模型免費"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1522,7 +1522,7 @@
             "人類控制硬體"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1540,7 +1540,7 @@
             "硬體故障"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1558,7 +1558,7 @@
             "無法輸出文字"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1576,7 +1576,7 @@
             "資料分析工具"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1594,7 +1594,7 @@
             "模型部署技術"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1612,7 +1612,7 @@
             "生成資料"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1630,7 +1630,7 @@
             "影像辨識"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1648,7 +1648,7 @@
             "模型部署"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1666,7 +1666,7 @@
             "強化學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1684,7 +1684,7 @@
             "訓練資料不足"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1702,7 +1702,7 @@
             "增加資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1720,7 +1720,7 @@
             "測試資料大小"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1738,7 +1738,7 @@
             "減少模型大小"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1756,7 +1756,7 @@
             "無法應用於藝術"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1774,7 +1774,7 @@
             "模型訓練時間"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1792,7 +1792,7 @@
             "模型名稱獨特"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1810,7 +1810,7 @@
             "避免使用逗號或分隔符"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1828,7 +1828,7 @@
             "強制模型產生詩歌"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -1846,7 +1846,7 @@
             "僅用固定 boilerplate 內文"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -1864,7 +1864,7 @@
             "顏色細節最後提及"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1882,7 +1882,7 @@
             "只要 model 名稱與風格"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1900,7 +1900,7 @@
             "限制模型輸出風格"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1918,7 +1918,7 @@
             "提示中包含 adversarial 攻擊"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1936,7 +1936,7 @@
             "Decoder 解碼器"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -1954,7 +1954,7 @@
             "key‑word stub 提示"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1972,7 +1972,7 @@
             "舊模型速度較慢"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1990,7 +1990,7 @@
             "設計使用者介面"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2008,7 +2008,7 @@
             "模型不使用 prompt"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2026,7 +2026,7 @@
             "無限多個"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2044,7 +2044,7 @@
             "沒有範例"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2062,7 +2062,7 @@
             "只適用於影象產生"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2080,7 +2080,7 @@
             "產生音訊"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2098,7 +2098,7 @@
             "僅分類圖片"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2116,7 +2116,7 @@
             "以上皆是"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -2134,7 +2134,7 @@
             "訓練新模型"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2152,7 +2152,7 @@
             "Multimodal 輸出"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2170,7 +2170,7 @@
             "監督式大量標註"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2188,7 +2188,7 @@
             "忽略 prompt 裡的內容"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2206,7 +2206,7 @@
             "IBM"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2224,7 +2224,7 @@
             "與模型大小無關"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2242,7 +2242,7 @@
             "Translate to English."
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2260,7 +2260,7 @@
             "增加 prompt token 長度"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2278,7 +2278,7 @@
             "Token‑compression CoT"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -2296,7 +2296,7 @@
             "專長 DevOps"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2314,7 +2314,7 @@
             "多模態學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2332,7 +2332,7 @@
             "強制模型使用第一人稱"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2350,7 +2350,7 @@
             "None"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2368,7 +2368,7 @@
             "增加 token 長度"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2386,7 +2386,7 @@
             "無刻意結構"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2404,7 +2404,7 @@
             "無實際作用"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2422,7 +2422,7 @@
             "不用示例"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2440,7 +2440,7 @@
             "僅文字分類任務"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2458,7 +2458,7 @@
             "提高產生速度"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2476,7 +2476,7 @@
             "減少 manual 範例寫作"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2494,7 +2494,7 @@
             "僅適用於製圖模型"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2512,7 +2512,7 @@
             "僅適用於將 answer 輸出作為下 prompt 輸入製圖模型"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2530,7 +2530,7 @@
             "僅用於影象提示"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2548,7 +2548,7 @@
             "僅使用 zero‑shot 提示"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2566,7 +2566,7 @@
             "增加 prompt token 數"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2584,7 +2584,7 @@
             "僅以文字 prompt 攻擊"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2602,7 +2602,7 @@
             "Conversation Spoofing"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2620,7 +2620,7 @@
             "降低推理時間"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 5,
         "image": null,
@@ -2638,7 +2638,7 @@
             "強化 adversarial 攻擊"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2656,7 +2656,7 @@
             "ReAct method"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2674,7 +2674,7 @@
             "使用 zero‑shot prompting"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2692,7 +2692,7 @@
             "GPU 記憶體洩漏"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2710,7 +2710,7 @@
             "零樣本失敗"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2728,7 +2728,7 @@
             "僅用於 QA 系統"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2746,7 +2746,7 @@
             "Pure adversarial attack"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2764,7 +2764,7 @@
             "只用來測試的資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2782,7 +2782,7 @@
             "提升生成速度"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2800,7 +2800,7 @@
             "只用於影象生成"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2818,7 +2818,7 @@
             "安全架構設計"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2836,7 +2836,7 @@
             "僅限於影像識別"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2854,7 +2854,7 @@
             "音樂作曲"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2872,7 +2872,7 @@
             "感知器 (Perceptron)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2890,7 +2890,7 @@
             "收集訓練資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2908,7 +2908,7 @@
             "隨機產生雜訊"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2926,7 +2926,7 @@
             "僅限於小規模資料集"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2944,7 +2944,7 @@
             "影片生成模型"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2962,7 +2962,7 @@
             "僅限於雲端運算"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2980,7 +2980,7 @@
             "支援向量機 (SVM)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2998,7 +2998,7 @@
             "訓練資料被破壞"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3016,7 +3016,7 @@
             "影片生成模型"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3034,7 +3034,7 @@
             "降低計算成本"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3052,7 +3052,7 @@
             "將文字轉換為圖片"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3070,7 +3070,7 @@
             "收集玩家資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3088,7 +3088,7 @@
             "RMSE (Root Mean Squared Error)"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3106,7 +3106,7 @@
             "限制模型的學習能力"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -3124,7 +3124,7 @@
             "語音辨識模型"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3142,7 +3142,7 @@
             "僅限於生成多個角度的影象"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3160,7 +3160,7 @@
             "生成文字的詞彙量"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3178,7 +3178,7 @@
             "音色生成"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3196,7 +3196,7 @@
             "迴圈神經網路 (RNN)"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3214,7 +3214,7 @@
             "將影象中的物體移除"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3232,7 +3232,7 @@
             "訓練速度變慢"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3250,7 +3250,7 @@
             "壓縮模型的記憶體使用"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3268,7 +3268,7 @@
             "資料標註成本過高"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3286,7 +3286,7 @@
             "自然語言理解"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3304,7 +3304,7 @@
             "邏輯回歸"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3322,7 +3322,7 @@
             "檢測影象中的物體"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3340,7 +3340,7 @@
             "模型訓練時的網路連線狀態"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3358,7 +3358,7 @@
             "多對多"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3376,7 +3376,7 @@
             "處理結構化資料的最佳工具"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3394,7 +3394,7 @@
             "記憶體與儲存裝置"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3412,7 +3412,7 @@
             "語音合成"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3430,7 +3430,7 @@
             "語音辨識"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3448,7 +3448,7 @@
             "訓練資料集的大小"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3466,7 +3466,7 @@
             "HIPAA（健康保險可攜性與責任法案）"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3484,7 +3484,7 @@
             "RNN（遞迴神經網路）"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3502,7 +3502,7 @@
             "提高預測準確率"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3520,7 +3520,7 @@
             "自動駕駛"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3538,7 +3538,7 @@
             "提高訓練效率"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3556,7 +3556,7 @@
             "訓練資料不足"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3574,7 +3574,7 @@
             "降低能源消耗"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3592,7 +3592,7 @@
             "降低訓練成本"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3610,7 +3610,7 @@
             "降低記憶體使用"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3628,7 +3628,7 @@
             "必須完全依賴人工程式設計"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3646,7 +3646,7 @@
             "最佳化記憶體使用"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3664,7 +3664,7 @@
             "節點的連線度"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3682,7 +3682,7 @@
             "計算資源消耗"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3700,7 +3700,7 @@
             "提高運算效率"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -3718,7 +3718,7 @@
             "馮紐曼"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3736,7 +3736,7 @@
             "序列資料"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3754,7 +3754,7 @@
             "提高模型效率"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -3772,7 +3772,7 @@
             "自動除錯"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3790,7 +3790,7 @@
             "大規模運算能力"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3808,7 +3808,7 @@
             "記憶體使用問題"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3826,7 +3826,7 @@
             "線性控制論"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3844,7 +3844,7 @@
             "簡單的因果關係"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3862,7 +3862,7 @@
             "提高生產效率"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3880,7 +3880,7 @@
             "增強人類智慧"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3898,7 +3898,7 @@
             "簡單的引數更新"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3916,7 +3916,7 @@
             "絕熱過程"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3934,7 +3934,7 @@
             "拓撲資料分析的持續同調"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3952,7 +3952,7 @@
             "線性系統"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3970,7 +3970,7 @@
             "曼哈頓距離"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 5,
         "image": null,
@@ -3988,7 +3988,7 @@
             "創造力和原創性"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4006,7 +4006,7 @@
             "固定模式"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4024,7 +4024,7 @@
             "協同學習理論"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4042,7 +4042,7 @@
             "確定性界限"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4060,7 +4060,7 @@
             "簡單引數估計"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4078,7 +4078,7 @@
             "量子計算"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4096,7 +4096,7 @@
             "確定性模型"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4114,7 +4114,7 @@
             "將相關企業資料手動帶入提示(few-shot prompting)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4132,7 +4132,7 @@
             "分析對話資料以提取模式和特徵以及辨識對話中的情感和意圖"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4150,7 +4150,7 @@
             "自動式學習、非自動式學習、半自動式學習、重點學習"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4168,7 +4168,7 @@
             "由於電腦神經元是參考人類神經元的架構設計的，且電腦計算速度比人類快上很多，所以能夠輕鬆地解決聽、說、讀、寫、看等問題。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4186,7 +4186,7 @@
             "CNN是一個機器學習神經網路。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4204,7 +4204,7 @@
             "強化學習 (Reinforcement Learning) 。"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4222,7 +4222,7 @@
             "貝氏分類器(Bayesian Classifier) 。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4240,7 +4240,7 @@
             "短時間內，監督式學習比非監督式學習更有效率。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4258,7 +4258,7 @@
             "SVM會建立分隔線來幫助分類。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4276,7 +4276,7 @@
             "特點是每個決策階段都相當的明確清楚（不是YES就是NO）。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4294,7 +4294,7 @@
             "支援向量機(SVM)。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4312,7 +4312,7 @@
             "中繼閥門(Relay Gate)"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4330,7 +4330,7 @@
             "增加分類的能力"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4348,7 +4348,7 @@
             "以上皆是"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4366,7 +4366,7 @@
             "主要分成三個部分:輸入層、輸出層、隱藏層"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4384,7 +4384,7 @@
             "從資料中自行探索出潛在的特徵"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4402,7 +4402,7 @@
             "強化學習需要定義反饋函式(Reward Function)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4420,7 +4420,7 @@
             "人工智慧、機器學習、深度學習"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4438,7 +4438,7 @@
             "半監督學習相對監督學習使用較多資料標籤訓練模型"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4456,7 +4456,7 @@
             "K-means 演演算法行時，通常須要計算各個群中心之間的距離"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4474,7 +4474,7 @@
             "一定要轉成灰階影像格式才能輸入深度學習網路中學習。"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4492,7 +4492,7 @@
             "使用虛擬色彩技術將黑白影像轉成彩色影像。"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4510,7 +4510,7 @@
             "偵測影像上是否有交通號誌。"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4528,7 +4528,7 @@
             "自駕車在路上容易遇到的物件有車輛、機車騎士、行人等，鎖定這幾類物件偵測可以降低深度學習的複雜度，使得在同樣的精準度下達到更快偵測速度。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4546,7 +4546,7 @@
             "影像模糊化"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4564,7 +4564,7 @@
             "將無標記照片透過CNN進行影象分析，提取每種情緒特徵，即可建構出一套情緒辨識系統。"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4582,7 +4582,7 @@
             "BeautifulSoup"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4600,7 +4600,7 @@
             "Desequence"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4618,7 +4618,7 @@
             "推薦系統"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4636,7 +4636,7 @@
             "梯度的不連續性"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -4654,7 +4654,7 @@
             "半自動搜尋模式"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -4672,7 +4672,7 @@
             "設計對話"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4690,7 +4690,7 @@
             "BERT"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -4708,7 +4708,7 @@
             "抽取式摘要的準確率較抽象式摘要低"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4726,7 +4726,7 @@
             "234"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4744,7 +4744,7 @@
             "Gensim"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4762,7 +4762,7 @@
             "CNN"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4780,7 +4780,7 @@
             "3214"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4798,7 +4798,7 @@
             "情感系統"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4816,7 +4816,7 @@
             "主動推薦型別"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4834,7 +4834,7 @@
             "館藏查詢系統"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4852,7 +4852,7 @@
             "多示例學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -4870,7 +4870,7 @@
             "就算用藏頭詩諷刺也能分析出諷刺的情緒"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4888,7 +4888,7 @@
             "圖形解析"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4906,7 +4906,7 @@
             "透過以往審判資料進行學習，分析具有哪種特性的人會反覆地犯罪"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4924,7 +4924,7 @@
             ".NET Framework"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -4942,7 +4942,7 @@
             "卷積神經網路無法被用於自然語言處理"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 2,
         "image": null,
@@ -4960,7 +4960,7 @@
             "蒐集消費者資訊，並且分析顧客的購物習慣與行為，透過對話的方式提供使用者有興趣的專案。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -4978,7 +4978,7 @@
             "使用者提出問題，斷詞解析，搜尋資料集，排序答覆，產生關鍵字，回饋使用者。"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -4996,7 +4996,7 @@
             "機器手臂"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5014,7 +5014,7 @@
             "精準推薦和智慧互動提升使用者購買體驗"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5032,7 +5032,7 @@
             "提升農作物的品質。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5050,7 +5050,7 @@
             "混和式推薦"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5068,7 +5068,7 @@
             "新專案問題(New Item Problem) 品質取決於歷史資料的豐富程度"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5086,7 +5086,7 @@
             "基於熱門度資料"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5104,7 +5104,7 @@
             "通訊軟體 Line 的購物平臺推薦系統"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5122,7 +5122,7 @@
             "增加人力的需求量"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5140,7 +5140,7 @@
             "社群媒體"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5158,7 +5158,7 @@
             "靠結構化的的資料精準行銷"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5176,7 +5176,7 @@
             "保險公司"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5194,7 +5194,7 @@
             "可透過 Chatbot 回應客戶，並依照客戶需求推薦保險產品的最佳組合"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5212,7 +5212,7 @@
             "人工智慧信用評分可應用在無聯徵資料或少與銀行往來客戶的評分"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5230,7 +5230,7 @@
             "風險監控"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5248,7 +5248,7 @@
             "虹膜辨識為透過紅外線攝影機，根據微血管的分佈變化做為依據"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5266,7 +5266,7 @@
             "理財機器人作為理財工具，有著風險控制與長期投資的優勢"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5284,7 +5284,7 @@
             "法令依據"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5302,7 +5302,7 @@
             "流程化"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5320,7 +5320,7 @@
             "支援向量機"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5338,7 +5338,7 @@
             "增強學習"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5356,7 +5356,7 @@
             "自然語言"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5374,7 +5374,7 @@
             "有眾多的機電裝置"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5392,7 +5392,7 @@
             "工業用機器人都是固定式的，家用機器人都可移動"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5410,7 +5410,7 @@
             "個人或家庭用的服務機器人，顧名思義就是能夠提供個人或家庭，各式各樣支援和服務"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5428,7 +5428,7 @@
             "遙控裝置"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5446,7 +5446,7 @@
             "當現場需求靈活多變的狀況下並不適合使用人工智慧機器人"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5464,7 +5464,7 @@
             "RPA 機器人跟工廠的自動化裝置類似，因此並不需要人工智慧的支援"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5482,7 +5482,7 @@
             "結合 AI 的 RPA 程式無法與舊有老舊系統結合"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5500,7 +5500,7 @@
             "Q 學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5518,7 +5518,7 @@
             "強化學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5536,7 +5536,7 @@
             "強化學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5554,7 +5554,7 @@
             "迴歸"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5572,7 +5572,7 @@
             "不擬合"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5590,7 +5590,7 @@
             "僅需要樣本的一部分就可以建立分類模型"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5608,7 +5608,7 @@
             "可解釋性較好"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -5626,7 +5626,7 @@
             "可以處理類別型資料"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5644,7 +5644,7 @@
             "132"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5662,7 +5662,7 @@
             "餘弦相似度"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5680,7 +5680,7 @@
             "若群中含有異常點，對均值偏離影響不大"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5698,7 +5698,7 @@
             "維度過高也不容易造成運算上的負擔"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 3,
         "image": null,
@@ -5716,7 +5716,7 @@
             "對於多分類問題的表現較SVM差"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5734,7 +5734,7 @@
             "實現推薦系統"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5752,7 +5752,7 @@
             "Touch ID"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5770,7 +5770,7 @@
             "中國信託銀行的「小C」"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5788,7 +5788,7 @@
             "影象辨識"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -5806,7 +5806,7 @@
             "小阡"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5824,7 +5824,7 @@
             "情感分析"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5842,7 +5842,7 @@
             "超人工智慧"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5860,7 +5860,7 @@
             "自主學習"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5878,7 +5878,7 @@
             "Amazon Store"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5896,7 +5896,7 @@
             "無線網路"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5914,7 +5914,7 @@
             "LISP人工智慧程式語言被提出"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -5932,7 +5932,7 @@
             "成長期"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -5950,7 +5950,7 @@
             "發展出華生超級電腦"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -5968,7 +5968,7 @@
             "對話測試"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -5986,7 +5986,7 @@
             "提出模糊集合理論"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6004,7 +6004,7 @@
             "Martin Minsky"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6022,7 +6022,7 @@
             "當時參與人工智慧發展的人員太少"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6040,7 +6040,7 @@
             "無法評斷專家專業知識的正確性"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6058,7 +6058,7 @@
             "臉書的聊天機器人"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 3,
         "image": null,
@@ -6076,7 +6076,7 @@
             "重點學習"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 3,
         "image": null,
@@ -6094,7 +6094,7 @@
             "QA機器人"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6112,7 +6112,7 @@
             "檢測垃圾電子郵件"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6130,7 +6130,7 @@
             "物品表示：為每個商品取出一些特徵來表示這個商品。"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6148,7 +6148,7 @@
             "例項分割可以檢測輸入影象中的物件，將它們與背景隔離，並根據其類別對它們進行分組，並且檢測相似物件群集中的每個單獨物件，並為每個物件繪製邊界。"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6166,7 +6166,7 @@
             "Python 爬蟲包含了大量的函式庫，能夠簡單並快速的實現網路爬蟲功能，尤其在資料的擷取方面。"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6184,7 +6184,7 @@
             "TF-IDF"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6202,7 +6202,7 @@
             "影像處理-文字情感分析"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6220,7 +6220,7 @@
             "機場快速通關"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6238,7 +6238,7 @@
             "情感分析"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6256,7 +6256,7 @@
             "(4)(3)(1)(2)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6274,7 +6274,7 @@
             "無人巴士"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6292,7 +6292,7 @@
             "意圖瞭解"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6310,7 +6310,7 @@
             "可用來協助診斷及醫療"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6328,7 +6328,7 @@
             "統整"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6346,7 +6346,7 @@
             "文字翻譯"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6364,7 +6364,7 @@
             "新商品不需要使用者評分的資訊，就能被推薦"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6382,7 +6382,7 @@
             "畫面分割"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6400,7 +6400,7 @@
             "雲端運算(Cloud Computing)"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6418,7 +6418,7 @@
             "迴圈神經網路（ Recurrent Neural Network ）"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6436,7 +6436,7 @@
             "虛擬實境生成內容（Virtual Reality Generated Content）"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6454,7 +6454,7 @@
             "用於管理 AI 模型部署的軟體框架。"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6472,7 +6472,7 @@
             "盡可能減少模型訓練時間。"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6490,7 +6490,7 @@
             "長短期記憶網路（Long Short-Term Memory, LSTM）"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6508,7 +6508,7 @@
             "決策樹 (Decision Tree)"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6526,7 +6526,7 @@
             "隨機森林 (Random Forest)"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6544,7 +6544,7 @@
             "隨機梯度下降 (Stochastic Gradient Descent)"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6562,7 +6562,7 @@
             "Bard"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -6580,7 +6580,7 @@
             "Midjourney"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -6598,7 +6598,7 @@
             "1990"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6616,7 +6616,7 @@
             "Andrew Ng"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6634,7 +6634,7 @@
             "2017"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -6652,7 +6652,7 @@
             "2017"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -6670,7 +6670,7 @@
             "2023年"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,

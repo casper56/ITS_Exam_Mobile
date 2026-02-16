@@ -4142,21 +4142,30 @@
     const CORR_KEY = 'its_python_correct_v1', INCORR_KEY = 'its_python_incorrect_v1', CORR_EDIT_KEY = 'its_python_corrected_v1', INDEX_KEY = 'its_python_index_v1', ANSWERS_KEY = 'its_python_answers_v1';
 
     function loadState() {
-        const sCorr = localStorage.getItem(CORR_KEY), sIncorr = localStorage.getItem(INCORR_KEY), sEdit = localStorage.getItem(CORR_EDIT_KEY), sIdx = localStorage.getItem(INDEX_KEY), sAns = localStorage.getItem(ANSWERS_KEY);
-        if (sCorr) correctSet = new Set(JSON.parse(sCorr));
-        if (sIncorr) incorrectSet = new Set(JSON.parse(sIncorr));
-        if (sEdit) correctedSet = new Set(JSON.parse(sEdit));
-        if (sIdx) currentIndex = parseInt(sIdx) || 0;
-        if (sAns) userAnswers = JSON.parse(sAns);
+        try {
+            const sCorr = localStorage.getItem(CORR_KEY), sIncorr = localStorage.getItem(INCORR_KEY), sEdit = localStorage.getItem(CORR_EDIT_KEY), sIdx = localStorage.getItem(INDEX_KEY), sAns = localStorage.getItem(ANSWERS_KEY);
+            if (sCorr) correctSet = new Set(JSON.parse(sCorr));
+            if (sIncorr) incorrectSet = new Set(JSON.parse(sIncorr));
+            if (sEdit) correctedSet = new Set(JSON.parse(sEdit));
+            if (sIdx) currentIndex = parseInt(sIdx) || 0;
+            if (sAns) userAnswers = JSON.parse(sAns);
+        } catch(e) { console.warn("LoadState failed: Storage blocked."); }
     }
     function saveState() {
-        localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
-        localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
-        localStorage.setItem(CORR_EDIT_KEY, JSON.stringify([...correctedSet]));
-        localStorage.setItem(INDEX_KEY, currentIndex.toString());
-        localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
+        try {
+            localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
+            localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
+            localStorage.setItem(CORR_EDIT_KEY, JSON.stringify([...correctedSet]));
+            localStorage.setItem(INDEX_KEY, currentIndex.toString());
+            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
+        } catch(e) { console.warn("SaveState failed: Storage blocked."); }
     }
-    function resetProgress() { if(confirm('確定清除紀錄嗎？')) { localStorage.clear(); location.reload(); } }
+    function resetProgress() { 
+        if(confirm('確定清除紀錄嗎？')) { 
+            try { localStorage.clear(); } catch(e) {}
+            location.reload(); 
+        } 
+    }
     function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 
     function processContent(content, item) {
