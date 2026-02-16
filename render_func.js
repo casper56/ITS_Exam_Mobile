@@ -1,3 +1,15 @@
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+
     function renderQuestion(index) {
         currentIndex = index;
         const item = examQuestions[index];
@@ -38,10 +50,10 @@
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
             
-            // 決定編號文字與顯示樣式
-            let labelText = `${optIdx + 1}. `;
-            if (item.labelType === 'alpha') {
-                labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            // 預設為 Alpha (A), 只有明確設為 'num' 才用 1.
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') {
+                labelText = `${optIdx + 1}. `;
             }
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
 
@@ -61,8 +73,10 @@
                 for (let i = sIdx; i < parts.length; i++) {
                     const btnIdx = i - sIdx;
                     const isSel = (savedAns && savedAns[optIdx] === btnIdx);
-                    let subLabel = `(${btnIdx+1}) `;
-                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + btnIdx)}) `;
+                    // 子選項也同步預設 Alpha
+                    let subLabel = `(${String.fromCharCode(65 + btnIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${btnIdx+1}) `;
+                    
                     html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${btnIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${parts[i]}</div>`;
                 }
                 html += '</div>';

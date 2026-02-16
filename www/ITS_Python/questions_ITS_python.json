@@ -2,7 +2,6 @@
     {
         "id": 1,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "1. 【CH01-1】資料型態的檢視：<br>\n你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。<br>\n輸出結果必須盡可能精準。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。<br>\n其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。<br>\n<pre><code class=\"language-python line-numbers line-hight19\">#步速計算器\ndistance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))\n# convert to kilometers\ndistance_kms = distance / 1000\n#輸入已用時間(分鐘)\ntime_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))\n#輸入已用秒數\ntime_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))\ntime time_minute*60+time_se_sec\npace = time / distance_kms\n#平均速度\nprint(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre><br>\n以上空格分別要填入的函式名為：",
         "options": [
             "int|string|float",
@@ -25,7 +24,6 @@
     {
         "id": 2,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "2. 【CH01-2】你正在編寫一個 Python 程式用來記錄客戶資料並將其儲存在資料庫中。<br>\n這個程式處理各種各樣的資料。<br>\n以下的變數宣告後它們的資料類別是？<br>\n<pre><code class=\"language-python\">選項 1. age = 12\n選項 2. minor = False\n選項 3. name = 'David'\n選項 4. weight = 64.5\n選項 5. zip = '545'</code></pre>",
         "options": [
             "int|bool|str|float",
@@ -55,7 +53,6 @@
     {
         "id": 3,
         "type": "single",
-        "labelType": "alpha",
         "question": "3. 【CH01-3】你正在編寫一個計算使用者出生年份的程式，<br>\n該程式詢問使用者的年齡和當前年份，<br>\n然後輸出使用者的出生年份。<br>\n你編寫以下程式碼：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">age = input(\"Enter your age: \")\nyear = input(\"Enter the four digit year: \")\nborn = eval(year) - eval(age)\n04 message = \"You were born in \" + str(born)\n</code></pre><br>\n下列選項正確答案為？",
         "options": [
             "第 1 行中的 age 的資料型別是 str",
@@ -81,7 +78,6 @@
     {
         "id": 4,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "4. 【CH01-4】在 Python 資料型別的課程中建立以下三個程式碼片段：<br>\n<pre><code class=\"language-python\"># 程式碼片段 1\nx1 = \"5\"\ny1 = 4\na = x1 * y1\n# 程式碼片段 2\nx2 = 10\ny2 = 4\nb = x2 / y2\n# 程式碼片段 3\nx3 = 5.5\ny3 = 1\nc = x3 / y3</code></pre>",
         "options": [
             "執行程式碼片段 1 後，變數 a 的資料類為 str。",
@@ -107,7 +103,6 @@
     {
         "id": 5,
         "type": "single",
-        "labelType": "alpha",
         "question": "5. 【CH01-5】在 Python 程式中我們利用 type() 查詢每個值的資料類別，以下的程式執行後出現的資料類別分別是：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">type (+1E10)\ntype(5.0)\ntype (\"True\")\ntype(False)</code></pre>",
         "options": [
             "int,  int,  bool,  bool",
@@ -133,7 +128,6 @@
     {
         "id": 6,
         "type": "single",
-        "labelType": "alpha",
         "question": "6. 【CH01-6】你加入了電子商務公司成為其程式開發部門的實習生。<br>\n你的程式中有一個地方要讓使用者提供一個數值。<br>\n即使使用者輸入了小數，該值也必須轉換為整數來進行計算。<br>\n你應該使用哪個程式碼片段？?",
         "options": [
             "totalNums = input(\"How many items would you like?\")",
@@ -158,7 +152,6 @@
     {
         "id": 7,
         "type": "single",
-        "labelType": "alpha",
         "question": "7. 【CH01-7】你設計了一個 Python 程式用來顯示每個員工每天工作到現在的小時數，<br>\n你需要計算工作時數並顯示訊息，程式碼如下：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">start = input(\"What time do you start work today?\")\nend = input(\"what time is is it now?\")</code></pre><br>\n如果要完成這個程式，在 3 行應該使用哪個程式碼？",
         "options": [
             "print(\"You have worked for\" + str(int(end) - int(start)) + \"hours\")",
@@ -181,7 +174,6 @@
     {
         "id": 8,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "8. 【CH02-1】高年級的老師要製作一份報表來顯示這次考試班上所有學生的平均分數。<br>\n報表必須去除平均分數的小數部分。<br>\n每個正確的答案都提供了一個完整的解決方案。<br>\n你應該使用哪兩個程式碼片段？",
         "options": [
             "average_score = float(total_score // number_of_students)",
@@ -207,7 +199,6 @@
     {
         "id": 9,
         "type": "single",
-        "labelType": "alpha",
         "question": "9. 【CH02-2】你編寫了以下的程式碼：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">a = 24\nb = 7\nans = (a % b * 100) // 2.0 ** 3.0 – b\nprint(ans)</code></pre><br>\n執行程式碼的輸出值是？",
         "options": [
             "30.0",
@@ -228,7 +219,6 @@
     {
         "id": 10,
         "type": "single",
-        "labelType": "alpha",
         "question": "10. 【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。<br>\n公式內容為b等於 a 加上 5，然後再平方，其中 a 是輸入的值， b 是結果。<br>\n你設計了以下的程式碼片段：<br>\n<pre><code class=\"language-python line-numbers\">a = eval(input(\"Enter a number for the equation:\"))\nb =</code></pre><br>\n如何完成 2 行的程式碼？",
         "options": [
             "b= (a + 5)**2",
@@ -250,7 +240,6 @@
     {
         "id": 11,
         "type": "single",
-        "labelType": "alpha",
         "question": "11. 【CH02-4】你正在開發一個補習班的 Python 函式來計算折扣，<br>\n補習班希望鼓勵小朋友和老年人報名，<br>\n只要是小朋友和老年人報名相關課程就會獲得10%的折扣。<br>\n你編寫了以下程式碼：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">def get_discount(kid, senior): \n   discount = 0.1\n\n      discount = 0\n   return discount</code></pre><br>\n為了完成這個程式碼，你應該在 3 行加入什麼程式碼？",
         "options": [
             "if not (kid or senior):",
@@ -272,7 +261,6 @@
     {
         "id": 12,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "12. 【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)",
         "options": [
             "0 or 5",
@@ -297,7 +285,6 @@
     {
         "id": 13,
         "type": "single",
-        "labelType": "alpha",
         "question": "13. 【CH02-6】計算以下的 Python 數學運算式結果為何？<br>\n<pre><code class=\"language-python line-numbers line-hight19\">(3*(1+2)**2-2**2*3)</code></pre>",
         "options": [
             "3",
@@ -324,7 +311,6 @@
     {
         "id": 14,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "14. 【CH02-7】你編寫了以下的程式碼：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">a = 'Test 1'\nprint(a)\nb = 'Test 2'\na +=b\nprint(a)\nprint(b)</code></pre><br>\n根據程式碼片段中提供的資訊選擇每個問題的答案進頂。<br>\n在第一次 print 後會顯示什麼？_(選項 1)_<br>\n在第二次 print 後會顯示什麼？_(選項 2)_<br>\n在第三次 print 後會顯示什麼？_(選項 3)_",
         "options": [
             "Test 1|Test 1Test 2|Test 2",
@@ -348,7 +334,6 @@
     {
         "id": 15,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "15. 【CH02-8】你為公司開發了一個 Python 應用程式，程式碼如下：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">def test(a, b, c, d): \n   value=(a+b)*c-d\n   return value</code></pre>根據程式碼片段中提供的資訊選擇每個問題的答案選頂。<br>\n選項1 :運算式的哪個部份將第一個進行計算？<br>\n選項2 :運算式的哪個部份將第二個進行計算？<br>\n選項3 :哪個運算式等於題目函式中的運算式？",
         "options": [
             "a+b|b*c|c-d",
@@ -372,7 +357,6 @@
     {
         "id": 16,
         "type": "single",
-        "labelType": "alpha",
         "question": "16. 【CH02-9】請按先後順序從頭至尾排列這六類運算的正確順序：<br>\n1. 加法和減法(+,  -)<br>\n2. 乘法和除法(*,  /)<br>\n3. 正數 (+)、負數 (-) 與反位元 (not) <br>\n4. 括弧<br>\n5. 指數 (**)<br>\n6. 且 (And)",
         "options": [
             "加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且",
@@ -400,7 +384,6 @@
     {
         "id": 17,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "17. 【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，然而週四和週日也有特別的費率。費用結構如下所示：<br>\n<pre><code class=\"language-python\">1. 費用每天 100 美元。\n2. 如果在晚上 11 點後返還，將被多收取額外一天的費用。\n3. 如果是在星期天租的，可享受 10% 的折扣。\n4. 如果是在星期四租的，可以享受 20% 的折扣。</code></pre><br>\n你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？<br>\n<pre><code class=\"language-python line-numbers line-hight19\"># 車輛出租計算機\nontime = input(\"Was car returned before 11 pm? y or n\").lower()\ndays_rented = int(input(\"How many days was car rented?\"))\nday_rented = input(\"What day was the car rented?\").capitalize()\ncost_per_day = 100\nif ontime _(選項 1)_ #不準時\n    days_rented += 1\nif day_rented _(選項 2)_ #星期天租的\n    total = (days_rented * cost_per_day) * 0.9\nelif day_rented _(選項 3)_  #星期四租的\n    total = (days_rented*cost_per_day) * 0.8\nelse:\n    total = days_rented * cost_per_day\nprint(\"Cost of the car rental is : $\", total)</code></pre><br>\n以上空格選項分別要填入的程式為：",
         "options": [
             "!=\"n\":|==\"n\":| --\"y\":",
@@ -424,7 +407,6 @@
     {
         "id": 18,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "18. 【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">a = 11\nb = 5\n</code></pre><pre><code class=\"language-python\">選項答案選擇區\nprint(a / b)的輸出結果是？_(選項 1)_\nprint(a // b)的輸出結果是？_(選項 2)_\nprint(a % b)的輸出結果是？_(選項 3)_</code></pre>",
         "options": [
             "1|2|2.2",
@@ -475,7 +457,6 @@
     {
         "id": 20,
         "type": "single",
-        "labelType": "alpha",
         "question": "20. 【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">x = 0\nwhile x < 4:\n    if  x % 4 == 0:\n        print(\"party\")\n    elif  x - 2 < 0:\n        print(\"cake\")\n    elif  x / 3 == 0:\n        print(\"greeting\")\n    else:\n        print(\"birthday\")\n    x = x + 1</code></pre><br>\n請選擇正確的輸出結果。",
         "options": [
             "party，greeting，birthday，cake",
@@ -496,7 +477,6 @@
     {
         "id": 21,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "21. 【CH02-14】您正在撰寫一個 Python 程式評估算術公式。此公式描述 a 是先取得一個輸入值，而 b 等於 a 乘以 -1 之後再平方，所以 b 是結果。<br>\n您所建立的程式碼片段如下。<br>\n<pre><code class=\"language-python line-numbers line-hight19\">a = eval(input(\"Enter a number for the equation: \")))\nb = 選項1 選項2 選項3 選項4 選項5</code></pre>您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，以完成第 2 行的程式碼。每個程式碼片段可能使用一次，也可能使用多次，甚至完全用不到。<br>\n",
         "options": [
             "-|(|)|**|**2|2|a",
@@ -524,7 +504,6 @@
     {
         "id": 22,
         "type": "single",
-        "labelType": "alpha",
         "question": "22. 【CH03-1】你編寫了以下的程式碼：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">list_1 = [1, 2, 3]\nlist_2 = [4, 5, 6]\nlist_3 = list_1 + list_2\nlist_4 = list_3 * 2\nprint(list_4)\n</code></pre>執行程式碼的輸出值是？<br>\n",
         "options": [
             "[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]",
@@ -545,7 +524,6 @@
     {
         "id": 23,
         "type": "single",
-        "labelType": "alpha",
         "question": "23. 【CH03-2】在下列的程式碼中：<br>\n<pre><code class=\"language-python line-numbers line-hight19\">aList = [0, 1, 2, 3, 4]\nprint(4 in aList)</code></pre>會輸出列印的內容？",
         "options": [
             "4",
@@ -671,7 +649,6 @@
     {
         "id": 28,
         "type": "single",
-        "labelType": "alpha",
         "question": "28. 【CH03-7】你開發了一個 Python 應用程式，其中有一個名為 month 的清單單儲存所有月份的英文。<br>\n你要分割這個清單，取得由第二個月份開始，每間隔一個值的月份名稱，你應該使用哪個程式碼？",
         "options": [
             "month[2:2]",
@@ -791,7 +768,6 @@
     {
         "id": 33,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "33. 【CH04-3】你正在設計一個電子商務程式，它可以接受來自使用者輸入，並以逗號分隔的格式輸出資料。<br>\n你可以編寫以下程式碼接受資料輸入：<pre><code class=\"language-python line-numbers line-hight19\">product = input('Enter product name:')\nqty = input('Input quantity:')</code></pre>輸出必須符合以下要求：<pre><code class=\"language-python\">●字串必須括在雙引號內。\n●數字不得用引號或其他字元括起來。\n●每個產品必須用逗號隔開。</code></pre>你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？",
         "options": [
             "print('\"{0}\", {1} '.format(product, qty))",
@@ -818,7 +794,6 @@
     {
         "id": 34,
         "type": "single",
-        "labelType": "alpha",
         "question": "34. 【CH04-4】請檢視下面的程式碼：<pre><code class=\"language-python line-numbers line-hight19\">x = 'Tiger'\ny = 'Lion'\nz = 'Jaguar'\nanimals = '{1} and {0} and {2}'\nprint(animals.format(x, y, z))</code></pre>輸出的結果為？",
         "options": [
             "Lion and Tiger and Jaguar",
@@ -841,7 +816,6 @@
     {
         "id": 35,
         "type": "single",
-        "labelType": "alpha",
         "question": "35. 【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。你的程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">print('Enter product name: ')\n?\nprint(product_name)</code></pre>在02行應該編寫哪個程式碼？",
         "options": [
             "product_name = input()",
@@ -945,7 +919,6 @@
     {
         "id": 39,
         "type": "single",
-        "labelType": "alpha",
         "question": "39. 【CH04-9】你設計一個 Python 應用程式，需要將資料讀寫到文字檔中。<br>\n如果檔案不存在，則必須新增它。<br>\n如果檔案已有內容，則將文字加到最後。<br>\n你應該使用哪個程式碼？",
         "options": [
             "open('file_data', 'a')",
@@ -968,7 +941,6 @@
     {
         "id": 40,
         "type": "single",
-        "labelType": "alpha",
         "question": "40. 【CH04-10】你正在設計一個 Python 程式來讀取學生資料的檔案，檔案中包含了學生的班級、座號和姓名，下面顯示的是檔案中的資料範例：<br>\n<pre><code class=\"language-python\">'1A',1,'David'\n'1A',2,'Mary'</code></pre>程式碼必須符合以下的需求：<pre><code class=\"language-python\">● 檔案的每一行都必須讀取和列印。\n● 如果遇到空行，則必須忽略。\n● 在完成所有行的讀取後,必須關閉檔案。</code></pre>你建立了以下的程式碼：<pre><code class=\"language-python line-numbers line-hight19\">students = open('students.txt', 'r')\neof = False\nwhile eof == False:\n   line = students.readline()\n(程式碼1)\n(程式碼2)\n           print(line.strip())\n   else:\n       print('End of file')\n       eof = True\nstudents.close()</code></pre>在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？",
         "options": [
             "(程式碼1).if line != '': (程式碼2).if line != '\\n':",
@@ -1015,7 +987,6 @@
     {
         "id": 42,
         "type": "single",
-        "labelType": "alpha",
         "question": "42. 【CH04-12】請問下列陳述式有何功能？<pre><code class=\"language-python line-numbers line-hight19\">data = input()</code></pre>",
         "options": [
             "允許使用者在主控臺中輸入文字",
@@ -1092,7 +1063,6 @@
     {
         "id": 45,
         "type": "single",
-        "labelType": "alpha",
         "question": "45. 【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：<pre><code class=\"language-python line-numbers line-hight19\">if grade > 80 and rank >= 3:\n   grade += 10\nif grade > 70 and rank > 3:\n   grade += 5\nelse:\n   grade -= 5</code></pre>當 grade = 76，rand = 3 時，執行程式碼的輸出值是？",
         "options": [
             "71",
@@ -1695,7 +1665,6 @@
     {
         "id": 70,
         "type": "multioption",
-        "labelType": "alpha",
         "question": "【CH03-補充】某位同事撰寫了一個程式來輸入名稱至資料庫中。然而,此程式卻將每個名稱中的字母前後顛倒。<br>您需要撰寫一個 Python 函式來按照正確順序輸出名稱中的字元。<br><pre><code class=\"language-python line-numbers line-hight19\">#Function reverses characters in a string.\n#returns new string in reversed order.<br>\ndef reverse_name(backward_name):\n    forward_name = \"\"\n    length = (1)\nwhile length >= 0:\n    forward_name += (2)\n    length = length-1\n    return forward_name<br><br>print(reverse_name(\"nohtyp\")</code></pre>",
         "options": [
             "backward_name:|len(backward_name)-1|range(0,len(backward_name),-1)|range(len(backward_name)-1,-1,-1)",
@@ -1715,7 +1684,6 @@
     {
         "id": 71,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "您任職於某個遊戲開發團隊。\n您需要撰寫程式碼來產生符合下列需求的隨機數字：\n•此數字是 5 的倍數。\n•最低數字是 5。\n•最高數字是 100。\n請問哪兩個程式碼片段將符合需求?每個正確答案都是一個完整的解決方案。(請選擇 2 個答案。)",
         "options": [
             "<pre><code class=\"language-python\">from random import randrange\nprint(randrange(0, 100, 5))</code></pre>",
@@ -1814,7 +1782,6 @@
     {
         "id": 75,
         "type": "single",
-        "labelType": "alpha",
         "question": "73. 【CH06-10】您為公司開發了一個 Python 應用程式，您想要在自己的程式碼中加入附註，好讓其他團隊成員能夠瞭解。<br>\n請問您應該採取下列哪一項做法？",
         "options": [
             "在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。",
@@ -1837,7 +1804,6 @@
     {
         "id": 76,
         "type": "single",
-        "labelType": "alpha",
         "question": "74. 【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？",
         "options": [
             "from datetime as dt",
@@ -1862,7 +1828,6 @@
     {
         "id": 77,
         "type": "single",
-        "labelType": "alpha",
         "question": "75. 【CH07-2】你設計一個讀取檔案後將檔案中的每一行列印出來的函式。程式碼如下：<pre><code class=\"language-python line-numbers line-hight19\">def print_file(filename):\n    line = None\n    if os.path.isfile(filename):\n        data = open(filename, 'r')\n    for line in data:\n        print(line)</code></pre>當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？",
         "options": [
             "你需匯入 os 模組。",
@@ -1885,7 +1850,6 @@
     {
         "id": 78,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "76. 【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？",
         "options": [
             "random.randrange(11, 21, 1)",
@@ -1909,7 +1873,6 @@
     {
         "id": 79,
         "type": "single",
-        "labelType": "alpha",
         "question": "77. 【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？",
         "options": [
             "random.random()",
@@ -1933,7 +1896,6 @@
     {
         "id": 80,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "78. 【CH07-5】你設計程式碼來產生一個隨機數數來符合以下要求：<pre><code class=\"language-python\">● 數字是 2 的倍數。\n● 最低的數字是 2。\n● 最高的數字是 50。</code></pre>哪兩個程式碼片段將符合要求？<pre><code class=\"language-python\">選項答案選擇區\n選項 1.\nfrom random import randint\nprint(randint(1,25) * 2)\n\n選項 2.\nfrom random import randint\nprint(randint(1,50))\n\n選項 3.\nfrom random import randrange\nprint(randrange(2,50,2))\n\n選項 4.\nfrom random import randrange\nprint(randrange(2,50,1))</code></pre>",
         "options": [
             "選項 1 程式碼片段符合要求",
@@ -1958,7 +1920,6 @@
     {
         "id": 81,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "79. 【CH07-6】你正在設計一個處理數字的函式。該函式具有以下要求：<pre><code class=\"language-python\">● 將浮點數傳遞到函式中\n● 函式必須取浮點數的絕對值\n● 函式必須無條件進位到整數</code></pre>你應該使用哪兩個數學函式？",
         "options": [
             "math.fabs(x)",
@@ -2216,7 +2177,6 @@
     {
         "id": 91,
         "type": "single",
-        "labelType": "alpha",
         "question": "89. 【CH04-補充】你編寫了以下程式來處理字串：<br>\n<pre><code class=\"language-python\">text = '  Python Programming  '\nresult = text.strip().upper().split(' ')[0]</code></pre><br>\n變數 result 的最終值是什麼？",
         "options": [
             "'PYTHON'",
@@ -2240,7 +2200,6 @@
     {
         "id": 92,
         "type": "single",
-        "labelType": "alpha",
         "question": "90. 【CH06-補充】關於變數的區域範圍 (Scope)，請檢視以下程式碼：<br>\n<pre><code class=\"language-python\">x = 10\n def update_x():\n  x = 20\n update_x()\nprint(x)</code></pre><br>\n執行後的輸出結果為何？",
         "options": [
             "10",
@@ -2263,7 +2222,6 @@
     {
         "id": 93,
         "type": "single",
-        "labelType": "alpha",
         "question": "91. 【CH02-補充】在 Python 中執行以下數學運算，結果為何？<br>\n<pre><code class=\"language-python\">result = 2 ** 3 ** 2</code></pre>",
         "options": [
             "512",
@@ -2286,7 +2244,6 @@
     {
         "id": 94,
         "type": "single",
-        "labelType": "alpha",
         "question": "92. 【CH07-補充】你正在編寫一個透過命令列 (Command Line) 接收引數的 Python 指令碼 <code>script.py</code>。<br>\n使用者執行命令如下：<br>\n<code>python script.py data.csv</code><br>\n若要取得檔名 'data.csv'，你應使用哪個程式碼？",
         "options": [
             "sys.argv[1]",
@@ -2309,7 +2266,6 @@
     {
         "id": 95,
         "type": "single",
-        "labelType": "alpha",
         "question": "93. 【CH04-補充】使用 <code>with open('data.txt', 'r') as f:</code> 語法的主要好處是什麼？",
         "options": [
             "當區塊結束時，檔案會自動關閉，即使發生錯誤也不例外",
@@ -2331,7 +2287,6 @@
     {
         "id": 96,
         "type": "single",
-        "labelType": "alpha",
         "question": "94. 【CH08-補充】檢視以下錯誤處理程式碼：<br>\n<pre><code class=\"language-python\">try:\n    num = int('10')\nexcept ValueError:\n    print('Error')\nelse:\n    print('Success')</code></pre><br>\n執行後的輸出結果為何？",
         "options": [
             "Success",
@@ -2354,7 +2309,6 @@
     {
         "id": 97,
         "type": "single",
-        "labelType": "alpha",
         "question": "95. 【CH05-補充】執行以下敘述程式碼，最後會列印出什麼？<br>\n<pre><code class=\"language-python\">for i in range(1, 4):\n    if i == 2:\n        continue\n    print(i, end=' ')\n</code></pre>",
         "options": [
             "1 3 ",
@@ -2378,7 +2332,6 @@
     {
         "id": 98,
         "type": "single",
-        "labelType": "alpha",
         "question": "96. 【CH04-補充】使用 f-String (Python 3.6+) 格式化字串，若變數 `name='Alice'` 和 `age=20`，下列哪種寫法可以正確輸出 `Alice is 20`？",
         "options": [
             "f'{name} is {age}'",
@@ -2400,7 +2353,6 @@
     {
         "id": 99,
         "type": "single",
-        "labelType": "alpha",
         "question": "97. 【CH06-補充】如果你想為你的 Python 模組 `my_module.py` 生成 HTML 格式的說明檔案，應該在命令列使用什麼指令？",
         "options": [
             "python -m pydoc -w my_module",
@@ -2422,7 +2374,6 @@
     {
         "id": 100,
         "type": "single",
-        "labelType": "alpha",
         "question": "98. 【CH07-補充】關於 `math.trunc()` 和 `math.floor()` 處理負數時的行為，下列何者正確？ (例如處理 -3.5)",
         "options": [
             "`math.trunc(-3.5)` 回傳 -3，`math.floor(-3.5)` 回傳 -4",
@@ -2444,7 +2395,6 @@
     {
         "id": 101,
         "type": "single",
-        "labelType": "alpha",
         "question": "99. 【CH07-補充】你希望從清單 `[1, 2, 3, 4, 5]` 中**隨機選取 3 個不重複**的元素，應該使用 `random` 模組的哪個方法？",
         "options": [
             "random.sample([1, 2, 3, 4, 5], 3)",
@@ -2465,7 +2415,6 @@
     {
         "id": 102,
         "type": "single",
-        "labelType": "alpha",
         "question": "100. 【CH07-補充】你正在設計一個遊戲的抽獎系統，獎品有三種：\n\n- **大獎 (Gold)**：機率 10%\n- **二獎 (Silver)**：機率 30%\n- **安慰獎 (Stone)**：機率 60%\n\n若希望根據上述機率**隨機抽取 5 次** (可重複中獎)，應該使用下列哪一行程式碼？",
         "options": [
             "random.choices(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)",
@@ -2486,7 +2435,6 @@
     {
         "id": 103,
         "type": "single",
-        "labelType": "alpha",
         "question": "101. 【CH07-補充】執行以下程式碼後，變數 `nums` 的狀態為何？\n<pre><code class=\"language-python\">import random\nnums = [1, 2, 3, 4, 5]\nrandom.shuffle(nums)</code></pre>",
         "options": [
             "nums 的元素順序被隨機打亂，且直接修改了原始清單",
@@ -2512,7 +2460,6 @@
     {
         "id": 104,
         "type": "single",
-        "labelType": "alpha",
         "question": "102. 【CH08-補充】在函式中，如果你檢測到一個不合法的引數值，並希望主動中斷程式執行並回報錯誤，應該使用哪個關鍵字？",
         "options": [
             "raise ValueError('Invalid value')",
@@ -2535,7 +2482,6 @@
     {
         "id": 105,
         "type": "single",
-        "labelType": "alpha",
         "question": "103. 【CH06-補充】你需要測試一段會輸出文字到控制檯 (stdout) 的程式碼，但不希望文字真的印在螢幕上，而是想存在記憶體中以便分析。可以使用哪個模組？",
         "options": [
             "io.StringIO",
@@ -2578,7 +2524,6 @@
     {
         "id": 106,
         "type": "single",
-        "labelType": "alpha",
         "question": "104. 【CH08-補充】在 `unittest` 模組中，若要驗證 `x` 的值是否為 `True`，應使用哪個斷言方法？",
         "options": [
             "self.assertTrue(x)",
@@ -2599,7 +2544,6 @@
     {
         "id": 107,
         "type": "single",
-        "labelType": "alpha",
         "question": "105. 【CH08-補充】在 `unittest` 中，若要驗證變數 `x` 的資料型態是否為整數 (`int`)，最推薦使用的斷言方法是？",
         "options": [
             "self.assertType(x, int)",
@@ -2620,7 +2564,6 @@
     {
         "id": 108,
         "type": "single",
-        "labelType": "alpha",
         "question": "106. 【CH08-補充】在 `unittest` 測試中，關於各種斷言指令 (Assert Methods) 的使用時機，下列敘述何者正確？",
         "options": [
             "若要檢查兩個變數的值是否相等 (Value Equality)，應使用 `assertIs`",
@@ -2661,7 +2604,6 @@
     {
         "id": 110,
         "type": "multiple",
-        "labelType": "alpha",
         "question": "108. 【CH03-補充】關於 Python 中的元組 (Tuple) 和清單 (List)，下列哪些敘述是**正確**的？ (複選)",
         "options": [
             "元組是不可變的 (Immutable)，而清單是可變的 (Mutable)",
@@ -2684,7 +2626,6 @@
     {
         "id": 111,
         "type": "single",
-        "labelType": "alpha",
         "question": "109. 【CH03-補充】你有一個字典 <code>student = {'name': 'John', 'age': 18}</code>。<br>\n你希望取得 'score' 的值，如果 'score' 不存在，則回傳 0，避免程式崩潰。應使用哪種語法？",
         "options": [
             "student.get('score', 0)",
@@ -2708,7 +2649,6 @@
     {
         "id": 112,
         "type": "single",
-        "labelType": "alpha",
         "question": "110. 【CH03-補充】你希望在清單 `fruits = ['apple', 'banana']` 的**開頭**插入一個元素 'orange'。應該使用哪種方法？",
         "options": [
             "fruits.insert(0, 'orange')",
@@ -2729,7 +2669,6 @@
     {
         "id": 113,
         "type": "single",
-        "labelType": "alpha",
         "question": "111. 【CH03-補充】關於 `sort()` 和 `sorted()` 的區別，下列敘述何者正確？",
         "options": [
             "`list.sort()` 會直接修改原始清單 (In-place)，而 `sorted(list)` 會回傳一個新的已排序清單",
@@ -2760,7 +2699,6 @@
     {
         "id": 114,
         "type": "single",
-        "labelType": "alpha",
         "question": "112. 【CH03-補充】你想要將一個清單 `nums = [1, 2, 3]` 的順序**原地 (in-place) 反轉**，使其變為 `[3, 2, 1]` 且不產生新的清單物件。應該使用哪種語法？",
         "options": [
             "nums.reverse()",
@@ -2781,7 +2719,6 @@
     {
         "id": 115,
         "type": "single",
-        "labelType": "alpha",
         "question": "113. 【CH03-綜合應用】執行下列 Python 程式碼後，最終列印出的結果為何？\n\n<pre><code>nums = [1, 2, 2, 3]\nnums = list(set(nums))\nnums.append(4)\nprint(nums)</code></pre>",
         "options": [
             "[1, 2, 3, 4]",
@@ -2802,7 +2739,6 @@
     {
         "id": 116,
         "type": "single",
-        "labelType": "alpha",
         "question": "114. 【CH03-集合運算】觀察下列程式碼，print(result) 的輸出結果為何？\n\n<pre><code>set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\nresult = set_a & set_b\nprint(result)</code></pre>",
         "options": [
             "{1, 2, 3, 4, 5, 6}",
@@ -2823,7 +2759,6 @@
     {
         "id": 117,
         "type": "single",
-        "labelType": "alpha",
         "question": "115. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？",
         "options": [
             "print(data[1])",
@@ -2844,7 +2779,6 @@
     {
         "id": 118,
         "type": "single",
-        "labelType": "alpha",
         "question": "116. 【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？",
         "options": [
             "my_list = [1, 2, 3]; my_list[0] = 9",
@@ -2865,7 +2799,6 @@
     {
         "id": 119,
         "type": "single",
-        "labelType": "alpha",
         "question": "117. 【CH03-集合操作】你想要在一個集合 `my_set = {1, 2, 3}` 中加入數字 4。下列哪一行程式碼是正確的？",
         "options": [
             "my_set.append(4)",
@@ -2886,7 +2819,6 @@
     {
         "id": 120,
         "type": "single",
-        "labelType": "alpha",
         "question": "118. 【CH03-除錯】執行下列哪一段程式碼會導致 `AttributeError` (屬性錯誤)？",
         "options": [
             "data = [1, 2]; data.append(3)",
@@ -2907,7 +2839,6 @@
     {
         "id": 121,
         "type": "single",
-        "labelType": "alpha",
         "question": "119. 【CH03-清單邏輯】執行下列程式碼後，`nums` 的內容為何？\n\n<pre><code>nums = [10, 30]\nnums.insert(1, 20)</code></pre>",
         "options": [
             "[10, 20, 30]",
@@ -2928,7 +2859,6 @@
     {
         "id": 122,
         "type": "single",
-        "labelType": "alpha",
         "question": "120. 【CH06-補充】你正在開發一個科學計算程式，需要判斷一個變數 `x` 是否為合法的數值 (不是 NaN)。<br>下列哪一種方式是**正確**的判斷方法？",
         "options": [
             "if x == float('nan'):",
@@ -2949,7 +2879,6 @@
     {
         "id": 123,
         "type": "single",
-        "labelType": "alpha",
         "question": "121. 【CH06-補充】關於 `math.fmod(x, y)` 與模數運運算元 `x % y` 的差異，下列敘述何者正確？",
         "options": [
             "兩者功能完全相同，沒有差異",
@@ -2970,7 +2899,6 @@
     {
         "id": 124,
         "type": "single",
-        "labelType": "alpha",
         "question": "122. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 `temp.txt`，應該使用 `os` 模組的哪個函式？",
         "options": [
             "os.delete('temp.txt')",
@@ -3000,7 +2928,6 @@
     {
         "id": 125,
         "type": "single",
-        "labelType": "alpha",
         "question": "123. 【CH03-補充】你有一個清單 `scores = [100, 80, 90, 80]`。你想要移除**第一個**出現的 80 分。應該使用哪個方法？",
         "options": [
             "scores.remove(80)",
@@ -3021,7 +2948,6 @@
     {
         "id": 126,
         "type": "single",
-        "labelType": "alpha",
         "question": "124. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 $\\pi r^2$。使用 `math` 模組時，下列寫法何者最精確且標準？",
         "options": [
             "area = 3.14 * (r ** 2)",
@@ -3042,7 +2968,6 @@
     {
         "id": 127,
         "type": "single",
-        "labelType": "alpha",
         "question": "125. 【CH03-補充】你這在編寫一個程式，需要將清單 `list_b` 的**所有元素**合併到 `list_a` 的尾端，形成一個長清單。應該使用哪種方法？\n<pre><code class=\"language-python\">list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>",
         "options": [
             "list_a.extend(list_b)",
@@ -3063,7 +2988,6 @@
     {
         "id": 128,
         "type": "single",
-        "labelType": "alpha",
         "question": "126. 【CH03-補充】你有一個學生成績清單 `grades = [85, 92, 78, 90, 55]`。若要快速找出清單中的**最高分**與**最低分**，應使用哪些內建函式？",
         "options": [
             "max(grades), min(grades)",
@@ -3084,7 +3008,6 @@
     {
         "id": 129,
         "type": "single",
-        "labelType": "alpha",
         "question": "127. 【CH06-補充】關於 `math.sqrt(x)` 與 `math.isqrt(x)` 的差異，下列何者正確？",
         "options": [
             "`math.sqrt` 回傳浮點數 (float)，`math.isqrt` 回傳整數 (int) 且無條件捨去小數",
@@ -3105,7 +3028,6 @@
     {
         "id": 130,
         "type": "single",
-        "labelType": "alpha",
         "question": "128. 【CH06-補充】你需要分析浮點數的底層結構。請問 `math.frexp(x)` 函式的作用是什麼？",
         "options": [
             "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
@@ -3126,7 +3048,6 @@
     {
         "id": 131,
         "type": "single",
-        "labelType": "alpha",
         "question": "129. 【CH07-補充】你使用 `datetime` 模組查詢今天是星期幾：<br><pre><code class=\"language-python\">import datetime\ntoday = datetime.datetime.now()\nprint(today.weekday())</code></pre><br>如果輸出結果是 `0`，代表今天是星期幾？",
         "options": [
             "星期一 (Monday)",
@@ -3147,7 +3068,6 @@
     {
         "id": 132,
         "type": "single",
-        "labelType": "alpha",
         "question": "130. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。應該使用 `random` 模組的哪個函式？",
         "options": [
             "random.random()",
@@ -3168,7 +3088,6 @@
     {
         "id": 133,
         "type": "single",
-        "labelType": "alpha",
         "question": "131. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，應使用哪個斷言方法？",
         "options": [
             "self.assertIs(a, b)",
@@ -3189,7 +3108,6 @@
     {
         "id": 134,
         "type": "single",
-        "labelType": "alpha",
         "question": "132. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code>q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>",
         "options": [
             "x: q[head]=c; y: head += 1",
@@ -3224,7 +3142,6 @@
     {
         "id": 135,
         "type": "single",
-        "labelType": "alpha",
         "question": "133. 【演算法-堆疊】此程式中 s 是用來當作一個後進先出的堆疊 (Stack)。push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？<br><br><pre><code class=\"language-python\">s = []\ndef push(s, c):\n    x\n#\ndef pop(s):\n    y\n    return c</code></pre>",
         "options": [
             "x: s.append(c); y: c = s.pop(0)",
@@ -3245,7 +3162,6 @@
     {
         "id": 136,
         "type": "single",
-        "labelType": "alpha",
         "question": "134. 【Python運算元】執行下列程式碼後，輸出為何？<br><br><pre><code>a = 13 % 5\nb = -13 % 5\nc = -13 // 5\nprint(a, b, c)</code></pre>",
         "options": [
             "3 -3 -3",
@@ -3267,7 +3183,6 @@
     {
         "id": 137,
         "type": "single",
-        "labelType": "alpha",
         "question": "135. 【Python迴圈邏輯】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 2, 4, -1, 2, 3, -5, 2, -1, 1]\nq = []\nh = 0\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and h < len(q):\n            v += q[h]\n            h += 1\nprint(sum(q[h:]))</code></pre>",
         "options": [
             "1",
@@ -3289,7 +3204,6 @@
     {
         "id": 138,
         "type": "single",
-        "labelType": "alpha",
         "question": "136. 【Python流程控制】執行下列程式碼後，輸出為何？<br><br><pre><code>q = []\nh = 0\ns = ''\nfor v in [3, 12, -2, 765, 23, -1, -3]:\n    if v > 0:\n        q.append(str(v))\n    else:\n        s += q[h]\n        h += 1\nprint(s)</code></pre>",
         "options": [
             "312765",
@@ -3310,7 +3224,6 @@
     {
         "id": 139,
         "type": "single",
-        "labelType": "alpha",
         "question": "137. 【Python迴圈與列表】執行下列程式碼後，輸出為何？<br><br><pre><code>s = [1, 1, -3, 3, 4, -1, 2, 3, -5, 2, 1, -1]\nq = []\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and q:\n            v += q.pop()\nprint(sum(q))</code></pre>",
         "options": [
             "1",
@@ -3332,7 +3245,6 @@
     {
         "id": 140,
         "type": "single",
-        "labelType": "alpha",
         "question": "138. 【Python變數範圍】執行下列程式碼：<br><pre><code>s = input()\na = [s for s in input().split()]\nprint(s, a)</code></pre><br>若輸入為以下內容：<br><code>hello py</code><br><code>123 45</code><br>則輸出為何？",
         "options": [
             "hello py [123, 45]",
@@ -3354,7 +3266,6 @@
     {
         "id": 141,
         "type": "single",
-        "labelType": "alpha",
         "question": "139. 【Python輸入與運算】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a + b)</code></pre><br>若輸入為以下內容：<br><code>100 45</code><br>則輸出為何？",
         "options": [
             "10045",
@@ -3376,7 +3287,6 @@
     {
         "id": 142,
         "type": "single",
-        "labelType": "alpha",
         "question": "140. 【Python解包錯誤】執行下列程式碼：<br><pre><code>a, b = [int(x) for x in input().split()]\nprint(a, b)</code></pre><br>若輸入為以下內容：<br><code>100 45 25</code><br>則輸出為何？",
         "options": [
             "100 45",
@@ -3398,7 +3308,6 @@
     {
         "id": 143,
         "type": "single",
-        "labelType": "alpha",
         "question": "141. 【Python字元編碼】執行下列程式碼：<br><pre><code>a = \"fake\"\nb = ord(a[3]) - ord(a[1])\nc = a + chr(ord('f') + b)\nprint(c)</code></pre><br>輸出為何？",
         "options": [
             "fakek",
@@ -3420,7 +3329,6 @@
     {
         "id": 144,
         "type": "single",
-        "labelType": "alpha",
         "question": "142. 【APCS-進階切片】執行下列程式碼後，輸出為何？<br><br><pre><code>s = 'abcdefg'\nprint(s[::-2])</code></pre>",
         "options": [
             "geca",
@@ -3441,7 +3349,6 @@
     {
         "id": 145,
         "type": "single",
-        "labelType": "alpha",
         "question": "143. 【APCS-遞迴邏輯】執行下列函式 <code>f(3)</code> 的回傳值為何？<br><br><pre><code>def f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)</code></pre>",
         "options": [
             "0",
@@ -3462,7 +3369,6 @@
     {
         "id": 146,
         "type": "single",
-        "labelType": "alpha",
         "question": "144. 【APCS-迴圈追蹤】執行下列程式碼後，<code>cnt</code> 的值為何？<br><br><pre><code>cnt = 0\nfor i in range(1, 5):\n    for j in range(i, 5):\n        cnt += 1\nprint(cnt)</code></pre>",
         "options": [
             "10",
@@ -3483,7 +3389,6 @@
     {
         "id": 147,
         "type": "single",
-        "labelType": "alpha",
         "question": "145. 【CH06-補充】在 Python 中，若要取得「自 1970 年 1 月 1 日 00:00:00 (UTC) 起」經過的總秒數 (Unix Timestamp)，應使用下列哪個函式？",
         "options": [
             "time.clock()",
@@ -3504,7 +3409,6 @@
     {
         "id": 148,
         "type": "single",
-        "labelType": "alpha",
         "question": "146. 【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？",
         "options": [
             "time.stop(3.5)",
@@ -3525,7 +3429,6 @@
     {
         "id": 149,
         "type": "single",
-        "labelType": "alpha",
         "question": "147. 【CH06-補充】若您在程式開頭使用了 `import time as t`，則下列哪一行程式碼是**正確**的呼叫方式？",
         "options": [
             "time.sleep(1)",
@@ -3546,7 +3449,6 @@
     {
         "id": 150,
         "type": "single",
-        "labelType": "alpha",
         "question": "148. 【CH06-補充】關於 `from time import *` 的用法，下列敘述何者正確？",
         "options": [
             "這是不合法的 Python 語法",
@@ -3567,7 +3469,6 @@
     {
         "id": 151,
         "type": "single",
-        "labelType": "alpha",
         "question": "149. 【CH06-補充】您想要從一個包含 50 個學生的清單中，隨機抽出 3 位幸運得主，且這 3 位不能重複。應該使用 `random` 模組的哪一個函式？",
         "options": [
             "random.choices(students, k=3)",
@@ -3588,7 +3489,6 @@
     {
         "id": 152,
         "type": "single",
-        "labelType": "alpha",
         "question": "150. 【CH06-補充】您需要寫一個 Python 腳本，能夠讀取使用者在執行時傳入的「命令列參數」(Command Line Arguments)。應該匯入哪個模組並使用哪個屬性？",
         "options": [
             "import os; os.args",
@@ -3609,7 +3509,6 @@
     {
         "id": 153,
         "type": "single",
-        "labelType": "alpha",
         "question": "151. 【CH06-補充】關於 `math` 模組中的 `math.ceil()` 與 `math.floor()` 函式，下列敘述何者正確？",
         "options": [
             "`math.ceil(3.2)` 回傳 3，`math.floor(3.2)` 回傳 4",
@@ -3630,7 +3529,6 @@
     {
         "id": 154,
         "type": "single",
-        "labelType": "alpha",
         "question": "152. 【CH06-補充】您想知道目前的 Python 程式是在哪個作業系統下執行 (例如 Windows 或 Linux)，以決定檔案路徑的寫法。可以使用下列哪個變數？",
         "options": [
             "os.name",
@@ -3651,7 +3549,6 @@
     {
         "id": 155,
         "type": "single",
-        "labelType": "alpha",
         "question": "153. 【CH01-補充】關於 Python 的算術運算子，下列程式碼的執行結果為何？<br><pre><code class=\"language-python\">print(10 // 3)\nprint(10 % 3)\nprint(2 ** 3)</code></pre>",
         "options": [
             "3, 1, 6",
@@ -3672,7 +3569,6 @@
     {
         "id": 156,
         "type": "single",
-        "labelType": "alpha",
         "question": "154. 【CH01-補充】您有一個字串變數 `s = 'Python'`。請問下列哪一個指令可以取出 `'tho'` 這段子字串？",
         "options": [
             "s[2:5]",
@@ -3693,7 +3589,6 @@
     {
         "id": 157,
         "type": "single",
-        "labelType": "alpha",
         "question": "155. 【CH01-補充】關於布林邏輯運算子，下列程式碼的輸出結果為何？<br><pre><code class=\"language-python\">x = True\ny = False\nprint(x and y)\nprint(x or y)\nprint(not x)</code></pre>",
         "options": [
             "True, True, True",
@@ -3714,7 +3609,6 @@
     {
         "id": 158,
         "type": "single",
-        "labelType": "alpha",
         "question": "156. 【CH01-補充】下列哪一行程式碼使用了「複合賦值運算子」，且其執行結果與 `x = x + 5` 相同？",
         "options": [
             "x += 5",
@@ -3735,7 +3629,6 @@
     {
         "id": 159,
         "type": "single",
-        "labelType": "alpha",
         "question": "157. 【CH08-補充】關於 Python 的例外處理結構，下列哪一個區塊中的程式碼是「無論是否發生錯誤，最後都**一定會執行**」的？(常用於關閉檔案或釋放資源)",
         "options": [
             "try",
@@ -3756,7 +3649,6 @@
     {
         "id": 160,
         "type": "single",
-        "labelType": "alpha",
         "question": "158. 【CH08-補充】請分析下列程式碼的執行結果：<br><pre><code class=\"language-python\">try:\n    print('A')\n    x = 1 / 0  # 這裡會發生 ZeroDivisionError\nexcept:\n    print('B')\nelse:\n    print('C')\nfinally:\n    print('D')</code></pre>",
         "options": [
             "A, B, C, D",
@@ -3777,7 +3669,6 @@
     {
         "id": 161,
         "type": "single",
-        "labelType": "alpha",
         "question": "159. 【CH08-補充】在使用 Python 的 `unittest` 模組進行單元測試時，若要測試函式回傳值 `result` 是否等於整數 `100`，應使用下列哪一個斷言方法 (Assertion Method)？",
         "options": [
             "self.checkEqual(result, 100)",
@@ -3798,7 +3689,6 @@
     {
         "id": 162,
         "type": "single",
-        "labelType": "alpha",
         "question": "160. 【CH08-補充】若您在程式中偵測到使用者輸入了不合法的數值 (例如年齡輸入負數)，想要**主動觸發**一個錯誤讓上層程式處理，應該使用哪個關鍵字？",
         "options": [
             "throw ValueError('Age cannot be negative')",
@@ -3819,7 +3709,6 @@
     {
         "id": 163,
         "type": "single",
-        "labelType": "alpha",
         "question": "161. 【CH04-補充】在 Python 中，若要為一個自定義函式編寫「說明文件 (Documentation String)」，以便其他人可以透過 `help(func_name)` 查詢其功能，應該使用下列哪種語法？",
         "options": [
             "在函式定義的第一行使用 `#` 開頭的註解",
@@ -3840,7 +3729,6 @@
     {
         "id": 164,
         "type": "single",
-        "labelType": "alpha",
         "question": "162. 【CH04-補充】您正在閱讀一份符合 PEP 8 風格指南的 Python 程式碼。請問下列哪一個變數名稱**不符合**標準的命名慣例？",
         "options": [
             "user_name",
@@ -3861,7 +3749,6 @@
     {
         "id": 165,
         "type": "single",
-        "labelType": "alpha",
         "question": "163. 【CH04-補充】Python 使用什麼方式來定義程式碼區塊 (Block) 的範圍 (例如 `if` 語句或 `for` 迴圈內部的程式碼)？",
         "options": [
             "大括號 `{ }`",
@@ -3882,7 +3769,6 @@
     {
         "id": 166,
         "type": "single",
-        "labelType": "alpha",
         "question": "164. 【CH04-補充】若您定義了一個函式，但在開發階段還沒想好要寫什麼程式碼，卻又希望程式能先執行不報錯。應該在函式主體中填入哪個關鍵字作為「佔位符 (Placeholder)」？",
         "options": [
             "null",
@@ -3903,7 +3789,6 @@
     {
         "id": 167,
         "type": "single",
-        "labelType": "alpha",
         "question": "165. 【CH04-補充】關於 Python 的註解 (Comment)，下列敘述何者正確？",
         "options": [
             "多行註解必須使用 `/* ... */`",
@@ -3924,7 +3809,6 @@
     {
         "id": 168,
         "type": "single",
-        "labelType": "alpha",
         "question": "166. 【CH02-補充】執行下列程式碼，當迴圈結束後，螢幕上會印出什麼結果？<br><pre><code class=\"language-python\">for i in range(1, 6):\n    if i == 3:\n        continue\n    print(i, end=' ')</code></pre>",
         "options": [
             "1 2 3 4 5",
@@ -3945,7 +3829,6 @@
     {
         "id": 169,
         "type": "single",
-        "labelType": "alpha",
         "question": "167. 【CH02-補充】關於 Python 迴圈獨有的 `else` 子句 (例如 `for...else` 或 `while...else`)，下列敘述何者正確？",
         "options": [
             "else 區塊只有在迴圈因為 `break` 中斷時才會執行",
@@ -3966,7 +3849,6 @@
     {
         "id": 170,
         "type": "single",
-        "labelType": "alpha",
         "question": "168. 【CH02-補充】您想要將一行 `if-else` 判斷式寫得更簡潔 (單行語法/三元運算子)。若 `score >= 60` 則 `result` 為 'Pass'，否則為 'Fail'。下列哪一行寫法正確？",
         "options": [
             "result = 'Pass' if score >= 60 else 'Fail'",
@@ -3987,7 +3869,6 @@
     {
         "id": 171,
         "type": "single",
-        "labelType": "alpha",
         "question": "169. 【CH02-補充】執行 `list(range(10, 0, -2))` 會產生下列哪一個數列？",
         "options": [
             "[10, 8, 6, 4, 2, 0]",
@@ -4008,7 +3889,6 @@
     {
         "id": 172,
         "type": "single",
-        "labelType": "alpha",
         "question": "170. 【CH02-補充】下列哪一段程式碼使用了「列表生成式 (List Comprehension)」來產生一個包含 1 到 5 平方數 (`[1, 4, 9, 16, 25]`) 的清單？",
         "options": [
             "nums = [x * x for x in range(1, 6)]",
@@ -4029,7 +3909,6 @@
     {
         "id": 173,
         "type": "single",
-        "labelType": "alpha",
         "question": "171. 【CH07-補充】在 Python 中定義一個類別 (Class) 時，下列哪一個特殊方法是用來**初始化**物件屬性的（建構子）？",
         "options": [
             "def __init__(self):",
@@ -4050,7 +3929,6 @@
     {
         "id": 174,
         "type": "single",
-        "labelType": "alpha",
         "question": "172. 【CH07-補充】觀察下列程式碼，請問 `self` 代表什麼意義？<br><pre><code class=\"language-python\">class Dog:\n    def bark(self):\n        print(\"Woof!\")</code></pre>",
         "options": [
             "它代表 Dog 類別本身",
@@ -4071,7 +3949,6 @@
     {
         "id": 175,
         "type": "single",
-        "labelType": "alpha",
         "question": "173. 【CH07-補充】若 `Cat` 類別繼承自 `Animal` 類別，且您希望在 `Cat` 的 `__init__` 方法中，先執行 `Animal` 的初始化邏輯，應該使用下列哪個函式？",
         "options": [
             "parent().__init__()",
@@ -4092,7 +3969,6 @@
     {
         "id": 176,
         "type": "single",
-        "labelType": "alpha",
         "question": "174. 【CH07-補充】在 Python 類別中，若您希望某個屬性變為「私有 (Private)」，不讓外部輕易存取，根據慣例應該如何在變數名稱前加上前綴？",
         "options": [
             "使用一個底線 (例如 `_score`)",
@@ -4113,7 +3989,6 @@
     {
         "id": 177,
         "type": "single",
-        "labelType": "alpha",
         "question": "175. 【CH07-補充】下列哪一段程式碼正確地建立了一個 `Student` 類別的**物件實體** (Instance)？",
         "options": [
             "s = new Student()",
@@ -4134,7 +4009,6 @@
     {
         "id": 178,
         "type": "single",
-        "labelType": "alpha",
         "question": "176. 【CH08-補充】若您需要為特定的應用程式邏輯定義一個「自定義例外 (Custom Exception)」，應該建立一個類別並繼承自下列哪一個內建類別？",
         "options": [
             "BaseException",
@@ -4155,7 +4029,6 @@
     {
         "id": 179,
         "type": "single",
-        "labelType": "alpha",
         "question": "177. 【CH08-補充】關於 `assert` 關鍵字的使用，下列敘述何者正確？",
         "options": [
             "`assert x > 0` 會在 x 小於等於 0 時拋出 `AssertionError`",
@@ -4176,7 +4049,6 @@
     {
         "id": 180,
         "type": "single",
-        "labelType": "alpha",
         "question": "178. 【CH08-補充】請檢視下列程式碼，若 `x = 'A'`，執行時會發生什麼情況？<br><pre><code class=\"language-python\">try:\n    print(int(x))\nexcept Exception:\n    print('General Error')\nexcept ValueError:\n    print('Value Error')</code></pre>",
         "options": [
             "印出 'Value Error'",
@@ -4197,7 +4069,6 @@
     {
         "id": 181,
         "type": "single",
-        "labelType": "alpha",
         "question": "179. 【CH05-補充】下列哪一種錯誤屬於「邏輯錯誤 (Logic Error)」，且 Python 直譯器**無法**在執行前或執行中自動偵測並報錯？",
         "options": [
             "將變數名稱 `count` 誤打成 `cont` (NameError)",
@@ -4218,7 +4089,6 @@
     {
         "id": 182,
         "type": "single",
-        "labelType": "alpha",
         "question": "180.在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？",
         "options": [
             "date",

@@ -3963,16 +3963,17 @@
         html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
-            let labelText = `${optIdx + 1}. `;
-            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            // 預設 Alpha
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
                 const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => { 
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
-                    let subLabel = `(${subIdx+1}) `;
-                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
                     html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
                 });
                 html += `</div>`;
@@ -4022,24 +4023,34 @@
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
                 isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
             } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+            
+            // 優化正確答案文字顯示
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
             if (isCorrect) { correctCount++; stats[cat].correct++; }
             else {
-                let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 opts.forEach((o, i) => {
-                    const isAlpha = (item.labelType === 'alpha');
+                    // 預設為 Alpha，只有標註 'num' 才用數字
+                    const isNum = (item.labelType === 'num');
                     const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                     if (String(o).includes('|')) {
                         const subLabels = o.split('|').map((s, si) => {
-                            const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
+                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                             return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                         }).join(' ');
                         optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
                     }
                     else {
-                        const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
+                        const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
                         optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
                     }
                 });

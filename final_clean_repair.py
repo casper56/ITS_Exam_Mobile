@@ -216,16 +216,17 @@ def clean_repair_all():
         html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
-            let labelText = `${optIdx + 1}. `;
-            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            // 預設 Alpha
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
                 const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => { 
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
-                    let subLabel = `(${subIdx+1}) `;
-                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
                     html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
                 });
                 html += `</div>`;
@@ -275,24 +276,34 @@ def clean_repair_all():
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
                 isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
             } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+            
+            // 優化正確答案文字顯示
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
             if (isCorrect) { correctCount++; stats[cat].correct++; }
             else {
-                let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 opts.forEach((o, i) => {
-                    const isAlpha = (item.labelType === 'alpha');
+                    // 預設為 Alpha，只有標註 'num' 才用數字
+                    const isNum = (item.labelType === 'num');
                     const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                     if (String(o).includes('|')) {
                         const subLabels = o.split('|').map((s, si) => {
-                            const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
+                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                             return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                         }).join(' ');
                         optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
                     }
                     else {
-                        const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
+                        const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
                         optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
                     }
                 });
@@ -602,23 +613,34 @@ def clean_repair_all():
             const div = document.createElement('div'); div.className = 'review-item';
             const optsRaw = item.quiz || item.options || [];
             const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-            const isAlpha = (item.labelType === 'alpha');
+            // 預設 Alpha
+            const isNum = (item.labelType === 'num');
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             let optHtml = opts.map((o, i) => {
                 if (String(o).includes('|')) {
                     const subLabels = o.split('|').map((s, si) => {
-                        const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
-                        return `(${lbl})${s}`;
+                        const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                        return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                     }).join(' ');
                     return `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
                 } else {
-                    const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
-                    return `<div class="review-opt-line">${lbl} ${o}</div>`;
+                    const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                    return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
                 }
             }).join('');
             const cleanQ = String(item.question).replace(/^\d+\.\s*/, '');
             let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
-            const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+            
+            // 優化正確答案文字顯示
+            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            const ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
             div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${imgHtml}<div class="review-opts" style="margin-left:20px">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp-box"><b>解析：</b><br>${processContent(item.explanation || '暫無解析。', item)}</div>`;
             area.appendChild(div);
         });
@@ -637,15 +659,16 @@ def clean_repair_all():
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
-            let labelText = `${oIdx + 1}. `;
-            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + oIdx)}) `;
+            // 預設 Alpha，只有標註 'num' 才用數字
+            let labelText = `(${String.fromCharCode(65 + oIdx)}) `;
+            if (item.labelType === 'num') labelText = `${oIdx + 1}. `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
 
             if (String(opt).includes('|')) {
                 let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => { 
-                    let subLabel = `(${subIdx+1}) `;
-                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
                     sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>${subLabel}</span> ${s}</div>`; 
                 });
                 optionsArea.innerHTML += sHtml + '</div></div>';
