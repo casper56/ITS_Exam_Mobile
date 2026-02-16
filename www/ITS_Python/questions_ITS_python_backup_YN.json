@@ -9,9 +9,9 @@
             "int|string|float"
         ],
         "answer": [
-            3,
-            1,
-            1
+            "C",
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -33,11 +33,11 @@
             "int|bool|str|float"
         ],
         "answer": [
-            1,
-            2,
-            3,
-            4,
-            3
+            "A",
+            "B",
+            "C",
+            "D",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -60,7 +60,7 @@
             "第 4 行中的 message 的資料型別是 bool"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -85,8 +85,8 @@
             "執行程式碼片段 3 後，變數 c 的資料型別為 int"
         ],
         "answer": [
-            1,
-            2
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -111,7 +111,7 @@
             "float,  int,  str,  str"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -136,7 +136,7 @@
             "totalNums = float(input(\"How many items would you like?\"))"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -160,7 +160,7 @@
             "print(\"You have worked for\" + int(end - start) + \"hours\")"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -182,8 +182,8 @@
             "average_score = total_score // number_of_students"
         ],
         "answer": [
-            2,
-            4
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -207,7 +207,7 @@
             "語法錯誤"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -227,7 +227,7 @@
             "b=a+(5**2)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -248,7 +248,7 @@
             "if (not kid) and senior:"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -269,8 +269,8 @@
             "-5 < 0 < 5"
         ],
         "answer": [
-            3,
-            4
+            "C",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -293,7 +293,7 @@
             "69"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -318,9 +318,9 @@
             "Test 1|Test 1Test 2|Test 2"
         ],
         "answer": [
-            1,
-            2,
-            3
+            "A",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -341,9 +341,9 @@
             "(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d"
         ],
         "answer": [
-            1,
-            3,
-            3
+            "A",
+            "C",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -365,7 +365,7 @@
             "乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -391,9 +391,9 @@
             "==\"Thursday\":|<=\"Thursday\":| is \"Thursday\":"
         ],
         "answer": [
-            2,
-            1,
-            1
+            "B",
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -414,9 +414,9 @@
             "1|2|2.2"
         ],
         "answer": [
-            3,
-            2,
-            1
+            "C",
+            "B",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -438,10 +438,10 @@
             "Yes|No"
         ],
         "answer": [
-            1,
-            2,
-            1,
-            1
+            "A",
+            "B",
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -464,7 +464,7 @@
             "birthday，greeting，party，cake"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -485,11 +485,11 @@
             "-|(|)|**|**2|2|a"
         ],
         "answer": [
-            2,
-            1,
-            7,
-            3,
-            5
+            "B",
+            "A",
+            "G",
+            "C",
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -511,7 +511,7 @@
             "[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -531,7 +531,7 @@
             "False"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -552,10 +552,10 @@
             "True|False"
         ],
         "answer": [
-            2,
-            2,
-            1,
-            1
+            "B",
+            "B",
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -576,8 +576,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            4
+            "D",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -600,10 +600,10 @@
             "A|B|C|D|E|F|G"
         ],
         "answer": [
-            3,
-            6,
-            2,
-            1
+            "C",
+            "F",
+            "B",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -627,11 +627,11 @@
             "Yes|No"
         ],
         "answer": [
-            2,
-            1,
-            2,
-            1,
-            2
+            "B",
+            "A",
+            "B",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -652,7 +652,7 @@
             "month[1:2]"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -674,8 +674,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            1
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -697,9 +697,9 @@
             "A|B|C"
         ],
         "answer": [
-            1,
-            3,
-            2
+            "A",
+            "C",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -719,8 +719,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            2
+            "D",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -741,10 +741,10 @@
             "A|B|C|D|E|F|G"
         ],
         "answer": [
-            1,
-            7,
-            6,
-            5
+            "A",
+            "G",
+            "F",
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -768,9 +768,9 @@
             "print(product + ', ' + qty)"
         ],
         "answer": [
-            1,
-            2,
-            3
+            "A",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -793,7 +793,7 @@
             "Tiger and Lion and Jaguar"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -815,7 +815,7 @@
             "name = product_input"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -836,9 +836,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            2,
-            4,
-            1
+            "B",
+            "D",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -862,10 +862,10 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            3,
-            1,
-            3
+            "D",
+            "C",
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -889,11 +889,11 @@
             "A|B|C|D|E"
         ],
         "answer": [
-            4,
-            1,
-            3,
-            5,
-            2
+            "D",
+            "A",
+            "C",
+            "E",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -915,7 +915,7 @@
             "open('file_data', 'r')"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -937,7 +937,7 @@
             "(程式碼1).if line != '': (程式碼2).if line != '':"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -958,8 +958,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            1
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -982,8 +982,8 @@
             "顯示允許使用者輸入的訊息方塊"
         ],
         "answer": [
-            1,
-            1
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1003,10 +1003,10 @@
             "A|B|C|D"
         ],
         "answer": [
-            2,
-            4,
-            4,
-            4
+            "B",
+            "D",
+            "D",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1028,10 +1028,10 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            1,
-            2,
-            3
+            "D",
+            "A",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1056,7 +1056,7 @@
             "86"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1076,10 +1076,10 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            3,
-            2,
-            3
+            "A",
+            "C",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1101,9 +1101,9 @@
             "A|B|C"
         ],
         "answer": [
-            1,
-            2,
-            3
+            "A",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1124,9 +1124,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            3,
-            4
+            "A",
+            "C",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1147,9 +1147,9 @@
             "A|B|C|D|E|F"
         ],
         "answer": [
-            1,
-            2,
-            4
+            "A",
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1170,8 +1170,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1192,10 +1192,10 @@
             "A|B|C|D|E|F"
         ],
         "answer": [
-            1,
-            5,
-            2,
-            4
+            "A",
+            "E",
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1216,8 +1216,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            3,
-            2
+            "C",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1237,8 +1237,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            2,
-            3
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1264,10 +1264,10 @@
             "A|B|C|D|E|F|G"
         ],
         "answer": [
-            2,
-            7,
-            3,
-            5
+            "B",
+            "G",
+            "C",
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -1291,11 +1291,11 @@
             "A|B|C|D|E"
         ],
         "answer": [
-            5,
-            1,
-            2,
-            4,
-            3
+            "E",
+            "A",
+            "B",
+            "D",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1319,10 +1319,10 @@
             "A|B"
         ],
         "answer": [
-            2,
-            1,
-            1,
-            2
+            "B",
+            "A",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1342,9 +1342,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            4,
-            3
+            "A",
+            "D",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1364,8 +1364,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            3
+            "D",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1389,12 +1389,12 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            1,
-            3,
-            3,
-            2,
-            2
+            "A",
+            "A",
+            "C",
+            "C",
+            "B",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1408,14 +1408,14 @@
     {
         "id": 60,
         "type": "multioption",
-        "question": "60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. letter_list in word:\nB. word in letter_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>",
+        "question": "60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. letter_list in word:\nB. word in word_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>",
         "options": [
             "A|B|C|D",
             "A|B|C|D"
         ],
         "answer": [
-            2,
-            4
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1434,8 +1434,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            1
+            "D",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1455,9 +1455,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            2,
-            4
+            "A",
+            "B",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1477,8 +1477,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            2
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1499,7 +1499,7 @@
             "D"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1519,10 +1519,10 @@
             "Yes|No"
         ],
         "answer": [
-            1,
-            2,
-            2,
-            1
+            "A",
+            "B",
+            "B",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1543,8 +1543,8 @@
             "def calc_calories(): | def calc calories(kms, burn_rate):|def calc_calories(kms, calories_per_km):"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1563,9 +1563,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            2,
-            1,
-            2
+            "B",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1586,10 +1586,10 @@
             "Yes|No"
         ],
         "answer": [
-            1,
-            1,
-            2,
-            2
+            "A",
+            "A",
+            "B",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1611,9 +1611,9 @@
             "Yes|No"
         ],
         "answer": [
-            2,
-            2,
-            1
+            "B",
+            "B",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1634,9 +1634,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            4,
-            2,
-            3
+            "D",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1658,9 +1658,9 @@
             "Yes|No"
         ],
         "answer": [
-            2,
-            1,
-            2
+            "B",
+            "A",
+            "B"
         ],
         "weight": 5,
         "image": null,
@@ -1683,10 +1683,10 @@
             "正確|錯誤"
         ],
         "answer": [
-            1,
-            2,
-            1,
-            2
+            "A",
+            "B",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1709,7 +1709,7 @@
             "在任何程式碼片段的 /**/ 之間置附註"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1731,7 +1731,7 @@
             "import datetime.datetime as dt"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1755,7 +1755,7 @@
             "isfile 方法不接受一個引數。"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1777,8 +1777,8 @@
             "random.randint(11, 21)"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1800,7 +1800,7 @@
             "random.randint(0, 10)"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1823,8 +1823,8 @@
             "選項 4 程式碼片段符合要求"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1848,8 +1848,8 @@
             "math.frexp(x)"
         ],
         "answer": [
-            1,
-            4
+            "A",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -1876,9 +1876,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            1,
-            2
+            "A",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1899,8 +1899,8 @@
             "A|B|C|D"
         ],
         "answer": [
-            1,
-            1
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -1922,10 +1922,10 @@
             "Yes|No"
         ],
         "answer": [
-            1,
-            1,
-            1,
-            2
+            "A",
+            "A",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1946,8 +1946,8 @@
             "A|B|C|D|E"
         ],
         "answer": [
-            1,
-            3
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -1968,9 +1968,9 @@
             "A|B|C|D"
         ],
         "answer": [
-            3,
-            1,
-            2
+            "C",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -1996,10 +1996,10 @@
             "A|B|C|D"
         ],
         "answer": [
-            3,
-            2,
-            3,
-            4
+            "C",
+            "B",
+            "C",
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2022,9 +2022,9 @@
             "A|B|C|D|E"
         ],
         "answer": [
-            4,
-            3,
-            5
+            "D",
+            "C",
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -2045,9 +2045,9 @@
             "Yes|No"
         ],
         "answer": [
-            1,
-            1,
-            1
+            "A",
+            "A",
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2069,10 +2069,10 @@
             "Yes|No"
         ],
         "answer": [
-            2,
-            1,
-            1,
-            2
+            "B",
+            "A",
+            "A",
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2095,7 +2095,7 @@
             "'PROGRAMMING'"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2118,7 +2118,7 @@
             "發生執行階段錯誤"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2140,7 +2140,7 @@
             "81"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2162,7 +2162,7 @@
             "sys.input[1]"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2184,7 +2184,7 @@
             "它會自動檢查檔案是否存在，不存在則建立之"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2205,7 +2205,7 @@
             "什麼都不會顯示"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2227,7 +2227,7 @@
             "1 2 "
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2250,7 +2250,7 @@
             "f(name, ' is ', age)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2271,7 +2271,7 @@
             "python my_module.py --help"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2292,7 +2292,7 @@
             "`math.trunc(-3.5)` 回傳 -4，`math.floor(-3.5)` 回傳 -3"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2313,7 +2313,7 @@
             "random.pick([1, 2, 3, 4, 5], 3)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2333,7 +2333,7 @@
             "random.sample(['Gold', 'Silver', 'Stone'], 5)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2353,7 +2353,7 @@
             "會發生錯誤，因為 list 不支援 shuffle"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2378,7 +2378,7 @@
             "break ValueError('Invalid value')"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2400,7 +2400,7 @@
             "io.TextWrapper"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2442,7 +2442,7 @@
             "self.assert(x)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2462,7 +2462,7 @@
             "self.assertClass(x, int)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2482,7 +2482,7 @@
             "若要檢查 `x` 是否為 None，應使用 `assertTrue(x == None)`"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2502,7 +2502,7 @@
             "['red', 'green']"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2522,9 +2522,9 @@
             "元組和清單都擁有 append() 方法來動態增加元素"
         ],
         "answer": [
-            1,
-            2,
-            3
+            "A",
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2544,7 +2544,7 @@
             "student['score'] if exists else 0"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2567,7 +2567,7 @@
             "fruits[0] = 'orange'"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2587,7 +2587,7 @@
             "`sort()` 只能用於數字清單，`sorted()` 只能用於字串清單"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2617,7 +2617,7 @@
             "nums.sort(reverse=False)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2637,7 +2637,7 @@
             "(1, 2, 3, 4)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2657,7 +2657,7 @@
             "{1, 2, 5, 6}"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2677,7 +2677,7 @@
             "print(data(20))"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2697,7 +2697,7 @@
             "my_set = {1, 2, 3}; my_set.add(9)"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2717,7 +2717,7 @@
             "my_set[3] = 4"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2737,7 +2737,7 @@
             "data = (1, 2); data.append(3)"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -2757,7 +2757,7 @@
             "[10, 20]"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2777,7 +2777,7 @@
             "if x is math.nan:"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2797,7 +2797,7 @@
             "`math.fmod` 只回傳整數，`%` 回傳浮點數"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -2817,7 +2817,7 @@
             "os.files.del('temp.txt')"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2846,7 +2846,7 @@
             "del scores[80]"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2866,7 +2866,7 @@
             "area = math.pi * math.sqrt(r)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -2886,7 +2886,7 @@
             "list_a.add(list_b)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2906,7 +2906,7 @@
             "high(grades), low(grades)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2926,7 +2926,7 @@
             "`math.isqrt` 會四捨五入到最接近的整數"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2946,7 +2946,7 @@
             "回傳 x 的自然對數 (natural log)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2966,7 +2966,7 @@
             "1 月 1 日"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -2986,7 +2986,7 @@
             "random.float()"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3006,7 +3006,7 @@
             "self.assertTrue(a == b)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3027,7 +3027,7 @@
             "以上皆非"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3060,7 +3060,7 @@
             "x: s.append(c); y: c = s[0]"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3081,7 +3081,7 @@
             "執行錯誤"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3102,7 +3102,7 @@
             "以上皆非或執行錯誤"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3122,7 +3122,7 @@
             "執行錯誤"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3143,7 +3143,7 @@
             "以上皆非或執行錯誤"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3164,7 +3164,7 @@
             "以上皆非或執行錯誤"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -3185,7 +3185,7 @@
             "以上皆非或執行錯誤"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3206,7 +3206,7 @@
             "以上皆非或執行錯誤"
         ],
         "answer": [
-            5
+            "E"
         ],
         "weight": 1,
         "image": null,
@@ -3227,7 +3227,7 @@
             "執行錯誤 Error"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3247,7 +3247,7 @@
             "db"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3267,7 +3267,7 @@
             "執行錯誤 (RecursionError)"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3287,7 +3287,7 @@
             "25"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3307,7 +3307,7 @@
             "time.date()"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3327,7 +3327,7 @@
             "time.wait(3.5)"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3347,7 +3347,7 @@
             "Time.sleep(1)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3367,7 +3367,7 @@
             "這只能匯入 sleep 函式，其他函式無法使用"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3387,7 +3387,7 @@
             "random.shuffle(students, 3)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3407,7 +3407,7 @@
             "import subprocess; subprocess.input"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3427,7 +3427,7 @@
             "`math.ceil()` 用於負數，`math.floor()` 用於正數"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3447,7 +3447,7 @@
             "environment.type"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3467,7 +3467,7 @@
             "3, 0.1, 6"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3487,7 +3487,7 @@
             "s[3:6]"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3507,7 +3507,7 @@
             "True, False, False"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3527,7 +3527,7 @@
             "x .add(5)"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3547,7 +3547,7 @@
             "finally"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -3567,7 +3567,7 @@
             "A, B"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3587,7 +3587,7 @@
             "self.assert(result == 100)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3607,7 +3607,7 @@
             "return ValueError('Age cannot be negative')"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3627,7 +3627,7 @@
             "在函式內部使用 `return \"說明文字\"`"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3647,7 +3647,7 @@
             "StudentName"
         ],
         "answer": [
-            4
+            "D"
         ],
         "weight": 1,
         "image": null,
@@ -3667,7 +3667,7 @@
             "分號 `;`"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3687,7 +3687,7 @@
             "continue"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3707,7 +3707,7 @@
             "註解只能寫在程式碼的上方，不能寫在行尾"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3727,7 +3727,7 @@
             "1 2 3"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3747,7 +3747,7 @@
             "Python 的迴圈不支援 else 語法"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3767,7 +3767,7 @@
             "result = 'Pass' when score >= 60 else 'Fail'"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3787,7 +3787,7 @@
             "[] (空清單)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3807,7 +3807,7 @@
             "nums = [x ** 2 in range(1, 6)]"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3827,7 +3827,7 @@
             "def __class__(self):"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3847,7 +3847,7 @@
             "它是一個 Python 保留字，沒有實際意義"
         ],
         "answer": [
-            3
+            "C"
         ],
         "weight": 1,
         "image": null,
@@ -3867,7 +3867,7 @@
             "self.parent.__init__()"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3887,7 +3887,7 @@
             "使用 @private 裝飾器"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3907,7 +3907,7 @@
             "s = class Student()"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3927,7 +3927,7 @@
             "Object"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3947,7 +3947,7 @@
             "當 Python 以最佳化模式 (`-O`) 執行時，`assert` 仍會執行"
         ],
         "answer": [
-            1
+            "A"
         ],
         "weight": 1,
         "image": null,
@@ -3967,7 +3967,7 @@
             "同時印出 'General Error' 和 'Value Error'"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -3987,7 +3987,7 @@
             "試圖除以零 (ZeroDivisionError)"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,
@@ -4007,7 +4007,7 @@
             "datetime"
         ],
         "answer": [
-            2
+            "B"
         ],
         "weight": 1,
         "image": null,

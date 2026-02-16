@@ -1,0 +1,67 @@
+{
+    "subjects": [
+        {
+            "dir": "www/AI900",
+            "json": "questions_AI900.json",
+            "title": "AI-900",
+            "id": "ai900",
+            "html": "AI900.html",
+            "cutoff": 100,
+            "cutoff_info": "1-100 為官方版題數"
+        },
+        {
+            "dir": "www/AZ900",
+            "json": "questions_AZ900.json",
+            "title": "AZ-900",
+            "id": "az900",
+            "html": "AZ900.html",
+            "cutoff": 100,
+            "cutoff_info": "1-100 為官方版題數"
+        },
+        {
+            "dir": "www/Generative_AI",
+            "json": "questions_Generative_AI_Foundations.json",
+            "title": "Generative AI",
+            "id": "genai",
+            "html": "Generative_AI.html",
+            "cutoff": 100,
+            "cutoff_info": "1-100 為官方版題數"
+        },
+        {
+            "dir": "www/ITS_AI",
+            "json": "questions_ITS_AI.json",
+            "title": "ITS AI",
+            "id": "itsai",
+            "html": "ITS_AI.html",
+            "cutoff": 118,
+            "cutoff_info": "1-118 為官方版題數"
+        },
+        {
+            "dir": "www/ITS_Database",
+            "json": "questions_ITS_Database.json",
+            "title": "ITS Database",
+            "id": "itsdb",
+            "html": "ITS_Database.html",
+            "cutoff": 69,
+            "cutoff_info": "1-69 為官方版題數"
+        },
+        {
+            "dir": "www/ITS_softdevelop",
+            "json": "questions_ITS_csharp.json",
+            "title": "ITS Software Development",
+            "id": "itscs",
+            "html": "ITS_softdevelop.html",
+            "cutoff": 69,
+            "cutoff_info": "1-69 為官方版題數"
+        },
+        {
+            "dir": "www/ITS_Python",
+            "json": "questions_ITS_python.json",
+            "title": "ITS Python",
+            "id": "itspy",
+            "html": "ITS_Python.html",
+            "cutoff": 69,
+            "cutoff_info": "1-69 為官方版題數"
+        }
+    ]
+}

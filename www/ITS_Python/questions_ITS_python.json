@@ -438,10 +438,10 @@
             "Yes|No"
         ],
         "answer": [
-            "A",
-            "B",
-            "A",
-            "A"
+            "Y",
+            "N",
+            "Y",
+            "Y"
         ],
         "weight": 1,
         "image": null,
@@ -627,11 +627,11 @@
             "Yes|No"
         ],
         "answer": [
-            "B",
-            "A",
-            "B",
-            "A",
-            "B"
+            "N",
+            "Y",
+            "N",
+            "Y",
+            "N"
         ],
         "weight": 1,
         "image": null,
@@ -854,7 +854,7 @@
     {
         "id": 37,
         "type": "multioption",
-        "question": "37. 【CH04-7】你必須開發一個簡單的 Python 檔案程式來執行以下的動作：<pre><code class=\"language-python\">● 檢查檔案是否存在。\n● 如果該檔案存在，就顯示檔案內容。\n● 如果該檔案不存在，就使用指定的名稱新增檔案。\n● 在檔案最後加入文字：'End of file'。</code></pre>你需要完成程式碼以符合要求。你要如何完成這段程式碼？<br>\n請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">import os\nif _(選項 1)_\n   file = open('theFile.txt')\n_(選項 2)_\nfile.close()\nfile = _(選項 3)_\n_(選項 4)_ ('End of file')\nfile.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\n答案 A. isfile('theFile.txt')\n答案 B. os.exist('theFile.txt')\n答案 C. os.find('theFile.txt')\n答案 D. os.path.isfile('theFile.txt')\n\n選項2答案選擇區\n答案 A. output(theFile.txt')\n答案 B. print(file.get('theFile.txt'))\n答案 C. print(file.read())\n答案 D. print('theFile.txt')\n\n選項3答案選擇區\n答案 A. open('theFile.txt', 'a')\n答案 B. open('theFile.txt', 'at')\n答案 C. open('theFile,txt', 'w')\n答案 D. open('theFile.txt', 'wt')\n\n選項3答案選擇區\n答案 A. Append\n答案 B. file.add\n答案 C. file.write\n答案 D. write\n</code></pre>",
+        "question": "37. 【CH04-7】你必須開發一個簡單的 Python 檔案程式來執行以下的動作：<pre><code class=\"language-python\">● 檢查檔案是否存在。\n● 如果該檔案存在，就顯示檔案內容。\n● 如果該檔案不存在，就使用指定的名稱新增檔案。\n● 在檔案最後加入文字：'End of file'。</code></pre>你需要完成程式碼以符合要求。你要如何完成這段程式碼？<br>\n請在回答區選擇適當的程式碼片段。<pre><code class=\"language-python line-numbers line-hight19\">import os\nif _(選項 1)_\n   file = open('theFile.txt')\n    _(選項 2)_\nfile.close()\nfile = _(選項 3)_\n_(選項 4)_ ('End of file')\nfile.close()</code></pre><pre><code class=\"language-python\">選項1答案選擇區\n答案 A. isfile('theFile.txt')\n答案 B. os.exist('theFile.txt')\n答案 C. os.find('theFile.txt')\n答案 D. os.path.isfile('theFile.txt')\n\n選項2答案選擇區\n答案 A. output(theFile.txt')\n答案 B. print(file.get('theFile.txt'))\n答案 C. print(file.read())\n答案 D. print('theFile.txt')\n\n選項3答案選擇區\n答案 A. open('theFile.txt', 'a')\n答案 B. open('theFile.txt', 'at')\n答案 C. open('theFile,txt', 'w')\n答案 D. open('theFile.txt', 'wt')\n\n選項3答案選擇區\n答案 A. Append\n答案 B. file.add\n答案 C. file.write\n答案 D. write\n</code></pre>",
         "options": [
             "A|B|C|D",
             "A|B|C|D",
@@ -1519,10 +1519,10 @@
             "Yes|No"
         ],
         "answer": [
-            "A",
-            "B",
-            "B",
-            "A"
+            "Y",
+            "N",
+            "N",
+            "Y"
         ],
         "weight": 1,
         "image": null,
@@ -1586,10 +1586,10 @@
             "Yes|No"
         ],
         "answer": [
-            "A",
-            "A",
-            "B",
-            "B"
+            "Y",
+            "Y",
+            "N",
+            "N"
         ],
         "weight": 1,
         "image": null,
@@ -1611,9 +1611,9 @@
             "Yes|No"
         ],
         "answer": [
-            "B",
-            "B",
-            "A"
+            "N",
+            "N",
+            "Y"
         ],
         "weight": 1,
         "image": null,
@@ -1658,9 +1658,9 @@
             "Yes|No"
         ],
         "answer": [
-            "B",
-            "A",
-            "B"
+            "N",
+            "Y",
+            "N"
         ],
         "weight": 5,
         "image": null,
@@ -1922,10 +1922,10 @@
             "Yes|No"
         ],
         "answer": [
-            "A",
-            "A",
-            "A",
-            "B"
+            "Y",
+            "Y",
+            "Y",
+            "N"
         ],
         "weight": 1,
         "image": null,
@@ -2045,9 +2045,9 @@
             "Yes|No"
         ],
         "answer": [
-            "A",
-            "A",
-            "A"
+            "Y",
+            "Y",
+            "Y"
         ],
         "weight": 1,
         "image": null,
@@ -2069,10 +2069,10 @@
             "Yes|No"
         ],
         "answer": [
-            "B",
-            "A",
-            "A",
-            "B"
+            "N",
+            "Y",
+            "Y",
+            "N"
         ],
         "weight": 1,
         "image": null,

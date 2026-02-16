@@ -4,15 +4,22 @@ import os
 import glob
 
 def clean_repair_all():
-    subject_dirs = [d for d in os.listdir('www') if os.path.isdir(os.path.join('www', d)) and d != 'assets']
+    # 1. 讀取結構化紀錄
+    config_path = 'www/config.json'
+    if not os.path.exists(config_path):
+        print("錯誤：找不到 www/config.json 設定檔！")
+        return
     
-    # V3.4.3 專業比例版模板 (包含完整比例分配邏輯)
-    html_top = r"""<!DOCTYPE html>
+    with open(config_path, 'r', encoding='utf-8') as f:
+        config = json.load(f)
+    
+    # --- 模板 A: 模擬考試 (mock_v34.html) ---
+    mock_top_tmpl = r"""<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPLACE_TITLE</title>
+    <title>REPLACE_TITLE 模擬考試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
     <style>
@@ -63,7 +70,7 @@ def clean_repair_all():
 </div>
 <div id="exam-ui">
     <header class="exam-header d-flex justify-content-between align-items-center">
-        <div><h5 class="m-0">REPLACE_TITLE</h5><small id="q-progress">1 / 50</small></div>
+        <div><h5 class="m-0">REPLACE_TITLE 模擬考試</h5><small id="q-progress">1 / 50</small></div>
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
@@ -88,14 +95,16 @@ def clean_repair_all():
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script>
-    const EXAM_LIMIT = 50, WRONG_KEY = 'its_exam_wrong_ids';
+    const EXAM_LIMIT = 50, WRONG_KEY = 'REPLACE_SUBJECT_ID_exam_wrong_ids';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
     function parseAnswerToIndex(val) {
         if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
-            const code = val.toUpperCase().charCodeAt(0);
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
             if (code >= 65 && code <= 90) return code - 65;
             return parseInt(val) - 1;
         }
@@ -104,7 +113,7 @@ def clean_repair_all():
 
     const allQuestions = """
 
-    html_bottom = r"""
+    mock_bottom_tmpl = r"""
     function startTimer() {
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -138,11 +147,7 @@ def clean_repair_all():
         if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
             console.error("題庫資料載入失敗！"); return;
         }
-        const isITS_AI = window.location.href.includes('ITS_AI');
-        const is900Series = window.location.href.includes('AZ900') || window.location.href.includes('AI900');
-        const isPython = window.location.href.includes('ITS_Python');
-        
-        const CUTOFF = isITS_AI ? 118 : (is900Series ? 100 : 69);
+        const CUTOFF = REPLACE_CUTOFF;
         const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); 
         
         const categories = {};
@@ -166,7 +171,6 @@ def clean_repair_all():
         const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * 0.05));
         const MAX_PER_CAT = Math.floor(EXAM_LIMIT * 0.40);
 
-        // A. 每個分類保底 (優先官方題)
         catNames.forEach(cat => {
             const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
             const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
@@ -176,7 +180,6 @@ def clean_repair_all():
             }
         });
 
-        // B. 補足 92% 官方題 (遵守 40% 上限)
         let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
         for (let q of offPool) {
             if (selected.length >= TARGET_OFF_COUNT) break;
@@ -186,7 +189,6 @@ def clean_repair_all():
             if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
         }
 
-        // C. 補滿總數 (官方優先)
         let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
         while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
 
@@ -200,7 +202,6 @@ def clean_repair_all():
         container.innerHTML = '';
         const progressEl = document.getElementById('q-progress');
         if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
-        
         const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
         if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
         if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
@@ -209,11 +210,9 @@ def clean_repair_all():
         let qText = processContent(item.question, item);
         let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body"><div class="mb-4">${qText}</div>`;
         if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
-        
         const optionsRaw = item.quiz || item.options || [];
         const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
         const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
-        
         html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
@@ -240,9 +239,7 @@ def clean_repair_all():
             const idx = userAnswers[currentIndex].indexOf(optIdx);
             if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
             else userAnswers[currentIndex].push(optIdx);
-        } else {
-            userAnswers[currentIndex] = optIdx;
-        }
+        } else { userAnswers[currentIndex] = optIdx; }
         renderQuestion(currentIndex, false);
     }
     function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
@@ -252,58 +249,42 @@ def clean_repair_all():
     function submitExam() {
         clearInterval(timerInterval); 
         const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
-        if (ui) ui.style.display = 'none';
-        if (rs) rs.style.display = 'block';
-        
+        if (ui) ui.style.display = 'none'; if (rs) rs.style.display = 'block';
         let correctCount = 0, stats = {}, incorrectHTML = '';
-        
         const catNameMap = {};
         allQuestions.forEach(q => {
             let fullCat = q.category || '一般';
             let _m = fullCat.match(/^(D\d+)/); let prefix = (_m ? _m[1] : fullCat);
             if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
         });
-
         examQuestions.forEach((item, idx) => {
             let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
             const cat = catNameMap[prefix];
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0 }; stats[cat].total++;
-            
             const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-            
             if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
-                const correctIndices = answers.map(a => parseAnswerToIndex(a));
-                isCorrect = Array.isArray(userAns) && userAns.length === correctIndices.length && userAns.every(val => correctIndices.includes(val));
-            } else { 
-                isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); 
-            }
-
+                const cIdxs = answers.map(a => parseAnswerToIndex(a));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => correctIndices.includes(val));
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
             if (isCorrect) { correctCount++; stats[cat].correct++; }
             else {
-                let ansText = answers.join(', ');
+                let ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 opts.forEach((o, i) => {
-                    if (String(o).includes('|')) {
-                        optionsHTML += `<div class="mb-1"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>`;
-                    } else {
-                        optionsHTML += `<div class="mb-1">${i+1}. ${o}</div>`;
-                    }
+                    if (String(o).includes('|')) optionsHTML += `<div class="mb-1"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>`;
+                    else optionsHTML += `<div class="mb-1">${i+1}. ${o}</div>`;
                 });
                 optionsHTML += '</div>';
                 incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="mb-2">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
         });
-        
         const score = Math.round((correctCount / examQuestions.length) * 100);
-        const scoreEl = document.getElementById('final-score'), cEl = document.getElementById('correct-count');
-        if (scoreEl) scoreEl.innerText = score;
-        if (cEl) cEl.innerText = correctCount;
-        
+        document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
         let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th>分類</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
         for (let cat of sortedCats) {
@@ -311,60 +292,402 @@ def clean_repair_all():
             catHTML += `<tr><td>${cat}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
         catHTML += '</tbody></table>'; 
-        const csEl = document.getElementById('category-stats'), rlEl = document.getElementById('review-list');
-        if (csEl) csEl.innerHTML = catHTML;
-
-        let reportSummary = `
-            <div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;">
-                <h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2>
-                <div class="d-flex justify-content-around mt-3">
-                    <div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div>
-                    <div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div>
-                </div>
-                <div class="mt-3">${catHTML}</div>
-            </div>
-        `;
-        if (rlEl) rlEl.innerHTML = reportSummary + incorrectHTML;
-        
+        document.getElementById('category-stats').innerHTML = catHTML;
+        let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {
-                const userAns = userAnswers[idx];
-                const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
                 let isCorr = false;
-                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) {
-                    isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
-                } else if (q.type === 'multiple') {
-                    const cIdxs = answers.map(a => parseAnswerToIndex(a));
-                    isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v));
-                } else { isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer); }
+                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
+                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
                 if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
             });
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
         } catch(e) {}
     }
-
     initExam();
 </script>
 </body>
 </html>"""
 
-    for subj_dir in subject_dirs:
+    # --- 模板 B: 自主練習模板 (不計時) ---
+    prac_top_tmpl = r"""<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPLACE_TITLE 認證練習</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.css" rel="stylesheet" />
+    <style>
+        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; }
+        .main-wrapper { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; }
+        .sidebar-header { background: #212529; color: #fff; padding: 15px; border-bottom: 1px solid #dee2e6; }
+        .sidebar-header h5 { font-size: 1.25rem; font-weight: bold; color: #fff; margin-bottom: 0; }
+        #progress-stats { font-size: 1.2rem; font-weight: bold; color: #fff; }
+        .sidebar-content { flex: 1; overflow-y: auto; padding: 15px; }
+        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; }
+        .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; }
+        code { color: #000 !important; background-color: transparent !important; }
+        pre { background-color: transparent !important; border: none !important; }
+        .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
+        .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
+        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
+        .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
+        .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
+        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; }
+        .q-node { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff; cursor: pointer; font-size: 0.85rem; }
+        .q-node.correct { background-color: #d1e7dd; color: #0f5132; }
+        .q-node.incorrect { background-color: #f8d7da; color: #842029; }
+        .q-node.corrected { background-color: #fd7e14; color: #fff; }
+        .q-node.active { background-color: #0d6efd; color: white; transform: scale(1.1); z-index: 1; }
+        .progress-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+        .category-tag { font-size: 0.8rem; color: #6c757d; background-color: #f8f9fa; padding: 2px 8px; border-radius: 12px; border: 1px solid #dee2e6; margin-top: 5px; display: inline-block; }
+        .type-badge { font-size: 0.75rem; vertical-align: middle; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
+        .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
+        .question-body { padding: 20px; font-size: 1.05rem; }
+        .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
+        .q-img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px auto; display: block; }
+        #review-area { display: none; text-align: left; padding: 20px; background: white; }
+        .review-item { margin-bottom: 40px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .review-q-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; color: #333; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 20px 0; border-left: 5px solid #198754; background: white; font-size: 1.1rem; }
+        .review-exp-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; }
+        @media print {
+            @page { size: auto; margin: 8mm; }
+            body { background: white !important; font-size: 13px; line-height: 1.4 !important; }
+            .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; }
+            #review-area { display: block !important; }
+            .review-item { margin-bottom: 20px !important; padding-bottom: 15px !important; border-bottom: 1px solid #eee !important; }
+            .review-q-text { font-size: 1rem !important; margin-bottom: 8px !important; }
+            .review-ans { font-size: 0.95rem !important; margin: 10px 0 !important; padding: 5px 10px !important; border-left-width: 4px !important; }
+            .review-exp-box { font-size: 0.9rem !important; padding: 12px !important; border-radius: 6px !important; background: #fafafa !important; }
+            .review-opt-line { margin-bottom: 2px !important; }
+            .q-img { max-width: 300px !important; margin: 10px 0 !important; }
+            h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
+        }
+        .side-nav-btn { position: fixed; top: 55%; width: 25px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s; text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; transform: translateY(-50%); }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 25px; }
+        .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
+        .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .content-area { margin-left: 0; }
+            .mobile-toggle { display: block !important; }
+            .side-nav-btn { width: 22px; height: 50px; font-size: 0.9rem; background: rgba(33, 37, 41, 0.6); }
+            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
+            .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
+        }
+        .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題庫列表</h5></div>
+                <div class="d-flex gap-1">
+                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">完整解析</button>
+                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
+                </div>
+            </div>
+            <div id="progress-stats">✅0 ❌0 🟠0 / REPLACE_TOTAL</div>
+        </div>
+        <div class="sidebar-content">
+            <div class="d-flex justify-content-between small mb-3 text-muted">
+                <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未答</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd"></span> 正確</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#f8d7da"></span> 錯誤</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#fd7e14"></span> 已訂正</span>
+            </div>
+            <div class="progress-grid" id="progress-grid"></div>
+        </div>
+        <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
+    </nav>
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
+    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto;"><div id="question-container"></div></div></main>
+</div>
+<div id="review-area"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script>
+    const quizData = """
+
+    prac_bottom_tmpl = r"""
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+    let currentIndex = 0;
+    let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
+    const SUBJECT_ID = 'REPLACE_SUBJECT_ID';
+    const CORR_KEY = SUBJECT_ID + '_correct_v1', INCORR_KEY = SUBJECT_ID + '_incorrect_v1', CORR_EDIT_KEY = SUBJECT_ID + '_corrected_v1', INDEX_KEY = SUBJECT_ID + '_index_v1', ANSWERS_KEY = SUBJECT_ID + '_answers_v1';
+    function loadState() {
+        try {
+            const sCorr = localStorage.getItem(CORR_KEY), sIncorr = localStorage.getItem(INCORR_KEY), sEdit = localStorage.getItem(CORR_EDIT_KEY), sIdx = localStorage.getItem(INDEX_KEY), sAns = localStorage.getItem(ANSWERS_KEY);
+            if (sCorr) correctSet = new Set(JSON.parse(sCorr));
+            if (sIncorr) incorrectSet = new Set(JSON.parse(sIncorr));
+            if (sEdit) correctedSet = new Set(JSON.parse(sEdit));
+            if (sIdx) currentIndex = parseInt(sIdx) || 0;
+            if (sAns) userAnswers = JSON.parse(sAns);
+        } catch(e) {}
+    }
+    function saveState() {
+        try {
+            localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
+            localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
+            localStorage.setItem(CORR_EDIT_KEY, JSON.stringify([...correctedSet]));
+            localStorage.setItem(INDEX_KEY, currentIndex.toString());
+            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
+        } catch(e) {}
+    }
+    function resetProgress() { 
+        if(confirm('確定清除紀錄嗎？')) { 
+            try { localStorage.removeItem(CORR_KEY); localStorage.removeItem(INCORR_KEY); localStorage.removeItem(CORR_EDIT_KEY); localStorage.removeItem(INDEX_KEY); localStorage.removeItem(ANSWERS_KEY); } catch(e) {}
+            location.reload(); 
+        } 
+    }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    function processContent(content, item) {
+        if (!content) return '';
+        const lines = Array.isArray(content) ? content : [String(content)];
+        return lines.map(line => {
+            let html = String(line);
+            html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+                const src = item['image' + p1];
+                return src ? `<img src="${src}" class="q-img">` : match;
+            });
+            if (html.includes('●')) {
+                const parts = html.split('●').map(p => p.trim()).filter(p => p);
+                return parts.map(p => `<div class="mb-1">● ${p}</div>`).join('');
+            }
+            return `<div>${html}</div>`;
+        }).join('');
+    }
+    function toggleExplanation(forceShow = null) {
+        const el = document.getElementById('ans-section'), btn = document.getElementById('toggle-exp-btn');
+        if (!el || !btn) return;
+        const isShow = (forceShow !== null) ? forceShow : (el.style.display !== 'block');
+        el.style.display = isShow ? 'block' : 'none';
+    }
+    function checkAnswer(element, qIdx, optIdx, event) {
+        const item = quizData[qIdx], isMultiple = item.type === 'multiple';
+        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
+        const correctIndices = answers.map(a => parseAnswerToIndex(a));
+        const input = element.querySelector('input');
+        if (event && event.target !== input) { if (isMultiple) input.checked = !input.checked; else input.checked = true; }
+        if (isMultiple) {
+            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
+            let selected = []; inputs.forEach((inp, idx) => { if (inp.checked) selected.push(idx); });
+            userAnswers[qIdx] = selected;
+            element.classList.toggle('correct', input.checked && correctIndices.includes(optIdx));
+            element.classList.toggle('incorrect', input.checked && !correctIndices.includes(optIdx));
+            const isPerfect = selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v));
+            if (isPerfect) {
+                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
+                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
+                inputs.forEach(i => i.disabled = true); toggleExplanation(true);
+            } else if (selected.some(v => !correctIndices.includes(v)) || selected.length > correctIndices.length) {
+                incorrectSet.add(qIdx); correctSet.delete(qIdx); correctedSet.delete(qIdx);
+            }
+        } else {
+            if (correctSet.has(qIdx) || correctedSet.has(qIdx)) return;
+            userAnswers[qIdx] = optIdx;
+            if (correctIndices.includes(optIdx)) {
+                element.classList.add('correct');
+                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
+                else { correctSet.add(qIdx); }
+                document.querySelectorAll(`input[name="q${qIdx}"]`).forEach(i => i.disabled = true);
+            } else {
+                element.classList.add('incorrect'); incorrectSet.add(qIdx);
+                const ci = document.getElementById(`o${correctIndices[0]}`); if (ci) ci.closest('.option-item').classList.add('correct');
+            }
+            toggleExplanation(true);
+        }
+        saveState(); updateUI();
+    }
+    function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {
+        const item = quizData[qIdx];
+        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
+        const correctSubIdx = parseAnswerToIndex(answers[optIdx]), input = element.querySelector('input');
+        if (event && event.target !== input) input.checked = true;
+        if (!userAnswers[qIdx]) userAnswers[qIdx] = {}; userAnswers[qIdx][optIdx] = subIdx;
+        element.parentElement.querySelectorAll('.sub-opt-container').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        if (subIdx === correctSubIdx) {
+            element.classList.add('correct');
+            const totalSub = (item.quiz || item.options || []).length;
+            const curCorrect = document.querySelectorAll('.sub-opt-container.correct').length;
+            if (curCorrect === totalSub) {
+                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
+                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
+                toggleExplanation(true);
+            }
+            document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`).forEach(i => i.disabled = true);
+        } else {
+            element.classList.add('incorrect'); incorrectSet.add(qIdx);
+            const ci = document.getElementById(`o${optIdx}_s${correctSubIdx}`); if (ci) ci.parentElement.classList.add('correct');
+            toggleExplanation(true);
+        }
+        saveState(); updateUI();
+    }
+    function evaluateCurrentQuestion() {
+        const item = quizData[currentIndex], qIdx = currentIndex;
+        if (correctSet.has(qIdx) || correctedSet.has(qIdx) || incorrectSet.has(qIdx)) return;
+        const saved = userAnswers[qIdx]; if (!saved) return; 
+        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
+        const correctIndices = answers.map(a => parseAnswerToIndex(a));
+        if (item.type === 'multiple') {
+            const selected = Array.isArray(saved) ? saved : []; if (selected.length === 0) return;
+            if (selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v))) correctSet.add(qIdx); else incorrectSet.add(qIdx);
+        } else if (String(item.quiz || item.options || "").includes('|')) {
+            const totalSub = (item.quiz || item.options || []).length;
+            let allCorrect = (Object.keys(saved).length === totalSub);
+            if (allCorrect) { for(let i=0; i<totalSub; i++) if (parseInt(saved[i]) != parseAnswerToIndex(answers[i])) { allCorrect = false; break; } }
+            if (allCorrect) correctSet.add(qIdx); else incorrectSet.add(qIdx);
+        }
+        saveState(); updateUI();
+    }
+    function nextQuestion() { evaluateCurrentQuestion(); if (currentIndex < quizData.length-1) renderQuestion(currentIndex+1); }
+    function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
+    function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
+    function prepareAndPrint(onlyMistakes = false) {
+        const area = document.getElementById('review-area');
+        let title = "REPLACE_TITLE 認證完整解析";
+        let targetItems = quizData.map((item, idx) => ({ item, idx }));
+        if (onlyMistakes) {
+            targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+            if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+            title = "REPLACE_TITLE 訂正解析講義";
+        }
+        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+        targetItems.forEach(({ item, idx }) => {
+            const div = document.createElement('div'); div.className = 'review-item';
+            const optsRaw = item.quiz || item.options || [];
+            const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+            let optHtml = opts.map((o, i) => String(o).includes('|') ? `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>` : `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
+            const cleanQ = String(item.question).replace(/^\d+\.\s*/, '');
+            let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
+            const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${imgHtml}<div class="review-opts" style="margin-left:20px">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp-box"><b>解析：</b><br>${processContent(item.explanation || '暫無解析。', item)}</div>`;
+            area.appendChild(div);
+        });
+        window.print();
+    }
+    function renderQuestion(index) {
+        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        const container = document.getElementById('question-area') || document.getElementById('question-container');
+        const opts = item.quiz || item.options || [];
+        const pBtn = document.getElementById('side-btn-prev'); if (pBtn) pBtn.style.display = (index === 0) ? 'none' : 'flex';
+        let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
+        container.innerHTML = `
+            <div class="card question-card">
+                <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+                <div class="question-body"><div class="mb-3">${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area mt-3"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div>
+            </div>`;
+        const optionsArea = container.querySelector('.options-area');
+        opts.forEach((opt, oIdx) => {
+            if (String(opt).includes('|')) {
+                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
+                opt.split('|').forEach((s, subIdx) => { sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"> ${s}</div>`; });
+                optionsArea.innerHTML += sHtml + '</div></div>';
+            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"> ${oIdx+1}. ${opt}</div>`; }
+        });
+        const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
+        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
+        let cIdxs = answers.map(a => parseAnswerToIndex(a));
+        if (opts.some(o => String(o).includes('|'))) {
+            opts.forEach((opt, r) => {
+                const correctSubIdx = parseAnswerToIndex(answers[r]); const savedSubIdx = (saved && typeof saved === 'object') ? saved[r] : undefined;
+                opt.split('|').forEach((_, subIdx) => {
+                    const inp = document.getElementById(`o${r}_s${subIdx}`); if (!inp) return;
+                    if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) { inp.checked = true; inp.parentElement.classList.add('selected'); }
+                    if (completed) { if (subIdx === correctSubIdx) inp.parentElement.classList.add('correct'); else if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) inp.parentElement.classList.add('incorrect'); }
+                });
+            });
+        } else if (saved !== undefined) {
+            if (Array.isArray(saved)) {
+                saved.forEach(idx => { const inp = document.getElementById(`o${idx}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(idx) ? 'correct' : 'incorrect'); } });
+                if(completed) cIdxs.forEach(ci => { const inp = document.getElementById(`o${ci}`); if (inp) inp.closest('.option-item').classList.add('correct'); });
+            } else {
+                const inp = document.getElementById(`o${saved}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(saved) ? 'correct' : 'incorrect'); }
+                if(completed && !cIdxs.includes(saved)) { const ci = document.getElementById(`o${cIdxs[0]}`); if(ci) ci.closest('.option-item').classList.add('correct'); }
+            }
+        }
+        if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
+        updateUI(); Prism.highlightAll(); saveState();
+    }
+    function updateUI() {
+        const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
+        const grid = document.getElementById('progress-grid'); grid.innerHTML = '';
+        quizData.forEach((_, i) => {
+            const n = document.createElement('div'); n.className = 'q-node'; if (i === currentIndex) n.classList.add('active');
+            if (incorrectSet.has(i)) n.classList.add('incorrect'); else if (correctedSet.has(i)) n.classList.add('corrected'); else if (correctSet.has(i)) n.classList.add('correct');
+            n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
+        });
+    }
+    loadState(); renderQuestion(currentIndex);
+</script>
+</body>
+</html>"""
+
+    # 讀取結構化紀錄
+    config_path = 'www/config.json'
+    if not os.path.exists(config_path): return
+    with open(config_path, 'r', encoding='utf-8') as f:
+        config = json.load(f)
+
+    for subj in config['subjects']:
         try:
-            json_files = glob.glob(os.path.join('www', subj_dir, 'questions_*.json'))
-            if not json_files: continue
-            with open(json_files[0], 'rb') as f: json_bytes = f.read()
-            title = subj_dir.replace('_', ' ') + " 模擬考試"
-            if subj_dir == 'ITS_softdevelop': title = "ITS Software Development 模擬考試"
-            mock_path = os.path.join('www', subj_dir, 'mock_v34.html')
+            json_file = os.path.join(subj['dir'], subj['json'])
+            if not os.path.exists(json_file): continue
+            
+            with open(json_file, 'rb') as f:
+                json_bytes = f.read()
+            
+            json_cleaned = json_bytes.replace(b'</script>', b'<\\/script>')
+            quiz_obj = json.loads(json_cleaned.decode('utf-8'))
+            total_count = len(quiz_obj)
+            
+            # --- 1. 生成 mock_v34.html ---
+            mock_path = os.path.join(subj['dir'], 'mock_v34.html')
             with open(mock_path, 'wb') as f:
-                f.write(html_top.replace('REPLACE_TITLE', title).encode('utf-8'))
-                f.write(json_bytes.replace(b'</script>', b'<\\/script>'))
+                f.write(mock_top_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
+                f.write(json_cleaned)
                 f.write(b";")
-                f.write(html_bottom.encode('utf-8'))
-            print(f"V3.4.3 Refreshed (Full Logic): {mock_path}")
+                # 動態注入 CUTOFF
+                f.write(mock_bottom_tmpl.replace('REPLACE_CUTOFF', str(subj['cutoff'])).encode('utf-8'))
+            
+            # --- 2. 生成 自主練習頁面 (學科名.html) ---
+            prac_path = os.path.join(subj['dir'], subj['html'])
+            with open(prac_path, 'wb') as f:
+                f.write(prac_top_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_TOTAL', str(total_count)).encode('utf-8'))
+                f.write(json_cleaned)
+                f.write(b";")
+                f.write(prac_bottom_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
+            
+            print(f"V3.4.4 Complete Refresh: {subj['dir']} (Mock & Practice)")
         except Exception as e:
-            print(f"Failed {subj_dir}: {e}")
+            print(f"Failed {subj['dir']}: {e}")
 
 if __name__ == "__main__":
     clean_repair_all()
