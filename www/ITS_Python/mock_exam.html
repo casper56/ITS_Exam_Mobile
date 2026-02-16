@@ -11,9 +11,9 @@
         .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
         .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 60px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
-        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; overflow: visible !important; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
         .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
-        .question-body { padding: 15px 20px; font-size: 1.05rem; overflow: visible !important; background-color: #fff; color: #000; }
+        .question-body { padding: 15px 20px; font-size: 1.05rem; background-color: #fff; color: #000; }
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
@@ -24,7 +24,7 @@
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
         code, pre code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; }
-        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease; text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; }
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 25px; }
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
@@ -72,7 +72,7 @@
         <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="window.print()">🖨️ 列印錯題</button>
     </div>
     <div id="review-area">
-        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目報告</h3></div>
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
         <div id="review-list"></div>
     </div>
 </div>
@@ -92,6 +92,7 @@
         }
         return -1;
     }
+
     const allQuestions = [
   {
     "id": 1,
@@ -1502,7 +1503,7 @@
   {
     "id": 60,
     "type": "multioption",
-    "question": "60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. letter_list in word:\nB. word in letter_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>",
+    "question": "60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)</code></pre><pre><code class=\"language-python\">選項 1 答案選擇區\nA. letter_list in word:\nB. word in word_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>",
     "options": [
       "A|B|C|D",
       "A|B|C|D"
@@ -4112,6 +4113,7 @@
     "category": "D6_模組與常用工具"
   }
 ];
+
     function startTimer() {
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -4141,7 +4143,10 @@
     }
 
     function initExam() {
-        // 隨機抽選 50 題
+        if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
+            console.error("allQuestions is empty!");
+            return;
+        }
         const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
         examQuestions = shuffled.slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
@@ -4240,7 +4245,6 @@
                     }
                 });
                 optionsHTML += '</div>';
-
                 incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="mb-2">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
         });
@@ -4249,16 +4253,14 @@
         document.getElementById('final-score').innerText = score;
         document.getElementById('correct-count').innerText = correctCount;
         
-        // 排序分類統計
         let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th>分類</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
         for (let cat of sortedCats) {
-            let p = Math.round((stats[cat].correct / stats[cat].total) * 100);
-            catHTML += `<tr><td>${cat}</td><td>${stats[cat].total}</td><td>${p}%</td></tr>`;
+            let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
+            catHTML += `<tr><td>${cat}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
         catHTML += '</tbody></table>'; document.getElementById('category-stats').innerHTML = catHTML;
 
-        // 在列印區域頂端加上總分與摘要
         let reportSummary = `
             <div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;">
                 <h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2>

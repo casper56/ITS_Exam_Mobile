@@ -91,6 +91,57 @@
     
     
     
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    
+        return -1;
+    }
+
+    
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const code = val.toUpperCase().charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+
     function initExam() {
         if (!allQuestions || allQuestions.length === 0) { console.error("題庫資料載入失敗！"); return; }
         
@@ -99,9 +150,9 @@
         const isPython = window.location.href.includes('ITS_Python');
         
         const CUTOFF = isITS_AI ? 118 : (is900Series ? 100 : 69);
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); // 提升至 92%
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); 
         const MIN_PER_CAT_PCT = 0.05; 
-        const MAX_PER_CAT_PCT = isPython ? 0.40 : 0.40; // 統一提升至 40% 上限
+        const MAX_PER_CAT_PCT = 0.40; 
         
         const categories = {};
         const catNameMap = {}; 
@@ -126,7 +177,6 @@
         const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
         const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
 
-        // A. 每個分類保底 (優先官方)
         catNames.forEach(cat => {
             const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
             const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
@@ -136,7 +186,6 @@
             }
         });
 
-        // B. 補足 92% 官方題 (遵守 40% 上限)
         let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
         for (let q of offPool) {
             if (selected.length >= TARGET_OFF_COUNT) break;
@@ -145,7 +194,265 @@
             if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
         }
 
-        // C. 補滿總數 (官方優先)
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    });
+
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * MIN_PER_CAT_PCT));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * MAX_PER_CAT_PCT);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
         let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
         while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
 
@@ -220,11 +527,11 @@
             const userAns = userAnswers[idx]; let isCorrect = false;
             if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-                isCorrect = answers.every((a, i) => userAns && (parseInt(a) - 1) === userAns[i]);
+                isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
-                const answers = item.answer.map(a => parseInt(a) - 1);
+                const answers = item.answer.map(a => parseAnswerToIndex(a));
                 isCorrect = Array.isArray(userAns) && userAns.length === answers.length && userAns.every(val => answers.includes(val));
-            } else { isCorrect = userAns === (parseInt(item.answer) - 1); }
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer); }
             if (isCorrect) { correctCount++; stats[cat].correct++; wrongIds.delete(item.id); }
             else {
                 wrongIds.add(item.id); let qText = processContent(item.question, item);
@@ -2914,8 +3221,7 @@
     "explanation": "",
     "category": "D2_Azure 架構與服務"
   }
-];
-    let examQuestions = []; // end_marker
+] // end_marker
     window.onload = initExam;
 </script>
 </body>
