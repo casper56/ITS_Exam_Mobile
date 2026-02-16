@@ -27,12 +27,12 @@
   - **ITS AI**：ID 1 - 118 為官方題。
   - **微軟 900 系列 / 其他**：ID 1 - 100 為官方題。
 
-## 🛠️ 新增考科標準 SOP
+## 🛠️ 新增考科標準 SOP (V3.4.4 結構化模式)
 若要新增考科 (例如 `AZ-104`)，請遵循以下步驟：
 1. **建立目錄**：在 `www/` 下建立資料夾，例如 `www/AZ104/`。
-2. **準備 JSON**：將題庫存為 `www/AZ104/questions_AZ104.json` (符合上述格式)。
-3. **設定生產器**：打開 `final_clean_repair.py`，在 `subjects` 列表中加入新科目的 `dir`, `json`, `title`, `id`, `html` 設定。
-4. **執行生成**：執行 `python final_clean_repair.py`。系統會自動產出對應的 `Subj.html` 與 `mock_v34.html`。
+2. **準備 JSON**：將題庫存為 `www/AZ104/questions_AZ104.json` (符合數據規範)。
+3. **登記設定**：打開 `www/config.json`，在 `subjects` 列表中加入新科目的設定 (包含 `dir`, `json`, `title`, `id`, `html`, `cutoff`)。
+4. **執行生成**：執行 `python final_clean_repair.py`。系統會自動根據 `config.json` 產出對應的 `Subj.html` 與 `mock_v34.html`。
 5. **更新入口**：修改 `www/index.html` 加入跳轉卡片。
 
 ## 🛠️ 維護工作流
