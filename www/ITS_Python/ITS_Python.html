@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS Python Programming 模擬測驗</title>
+    <title>ITS Python Programming 認證模擬測驗</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
     <style>
@@ -42,11 +42,11 @@
         .review-q-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; color: #333; }
         .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 20px 0; border-left: 5px solid #198754; background: white; font-size: 1.1rem; }
         .review-exp-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; }
-        @media print { 
+        @media print {
             @page { size: auto; margin: 8mm; }
-            body { background: white !important; font-size: 13px; line-height: 1.4 !important; } 
-            .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; } 
-            #review-area { display: block !important; } 
+            body { background: white !important; font-size: 13px; line-height: 1.4 !important; }
+            .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; }
+            #review-area { display: block !important; }
             .review-item { margin-bottom: 20px !important; padding-bottom: 15px !important; border-bottom: 1px solid #eee !important; }
             .review-q-text { font-size: 1rem !important; margin-bottom: 8px !important; }
             .review-ans { font-size: 0.95rem !important; margin: 10px 0 !important; padding: 5px 10px !important; border-left-width: 4px !important; }
@@ -59,11 +59,11 @@
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 25px; }
         .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
-        @media (max-width: 992px) { 
-            .sidebar { transform: translateX(-100%); } 
-            .sidebar.active { transform: translateX(0); } 
-            .content-area { margin-left: 0; } 
-            .mobile-toggle { display: block !important; } 
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .content-area { margin-left: 0; }
+            .mobile-toggle { display: block !important; }
             .side-nav-btn { width: 22px; height: 50px; font-size: 0.9rem; background: rgba(33, 37, 41, 0.6); }
             .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
@@ -76,24 +76,24 @@
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題目列表</h5></div>
+                <div class="d-flex align-items-center"><a href="../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題庫列表</h5></div>
                 <div class="d-flex gap-1">
-                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">列印預覽</button>
-                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">訂正預覽</button>
+                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">完整解析</button>
+                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
                 </div>
             </div>
             <div id="progress-stats">✅0 ❌0 🟠0 / 180</div>
         </div>
         <div class="sidebar-content">
             <div class="d-flex justify-content-between small mb-3 text-muted">
-                <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未讀</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd"></span> 答對</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#f8d7da"></span> 答錯</span>
-                <span><span style="display:inline-block;width:10px;height:10px;background:#fd7e14"></span> 訂正</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #ccc"></span> 未答</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#d1e7dd"></span> 正確</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#f8d7da"></span> 錯誤</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#fd7e14"></span> 已訂正</span>
             </div>
             <div class="progress-grid" id="progress-grid"></div>
         </div>
-        <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">🗑️ 重置進度</button></div>
+        <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
     </nav>
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
@@ -469,9 +469,9 @@
     "question": "16. 【CH02-9】請按先後順序從頭至尾排列這六類運算的正確順序：<br>\n1. 加法和減法(+,  -)<br>\n2. 乘法和除法(*,  /)<br>\n3. 正數 (+)、負數 (-) 與反位元 (not) <br>\n4. 括弧<br>\n5. 指數 (**)<br>\n6. 且 (And)",
     "options": [
       "加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且",
-      "括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和滅法 -> 且",
+      "括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且",
       "指數 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 且 -> 加法和減法",
-      "乘法和餘法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法"
+      "乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法"
     ],
     "answer": [
       2
@@ -685,8 +685,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      4
+      "D",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -709,10 +709,10 @@
       "A|B|C|D|E|F|G"
     ],
     "answer": [
-      3,
-      6,
-      2,
-      1
+      "C",
+      "F",
+      "B",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -783,8 +783,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      1
+      "A",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -806,9 +806,9 @@
       "A|B|C"
     ],
     "answer": [
-      1,
-      3,
-      2
+      "A",
+      "C",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -828,8 +828,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      2
+      "D",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -850,10 +850,10 @@
       "A|B|C|D|E|F|G"
     ],
     "answer": [
-      1,
-      7,
-      6,
-      5
+      "A",
+      "G",
+      "F",
+      "E"
     ],
     "weight": 1,
     "image": null,
@@ -945,9 +945,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      2,
-      4,
-      1
+      "B",
+      "D",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -971,10 +971,10 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      3,
-      1,
-      3
+      "D",
+      "C",
+      "A",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -998,11 +998,11 @@
       "A|B|C|D|E"
     ],
     "answer": [
-      4,
-      1,
-      3,
-      5,
-      2
+      "D",
+      "A",
+      "C",
+      "E",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -1067,8 +1067,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      1
+      "A",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -1112,10 +1112,10 @@
       "A|B|C|D"
     ],
     "answer": [
-      2,
-      4,
-      4,
-      4
+      "B",
+      "D",
+      "D",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1137,10 +1137,10 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      1,
-      2,
-      3
+      "D",
+      "A",
+      "B",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1185,10 +1185,10 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      3,
-      2,
-      3
+      "A",
+      "C",
+      "B",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1210,9 +1210,9 @@
       "A|B|C"
     ],
     "answer": [
-      1,
-      2,
-      3
+      "A",
+      "B",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1233,9 +1233,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      3,
-      4
+      "A",
+      "C",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1256,9 +1256,9 @@
       "A|B|C|D|E|F"
     ],
     "answer": [
-      1,
-      2,
-      4
+      "A",
+      "B",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1279,8 +1279,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      3
+      "A",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1301,10 +1301,10 @@
       "A|B|C|D|E|F"
     ],
     "answer": [
-      1,
-      5,
-      2,
-      4
+      "A",
+      "E",
+      "B",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1325,8 +1325,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      3,
-      2
+      "C",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -1346,8 +1346,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      2,
-      3
+      "B",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1373,10 +1373,10 @@
       "A|B|C|D|E|F|G"
     ],
     "answer": [
-      2,
-      7,
-      3,
-      5
+      "B",
+      "G",
+      "C",
+      "E"
     ],
     "weight": 1,
     "image": null,
@@ -1400,11 +1400,11 @@
       "A|B|C|D|E"
     ],
     "answer": [
-      5,
-      1,
-      2,
-      4,
-      3
+      "E",
+      "A",
+      "B",
+      "D",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1451,9 +1451,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      4,
-      3
+      "A",
+      "D",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1473,8 +1473,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      3
+      "D",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1498,12 +1498,12 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      1,
-      3,
-      3,
-      2,
-      2
+      "A",
+      "A",
+      "C",
+      "C",
+      "B",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -1523,8 +1523,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      2,
-      4
+      "B",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1543,8 +1543,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      1
+      "D",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -1564,9 +1564,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      2,
-      4
+      "A",
+      "B",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -1586,8 +1586,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      2
+      "A",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -1672,9 +1672,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      2,
-      1,
-      2
+      "B",
+      "A",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -1743,9 +1743,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      4,
-      2,
-      3
+      "D",
+      "B",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -1985,9 +1985,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      1,
-      2
+      "A",
+      "A",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -2008,8 +2008,8 @@
       "A|B|C|D"
     ],
     "answer": [
-      1,
-      1
+      "A",
+      "A"
     ],
     "weight": 1,
     "image": null,
@@ -2055,8 +2055,8 @@
       "A|B|C|D|E"
     ],
     "answer": [
-      1,
-      3
+      "A",
+      "C"
     ],
     "weight": 1,
     "image": null,
@@ -2077,9 +2077,9 @@
       "A|B|C|D"
     ],
     "answer": [
-      3,
-      1,
-      2
+      "C",
+      "A",
+      "B"
     ],
     "weight": 1,
     "image": null,
@@ -2105,10 +2105,10 @@
       "A|B|C|D"
     ],
     "answer": [
-      3,
-      2,
-      3,
-      4
+      "C",
+      "B",
+      "C",
+      "D"
     ],
     "weight": 1,
     "image": null,
@@ -2131,9 +2131,9 @@
       "A|B|C|D|E"
     ],
     "answer": [
-      4,
-      3,
-      5
+      "D",
+      "C",
+      "E"
     ],
     "weight": 1,
     "image": null,
@@ -4127,6 +4127,16 @@
     "category": "D6_模組與常用工具"
   }
 ];
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const code = val.toUpperCase().charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+
     let currentIndex = 0;
     let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
     const CORR_KEY = 'its_python_correct_v1', INCORR_KEY = 'its_python_incorrect_v1', CORR_EDIT_KEY = 'its_python_corrected_v1', INDEX_KEY = 'its_python_index_v1', ANSWERS_KEY = 'its_python_answers_v1';
@@ -4176,7 +4186,7 @@
     function checkAnswer(element, qIdx, optIdx, event) {
         const item = quizData[qIdx], isMultiple = item.type === 'multiple';
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseInt(a) - 1);
+        const correctIndices = answers.map(a => parseAnswerToIndex(a));
         const input = element.querySelector('input');
         if (event && event.target !== input) { if (isMultiple) input.checked = !input.checked; else input.checked = true; }
         
@@ -4216,12 +4226,11 @@
     function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {
         const item = quizData[qIdx];
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctSubIdx = parseInt(answers[optIdx]) - 1, input = element.querySelector('input');
+        const correctSubIdx = parseAnswerToIndex(answers[optIdx]), input = element.querySelector('input');
         if (event && event.target !== input) input.checked = true;
         if (!userAnswers[qIdx]) userAnswers[qIdx] = {};
         userAnswers[qIdx][optIdx] = subIdx;
         
-        // 移除同題組其他選項的選中樣式
         element.parentElement.querySelectorAll('.sub-opt-container').forEach(el => el.classList.remove('selected'));
         element.classList.add('selected');
 
@@ -4248,7 +4257,7 @@
         if (correctSet.has(qIdx) || correctedSet.has(qIdx) || incorrectSet.has(qIdx)) return;
         const saved = userAnswers[qIdx]; if (!saved) return; 
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseInt(a) - 1);
+        const correctIndices = answers.map(a => parseAnswerToIndex(a));
         if (item.type === 'multiple') {
             const selected = Array.isArray(saved) ? saved : []; if (selected.length === 0) return;
             const isPerfect = selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v));
@@ -4257,7 +4266,7 @@
             const savedKeys = typeof saved === 'object' ? Object.keys(saved) : []; if (savedKeys.length === 0) return;
             const totalSub = (item.quiz || item.options || []).length;
             let allCorrect = (savedKeys.length === totalSub);
-            if (allCorrect) { for(let i=0; i<totalSub; i++) if ((parseInt(saved[i]) + 1) != parseInt(answers[i])) { allCorrect = false; break; } }
+            if (allCorrect) { for(let i=0; i<totalSub; i++) if (parseInt(saved[i]) != parseAnswerToIndex(answers[i])) { allCorrect = false; break; } }
             if (allCorrect) correctSet.add(qIdx); else incorrectSet.add(qIdx);
         }
         saveState(); updateUI();
@@ -4305,11 +4314,9 @@
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         
-        // UI 按鈕顯示邏輯
         const pBtn = document.getElementById('side-btn-prev');
         if (pBtn) pBtn.style.display = (index === 0) ? 'none' : 'flex';
 
-        // Determine Type Label
         let typeLabel = "單選";
         if (opts.some(o => String(o).includes('|'))) typeLabel = "題組";
         else if (item.type === 'multiple') typeLabel = "複選";
@@ -4338,7 +4345,7 @@
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
             if (String(opt).includes('|')) {
-                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">題目 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
+                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => {
                     sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"> ${s}</div>`;
                 });
@@ -4349,26 +4356,21 @@
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        let cIdxs = answers.map(a => parseInt(a) - 1);
+        let cIdxs = answers.map(a => parseAnswerToIndex(a));
 
-        // --- 題組 (multioption) 顯示邏輯強化 ---
         if (opts.some(o => String(o).includes('|'))) {
             opts.forEach((opt, r) => {
-                const correctSubIdx = parseInt(answers[r]) - 1;
+                const correctSubIdx = parseAnswerToIndex(answers[r]);
                 const savedSubIdx = (saved && typeof saved === 'object') ? saved[r] : undefined;
                 
                 opt.split('|').forEach((_, subIdx) => {
                     const inp = document.getElementById(`o${r}_s${subIdx}`);
                     if (!inp) return;
                     const container = inp.parentElement;
-                    
-                    // 1. 恢復曾經填寫的答案
                     if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) {
                         inp.checked = true;
                         container.classList.add('selected');
                     }
-                    
-                    // 2. 如果已完成，顯示正確(綠)/錯誤(紅)顏色
                     if (completed) {
                         if (subIdx === correctSubIdx) {
                             container.classList.add('correct');
@@ -4379,7 +4381,6 @@
                 });
             });
         } 
-        // --- 單選/複選 顯示邏輯 ---
         else if (saved !== undefined) {
             if (Array.isArray(saved)) {
                 saved.forEach(idx => { const inp = document.getElementById(`o${idx}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(idx) ? 'correct' : 'incorrect'); } });
