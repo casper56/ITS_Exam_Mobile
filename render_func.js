@@ -37,6 +37,14 @@
         
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
+            
+            // 決定編號文字與顯示樣式
+            let labelText = `${optIdx + 1}. `;
+            if (item.labelType === 'alpha') {
+                labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            }
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+
             if (optStr.includes('|')) {
                 const parts = optStr.split('|');
                 html += `<div class="sub-question-label">選項 ${optIdx + 1}</div>`;
@@ -53,12 +61,14 @@
                 for (let i = sIdx; i < parts.length; i++) {
                     const btnIdx = i - sIdx;
                     const isSel = (savedAns && savedAns[optIdx] === btnIdx);
-                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${btnIdx})">(${btnIdx+1}) ${parts[i]}</div>`;
+                    let subLabel = `(${btnIdx+1}) `;
+                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + btnIdx)}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${btnIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${parts[i]}</div>`;
                 }
                 html += '</div>';
             } else {
                 const isSel = Array.isArray(savedAns) ? savedAns.includes(optIdx) : savedAns === optIdx;
-                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})">${optIdx + 1}. ${optStr}</div>`;
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
             }
         });
         html += '</div></div></div>';

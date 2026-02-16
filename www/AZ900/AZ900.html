@@ -20,7 +20,8 @@
         pre { background-color: transparent !important; border: none !important; }
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
-        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
+        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
+        .option-item pre { margin: 0; display: inline-block; width: 100%; }
         .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
         .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
         .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; }
@@ -2928,7 +2929,20 @@
             const div = document.createElement('div'); div.className = 'review-item';
             const optsRaw = item.quiz || item.options || [];
             const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-            let optHtml = opts.map((o, i) => String(o).includes('|') ? `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>` : `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
+            const isAlpha = (item.labelType === 'alpha');
+            
+            let optHtml = opts.map((o, i) => {
+                if (String(o).includes('|')) {
+                    const subLabels = o.split('|').map((s, si) => {
+                        const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
+                        return `(${lbl})${s}`;
+                    }).join(' ');
+                    return `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                } else {
+                    const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
+                    return `<div class="review-opt-line">${lbl} ${o}</div>`;
+                }
+            }).join('');
             const cleanQ = String(item.question).replace(/^\d+\.\s*/, '');
             let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
             const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
@@ -2950,11 +2964,19 @@
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
+            let labelText = `${oIdx + 1}. `;
+            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + oIdx)}) `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+
             if (String(opt).includes('|')) {
                 let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
-                opt.split('|').forEach((s, subIdx) => { sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"> ${s}</div>`; });
+                opt.split('|').forEach((s, subIdx) => { 
+                    let subLabel = `(${subIdx+1}) `;
+                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>${subLabel}</span> ${s}</div>`; 
+                });
                 optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"> ${oIdx+1}. ${opt}</div>`; }
+            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${opt}</div>`; }
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];

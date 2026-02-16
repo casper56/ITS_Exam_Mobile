@@ -30,7 +30,7 @@ def clean_repair_all():
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
         .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
         .question-body { padding: 15px 20px; font-size: 1.05rem; background-color: #fff; color: #000; }
-        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; }
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
         .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
@@ -216,16 +216,22 @@ def clean_repair_all():
         html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
+            let labelText = `${optIdx + 1}. `;
+            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            
             if (optStr.includes('|')) {
                 const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => { 
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
-                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})">(${subIdx+1}) ${sub}</div>`; 
+                    let subLabel = `(${subIdx+1}) `;
+                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
                 });
                 html += `</div>`;
             } else {
                 const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
-                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})">${optIdx + 1}. ${optStr}</div>`;
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
             }
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
@@ -267,7 +273,7 @@ def clean_repair_all():
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
-                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => correctIndices.includes(val));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
             } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
             if (isCorrect) { correctCount++; stats[cat].correct++; }
             else {
@@ -276,8 +282,19 @@ def clean_repair_all():
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 opts.forEach((o, i) => {
-                    if (String(o).includes('|')) optionsHTML += `<div class="mb-1"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>`;
-                    else optionsHTML += `<div class="mb-1">${i+1}. ${o}</div>`;
+                    const isAlpha = (item.labelType === 'alpha');
+                    const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                    if (String(o).includes('|')) {
+                        const subLabels = o.split('|').map((s, si) => {
+                            const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
+                            return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                        }).join(' ');
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                    }
+                    else {
+                        const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                    }
                 });
                 optionsHTML += '</div>';
                 incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="mb-2">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
@@ -336,7 +353,8 @@ def clean_repair_all():
         pre { background-color: transparent !important; border: none !important; }
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
-        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
+        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
+        .option-item pre { margin: 0; display: inline-block; width: 100%; }
         .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
         .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
         .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; }
@@ -584,7 +602,20 @@ def clean_repair_all():
             const div = document.createElement('div'); div.className = 'review-item';
             const optsRaw = item.quiz || item.options || [];
             const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-            let optHtml = opts.map((o, i) => String(o).includes('|') ? `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${o.split('|').map((s, si)=>`(${si+1})${s}`).join(' ')}</div>` : `<div class="review-opt-line">${i+1}. ${o}</div>`).join('');
+            const isAlpha = (item.labelType === 'alpha');
+            
+            let optHtml = opts.map((o, i) => {
+                if (String(o).includes('|')) {
+                    const subLabels = o.split('|').map((s, si) => {
+                        const lbl = isAlpha ? String.fromCharCode(65 + si) : (si + 1);
+                        return `(${lbl})${s}`;
+                    }).join(' ');
+                    return `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                } else {
+                    const lbl = isAlpha ? `(${String.fromCharCode(65 + i)})` : (i + 1) + ".";
+                    return `<div class="review-opt-line">${lbl} ${o}</div>`;
+                }
+            }).join('');
             const cleanQ = String(item.question).replace(/^\d+\.\s*/, '');
             let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
             const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
@@ -606,11 +637,19 @@ def clean_repair_all():
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
+            let labelText = `${oIdx + 1}. `;
+            if (item.labelType === 'alpha') labelText = `(${String.fromCharCode(65 + oIdx)}) `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+
             if (String(opt).includes('|')) {
                 let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
-                opt.split('|').forEach((s, subIdx) => { sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"> ${s}</div>`; });
+                opt.split('|').forEach((s, subIdx) => { 
+                    let subLabel = `(${subIdx+1}) `;
+                    if (item.labelType === 'alpha') subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>${subLabel}</span> ${s}</div>`; 
+                });
                 optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"> ${oIdx+1}. ${opt}</div>`; }
+            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${opt}</div>`; }
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
