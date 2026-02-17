@@ -157,7 +157,7 @@ def clean_repair_all():
             console.error("題庫資料載入失敗！"); return;
         }
         const CUTOFF = REPLACE_CUTOFF;
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.92); 
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); 
         
         const categories = {};
         const catNameMap = {}; 

@@ -1,0 +1,6 @@
+{
+	"appId": "com.itsexam.app",
+	"appName": "ITS Exam Mobile",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
