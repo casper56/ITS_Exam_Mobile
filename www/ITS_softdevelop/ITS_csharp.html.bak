@@ -838,7 +838,7 @@
     ],
     "explanation": [
       "<code class=\"language-csharp\">A. FTP      //用於檔案傳輸(如下載或上傳檔案)，但非網頁資料交換的標準協定。",
-      "B. HTML     //是網頁的結構語言（如&lt;html&gt;、&lt;div&gt;標籤），屬資料格式，非通訊協議",
+      "B. HTML     //是網頁的結構語言（如<html>、<div>標籤），屬資料格式，非通訊協議",
       "C. HTTP     //超文字傳輸協定，是瀏覽器與伺服器之間交換網頁資料的標準協議",
       "D. IP       //IP位址 是唯一標識網路裝置的核心要素</code>"
     ],
@@ -1068,12 +1068,12 @@
     "explanation": [
       "問題：哪一個 LINQ 運運算元會「壓平合併序列」？ ",
       "正解說明 SelectMany 是唯一一個能將巢狀序列「壓平」並合併成單一序列的 LINQ 運運算元。",
-      "例如： var nested = new List&lt;List&lt;int&gt;&gt; { new List&lt;int&gt; { 1, 2 }, new List&lt;int&gt; { 3, 4 } }; ",
-      "       var flattened = nested.SelectMany(list =&gt; list).ToList();",
-      "<pre style=\"margin: 5px 0; line-height: 1.8; font-size: 1.1rem;\"><code class=\"language-csharp\">A. SelectMany\t//是 LINQ 中用於「壓平巢狀序列」的運運算元。它會將每個元素轉換為一個序列",
-      "B. GroupBy\t//根據某個條件(例如屬性)將元素分組, 並返回一個鍵值對集合(IGrouping&lt;TKey, TElement&gt;)",
-      "C. ToArray\t// ToArray 是將 IEnumerable&lt;T&gt; 轉換為陣列（T[]）",
-      "D. Cast\t\t// Cast 是將序列中的元素轉換為指定型別(例如 IEnumerable&lt;T&gt;)：僅針對型別轉換</code></pre>"
+      "例如： var nested = new List<List<int>> { new List<int> { 1, 2 }, new List<int> { 3, 4 } }; ",
+      "       var flattened = nested.SelectMany(list => list).ToList();",
+      "<code class=\"language-csharp\">A. SelectMany  //是 LINQ 中用於「壓平巢狀序列」的運運算元。它會將每個元素轉換為一個序列",
+      "B. GroupBy    //根據某個條件(例如屬性)將元素分組, 並返回一個鍵值對集合(IGrouping<TKey, TElement>)",
+      "C. ToArray    // ToArray 是將 IEnumerable<T> 轉換為陣列（T[]）",
+      "D. Cast       // Cast 是將序列中的元素轉換為指定型別(例如 IEnumerable<T>)：僅針對型別轉換</code>"
     ],
     "weight": 1,
     "image": null,
@@ -3307,16 +3307,6 @@
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        
-        // 如果陣列中包含 <pre>，代表這是一個程式碼區塊，我們合併處理以支援跨行對齊
-        if (lines.some(l => String(l).includes('<pre'))) {
-            let fullHtml = lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" class="q-img">` : match;
-            });
-            return `<div>${fullHtml}</div>`;
-        }
-
         return lines.map(line => {
             let html = String(line);
             html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
