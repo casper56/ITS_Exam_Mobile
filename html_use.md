@@ -66,9 +66,40 @@ HTML 會自動合併連續空格，若需手動排版請用以下字元。
 
 ---
 
+## 6. 顏色與樣式控制 (Color & Style Control)
+在題庫中，若需強調文字或美化表格，請使用內聯樣式 (Inline Style)。
+
+### 文字顏色控制
+使用 `<span>` 標籤並配合 `style="color:顏色碼"`：
+
+| 顏色名稱 | 代碼 | 範例 | 建議用途 |
+| :--- | :--- | :--- | :--- |
+| **標準藍** | `#0d6efd` | `<span style="color:#0d6efd">強調文字</span>` | 標題、重點、核心提示 |
+| **正確綠** | `#198754` | `<span style="color:#198754">正確答案</span>` | 正確答案、解析成功提示 |
+| **警示紅** | `#dc3545` | `<span style="color:#dc3545">錯誤警告</span>` | 重要警語、錯誤選項強調 |
+| **中性灰** | `#6c757d` | `<span style="color:#6c757d">補充資訊</span>` | 次要內容、背景說明 |
+
+### 表格精確控制 (Table Style)
+為了確保表格與前後文字有專業的間距感，建議採用以下標準樣式：
+```html
+<table class='table table-bordered' style='max-width: 350px; color: #000; font-size: 0.9rem; margin: 15px 0; line-height: 1.2;'>
+    <tr><td>項目</td><td>內容</td></tr>
+</table>
+```
+- **`max-width: 350px;`**：防止表格在窄螢幕下撐破佈局。
+- **`font-size: 0.9rem;`**：讓表格內容呈現專業的學術微調感。
+- **`margin: 15px 0;`**：確保表格上下各留出 15px 的呼吸空間。
+
+### 程式碼塊去粉紅規範 (No-Pink Rule)
+根據系統 V3.4 核心規範，所有代碼塊必須維持專業感：
+- **嚴禁粉紅**：禁止在 `<pre>` 或 `<code>` 中出現任何粉紅色系的背景或文字顏色。
+- **高亮規範**：必須配合 `language-python` 等類別使用，顏色應以純黑 (#000) 或語法高亮預設色為主。
+
+---
+
 ## 備註：不同環境下的轉換 (對比)
 - **HTML**: 使用 `&...;` (如 `&lt;`)
-- **CSS**: 使用 `` 十六進制 (如 `content: "\003c";`)
+- **CSS**: 使用 `\` 十六進制 (如 `content: "\003c";`)
 - **JavaScript**: 使用 `\u` Unicode (如 `\u003c`)
 
 > **提示**：在維護 `questions_xxx.json` 時，若題目出現標籤，請務必將 `<` 換成 `&lt;`，將 `>` 換成 `&gt;`。

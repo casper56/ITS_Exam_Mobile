@@ -360,12 +360,12 @@ def clean_repair_all():
         html { scrollbar-gutter: stable; }
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
         .main-wrapper { display: flex; min-height: 100vh; }
-        .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; }
-        .sidebar-header { background: #212529; color: #fff; padding: 15px; border-bottom: 1px solid #dee2e6; }
+        .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; height: 100vh; }
+        .sidebar-header { background: #212529; color: #fff; padding: 15px; border-bottom: 1px solid #dee2e6; flex-shrink: 0; }
         .sidebar-header h5 { font-size: 1.25rem; font-weight: bold; color: #fff; margin-bottom: 0; }
         #progress-stats { font-size: 1.2rem; font-weight: bold; color: #fff; }
-        .sidebar-content { flex: 1; overflow-y: auto; padding: 15px; }
-        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; }
+        .sidebar-content { flex: 1; overflow-y: auto !important; padding: 15px; }
+        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; flex-shrink: 0; }
         .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; overflow-x: hidden !important; }
         code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
@@ -723,7 +723,7 @@ def clean_repair_all():
         const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
         const grid = document.getElementById('progress-grid'); grid.innerHTML = '';
         quizData.forEach((_, i) => {
-            const n = document.createElement('div'); n.className = 'q-node'; if (i === currentIndex) n.classList.add('active');
+            const n = document.createElement('div'); n.className = 'q-node'; if (i === currentIndex) { n.classList.add('active'); setTimeout(() => n.scrollIntoView({ block: 'center', behavior: 'smooth' }), 100); }
             if (incorrectSet.has(i)) n.classList.add('incorrect'); else if (correctedSet.has(i)) n.classList.add('corrected'); else if (correctSet.has(i)) n.classList.add('correct');
             n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
         });

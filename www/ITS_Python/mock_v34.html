@@ -1653,21 +1653,21 @@
             "答案 B.",
             "n = 2",
             "while n <= 100:",
-            "is_prime = True",
+            "   is_prime = True",
             "答案 C.",
-            "break",
+            "       break",
             "答案 D.",
             "Continue",
             "答案 E.",
             "n += 1",
             "答案 F.",
             "for i in range(2, n):",
-            "if n / i = = 0:",
-            "is_prime = False",
+            "   if n / i = = 0:",
+            "      is_prime = False",
             "答案 G.",
             "for i in range(2, n):",
-            "if n % i == 0:",
-            "is_prime = False</code></pre>"
+            "   if n % i == 0:",
+            "      is_prime = False</code></pre>"
         ],
         "options": [
             "A|B|C|D|E|F|G",
@@ -1985,12 +1985,12 @@
             "04  # return the value of x*y",
             "05  def area_retangle(x, y):",
             "06     comment = '# Retrun the value'",
-            "07     return x*y # x*y</code></pre>",
+            "07     return x*y # x*y",
             "針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
-            "第 1 到 4 行在語法檢查時將被忽略。",
-            "第 2 和第 3 行中的井字元號(#)非必填的。",
-            "第 6 行中的字串將被解釋為注釋。",
-            "第 7 行包含內嵌注釋。"
+            "題1:第 1 到 4 行在語法檢查時將被忽略。",
+            "題2:第 2 和第 3 行中的井字元號(#)非必填的。",
+            "題3:第 6 行中的字串將被解釋為注釋。",
+            "題4:第 7 行包含內嵌注釋。</code></pre>"
         ],
         "options": [
             "Yes|No",
@@ -2007,10 +2007,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "● 第一到第四行的註解將在語法檢查時被忽略。",
-            "● 第二和第三行中的井字元號 (#) 是必要的，因為它們用來標記註解。",
-            "● 第六行中的字串 `comment` 並不會被解釋為註解，因為它是被引號包圍的字串。",
-            "● 第七行中的內嵌註解是正確的，因為它使用了井字元號 (#)。"
+            "● 1.第一到第四行的註解將在語法檢查時被忽略。",
+            "● 2.第二和第三行中的井字元號 (#) 是必要的，因為它們用來標記註解。",
+            "● 3.第六行中的字串 `comment` 並不會被解釋為註解，因為它是被引號包圍的字串。",
+            "● 4.第七行中的內嵌註解是正確的，因為它使用了井字元號 (#)。"
         ],
         "category": "D4_函式與註解"
     },
@@ -2110,10 +2110,10 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "69. 【CH06-6】你設計了以下的函式來計算薪水：<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate</code></pre>針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。",
+            "69. 【CH06-6】你設計了以下的函式來計算薪水：<pre><code class=\"language-python line-numbers line-hight19\">#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate\n針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。",
             "題一:getpay() 函式會發生錯誤。",
             "題二:getpay(salary = 5000) 不會回傳任何值。",
-            "題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000"
+            "題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
         ],
         "options": [
             "Yes|No",
@@ -2234,11 +2234,11 @@
             "15&nbsp;else:",
             "16&nbsp;    petstore(category, species)",
             "17&nbsp;    petstore(breed='Maltese', species='Canine', category='dog')",
-            "18&nbsp;    petstore('bird', species='Scarlet Macaw')</code></pre>",
+            "18&nbsp;    petstore('bird', species='Scarlet Macaw')",
             "針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。",
             "題一:此函式會傳回一個值。",
             "題二:第 14 行和第 17 行的函式呼叫無效。",
-            "題三:第 16 行和第 18 行的函式呼叫會產生錯誤。"
+            "題三:第 16 行和第 18 行的函式呼叫會產生錯誤。</code></pre>"
         ],
         "options": [
             "Yes|No",
@@ -2255,8 +2255,9 @@
         "explanation": [
             "● 函式 `petstore` 沒有寫 `return` 因此並不會傳回任何值，選項 1 是錯誤的。",
             "● 第 14 行和第 17 行的函式呼叫是有效的，因為它們符合函式的引數要求。",
-            "● 第 16 行和第 18 行的函式呼叫會產生錯誤，因為它們使用了不正確的引數名稱或順序。",
-            "● 第14和17行的函式呼叫，應該是有效呼叫，ITS答案 Yes；ChatGPT：No  #有效呼叫"
+			"<span style=\"color:#dc3545\">&emsp;&emsp;&mdash;&rarr;&emsp;&emsp;ITS答案 Yes；ChatGPT：No  #有效呼叫</span>",
+            "● 第 16 行和第 18 行的函式呼叫會產生錯誤，因為它們使用了不正確的引數名稱或順序。"
+            
         ],
         "category": "D4_函式與註解"
     },
@@ -2477,7 +2478,8 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "82. 【CH07-7】您正在撰寫一個程式來顯示 My Healthy Eata Delivery 的特價優惠。<pre><code class=\"language-python line-numbers line-hight19\">import datetime\ndailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')\nweekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')\n\n\nprint('My Healthy Eats Delivery')\nif today == 'Friday' or today == 'Saturday' or today == 'Sunday':\n    print('The weekend specials include:')\n    for item in weekendspecials:\n        print(item)\nelse:\n    print('The weekday specials include: ')\n    for item in dailySpecials:\n        print(item)\n\nprint(f'Pricing specials change in (daysLeft) days')</code></pre>請選取正確的還項以完成第 4、 5 和 15 行的程式碼。<pre><code class=\"language-python\">選項答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()\n</code></pre>"
+            "82. 【CH07-7】您正在撰寫一個程式來顯示 My Healthy Eata Delivery 的特價優惠。",
+			"<pre><code class=\"language-python line-numbers line-hight19\">import datetime\ndailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')\nweekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')\n\n\nprint('My Healthy Eats Delivery')\nif today == 'Friday' or today == 'Saturday' or today == 'Sunday':\n    print('The weekend specials include:')\n    for item in weekendspecials:\n        print(item)\nelse:\n    print('The weekday specials include: ')\n    for item in dailySpecials:\n        print(item)\n\nprint(f'Pricing specials change in (daysLeft) days')</code></pre>請選取正確的還項以完成第 4、 5 和 15 行的程式碼。<pre><code class=\"language-python\">選項答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()\n</code></pre>"
         ],
         "options": [
             "A|B|C|D",
@@ -2707,11 +2709,11 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "90. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()</code></pre>out.txt 檔案不存在執行程式碼。針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
+            "90. 【CH08-7】您撰寫了以下這段程式碼：<pre><code class=\"language-python line-numbers line-hight19\">import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()\nout.txt 檔案不存在執行程式碼。\n針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
             "題一:此程式碼將正常執行，不會發生錯誤。",
             "題二:此程式碼將執行，但會產生邏輯錯誤。",
             "題三:此程式碼將產生執行階段錯誤。",
-            "題四:此程式碼將產生語法錯誤。"
+            "題四:此程式碼將產生語法錯誤。</code></pre>"
         ],
         "options": [
             "Yes|No",
@@ -2793,7 +2795,7 @@
         "type": "single",
         "question": [
             "93. 【CH06-補充】關於變數的區域範圍 (Scope)，請檢視以下程式碼：",
-            "<pre><code class=\"language-python\">x = 10\n def update_x():\n  x = 20\n update_x()\nprint(x)</code></pre>",
+            "<pre><code class=\"language-python\">x = 10\ndef update_x():\n  x = 20\nupdate_x()\nprint(x)</code></pre>",
             "執行後的輸出結果為何？"
         ],
         "options": [
