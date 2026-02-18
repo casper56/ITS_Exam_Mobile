@@ -2448,9 +2448,10 @@
         "image": null,
         "explanation": [
             "● 選擇 1 和選擇 3 是正確的，因為它們都能生成符合條件的隨機數字。",
+			"<span style=\"color:#dc3545\">&emsp;&emsp;&mdash;&rarr;選擇 3 似乎不對，除非改成 print(randrange(2, 51, 2))</span>",
             "● 選擇 2 是錯誤的，因為 `randint(1,50)` 可能生成奇數。",
-            "● 選擇 4 是錯誤的，因為 `randrange(2,50,1)` 會生成所有的整數，包括奇數。",
-            "● 選擇 3 似乎不對，除非改成 print(randrange(2, 51, 2))"
+            "● 選擇 4 是錯誤的，因為 `randrange(2,50,1)` 會生成所有的整數，包括奇數。"
+            
         ],
         "category": "D6_模組與常用工具"
     },
@@ -2651,7 +2652,7 @@
             "● 選擇 2 的正確答案是 B，因為 `unittest.TestCase` 是單元測試的基礎類別。",
             "● 選擇 3 的正確答案是 C，因為 `test_isInstance(self)` 是測試方法的命名慣例。",
             "● 選擇 4 的正確答案是 D，因為 `self.assertIsInstance(obj, cls)` 用來測試物件是否為特定類別的例項。",
-            "● 本題 ITS 答案 C、B、C、B ChatGPT 答案 C、B、C、D"
+			"<span style=\"color:#dc3545\">&emsp;&emsp;&mdash;&rarr;本題 ITS 答案 C、B、C、B , ChatGPT 答案 C、B、C、D</span>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -2687,12 +2688,12 @@
         "hideLabel": true,
         "question": [
             "89. 【CH08-6】下列函式會計算使用指數之運算式的值。",
-            "<pre><code class=\"language-python line-numbers line-hight19\">def calc_power(a, b):",
-            "return a**b",
-            "base = input('Enter the number for the base: ')",
-            "exponent = input('Enter the number for the exponent: ')",
-            "result = calc_power(base, exponent)",
-            "print('The result is ' + result)",
+            "<pre><code class=\"language-python line-numbers line-hight19\">01 def calc_power(a, b):",
+            "02   return a**b",
+            "03 base = input('Enter the number for the base: ')",
+            "04 exponent = input('Enter the number for the exponent: ')",
+            "05 result = calc_power(base, exponent)",
+            "06 print('The result is ' + result)",
             "針對下列每個敘述，如果是正確的就選擇 Yes，否則請選揮No。</code></pre>",
             "<pre style=\"margin: 5px 0; line-height: 1.6; font-size: 1.0rem;\"><code>題一:第 2 行會造成執行階段錯誤。",
             "題二:第 6 行會造成執行階段錯誤。",
@@ -3207,7 +3208,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "● 選項 1 錯：值相等應為 `assertEqual`。<br>● 選項 2 錯：物件相同應為 `assertIs`。<br>● 選項 3 對：包含關係應為 `assertIn`。<br>● (註：本題庫答案索引從 1 開始，故選 [3])<br><br><b>【unittest 常用指令與使用物件對照表】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>斷言指令 (Method)</th><th style='background-color: #f2f2f2;'>對應 Python 語法</th><th style='background-color: #f2f2f2;'>使用物件 / 時機</th></tr><tr><td><b>assertEqual(a, b)</b></td><td><code>a == b</code></td><td><b>數值、字串、清單內容</b><br>檢查「值」是否相等 (最常用)。</td></tr><tr><td><b>assertIs(a, b)</b></td><td><code>a is b</code></td><td><b>物件實體 (Identity)</b><br>檢查是否為「同一個」物件。</td></tr><tr><td><b>assertIn(a, b)</b></td><td><code>a in b</code></td><td><b>容器 (List, Dict, Set)</b><br>檢查 `a` 是否存在於 `b` 之中。</td></tr><tr><td><b>assertIsInstance(a, b)</b></td><td><code>isinstance(a, b)</code></td><td><b>資料型態 (Type)</b><br>檢查 `a` 是否為類別 `b` 的例項。</td></tr></table>"
+            "● 選項 1 錯：值相等應為 `assertEqual`。",
+			"● 選項 2 錯：物件相同應為 `assertIs`。",
+			"● 選項 3 對：包含關係應為 `assertIn`。",
+			"● 選項 4 錯：應為assertIsNone(x)",
+			"<b>【unittest 常用指令與使用物件對照表】</b><br><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>斷言指令 (Method)</th><th style='background-color: #f2f2f2;'>對應 Python 語法</th><th style='background-color: #f2f2f2;'>使用物件 / 時機</th></tr><tr><td><b>assertEqual(a, b)</b></td><td><code>a == b</code></td><td><b>數值、字串、清單內容</b><br>檢查「值」是否相等 (最常用)。</td></tr><tr><td><b>assertIs(a, b)</b></td><td><code>a is b</code></td><td><b>物件實體 (Identity)</b><br>檢查是否為「同一個」物件。</td></tr><tr><td><b>assertIn(a, b)</b></td><td><code>a in b</code></td><td><b>容器 (List, Dict, Set)</b><br>檢查 `a` 是否存在於 `b` 之中。</td></tr><tr><td><b>assertIsInstance(a, b)</b></td><td><code>isinstance(a, b)</code></td><td><b>資料型態 (Type)</b><br>檢查 `a` 是否為類別 `b` 的例項。</td></tr></table>"
         ],
         "category": "D5_錯誤處理與測試"
     },
