@@ -2055,8 +2055,18 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
+            "B. No:",
+			"適合連結清單的排序演算法雖然理論上你可以對連結清單使用任何演算法，但以下兩種是最常被推薦的：",
+			"1.合併排序 (Merge Sort) —— 最推薦這是連結清單排序的「黃金標準」。",
+			"\t原因：合併排序主要依據順序存取（Sequential Access），這非常符合連結清單的特性。",
+			"\t優勢：在陣列中進行合併排序需要 O(n) 的額外空間，但在連結清單中，我們只需要調整指標（Pointer），",
+			"\t&emsp;&emsp;&emsp;&emsp;&emsp;空間複雜度可以優化到 O(1)（如果不考慮遞迴呼叫堆疊的話）。",
+			"\t時間複雜度：穩定維持在 O(n log n)。",
+			"2.插入排序 (Insertion Sort)",
+			"\t原因：當資料量很小，或是清單已經「幾乎排序好」時，插入排序非常有效。",
+			"\t優勢：它不需要像陣列那樣頻繁搬移元素，只需要斷開節點並重新接上指標即可。",
+			"\t時間複雜度：平均 O(n^2)，最佳 O(n)。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2074,8 +2084,8 @@
             "B"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No     //連結串列的節點數量由實際需求或程式設計決定，若無明確限制</code>"
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No     //連結串列的節點數量由實際需求或程式設計決定，若無明確限制</pre></code>"
         ],
         "weight": 1,
         "image": null,
@@ -2093,8 +2103,8 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢",
+            "B. No</pre></code>"
         ],
         "weight": 1,
         "image": null,
@@ -2114,8 +2124,8 @@
         "explanation": [
             "關鍵點：數位簽章的加密（簽章）是使用私鑰，而非公鑰。",
             "2. 加密（Encryption）與數位簽章的區別",
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：</code>",
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：</code></pre>",
             "[[image01]]"
         ],
         "weight": 1,
@@ -2136,8 +2146,8 @@
         ],
         "explanation": [
             "[[image01]]",
-            "<code class=\"language-csharp\">A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 ",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 ",
+            "B. No</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2327,10 +2337,10 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
+            "<pre><code class=\"language-csharp\">佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
             "1. 入隊（Enqueue）：新元素加入佇列尾端。",
             "2. 出隊（Dequeue）：最舊的元素從佇列頭端移除。",
-            "3. 順序性：元素的處理順序完全依照插入順序，符合「先來先處理」的原則</code>"
+            "3. 順序性：元素的處理順序完全依照插入順序，符合「先來先處理」的原則</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2349,8 +2359,8 @@
         ],
         "explanation": [
             "說明同上題",
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2368,10 +2378,10 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">※文件資料庫 (Document Database)",
+            "<pre><code class=\"language-csharp\">※文件資料庫 (Document Database)",
             "\t●資料以「文件 (Document)」形式儲存。",
             "\t●文件的結構通常是 JSON 或類似 JSON 的格式（如 BSON, XML）。",
-            "\t●MongoDB 就是最典型的例子</code>"
+            "\t●MongoDB 就是最典型的例子</code></pre>"
         ],
         "weight": 1,
         "image": null,

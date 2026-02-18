@@ -84,7 +84,7 @@
                     <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
                 </div>
             </div>
-            <div id="progress-stats">✅0 ❌0 🟠0 / 124</div>
+            <div id="progress-stats">✅0 ❌0 🟠0 / 121</div>
         </div>
         <div class="sidebar-content">
             <div class="d-flex justify-content-between small mb-3 text-muted">
@@ -2100,90 +2100,6 @@
     },
     {
         "id": 78,
-        "question": "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案。）</code></pre>",
-        "options": [
-            "測試案例必要的任何前置條件",
-            "測試案例的預期結果",
-            "與其他測試案例的整合",
-            "綜合成單一測試的所有使用案例",
-            "沒有任何判斷提示的測試案例",
-            "以上皆非"
-        ],
-        "answer": [
-            "A",
-            "B"
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">A. 測試案例必要的任何前置條件\t//單元測試需要定義測試前的狀態，例如輸入參數、初始資料等。",
-            "B. 測試案例的預期結果\t\t//單元測試的重點就是比較「實際結果」與「預期結果」",
-            "C. 與其他測試案例的整合\t\t//單元測試應該是獨立的，不依賴其他測試。",
-            "D. 綜合成單一測試的所有使用案例\t//這比較像整合測試，不是單元測試。",
-            "E. 沒有任何判斷提示的測試案例\t//單元測試必須要有判斷標準(assertion)，否則測不出對錯。</pre>",
-            "F. 以上皆非</code>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "multiple",
-        "category": "D3_一般軟體開發"
-    },
-    {
-        "id": 79,
-        "question": "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了JSON物件?(請選擇2個答案·)</code></pre>",
-        "options": [
-            "(A)JSON物件可使用名稱/直對來建置。",
-            "(B)JSON物件可使用已排序的值清單來建置。",
-            "(C)JSON物件可運用命名空間。",
-            "(D)JSON物件可延伸。",
-            "(E)以上皆是",
-            "(F)以上皆非"
-        ],
-        "answer": [
-            "A",
-            "B"
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">(A)JSON物件可使用名稱/直對來建置。\t// JSON 的核心結構就是 名稱/值對 (name/value pair)",
-            "(B)JSON物件可使用已排序的值清單來建置。\t//已排序的值清單屬於 JSON 陣列 (Array)，不是 JSON 物件",
-            "(C)JSON物件可運用命名空間。\t\t// JSON 本身 不支援命名空間，這是 XML 的特性",
-            "(D)JSON物件可延伸。\t\t// JSON 物件本質上是 key-value 結構，可以自由新增欄位，因此具有可延伸性",
-            "(E)以上皆是",
-            "(F)以上皆非</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "multiple",
-        "category": "D4_Web應用程式"
-    },
-    {
-        "id": 80,
-        "question": "<pre><code class=\"language-csharp\">連級共用有那三項優點2(請選擇:個答案・)</code></pre>",
-        "options": [
-            "提升效能",
-            "提升可據能性",
-            "縮短建立連線的時間",
-            "不需要任何設定",
-            "提升安全性",
-            "以上皆非"
-        ],
-        "answer": [
-            "A",
-            "B",
-            "C"
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">(1)提升效能\t\t//因為避免了反覆建立/關閉連線的成本，效能會提升",
-            "(2)提升可據能性\t\t//共用連線池能讓伺服器在有限連線下同時服務更多用戶，提升可擴充性",
-            "(3)縮短建立連線的時間\t//從池子取用現有連線比重新建立新連線更快",
-            "(4)不需要任何設定\t//多數情況下需要在連線字串或環境中啟用/調整連線池參數",
-            "(5)提升安全性\t\t//連線池的主要優點是效能與資源利用，與安全性無直接關係</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "multiple",
-        "category": "D1_核心程式設計概念"
-    },
-    {
-        "id": 81,
         "question": "<pre><code class=\"language-csharp\">請回答有關單元測試的敘述：\n單元測試會測試整個應用程式的整合與相依性。</code></pre>",
         "options": [
             "Yes",
@@ -2202,7 +2118,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 82,
+        "id": 79,
         "question": "<pre><code class=\"language-csharp\">單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>",
         "options": [
             "Yes",
@@ -2222,7 +2138,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 83,
+        "id": 80,
         "question": "<pre><code class=\"language-csharp\">單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，\n然後判斷其行為表現是否完全符合預期。</code></pre>",
         "options": [
             "Yes",
@@ -2240,7 +2156,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 84,
+        "id": 81,
         "question": "<pre><code class=\"language-csharp\">連結清單可進行排序。</code></pre>",
         "options": [
             "Yes",
@@ -2250,8 +2166,18 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
+            "B. No:",
+			"適合連結清單的排序演算法雖然理論上你可以對連結清單使用任何演算法，但以下兩種是最常被推薦的：",
+			"1.合併排序 (Merge Sort) —— 最推薦這是連結清單排序的「黃金標準」。",
+			"\t原因：合併排序主要依據順序存取（Sequential Access），這非常符合連結清單的特性。",
+			"\t優勢：在陣列中進行合併排序需要 O(n) 的額外空間，但在連結清單中，我們只需要調整指標（Pointer），",
+			"\t&emsp;&emsp;&emsp;&emsp;&emsp;空間複雜度可以優化到 O(1)（如果不考慮遞迴呼叫堆疊的話）。",
+			"\t時間複雜度：穩定維持在 O(n log n)。",
+			"2.插入排序 (Insertion Sort)",
+			"\t原因：當資料量很小，或是清單已經「幾乎排序好」時，插入排序非常有效。",
+			"\t優勢：它不需要像陣列那樣頻繁搬移元素，只需要斷開節點並重新接上指標即可。",
+			"\t時間複雜度：平均 O(n^2)，最佳 O(n)。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2259,7 +2185,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 85,
+        "id": 82,
         "question": "<pre><code class=\"language-csharp\">連結清單最多包含 100 個節點。</code></pre>",
         "options": [
             "Yes",
@@ -2269,8 +2195,8 @@
             "B"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No     //連結串列的節點數量由實際需求或程式設計決定，若無明確限制</code>"
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No     //連結串列的節點數量由實際需求或程式設計決定，若無明確限制</pre></code>"
         ],
         "weight": 1,
         "image": null,
@@ -2278,7 +2204,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 86,
+        "id": 83,
         "question": "<pre><code class=\"language-csharp\">您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>",
         "options": [
             "Yes",
@@ -2288,8 +2214,8 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢",
+            "B. No</pre></code>"
         ],
         "weight": 1,
         "image": null,
@@ -2297,7 +2223,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 87,
+        "id": 84,
         "question": "<pre><code class=\"language-csharp\">數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>",
         "options": [
             "Yes",
@@ -2309,8 +2235,8 @@
         "explanation": [
             "關鍵點：數位簽章的加密（簽章）是使用私鑰，而非公鑰。",
             "2. 加密（Encryption）與數位簽章的區別",
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：</code>",
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：</code></pre>",
             "[[image01]]"
         ],
         "weight": 1,
@@ -2320,7 +2246,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 88,
+        "id": 85,
         "question": "<pre><code class=\"language-csharp\">CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>",
         "options": [
             "Yes",
@@ -2331,8 +2257,8 @@
         ],
         "explanation": [
             "[[image01]]",
-            "<code class=\"language-csharp\">A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 ",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 ",
+            "B. No</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2341,7 +2267,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 89,
+        "id": 86,
         "question": "<pre><code class=\"language-csharp\">防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>",
         "options": [
             "Yes",
@@ -2360,7 +2286,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 90,
+        "id": 87,
         "question": "<pre><code class=\"language-csharp\">Person 類別中的方法可以存取 co1or 屬性。</code></pre>",
         "options": [
             "Yes",
@@ -2378,7 +2304,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 91,
+        "id": 88,
         "question": "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。\nTree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。\n請選取 [正確] 或 [錯誤]。\nPerson 類別中的方法可以存取 NumberOfLeaves 屬性。</code></pre>",
         "options": [
             "Yes",
@@ -2396,7 +2322,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 92,
+        "id": 89,
         "question": "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。\nTree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。\n請選取 [正確] 或 [錯誤]。\nTree 類別中的方法可以存取 Person 中的所有私用屬性。</code></pre>",
         "options": [
             "Yes",
@@ -2426,7 +2352,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 93,
+        "id": 90,
         "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() { \n03   if(xhr.status === 200) {\n04      responseObject = JSON.parse(xhr.responseText);\n05      var newContent = '';\n06      for (var i = 0; i < responseObject.menu.length; i++) {\n07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';\n08         newContent+='Price: ' + responseObject.menu[i].Price + '</p>';\n09      }\n10      document.getElementById('content').innerHTML = newContent;\n11   }\n12 };\n13 xhr.open('GET', 'menu.json', true);  \n14 xhr.send(null); \n\n在第 02 行，onload 物件會將要求傳送至伺服器。</code></pre>",
         "options": [
             "Yes",
@@ -2452,7 +2378,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 94,
+        "id": 91,
         "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() {\n03   if(xhr.status == 200) {\n04      responseObject = JSON.parse(xhr.responseText);\n05      var newContent = '';\n06      for (var i = 0; i < responseObject.menu.length; i++) {\n07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';\n08         newContent+='Price: '+responseObject.menu[i].Price + '</p>';\n09      }\n10      document.getElementById('content').innerHTML = newContent;\n11   }\n12 };\n13 xhr.open('GET', 'menu.json', true);\n14 xhr.send(null);\n\n在第 03 行，status 是由處理要求的伺服器傳回。</code></pre>",
         "options": [
             "Yes",
@@ -2471,7 +2397,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 95,
+        "id": 92,
         "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() {\n03     if(xhr.status === 200) {\n04         responseObject = JSON.parse(xhr.responseText);\n05         var newContent = '';\n06         for (var i = 0; i < responseObject.menu.length; i++) {\n07             newContent += '<p>Entree: ' + responseObject.menu[i].Entree + '<br>';\n08             newContent += 'Price: ' + responseObject.menu[i].Price + '</p>';\n09         }\n10         document.getElementById('content').innerHTML = newContent;\n11     }\n12 };\n13 xhr.open('GET', 'menu.json', true);\n14 xhr.send(null);\n\n在第 13 行，true 參數會指定非同步處理。</code></pre>",
         "options": [
             "Yes",
@@ -2490,7 +2416,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 96,
+        "id": 93,
         "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列的項目數有限制。</code></pre>",
         "options": [
             "Yes",
@@ -2512,7 +2438,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 97,
+        "id": 94,
         "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列是一種先進先出（FIFO）資料結構。</code></pre>",
         "options": [
             "Yes",
@@ -2522,10 +2448,10 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
+            "<pre><code class=\"language-csharp\">佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
             "1. 入隊（Enqueue）：新元素加入佇列尾端。",
             "2. 出隊（Dequeue）：最舊的元素從佇列頭端移除。",
-            "3. 順序性：元素的處理順序完全依照插入順序，符合「先來先處理」的原則</code>"
+            "3. 順序性：元素的處理順序完全依照插入順序，符合「先來先處理」的原則</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2533,7 +2459,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 98,
+        "id": 95,
         "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列的項目是按照加入的順序儲存。</code></pre>",
         "options": [
             "Yes",
@@ -2544,8 +2470,8 @@
         ],
         "explanation": [
             "說明同上題",
-            "<code class=\"language-csharp\">A. Yes",
-            "B. No</code>"
+            "<pre><code class=\"language-csharp\">A. Yes",
+            "B. No</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2553,7 +2479,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 99,
+        "id": 96,
         "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n文件資料庫會將資料儲存在類似 JSON 的檔案中。</code></pre>",
         "options": [
             "Yes",
@@ -2563,10 +2489,10 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">※文件資料庫 (Document Database)",
+            "<pre><code class=\"language-csharp\">※文件資料庫 (Document Database)",
             "\t●資料以「文件 (Document)」形式儲存。",
             "\t●文件的結構通常是 JSON 或類似 JSON 的格式（如 BSON, XML）。",
-            "\t●MongoDB 就是最典型的例子</code>"
+            "\t●MongoDB 就是最典型的例子</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2574,7 +2500,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 100,
+        "id": 97,
         "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n文件資料庫的設計目的是以預先定義的關聯處理資料。</code></pre>",
         "options": [
             "Yes",
@@ -2592,7 +2518,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 101,
+        "id": 98,
         "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。</code></pre>",
         "options": [
             "Yes",
@@ -2610,7 +2536,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 102,
+        "id": 99,
         "question": "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>",
         "options": [
             "Yes",
@@ -2629,7 +2555,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 103,
+        "id": 100,
         "question": "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>",
         "options": [
             "Yes",
@@ -2650,7 +2576,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 104,
+        "id": 101,
         "type": "single",
         "question": "<pre><code class=\"language-csharp\">基數是指資料表的互相連結方式，例如一對多。</code></pre>",
         "options": [
@@ -2672,7 +2598,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 105,
+        "id": 102,
         "type": "single",
         "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
         "options": [
@@ -2706,7 +2632,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 106,
+        "id": 103,
         "type": "single",
         "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
         "options": [
@@ -2734,7 +2660,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 107,
+        "id": 104,
         "type": "single",
         "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
         "options": [
@@ -2754,7 +2680,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 108,
+        "id": 105,
         "type": "single",
         "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
         "options": [
@@ -2774,7 +2700,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 109,
+        "id": 106,
         "type": "single",
         "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
         "options": [
@@ -2794,7 +2720,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 110,
+        "id": 107,
         "type": "single",
         "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
         "options": [
@@ -2816,7 +2742,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 111,
+        "id": 108,
         "type": "single",
         "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？",
         "options": [
@@ -2836,7 +2762,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 112,
+        "id": 109,
         "type": "single",
         "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
         "options": [
@@ -2856,7 +2782,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 113,
+        "id": 110,
         "type": "single",
         "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
         "options": [
@@ -2883,7 +2809,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 114,
+        "id": 111,
         "type": "single",
         "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
         "options": [
@@ -2910,7 +2836,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 115,
+        "id": 112,
         "type": "single",
         "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
         "options": [
@@ -2937,7 +2863,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 116,
+        "id": 113,
         "type": "single",
         "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
         "options": [
@@ -2967,7 +2893,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 117,
+        "id": 114,
         "type": "single",
         "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？",
         "options": [
@@ -2993,7 +2919,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 118,
+        "id": 115,
         "type": "single",
         "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
         "options": [
@@ -3019,7 +2945,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 119,
+        "id": 116,
         "type": "single",
         "question": "<pre><code class=\"language-csharp\">在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>",
         "options": [
@@ -3050,7 +2976,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 120,
+        "id": 117,
         "type": "single",
         "question": "【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？",
         "options": [
@@ -3076,7 +3002,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 121,
+        "id": 118,
         "type": "single",
         "question": "【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？",
         "options": [
@@ -3103,7 +3029,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 122,
+        "id": 119,
         "type": "single",
         "question": "【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？",
         "options": [
@@ -3130,7 +3056,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 123,
+        "id": 120,
         "type": "single",
         "question": "【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？",
         "options": [
@@ -3157,7 +3083,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 124,
+        "id": 121,
         "type": "single",
         "question": "【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？",
         "options": [
