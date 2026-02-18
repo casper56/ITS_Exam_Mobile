@@ -1,3 +1,4 @@
+
 import json
 import os
 import glob
@@ -26,7 +27,7 @@ def clean_repair_all():
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
         .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
-        .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 50px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 90px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
         .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
         .question-body { padding: 15px 20px; font-size: 1.05rem; background-color: #fff; color: #000; word-wrap: break-word; word-break: normal; overflow-x: hidden; }
@@ -40,8 +41,8 @@ def clean_repair_all():
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
         code, pre code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
-        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
-        .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 35px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 35px; }
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
@@ -76,7 +77,7 @@ def clean_repair_all():
     </header>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
-    <main class="container-fluid main-content" style="width: calc(100% - 50px); margin-top: 80px;"><div id="question-area"></div></main>
+    <main class="container-fluid main-content" style="width: calc(100% - 90px); margin-top: 80px;"><div id="question-area"></div></main>
 </div>
 <div id="result-screen" class="container-fluid">
     <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
@@ -203,7 +204,21 @@ def clean_repair_all():
 
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
+        updateButtonPosition();
     }
+
+    function updateButtonPosition() {
+        const nextBtn = document.getElementById('side-btn-next'); if (!nextBtn) return;
+        const hasScrollbar = document.documentElement.scrollHeight > window.innerHeight;
+        if (hasScrollbar) {
+            nextBtn.style.right = '0px';
+            nextBtn.style.width = '45px';
+        } else {
+            nextBtn.style.right = '0px';
+            nextBtn.style.width = '30px';
+        }
+    }
+    window.addEventListener('resize', updateButtonPosition);
 
     function renderQuestion(index, scrollTop = true) {
         currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); 
@@ -225,6 +240,7 @@ def clean_repair_all():
         html += '<div class="mt-3">';
         options.forEach((opt, optIdx) => {
             const optStr = String(opt);
+            // 預設 Alpha
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
             if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
@@ -245,6 +261,7 @@ def clean_repair_all():
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
         if (scrollTop) window.scrollTo(0, 0); if (typeof Prism !== 'undefined') Prism.highlightAll();
+        updateButtonPosition();
     }
 
     function selectOption(optIdx) {
@@ -285,6 +302,7 @@ def clean_repair_all():
                 isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
             } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
             
+            // 優化正確答案文字顯示
             const isNum = (item.labelType === 'num');
             let ansText = answers.map(a => {
                 if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
@@ -299,6 +317,7 @@ def clean_repair_all():
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 opts.forEach((o, i) => {
+                    // 預設為 Alpha，只有標註 'num' 才用數字
                     const isNum = (item.labelType === 'num');
                     const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                     if (String(o).includes('|')) {
@@ -357,7 +376,6 @@ def clean_repair_all():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.css" rel="stylesheet" />
     <style>
-        html { scrollbar-gutter: stable; }
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
         .main-wrapper { display: flex; min-height: 100vh; }
         .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; }
@@ -407,8 +425,8 @@ def clean_repair_all():
             .q-img { max-width: 300px !important; margin: 10px 0 !important; }
             h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
         }
-        .side-nav-btn { position: fixed; top: 55%; width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; transform: translateY(-50%); }
-        .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
+        .side-nav-btn { position: fixed; top: 55%; width: 30px; height: 65px; background: rgba(13, 110, 253, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; transform: translateY(-50%); }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 35px; }
         .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
         @media (max-width: 992px) {
@@ -450,7 +468,7 @@ def clean_repair_all():
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
-    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 50px); padding: 0; margin-left: auto; margin-right: auto;"><div id="question-container"></div></div></main>
+    <main class="content-area"><div class="container-fluid" style="width: calc(100vw - 90px); padding: 0; margin-left: auto; margin-right: auto;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -629,6 +647,7 @@ def clean_repair_all():
             const div = document.createElement('div'); div.className = 'review-item';
             const optsRaw = item.quiz || item.options || [];
             const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+            // 預設 Alpha
             const isNum = (item.labelType === 'num');
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
@@ -643,18 +662,20 @@ def clean_repair_all():
                     const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
                     return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
                 }
-            }).join('');
+                        }).join('');
+                        
+                        // 處理題目清理：若是陣列，僅清理第一項
+                        let cleanQ = item.question;
+                        if (Array.isArray(cleanQ)) {
+                            cleanQ = [...cleanQ];
+                            if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^\d+\.\s*/, '');
+                        } else {
+                            cleanQ = String(cleanQ).replace(/^\d+\.\s*/, '');
+                        }
+                        
+                        let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
             
-            // 處理題目清理：若是陣列，僅清理第一項
-            let cleanQ = item.question;
-            if (Array.isArray(cleanQ)) {
-                cleanQ = [...cleanQ];
-                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^\d+\.\s*/, '');
-            } else {
-                cleanQ = String(cleanQ).replace(/^\d+\.\s*/, '');
-            }
-            
-            let imgHtml = item.image ? `<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>` : '';
+            // 優化正確答案文字顯示
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
             const ansText = answers.map(a => {
                 if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
@@ -681,6 +702,7 @@ def clean_repair_all():
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
+            // 預設 Alpha，只有標註 'num' 才用數字
             let labelText = `(${String.fromCharCode(65 + oIdx)}) `;
             if (item.labelType === 'num') labelText = `${oIdx + 1}. `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
@@ -727,7 +749,20 @@ def clean_repair_all():
             if (incorrectSet.has(i)) n.classList.add('incorrect'); else if (correctedSet.has(i)) n.classList.add('corrected'); else if (correctSet.has(i)) n.classList.add('correct');
             n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
         });
+        updateButtonPosition();
     }
+    function updateButtonPosition() {
+        const nextBtn = document.getElementById('side-btn-next'); if (!nextBtn) return;
+        const hasScrollbar = document.documentElement.scrollHeight > window.innerHeight;
+        if (hasScrollbar) {
+            nextBtn.style.right = '0px';
+            nextBtn.style.width = '45px';
+        } else {
+            nextBtn.style.right = '0px';
+            nextBtn.style.width = '30px';
+        }
+    }
+    window.addEventListener('resize', updateButtonPosition);
     loadState(); renderQuestion(currentIndex);
 </script>
 </body>
@@ -757,6 +792,7 @@ def clean_repair_all():
                 f.write(mock_top_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
                 f.write(json_cleaned)
                 f.write(b";")
+                # 動態注入 CUTOFF
                 f.write(mock_bottom_tmpl.replace('REPLACE_CUTOFF', str(subj['cutoff'])).encode('utf-8'))
             
             # --- 2. 生成 自主練習頁面 (學科名.html) ---
@@ -767,7 +803,7 @@ def clean_repair_all():
                 f.write(b";")
                 f.write(prac_bottom_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
             
-            print(f"V3.4.6 Ultimate Layout Fixed: {subj['dir']} (Locked Width & Gutter)")
+            print(f"V3.4.4 Complete Refresh: {subj['dir']} (Mock & Practice)")
         except Exception as e:
             print(f"Failed {subj['dir']}: {e}")
 
