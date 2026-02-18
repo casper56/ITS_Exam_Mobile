@@ -47,7 +47,7 @@
         },
         {
             "dir": "www/ITS_softdevelop",
-            "json": "questions_ITS_csharp.json",
+            "json": "questions_ITS_softdevelop.json",
             "title": "ITS Software Development",
             "id": "itscs",
             "html": "ITS_softdevelop.html",

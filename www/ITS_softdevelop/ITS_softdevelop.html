@@ -1815,10 +1815,10 @@
         "id": 67,
         "question": "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。\n您使用如下圖所示的設定建立了一個虛擬目錄。\n\n\n您將 Overview.jpg 檔案儲存在虛擬目錄中。\n您應該使用哪一個 URL 來存取該檔案？</code></pre>",
         "options": [
-            "A. https://sunsetweb.org/images/Overview.jpg",
-            "B. http://sunsetweb.org/images/Overview.jpg",
-            "C. http://sunsetweb.org/myapplication/Images/Overview.jpg",
-            "D. https://sunsetweb.org/Storage/Images/Overview.jpg"
+            "https://sunsetweb.org/images/Overview.jpg",
+            "http://sunsetweb.org/images/Overview.jpg",
+            "http://sunsetweb.org/myapplication/Images/Overview.jpg",
+            "https://sunsetweb.org/Storage/Images/Overview.jpg"
         ],
         "answer": [
             "A"
@@ -1897,7 +1897,8 @@
             "<code class=\"language-csharp\">A. CREATE PROCEDURE StoreData @UserName nvarchar (255),@Age int",
             "B. CREATE PROCEDURE StoreData @UserName char,@Age double     \t #資料型態不符",
             "C. UPDATE PROCEDURE StoreData  @UserName nvarchar (255),@Age int \t#必需有Create 關鍵字 ",
-            "D. CREATE PROCEDURE StoreData (@UserName, @Age)  #沒有資料型別宣告</code>"
+            "D. CREATE PROCEDURE StoreData (@UserName, @Age)  #沒有資料型別宣告",
+            "CREATE PROCEDURE 名字 @變數1 型別, @變數2 型別</code> "
         ],
         "weight": 1,
         "image": null,
@@ -1908,10 +1909,10 @@
         "id": 71,
         "question": "<pre><code class=\"language-csharp\">在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>",
         "options": [
-            "A. 更新不會失敗。",
-            "B. 更新會以單位的形式成功或失敗。",
-            "C. 更新會盡快完成",
-            "D. 如果發生錯誤，將無法回復變更。"
+            "更新不會失敗。",
+            "更新會以單位的形式成功或失敗。",
+            "更新會盡快完成",
+            "如果發生錯誤，將無法回復變更。"
         ],
         "answer": [
             "B"
@@ -1937,10 +1938,10 @@
         "id": 72,
         "question": "<pre><code class=\"language-csharp\">您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>",
         "options": [
-            "A. 連線共用",
-            "B. 連線逾時",
-            "C. 索引 ",
-            "D. 正規化"
+            "連線共用",
+            "連線逾時",
+            "索引 ",
+            "正規化"
         ],
         "answer": [
             "A"
@@ -1960,12 +1961,12 @@
         "id": 73,
         "question": "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>",
         "options": [
-            "A. 測試案例必要的任何前置條件 ",
-            "B. 測試案例的預期結果",
-            "C. 與其他測試案例的整合 ",
-            "D. 結合成單一測試的所有使用案例",
-            "E. 沒有任何判斷提示的測試案例 ",
-            "F. 以上皆非"
+            "測試案例必要的任何前置條件 ",
+            "測試案例的預期結果",
+            "與其他測試案例的整合 ",
+            "結合成單一測試的所有使用案例",
+            "沒有任何判斷提示的測試案例 ",
+            "以上皆非"
         ],
         "answer": [
             "A",
@@ -1988,12 +1989,12 @@
         "id": 74,
         "question": "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>",
         "options": [
-            "A. JSON 物件可使用名稱/值對來建立。",
-            "B. JSON 物件可使用已排序的值清單來建立。",
-            "C. JSON 物件可運用名稱空間。",
-            "D. JSON 物件可延伸。",
-            "E. 以上皆是",
-            "F. 以上皆非"
+            "JSON 物件可使用名稱/值對來建立。",
+            "JSON 物件可使用已排序的值清單來建立。",
+            "JSON 物件可運用名稱空間。",
+            "JSON 物件可延伸。",
+            "以上皆是",
+            "以上皆非"
         ],
         "answer": [
             "A",
@@ -2016,12 +2017,12 @@
         "id": 75,
         "question": "<pre><code class=\"language-csharp\">下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>",
         "options": [
-            "A. 正規化可降低磁碟空間使用量。",
-            "B. 正規化可防止資料不一致。",
-            "C. 正規化可將資料損毀的影響降到最低。",
-            "D. 正規化可減少結構描述限制。",
-            "E. 以上皆是",
-            "F. 以上皆非"
+            "正規化可降低磁碟空間使用量。",
+            "正規化可防止資料不一致。",
+            "正規化可將資料損毀的影響降到最低。",
+            "正規化可減少結構描述限制。",
+            "以上皆是",
+            "以上皆非"
         ],
         "answer": [
             "A",
@@ -2044,12 +2045,12 @@
         "id": 76,
         "question": "<pre><code class=\"language-csharp\">連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>",
         "options": [
-            "A. 提升效能",
-            "B. 提升可擴縮性",
-            "C. 縮短建立連線的時間",
-            "D. 不需要任何設定 ",
-            "E. 提升安全性",
-            "F. 以上皆非"
+            "提升效能",
+            "提升可擴縮性",
+            "縮短建立連線的時間",
+            "不需要任何設定 ",
+            "提升安全性",
+            "以上皆非"
         ],
         "answer": [
             "A",
@@ -2101,12 +2102,12 @@
         "id": 78,
         "question": "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案。）</code></pre>",
         "options": [
-            "A. 測試案例必要的任何前置條件",
-            "B. 測試案例的預期結果",
-            "C. 與其他測試案例的整合",
-            "D. 綜合成單一測試的所有使用案例",
-            "E. 沒有任何判斷提示的測試案例",
-            "F. 以上皆非"
+            "測試案例必要的任何前置條件",
+            "測試案例的預期結果",
+            "與其他測試案例的整合",
+            "綜合成單一測試的所有使用案例",
+            "沒有任何判斷提示的測試案例",
+            "以上皆非"
         ],
         "answer": [
             "A",
