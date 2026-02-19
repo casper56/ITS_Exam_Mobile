@@ -1,0 +1,5 @@
+類別,指令公式 / 查詢對象,參數與功能說明
+查欄位,SELECT * FROM INFORMATION_SCHEMA.COLUMNS,查詢所有表或特定表的欄位名稱、型別、是否允許 NULL。
+查表格,SELECT * FROM INFORMATION_SCHEMA.TABLES,列出資料庫中所有的資料表 (Base Table) 與視圖 (View)。
+查程序,SELECT * FROM INFORMATION_SCHEMA.ROUTINES,查詢預存程序 (Stored Procedures) 與函數 (Functions) 的清單。
+查參數,SELECT * FROM INFORMATION_SCHEMA.PARAMETERS,"查詢預存程序中定義的參數（如 @UserName, @Age）。"

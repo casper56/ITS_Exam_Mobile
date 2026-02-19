@@ -1,0 +1,9 @@
+﻿指令類別,指令 (Command),MSSQL 正確語法範例,括號規則,功能與考試重點說明
+DDL (結構),CREATE TABLE,"CREATE TABLE Customer (ID int, Name nvarchar(50))",必須有括號,建立新表與定義欄位。
+DDL (結構),ALTER ADD,ALTER TABLE Customer ADD District int,不可有括號,增加單一欄位。注意：MSSQL 加括號會報錯 102。
+DDL (結構),ALTER COLUMN,ALTER TABLE Customer ALTER COLUMN District int NOT NULL,不可有括號,修改型別或必填屬性。修改為 NOT NULL 前須先補值。
+DML (資料),INSERT,"INSERT INTO Customer (ID, Name) VALUES (1, N'張三')",必須有括號,新增記錄。VALUES 後方括號封裝實際數值。
+DML (資料),UPDATE,UPDATE Customer SET District = 0 WHERE District IS NULL,通常無括號,修改現有資料。SET 用於指定欄位與新值。
+DQL (查詢),SELECT,SELECT * FROM INFORMATION_SCHEMA.COLUMNS,通常無括號,檢索資料。可用於查詢資料庫「字典」結構。
+TCL (交易),COMMIT / ROLLBACK,COMMIT;,無括號,確認(COMMIT)或撤銷(ROLLBACK)交易。
+中繼資料,INFORMATION_SCHEMA,SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS,無括號,查詢資料庫字典。確認欄位是否為必填 (IS_NULLABLE)。

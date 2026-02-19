@@ -1,0 +1,8 @@
+﻿資料型別 (Data Type),宣告方式範例,IS_NULLABLE 預設結果,適用場景與備註
+int / bigint,Age int,YES,整數資料（年齡、編號）。
+nvarchar(n) / nvarchar(max),Address nvarchar(200),YES,支援中文的變動長度文字。
+varchar(n),Email varchar(100),YES,僅支援英文、數字與符號。
+"decimal(p,s)","Price decimal(10,2)",YES,精確小數（如金額、薪資）。
+datetime / date,OrderDate datetime,YES,日期與時間。
+bit,IsActive bit,YES,布林值（0 或 1）。
+char(n),Gender char(1),YES,固定長度的字元（如身分證字號）。

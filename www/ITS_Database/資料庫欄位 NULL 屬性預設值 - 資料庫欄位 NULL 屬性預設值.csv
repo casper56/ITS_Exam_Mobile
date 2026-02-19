@@ -1,0 +1,5 @@
+﻿宣告方式 (語法範例),是否定義 NULL 屬性,IS_NULLABLE 結果,原因說明
+ID int PRIMARY KEY,否,NO,主鍵在資料庫規則中強制不可為空（隱含 NOT NULL）。
+Name nvarchar(50) NOT NULL,是,NO,你明確要求系統「不准有空值」。
+District int,否,YES,系統預設值。沒說要必填，系統就當作選填。
+Note nvarchar(max) NULL,是,YES,明確告訴系統「可以有空值」。
