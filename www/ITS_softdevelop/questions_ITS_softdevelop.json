@@ -2,7 +2,7 @@
     {
         "id": 1,
         "question": [
-            "<pre style=\"margin: 5px 0; line-height: 1.5; font-size: 0.95rem;color: #333333\" >您正在建立用以儲存測驗結果的應用程式。",
+            "<pre>您正在建立用以儲存測驗結果的應用程式。",
             "您需要記錄每個答案正確或不正確。",
             "您還需要將儲存資料所需的記憶體數量減到最少。",
             "您應該使用哪一種資料類型？</pre>"
@@ -17,7 +17,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-csharp\">boolean在C#中是1位元組byte，",
+            "<pre><code>boolean在C#中是1位元組byte，",
             "double是雙精度浮點數，通常需要8個位元組，",
             "integer是整數，通常4位元組 string是字串型別，佔用的記憶體更大。</code></pre>"
         ],
@@ -73,14 +73,14 @@
             "int c = 30;",
             "int result = 0;",
             "",
-            "if (a &lt;= b || c &gt; a)",
+            "if (a <= b || c > a)",
             "   result = 10;",
-            "else if (a &lt;= b || c &lt;= a))",
+            "else if (a <= b || c <= a)",
             "   result = 20;",
             "else",
-            "   result = 30;",
+            "   result = 30;</code></pre>",
             "",
-            "程式碼執行完畢之後，result 的值為何？</code></pre>"
+            "程式碼執行完畢之後，result 的值為何？"
         ],
         "options": [
             "0",

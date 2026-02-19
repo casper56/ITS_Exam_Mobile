@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITS Software Development 模擬考試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         html { scrollbar-gutter: stable; }
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
@@ -13,8 +13,34 @@
         .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
         .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 50px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
-        .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
-        .question-body { padding: 15px 20px; font-size: 1.05rem; background-color: #fff; color: #000; word-wrap: break-word; word-break: normal; overflow-x: hidden; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 15px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                    white-space: pre-wrap; /* 核心修正：確保陣列結合後的 \n 能正常換行 */
+                }
+                
+                /* 預設題目與程式碼樣式 */                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                    white-space: pre-wrap; /* 確保字串陣列的 \n 換行生效 */
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                    white-space: pre-wrap; /* 全域保留換行 */
+                }
+        code[class*="language-"] { color: inherit; }
+
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
@@ -23,7 +49,6 @@
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        code, pre code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
         .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
@@ -79,6 +104,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
     const EXAM_LIMIT = 50, WRONG_KEY = 'itscs_exam_wrong_ids';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
@@ -99,7 +125,12 @@
     const allQuestions = [
     {
         "id": 1,
-        "question": "<pre><code class=\"language-csharp\">您正在建立用以儲存測驗結果的應用程式。\n您需要記錄每個答案正確或不正確。\n您還需要將儲存資料所需的記憶體數量減到最少。\n您應該使用哪一種資料類型？</code></pre>",
+        "question": [
+            "<pre>您正在建立用以儲存測驗結果的應用程式。",
+            "您需要記錄每個答案正確或不正確。",
+            "您還需要將儲存資料所需的記憶體數量減到最少。",
+            "您應該使用哪一種資料類型？</pre>"
+        ],
         "options": [
             "boolean",
             "double",
@@ -110,7 +141,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-csharp\">boolean在C#中是1位元組byte，",
+            "<pre><code>boolean在C#中是1位元組byte，",
             "double是雙精度浮點數，通常需要8個位元組，",
             "integer是整數，通常4位元組 string是字串型別，佔用的記憶體更大。</code></pre>"
         ],
@@ -121,7 +152,11 @@
     },
     {
         "id": 2,
-        "question": "<pre><code class=\"language-csharp\">你建立了一個應用程式，其中包含一個名為 Red 的函式。\nRed 會呼叫一個名為 Blue 的函式。\n在 Blue 執行完成之後，編譯器如何返回程式碼路徑中的正確位置？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">你建立了一個應用程式，其中包含一個名為 Red 的函式。",
+            "Red 會呼叫一個名為 Blue 的函式。",
+            "在 Blue 執行完成之後，編譯器如何返回程式碼路徑中的正確位置？</code></pre>"
+        ],
         "options": [
             "函式呼叫儲存在堆疊上。",
             "函式呼叫儲存在堆疊上, 且完成之後, 執行資料都將從堆疊上清除, 並將最後一個指示保留在頂端。",
@@ -156,7 +191,21 @@
     },
     {
         "id": 3,
-        "question": "你執行了下列程式碼：<br/><pre><code class=\"language-csharp\">int a = 10;\nint b = 20;\nint c = 30;\nint result = 0;\n\nif (a &lt;= b || c &gt; a)\n   result = 10;\nelse if (a &lt;= b || c &lt;= a))\n   result = 20;\nelse\n   result = 30;\n\n程式碼執行完畢之後，result 的值為何？</code></pre>",
+        "question": [
+            "你執行了下列程式碼：<br/><pre><code class=\"language-csharp\">int a = 10;",
+            "int b = 20;",
+            "int c = 30;",
+            "int result = 0;",
+            "",
+            "if (a <= b || c > a)",
+            "   result = 10;",
+            "else if (a <= b || c <= a)",
+            "   result = 20;",
+            "else",
+            "   result = 30;</code></pre>",
+            "",
+            "程式碼執行完畢之後，result 的值為何？"
+        ],
         "options": [
             "0",
             "10",
@@ -176,7 +225,22 @@
     },
     {
         "id": 4,
-        "question": "<pre><code class=\"language-csharp\">你執行了下列程式碼：\nint a = 10;\nint b = 20;\nint c = 30;\nint result = 0;\n\nif (a <= b && c <= a)\n    result = 10;\nelse if (a <= b && b >= c)\n    result = 20;\nelse\n    result = 30;\n\n程式碼執行完畢之後，result 的值為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">你執行了下列程式碼：",
+            "int a = 10;",
+            "int b = 20;",
+            "int c = 30;",
+            "int result = 0;",
+            "",
+            "if (a <= b && c <= a)",
+            "    result = 10;",
+            "else if (a <= b && b >= c)",
+            "    result = 20;",
+            "else",
+            "    result = 30;",
+            "",
+            "程式碼執行完畢之後，result 的值為何？</code></pre>"
+        ],
         "options": [
             "0",
             "10",
@@ -196,7 +260,9 @@
     },
     {
         "id": 5,
-        "question": "<pre><code class=\"language-csharp\">在例外狀況處理常式中，catch 區段的用途為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">在例外狀況處理常式中，catch 區段的用途為何？</code></pre>"
+        ],
         "options": [
             "不論是否擲回例外狀況都執行程式碼",
             "只有在擲回例外狀況時才執行程式碼",
@@ -222,7 +288,22 @@
     },
     {
         "id": 6,
-        "question": "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。\n你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。\n請選取正確的選項以完成程式碼：\n_(Q1)_ _(Q2)_ _(Q3)_ );\n\nfunction updateClock() {\n  let d = new Date();\n  document.getElementById(\"clock\").innerHTML =\n    d.getHours() + \":\" +\n    d.getMinutes() + \":\" +\n    d.getSeconds();\n}\n\nQ1該寫入？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。",
+            "你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。",
+            "請選取正確的選項以完成程式碼：",
+            "_(Q1)_ _(Q2)_ _(Q3)_ );",
+            "",
+            "function updateClock() {",
+            "  let d = new Date();",
+            "  document.getElementById(\"clock\").innerHTML =",
+            "    d.getHours() + \":\" +",
+            "    d.getMinutes() + \":\" +",
+            "    d.getSeconds();",
+            "}",
+            "",
+            "Q1該寫入？</code></pre>"
+        ],
         "options": [
             "fetch(",
             "setInterval(",
@@ -247,7 +328,23 @@
     },
     {
         "id": 7,
-        "question": "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。\n你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。\n請選取正確的選項以完成程式碼：\n\n_(Q1)_ _(Q2)_ _(Q3)_ );\n\nfunction updateClock() {\n  let d = new Date();\n  document.getElementById(\"clock\").innerHTML =\n    d.getHours() + \":\" +\n    d.getMinutes() + \":\" +\n    d.getSeconds();\n}\n\nQ2該寫入？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。",
+            "你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。",
+            "請選取正確的選項以完成程式碼：",
+            "",
+            "_(Q1)_ _(Q2)_ _(Q3)_ );",
+            "",
+            "function updateClock() {",
+            "  let d = new Date();",
+            "  document.getElementById(\"clock\").innerHTML =",
+            "    d.getHours() + \":\" +",
+            "    d.getMinutes() + \":\" +",
+            "    d.getSeconds();",
+            "}",
+            "",
+            "Q2該寫入？</code></pre>"
+        ],
         "options": [
             "updateClock",
             "updateClock(),",
@@ -274,7 +371,23 @@
     },
     {
         "id": 8,
-        "question": "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。\n你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。\n請選取正確的選項以完成程式碼：\n\n_(Q1)_ _(Q2)_ _(Q3)_ );\n\nfunction updateClock() {\n  let d = new Date();\n  document.getElementById(\"clock\").innerHTML =\n    d.getHours() + \":\" +\n    d.getMinutes() + \":\" +\n    d.getSeconds();\n}\n\nQ3該寫入？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個網頁顯示了 clock 元素。",
+            "你需要完成 JavaScript 程式碼以每秒更新 clock 元素一次。",
+            "請選取正確的選項以完成程式碼：",
+            "",
+            "_(Q1)_ _(Q2)_ _(Q3)_ );",
+            "",
+            "function updateClock() {",
+            "  let d = new Date();",
+            "  document.getElementById(\"clock\").innerHTML =",
+            "    d.getHours() + \":\" +",
+            "    d.getMinutes() + \":\" +",
+            "    d.getSeconds();",
+            "}",
+            "",
+            "Q3該寫入？</code></pre>"
+        ],
         "options": [
             "1",
             "60",
@@ -301,7 +414,20 @@
     },
     {
         "id": 9,
-        "question": "<pre><code class=\"language-csharp\">您撰寫了以下這段程式碼：\npublic delegate void Notification();\npublic Notification DelegateA;\nDelegateA = MethodA;\nDelegateA += MethodA;\n\npublic delegate void Notification();\npublic event Notification EventA;\nEventA = EventHandlerA;\nEventA += EventHandlerA;\n\n請問哪一個陳述式會讓程式無法正確執行？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您撰寫了以下這段程式碼：",
+            "public delegate void Notification();",
+            "public Notification DelegateA;",
+            "DelegateA = MethodA;",
+            "DelegateA += MethodA;",
+            "",
+            "public delegate void Notification();",
+            "public event Notification EventA;",
+            "EventA = EventHandlerA;",
+            "EventA += EventHandlerA;",
+            "",
+            "請問哪一個陳述式會讓程式無法正確執行？</code></pre>"
+        ],
         "options": [
             "DelegateA = MethodA;",
             "DelegateA += MethodA;",
@@ -324,7 +450,11 @@
     },
     {
         "id": 10,
-        "question": "<pre><code class=\"language-csharp\">您正在將軟體規格轉換為程式碼元件。\n規格需要無法具現化的類別，但是可以指定必須在實體繼承類別中實作的方法。\n您應該建置哪一種類別？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在將軟體規格轉換為程式碼元件。",
+            "規格需要無法具現化的類別，但是可以指定必須在實體繼承類別中實作的方法。",
+            "您應該建置哪一種類別？</code></pre>"
+        ],
         "options": [
             "abstract",
             "protected",
@@ -354,7 +484,20 @@
     },
     {
         "id": 11,
-        "question": "<pre><code class=\"language-csharp\">有一個堆疊包含整數值，這些值會按照下列順序推入堆疊：2、4、6、8。\n您執行了下列作業序列：\nPop\nPush 3\nPop\nPush 4\nPush 6\nPush 7\nPop\nPop\nPop\n這些作業執行完畢之後，最上層元素的值為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個堆疊包含整數值，這些值會按照下列順序推入堆疊：2、4、6、8。",
+            "您執行了下列作業序列：",
+            "Pop",
+            "Push 3",
+            "Pop",
+            "Push 4",
+            "Push 6",
+            "Push 7",
+            "Pop",
+            "Pop",
+            "Pop",
+            "這些作業執行完畢之後，最上層元素的值為何？</code></pre>"
+        ],
         "options": [
             "2",
             "3",
@@ -386,7 +529,20 @@
     },
     {
         "id": 12,
-        "question": "<pre><code class=\"language-csharp\">您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。\n其他團隊成員所進行的應用程式維護作業不得影響您的工作。請問您該怎麼做？請將清單中適當的詞彙移至正確位置：\n詞彙：\n1. 合併   (merge)                2. 提取要求   (pull request)               3. 推送   (push)\n4. 分支   (Branch)               5. 認可    (commit)                        6. 複製            \n\n您應該先建立原始程式碼的 __A__。\n當您在本機工作並確認變更時，需要執行 __B__，如此您的變更才能儲存在本機儲存庫中。\n\n然後，您應該執行 __C__，以將您的變更儲存在遠端儲存庫中。\n為了通知其他開發人員您所做的變更，您應該建立 __D__。    \n在您的功能完成之後，其他開發人員應該執行 __E__。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。",
+            "其他團隊成員所進行的應用程式維護作業不得影響您的工作。請問您該怎麼做？請將清單中適當的詞彙移至正確位置：",
+            "詞彙：",
+            "1. 合併   (merge)                2. 提取要求   (pull request)               3. 推送   (push)",
+            "4. 分支   (Branch)               5. 認可    (commit)                        6. 複製            ",
+            "",
+            "您應該先建立原始程式碼的 __A__。",
+            "當您在本機工作並確認變更時，需要執行 __B__，如此您的變更才能儲存在本機儲存庫中。",
+            "",
+            "然後，您應該執行 __C__，以將您的變更儲存在遠端儲存庫中。",
+            "為了通知其他開發人員您所做的變更，您應該建立 __D__。    ",
+            "在您的功能完成之後，其他開發人員應該執行 __E__。</code></pre>"
+        ],
         "options": [
             "45321",
             "12345",
@@ -421,7 +577,23 @@
     },
     {
         "id": 13,
-        "question": "<pre><code class=\"language-csharp\">請將清單中的每個版本控制系統命令，移至正確的描述位置：\n命令：\n1. branch\n2. checkout\n3. commit\n4. merge\n5. rollback\n描述：\nA. 儲存新的專案快照\nB. 管理開發程式碼行\nC. 更新工作專案的全部或其中一部分\nD. 將您的本機專案還原回先前的狀態\nE. 將另一個專案的內容導入目前的專案\n\n哪一個選項的順序正確？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請將清單中的每個版本控制系統命令，移至正確的描述位置：",
+            "命令：",
+            "1. branch",
+            "2. checkout",
+            "3. commit",
+            "4. merge",
+            "5. rollback",
+            "描述：",
+            "A. 儲存新的專案快照",
+            "B. 管理開發程式碼行",
+            "C. 更新工作專案的全部或其中一部分",
+            "D. 將您的本機專案還原回先前的狀態",
+            "E. 將另一個專案的內容導入目前的專案",
+            "",
+            "哪一個選項的順序正確？</code></pre>"
+        ],
         "options": [
             "12345",
             "21354",
@@ -449,7 +621,11 @@
     },
     {
         "id": 14,
-        "question": "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。\n您需要將 accessCount 成員變數的可用性限制為基底類別以及衍生自基底類別的任何類別。\n請問您應該使用哪個存取修飾詞？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。",
+            "您需要將 accessCount 成員變數的可用性限制為基底類別以及衍生自基底類別的任何類別。",
+            "請問您應該使用哪個存取修飾詞？</code></pre>"
+        ],
         "options": [
             "internal",
             "private",
@@ -477,7 +653,9 @@
     },
     {
         "id": 15,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>"
+        ],
         "options": [
             "Boxing",
             "Unboxing",
@@ -508,7 +686,11 @@
     },
     {
         "id": 16,
-        "question": "<pre><code class=\"language-csharp\">您有一個具有屬性的類別。\n您需要確保該類別的取用者可以寫入屬性的值。\n請問您應該使用哪一個關鍵字？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您有一個具有屬性的類別。",
+            "您需要確保該類別的取用者可以寫入屬性的值。",
+            "請問您應該使用哪一個關鍵字？</code></pre>"
+        ],
         "options": [
             "set",
             "get",
@@ -538,7 +720,9 @@
     },
     {
         "id": 17,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>"
+        ],
         "options": [
             "基底類別",
             "衍生類別",
@@ -573,7 +757,14 @@
     },
     {
         "id": 18,
-        "question": "<pre><code class=\"language-csharp\">類別 C 和類別 D 繼承自類別 B。\n類別 B 繼承自類別 A。\n這些類別的方法如下所示：\n\n所有類別都有受保護的範圍。\n類別 C 可以存取哪些方法？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">類別 C 和類別 D 繼承自類別 B。",
+            "類別 B 繼承自類別 A。",
+            "這些類別的方法如下所示：",
+            "",
+            "所有類別都有受保護的範圍。",
+            "類別 C 可以存取哪些方法？</code></pre>"
+        ],
         "options": [
             "僅 m1 和 m3",
             "僅 m2 和 m3",
@@ -605,7 +796,9 @@
     },
     {
         "id": 19,
-        "question": "<pre><code class=\"language-csharp\">哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>"
+        ],
         "options": [
             "向上轉型",
             "向下轉型",
@@ -637,7 +830,9 @@
     },
     {
         "id": 20,
-        "question": "<pre><code class=\"language-csharp\">衍生類別可以覆寫哪一種函式？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">衍生類別可以覆寫哪一種函式？</code></pre>"
+        ],
         "options": [
             "static 函式",
             "private virtual 函式",
@@ -668,7 +863,9 @@
     },
     {
         "id": 21,
-        "question": "<pre><code class=\"language-csharp\">下列哪一項敘述正確描述了在基底類別中宣告為虛擬的 C# 方法？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">下列哪一項敘述正確描述了在基底類別中宣告為虛擬的 C# 方法？</code></pre>"
+        ],
         "options": [
             "衍生類別的實作看不到此方法",
             "可透過衍生類別本身的實作覆寫此方法",
@@ -688,7 +885,53 @@
     },
     {
         "id": 22,
-        "question": "<pre><code class=\"language-csharp\">您正在撰寫一個儲存及顯示各種賽跑結果的應用程式。此應用程式包含下列定義：\npublic interface IDisplayResult {\n void Display();\n}\n\npublic class Race {\n public int Seconds;\n public virtual void Display() {\n  Console.WriteLine(Seconds);  \n }\n}\n\n下列程式碼會顯示競賽的結果：\nvar r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();   \nr2.Display();         \nr1.DisplayRaw(); \n\n此程式碼必須輸出下列結果至主控台：\n99 seconds\n1.65 minutes\n99\n\n請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：\n宣告：\n(1)public override void Display(){ \n(2)public void DisplayRaw() {\n(3)void IDisplayResult.Display() {\n(4)private void Display()\n作答區：\npublic class FootRace : Race, IDisplayResult\n{\n    ＿ (A) ＿  \n    Console.WriteLine(Seconds + \" seconds\");\n     }\n    ＿ (B) ＿    \n    base.Display();\n    }\n    ＿ (C) ＿   \n    Console.WriteLine(Seconds / 60d + \" minutes\");  \n    }\n}</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在撰寫一個儲存及顯示各種賽跑結果的應用程式。此應用程式包含下列定義：",
+            "public interface IDisplayResult {",
+            " void Display();",
+            "}",
+            "",
+            "public class Race {",
+            " public int Seconds;",
+            " public virtual void Display() {",
+            "  Console.WriteLine(Seconds);  ",
+            " }",
+            "}",
+            "",
+            "下列程式碼會顯示競賽的結果：",
+            "var r1 = new FootRace();",
+            "var r2 = r1 as IDisplayResult;",
+            "r1.Seconds = 99;",
+            "",
+            "r1.Display();   ",
+            "r2.Display();         ",
+            "r1.DisplayRaw(); ",
+            "",
+            "此程式碼必須輸出下列結果至主控台：",
+            "99 seconds",
+            "1.65 minutes",
+            "99",
+            "",
+            "請完成 FootRace 類別的實作，將下列宣告依適當順序放入程式碼中：",
+            "宣告：",
+            "(1)public override void Display(){ ",
+            "(2)public void DisplayRaw() {",
+            "(3)void IDisplayResult.Display() {",
+            "(4)private void Display()",
+            "作答區：",
+            "public class FootRace : Race, IDisplayResult",
+            "{",
+            "    ＿ (A) ＿  ",
+            "    Console.WriteLine(Seconds + \" seconds\");",
+            "     }",
+            "    ＿ (B) ＿    ",
+            "    base.Display();",
+            "    }",
+            "    ＿ (C) ＿   ",
+            "    Console.WriteLine(Seconds / 60d + \" minutes\");  ",
+            "    }",
+            "}</code></pre>"
+        ],
         "options": [
             "123",
             "132",
@@ -718,7 +961,9 @@
     },
     {
         "id": 23,
-        "question": "<pre><code class=\"language-csharp\">您需要將所有樣式設定分組成個別的檔案，以便套用至 Web 應用程式的所有頁面。請問您該怎麼做？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您需要將所有樣式設定分組成個別的檔案，以便套用至 Web 應用程式的所有頁面。請問您該怎麼做？</code></pre>"
+        ],
         "options": [
             "使用內部樣式表。",
             "使用內嵌樣式。",
@@ -741,7 +986,11 @@
     },
     {
         "id": 24,
-        "question": "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。\n請選擇正確的選項以完成句子。\n對於 background-image 樣式，您應該使用此值：</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。",
+            "請選擇正確的選項以完成句子。",
+            "對於 background-image 樣式，您應該使用此值：</code></pre>"
+        ],
         "options": [
             "linear-gradient(to top, green, black);",
             "linear-gradient(to bottom, green, black);",
@@ -761,7 +1010,12 @@
     },
     {
         "id": 25,
-        "question": "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：\n \n請選擇正確的選項以完成句子。\n對於 background-image 樣式，您應該使用此值：</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：",
+            " ",
+            "請選擇正確的選項以完成句子。",
+            "對於 background-image 樣式，您應該使用此值：</code></pre>"
+        ],
         "options": [
             "10px;",
             "10px, 10px, 10px;",
@@ -783,7 +1037,10 @@
     },
     {
         "id": 26,
-        "question": "<pre><code class=\"language-csharp\">您正在建立一個 Web 應用程式。即將存取該應用程式的用戶端電腦會執行各種網頁瀏覽器。\n哪一個詞能描述讓應用程式可供用戶端電腦存取的程序？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在建立一個 Web 應用程式。即將存取該應用程式的用戶端電腦會執行各種網頁瀏覽器。",
+            "哪一個詞能描述讓應用程式可供用戶端電腦存取的程序？</code></pre>"
+        ],
         "options": [
             "轉型",
             "封裝",
@@ -808,7 +1065,9 @@
     },
     {
         "id": 27,
-        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器都有___位址和網域名稱，用以在網際網路上識別其身分。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器都有___位址和網域名稱，用以在網際網路上識別其身分。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTML",
@@ -831,7 +1090,9 @@
     },
     {
         "id": 28,
-        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTML",
@@ -854,7 +1115,9 @@
     },
     {
         "id": 29,
-        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。擁有存取權的用戶端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。擁有存取權的用戶端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTTP",
@@ -877,7 +1140,9 @@
     },
     {
         "id": 30,
-        "question": "<pre><code class=\"language-csharp\">哪一個程序會將資料轉換為 Web 服務所用的 XML 字串？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個程序會將資料轉換為 Web 服務所用的 XML 字串？</code></pre>"
+        ],
         "options": [
             "還原序列化",
             "序列化",
@@ -901,7 +1166,10 @@
     },
     {
         "id": 31,
-        "question": "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。\nB1 是控制器，B2 是模型，B3 是檢視</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。",
+            "B1 是控制器，B2 是模型，B3 是檢視</code></pre>"
+        ],
         "options": [
             "231",
             "123",
@@ -929,7 +1197,14 @@
     },
     {
         "id": 32,
-        "question": "<pre><code class=\"language-csharp\">請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。\n1. 將事件轉換成要求\n2. 顯示資料\n3. 解譯並傳遞資料\n4. 使用者點選按鈕\n5. 驗證要求、儲存資料</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。",
+            "1. 將事件轉換成要求",
+            "2. 顯示資料",
+            "3. 解譯並傳遞資料",
+            "4. 使用者點選按鈕",
+            "5. 驗證要求、儲存資料</code></pre>"
+        ],
         "options": [
             "12345",
             "23154",
@@ -954,7 +1229,9 @@
     },
     {
         "id": 33,
-        "question": "<pre><code class=\"language-csharp\">您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>"
+        ],
         "options": [
             "多對多",
             "多維",
@@ -974,7 +1251,14 @@
     },
     {
         "id": 34,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 Items 的資料表，其欄位包括：\n- ID（integer，主索引鍵，自動產生）\n- Description（text）\n- Completed（Boolean）\n\n您只需要刪除 Completed 欄位設為 True 的資料列。請問您應該使用哪一個陳述式？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個名為 Items 的資料表，其欄位包括：",
+            "- ID（integer，主索引鍵，自動產生）",
+            "- Description（text）",
+            "- Completed（Boolean）",
+            "",
+            "您只需要刪除 Completed 欄位設為 True 的資料列。請問您應該使用哪一個陳述式？</code></pre>"
+        ],
         "options": [
             "DELETE FROM Items WHERE (Items.Completed =1)",
             "DELETE FROM * WHERE (Items.Completed =1)",
@@ -997,7 +1281,29 @@
     },
     {
         "id": 35,
-        "question": "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：\n- 如果客戶只有一張發票，請刪除該發票。\n- 如果客戶有多張發票，請取消交易。\n請問 A 部分應填入下列何者程式碼？\n-- A 部分    //開始交易\nDECLARE @invoice_count INT;\n\nSELECT @invoice_count = COUNT(*)\nFROM Invoices\nWHERE CustomerID = 123;\n\nIF @invoice_count = 1\nBEGIN\n    DELETE FROM Invoices\n    WHERE CustomerID = 123;\n    -- C 部分\nEND\nELSE\nBEGIN\n    -- B 部分\nEND</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：",
+            "- 如果客戶只有一張發票，請刪除該發票。",
+            "- 如果客戶有多張發票，請取消交易。",
+            "請問 A 部分應填入下列何者程式碼？",
+            "-- A 部分    //開始交易",
+            "DECLARE @invoice_count INT;",
+            "",
+            "SELECT @invoice_count = COUNT(*)",
+            "FROM Invoices",
+            "WHERE CustomerID = 123;",
+            "",
+            "IF @invoice_count = 1",
+            "BEGIN",
+            "    DELETE FROM Invoices",
+            "    WHERE CustomerID = 123;",
+            "    -- C 部分",
+            "END",
+            "ELSE",
+            "BEGIN",
+            "    -- B 部分",
+            "END</code></pre>"
+        ],
         "options": [
             "TRY TRAN;",
             "BEGIN TRAN;",
@@ -1020,7 +1326,29 @@
     },
     {
         "id": 36,
-        "question": "<pre><code>請設定交易以符合下列需求：\n- 如果客戶只有一張發票，請刪除該發票。\n- 如果客戶有多張發票，請取消交易。\n請問 B 部分應填入下列何者程式碼？\n-- A 部分\nDECLARE @invoice_count INT;\n\nSELECT @invoice_count = COUNT(*)\nFROM Invoices\nWHERE CustomerID = 123;\n\nIF @invoice_count = 1\nBEGIN\n    DELETE FROM Invoices\n    WHERE CustomerID = 123;\n    -- C 部分   \nEND\nELSE\nBEGIN\n    -- B 部分\nEND</code></pre>",
+        "question": [
+            "<pre><code>請設定交易以符合下列需求：",
+            "- 如果客戶只有一張發票，請刪除該發票。",
+            "- 如果客戶有多張發票，請取消交易。",
+            "請問 B 部分應填入下列何者程式碼？",
+            "-- A 部分",
+            "DECLARE @invoice_count INT;",
+            "",
+            "SELECT @invoice_count = COUNT(*)",
+            "FROM Invoices",
+            "WHERE CustomerID = 123;",
+            "",
+            "IF @invoice_count = 1",
+            "BEGIN",
+            "    DELETE FROM Invoices",
+            "    WHERE CustomerID = 123;",
+            "    -- C 部分   ",
+            "END",
+            "ELSE",
+            "BEGIN",
+            "    -- B 部分",
+            "END</code></pre>"
+        ],
         "options": [
             "SAVE TRAN;",
             "REVOKE TRAN;",
@@ -1044,7 +1372,29 @@
     },
     {
         "id": 37,
-        "question": "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：\n- 如果客戶只有一張發票，請刪除該發票。\n- 如果客戶有多張發票，請取消交易。\n請問 C 部分應填入下列何者程式碼？\n-- A 部分\nDECLARE @invoice_count INT;\n\nSELECT @invoice_count = COUNT(*)\nFROM Invoices\nWHERE CustomerID = 123;\n\nIF @invoice_count = 1\nBEGIN\n    DELETE FROM Invoices\n    WHERE CustomerID = 123;\n    -- C 部分\nEND\nELSE\nBEGIN\n    -- B 部分\nEND</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：",
+            "- 如果客戶只有一張發票，請刪除該發票。",
+            "- 如果客戶有多張發票，請取消交易。",
+            "請問 C 部分應填入下列何者程式碼？",
+            "-- A 部分",
+            "DECLARE @invoice_count INT;",
+            "",
+            "SELECT @invoice_count = COUNT(*)",
+            "FROM Invoices",
+            "WHERE CustomerID = 123;",
+            "",
+            "IF @invoice_count = 1",
+            "BEGIN",
+            "    DELETE FROM Invoices",
+            "    WHERE CustomerID = 123;",
+            "    -- C 部分",
+            "END",
+            "ELSE",
+            "BEGIN",
+            "    -- B 部分",
+            "END</code></pre>"
+        ],
         "options": [
             "CATCH TRAN;",
             "ROLLBACK TRAN;",
@@ -1064,7 +1414,9 @@
     },
     {
         "id": 38,
-        "question": "<pre><code class=\"language-csharp\">哪一個 LINQ 運算子會壓平合併序列？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個 LINQ 運算子會壓平合併序列？</code></pre>"
+        ],
         "options": [
             "SelectMany",
             "GroupBy",
@@ -1091,7 +1443,9 @@
     },
     {
         "id": 39,
-        "question": "<pre><code class=\"language-csharp\">如何設定 NoSQL 文件資料庫的資料結構？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">如何設定 NoSQL 文件資料庫的資料結構？</code></pre>"
+        ],
         "options": [
             "設為 XML",
             "使用兩個資料行：",
@@ -1131,7 +1485,15 @@
     },
     {
         "id": 40,
-        "question": "<pre><code class=\"language-csharp\">您正在為應用程式建立必要的變數。\n您將儲存在這些變數中的資料具有下列特性：\n由數字組成\n包含小數點的數字\n需要超過七位數的精確度\n您需要將儲存資料所需的記憶體數量減到最少\n您應該使用哪一種資料型別？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在為應用程式建立必要的變數。",
+            "您將儲存在這些變數中的資料具有下列特性：",
+            "由數字組成",
+            "包含小數點的數字",
+            "需要超過七位數的精確度",
+            "您需要將儲存資料所需的記憶體數量減到最少",
+            "您應該使用哪一種資料型別？</code></pre>"
+        ],
         "options": [
             "byte",
             "decimal",
@@ -1155,7 +1517,13 @@
     },
     {
         "id": 41,
-        "question": "<pre><code class=\"language-csharp\">您正在為應用程式建立變數。\n您將儲存在這個變數中的資料具有下列特性：\n由數字和字元組成   (例如：\"123abc\" 或 \"123.45abc\")\n含有小數點的數字   (例如：\"123.45\" 或 \"123.45abc\")\n您應該使用哪一種資料型別？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在為應用程式建立變數。",
+            "您將儲存在這個變數中的資料具有下列特性：",
+            "由數字和字元組成   (例如：\"123abc\" 或 \"123.45abc\")",
+            "含有小數點的數字   (例如：\"123.45\" 或 \"123.45abc\")",
+            "您應該使用哪一種資料型別？</code></pre>"
+        ],
         "options": [
             "char",
             "decimal",
@@ -1178,7 +1546,24 @@
     },
     {
         "id": 42,
-        "question": "<pre><code class=\"language-csharp\">您執行了下列程式碼：\nbool beakerFull = true;\nbool flameOn = false;\nint iResult = 0;\n\nif (beakerFull) {\n    if (flameOn) {\n        iResult = 1;\n    } else {\n        iResult = 2; \n    }\n} else {\n    iResult = 3;\n}\n\n程式碼執行完畢之後，哪一個值會儲存在 iResult 變數中？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您執行了下列程式碼：",
+            "bool beakerFull = true;",
+            "bool flameOn = false;",
+            "int iResult = 0;",
+            "",
+            "if (beakerFull) {",
+            "    if (flameOn) {",
+            "        iResult = 1;",
+            "    } else {",
+            "        iResult = 2; ",
+            "    }",
+            "} else {",
+            "    iResult = 3;",
+            "}",
+            "",
+            "程式碼執行完畢之後，哪一個值會儲存在 iResult 變數中？</code></pre>"
+        ],
         "options": [
             "0",
             "1",
@@ -1198,7 +1583,18 @@
     },
     {
         "id": 43,
-        "question": "<pre><code class=\"language-csharp\">您有下列虛擬程式碼邏輯運算式：\n(A > B) AND (C < D)\n\n您使用下列值評估了該運算式：\nA = 3\nB = 4\nC = 4\nD = 5\n\n請問結果為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您有下列虛擬程式碼邏輯運算式：",
+            "(A > B) AND (C < D)",
+            "",
+            "您使用下列值評估了該運算式：",
+            "A = 3",
+            "B = 4",
+            "C = 4",
+            "D = 5",
+            "",
+            "請問結果為何？</code></pre>"
+        ],
         "options": [
             "0",
             "4",
@@ -1222,7 +1618,9 @@
     },
     {
         "id": 44,
-        "question": "<pre><code class=\"language-csharp\">在例外狀況處理程式中，finally 段的用途為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">在例外狀況處理程式中，finally 段的用途為何？</code></pre>"
+        ],
         "options": [
             "僅出錯時處理常式",
             "僅支援應用程式的執行作業",
@@ -1246,7 +1644,18 @@
     },
     {
         "id": 45,
-        "question": "<pre><code class=\"language-csharp\">有一個 C# 程式包含下列程式碼：\npublic delegate string CheckCodingStyle(string code); \n\npublic void CheckCode(string code, CheckCodingStyle algorithm)  \n{\n    // 請在這裡呼叫委派方法\n}\n\n您需要在第 05 行撰寫一個陳述式以呼叫 CheckCodingStyle 委派。\n請問您應該使用哪個陳述式最恰當？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個 C# 程式包含下列程式碼：",
+            "public delegate string CheckCodingStyle(string code); ",
+            "",
+            "public void CheckCode(string code, CheckCodingStyle algorithm)  ",
+            "{",
+            "    // 請在這裡呼叫委派方法",
+            "}",
+            "",
+            "您需要在第 05 行撰寫一個陳述式以呼叫 CheckCodingStyle 委派。",
+            "請問您應該使用哪個陳述式最恰當？</code></pre>"
+        ],
         "options": [
             "algorithm(code);",
             "algorithm = new CheckCodingStyle(code);",
@@ -1274,7 +1683,9 @@
     },
     {
         "id": 46,
-        "question": "<pre><code class=\"language-csharp\">請檢視 Winter Sports Corporation 的下列軟體需求規格：</code></pre>[[image01]]<pre><code class=\"language-csharp\">根據所需的系統功能，您應該選擇哪一種架構？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請檢視 Winter Sports Corporation 的下列軟體需求規格：</code></pre>[[image01]]<pre><code class=\"language-csharp\">根據所需的系統功能，您應該選擇哪一種架構？</code></pre>"
+        ],
         "options": [
             "Model-View-Controller (MVC)",
             "Windows Forms",
@@ -1310,7 +1721,16 @@
     },
     {
         "id": 47,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 theStack 的堆疊包含整數值，這些值會按照下列順序推入堆疊：\n1 → 4 → 1 → 6 → 3 → 5 → 6\n推入堆疊的第一個數字是 1。\n然後執行下列程式碼：\nfor (int i = 0; i < 3; i++)\n    theStack.pop();  \n\n請問程式執行完畢之後，theStack 將包含什麼？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個名為 theStack 的堆疊包含整數值，這些值會按照下列順序推入堆疊：",
+            "1 → 4 → 1 → 6 → 3 → 5 → 6",
+            "推入堆疊的第一個數字是 1。",
+            "然後執行下列程式碼：",
+            "for (int i = 0; i < 3; i++)",
+            "    theStack.pop();  ",
+            "",
+            "請問程式執行完畢之後，theStack 將包含什麼？</code></pre>"
+        ],
         "options": [
             "6、1、4、1",
             "6、5、3、6",
@@ -1333,7 +1753,18 @@
     },
     {
         "id": 48,
-        "question": "<pre><code class=\"language-csharp\">請根據 Git 的常見操作流程，將下列詞語移至正確位置。\n詞語：\n1.合併        2.提取要求        3.推送\n4.分支        5.認可           6.複製\n\nA. 您應該先建立原始的程式碼的 ______ 副本。 \nB. 當您在本機工作並確認變更時，需要執行 ____, 如此您的變更才能儲存在本機版本庫中。\nC. 然後，您應該執行 ______，以將您的變更儲存在遠端存放庫中。 \nD. 為了通知他們有人修改所的變更，您應建立 ______。  \nE. 在您的功能完成後，其他開發人員應該執行 ______ 將其納入主要分支。  </code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請根據 Git 的常見操作流程，將下列詞語移至正確位置。",
+            "詞語：",
+            "1.合併        2.提取要求        3.推送",
+            "4.分支        5.認可           6.複製",
+            "",
+            "A. 您應該先建立原始的程式碼的 ______ 副本。 ",
+            "B. 當您在本機工作並確認變更時，需要執行 ____, 如此您的變更才能儲存在本機版本庫中。",
+            "C. 然後，您應該執行 ______，以將您的變更儲存在遠端存放庫中。 ",
+            "D. 為了通知他們有人修改所的變更，您應建立 ______。  ",
+            "E. 在您的功能完成後，其他開發人員應該執行 ______ 將其納入主要分支。  </code></pre>"
+        ],
         "options": [
             "12345",
             "25431",
@@ -1359,7 +1790,11 @@
     },
     {
         "id": 49,
-        "question": "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。\n您想要正確地將頁面填入完成的碼\n</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
+            "您想要正確地將頁面填入完成的碼",
+            "</code></pre>"
+        ],
         "options": [
             "複製 (Clone)",
             "派生 (Fork)",
@@ -1385,7 +1820,11 @@
     },
     {
         "id": 50,
-        "question": "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。\n若要以非複製模式方式將遠端原始碼專屬變更複製到您的設定檔\n可以執行?</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
+            "若要以非複製模式方式將遠端原始碼專屬變更複製到您的設定檔",
+            "可以執行?</code></pre>"
+        ],
         "options": [
             "複製 (Clone)",
             "派生 (Fork)",
@@ -1426,7 +1865,10 @@
     },
     {
         "id": 51,
-        "question": "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。\n若要獲知儲存庫中取得專案的最新修訂，請使用選項內那個指令？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
+            "若要獲知儲存庫中取得專案的最新修訂，請使用選項內那個指令？</code></pre>"
+        ],
         "options": [
             "複製(Clone)",
             "派生(Fork)",
@@ -1452,7 +1894,10 @@
     },
     {
         "id": 52,
-        "question": "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關資料化加密的句子：\n數位簽章會使用？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關資料化加密的句子：",
+            "數位簽章會使用？</code></pre>"
+        ],
         "options": [
             "非對稱加密",
             "對稱加密"
@@ -1473,7 +1918,10 @@
     },
     {
         "id": 53,
-        "question": "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關加密解密的句子：\n數位簽章需要？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關加密解密的句子：",
+            "數位簽章需要？</code></pre>"
+        ],
         "options": [
             "私金鑰匙",
             "公開鑰匙",
@@ -1497,7 +1945,9 @@
     },
     {
         "id": 54,
-        "question": "<pre><code class=\"language-csharp\">在類別中，建構函式的用途為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">在類別中，建構函式的用途為何？</code></pre>"
+        ],
         "options": [
             "建立實值型別",
             "自基底類別繼承",
@@ -1524,7 +1974,9 @@
     },
     {
         "id": 55,
-        "question": "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。您需要讓 AccessCount 欄位變數只有在類別內可用。請問應該使用哪個存取修飾詞？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。您需要讓 AccessCount 欄位變數只有在類別內可用。請問應該使用哪個存取修飾詞？</code></pre>"
+        ],
         "options": [
             "internal",
             "private",
@@ -1547,7 +1999,35 @@
     },
     {
         "id": 56,
-        "question": "<pre><code class=\"language-csharp\">//!!\n下列程式碼會追蹤與競賽選手排名的資訊。\npublic class RankedPlayer\n{\n\tprivate static string _defaultTeam;\n\tprivate int _rank;\n\tprivate string _name;\n\tpublic RankedPlayer(string name, int rank):this(name)\n\t{\n\t\t   _rank = rank;\n\t}\n\n\tpublic RankedPlayer(string name, string team, int rank):this(name, rank)\n\t{\n     \t\t_defaultTeam = team;\n\t}\n\n\tpublic RankedPlayer(string name)\n\t{\n\t\t    _name = name;\n\t}\n}\n呼叫包含三個參數的建構函式時，指派欄位的順序為何？\n請選出下列欄位位置正確排序：\n1._defaultTeam\n2._rank\n3. _name</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">//!!",
+            "下列程式碼會追蹤與競賽選手排名的資訊。",
+            "public class RankedPlayer",
+            "{",
+            "\tprivate static string _defaultTeam;",
+            "\tprivate int _rank;",
+            "\tprivate string _name;",
+            "\tpublic RankedPlayer(string name, int rank):this(name)",
+            "\t{",
+            "\t\t   _rank = rank;",
+            "\t}",
+            "",
+            "\tpublic RankedPlayer(string name, string team, int rank):this(name, rank)",
+            "\t{",
+            "     \t\t_defaultTeam = team;",
+            "\t}",
+            "",
+            "\tpublic RankedPlayer(string name)",
+            "\t{",
+            "\t\t    _name = name;",
+            "\t}",
+            "}",
+            "呼叫包含三個參數的建構函式時，指派欄位的順序為何？",
+            "請選出下列欄位位置正確排序：",
+            "1._defaultTeam",
+            "2._rank",
+            "3. _name</code></pre>"
+        ],
         "options": [
             "123",
             "321",
@@ -1570,7 +2050,25 @@
     },
     {
         "id": 57,
-        "question": "<pre><code class=\"language-csharp\">您正在開發一個追蹤網球比賽的應用程式。\n比賽由下列 Match 類別代表：\npublic class Match {\n    public Match() {\n        Location = \"unknown\"; \n    }\n\n    public string Location { get; set; }   \n    public DateTime MatchDate { get; set; }\n}\n\n比賽是使用下列程式碼來建立：\nMatch myMatch = new Match();                      //1\nmyMatch.Location = \"north region\";                //2\nmyMatch.MatchDate = new DateTime(2021, 4, 14);\n\n新建立 Match 類別的 Location 屬性指派了幾次？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在開發一個追蹤網球比賽的應用程式。",
+            "比賽由下列 Match 類別代表：",
+            "public class Match {",
+            "    public Match() {",
+            "        Location = \"unknown\"; ",
+            "    }",
+            "",
+            "    public string Location { get; set; }   ",
+            "    public DateTime MatchDate { get; set; }",
+            "}",
+            "",
+            "比賽是使用下列程式碼來建立：",
+            "Match myMatch = new Match();                      //1",
+            "myMatch.Location = \"north region\";                //2",
+            "myMatch.MatchDate = new DateTime(2021, 4, 14);",
+            "",
+            "新建立 Match 類別的 Location 屬性指派了幾次？</code></pre>"
+        ],
         "options": [
             "0",
             "1",
@@ -1590,7 +2088,11 @@
     },
     {
         "id": 58,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 Mammal 的類別衍生自一個名為 Animal 的父類別。\nMammal 類別則具有 Animal 類別的變數和方法。\n哪一個能描述這種動物分類的處理過程？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個名為 Mammal 的類別衍生自一個名為 Animal 的父類別。",
+            "Mammal 類別則具有 Animal 類別的變數和方法。",
+            "哪一個能描述這種動物分類的處理過程？</code></pre>"
+        ],
         "options": [
             "資料封裝化",
             "結構基礎模組化",
@@ -1614,7 +2116,9 @@
     },
     {
         "id": 59,
-        "question": "<pre><code class=\"language-csharp\">下列何者必須存在，才能從特定類別推導出繼承性？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">下列何者必須存在，才能從特定類別推導出繼承性？</code></pre>"
+        ],
         "options": [
             "has-a 關聯",
             "is-a 關聯",
@@ -1637,7 +2141,10 @@
     },
     {
         "id": 60,
-        "question": "<pre><code class=\"language-csharp\">有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。\n請問應從 Glass 類別中呼叫 break() 方法的語法是？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。",
+            "請問應從 Glass 類別中呼叫 break() 方法的語法是？</code></pre>"
+        ],
         "options": [
             "base.break();",
             "this.break();",
@@ -1660,7 +2167,20 @@
     },
     {
         "id": 61,
-        "question": "<pre><code class=\"language-csharp\">//!!\n您建立了一個AMumber類型的物件並將類別定義如下:\npublic class ANumber {\n\tprivate int _number = 7;\n\tpublic ANumber() { \n }\npublic ANumber(int number) {\n\t_number = number;\n}\n您執行了下列程式碼:\nANumber mynumber = new ANumber(3);\n程式碼執行完畢之後,_number的值為何?</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">//!!",
+            "您建立了一個AMumber類型的物件並將類別定義如下:",
+            "public class ANumber {",
+            "\tprivate int _number = 7;",
+            "\tpublic ANumber() { ",
+            " }",
+            "public ANumber(int number) {",
+            "\t_number = number;",
+            "}",
+            "您執行了下列程式碼:",
+            "ANumber mynumber = new ANumber(3);",
+            "程式碼執行完畢之後,_number的值為何?</code></pre>"
+        ],
         "options": [
             "null",
             "0",
@@ -1680,7 +2200,9 @@
     },
     {
         "id": 62,
-        "question": "<pre><code class=\"language-csharp\">Circle 和 Square 這兩個類別繼承自 Shape 類別，並且都繼承並以不同方式實作 Area 方法。請問這代表哪一種物件導向的概念？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">Circle 和 Square 這兩個類別繼承自 Shape 類別，並且都繼承並以不同方式實作 Area 方法。請問這代表哪一種物件導向的概念？</code></pre>"
+        ],
         "options": [
             "封裝",
             "抽象化",
@@ -1705,7 +2227,11 @@
     },
     {
         "id": 63,
-        "question": "<pre><code class=\"language-csharp\">您正在撰寫一個處理訂房要求的 web 應用程式。\n您需要確認每位訪客所選取的房間尚未被其他訪客預定。\n您應該使用哪一種程式設計來判斷建立要求時房間仍然可用？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您正在撰寫一個處理訂房要求的 web 應用程式。",
+            "您需要確認每位訪客所選取的房間尚未被其他訪客預定。",
+            "您應該使用哪一種程式設計來判斷建立要求時房間仍然可用？</code></pre>"
+        ],
         "options": [
             "批次處理",
             "使用者端",
@@ -1729,7 +2255,10 @@
     },
     {
         "id": 64,
-        "question": "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。\n所有網頁伺服器都有 ＿＿ 位址和網域名稱，用以在網際網路上識別其身分。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
+            "所有網頁伺服器都有 ＿＿ 位址和網域名稱，用以在網際網路上識別其身分。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTML",
@@ -1752,7 +2281,10 @@
     },
     {
         "id": 65,
-        "question": "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。\n所有網頁伺服器會經由 ＿＿ 通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
+            "所有網頁伺服器會經由 ＿＿ 通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTML",
@@ -1775,7 +2307,10 @@
     },
     {
         "id": 66,
-        "question": "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。\n擁有存取權的用戶端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
+            "擁有存取權的用戶端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
+        ],
         "options": [
             "FTP",
             "HTTP",
@@ -1800,7 +2335,11 @@
     },
     {
         "id": 67,
-        "question": "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。\n您使用如下圖所示的設定建立了一個虛擬目錄。\n\n\n您將 Overview.jpg 檔案儲存在虛擬目錄中。\n您應該使用哪一個 URL 來存取該檔案？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。",
+            "您使用如下圖所示的設定建立了一個虛擬目錄。</code></pre>[[image01]]<pre><code class=\"language-csharp\">您將 Overview.jpg 檔案儲存在虛擬目錄中。",
+            "您應該使用哪一個 URL 來存取該檔案？</code></pre>"
+        ],
         "options": [
             "https://sunsetweb.org/images/Overview.jpg",
             "http://sunsetweb.org/images/Overview.jpg",
@@ -1814,13 +2353,40 @@
             "題目指出網站需要 SSL，因此需使用 https 協定。虛擬目錄別名設為 images，對應的路徑會變成 /images/Overview.jpg。"
         ],
         "weight": 1,
-        "image": "images/id70.png",
+        "image01": "images/id70.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
     {
         "id": 68,
-        "question": "<pre><code class=\"language-csharp\">下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：\npublic class CarService\n{\n    private static List lst = new List(new String[] { \"Oil\", \"Engine\", \"Wheels\", \"Paint\" });\n    [WebGet(UriTemplate=\"/CarServices\")]\n    public String GetAllCarServices()\n    {\n        int count = lst.Count;\n        String ServiceList = \"\";\n        for (int i = 0; i < count; i++)\n            ServiceList = ServiceList + lst[i] + \",\";\n        return ServiceList;\n    }\n\n    [WebGet(UriTemplate = \"/CarServices/{ServiceListid}\")]\n    public String GetCarServicebyID(String ServiceListid)\n    {\n        int id;\n        Int32.TryParse(ServiceListid, out id);\n        return lst[id];  \n    }\n}\n\n您對這個 web 服務發出了如下列呼叫：\nwww.sunsetweb.com/carservices/3\n請問輸出為何？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：",
+            "public class CarService",
+            "{",
+            "    private static List lst = new List(new String[] { \"Oil\", \"Engine\", \"Wheels\", \"Paint\" });",
+            "    [WebGet(UriTemplate=\"/CarServices\")]",
+            "    public String GetAllCarServices()",
+            "    {",
+            "        int count = lst.Count;",
+            "        String ServiceList = \"\";",
+            "        for (int i = 0; i < count; i++)",
+            "            ServiceList = ServiceList + lst[i] + \",\";",
+            "        return ServiceList;",
+            "    }",
+            "",
+            "    [WebGet(UriTemplate = \"/CarServices/{ServiceListid}\")]",
+            "    public String GetCarServicebyID(String ServiceListid)",
+            "    {",
+            "        int id;",
+            "        Int32.TryParse(ServiceListid, out id);",
+            "        return lst[id];  ",
+            "    }",
+            "}",
+            "",
+            "您對這個 web 服務發出了如下列呼叫：",
+            "www.sunsetweb.com/carservices/3",
+            "請問輸出為何？</code></pre>"
+        ],
         "options": [
             "Paint",
             "Oil",
@@ -1846,7 +2412,9 @@
     },
     {
         "id": 69,
-        "question": "<pre><code class=\"language-csharp\">哪一個正規化要求資料表的屬性僅相依於主索引鍵？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪一個正規化要求資料表的屬性僅相依於主索引鍵？</code></pre>"
+        ],
         "options": [
             "CREATE PROCEDURE StoreData @UserName nvarchar (255), @Age int",
             "CREATE PROCEDURE StoreData @UserName char, @Age double         ",
@@ -1870,7 +2438,17 @@
     },
     {
         "id": 70,
-        "question": "<pre><code class=\"language-csharp\">您需要建立一個傳入人員 UserName 和 Age 的預存程序。\nAge 必須是以年為單位的整數。\nUserName 至少必須有三個字元。\n您應該使用哪一個陳述式來建立此預存程序？\n選項：\nA. CREATE PROCEDURE StoreData @UserName nvarchar (255),@Age int\nB. CREATE PROCEDURE StoreData @UserName char,@Age double\nC. UPDATE PROCEDURE StoreData @UserName nvarchar (255),@Age int\nD. CREATE PROCEDURE StoreData (@UserName, @Age)</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您需要建立一個傳入人員 UserName 和 Age 的預存程序。",
+            "Age 必須是以年為單位的整數。",
+            "UserName 至少必須有三個字元。",
+            "您應該使用哪一個陳述式來建立此預存程序？",
+            "選項：",
+            "A. CREATE PROCEDURE StoreData @UserName nvarchar (255),@Age int",
+            "B. CREATE PROCEDURE StoreData @UserName char,@Age double",
+            "C. UPDATE PROCEDURE StoreData @UserName nvarchar (255),@Age int",
+            "D. CREATE PROCEDURE StoreData (@UserName, @Age)</code></pre>"
+        ],
         "options": [
             "A",
             "B",
@@ -1894,7 +2472,9 @@
     },
     {
         "id": 71,
-        "question": "<pre><code class=\"language-csharp\">在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>"
+        ],
         "options": [
             "更新不會失敗。",
             "更新會以單位的形式成功或失敗。",
@@ -1923,7 +2503,9 @@
     },
     {
         "id": 72,
-        "question": "<pre><code class=\"language-csharp\">您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>"
+        ],
         "options": [
             "連線共用",
             "連線逾時",
@@ -1946,7 +2528,9 @@
     },
     {
         "id": 73,
-        "question": "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>"
+        ],
         "options": [
             "測試案例必要的任何前置條件 ",
             "測試案例的預期結果",
@@ -1974,7 +2558,9 @@
     },
     {
         "id": 74,
-        "question": "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>"
+        ],
         "options": [
             "JSON 物件可使用名稱/值對來建立。",
             "JSON 物件可使用已排序的值清單來建立。",
@@ -2002,7 +2588,9 @@
     },
     {
         "id": 75,
-        "question": "<pre><code class=\"language-csharp\">下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>"
+        ],
         "options": [
             "正規化可降低磁碟空間使用量。",
             "正規化可防止資料不一致。",
@@ -2030,7 +2618,9 @@
     },
     {
         "id": 76,
-        "question": "<pre><code class=\"language-csharp\">連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>"
+        ],
         "options": [
             "提升效能",
             "提升可擴縮性",
@@ -2059,7 +2649,9 @@
     },
     {
         "id": 77,
-        "question": "<pre><code class=\"language-csharp\">哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）</code></pre>"
+        ],
         "options": [
             "using 陳述式",
             "using 指示詞",
@@ -2087,7 +2679,10 @@
     },
     {
         "id": 78,
-        "question": "<pre><code class=\"language-csharp\">請回答有關單元測試的敘述：\n單元測試會測試整個應用程式的整合與相依性。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關單元測試的敘述：",
+            "單元測試會測試整個應用程式的整合與相依性。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2106,7 +2701,9 @@
     },
     {
         "id": 79,
-        "question": "<pre><code class=\"language-csharp\">單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2126,7 +2723,10 @@
     },
     {
         "id": 80,
-        "question": "<pre><code class=\"language-csharp\">單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，\n然後判斷其行為表現是否完全符合預期。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，",
+            "然後判斷其行為表現是否完全符合預期。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2144,7 +2744,9 @@
     },
     {
         "id": 81,
-        "question": "<pre><code class=\"language-csharp\">連結清單可進行排序。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">連結清單可進行排序。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2155,16 +2757,16 @@
         "explanation": [
             "<pre><code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
             "B. No:",
-			"適合連結清單的排序演算法雖然理論上你可以對連結清單使用任何演算法，但以下兩種是最常被推薦的：",
-			"1.合併排序 (Merge Sort) —— 最推薦這是連結清單排序的「黃金標準」。",
-			"\t原因：合併排序主要依據順序存取（Sequential Access），這非常符合連結清單的特性。",
-			"\t優勢：在陣列中進行合併排序需要 O(n) 的額外空間，但在連結清單中，我們只需要調整指標（Pointer），",
-			"\t&emsp;&emsp;&emsp;&emsp;&emsp;空間複雜度可以優化到 O(1)（如果不考慮遞迴呼叫堆疊的話）。",
-			"\t時間複雜度：穩定維持在 O(n log n)。",
-			"2.插入排序 (Insertion Sort)",
-			"\t原因：當資料量很小，或是清單已經「幾乎排序好」時，插入排序非常有效。",
-			"\t優勢：它不需要像陣列那樣頻繁搬移元素，只需要斷開節點並重新接上指標即可。",
-			"\t時間複雜度：平均 O(n^2)，最佳 O(n)。</code></pre>"
+            "適合連結清單的排序演算法雖然理論上你可以對連結清單使用任何演算法，但以下兩種是最常被推薦的：",
+            "1.合併排序 (Merge Sort) —— 最推薦這是連結清單排序的「黃金標準」。",
+            "\t原因：合併排序主要依據順序存取（Sequential Access），這非常符合連結清單的特性。",
+            "\t優勢：在陣列中進行合併排序需要 O(n) 的額外空間，但在連結清單中，我們只需要調整指標（Pointer），",
+            "\t&emsp;&emsp;&emsp;&emsp;&emsp;空間複雜度可以優化到 O(1)（如果不考慮遞迴呼叫堆疊的話）。",
+            "\t時間複雜度：穩定維持在 O(n log n)。",
+            "2.插入排序 (Insertion Sort)",
+            "\t原因：當資料量很小，或是清單已經「幾乎排序好」時，插入排序非常有效。",
+            "\t優勢：它不需要像陣列那樣頻繁搬移元素，只需要斷開節點並重新接上指標即可。",
+            "\t時間複雜度：平均 O(n^2)，最佳 O(n)。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2173,7 +2775,9 @@
     },
     {
         "id": 82,
-        "question": "<pre><code class=\"language-csharp\">連結清單最多包含 100 個節點。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">連結清單最多包含 100 個節點。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2192,7 +2796,9 @@
     },
     {
         "id": 83,
-        "question": "<pre><code class=\"language-csharp\">您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2211,7 +2817,9 @@
     },
     {
         "id": 84,
-        "question": "<pre><code class=\"language-csharp\">數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2234,7 +2842,9 @@
     },
     {
         "id": 85,
-        "question": "<pre><code class=\"language-csharp\">CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2255,7 +2865,9 @@
     },
     {
         "id": 86,
-        "question": "<pre><code class=\"language-csharp\">防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2274,7 +2886,9 @@
     },
     {
         "id": 87,
-        "question": "<pre><code class=\"language-csharp\">Person 類別中的方法可以存取 co1or 屬性。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">Person 類別中的方法可以存取 co1or 屬性。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2292,7 +2906,12 @@
     },
     {
         "id": 88,
-        "question": "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。\nTree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。\n請選取 [正確] 或 [錯誤]。\nPerson 類別中的方法可以存取 NumberOfLeaves 屬性。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
+            "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
+            "請選取 [正確] 或 [錯誤]。",
+            "Person 類別中的方法可以存取 NumberOfLeaves 屬性。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2310,7 +2929,12 @@
     },
     {
         "id": 89,
-        "question": "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。\nTree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。\n請選取 [正確] 或 [錯誤]。\nTree 類別中的方法可以存取 Person 中的所有私用屬性。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
+            "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
+            "請選取 [正確] 或 [錯誤]。",
+            "Tree 類別中的方法可以存取 Person 中的所有私用屬性。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2340,7 +2964,26 @@
     },
     {
         "id": 90,
-        "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() { \n03   if(xhr.status === 200) {\n04      responseObject = JSON.parse(xhr.responseText);\n05      var newContent = '';\n06      for (var i = 0; i < responseObject.menu.length; i++) {\n07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';\n08         newContent+='Price: ' + responseObject.menu[i].Price + '</p>';\n09      }\n10      document.getElementById('content').innerHTML = newContent;\n11   }\n12 };\n13 xhr.open('GET', 'menu.json', true);  \n14 xhr.send(null); \n\n在第 02 行，onload 物件會將要求傳送至伺服器。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
+            "加上行號僅為參考之用。",
+            "01 var xhr = new XMLHttpRequest();",
+            "02 xhr.onload = function() { ",
+            "03   if(xhr.status === 200) {",
+            "04      responseObject = JSON.parse(xhr.responseText);",
+            "05      var newContent = '';",
+            "06      for (var i = 0; i < responseObject.menu.length; i++) {",
+            "07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';",
+            "08         newContent+='Price: ' + responseObject.menu[i].Price + '</p>';",
+            "09      }",
+            "10      document.getElementById('content').innerHTML = newContent;",
+            "11   }",
+            "12 };",
+            "13 xhr.open('GET', 'menu.json', true);  ",
+            "14 xhr.send(null); ",
+            "",
+            "在第 02 行，onload 物件會將要求傳送至伺服器。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2366,7 +3009,26 @@
     },
     {
         "id": 91,
-        "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() {\n03   if(xhr.status == 200) {\n04      responseObject = JSON.parse(xhr.responseText);\n05      var newContent = '';\n06      for (var i = 0; i < responseObject.menu.length; i++) {\n07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';\n08         newContent+='Price: '+responseObject.menu[i].Price + '</p>';\n09      }\n10      document.getElementById('content').innerHTML = newContent;\n11   }\n12 };\n13 xhr.open('GET', 'menu.json', true);\n14 xhr.send(null);\n\n在第 03 行，status 是由處理要求的伺服器傳回。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
+            "加上行號僅為參考之用。",
+            "01 var xhr = new XMLHttpRequest();",
+            "02 xhr.onload = function() {",
+            "03   if(xhr.status == 200) {",
+            "04      responseObject = JSON.parse(xhr.responseText);",
+            "05      var newContent = '';",
+            "06      for (var i = 0; i < responseObject.menu.length; i++) {",
+            "07         newContent+='<p>Entree: '+responseObject.menu[i].Entree+'<br>';",
+            "08         newContent+='Price: '+responseObject.menu[i].Price + '</p>';",
+            "09      }",
+            "10      document.getElementById('content').innerHTML = newContent;",
+            "11   }",
+            "12 };",
+            "13 xhr.open('GET', 'menu.json', true);",
+            "14 xhr.send(null);",
+            "",
+            "在第 03 行，status 是由處理要求的伺服器傳回。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2385,7 +3047,26 @@
     },
     {
         "id": 92,
-        "question": "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：\n加上行號僅為參考之用。\n01 var xhr = new XMLHttpRequest();\n02 xhr.onload = function() {\n03     if(xhr.status === 200) {\n04         responseObject = JSON.parse(xhr.responseText);\n05         var newContent = '';\n06         for (var i = 0; i < responseObject.menu.length; i++) {\n07             newContent += '<p>Entree: ' + responseObject.menu[i].Entree + '<br>';\n08             newContent += 'Price: ' + responseObject.menu[i].Price + '</p>';\n09         }\n10         document.getElementById('content').innerHTML = newContent;\n11     }\n12 };\n13 xhr.open('GET', 'menu.json', true);\n14 xhr.send(null);\n\n在第 13 行，true 參數會指定非同步處理。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
+            "加上行號僅為參考之用。",
+            "01 var xhr = new XMLHttpRequest();",
+            "02 xhr.onload = function() {",
+            "03     if(xhr.status === 200) {",
+            "04         responseObject = JSON.parse(xhr.responseText);",
+            "05         var newContent = '';",
+            "06         for (var i = 0; i < responseObject.menu.length; i++) {",
+            "07             newContent += '<p>Entree: ' + responseObject.menu[i].Entree + '<br>';",
+            "08             newContent += 'Price: ' + responseObject.menu[i].Price + '</p>';",
+            "09         }",
+            "10         document.getElementById('content').innerHTML = newContent;",
+            "11     }",
+            "12 };",
+            "13 xhr.open('GET', 'menu.json', true);",
+            "14 xhr.send(null);",
+            "",
+            "在第 13 行，true 參數會指定非同步處理。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2404,7 +3085,10 @@
     },
     {
         "id": 93,
-        "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列的項目數有限制。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
+            "佇列的項目數有限制。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2426,7 +3110,10 @@
     },
     {
         "id": 94,
-        "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列是一種先進先出（FIFO）資料結構。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
+            "佇列是一種先進先出（FIFO）資料結構。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2447,7 +3134,10 @@
     },
     {
         "id": 95,
-        "question": "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：\n佇列的項目是按照加入的順序儲存。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
+            "佇列的項目是按照加入的順序儲存。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2467,7 +3157,10 @@
     },
     {
         "id": 96,
-        "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n文件資料庫會將資料儲存在類似 JSON 的檔案中。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
+            "文件資料庫會將資料儲存在類似 JSON 的檔案中。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2488,7 +3181,10 @@
     },
     {
         "id": 97,
-        "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n文件資料庫的設計目的是以預先定義的關聯處理資料。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
+            "文件資料庫的設計目的是以預先定義的關聯處理資料。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2506,7 +3202,10 @@
     },
     {
         "id": 98,
-        "question": "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：\n索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
+            "索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2524,7 +3223,9 @@
     },
     {
         "id": 99,
-        "question": "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2543,7 +3244,9 @@
     },
     {
         "id": 100,
-        "question": "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>"
+        ],
         "options": [
             "Yes",
             "No"
@@ -2565,7 +3268,9 @@
     {
         "id": 101,
         "type": "single",
-        "question": "<pre><code class=\"language-csharp\">基數是指資料表的互相連結方式，例如一對多。</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">基數是指資料表的互相連結方式，例如一對多。</code></pre>"
+        ],
         "options": [
             "一對一（1:1）",
             "一對多（1:N）",
@@ -2587,7 +3292,9 @@
     {
         "id": 102,
         "type": "single",
-        "question": "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？",
+        "question": [
+            "【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？"
+        ],
         "options": [
             "public",
             "private",
@@ -2621,7 +3328,9 @@
     {
         "id": 103,
         "type": "single",
-        "question": "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？",
+        "question": [
+            "【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？"
+        ],
         "options": [
             "overload (多載)",
             "override (覆寫)",
@@ -2649,7 +3358,9 @@
     {
         "id": 104,
         "type": "single",
-        "question": "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？",
+        "question": [
+            "【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？"
+        ],
         "options": [
             "類別是藍圖，物件是根據藍圖建立的實體",
             "物件是藍圖，類別是實體",
@@ -2669,7 +3380,9 @@
     {
         "id": 105,
         "type": "single",
-        "question": "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？",
+        "question": [
+            "【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？"
+        ],
         "options": [
             "設計 (Design)",
             "測試 (Testing)",
@@ -2689,7 +3402,9 @@
     {
         "id": 106,
         "type": "single",
-        "question": "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？",
+        "question": [
+            "【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？"
+        ],
         "options": [
             "單元測試 (Unit Testing)",
             "整合測試 (Integration Testing)",
@@ -2709,7 +3424,9 @@
     {
         "id": 107,
         "type": "single",
-        "question": "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？",
+        "question": [
+            "【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？"
+        ],
         "options": [
             "CSS",
             "JavaScript",
@@ -2731,7 +3448,9 @@
     {
         "id": 108,
         "type": "single",
-        "question": "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？",
+        "question": [
+            "【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？"
+        ],
         "options": [
             "HTML",
             "CSS (Cascading Style Sheets)",
@@ -2751,7 +3470,9 @@
     {
         "id": 109,
         "type": "single",
-        "question": "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？",
+        "question": [
+            "【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？"
+        ],
         "options": [
             "資料庫伺服器",
             "網頁伺服器 (IIS/Apache)",
@@ -2771,7 +3492,9 @@
     {
         "id": 110,
         "type": "single",
-        "question": "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？",
+        "question": [
+            "【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？"
+        ],
         "options": [
             "Web Browser",
             "Web Server",
@@ -2798,7 +3521,9 @@
     {
         "id": 111,
         "type": "single",
-        "question": "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？",
+        "question": [
+            "【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？"
+        ],
         "options": [
             "類別可以繼承多個抽象類別",
             "介面可以包含實作程式碼 (在 C# 8.0 之前)",
@@ -2825,7 +3550,9 @@
     {
         "id": 112,
         "type": "single",
-        "question": "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？",
+        "question": [
+            "【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？"
+        ],
         "options": [
             "Stack (堆疊)",
             "Heap (堆積)",
@@ -2852,7 +3579,9 @@
     {
         "id": 113,
         "type": "single",
-        "question": "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護",
+        "question": [
+            "【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護"
+        ],
         "options": [
             "2 -> 4 -> 1 -> 3 -> 5",
             "1 -> 2 -> 3 -> 4 -> 5",
@@ -2882,7 +3611,9 @@
     {
         "id": 114,
         "type": "single",
-        "question": "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？",
+        "question": [
+            "【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？"
+        ],
         "options": [
             "List<int>",
             "Array",
@@ -2908,7 +3639,9 @@
     {
         "id": 115,
         "type": "single",
-        "question": "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？",
+        "question": [
+            "【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？"
+        ],
         "options": [
             "HTML Tags",
             "CSS Styles",
@@ -2934,7 +3667,9 @@
     {
         "id": 116,
         "type": "single",
-        "question": "<pre><code class=\"language-csharp\">在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>",
+        "question": [
+            "<pre><code class=\"language-csharp\">在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>"
+        ],
         "options": [
             "Has-a 關係 (擁有)",
             "Is-a 關係 (是一個)",
@@ -2965,7 +3700,9 @@
     {
         "id": 117,
         "type": "single",
-        "question": "【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？",
+        "question": [
+            "【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？"
+        ],
         "options": [
             "數列必須已經過排序 (Sorted)",
             "數列必須包含重複的元素",
@@ -2991,7 +3728,9 @@
     {
         "id": 118,
         "type": "single",
-        "question": "【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？",
+        "question": [
+            "【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？"
+        ],
         "options": [
             "快速排序 (Quick Sort)",
             "合併排序 (Merge Sort)",
@@ -3018,7 +3757,9 @@
     {
         "id": 119,
         "type": "single",
-        "question": "【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？",
+        "question": [
+            "【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？"
+        ],
         "options": [
             "雜湊是雙向的，加密是單向的",
             "雜湊是單向的 (不可逆)，加密是雙向的 (可解密)",
@@ -3045,7 +3786,9 @@
     {
         "id": 120,
         "type": "single",
-        "question": "【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？",
+        "question": [
+            "【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？"
+        ],
         "options": [
             "JSON",
             "SOAP",
@@ -3072,7 +3815,9 @@
     {
         "id": 121,
         "type": "single",
-        "question": "【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？",
+        "question": [
+            "【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？"
+        ],
         "options": [
             "Model",
             "View",
@@ -3116,23 +3861,10 @@
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-
-        if (lines.some(l => String(l).includes('<pre'))) {
-            let fullHtml = lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
-            });
-            return fullHtml;
-        }
-
-        return lines.map(line => {
-            let html = String(line);
-            html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
-            });
-            return html;
-        }).join('<br/>');
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const src = item['image' + p1];
+            return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
+        });
     }
 
     function initExam() {
@@ -3227,7 +3959,7 @@
             }
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
-        if (scrollTop) window.scrollTo(0, 0); if (typeof Prism !== 'undefined') Prism.highlightAll();
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
     }
 
     function selectOption(optIdx) {
@@ -3312,6 +4044,7 @@
         document.getElementById('category-stats').innerHTML = catHTML;
         let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
         document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {

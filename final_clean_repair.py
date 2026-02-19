@@ -3,7 +3,6 @@ import os
 import glob
 
 def clean_repair_all():
-    # 1. 讀取結構化紀錄
     config_path = 'www/config.json'
     if not os.path.exists(config_path):
         print("錯誤：找不到 www/config.json 設定檔！")
@@ -20,7 +19,7 @@ def clean_repair_all():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REPLACE_TITLE 模擬考試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarized-light.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         html { scrollbar-gutter: stable; }
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
@@ -28,8 +27,34 @@ def clean_repair_all():
         .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
         .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 50px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
-        .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
-        .question-body { padding: 15px 20px; font-size: 1.05rem; background-color: #fff; color: #000; word-wrap: break-word; word-break: normal; overflow-x: hidden; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 15px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                    white-space: pre-wrap; /* 核心修正：確保陣列結合後的 \n 能正常換行 */
+                }
+                
+                /* 預設題目與程式碼樣式 */                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                    white-space: pre-wrap; /* 確保字串陣列的 \n 換行生效 */
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                    white-space: pre-wrap; /* 全域保留換行 */
+                }
+        code[class*="language-"] { color: inherit; }
+
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
@@ -38,7 +63,6 @@ def clean_repair_all():
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        code, pre code { color: #000 !important; background-color: transparent !important; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
         .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
@@ -94,6 +118,7 @@ def clean_repair_all():
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
     const EXAM_LIMIT = 50, WRONG_KEY = 'REPLACE_SUBJECT_ID_exam_wrong_ids';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
@@ -133,23 +158,10 @@ def clean_repair_all():
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-
-        if (lines.some(l => String(l).includes('<pre'))) {
-            let fullHtml = lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
-            });
-            return fullHtml;
-        }
-
-        return lines.map(line => {
-            let html = String(line);
-            html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
-            });
-            return html;
-        }).join('<br/>');
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const src = item['image' + p1];
+            return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
+        });
     }
 
     function initExam() {
@@ -244,7 +256,7 @@ def clean_repair_all():
             }
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
-        if (scrollTop) window.scrollTo(0, 0); if (typeof Prism !== 'undefined') Prism.highlightAll();
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
     }
 
     function selectOption(optIdx) {
@@ -329,6 +341,7 @@ def clean_repair_all():
         document.getElementById('category-stats').innerHTML = catHTML;
         let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
         document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {
@@ -355,7 +368,7 @@ def clean_repair_all():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REPLACE_TITLE 認證練習</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         html { scrollbar-gutter: stable; }
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
@@ -367,8 +380,18 @@ def clean_repair_all():
         .sidebar-content { flex: 1; overflow-y: auto !important; padding: 15px; }
         .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; flex-shrink: 0; }
         .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; overflow-x: hidden !important; }
-        code { color: #000 !important; background-color: transparent !important; }
-        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
+        
+        /* 預設題目與程式碼樣式 */
+        code:not([class*="language-"]) { 
+            display: inline-block; 
+            margin: 5px 0; 
+            line-height: 1.4; 
+            font-size: 1.0rem; 
+            color: #222222; 
+        }
+        code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; }
+        code[class*="language-"] { color: inherit; }
+
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
         .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
@@ -421,6 +444,7 @@ def clean_repair_all():
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
     </style>
 </head>
 <body>
@@ -506,33 +530,17 @@ def clean_repair_all():
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-
-        if (lines.some(l => String(l).includes('<pre'))) {
-            let fullHtml = lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" class="q-img">` : match;
-            });
-            return `<div>${fullHtml}</div>`;
-        }
-
-        return lines.map(line => {
-            let html = String(line);
-            html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-                const src = item['image' + p1];
-                return src ? `<img src="${src}" class="q-img">` : match;
-            });
-            if (html.includes('●')) {
-                const parts = html.split('●').map(p => p.trim()).filter(p => p);
-                return parts.map(p => `<div class="mb-1">● ${p}</div>`).join('');
-            }
-            return `<div>${html}</div>`;
-        }).join('');
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const src = item['image' + p1];
+            return src ? `<img src="${src}" class="q-img">` : match;
+        });
     }
     function toggleExplanation(forceShow = null) {
         const el = document.getElementById('ans-section'), btn = document.getElementById('toggle-exp-btn');
         if (!el || !btn) return;
         const isShow = (forceShow !== null) ? forceShow : (el.style.display !== 'block');
         el.style.display = isShow ? 'block' : 'none';
+        if (isShow) setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
     }
     function checkAnswer(element, qIdx, optIdx, event) {
         const item = quizData[qIdx], isMultiple = item.type === 'multiple';
@@ -717,7 +725,9 @@ def clean_repair_all():
             }
         }
         if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
-        updateUI(); Prism.highlightAll(); saveState();
+        updateUI(); 
+        setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+        saveState();
     }
     function updateUI() {
         const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
@@ -732,12 +742,6 @@ def clean_repair_all():
 </script>
 </body>
 </html>"""
-
-    # 讀取結構化紀錄
-    config_path = 'www/config.json'
-    if not os.path.exists(config_path): return
-    with open(config_path, 'r', encoding='utf-8') as f:
-        config = json.load(f)
 
     for subj in config['subjects']:
         try:
@@ -767,7 +771,7 @@ def clean_repair_all():
                 f.write(b";")
                 f.write(prac_bottom_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
             
-            print(f"V3.4.6 Ultimate Layout Fixed: {subj['dir']} (Locked Width & Gutter)")
+            print(f"V3.5.0 Standard Refreshed: {subj['dir']}")
         except Exception as e:
             print(f"Failed {subj['dir']}: {e}")
 
