@@ -818,17 +818,17 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：顯式介面實作與方法覆寫</b>",
+            "<pre><code><b>核心重點：顯式介面實作與方法覆寫</b>",
             "本題考察 C# 如何同時處理基底類別方法、自訂方法以及介面實作。",
             "<b>為什麼這樣實作？</b><br/><table><tr><th>方法</th><th>目的與特色</th><th>呼叫方式</th></tr><tr><td>public override void Display()</td><td>覆寫基底類別的 Display()</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>public void DisplayRaw()</td><td>自訂方法，將秒數換算成分鐘</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>void IDisplayResult.Display()</td><td>介面顯式實作，輸出含 \" seconds\"</td><td>必須轉為介面型別呼叫</td></tr></table>",
             "<b>1. 顯式介面實作</b>",
-            "使用 <code>void IDisplayResult.Display()</code> 這種寫法時，該方法不會在類別實例中直接暴露，只能透過介面型別來存取。",
+            "<pre><code class=\"language-csharp\">使用 <code>void IDisplayResult.Display()</code> 這種寫法時，該方法不會在類別實例中直接暴露，只能透過介面型別來存取。",
             "<b>2. 程式碼完整範例</b>",
-            "<pre><code class=\"language-csharp\">public class FootRace : Race, IDisplayResult\n{\n    public override void Display() { \n        Console.WriteLine(Seconds); \n    }\n    public void DisplayRaw() { \n        Console.WriteLine(Seconds / 60d + \" minutes\"); \n    }\n    void IDisplayResult.Display() { \n        Console.WriteLine(Seconds + \" seconds\"); \n    }\n}</code></pre>",
+            "public class FootRace : Race, IDisplayResult\n{\n    public override void Display() { \n        Console.WriteLine(Seconds); \n    }\n    public void DisplayRaw() { \n        Console.WriteLine(Seconds / 60d + \" minutes\"); \n    }\n    void IDisplayResult.Display() { \n        Console.WriteLine(Seconds + \" seconds\"); \n    }\n}",
             "<b>3. 呼叫流程與輸出說明</b>",
-            "<pre><code class=\"language-csharp\">var r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();      // 輸出：99\nr2.Display();      // 輸出：99 seconds\nr1.DisplayRaw();   // 輸出：1.65 minutes</code></pre>",
-            "<b>小結</b>",
-            "透過不同型別的參考 (r1 vs r2)，同一個物件可以表現出不同的行為版本。"
+            "var r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();      // 輸出：99\nr2.Display();      // 輸出：99 seconds\nr1.DisplayRaw();   // 輸出：1.65 minutes</code></pre>",
+            "<pre><code><b>小結</b>",
+            "透過不同型別的參考 (r1 vs r2)，同一個物件可以表現出不同的行為版本。</code></pre>"
         ],
         "weight": 1,
         "image": null,

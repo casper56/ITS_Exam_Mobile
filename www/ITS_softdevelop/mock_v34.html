@@ -50,6 +50,24 @@
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
+
+        /* 表格樣式：黑色實線邊框 */
+        .q-table { width: 100%; border-collapse: collapse; margin: 15px 0; table-layout: fixed; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; }
+        .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all; color: #000; }
+        .w-5 { width: 5% !important; }
+        .w-10 { width: 10% !important; }
+        .w-15 { width: 15% !important; }
+        .w-20 { width: 20% !important; }
+        .w-25 { width: 25% !important; }
+        .w-30 { width: 30% !important; }
+        .w-35 { width: 35% !important; }
+        .w-40 { width: 40% !important; }
+        .w-45 { width: 45% !important; }
+        .w-50 { width: 50% !important; }
+        .w-60 { width: 60% !important; }
+        .w-70 { width: 70% !important; }
+        .w-75 { width: 75% !important; }
+        .w-80 { width: 80% !important; }
         .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
@@ -942,17 +960,17 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：顯式介面實作與方法覆寫</b>",
+            "<pre><code><b>核心重點：顯式介面實作與方法覆寫</b>",
             "本題考察 C# 如何同時處理基底類別方法、自訂方法以及介面實作。",
             "<b>為什麼這樣實作？</b><br/><table><tr><th>方法</th><th>目的與特色</th><th>呼叫方式</th></tr><tr><td>public override void Display()</td><td>覆寫基底類別的 Display()</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>public void DisplayRaw()</td><td>自訂方法，將秒數換算成分鐘</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>void IDisplayResult.Display()</td><td>介面顯式實作，輸出含 \" seconds\"</td><td>必須轉為介面型別呼叫</td></tr></table>",
             "<b>1. 顯式介面實作</b>",
-            "使用 <code>void IDisplayResult.Display()</code> 這種寫法時，該方法不會在類別實例中直接暴露，只能透過介面型別來存取。",
+            "<pre><code class=\"language-csharp\">使用 <code>void IDisplayResult.Display()</code> 這種寫法時，該方法不會在類別實例中直接暴露，只能透過介面型別來存取。",
             "<b>2. 程式碼完整範例</b>",
-            "<pre><code class=\"language-csharp\">public class FootRace : Race, IDisplayResult\n{\n    public override void Display() { \n        Console.WriteLine(Seconds); \n    }\n    public void DisplayRaw() { \n        Console.WriteLine(Seconds / 60d + \" minutes\"); \n    }\n    void IDisplayResult.Display() { \n        Console.WriteLine(Seconds + \" seconds\"); \n    }\n}</code></pre>",
+            "public class FootRace : Race, IDisplayResult\n{\n    public override void Display() { \n        Console.WriteLine(Seconds); \n    }\n    public void DisplayRaw() { \n        Console.WriteLine(Seconds / 60d + \" minutes\"); \n    }\n    void IDisplayResult.Display() { \n        Console.WriteLine(Seconds + \" seconds\"); \n    }\n}",
             "<b>3. 呼叫流程與輸出說明</b>",
-            "<pre><code class=\"language-csharp\">var r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();      // 輸出：99\nr2.Display();      // 輸出：99 seconds\nr1.DisplayRaw();   // 輸出：1.65 minutes</code></pre>",
-            "<b>小結</b>",
-            "透過不同型別的參考 (r1 vs r2)，同一個物件可以表現出不同的行為版本。"
+            "var r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();      // 輸出：99\nr2.Display();      // 輸出：99 seconds\nr1.DisplayRaw();   // 輸出：1.65 minutes</code></pre>",
+            "<pre><code><b>小結</b>",
+            "透過不同型別的參考 (r1 vs r2)，同一個物件可以表現出不同的行為版本。</code></pre>"
         ],
         "weight": 1,
         "image": null,

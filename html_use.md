@@ -100,16 +100,44 @@ HTML 會自動合併連續空格，若需手動排版請用以下字元。
 
 ---
 
-## 8. 表格精確控制 (Table Style)
-為了確保表格與前後文字有專業的間距感，建議採用以下標準樣式：
-```html
-<table class='table table-bordered' style='max-width: 350px; color: #000; font-size: 0.9rem; margin: 15px 0; line-height: 1.2;'>
-    <tr><td>項目</td><td>內容</td></tr>
-</table>
+## 8. 表格精確控制 (Table Style & Alignment) - V3.5+ 標準
+系統已在全域模板中定義了 **`.q-table`** 與一系列輔助類別，建議優先使用 `class` 組合而非內嵌 `style`。
+
+### 8.1 核心表格樣式 (`.q-table`)
+使用此類別可自動套用：**黑色實線邊框 (`#000`)**、**0.9rem 字體**、**1.2 行高**與**上下 15px 間距**。
+
+### 8.2 寬度與對齊組合 (Width & Alignment)
+透過 `w-*` 控制寬度，`t-*` 控制對齊，可靈活配置表格佈局：
+
+| 類別類型 | 常用類別 (Class) | 說明 |
+| :--- | :--- | :--- |
+| **寬度控制** | `w-5` 至 `w-80` | 以 5% 為級距。例如 `w-70` 代表佔容器寬度 70%。 |
+| **對齊控制** | `t-left`, `t-center`, `t-right` | 控制表格在頁面中的對齊位置。 |
+| **固定佈局** | (內建於 `.q-table`) | 系統強制執行 `table-layout: fixed`，嚴格遵守寬度比例。 |
+
+### 8.3 欄位比例分配 (Column Ratios)
+在 `<td>` 標籤上使用 `w-*` 類別可精確分配欄位佔比。**注意：同一行 (tr) 內的寬度百分比總和應等於 100%。**
+
+### 8.4 最佳實踐範例 (JSON 寫法)
+```json
+"explanation": [
+    "<table class=\"q-table w-70 t-left\">",
+    "  <tr style=\"background:#f8f9fa; font-weight:bold;\">",
+    "    <td class=\"w-20\">指令</td>",
+    "    <td class=\"w-40\">語法結構</td>",
+    "    <td class=\"w-40\">參數說明</td>",
+    "  </tr>",
+    "  <tr>",
+    "    <td>SELECT</td>",
+    "    <td class=\"code-font\">SELECT * FROM Table</td>",
+    "    <td>從資料庫檢索資料。</td>",
+    "  </tr>",
+    "</table>"
+]
 ```
-- **`max-width: 350px;`**：防止表格在窄螢幕下撐破佈局。
-- **`font-size: 0.9rem;`**：讓表格內容呈現專業的學術微調感。
-- **`margin: 15px 0;`**：確保表格上下各留出 15px 的呼吸空間。
+- **`w-70 t-left`**：表格寬度 70% 且靠左對齊（最推薦的解析表格寫法）。
+- **`w-20 + w-40 + w-40 = 100`**：確保欄位比例精確生效。
+- **`.code-font`**：建議用於 SQL 或程式碼欄位，會自動套用等寬字體與深藍色。
 
 ---
 
@@ -119,6 +147,12 @@ HTML 會自動合併連續空格，若需手動排版請用以下字元。
 - **高亮規範**：必須配合 `language-xxx` 類別使用，顏色應以純黑 (#000) 或語法高亮預設色為主。
 
 ---
+
+## 10. 全屏外擴佈局規範 (Subject Layout)
+根據 V3.4 核心 UI 規範，題目容器必須維持精確的左右留白與同步位移。
+- **佈局代碼**：`style="width: calc(100% - 60px); margin: 20px auto; max-width: none;"`
+- **嚴禁修改**：任何情況下禁止移除 `max-width: none` 或修改 `60px` 留白設定，以確保全屏體驗與導覽按鈕同步。
+
 
 ## 備註：不同環境下的轉換 (對比)
 - **HTML**: 使用 `&...;` (如 `&lt;`)
