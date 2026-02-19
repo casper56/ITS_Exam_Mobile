@@ -1,0 +1,19 @@
+指令 (Command),公式 / 語法結構,參數與功能說明
+CREATE,CREATE TABLE 表名 (欄位 型別 [約束]),建立新資料表、預存程序或索引。
+ALTER,ALTER TABLE 表名 ADD/DROP/ALTER COLUMN 欄位,修改現有表格結構（加欄位、改型態）。
+DROP,DROP TABLE/PROCEDURE 名稱,完全刪除物件（連結構都不留）。
+TRUNCATE,TRUNCATE TABLE 表名,清空表格內所有資料，但保留表格結構。
+RENAME,"EXEC sp_rename '舊名', '新名'",更改物件名稱。
+SELECT,SELECT 欄位 FROM 表 WHERE 條件,讀取資料。可用 DISTINCT 去除重複。
+INSERT,INSERT INTO 表 (欄位) VALUES (值),新增資料。
+UPDATE,UPDATE 表 SET 欄位=值 WHERE 條件,修改資料。注意：沒 WHERE 會改全表。
+DELETE,DELETE FROM 表 WHERE 條件,刪除特定列。注意：沒 WHERE 會刪全表。
+ORDER BY,ORDER BY 欄位 [ASC/DESC],排序：ASC (升冪)、DESC (降冪)。
+GROUP BY,GROUP BY 欄位,"群組化。通常配合聚合函數（SUM, AVG）。"
+HAVING,GROUP BY ... HAVING 條件,對群組後的結果進行篩選（不能用 WHERE）。
+JOIN,FROM A JOIN B ON A.ID = B.ID,"合併多張表（INNER, LEFT, RIGHT, FULL）。"
+UNION,SELECT... UNION SELECT...,合併兩個查詢結果（會自動去重）。
+GRANT,GRANT 權限 ON 物件 TO 使用者,"賦予使用者權限（如 SELECT, UPDATE）。"
+REVOKE,REVOKE 權限 ON 物件 FROM 使用者,收回權限。
+COMMIT,COMMIT,確認提交，將變更永久寫入磁碟。
+ROLLBACK,ROLLBACK,撤銷變更，回到上一個提交點。
