@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "question": "<pre><code class=\"language-csharp\">您正在建立用以儲存測驗結果的應用程式。\n您需要記錄每個答案正確或不正確。\n您還需要將儲存資料所需的記憶體數量減到最少。\n您應該使用哪一種資料類型？</code></pre>",
+        "question": "<pre style=\"margin: 5px 0; line-height: 1.5; font-size: 0.95rem;color: #dc3545\" ><code>您正在建立用以儲存測驗結果的應用程式。\n您需要記錄每個答案正確或不正確。\n您還需要將儲存資料所需的記憶體數量減到最少。\n您應該使用哪一種資料類型？</code></pre>",
         "options": [
             "boolean",
             "double",
@@ -1702,7 +1702,7 @@
     },
     {
         "id": 67,
-        "question": "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。\n您使用如下圖所示的設定建立了一個虛擬目錄。\n\n\n您將 Overview.jpg 檔案儲存在虛擬目錄中。\n您應該使用哪一個 URL 來存取該檔案？</code></pre>",
+        "question": "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。\n您使用如下圖所示的設定建立了一個虛擬目錄。</code></pre>[[image01]]<pre><code class=\"language-csharp\">您將 Overview.jpg 檔案儲存在虛擬目錄中。\n您應該使用哪一個 URL 來存取該檔案？</code></pre>",
         "options": [
             "https://sunsetweb.org/images/Overview.jpg",
             "http://sunsetweb.org/images/Overview.jpg",
@@ -1716,7 +1716,7 @@
             "題目指出網站需要 SSL，因此需使用 https 協定。虛擬目錄別名設為 images，對應的路徑會變成 /images/Overview.jpg。"
         ],
         "weight": 1,
-        "image": "images/id70.png",
+        "image01": "images/id70.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
