@@ -103,7 +103,7 @@ def clean_repair_all():
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
             #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
             #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; }
-            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: avoid; margin-bottom: 15px !important; padding: 10px !important; }
+            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 5px !important; }
             pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 0.8rem !important; }
             .q-table { font-size: 0.85rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
