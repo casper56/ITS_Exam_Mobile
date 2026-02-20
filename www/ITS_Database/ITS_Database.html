@@ -46,28 +46,31 @@
         .type-badge { font-size: 0.75rem; vertical-align: middle; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
         .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
-        .question-body { padding: 20px; font-size: 1.05rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; }
+        .question-body { padding: 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
         .q-img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px auto; display: block; }
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
-        .review-item { margin-bottom: 40px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .review-q-text { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; color: #333; }
-        .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 20px 0; border-left: 5px solid #198754; background: white; font-size: 1.1rem; }
-        .review-exp-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; }
+        .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .review-q-text { font-size: 1.0rem; line-height: 1.8; margin-bottom: 5px; color: #333; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 5px 0; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
+        .review-exp-box { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; font-size: 1.0rem; }
         @media print {
-            @page { size: auto; margin: 8mm; }
-            body { background: white !important; font-size: 13px; line-height: 1.4 !important; }
-            .main-wrapper, .mobile-toggle, .side-nav-btn { display: none !important; }
-            #review-area { display: block !important; }
-            .review-item { margin-bottom: 20px !important; padding-bottom: 15px !important; border-bottom: 1px solid #eee !important; }
-            .review-q-text { font-size: 1rem !important; margin-bottom: 8px !important; }
-            .review-ans { font-size: 0.95rem !important; margin: 10px 0 !important; padding: 5px 10px !important; border-left-width: 4px !important; }
-            .review-exp-box { font-size: 0.9rem !important; padding: 12px !important; border-radius: 6px !important; background: #fafafa !important; }
-            .review-opt-line { margin-bottom: 2px !important; }
+            @page { size: auto; margin: 8mm !important; }
+            * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
+            html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: white !important; font-size: 1.0rem !important; line-height: 1.8 !important; }
+            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar { display: none !important; }
+            .content-area { margin-left: 0 !important; padding: 0 !important; margin-top: 0 !important; }
+            #review-area { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 10px 0 !important; padding: 0 !important; border-top: none !important; border-left: none !important; border-right: none !important; }
+            .review-q-text { padding: 10px 2px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-opt-line { padding-left: 2px !important; margin-bottom: 2px !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 5px !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; font-size: 1.0rem !important; }
+            .review-exp-box { font-size: 1.0rem !important; padding: 10px !important; border-radius: 10px !important; border: 1px solid #eee !important; margin: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; background: #fafafa !important; width: calc(100% - 2px) !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; }
             .q-img { max-width: 300px !important; margin: 10px 0 !important; }
             h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
-            .q-table { font-size: 0.85rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
-            .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
+            .q-table, table { font-size: 0.7rem !important; max-width: 98% !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; border-collapse: collapse !important; box-sizing: border-box !important; }
+            .q-table td, .q-table th, td, th { border: 1px solid #000 !important; padding: 6px !important; word-break: break-all !important; overflow-wrap: break-word !important; }
             .category-title, .header-bg { -webkit-print-color-adjust: exact; background-color: #f0f0f0 !important; }
         }
         .side-nav-btn { position: fixed; top: 55%; width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; box-shadow: none; outline: none !important; user-select: none; -webkit-tap-highlight-color: transparent; font-family: serif; font-weight: bold; transform: translateY(-50%); }
@@ -87,8 +90,8 @@
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
 
         /* 表格樣式：黑色實線邊框 */
-        .q-table { width: 100%; border-collapse: collapse; margin: 15px 0; table-layout: fixed; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; }
-        .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all; color: #000; }
+        table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
+        th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
         .w-5 { width: 5% !important; }
         .w-10 { width: 10% !important; }
         .w-15 { width: 15% !important; }
@@ -3189,10 +3192,11 @@
                 return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
             }).join(', ');
 
-            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${imgHtml}<div class="review-opts" style="margin-left:20px">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp-box"><b>解析：</b><br>${processContent(item.explanation || '暫無解析。', item)}</div>`;
+            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${imgHtml}<div class="review-opts" style="margin-left:0">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
             area.appendChild(div);
         });
-        window.print();
+        if(window.Prism) Prism.highlightAll();
+        setTimeout(() => { window.print(); }, 100);
     }
     function renderQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
