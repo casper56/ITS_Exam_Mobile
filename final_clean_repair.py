@@ -63,6 +63,7 @@ def clean_repair_all():
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
 
         /* 表格樣式：黑色實線邊框 */
@@ -196,8 +197,9 @@ def clean_repair_all():
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
         return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-            const src = item['image' + p1];
-            return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
+            const num = parseInt(p1, 10);
+            const src = item['image' + num] || item['image' + p1] || item['image'];
+            return src ? `<img src="${src}" class="q-img">` : match;
         });
     }
 
@@ -454,7 +456,7 @@ def clean_repair_all():
         .review-q-text b { margin-right: 8px; white-space: nowrap; }
         .review-q-text .q-content { flex: 1; }
         .review-q-text .q-content pre, .review-q-text .q-content code { margin-top: 0 !important; padding-top: 0 !important; }
-        .q-img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px auto; display: block; }
+        .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
         .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .review-q-text { font-size: 1.0rem; line-height: 1.8; margin-bottom: 5px; color: #333; }
@@ -603,7 +605,8 @@ def clean_repair_all():
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
         return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-            const src = item['image' + p1];
+            const num = parseInt(p1, 10);
+            const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
         });
     }

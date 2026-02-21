@@ -1,0 +1,5 @@
+[
+    "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+    "<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+    "  </tbody></table>"
+]

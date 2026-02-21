@@ -8,8 +8,8 @@ def convert_csv_to_json(csv_file):
         print(f"錯誤：找不到 CSV 檔案 '{csv_file}'")
         return
 
-    # 取得原始檔名並設定輸出 JSON 檔名
-    base_name = os.path.splitext(os.path.basename(csv_file))[0]
+    # 取得原始檔名並設定輸出 JSON 檔名 (路徑與原始檔相同)
+    base_name = os.path.splitext(csv_file)[0]
     output_file = f"{base_name}.json"
 
     # --- 您指定的 V3.5+ 專業樣式與標頭 ---

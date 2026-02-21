@@ -1,0 +1,4 @@
+錯誤位置,修正方式,理由
+OUTER JOIN,改為 LEFT OUTER JOIN,SQL 需要明確方向（左、右或全連線）。
+WHERE,改為 ON,ON 用於定義表與表之間的「橋樑」；WHERE 用於橋蓋好後的「資料過濾」。
+student.courseID,改為 students.courseID,注意資料表名稱的單複數（小細節，但考試常考拼字一致性）。

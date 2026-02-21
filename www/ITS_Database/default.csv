@@ -1,0 +1,5 @@
+語法狀態,範例程式碼,執行結果,關鍵點
+錯誤語法,ADD Prefix varchar(4) DEFAULT;,ERROR,DEFAULT 關鍵字後方不可直接加分號，必須給值。
+正確語法 (常數),ADD Prefix varchar(4) DEFAULT 'N/A',SUCCESS,預設為文字 'N/A'。
+正確語法 (數值),ADD Score int DEFAULT 0,SUCCESS,預設為數字 0。
+正確語法 (函數),ADD CreateDate date DEFAULT GETDATE(),SUCCESS,預設為系統當前日期。

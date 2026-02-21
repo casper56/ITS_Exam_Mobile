@@ -1,0 +1,20 @@
+[
+    "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+    "<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>SELECT</b></td>",
+    "      <td class=\"code-font\">students.name, courses.name</td>",
+    "      <td>選取結果：你想從這兩張表分別拿什麼資料？</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>FROM + JOIN</b></td>",
+    "      <td class=\"code-font\">students INNER JOIN courses</td>",
+    "      <td>設定橋樑：哪兩張表要黏在一起？</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>ON</b></td>",
+    "      <td class=\"code-font\">students.courseID = courses.courseID</td>",
+    "      <td>匹配規則：靠哪個欄位來對齊資料？</td>",
+    "    </tr>",
+    "  </tbody></table>"
+]

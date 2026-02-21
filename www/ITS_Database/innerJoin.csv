@@ -1,0 +1,4 @@
+要素,你的語法內容,角色
+SELECT,"students.name, courses.name",選取結果：你想從這兩張表分別拿什麼資料？
+FROM + JOIN,students INNER JOIN courses,設定橋樑：哪兩張表要黏在一起？
+ON,students.courseID = courses.courseID,匹配規則：靠哪個欄位來對齊資料？
