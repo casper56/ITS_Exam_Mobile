@@ -88,7 +88,14 @@
             body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
             #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
-            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; }
+            #result-screen h2.text-center { margin-top: 0 !important; padding-top: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
+            .review-id { margin: 0 !important; padding: 5px 10px !important; border-radius: 0 !important; }
+            .review-q-text { display: flex !important; align-items: flex-start !important; padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-q-text b { margin-right: 8px !important; white-space: nowrap !important; }
+            .review-q-text .q-content { flex: 1 !important; }
+            .review-q-text .q-content pre, .review-q-text .q-content code { margin-top: 0 !important; padding-top: 0 !important; }
             .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
             .review-q-text { padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
             .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
@@ -171,7 +178,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>boolean在C#中是1位元組byte，",
+            "<pre><code class=\"language-csharp\">boolean在C#中是1位元組byte，",
             "double是雙精度浮點數，通常需要8個位元組，",
             "integer是整數，通常4位元組 string是字串型別，佔用的記憶體更大。</code></pre>"
         ],
@@ -183,7 +190,7 @@
     {
         "id": 2,
         "question": [
-            "<pre><code>你建立了一個應用程式，其中包含一個名為 Red 的函式。",
+            "<pre><code class=\"language-csharp\">你建立了一個應用程式，其中包含一個名為 Red 的函式。",
             "Red 會呼叫一個名為 Blue 的函式。",
             "在 Blue 執行完成之後，編譯器如何返回程式碼路徑中的正確位置？</code></pre>"
         ],
@@ -197,7 +204,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. 函式呼叫儲存在堆疊上。   //但沒有提到執行完成後如何處理",
+            "<pre><code class=\"language-csharp\">A. 函式呼叫儲存在堆疊上。   //但沒有提到執行完成後如何處理",
             "B. 函式呼叫儲存在堆疊上, 且完成之後, 執行資料都將從堆疊上清除, 並將最後一個指示保留在頂端。",
             "C. 函式呼叫儲存在堆積的記憶體中。 //堆積指(heap), 用於動態記憶體分配, 別於堆疊。",
             "   //堆 (heap), 用於動態記憶體分配, (如物件、動態陣列)，與函式呼叫無直接關聯。",
@@ -246,7 +253,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>因第一個條件成立，直接賦值為 10，後續條件不執行。</code></pre>"
+            "<pre><code class=\"language-csharp\">因第一個條件成立，直接賦值為 10，後續條件不執行。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -281,7 +288,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>因前兩個條件判斷皆為假，執行 else 分支，將 result 賦值為 30。</code></pre>"
+            "<pre><code class=\"language-csharp\">因前兩個條件判斷皆為假，執行 else 分支，將 result 賦值為 30。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -291,7 +298,7 @@
     {
         "id": 5,
         "question": [
-            "<pre><code>在例外狀況處理常式中，catch 區段的用途為何？</code></pre>"
+            "<pre><code class=\"language-csharp\">在例外狀況處理常式中，catch 區段的用途為何？</code></pre>"
         ],
         "options": [
             "不論是否擲回例外狀況都執行程式碼",
@@ -304,7 +311,7 @@
         ],
         "explanation": [
             "B . 只有在擲回例外狀況時才執行程式碼",
-            "<pre><code>詳解",
+            "<pre><code class=\"language-csharp\">詳解",
             "A. 不論是否擲回例外狀況都執行程式碼　　＃catch 只有在異常被 throw 時才執行，h 區段不會觸發。",
             "B. 只有在擲回例外狀況時才執行程式碼",
             "C. 跳出錯誤處理常式                // catch 的功能是「處理異常」，而非「跳出」異常處理流程",
@@ -481,7 +488,7 @@
     {
         "id": 10,
         "question": [
-            "<pre><code>您正在將軟體規格轉換為程式碼元件。",
+            "<pre><code class=\"language-csharp\">您正在將軟體規格轉換為程式碼元件。",
             "規格需要無法具現化的類別，但是可以指定必須在實體繼承類別中實作的方法。",
             "您應該建置哪一種類別？</code></pre>"
         ],
@@ -495,17 +502,12 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：抽象類別的定義與規範</b>",
-            "題目要求建置一個 <b>無法直接實體化</b> (不能被 instantiate) 的類別，但需要 <b>在繼承的子類別中實作方法</b>。",
-            "<b>關鍵特性對照表：</b>",
-            "<table><tr><th>修飾詞</th><th>能否具現化 (New)</th><th>能否繼承</th><th>核心目的</th></tr><tr><td><b>abstract</b></td><td>❌ 否</td><td>✅ 是</td><td><b>定義規範</b>：作為基底類別，強制子類別實作。</td></tr><tr><td><b>protected</b></td><td>視類別定義</td><td>✅ 是</td><td><b>存取控制</b>：限制成員僅限類別內部或子類存取。</td></tr><tr><td><b>sealed</b></td><td>✅ 是</td><td>❌ 否</td><td><b>防止擴充</b>：確保類別邏輯不被修改或繼承。</td></tr><tr><td><b>public</b></td><td>✅ 是</td><td>✅ 是</td><td><b>公開存取</b>：開放給所有外部組件使用。</td></tr></table>",
-            "<b>選項逐一解析：</b>",
-            "<pre><code class=\"language-csharp\">A. abstract (正確) -> 符合「無法具現化」且「由子類實作」的規格需求。",
-            "B. protected      -> 此為成員存取權限，與類別能否具現化無直接關係。",
-            "C. sealed         -> 密封類別，禁止繼承，與題目需求完全相反。",
-            "D. public         -> 公開類別，預設可被具現化。</code></pre>",
-            "<b>小結：</b>",
-            "在物件導向設計中，當一個類別僅作為「概念藍圖」而非具體實體時，應使用 <b>abstract</b> 關鍵字。"
+            "<b>⭐ 核心概念：抽象類別與繼承</b>",
+            "題目要求建立一個<b>無法直接實例化</b> (instantiate)，但必須由<b>衍生類別實作方法</b>的類型。",
+            "<b>修飾詞功能對照：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>修飾詞</th><th>實例化 (New)</th><th>是否繼承</th><th>主要用途</th></tr></thead><tbody><tr><td><b>abstract</b></td><td>❌ 禁止</td><td>✅ 必須</td><td><b>定義樣版</b>，強制子類別實作。</td></tr><tr><td><b>protected</b></td><td>視建構子而定</td><td>✅ 可以</td><td><b>限制存取</b>，僅限類別內部與子類別。</td></tr><tr><td><b>sealed</b></td><td>✅ 可以</td><td>❌ 禁止</td><td><b>封印類別</b>，防止方法被覆寫或繼承。</td></tr><tr><td><b>public</b></td><td>✅ 可以</td><td>✅ 可以</td><td><b>完全公開</b>，任何地方皆可存取。</td></tr></tbody></table>",
+            "<b>選項解析：</b>",
+            "<pre><code class=\"language-csharp\">A. abstract (正確) -> 符合無法實例化且供繼承實作的要求。\nB. protected -> 成員存取修飾詞，不代表類別無法實例化。\nC. sealed -> 防止繼承，與題目要求相反。\nD. public -> 任何人皆可存作，無法限制繼承行為。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -515,7 +517,7 @@
     {
         "id": 11,
         "question": [
-            "<pre><code>有一個堆疊包含整數值，這些值會按照下列順序推入堆疊：2、4、6、8。",
+            "<pre><code class=\"language-csharp\">有一個堆疊包含整數值，這些值會按照下列順序推入堆疊：2、4、6、8。",
             "您執行了下列作業序列：",
             "Pop",
             "Push 3",
@@ -539,7 +541,7 @@
         ],
         "explanation": [
             "依照堆疊操作後，最上層依序彈出 8 → 3 → 7 → 6，剩下的是 2、4、6，其中 6 為最上層。",
-            "<pre><code>解題步驟",
+            "<pre><code class=\"language-csharp\">解題步驟",
             "//原序     // [2、4、6、8]",
             "Pop       // [2、4、6]",
             "Push 3    // [2、4、6、3]",
@@ -560,11 +562,11 @@
     {
         "id": 12,
         "question": [
-            "<pre><code>您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。",
+            "<pre><code class=\"language-csharp\">您任職於某個應用程式開發團隊。應用程式存放於 Git 檔控制系統中。您計劃將一項新功能加入至應用程式，這項功能需要數週的時間來完成。",
             "其他團隊成員所進行的應用程式維護作業不得影響您的工作。請問您該怎麼做？請將清單中適當的詞彙移至正確位置：",
             "詞彙：",
-            "1. 合併   (merge)                2. 提取要求   (pull request)               3. 推送   (push)",
-            "4. 分支   (Branch)               5. 認可    (commit)                        6. 複製            ",
+            "1. 合併(merge) \t\t2. 提取要求(pull request)\t3. 推送   (push)",
+            "4. 分支(Branch) \t5. 認可(commit)\t\t\t\t6. 複製",
             "",
             "您應該先建立原始程式碼的 __A__。",
             "當您在本機工作並確認變更時，需要執行 __B__，如此您的變更才能儲存在本機儲存庫中。",
@@ -584,7 +586,7 @@
         ],
         "explanation": [
             "※正確的順序應該是： 建立分支  (4) , 認可  (5) , 推送  (3) , 提取要求 (2) ,  合併   (1)",
-            "<pre><code>解題步驟",
+            "<pre><code class=\"language-csharp\">解題步驟",
             "※題目需求",
             "你要開發新功能，且不想影響其他人的維護工作 → 先建立一個Branch（分支）",
             "在本機完成修改並儲存變更 → commit（認可）",
@@ -608,7 +610,7 @@
     {
         "id": 13,
         "question": [
-            "<pre><code>請將清單中的每個版本控制系統命令，移至正確的描述位置：",
+            "<pre><code class=\"language-csharp\">請將清單中的每個版本控制系統命令，移至正確的描述位置：",
             "命令：",
             "1. branch",
             "2. checkout",
@@ -634,7 +636,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>註:上述命令與描述選項似乎都是打散應依實際中文描述的順序, 然後挑選命令英文數字編號",
+            "<pre><code class=\"language-csharp\">註:上述命令與描述選項似乎都是打散應依實際中文描述的順序, 然後挑選命令英文數字編號",
             "解題步驟",
             "正確順序的推導：將命令與描述的對應關係按順序排列：",
             "checkout  → B   (2)  //用於建立新的分支（管理開發程式碼行）",
@@ -652,7 +654,7 @@
     {
         "id": 14,
         "question": [
-            "<pre><code>您正在為應用程式設計一個 C# 類別。",
+            "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。",
             "您需要將 accessCount 成員變數的可用性限制為基底類別以及衍生自基底類別的任何類別。",
             "請問您應該使用哪個存取修飾詞？</code></pre>"
         ],
@@ -666,15 +668,10 @@
             "C"
         ],
         "explanation": [
-            "<b>核心重點：繼承關係中的成員存取限制</b>",
-            "題目要求將變數限制在「基底類別」與「衍生類別」之間，這符合 <b>protected</b> 的定義。",
-            "<b>存取修飾詞對照表：</b>",
-            "<table><tr><th>修飾詞</th><th>類別內部</th><th>衍生類別(子類)</th><th>外部/其他</th></tr><tr><td>private</td><td>✅</td><td>❌</td><td>❌</td></tr><tr><td><b>protected</b></td><td>✅</td><td><b>✅</b></td><td>❌</td></tr><tr><td>internal</td><td>✅</td><td>❌ (除非同組件)</td><td>❌</td></tr><tr><td>public</td><td>✅</td><td>✅</td><td>✅</td></tr></table>",
-            "<b>選項分析：</b>",
-            "<pre><code class=\"language-csharp\">A.internal\t-> 限制在同一個組件（DLL/EXE）中，不一定有繼承關係。",
-            "B.private\t-> 僅限該類別內部，子類別也無法讀取，過於嚴格。",
-            "C.protected \t-> (正確) 專門開放給基底與衍生類別共享成員。",
-            "D.public\t-> 全開放，無法達到「限制可用性」的規格需求。</code></pre>"
+            "<b>⭐ 存取修飾詞存取權限比較：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>修飾詞</th><th>類別內部</th><th>衍生類別(繼承)</th><th>外部專案</th></tr></thead><tbody><tr><td>private</td><td>✅</td><td>❌</td><td>❌</td></tr><tr><td><b>protected</b></td><td>✅</td><td><b>✅</b></td><td>❌</td></tr><tr><td>internal</td><td>✅</td><td>✅ (限同專案)</td><td>❌</td></tr><tr><td>public</td><td>✅</td><td>✅</td><td>✅</td></tr></tbody></table>",
+            "<b>選項解析：</b>",
+            "<pre><code class=\"language-csharp\">A. internal -> 限定在同一個編譯組件 (DLL/EXE) 內存取。\nB. private -> 最嚴格，僅限類別內部存取。\nC. protected (正確) -> 允許衍生類別存取，但對外部隱藏。\nD. public -> 最寬鬆，對外完全開放。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -684,7 +681,7 @@
     {
         "id": 15,
         "question": [
-            "<pre><code>哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個詞能描述將物件的實值型別轉換成參考型別的程序？</code></pre>"
         ],
         "options": [
             "Boxing",
@@ -696,18 +693,12 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：型別轉換與記憶體配置</b>",
-            "當我們把 <b>實值型別</b> (如 int, bool) 封裝在一個 <b>object</b> 容器中時，這個程序稱為 <b>Boxing (裝箱)</b>。",
-            "<b>Boxing vs. Unboxing 對照表：</b>",
-            "<table><tr><th>術語</th><th>轉換方向</th><th>記憶體變化</th><th>效能影響</th></tr><tr><td><b>Boxing (裝箱)</b></td><td>實值型別 → 參考型別</td><td>從 Stack 搬到 Heap</td><td>較高 (需分配記憶體)</td></tr><tr><td><b>Unboxing (拆箱)</b></td><td>參考型別 → 實值型別</td><td>從 Heap 搬回到 Stack</td><td>較低</td></tr></table>",
-            "",
-            "<b>選項逐一解析：</b>",
-            "<pre><code class=\"language-csharp\">A. Boxing (正確)\t-> 將值型別轉換為 object 或介面型別的過程。",
-            "B. Unboxing\t\t-> 相反過程，從 object 中提取出原本的值型別。",
-            "C. 介接 (Interface)\t-> 指實作介面的過程，與此轉換無關。",
-            "D. 對應 (Mapping)\t-> 通常指資料對應 (如 ORM)，並非型別轉換術語。</code></pre>",
-            "<b>開發小提醒：</b>",
-            "過度頻繁的 Boxing 會造成垃圾回收 (GC) 的負擔，影響效能，應盡量使用 <b>泛型 (Generics)</b> 來避免。"
+            "<b>⭐ Boxing (裝箱) 與 Unboxing (拆箱) 概念：</b>",
+            "當我們將<b>值型別</b> (如 int) 轉換為 <b>object</b> 型別時，這個過程稱為 <b>Boxing</b>。",
+            "<b>特性對照：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>術語</th><th>轉換方向</th><th>數據存儲位置</th><th>效能影響</th></tr></thead><tbody><tr><td><b>Boxing (裝箱)</b></td><td>值型別 -> 參考型別</td><td>Stack 移至 Heap</td><td>較大 (需分配記憶體)</td></tr><tr><td><b>Unboxing (拆箱)</b></td><td>參考型別 -> 值型別</td><td>Heap 移至 Stack</td><td>較小</td></tr></tbody></table>",
+            "<b>選項解析：</b>",
+            "<pre><code class=\"language-csharp\">A. Boxing (正確) -> 將值型別物件化。\nB. Unboxing -> 將物件還原為原始數值。\nC. 介面 (Interface) -> 定義契約，與型別轉換無關。\nD. 映射 (Mapping) -> 通常指數據欄位對應。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -717,7 +708,7 @@
     {
         "id": 16,
         "question": [
-            "<pre><code>您有一個具有屬性的類別。",
+            "<pre><code class=\"language-csharp\">您有一個具有屬性的類別。",
             "您需要確保該類別的取用者可以寫入屬性的值。",
             "請問您應該使用哪一個關鍵字？</code></pre>"
         ],
@@ -731,17 +722,10 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：屬性存取子 (Accessors) 的功能</b>",
-            "在 C# 中，屬性 (Property) 透過 <code>get</code> 和 <code>set</code> 存取子來控制私有欄位的讀取與寫入行為。",
-            "<b>存取關鍵字對照表：</b>",
-            "<table><tr><th>關鍵字</th><th>正式名稱</th><th>主要用途</th><th>讀寫權限</th></tr><tr><td><b>get</b></td><td>取用器 (Getter)</td><td>回傳屬性的值</td><td>唯讀 (Read-only)</td></tr><tr><td><b>set</b></td><td>設定器 (Setter)</td><td><b>寫入/修改</b>屬性的值</td><td>唯寫/可讀寫</td></tr><tr><td><b>value</b></td><td>隱含參數</td><td>代表外部傳入的新數值</td><td>-</td></tr></table>",
-            "<b>程式碼範例：</b>",
-            "<pre><code class=\"language-csharp\">public class Player {\n    private int _score;\n    public int Score {\n        get { return _score; }   // 讀取值\n        set { _score = value; }  // 寫入值，value 是系統保留字\n    }\n}</code></pre>",
-            "<b>選項分析：</b>",
-            "<pre><code class=\"language-csharp\">A. set (正確)\t-> 專門用於賦予屬性值，允許外部「寫入」。",
-            "B. get\t\t-> 用於獲取屬性值，若只有 get 則屬性為唯讀。",
-            "C. add\t\t-> 用於「事件 (event)」的訂閱或「集合 (Collection)」的新增，非屬性存取。",
-            "D. value\t-> 是 set 區塊內使用的「值變數」，而非定義權限的存取子。</code></pre>"
+            "<b>⭐ C# 屬性存取子 (Accessors) 功能：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>關鍵字</th><th>正式名稱</th><th>功能與權限</th></tr></thead><tbody><tr><td><b>get</b></td><td>取得器 (Getter)</td><td>讀取屬性值 (唯讀屬性)。</td></tr><tr><td><b>set</b></td><td>設定器 (Setter)</td><td><b>寫入或修改</b>屬性值 (可寫屬性)。</td></tr><tr><td><b>value</b></td><td>預設參數</td><td>代表外部傳入要寫入的新值。</td></tr></tbody></table>",
+            "<b>語法範例：</b>",
+            "<pre><code class=\"language-csharp\">public int Score {\n    get { return _score; }\n    set { _score = value; } // 使用 set 來允許外部修改\n}</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -751,7 +735,7 @@
     {
         "id": 17,
         "question": [
-            "<pre><code>哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個詞能描述自現有類別繼承功能的 C# 類別？</code></pre>"
         ],
         "options": [
             "基底類別",
@@ -763,22 +747,10 @@
             "B"
         ],
         "explanation": [
-            "<b>核心重點：繼承關係中的角色命名</b>",
-            "在 C# 的繼承機制中，我們將類別分為「提供功能者」與「獲得功能者」兩個角色。",
-            "---",
-            "<b>1. 繼承角色對照表：</b>",
-            "<table><tr><th>正式術語</th><th>別名</th><th>角色描述 (大腦白話翻譯)</th></tr><tr><td><b>基底類別 (Base Class)</b></td><td>父類別 / 老爸</td><td>原本就存在的<b>現有類別</b>，提供功能讓別人抄。</td></tr><tr><td><b>衍生類別 (Derived Class)</b></td><td>子類別 / 兒子</td><td><b>自現有類別繼承功能</b>的類別，是衍生出來的新產品。</td></tr></table>",
-            "---",
-            "<b>2. 程式碼範例：</b>",
-            "<pre><code class=\"language-csharp\">// 基底類別 (Base Class) -> 現有的\npublic class Shape { \n    public void Draw() { } \n}\n\n// 衍生類別 (Derived Class) -> 自現有類別繼承功能\npublic class Rectangle : Shape { \n    public void GetArea() { } \n}</code></pre>",
-            "---",
-            "<b>3. 選項解析：</b>",
-            "<pre><code class=\"language-csharp\">A.基底類別\t\t-> 指的是「被繼承」的那一個範本。",
-            "B.衍生類別 (正確)\t-> 描述從既有功能「衍生」出來的新版本。",
-            "C.繼承類別\t\t-> 非正式術語，通常僅作為動作描述。",
-            "D.超級類別\t\t-> 這是 Java 的術語 (Super Class)，在 C# 證照考試中不選。</code></pre>",
-            "<b>💡 記憶小撇步：</b>",
-            "題目問的是「哪一個詞描述『去繼承別人』的類別」，就像是從老爸那裡『衍生』出來的後代，所以選<b>衍生類別</b>。"
+            "<b>⭐ 繼承關係：基底類別 vs 衍生類別</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>類別類型</th><th>角色定義</th><th>繼承特性</th></tr></thead><tbody><tr><td><b>基底類別 (Base)</b></td><td>父類別 / 模板</td><td>提供通用功能供子類別繼承。</td></tr><tr><td><b>衍生類別 (Derived)</b></td><td>子類別 / 擴充</td><td><b>繼承並擴充</b>父類別功能的類型。</td></tr></tbody></table>",
+            "<b>解析：</b>",
+            "題目描述「繼承了另一個類別的所有功能」，這就是 <b>衍生類別 (Derived Class)</b> 的定義。"
         ],
         "weight": 1,
         "image": null,
@@ -788,7 +760,7 @@
     {
         "id": 18,
         "question": [
-            "<pre><code>類別 C 和類別 D 繼承自類別 B。",
+            "<pre><code class=\"language-csharp\">類別 C 和類別 D 繼承自類別 B。",
             "類別 B 繼承自類別 A。",
             "這些類別的方法如下所示：",
             "",
@@ -805,19 +777,12 @@
             "D"
         ],
         "explanation": [
-            "<b>核心重點：繼承鏈與受保護 (protected) 成員的存取</b>",
-            "本題考察在多層繼承（Multilevel Inheritance）中，<code>protected</code> 成員如何被向下傳遞。",
-            "<b>1. 繼承結構示意圖：</b>",
-            "<pre><code class=\"language-csharp\">類別 A (m1) ← 基底\n   └── 類別 B (m2) ← 衍生自 A\n          ├── 類別 C (m3) ← 衍生自 B\n          └── 類別 D (m4) ← 衍生自 B</code></pre>",
-            "<b>2. 成員存取權限對照表：</b>",
-            "<table><tr><th>方法來源</th><th>方法名稱</th><th>類別 C 是否可存取</th><th>原因說明</th></tr><tr><td>類別 A</td><td>m1</td><td>✅ 是</td><td>C 位於 A 的繼承鏈下方，可接收受保護成員。</td></tr><tr><td>類別 B</td><td>m2</td><td>✅ 是</td><td>C 直接繼承 B，可存取父類別受保護成員。</td></tr><tr><td>類別 C</td><td>m3</td><td>✅ 是</td><td>類別可存取自身的成員。</td></tr><tr><td>類別 D</td><td>m4</td><td>❌ 否</td><td><b>兄弟類別</b>之間無法存取彼此的受保護成員。</td></tr></table>",
-            "<b>3. 選項逐一解析：</b></code></pre>",
-            "<pre><code>A.僅 m1 和 m3 -> 漏掉了父類別 B 的 m2。",
-            "B.僅 m2 和 m3-> 漏掉了祖父類別 A 的 m1。",
-            "C.僅 m3 和 m4-> 錯誤！C 與 D 是平輩，無法存取彼此的 protected 成員。",
-            "D.m1、m2 和 m3 (正確)-> C 可以存取整個垂直繼承鏈上方的所有 protected 成員。</code></pre>",
-            "<b>開發小提醒：</b>",
-            "受保護成員 (protected) 就像「傳家寶」，會一代一代往下傳（A → B → C），但不會分給兄弟（C ↔ D）。"
+            "<b>⭐ Protected (受保護) 的繼承路徑：</b>",
+            "在多層繼承中，<code>protected</code> 成員會順著繼承鏈向下傳遞，只要是衍生類別都能存取。",
+            "<b>繼承結構：</b>",
+            "<pre><code class=\"language-csharp\">A (m1) <- B (m2) <- C (m3)\n               <- D (m4)</code></pre>",
+            "<b>存取權限分析：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>成員來源</th><th>成員名稱</th><th>C 類別是否可存取</th><th>說明</th></tr></thead><tbody><tr><td>A 類別</td><td>m1</td><td>✅ 可以</td><td>C 是 A 的子類的子類。</td></tr><tr><td>B 類別</td><td>m2</td><td>✅ 可以</td><td>C 是 B 的直接子類。</td></tr><tr><td>C 類別</td><td>m3</td><td>✅ 可以</td><td>C 類別自己的成員。</td></tr><tr><td>D 類別</td><td>m4</td><td>❌ 禁止</td><td>C 與 D 是平級，無法互相讀取。</td></tr></tbody></table>"
         ],
         "weight": 1,
         "image": null,
@@ -827,7 +792,7 @@
     {
         "id": 19,
         "question": [
-            "<pre><code>哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個詞能描述將物件轉換成較一般類型的程序？</code></pre>"
         ],
         "options": [
             "向上轉型",
@@ -839,19 +804,12 @@
             "A"
         ],
         "explanation": [
-            "<b>核心重點：向上轉型 (Upcasting) 的隱式轉換規則</b>",
-            "「較一般類型」指的是繼承鏈中位置較上方的<b>父類別 (基底類別)</b>。",
-            "<b>1. 轉型方向圖解：</b>",
-            "<pre><code class=\"language-csharp\">【父類別：Canvas】 (較一般/泛用)   ▲\n                                 │\n                                 ║  <b>向上轉型 (Upcasting)</b>\n【子類別：PictureCanvas】 (較特殊) ║  ✅ 隱式轉換 (自動進行)\n         └───────────────────────╝</code></pre>",
-            "<b>2. 轉換特性對照表：</b>",
-            "<table><tr><th>轉換類型</th><th>方向</th><th>語法要求</th><th>安全性</th></tr><tr><td><b>向上轉型</b></td><td>子型別 → 父型別</td><td><b>隱式轉換 (自動)</b></td><td>✅ 絕對安全</td></tr><tr><td><b>向下轉型</b></td><td>父型別 → 子型別</td><td>顯式轉換 (強制轉型)</td><td>⚠️ 可能導致執行期錯誤</td></tr></table>",
-            "<b>3. 選項解析：</b>",
-            "<pre><code class=\"language-csharp\">A. 向上轉型 (正確) -> 將子類別(特殊)看作父類別(一般)的過程。",
-            "B. 向下轉型 -> 將父類別轉為子類別，需強制轉型且有風險。",
-            "C. 介接 -> 通常指介面 (Interface) 的實作，非型別轉換術語。",
-            "D. Flex 處理 -> 與 C# 型別系統無關。</code></pre>",
-            "<b>白話小結：</b>",
-            "「賓士車」是一種「汽車」：這種從特殊到一般的自然轉換，就是向上轉型。"
+            "<b>⭐ Upcasting (向上轉型) 概念：</b>",
+            "將子類別（較具體）轉型為父類別（較通用）的過程，稱為向上轉型。",
+            "<b>特性比較：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>轉型方式</th><th>方向</th><th>隱式轉換</th><th>安全性</th></tr></thead><tbody><tr><td><b>向上轉型 (Up)</b></td><td>子類 -> 父類</td><td>✅ 自動</td><td>百分之百安全</td></tr><tr><td><b>向下轉型 (Down)</b></td><td>父類 -> 子類</td><td>❌ 需強制轉型</td><td>有失敗風險</td></tr></tbody></table>",
+            "<b>解析：</b>",
+            "將 PictureCanvas 視為較通用的 Canvas 處理，就是 <b>向上轉型 (Upcasting)</b>。"
         ],
         "weight": 1,
         "image": null,
@@ -861,7 +819,7 @@
     {
         "id": 20,
         "question": [
-            "<pre><code>衍生類別可以覆寫哪一種函式？</code></pre>"
+            "<pre><code class=\"language-csharp\">衍生類別可以覆寫哪一種函式？</code></pre>"
         ],
         "options": [
             "static 函式",
@@ -873,17 +831,10 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>核心重點：覆寫 (Override) 的成功條件</b>",
-            "想要在衍生類別中成功修改父類別的方法，必須同時滿足「看得到 (Access)」與「准許改 (Virtual)」兩個條件。",
-            "<b>1. 修改權限接力圖解：</b></code></pr>",
-            "[[image01]]",
-            "<b>2. 覆寫條件判定表：</b>",
-            "<table><tr><th>組合類型</th><th>能否覆寫</th><th>原因說明</th></tr><tr><td>static</td><td>❌ 否</td><td>屬於類別而非物件，不支援多型。</td></tr><tr><td>private virtual</td><td>❌ 否</td><td>子類別<b>看不到</b>父類的私有財產，無法覆寫。</td></tr><tr><td><b>protected virtual</b></td><td><b>✅ 是</b></td><td>子類別看得到父類成員，且父類標記為准許修改。</td></tr><tr><td>非虛擬 (Non-virtual)</td><td>❌ 否</td><td>父類別沒加 virtual，代表這方法不准動。</td></tr></table>",
-            "<b>3. 選項分析：</b>",
-            "<pre><code>A. static\t\t\t-> 靜態函式不具備繼承特性。",
-            "B. private\t\t\t-> 子類別無法存取父類別的私有成員。",
-            "C. protected virtual (正確)\t-> 符合「子類可見」與「父類准許」。",
-            "D. 非虛擬\t\t\t-> 沒有 virtual 關鍵字，子類別就不能 override。</code></pre>"
+            "<b>⭐ Override (覆寫) 的必要條件：</b>",
+            "若要在子類別中覆寫父類別的方法，該方法必須在存取權限上允許存取，且具備 <code>virtual</code> 關鍵字。",
+            "<b>條件對照表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>宣告方式</th><th>可否覆寫</th><th>原因說明</th></tr></thead><tbody><tr><td>static</td><td>❌</td><td>靜態方法屬於類別，不屬於物件。</td></tr><tr><td>private virtual</td><td>❌</td><td>子類別根本看不到 private 方法。</td></tr><tr><td><b>protected virtual</b></td><td>✅</td><td><b>子類別可見且允許擴充。</b></td></tr><tr><td>Non-virtual</td><td>❌</td><td>基底類別未宣告允許覆寫。</td></tr></tbody></table>"
         ],
         "weight": 1,
         "image01": "images/id20_override_diagram.png",
@@ -894,7 +845,7 @@
     {
         "id": 21,
         "question": [
-            "<pre><code>下列哪一項敘述正確描述了在基底類別中宣告為虛擬的 C# 方法？</code></pre>"
+            "<pre><code class=\"language-csharp\">下列哪一項敘述正確描述了在基底類別中宣告為虛擬的 C# 方法？</code></pre>"
         ],
         "options": [
             "衍生類別的實作看不到此方法",
@@ -906,7 +857,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>B. 可透過衍生類別本身的實作覆寫此方法</code></pre>"
+            "<pre><code class=\"language-csharp\">B. 可透過衍生類別本身的實作覆寫此方法</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -972,17 +923,33 @@
             "A"
         ],
         "explanation": [
-            "<pre><code><b>核心重點：顯式介面實作與方法覆寫</b>",
-            "本題考察 C# 如何同時處理基底類別方法、自訂方法以及介面實作。",
-            "<b>為什麼這樣實作？</b><br/><table><tr><th>方法</th><th>目的與特色</th><th>呼叫方式</th></tr><tr><td>public override void Display()</td><td>覆寫基底類別的 Display()</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>public void DisplayRaw()</td><td>自訂方法，將秒數換算成分鐘</td><td>以 FootRace 實例直接呼叫</td></tr><tr><td>void IDisplayResult.Display()</td><td>介面顯式實作，輸出含 \" seconds\"</td><td>必須轉為介面型別呼叫</td></tr></table>",
-            "<b>1. 顯式介面實作</b>",
-            "<pre><code class=\"language-csharp\">使用 <code>void IDisplayResult.Display()</code> 這種寫法時，該方法不會在類別實例中直接暴露，只能透過介面型別來存取。",
-            "<b>2. 程式碼完整範例</b>",
-            "public class FootRace : Race, IDisplayResult\n{\n    public override void Display() { \n        Console.WriteLine(Seconds); \n    }\n    public void DisplayRaw() { \n        Console.WriteLine(Seconds / 60d + \" minutes\"); \n    }\n    void IDisplayResult.Display() { \n        Console.WriteLine(Seconds + \" seconds\"); \n    }\n}",
-            "<b>3. 呼叫流程與輸出說明</b>",
-            "var r1 = new FootRace();\nvar r2 = r1 as IDisplayResult;\nr1.Seconds = 99;\n\nr1.Display();      // 輸出：99\nr2.Display();      // 輸出：99 seconds\nr1.DisplayRaw();   // 輸出：1.65 minutes</code></pre>",
-            "<pre><code><b>小結</b>",
-            "透過不同型別的參考 (r1 vs r2)，同一個物件可以表現出不同的行為版本。</code></pre>"
+            "<pre><code class=\"language-csharp\">必須實作的三個方法",
+            "1. public override void Display() ",
+            "  覆寫 Race 類別的虛擬方法，直接印出秒數。",
+            "2. public void DisplayRaw() ",
+            " 額外的方法，將秒數換算成分鐘顯示。",
+            "3. void IDisplayResult.Display() ",
+            "介面 IDisplayResult 的顯式實作方法，印出秒數加上字串 \" seconds\"。",
+
+            "<b>實作細節對照：</b></code></pre>",
+            "<table class=\"q-table w-100 t-left\">",
+            "  <thead>",
+            "    <tr><th>方法</th><th>目的與特色</th><th>呼叫方式</th></tr>",
+            "  </thead>",
+            "  <tbody>",
+            "    <tr><td>public override void Display()</td><td>覆寫基底類別的 Display() , 顯示秒數(整數)</td><td>以 FootRace 實例直接呼叫，例如 r1.Display()</td></tr>",
+            "    <tr><td>public void DisplayRaw()</td><td>自訂方法，顯示秒數換算成分鐘</td><td>以 FootRace 實例直接呼叫，例如 r1.DisplayRaw()</td></tr>",
+            "    <tr><td>void IDisplayResult.Display()</td><td>顯式介面實作</td><td><b>介面方法的顯式實作，只能用介面型別呼叫，顯示秒數字串加 \" seconds\"</b><br>以介面型別呼叫例如r2.Display(),其中 r2 是介面型別</td></tr>",
+            "  </tbody>",
+            "</table>",
+            "<pre><code class=\"language-csharp\">什麼是顯式介面實作？",
+            "void IDisplayResult.Display() 是顯式介面實作，這種寫法不會在類別本身暴露該方法，只能透過介面型別呼叫。",
+            "這是為了避免方法命名衝突或強制特定介面呼叫行為。",
+
+            "<b>執行結果解析：</b>",
+            "r1.Display() -> 執行 override -> 99\nr2.Display() -> 執行介面實作 -> 99 seconds\nr1.DisplayRaw() -> 執行新方法 -> 1.65 minutes",
+            "小結: 這題考察 C# 的繼承、多型及介面實作方式。顯式介面實作可以讓類別同時有多個同名方法，透過不同型別參考呼叫不同版本。",
+            "方法覆寫 (override) 可以改寫基底類別行為。額外自訂方法可增加類別功能。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -992,7 +959,7 @@
     {
         "id": 23,
         "question": [
-            "<pre><code>您需要將所有樣式設定分組成個別的檔案，以便套用至 Web 應用程式的所有頁面。請問您該怎麼做？</code></pre>"
+            "<pre><code class=\"language-csharp\">您需要將所有樣式設定分組成個別的檔案，以便套用至 Web 應用程式的所有頁面。請問您該怎麼做？</code></pre>"
         ],
         "options": [
             "使用內部樣式表。",
@@ -1017,7 +984,7 @@
     {
         "id": 24,
         "question": [
-            "<pre><code>您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。",
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。",
             "請選擇正確的選項以完成句子。",
             "對於 background-image 樣式，您應該使用此值：</code></pre>"
         ],
@@ -1041,7 +1008,7 @@
     {
         "id": 25,
         "question": [
-            "<pre><code>您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：",
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：",
             " ",
             "請選擇正確的選項以完成句子。",
             "對於 background-image 樣式，您應該使用此值：</code></pre>"
@@ -1056,7 +1023,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>選項 A：10px; 是設定 CSS 的 border-radius 值，使元素四個角都為 10px 的圓角，符合題目圖示。",
+            "<pre><code class=\"language-csharp\">選項 A：10px; 是設定 CSS 的 border-radius 值，使元素四個角都為 10px 的圓角，符合題目圖示。",
             "其他選項：並不正確或與 border-radius 無關。</code></pre>",
             "<pre><code class=\"language-csharp\">A. 10px;                        //CSS的border-radius屬性可以幫div添加圓角的效果\nB. 10px, 10px, 10px;\nC. inherit;\nD. initial;</code></pre>"
         ],
@@ -1068,7 +1035,7 @@
     {
         "id": 26,
         "question": [
-            "<pre><code>您正在建立一個 Web 應用程式。即將存取該應用程式的用戶端電腦會執行各種網頁瀏覽器。",
+            "<pre><code class=\"language-csharp\">您正在建立一個 Web 應用程式。即將存取該應用程式的用戶端電腦會執行各種網頁瀏覽器。",
             "哪一個詞能描述讓應用程式可供用戶端電腦存取的程序？</code></pre>"
         ],
         "options": [
@@ -1081,7 +1048,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A.轉型\t//指資料或程式的型別轉換(如資料型態轉換、語言轉換等)，與題目無直接關聯。 ",
+            "<pre><code class=\"language-csharp\">A.轉型\t//指資料或程式的型別轉換(如資料型態轉換、語言轉換等)，與題目無直接關聯。 ",
             "B.封裝\t//將資料與相關操作封裝成一個整體(如物件導向中的類別)，與題目無直接關聯 ",
             "C.裝載\t//指將程式或資料從儲存裝置（如伺服器）載入到記憶體中，以便執行。 ",
             "D.虛擬化\t//透過虛擬技術模擬硬體或軟體環境(如虛擬機器、容器)。 ",
@@ -1096,7 +1063,7 @@
     {
         "id": 27,
         "question": [
-            "<pre><code>請選取正確的選項以完成句子。所有網頁伺服器都有___位址和網域名稱，用以在網際網路上識別其身分。</code></pre>"
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器都有___位址和網域名稱，用以在網際網路上識別其身分。</code></pre>"
         ],
         "options": [
             "FTP",
@@ -1108,7 +1075,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>A. FTP\t//FTP(File Transfer Protocol)是用於傳輸檔案的協議，與伺服器的「位址」無直接關聯。",
+            "<pre><code class=\"language-csharp\">A. FTP\t//FTP(File Transfer Protocol)是用於傳輸檔案的協議，與伺服器的「位址」無直接關聯。",
             "B. HTML\t//HTML是網頁的結構語言，用於定義網頁內容，但與伺服器的「位址」無關。",
             "C. HTTP\t//HTTP是用於網頁資料傳輸的協議，例如瀏覽器與伺服器之間的通訊。",
             "D. IP\t//IP是用於在網際網路上唯一標識裝置的位址，例如伺服器的IP位址，結合網域名稱，可讓使用者端找到正確的伺服器</code></pre>"
@@ -1121,7 +1088,7 @@
     {
         "id": 28,
         "question": [
-            "<pre><code>請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。所有網頁伺服器會經由___通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
         ],
         "options": [
             "FTP",
@@ -1133,7 +1100,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A. FTP\t//用於檔案傳輸(如下載或上傳檔案)，但非網頁資料交換的標準協定。",
+            "<pre><code class=\"language-csharp\">A. FTP\t//用於檔案傳輸(如下載或上傳檔案)，但非網頁資料交換的標準協定。",
             "B. HTML\t//是網頁的結構語言（如\"&lt;html&gt;、&lt;div&gt;\"標籤），屬資料格式，非通訊協議",
             "C. HTTP\t//超文字傳輸協定，是瀏覽器與伺服器之間交換網頁資料的標準協議",
             "D. IP\t//IP位址 是唯一標識網路裝置的核心要素</code></pre>"
@@ -1146,7 +1113,7 @@
     {
         "id": 29,
         "question": [
-            "<pre><code>請選取正確的選項以完成句子。擁有存取權的用戶端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成句子。擁有存取權的用戶端可以經由___通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
         ],
         "options": [
             "FTP",
@@ -1158,7 +1125,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. FTP\t//用於檔案傳輸(如下載或上傳檔案) 支援使用者透過客戶端(如FileZilla)與伺服器互動",
+            "<pre><code class=\"language-csharp\">A. FTP\t//用於檔案傳輸(如下載或上傳檔案) 支援使用者透過客戶端(如FileZilla)與伺服器互動",
             "B. HTTP\t//超文字傳輸協定，是瀏覽器與伺服器之間交換網頁資料的標準協議",
             "C. IP\t//IP位址 是唯一標識網路裝置的核心要素",
             "D. SMTP\t//(簡單郵件傳輸協議)專門用於電郵的傳送，與網頁內容的修改無關。</code></pre>"
@@ -1171,7 +1138,7 @@
     {
         "id": 30,
         "question": [
-            "<pre><code>哪一個程序會將資料轉換為 Web 服務所用的 XML 字串？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個程序會將資料轉換為 Web 服務所用的 XML 字串？</code></pre>"
         ],
         "options": [
             "還原序列化",
@@ -1183,7 +1150,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A.還原序列化\t//指將序列化的資料(如 XML)轉換回原始物件的過程(即反序列化)。",
+            "<pre><code class=\"language-csharp\">A.還原序列化\t//指將序列化的資料(如 XML)轉換回原始物件的過程(即反序列化)。",
             "\t\t  與題目關係：與「轉換為 XML 字串」無關，而是「從 XML 回復物件」。",
             "B.序列化\t\t//將物件轉換為可儲存或傳輸的格式(如 XML、JSON、二進位等）, 直接符合題目要求。",
             "C.解碼\t\t//將加密或編碼過的資料轉換回原始形式(例如 Base64 解碼)",
@@ -1197,7 +1164,7 @@
     {
         "id": 31,
         "question": [
-            "<pre><code>請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。",
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。",
             "B1 是控制器，B2 是模型，B3 是檢視</code></pre>"
         ],
         "options": [
@@ -1210,7 +1177,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>在 MVC（Model-View-Controller）架構中，元件的流程通常如下:",
+            "<pre><code class=\"language-csharp\">在 MVC（Model-View-Controller）架構中，元件的流程通常如下:",
             "1.使用者（圖中的人）與檢視（View） 互動，發出請求。",
             "  請求由控制器（Controller） 接收。",
             "2.控制器與模型（Model） 互動，處理資料和業務邏輯。",
@@ -1228,7 +1195,7 @@
     {
         "id": 32,
         "question": [
-            "<pre><code>請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。",
+            "<pre><code class=\"language-csharp\">請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。",
             "1. 將事件轉換成要求",
             "2. 顯示資料",
             "3. 解譯並傳遞資料",
@@ -1245,7 +1212,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>根據 MVC 架構，順序為： 41532",
+            "<pre><code class=\"language-csharp\">根據 MVC 架構，順序為： 41532",
             "4 使用者點選按鈕(View)",
             "1 將事件轉換成要求(Controller)",
             "5 驗證要求、儲存資料(Controller)",
@@ -1260,7 +1227,7 @@
     {
         "id": 33,
         "question": [
-            "<pre><code>您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>"
+            "<pre><code class=\"language-csharp\">您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>"
         ],
         "options": [
             "多對多",
@@ -1272,7 +1239,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>一個 Customer（顧客）可以有多個 Order（訂單），但每筆 Order 只能屬於一個 Customer，因此這是典型的「一對多」關聯性</code></pre>"
+            "<pre><code class=\"language-csharp\">一個 Customer（顧客）可以有多個 Order（訂單），但每筆 Order 只能屬於一個 Customer，因此這是典型的「一對多」關聯性</code></pre>"
         ],
         "weight": 1,
         "image": "images/id33.png",
@@ -1282,7 +1249,7 @@
     {
         "id": 34,
         "question": [
-            "<pre><code>有一個名為 Items 的資料表，其欄位包括：",
+            "<pre><code class=\"language-csharp\">有一個名為 Items 的資料表，其欄位包括：",
             "- ID（integer，主索引鍵，自動產生）",
             "- Description（text）",
             "- Completed（Boolean）",
@@ -1298,8 +1265,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>選項A 是唯一符合以下條件的正確語法： ",
-            "<pre><code>1. 使用 DELETE FROM <b>table_name</b> WHERE <b>condition</b>。 ",
+            "<pre><code class=\"language-csharp\">選項A 是唯一符合以下條件的正確語法： ",
+            "<pre><code class=\"language-csharp\">1. 使用 DELETE FROM <b>table_name</b> WHERE <b>condition</b>。 ",
             "2. 條件正確：Completed = 1 確切對應 True。 ",
             "3. 邏輯正確：僅刪除符合條件的資料列，不影響其他資料。</code></pre>"
         ],
@@ -1343,7 +1310,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. TRY TRAN;\t// SQL中無 TRY TRAN 語法，TRY 通常用於 TRY-CATCH (錯誤處理)，與交易開始無關",
+            "<pre><code class=\"language-csharp\">A. TRY TRAN;\t// SQL中無 TRY TRAN 語法，TRY 通常用於 TRY-CATCH (錯誤處理)，與交易開始無關",
             "B. BEGIN TRAN;\t//SQL Server 中開始交易的標準語法 (BEGIN TRANSACTION)",
             "C. TRAN;\t//需完整語法 BEGIN TRANSACTION 或 BEGIN TRAN。",
             "D. BEGIN;\t//BEGIN是SQL中用於區塊（Block）的關鍵字，與交易無關</code></pre>"
@@ -1356,7 +1323,7 @@
     {
         "id": 36,
         "question": [
-            "<pre><code>請設定交易以符合下列需求：",
+            "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：",
             "- 如果客戶只有一張發票，請刪除該發票。",
             "- 如果客戶有多張發票，請取消交易。",
             "請問 B 部分應填入下列何者程式碼？",
@@ -1388,7 +1355,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>題目分析",
+            "<pre><code class=\"language-csharp\">題目分析",
             "題目要求在交易中處理以下邏輯：",
             "1. 若客戶僅有一張發票：刪除該發票。（COMMIT TRANSACTION）",
             "2. 若客戶有多張發票：取消交易  (ROLLBACK TRANSACTION）（回滾操作）。",
@@ -1444,7 +1411,7 @@
     {
         "id": 38,
         "question": [
-            "<pre><code>哪一個 LINQ 運算子會壓平合併序列？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個 LINQ 運算子會壓平合併序列？</code></pre>"
         ],
         "options": [
             "SelectMany",
@@ -1456,7 +1423,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>問題：哪一個 LINQ 運運算元會「壓平合併序列」？ ",
+            "<pre><code class=\"language-csharp\">問題：哪一個 LINQ 運運算元會「壓平合併序列」？ ",
             "正解說明 SelectMany 是唯一一個能將巢狀序列「壓平」並合併成單一序列的 LINQ 運運算元。",
             "例如： var nested = new List&lt;List&lt;int&gt;&gt; { new List&lt;int&gt; { 1, 2 }, new List&lt;int&gt; { 3, 4 } }; ",
             "       var flattened = nested.SelectMany(list =&gt; list).ToList();",
@@ -1473,7 +1440,7 @@
     {
         "id": 39,
         "question": [
-            "<pre><code>如何設定 NoSQL 文件資料庫的資料結構？</code></pre>"
+            "<pre><code class=\"language-csharp\">如何設定 NoSQL 文件資料庫的資料結構？</code></pre>"
         ],
         "options": [
             "設為 XML",
@@ -1515,7 +1482,7 @@
     {
         "id": 40,
         "question": [
-            "<pre><code>您正在為應用程式建立必要的變數。",
+            "<pre><code class=\"language-csharp\">您正在為應用程式建立必要的變數。",
             "您將儲存在這些變數中的資料具有下列特性：",
             "由數字組成",
             "包含小數點的數字",
@@ -1533,7 +1500,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A.byte\t\t//無法儲存小數（僅能儲存整數）",
+            "<pre><code class=\"language-csharp\">A.byte\t\t//無法儲存小數（僅能儲存整數）",
             "B.decimal\t//128位元的高精度浮點數，可儲存小數點後 28~29位 的數值。",
             "C.double\t//64位元的浮點數，可儲存小數點後 15~17位 的數值 ",
             "D.float\t\t//32位元的浮點數,精度不足( 小數點後僅約 6 ~ 9 位(保證 7 位),未達「超過七位」的需求)",
@@ -1547,7 +1514,7 @@
     {
         "id": 41,
         "question": [
-            "<pre><code>您正在為應用程式建立變數。",
+            "<pre><code class=\"language-csharp\">您正在為應用程式建立變數。",
             "您將儲存在這個變數中的資料具有下列特性：",
             "由數字和字元組成   (例如：\"123abc\" 或 \"123.45abc\")",
             "含有小數點的數字   (例如：\"123.45\" 或 \"123.45abc\")",
@@ -1563,7 +1530,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>A. char\t\t//無法儲存多字元的資料（如 \"123.45abc\"），也不支援小數點與非數字字元。",
+            "<pre><code class=\"language-csharp\">A. char\t\t//無法儲存多字元的資料（如 \"123.45abc\"），也不支援小數點與非數字字元。",
             "B. decimal\t//只能儲存數值，無法處理包含字元（如 'a' 或 'b'）的資料。",
             "C. float\t//僅能儲存數值，無法處理非數字字元或小數點後的字元（如 \"123.45abc\"）",
             "D. string\t//儲存任意字元序列(包括數字、字元、小數點等)</code></pre>"
@@ -1648,7 +1615,7 @@
     {
         "id": 44,
         "question": [
-            "<pre><code>在例外狀況處理程式中，finally 段的用途為何？</code></pre>"
+            "<pre><code class=\"language-csharp\">在例外狀況處理程式中，finally 段的用途為何？</code></pre>"
         ],
         "options": [
             "僅出錯時處理常式",
@@ -1660,7 +1627,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>finally 段是 try 與 catch 結構的一部分，其核心功能是確保在 try 塊執行完畢後，無論是否發生例外（exception），finally 中的程式碼都必須執行。",
+            "<pre><code class=\"language-csharp\">finally 段是 try 與 catch 結構的一部分，其核心功能是確保在 try 塊執行完畢後，無論是否發生例外（exception），finally 中的程式碼都必須執行。",
             "A. 僅出錯時處理常式",
             "B. 僅支援應用程式的執行作業",
             "C. 只有在遇回例外狀況時才輸入程式碼",
@@ -1713,7 +1680,7 @@
     {
         "id": 46,
         "question": [
-            "<pre><code>請檢視 Winter Sports Corporation 的下列軟體需求規格：</code></pre>[[image01]]<pre><code>根據所需的系統功能，您應該選擇哪一種架構？</code></pre>"
+            "<pre><code class=\"language-csharp\">請檢視 Winter Sports Corporation 的下列軟體需求規格：</code></pre>[[image01]]<pre><code class=\"language-csharp\">根據所需的系統功能，您應該選擇哪一種架構？</code></pre>"
         ],
         "options": [
             "Model-View-Controller (MVC)",
@@ -1783,7 +1750,7 @@
     {
         "id": 48,
         "question": [
-            "<pre><code>請根據 Git 的常見操作流程，將下列詞語移至正確位置。",
+            "<pre><code class=\"language-csharp\">請根據 Git 的常見操作流程，將下列詞語移至正確位置。",
             "詞語：",
             "1.合併        2.提取要求        3.推送",
             "4.分支        5.認可           6.複製",
@@ -1804,7 +1771,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>4   分支\tBranch",
+            "<pre><code class=\"language-csharp\">4   分支\tBranch",
             "5   認可\tCommit",
             "3   推送\tPush",
             "2   提取要求\tPull Request",
@@ -1820,7 +1787,7 @@
     {
         "id": 49,
         "question": [
-            "<pre><code>您的團隊使用了 GitHub 做為版本控制系統。",
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
             "您想要正確地將頁面填入完成的碼",
             "</code></pre>"
         ],
@@ -1834,7 +1801,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>A. 複製 (Clone)\t\t// 用於第一次把遠端專案下載到本機，並不是回報變更之前必要的最後一步。",
+            "<pre><code class=\"language-csharp\">A. 複製 (Clone)\t\t// 用於第一次把遠端專案下載到本機，並不是回報變更之前必要的最後一步。",
             "B. 派生 (Fork)\t\t// 是在 GitHub 上複製一份倉庫到自己的帳號下, 通常是跨專案協作時才用，非日常回報",
             "C. 提取 (Pull/Fetch)\t// 這是「同步」把遠端變更拉到本機，而非提交前的必要步驟。",
             "D. 暫存 (Stage/git add)\t// 在 Git 流程裡，「回報變更」（= commit/push/pull request）之前，",
@@ -1850,7 +1817,7 @@
     {
         "id": 50,
         "question": [
-            "<pre><code>您的團隊使用了 GitHub 做為版本控制系統。",
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
             "若要以非複製模式方式將遠端原始碼專屬變更複製到您的設定檔",
             "可以執行?</code></pre>"
         ],
@@ -1864,7 +1831,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. 複製 (Clone)\t//會把整個遠端儲存庫複製到本地，是初次取得專案的方式。  不符合「非複製模式」",
+            "<pre><code class=\"language-csharp\">A. 複製 (Clone)\t//會把整個遠端儲存庫複製到本地，是初次取得專案的方式。  不符合「非複製模式」",
             "B. 派生 (Fork)\t//建立遠端儲存庫的副本, 通常用於開源貢獻,  與本地設定檔無關，也非取得變更方式",
             "C. 提取 (Pull / Fetch)\t// fetch 會從遠端取得最新變更但不合併；pull 則會取得並合併到本地分支。",
             " \t\t\t ✅ 完全符合「非複製模式」且是用來取得遠端變更的方式。",
@@ -1895,7 +1862,7 @@
     {
         "id": 51,
         "question": [
-            "<pre><code>您的團隊使用了 GitHub 做為版本控制系統。",
+            "<pre><code class=\"language-csharp\">您的團隊使用了 GitHub 做為版本控制系統。",
             "若要獲知儲存庫中取得專案的最新修訂，請使用選項內那個指令？</code></pre>"
         ],
         "options": [
@@ -1924,7 +1891,7 @@
     {
         "id": 52,
         "question": [
-            "<pre><code>請選擇正確的選項以完成有關資料化加密的句子：",
+            "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關資料化加密的句子：",
             "數位簽章會使用？</code></pre>"
         ],
         "options": [
@@ -1935,7 +1902,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. 非對稱加密\t//公鑰與私鑰機制，以確保資料完整性與來源真實性",
+            "<pre><code class=\"language-csharp\">A. 非對稱加密\t//公鑰與私鑰機制，以確保資料完整性與來源真實性",
             "B. 對稱加密\t//因無辦法透過金鑰證明傳送者的身份，不能實現「來源驗證」，無法用於數位簽章。</code></pre>",
             "[[image01]]"
         ],
@@ -1948,7 +1915,7 @@
     {
         "id": 53,
         "question": [
-            "<pre><code>請選擇正確的選項以完成有關加密解密的句子：",
+            "<pre><code class=\"language-csharp\">請選擇正確的選項以完成有關加密解密的句子：",
             "數位簽章需要？</code></pre>"
         ],
         "options": [
@@ -1975,7 +1942,7 @@
     {
         "id": 54,
         "question": [
-            "<pre><code>在類別中，建構函式的用途為何？</code></pre>"
+            "<pre><code class=\"language-csharp\">在類別中，建構函式的用途為何？</code></pre>"
         ],
         "options": [
             "建立實值型別",
@@ -1987,7 +1954,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>選項解析",
+            "<pre><code class=\"language-csharp\">選項解析",
             "A. 建立實值型別\t\t錯誤, 建構函式並非專門用於「建立實值型別」，其初始化通常由語言本身處理。 ",
             "B. 自基底類別繼承\t錯誤, 繼承（Inheritance）是物件導向的特性，由「繼承語法」（如 class Derived : public Base）實現，",
             "\t\t\t與建構函式無直接關聯。建構函式的作用是初始化物件，而非處理繼承關係。",
@@ -2004,7 +1971,7 @@
     {
         "id": 55,
         "question": [
-            "<pre><code>您正在為應用程式設計一個 C# 類別。您需要讓 AccessCount 欄位變數只有在類別內可用。請問應該使用哪個存取修飾詞？</code></pre>"
+            "<pre><code class=\"language-csharp\">您正在為應用程式設計一個 C# 類別。您需要讓 AccessCount 欄位變數只有在類別內可用。請問應該使用哪個存取修飾詞？</code></pre>"
         ],
         "options": [
             "internal",
@@ -2016,7 +1983,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. internal\t//同一程式集內的類別可訪問，但不同程式集的類別無法訪問。",
+            "<pre><code class=\"language-csharp\">A. internal\t//同一程式集內的類別可訪問，但不同程式集的類別無法訪問。",
             "B. private\t//僅限當前類別內部使用。",
             "C. protected\t//當前類別及其所有衍生類別可訪問。",
             "D. public\t//所有程式碼（相同或不同程式集）均可訪問。</code></pre>"
@@ -2118,7 +2085,7 @@
     {
         "id": 58,
         "question": [
-            "<pre><code>有一個名為 Mammal 的類別衍生自一個名為 Animal 的父類別。",
+            "<pre><code class=\"language-csharp\">有一個名為 Mammal 的類別衍生自一個名為 Animal 的父類別。",
             "Mammal 類別則具有 Animal 類別的變數和方法。",
             "哪一個能描述這種動物分類的處理過程？</code></pre>"
         ],
@@ -2132,7 +2099,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>",
+            "<pre><code class=\"language-csharp\">",
             "A. 資料封裝化\t//指「把資料和行為包在類別裡面，限制外部直接存取內部欄位」。和本題無關",
             "B. 結構基礎模組化//並不是標準 OOP 的四大特性名詞。看起來像干擾選項。",
             "C. 對應\t\t//可能混淆 ORM (物件關聯對應 Object-Relational Mapping)，但和類別繼承無關",
@@ -2146,7 +2113,7 @@
     {
         "id": 59,
         "question": [
-            "<pre><code>下列何者必須存在，才能從特定類別推導出繼承性？</code></pre>"
+            "<pre><code class=\"language-csharp\">下列何者必須存在，才能從特定類別推導出繼承性？</code></pre>"
         ],
         "options": [
             "has-a 關聯",
@@ -2158,7 +2125,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. has-a 關聯\t//表示「擁有某個東西」的關係，例如： Car has-a Engine，這是組合或聚合的關係。",
+            "<pre><code class=\"language-csharp\">A. has-a 關聯\t//表示「擁有某個東西」的關係，例如： Car has-a Engine，這是組合或聚合的關係。",
             "B. is-a 關聯\t//表示「是一種」的關係，例如： Dog is-a Animal這是繼承的核心判斷依據。",
             "C. 將成員包入\t//這是物件封裝的概念，與繼承無直接關係。",
             "D. 公開屬性\t//這是存取修飾詞的設計問題，與是否該繼承無關。</code></pre>"
@@ -2171,7 +2138,7 @@
     {
         "id": 60,
         "question": [
-            "<pre><code>有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。",
+            "<pre><code class=\"language-csharp\">有一個名為 Glass 的類別繼承自 Window 類別。Window 類別中包含一個名為 break() 的受保護方法。",
             "請問應從 Glass 類別中呼叫 break() 方法的語法是？</code></pre>"
         ],
         "options": [
@@ -2220,7 +2187,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>C. 3  //_number 預設為 7, 有一個 int 的建構子, 當執行 ANumber mynumber = new ANumber(3); 會是3</code></pre>"
+            "<pre><code class=\"language-csharp\">C. 3  //_number 預設為 7, 有一個 int 的建構子, 當執行 ANumber mynumber = new ANumber(3); 會是3</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2230,7 +2197,7 @@
     {
         "id": 62,
         "question": [
-            "<pre><code>Circle 和 Square 這兩個類別繼承自 Shape 類別，並且都繼承並以不同方式實作 Area 方法。請問這代表哪一種物件導向的概念？</code></pre>"
+            "<pre><code class=\"language-csharp\">Circle 和 Square 這兩個類別繼承自 Shape 類別，並且都繼承並以不同方式實作 Area 方法。請問這代表哪一種物件導向的概念？</code></pre>"
         ],
         "options": [
             "封裝",
@@ -2242,7 +2209,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A.封裝\t//將資料與方法封裝於物件中，透過訪問控制(如 private、protected)限制對內部狀態的直接存取",
+            "<pre><code class=\"language-csharp\">A.封裝\t//將資料與方法封裝於物件中，透過訪問控制(如 private、protected)限制對內部狀態的直接存取",
             "B.抽象化\t//從複雜系統中提取核心特性，並定義通用介面(如抽象類別或介面)讓子類別實作具體細節",
             "C.多型\t//相同方法名稱，在不同類別中有不同實作方式, Circle 與 Square 継承 Shape 並重寫 Area 方法，",
             "\t  正是多型的典型應用（方法覆寫）。",
@@ -2257,7 +2224,7 @@
     {
         "id": 63,
         "question": [
-            "<pre><code>您正在撰寫一個處理訂房要求的 web 應用程式。",
+            "<pre><code class=\"language-csharp\">您正在撰寫一個處理訂房要求的 web 應用程式。",
             "您需要確認每位訪客所選取的房間尚未被其他訪客預定。",
             "您應該使用哪一種程式設計來判斷建立要求時房間仍然可用？</code></pre>"
         ],
@@ -2271,7 +2238,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>A. 批次處理\t//是指定時執行的背景作業(例如每天晚上清理資料) 不適合即時判斷房間是否可用",
+            "<pre><code class=\"language-csharp\">A. 批次處理\t//是指定時執行的背景作業(例如每天晚上清理資料) 不適合即時判斷房間是否可用",
             "B. 用戶端\t//指的是瀏覽器端的 JavaScript 或 UI 驗證,  不可靠, 因為用戶端無法存取最新的伺服器資料",
             "C. 多執行緒\t//是處理並行任務的技術，例如同時處理多個請求,  不直接解決資料一致性問題",
             "D. 伺服器端\t//指的是在 Web 伺服器或後端程式中進行判斷,  可以存取資料庫, 確認房間是否已被預定,",
@@ -2285,7 +2252,7 @@
     {
         "id": 64,
         "question": [
-            "<pre><code>請從清單中選取正確的選項以完成句子。",
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
             "所有網頁伺服器都有 ＿＿ 位址和網域名稱，用以在網際網路上識別其身分。</code></pre>"
         ],
         "options": [
@@ -2298,7 +2265,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code>A. FTP\t//是一種檔案傳輸協定，不是用來識別伺服器身分",
+            "<pre><code class=\"language-csharp\">A. FTP\t//是一種檔案傳輸協定，不是用來識別伺服器身分",
             "B. HTML\t//是網頁內容的語言，不是識別位址",
             "C. HTTP\t//是通訊協定，用於傳輸網頁資料，但不是「位址」",
             "D. IP\t//是網際網路上的數字位址，用來識別伺服器位置</code><//pre>"
@@ -2311,7 +2278,7 @@
     {
         "id": 65,
         "question": [
-            "<pre><code>請從清單中選取正確的選項以完成句子。",
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
             "所有網頁伺服器會經由 ＿＿ 通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
         ],
         "options": [
@@ -2324,7 +2291,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A. FTP\t//是檔案傳輸協定，用於上傳/下載檔案，不是用來傳送網頁資料",
+            "<pre><code class=\"language-csharp\">A. FTP\t//是檔案傳輸協定，用於上傳/下載檔案，不是用來傳送網頁資料",
             "B. HTML\t//是網頁的內容格式，不是通訊協定",
             "C. HTTP\t//是通訊協定「超文字傳輸協定」，專門用來傳送網頁資料, 如HTML、圖片、影片等",
             "D. IP\t// 是網際網路上的數字位址，用來識別伺服器位置</code></pre>"
@@ -2337,7 +2304,7 @@
     {
         "id": 66,
         "question": [
-            "<pre><code>請從清單中選取正確的選項以完成句子。",
+            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
             "擁有存取權的用戶端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
         ],
         "options": [
@@ -2350,7 +2317,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. FTP (File Transfer Protocol)：專門用來在客戶端與伺服器之間傳輸檔案。 如果有權限，就能「上傳、下載、",
+            "<pre><code class=\"language-csharp\">A. FTP (File Transfer Protocol)：專門用來在客戶端與伺服器之間傳輸檔案。 如果有權限，就能「上傳、下載、",
             "\t修改、刪除」伺服器上的檔案，符合題目需求 → 正解！",
             "B. HTTP (HyperText Transfer Protocol)：用於「讀取」網頁資源(GET/POST)： 雖然可透過 WebDAV 擴充支援檔案修改，",
             " \t但題目強調「修訂或移除」伺服器檔案，典型答案不會選 HTTP。",
@@ -2365,8 +2332,8 @@
     {
         "id": 67,
         "question": [
-            "<pre><code>您的網站（sunsetweb.org）需要 SSL。",
-            "您使用如下圖所示的設定建立了一個虛擬目錄。</code></pre>[[image01]]<pre><code>您將 Overview.jpg 檔案儲存在虛擬目錄中。",
+            "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。",
+            "您使用如下圖所示的設定建立了一個虛擬目錄。</code></pre>[[image01]]<pre><code class=\"language-csharp\">您將 Overview.jpg 檔案儲存在虛擬目錄中。",
             "您應該使用哪一個 URL 來存取該檔案？</code></pre>"
         ],
         "options": [
@@ -2389,7 +2356,7 @@
     {
         "id": 68,
         "question": [
-            "<pre><code>下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：",
+            "<pre><code class=\"language-csharp\">下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：",
             "public class CarService",
             "{",
             "    private static List lst = new List(new String[] { \"Oil\", \"Engine\", \"Wheels\", \"Paint\" });",
@@ -2426,7 +2393,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>關鍵點分析",
+            "<pre><code class=\"language-csharp\">關鍵點分析",
             "1. API 路徑結構 ",
             "www.sunsetweb.com/carservices/3 呼叫的是 GetCarServicebyID 方法，",
             "其路徑模板為 /CarServices/{ServiceListid}，其中 {ServiceListid} 是路徑引數。",
@@ -2442,7 +2409,7 @@
     {
         "id": 69,
         "question": [
-            "<pre><code>哪一個正規化要求資料表的屬性僅相依於主索引鍵？</code></pre>"
+            "<pre><code class=\"language-csharp\">哪一個正規化要求資料表的屬性僅相依於主索引鍵？</code></pre>"
         ],
         "options": [
             "CREATE PROCEDURE StoreData @UserName nvarchar (255), @Age int",
@@ -2468,7 +2435,7 @@
     {
         "id": 70,
         "question": [
-            "<pre><code>您需要建立一個傳入人員 UserName 和 Age 的預存程序。",
+            "<pre><code class=\"language-sql\">您需要建立一個傳入人員 UserName 和 Age 的預存程序。",
             "Age 必須是以年為單位的整數。",
             "UserName 至少必須有三個字元。",
             "您應該使用哪一個陳述式來建立此預存程序？",
@@ -2488,11 +2455,11 @@
             "A"
         ],
         "explanation": [
-            "<code class=\"language-csharp\">A. CREATE PROCEDURE StoreData @UserName nvarchar (255),@Age int",
+            "<pre><code class=\"language-sql\">A. CREATE PROCEDURE StoreData @UserName nvarchar (255),@Age int",
             "B. CREATE PROCEDURE StoreData @UserName char,@Age double     \t #資料型態不符",
             "C. UPDATE PROCEDURE StoreData  @UserName nvarchar (255),@Age int \t#必需有Create 關鍵字 ",
             "D. CREATE PROCEDURE StoreData (@UserName, @Age)  #沒有資料型別宣告",
-            "CREATE PROCEDURE 名字 @變數1 型別, @變數2 型別</code> "
+            "CREATE PROCEDURE 名字 @變數1 型別, @變數2 型別</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2502,7 +2469,7 @@
     {
         "id": 71,
         "question": [
-            "<pre><code>在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>"
+            "<pre><code class=\"language-csharp\">在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>"
         ],
         "options": [
             "更新不會失敗。",
@@ -2533,7 +2500,7 @@
     {
         "id": 72,
         "question": [
-            "<pre><code>您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>"
+            "<pre><code class=\"language-csharp\">您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>"
         ],
         "options": [
             "連線共用",
@@ -2545,7 +2512,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. 連線共用\t#連線數有限時，共用連線池可以讓多個使用者重複使用現有連線，免新建連線，最佳化效能與資源利用",
+            "<pre><code class=\"language-csharp\">A. 連線共用\t#連線數有限時，共用連線池可以讓多個使用者重複使用現有連線，免新建連線，最佳化效能與資源利用",
             "B. 連線逾時\t#只是設定等待時間，無法改善同時使用者多的問題。",
             "C. 索引\t\t#提升查詢效能，但與「限制連線數」無關。",
             "D. 正規化\t#減少資料冗餘，與連線數最佳化無關。</code></pre>"
@@ -2558,7 +2525,7 @@
     {
         "id": 73,
         "question": [
-            "<pre><code>您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>"
+            "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>"
         ],
         "options": [
             "測試案例必要的任何前置條件 ",
@@ -2573,7 +2540,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. 測試案例必要的任何前置條件\t#單元測試必須先設定測試環境或前提條件, 例如輸入資料、初始狀態",
+            "<pre><code class=\"language-csharp\">A. 測試案例必要的任何前置條件\t#單元測試必須先設定測試環境或前提條件, 例如輸入資料、初始狀態",
             "B. 測試案例的預期結果\t\t#測試必須定義明確的期望結果 (Expected Result)，才能驗證程式正確性",
             "C. 與其他測試案例的整合\t\t#這屬於整合測試 (Integration Test)，不是單元測試。",
             "D. 結合成單一測試的所有使用案例\t#單元測試應該「單一且專注」, 不應把多個使用案例混在一起。",
@@ -2588,7 +2555,7 @@
     {
         "id": 74,
         "question": [
-            "<pre><code>下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>"
+            "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>"
         ],
         "options": [
             "JSON 物件可使用名稱/值對來建立。",
@@ -2603,7 +2570,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. JSON 物件可使用名稱/值對來建立。      # JSON 基本結構就是 key:value 配對",
+            "<pre><code class=\"language-csharp\">A. JSON 物件可使用名稱/值對來建立。      # JSON 基本結構就是 key:value 配對",
             "B. JSON 物件可使用已排序的值清單來建立。 #這描述的是 JSON 陣列 (Array)，而不是 JSON 物件。",
             "C. JSON 物件可運用命名空間。   #JSON 沒有命名空間的概念，那是 XML 的特性。",
             "D. JSON 物件可延伸。   # JSON 是輕量格式, 可以自由新增 key/value，沒有schema, 具有「可擴展性」。",
@@ -2618,7 +2585,7 @@
     {
         "id": 75,
         "question": [
-            "<pre><code>下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>"
+            "<pre><code class=\"language-csharp\">下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>"
         ],
         "options": [
             "正規化可降低磁碟空間使用量。",
@@ -2633,7 +2600,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. 正規化可降低磁碟空間使用量。\t#正規化主要透過「消除重複資料」來減少磁碟空間浪費。",
+            "<pre><code class=\"language-csharp\">A. 正規化可降低磁碟空間使用量。\t#正規化主要透過「消除重複資料」來減少磁碟空間浪費。",
             "B. 正規化可防止資料不一致。\t#如把部門資料表，就能避免有寫「IT」、「I.T.」的不一致。",
             "C. 正規化可將資料損毀的影響降到最低。\t#這不是正規化的主要目的，是交易與備份的功能目標。",
             "D. 正規化可減少結構描述限制。\t#正規化會增加結構設計的限制(因為必須遵守規則), 而不是減少。",
@@ -2648,7 +2615,7 @@
     {
         "id": 76,
         "question": [
-            "<pre><code>連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>"
+            "<pre><code class=\"language-csharp\">連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>"
         ],
         "options": [
             "提升效能",
@@ -2664,7 +2631,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A. 提升效能\t\t#因為重複使用現有連線，減少建立/關閉連線的開銷。",
+            "<pre><code class=\"language-csharp\">A. 提升效能\t\t#因為重複使用現有連線，減少建立/關閉連線的開銷。",
             "B. 提升可擴縮性\t\t#連線池可以讓有限的連線資源服務更多用戶，提升系統可擴充能力。",
             "C. 縮短建立連線的時間\t#因為新請求可以直接重用池中連線，而不需要重新 handshake。",
             "D. 不需要任何設定\t#雖然有些框架會自動啟用，但通常還是需要設定(最大池大小、逾時等)。",
@@ -2679,7 +2646,7 @@
     {
         "id": 77,
         "question": [
-            "<pre><code>哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）</code></pre>"
+            "<pre><code class=\"language-csharp\">哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）</code></pre>"
         ],
         "options": [
             "using 陳述式",
@@ -2694,7 +2661,7 @@
             "C"
         ],
         "explanation": [
-            "<pre><code>A. using 陳述式\t// C# 的 using 陳述式(using (...) { ... })在區塊結束時會自動呼叫 Dispose()，作資源釋放。",
+            "<pre><code class=\"language-csharp\">A. using 陳述式\t// C# 的 using 陳述式(using (...) { ... })在區塊結束時會自動呼叫 Dispose()，作資源釋放。",
             "B. using 指示詞\t// 這個只是 using System; 之類的 namespace 引用，不會釋放資源。",
             "C. finally 區塊\t// try …finally…無論是否發生例外, finally 區塊的程式碼一定會執行，用來釋放資源。",
             "D. throw 關鍵字\t// 這是拋出例外，和資源釋出無關。",
@@ -2709,7 +2676,7 @@
     {
         "id": 78,
         "question": [
-            "<pre><code>請回答有關單元測試的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關單元測試的敘述：",
             "單元測試會測試整個應用程式的整合與相依性。</code></pre>"
         ],
         "options": [
@@ -2720,7 +2687,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. Yes      //只測試單一功能或最小程式單元(如函式、方法或類別)",
+            "<pre><code class=\"language-csharp\">A. Yes      //只測試單一功能或最小程式單元(如函式、方法或類別)",
             "B. No       //整合測試才會測試多個模組之間的整合與相依性。</code></pre>"
         ],
         "weight": 1,
@@ -2731,7 +2698,7 @@
     {
         "id": 79,
         "question": [
-            "<pre><code>單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>"
+            "<pre><code class=\"language-csharp\">單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2741,7 +2708,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. Yes",
+            "<pre><code class=\"language-csharp\">A. Yes",
             "※單元測試會呼叫被測的目標方法、並傳遞所需的引數、檢查返回值是否正確、是否符合開發實務</code></pre>"
         ],
         "weight": 1,
@@ -2752,7 +2719,7 @@
     {
         "id": 80,
         "question": [
-            "<pre><code>單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，",
+            "<pre><code class=\"language-csharp\">單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，",
             "然後判斷其行為表現是否完全符合預期。</code></pre>"
         ],
         "options": [
@@ -2773,7 +2740,7 @@
     {
         "id": 81,
         "question": [
-            "<pre><code>連結清單可進行排序。</code></pre>"
+            "<pre><code class=\"language-csharp\">連結清單可進行排序。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2783,7 +2750,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
+            "<pre><code class=\"language-csharp\">A. Yes   #連結清單可以進行排序，只是操作方式是透過遍歷和指標調整，而不是像陣列用索引存取。",
             "適合連結清單的排序演算法雖然理論上你可以對連結清單使用任何演算法，但以下兩種是最常被推薦的：",
             "1.合併排序 (Merge Sort) —— 最推薦這是連結清單排序的「黃金標準」。",
             "\t原因：合併排序主要依據順序存取（Sequential Access），這非常符合連結清單的特性。",
@@ -2803,7 +2770,7 @@
     {
         "id": 82,
         "question": [
-            "<pre><code>連結清單最多包含 100 個節點。</code></pre>"
+            "<pre><code class=\"language-csharp\">連結清單最多包含 100 個節點。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2813,7 +2780,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>A. Yes",
+            "<pre><code class=\"language-csharp\">A. Yes",
             "B. No     //連結串列的節點數量由實際需求或程式設計決定，若無明確限制</pre></code>"
         ],
         "weight": 1,
@@ -2824,7 +2791,7 @@
     {
         "id": 83,
         "question": [
-            "<pre><code>您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>"
+            "<pre><code class=\"language-csharp\">您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2834,7 +2801,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢</pre></code>"
+            "<pre><code class=\"language-csharp\">A. Yes    //連結清單的特點就是 可以在任意位置插入或刪除節點，這是它相對於陣列 (Array) 的優勢</pre></code>"
         ],
         "weight": 1,
         "image": null,
@@ -2844,7 +2811,7 @@
     {
         "id": 84,
         "question": [
-            "<pre><code>數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>"
+            "<pre><code class=\"language-csharp\">數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2854,12 +2821,10 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：",
-			"關鍵點：",
-			"1. 數位簽章的加密（簽章）是使用私鑰，而非公鑰。",
+            "<pre><code class=\"language-csharp\">B. No   //數位簽章 (Digital Signature) 的流程跟「加密訊息」不太一樣，重點是用私鑰簽署、用公鑰驗證：",
+            "關鍵點：",
+            "1. 數位簽章的加密（簽章）是使用私鑰，而非公鑰。",
             "2. 加密（Encryption）與數位簽章的區別</code></pre>",
-            
-            
             "[[image01]]"
         ],
         "weight": 1,
@@ -2871,7 +2836,7 @@
     {
         "id": 85,
         "question": [
-            "<pre><code>CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>"
+            "<pre><code class=\"language-csharp\">CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2881,9 +2846,8 @@
             "A"
         ],
         "explanation": [
-            
-            "<pre><code>A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 </code></pre>",
-			"[[image01]]"
+            "<pre><code class=\"language-csharp\">A. Yes      // CSRF 權杖是 主動防禦機制，直接針對 CSFR 攻擊的漏洞，它的設計目的明確是防止攻擊。 </code></pre>",
+            "[[image01]]"
         ],
         "weight": 1,
         "image": null,
@@ -2894,7 +2858,7 @@
     {
         "id": 86,
         "question": [
-            "<pre><code>防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>"
+            "<pre><code class=\"language-csharp\">防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2915,7 +2879,7 @@
     {
         "id": 87,
         "question": [
-            "<pre><code>Person 類別中的方法可以存取 co1or 屬性。</code></pre>"
+            "<pre><code class=\"language-csharp\">Person 類別中的方法可以存取 co1or 屬性。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -2925,7 +2889,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>Person類中的方法可以訪問該類的屬性color，只要該屬性是公開的或者在類的範圍內。</code></pre>"
+            "<pre><code class=\"language-csharp\">Person類中的方法可以訪問該類的屬性color，只要該屬性是公開的或者在類的範圍內。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2935,7 +2899,7 @@
     {
         "id": 88,
         "question": [
-            "<pre><code>某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
+            "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
             "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
             "請選取 [正確] 或 [錯誤]。",
             "Person 類別中的方法可以存取 NumberOfLeaves 屬性。</code></pre>"
@@ -2948,7 +2912,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>※因Person類別與Tree類別無繼承關係，且未明確在同一包內，Person類別的方法 無法訪問Tree的protected屬性。因此正確答案為 B. No。</code></pre>"
+            "<pre><code class=\"language-csharp\">※因Person類別與Tree類別無繼承關係，且未明確在同一包內，Person類別的方法 無法訪問Tree的protected屬性。因此正確答案為 B. No。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -2958,7 +2922,7 @@
     {
         "id": 89,
         "question": [
-            "<pre><code>某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
+            "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
             "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
             "請選取 [正確] 或 [錯誤]。",
             "Tree 類別中的方法可以存取 Person 中的所有私用屬性。</code></pre>"
@@ -2971,7 +2935,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>在軟體開發中，類別之間的私有屬性無法被其他類別直接訪問，因此 Tree 類別中的方法無法存取 Person 中的所有私用屬性",
+            "<pre><code class=\"language-csharp\">在軟體開發中，類別之間的私有屬性無法被其他類別直接訪問，因此 Tree 類別中的方法無法存取 Person 中的所有私用屬性",
             "正確答案為 B",
             "題目關鍵點分析",
             "1. 類別與屬性範圍",
@@ -3020,7 +2984,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>onload 是負責 處理伺服器回應，不是用來「傳送請求」",
+            "<pre><code class=\"language-csharp\">onload 是負責 處理伺服器回應，不是用來「傳送請求」",
             "重點解析：",
             "xhr.onload (第 02 行)",
             "是一個 事件處理函式 (event handler)。",
@@ -3114,7 +3078,7 @@
     {
         "id": 93,
         "question": [
-            "<pre><code>請回答有關佇列的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列的項目數有限制。</code></pre>"
         ],
         "options": [
@@ -3125,7 +3089,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>一般在考試的抽象資料結構角度，會認為佇列的項目數不一定有限制。",
+            "<pre><code class=\"language-csharp\">一般在考試的抽象資料結構角度，會認為佇列的項目數不一定有限制。",
             "這題要分情境來看：理論上的「抽象資料型別(ADT) 佇列」 佇列（Queue）本身只是一種抽象結構，先進先出 (FIFO)。",
             "在理論上，它的項目數 沒有固定限制（只要記憶體允許，就能持續新增）。",
             "實作上的佇列 陣列實作 (Array-based Queue)：會受限於陣列大小，所以項目數有限制。",
@@ -3139,7 +3103,7 @@
     {
         "id": 94,
         "question": [
-            "<pre><code>請回答有關佇列的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列是一種先進先出（FIFO）資料結構。</code></pre>"
         ],
         "options": [
@@ -3150,7 +3114,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
+            "<pre><code class=\"language-csharp\">佇列是一種先進先出（FIFO, First-In-First-Out）的資料結構，其核心特性是：",
             "1. 入隊（Enqueue）：新元素加入佇列尾端。",
             "2. 出隊（Dequeue）：最舊的元素從佇列頭端移除。",
             "3. 順序性：元素的處理順序完全依照插入順序，符合「先來先處理」的原則</code></pre>"
@@ -3163,7 +3127,7 @@
     {
         "id": 95,
         "question": [
-            "<pre><code>請回答有關佇列的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列的項目是按照加入的順序儲存。</code></pre>"
         ],
         "options": [
@@ -3175,7 +3139,7 @@
         ],
         "explanation": [
             "說明同上題",
-            "<pre><code>A. Yes",
+            "<pre><code class=\"language-csharp\">A. Yes",
             "B. No</code></pre>"
         ],
         "weight": 1,
@@ -3186,7 +3150,7 @@
     {
         "id": 96,
         "question": [
-            "<pre><code>請回答有關 NoSQL 資料庫的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "文件資料庫會將資料儲存在類似 JSON 的檔案中。</code></pre>"
         ],
         "options": [
@@ -3197,7 +3161,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>※文件資料庫 (Document Database)",
+            "<pre><code class=\"language-csharp\">※文件資料庫 (Document Database)",
             "\t●資料以「文件 (Document)」形式儲存。",
             "\t●文件的結構通常是 JSON 或類似 JSON 的格式（如 BSON, XML）。",
             "\t●MongoDB 就是最典型的例子</code></pre>"
@@ -3210,7 +3174,7 @@
     {
         "id": 97,
         "question": [
-            "<pre><code>請回答有關 NoSQL 資料庫的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "文件資料庫的設計目的是以預先定義的關聯處理資料。</code></pre>"
         ],
         "options": [
@@ -3221,7 +3185,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>文件資料庫的設計目的 不是 以預先定義的關聯處理資料，而是以文件形式靈活儲存。</code></pre>"
+            "<pre><code class=\"language-csharp\">文件資料庫的設計目的 不是 以預先定義的關聯處理資料，而是以文件形式靈活儲存。</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -3231,7 +3195,7 @@
     {
         "id": 98,
         "question": [
-            "<pre><code>請回答有關 NoSQL 資料庫的敘述：",
+            "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。</code></pre>"
         ],
         "options": [
@@ -3242,7 +3206,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>索引鍵值資料庫不會把資料當成可查詢或修改屬性的物件，所以答案是 B. No</code></pre>"
+            "<pre><code class=\"language-csharp\">索引鍵值資料庫不會把資料當成可查詢或修改屬性的物件，所以答案是 B. No</code></pre>"
         ],
         "weight": 1,
         "image": null,
@@ -3252,7 +3216,7 @@
     {
         "id": 99,
         "question": [
-            "<pre><code>實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>"
+            "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -3262,7 +3226,7 @@
             "B"
         ],
         "explanation": [
-            "<pre><code>●ERD是實體關係圖，通常用於傳統的資料庫設計，比如關係型資料庫。它主要關注實體之間的關係。",
+            "<pre><code class=\"language-csharp\">●ERD是實體關係圖，通常用於傳統的資料庫設計，比如關係型資料庫。它主要關注實體之間的關係。",
             "●物件導向的資料庫（OODB）則是基於物件模型的，每個物件包含資料和操作，比如UML類別圖，使用介面類別、控制類別、實體類別。</code></pre>"
         ],
         "weight": 1,
@@ -3273,7 +3237,7 @@
     {
         "id": 100,
         "question": [
-            "<pre><code>實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>"
+            "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>"
         ],
         "options": [
             "Yes",
@@ -3283,7 +3247,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code>ERD 的標準定義確實包含以下三要素：",
+            "<pre><code class=\"language-csharp\">ERD 的標準定義確實包含以下三要素：",
             "實體(Entity)：代表現實世界中的物件（如「客戶」、「產品」），用矩形框表示。",
             "關聯(Relationship)：描述兩個或更多實體之間的關係（如「客戶與訂單」的關聯），用連線表示。",
             "屬性(Attribute)：用於描述實體的特性（如「客戶」的「姓名」、「地址」），通常以矩形框內的文字標註。</code></pre>"
@@ -3297,7 +3261,7 @@
         "id": 101,
         "type": "single",
         "question": [
-            "<pre><code>基數是指資料表的互相連結方式，例如一對多。</code></pre>"
+            "<pre><code class=\"language-csharp\">基數是指資料表的互相連結方式，例如一對多。</code></pre>"
         ],
         "options": [
             "一對一（1:1）",
@@ -3310,7 +3274,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>基數(Cardinality)料庫設計中指的是資料表之間的關聯性質，用來描述兩個實體之間的對應關係",
+            "<pre><code class=\"language-csharp\">基數(Cardinality)料庫設計中指的是資料表之間的關聯性質，用來描述兩個實體之間的對應關係",
             "一對一（1:1）：一個資料表的記錄只會對應另一個資料表的一個記錄（如員工與工資單）。",
             "一對多（1:N）：一個資料表的記錄可能對應另一個資料表的多個記錄（如客戶與訂單）。",
             "多對多（M:N）：兩個資料表的記錄均可能對應對方的多個記錄（如學生與課程）。</code></pre>"
@@ -3321,7 +3285,7 @@
         "id": 102,
         "type": "single",
         "question": [
-            "<pre><code>【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？</code></pre>"
+            "<pre><code class=\"language-csharp\">【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？</code></pre>"
         ],
         "options": [
             "public",
@@ -3336,7 +3300,7 @@
         "image": null,
         "image01": "images/id110_encapsulation.png",
         "explanation": [
-            "<pre><code><b>1. 選項分析與封裝概念</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與封裝概念</b>",
             "<b>A. public</b>",
             "公開存取。如果 balance 設為 public，外部程式可以隨意修改（例如 account.balance = -1000），這會破壞資料的正確性。",
             "<b>B. private (正確)</b>",
@@ -3357,7 +3321,7 @@
         "id": 103,
         "type": "single",
         "question": [
-            "<pre><code>【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？</code></pre>"
+            "<pre><code class=\"language-csharp\">【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？</code></pre>"
         ],
         "options": [
             "overload (多載)",
@@ -3371,7 +3335,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>核心重點：多型 (Polymorphism) 的實現</b>",
+            "<pre><code class=\"language-csharp\"><b>核心重點：多型 (Polymorphism) 的實現</b>",
             "當子類別想要針對父類別的方法提供「專屬版本」時，必須使用 **override** 關鍵字。",
             "---",
             "<b>常見陷阱辨析：</b>",
@@ -3387,7 +3351,7 @@
         "id": 104,
         "type": "single",
         "question": [
-            "<pre><code>【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？</code></pre>"
+            "<pre><code class=\"language-csharp\">【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？</code></pre>"
         ],
         "options": [
             "類別是藍圖，物件是根據藍圖建立的實體",
@@ -3401,7 +3365,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。</code></pre>"
+            "<pre><code class=\"language-csharp\">類別 (Class) 像是一個**模具或藍圖**，定義了屬性與行為；而物件 (Object) 是使用 `new` 關鍵字根據類別建立出來的具體**實體 (Instance)**。</code></pre>"
         ],
         "category": "D2_物件導向程式設計"
     },
@@ -3409,7 +3373,7 @@
         "id": 105,
         "type": "single",
         "question": [
-            "<pre><code>【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？</code></pre>"
+            "<pre><code class=\"language-csharp\">【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？</code></pre>"
         ],
         "options": [
             "設計 (Design)",
@@ -3423,7 +3387,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。</code></pre>"
+            "<pre><code class=\"language-csharp\">**需求分析**階段的目標是釐清使用者的痛點與需求，產出規格書，確認「要做什麼 (What)」。設計階段則是規劃「如何做 (How)」。</code></pre>"
         ],
         "category": "D3_一般軟體開發"
     },
@@ -3431,7 +3395,7 @@
         "id": 106,
         "type": "single",
         "question": [
-            "<pre><code>【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？</code></pre>"
+            "<pre><code class=\"language-csharp\">【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？</code></pre>"
         ],
         "options": [
             "單元測試 (Unit Testing)",
@@ -3445,7 +3409,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。</code></pre>"
+            "<pre><code class=\"language-csharp\">**單元測試**是針對軟體中最小的可測試單元（通常是函式或方法）進行驗證，通常由開發人員自己撰寫。</code></pre>"
         ],
         "category": "D3_一般軟體開發"
     },
@@ -3453,7 +3417,7 @@
         "id": 107,
         "type": "single",
         "question": [
-            "<pre><code>【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？</code></pre>"
         ],
         "options": [
             "CSS",
@@ -3467,7 +3431,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；",
+            "<pre><code class=\"language-csharp\">**HTML** (HyperText Markup Language) 負責網頁的骨架與內容；",
             "**CSS** 負責樣式與美觀；",
             "**JavaScript** 負責行為與互動。</code></pre>"
         ],
@@ -3477,7 +3441,7 @@
         "id": 108,
         "type": "single",
         "question": [
-            "<pre><code>【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？</code></pre>"
         ],
         "options": [
             "HTML",
@@ -3491,7 +3455,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字型、排版）。</code></pre>"
+            "<pre><code class=\"language-csharp\">**CSS** 用於描述 HTML 元素的外觀樣式（如顏色、字型、排版）。</code></pre>"
         ],
         "category": "D4_Web應用程式"
     },
@@ -3499,7 +3463,7 @@
         "id": 109,
         "type": "single",
         "question": [
-            "<pre><code>【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？</code></pre>"
         ],
         "options": [
             "資料庫伺服器",
@@ -3513,7 +3477,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code>雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。</code></pre>"
+            "<pre><code class=\"language-csharp\">雖然現在有 Node.js，但在傳統 Web 開發語境下，**JavaScript** 主要是在使用者的**瀏覽器 (Client-side)** 上執行，負責動態互動效果。</code></pre>"
         ],
         "category": "D4_Web應用程式"
     },
@@ -3521,7 +3485,7 @@
         "id": 110,
         "type": "single",
         "question": [
-            "<pre><code>【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？</code></pre>"
         ],
         "options": [
             "Web Browser",
@@ -3535,7 +3499,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與術語定義</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與術語定義</b>",
             "<b>A. Web Browser (瀏覽器)</b>：是客戶端的軟體（如 Chrome），發送 HTTP 請求的人，不是託管者。",
             "<b>B. Web Server (網頁伺服器)</b>：負責儲存、處理並傳送網頁檔案給客戶端，並回應 HTTP 請求（如 IIS, Apache），為正確答案。",
             "<b>C. DNS Server (網域系統伺服器)</b>：負責將網址（如 google.com）翻譯成 IP 地址，不負責託管網頁內容。",
@@ -3550,7 +3514,7 @@
         "id": 111,
         "type": "single",
         "question": [
-            "<pre><code>【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？</code></pre>"
+            "<pre><code class=\"language-csharp\">【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？</code></pre>"
         ],
         "options": [
             "類別可以繼承多個抽象類別",
@@ -3564,7 +3528,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與觀念對照</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與觀念對照</b>",
             "<b>A. 類別可以繼承多個抽象類別</b>：錯誤。C# 僅支援「單一繼承」，一個子類別只能有一個父類別（無論是否為抽象）。",
             "<b>B. 介面可以包含實作程式碼</b>：錯誤。在 C# 8.0 之前，介面只能定義方法簽章，不能有具體邏輯。",
             "<b>C. 類別可以實作多個介面</b>：正確。這是 C# 彌補單一繼承不足的方式，一個類別可以掛載無數個介面（規格）。",
@@ -3579,7 +3543,7 @@
         "id": 112,
         "type": "single",
         "question": [
-            "<pre><code>【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？</code></pre>"
+            "<pre><code class=\"language-csharp\">【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？</code></pre>"
         ],
         "options": [
             "Stack (堆疊)",
@@ -3593,7 +3557,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與記憶體區域</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與記憶體區域</b>",
             "<b>A. Stack (堆疊)</b>：主要儲存實值型別 (Value Types, 如 int, bool) 的數值，以及指向物件的「參考指標」。其特點是存取速度極快，但空間固定且較小。",
             "<b>B. Heap (堆積)</b>：專門儲存參考型別 (Reference Types, 如 class, string, array) 的「物件實體」。其空間較大，由系統的垃圾回收器 (GC) 自動管理，為正確答案。",
             "<b>C. Queue (佇列)</b>：這是一種「先進先出 (FIFO)」的資料結構，並非記憶體模型中用來存放型別實體的基礎區域。",
@@ -3608,7 +3572,7 @@
         "id": 113,
         "type": "single",
         "question": [
-            "<pre><code>【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護</code></pre>"
+            "<pre><code class=\"language-csharp\">【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護</code></pre>"
         ],
         "options": [
             "2 -> 4 -> 1 -> 3 -> 5",
@@ -3622,7 +3586,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><pre><code><b>1. 選項拆解與階段分析</b>",
+            "<pre><code class=\"language-csharp\"><pre><code class=\"language-csharp\"><b>1. 選項拆解與階段分析</b>",
             "<b> 階段 2. 需求分析 (Requirements)：</b>這是第一步，必須先搞清楚客戶要什麼，才能開始後續工作。",
             "<b> 階段 4. 設計 (Design)：</b>根據需求畫出系統架構圖、資料庫關聯圖或介面草圖。",
             "<b> 階段 1. 開發 (Implementation)：</b>程式設計師根據設計圖開始寫程式碼。",
@@ -3640,7 +3604,7 @@
         "id": 114,
         "type": "single",
         "question": [
-            "<pre><code>【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？</code></pre>"
+            "<pre><code class=\"language-csharp\">【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？</code></pre>"
         ],
         "options": [
             "List<int>",
@@ -3654,7 +3618,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><pre><code><b>1. 選項拆解與集合特性分析</b>",
+            "<pre><code class=\"language-csharp\"><pre><code class=\"language-csharp\"><b>1. 選項拆解與集合特性分析</b>",
             "  <b>A. List<int></b>：\t動態陣列。雖然使用方便，但它允許儲存重複的元素。",
             "  <b>B. Array</b>：\t固定長度的陣列。同樣允許重複元素，且長度不可變動。",
             "  <b>C. HashSet<int></b>：\t正確答案。基於雜湊表 (Hash Table) 實作，其核心特性就是<b>不允許重複元素</b>，且檢查元素是否存在速度極快。",
@@ -3668,7 +3632,7 @@
         "id": 115,
         "type": "single",
         "question": [
-            "<pre><code>【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？</code></pre>"
         ],
         "options": [
             "HTML Tags",
@@ -3682,7 +3646,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與 Web 技術定義</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與 Web 技術定義</b>",
             "  <b>A. HTML Tags</b>：\t網頁結構標籤（如 div, p），僅負責內容呈現，無法儲存狀態。",
             "  <b>B. CSS Styles</b>：\t網頁樣式表，負責視覺外觀，與狀態追蹤無關。",
             "  <b>C. Cookies / Session</b>：正確答案。HTTP 協定每完成一次請求就會斷開連接，因此需要 Cookie (存於客戶端) 或 Session (存於伺服器) 來記住使用者是誰。",
@@ -3696,7 +3660,7 @@
         "id": 116,
         "type": "single",
         "question": [
-            "<pre><code>在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>"
+            "<pre><code class=\"language-csharp\">在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>"
         ],
         "options": [
             "Has-a 關係 (擁有)",
@@ -3710,7 +3674,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與術語定義</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與術語定義</b>",
             "<b>A. Has-a 關係 (擁有)</b>",
             "   描述「組合」關係。指一個類別包含另一個類別作為其欄位或屬性。例如：汽車「有一個」引擎 (Car has an Engine)。",
             "<b>B. Is-a 關係 (是一個)</b>",
@@ -3729,7 +3693,7 @@
         "id": 117,
         "type": "single",
         "question": [
-            "<pre><code>【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？</code></pre>"
+            "<pre><code class=\"language-csharp\">【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？</code></pre>"
         ],
         "options": [
             "數列必須已經過排序 (Sorted)",
@@ -3743,7 +3707,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與演算法邏輯</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與演算法邏輯</b>",
             "   <b>A. 數列必須已經過排序</b>：\t正確。二分搜尋法每次都會比較中間值來排除一半的範圍，若數列未排序，此邏輯將失效。",
             "   <b>B. 數列必須包含重複元素</b>：\t錯誤。重複與否不影響二分搜尋的運作，但通常用於不重複數列效率最高。",
             "   <b>C. 儲存在 Stack</b>：\t\t錯誤。這與儲存位置無關，通常是存在陣列 (Array) 中以便隨機存取中間值。",
@@ -3757,7 +3721,7 @@
         "id": 118,
         "type": "single",
         "question": [
-            "<pre><code>【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？</code></pre>"
+            "<pre><code class=\"language-csharp\">【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？</code></pre>"
         ],
         "options": [
             "快速排序 (Quick Sort)",
@@ -3771,7 +3735,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與排序特性</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與排序特性</b>",
             "<b>A. Quick Sort</b>：使用基準值 (Pivot) 進行分治法排序。",
             "<b>B. Merge Sort</b>：將數列拆分到最小後再進行合併排序。",
             "<b>C. Bubble Sort (氣泡排序)</b>：正確。因為較大的元素會經由相鄰交換，像氣泡一樣逐漸「浮」到數列的最後端。",
@@ -3786,10 +3750,10 @@
         "id": 119,
         "type": "single",
         "question": [
-            "<pre><code>【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？</code></pre>"
+            "<pre><code class=\"language-csharp\">【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？</code></pre>"
         ],
         "options": [
-            "<pre><code>雜湊是雙向的，加密是單向的",
+            "<pre><code class=\"language-csharp\">雜湊是雙向的，加密是單向的",
             "雜湊是單向的 (不可逆)，加密是雙向的 (可解密)",
             "兩者皆無法透過密鑰進行還原",
             "雜湊函數主要用於壓縮大型檔案，不具安全性用途</code></pre>"
@@ -3800,7 +3764,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與安全觀念</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與安全觀念</b>",
             "<b>A. 錯誤</b>：剛好相反。雜湊通常無法還原原始資料。",
             "<b>B. 正確</b>：雜湊 (Hashing) 是單向函數，用於驗證資料完整性或存儲密碼；加密 (Encryption) 則需要透過金鑰還原回明文。",
             "<b>C. 錯誤</b>：加密是可以被還原的。",
@@ -3815,7 +3779,7 @@
         "id": 120,
         "type": "single",
         "question": [
-            "<pre><code>【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？</code></pre>"
+            "<pre><code class=\"language-csharp\">【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？</code></pre>"
         ],
         "options": [
             "JSON",
@@ -3829,7 +3793,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與通訊協定</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與通訊協定</b>",
             "<b>A. JSON</b>：資料交換格式，不負責授權。",
             "<b>B. SOAP</b>：基於 XML 的遠端程序呼叫協定。",
             "<b>C. OAuth</b>：正確答案。這是一種工業標準授權協定（如「使用 Google 帳號登入」），用於授權存取資源。",
@@ -3844,7 +3808,7 @@
         "id": 121,
         "type": "single",
         "question": [
-            "<pre><code>【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？</code></pre>"
+            "<pre><code class=\"language-csharp\">【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？</code></pre>"
         ],
         "options": [
             "Model",
@@ -3858,7 +3822,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code><b>1. 選項分析與架構分工</b>",
+            "<pre><code class=\"language-csharp\"><b>1. 選項分析與架構分工</b>",
             "<b>A. Model</b>：負責原始資料與商務邏輯。",
             "<b>B. View</b>：負責使用者介面呈現。",
             "<b>C. ViewModel</b>：正確答案。它將 Model 的資料轉換為 View 可用的狀態，並透過資料繫結自動同步兩者。",
@@ -4057,7 +4021,7 @@
                     }
                 });
                 optionsHTML += '</div>';
-                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="mb-2">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text"><div class="q-content">${processContent(item.question, item)}</div></div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
         });
         const score = Math.round((correctCount / examQuestions.length) * 100);

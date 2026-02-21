@@ -48,6 +48,12 @@
         .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
         .question-body { padding: 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
+        .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
+        .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .review-q-text { display: flex; align-items: flex-start; font-size: 1.0rem; line-height: 1.8; margin-bottom: 5px; color: #333; }
+        .review-q-text b { margin-right: 8px; white-space: nowrap; }
+        .review-q-text .q-content { flex: 1; }
+        .review-q-text .q-content pre, .review-q-text .q-content code { margin-top: 0 !important; padding-top: 0 !important; }
         .q-img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px auto; display: block; }
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
         .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
@@ -316,7 +322,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">6. 【CH01-6】你加入了電子商務公司成為其程式開發部門的實習生。你的程式中有一個地方要讓使用者提供一個數值。",
-			"即使使用者輸入了小數，該值也必須轉換為整數來進行計算。",
+            "即使使用者輸入了小數，該值也必須轉換為整數來進行計算。",
             "你應該使用哪個程式碼片段？</code></pre>"
         ],
         "options": [
@@ -418,7 +424,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\"><b>【運算步驟】</b>1. a % b (24 % 7) = 32. 3 * 100 = 3003. 2.0 ** 3.0 = 8.04. 300 // 8.0 (整除) = 37.0 (注意：// 會無條件捨去小數，但因運算元含浮點數，故結果為 float)5. 37.0 - 7 = 30.0故選 [1]。<b>【補充：負數的除法與餘數規則】</b>Python 的運算邏輯是「地板除法 (Floor Division)」，意即<b>往數線的左邊 (負無限大方向) 取整數</b>。<table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>運算子</th><th>規則 / 公式</th><th>正數範例</th><th>負數範例</th></tr><tr><td><b>整除 //</b></td><td><b>往小 (左) 取整</b>不只是去尾，而是找「不大於商」的最大整數。</td><td>7 // 2 = 3(3.5 取 3)</td><td>-7 // 2 = -4(-3.5 往左取 -4)</td></tr><tr><td><b>餘數 %</b></td><td><b>符號與「除數」相同</b>公式：r = a - (b * (a // b))</td><td>7 % 3 = 1</td><td>-7 % 3 = 27 % -3 = -2</td></tr></table><b>記憶口訣：</b>● // 負數除法會「越除越負」(例如 -3.5 變 -4)。● % 餘數的符號永遠跟隨後面那個數 (除數)。</code></pre>"
+            "<b>⭐ 運算順序拆解：</b>",
+            "<pre><code class=\"language-python\">1. a % b (24 % 7) = 3\n2. 3 * 100 = 300\n3. 2.0 ** 3.0 = 8.0\n4. 300 // 8.0 = 37.0 (註：地板除法結果為 float)\n5. 37.0 - 7 = 30.0</code></pre>",
+            "<b>⭐ 補充：負數的地板除法與取餘數規則</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>運算子</th><th>規則</th><th>正數範例</th><th>負數範例</th></tr></thead><tbody><tr><td><b>地板除 //</b></td><td>向左取整</td><td>7 // 2 = 3</td><td>-7 // 2 = -4</td></tr><tr><td><b>取餘數 %</b></td><td>r = a - (b * (a // b))</td><td>7 % 3 = 1</td><td>-7 % 3 = 2</td></tr></tbody></table>",
+            "<b>💡 記住：</b>負數除法時，// 會向負無窮大方向靠攏（-3.5 變成 -4）。"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -428,7 +438,8 @@
         "question": [
             "<pre><code class=\"language-python\">10. 【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。",
             "公式內容為b等於 a 加上 5，然後再平方，其中 a 是輸入的值， b 是結果。",
-            "你設計了以下的程式碼片段：","a = eval(input(\"Enter a number for the equation:\"))",
+            "你設計了以下的程式碼片段：",
+            "a = eval(input(\"Enter a number for the equation:\"))",
             "b =",
             "如何完成 2 行的程式碼？</code></pre>"
         ],
@@ -454,7 +465,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">11. 【CH02-4】你正在開發一個補習班的 Python 函式來計算折扣，補習班希望鼓勵小朋友和老年人報名，",
-			"只要是小朋友和老年人報名相關課程就會獲得10%的折扣。",
+            "只要是小朋友和老年人報名相關課程就會獲得10%的折扣。",
             "你編寫了以下程式碼：",
             "01  def get_discount(kid, senior):",
             "02     discount = 0.1",
@@ -511,7 +522,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">13. 【CH02-6】計算以下的 Python 數學運算式結果為何？",
-			"(3*(1+2)**2-2**2*3)</code></pre>"
+            "(3*(1+2)**2-2**2*3)</code></pre>"
         ],
         "options": [
             "<code>3</code>",
@@ -539,7 +550,8 @@
         "id": 14,
         "type": "multioption",
         "question": [
-            "<pre><code class=\"language-python\">14. 【CH02-7】你編寫了以下的程式碼：","a = 'Test 1'\nprint(a)\nb = 'Test 2'\na +=b\nprint(a)\nprint(b)",
+            "<pre><code class=\"language-python\">14. 【CH02-7】你編寫了以下的程式碼：",
+            "a = 'Test 1'\nprint(a)\nb = 'Test 2'\na +=b\nprint(a)\nprint(b)",
             "根據程式碼片段中提供的資訊選擇每個問題的答案進頂。",
             "在第一次 print 後會顯示什麼？_(選項 1)_",
             "在第二次 print 後會顯示什麼？_(選項 2)_",
@@ -560,7 +572,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 在第一次 print 後，顯示的是變數 a 的值，即'Test 1'。",
             "● 在第二次 print 後，顯示的是變數 a 的值，即'Test 1Test 2'，因為在這一行中，",
-			"\t變數 a 被更新為原本的值加上變數 b 的值。",
+            "\t變數 a 被更新為原本的值加上變數 b 的值。",
             "● 在第三次 print 後，顯示的是變數 b 的值，即'Test 2'。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
@@ -570,8 +582,8 @@
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">15. 【CH02-8】你為公司開發了一個 Python 應用程式，程式碼如下：",
-			"def test(a, b, c, d): \n   value=(a+b)*c-d\n   return value",
-			"根據程式碼片段中提供的資訊選擇每個問題的答案選頂。",
+            "def test(a, b, c, d): \n   value=(a+b)*c-d\n   return value",
+            "根據程式碼片段中提供的資訊選擇每個問題的答案選頂。",
             "選項1 :運算式的哪個部份將第一個進行計算？",
             "選項2 :運算式的哪個部份將第二個進行計算？",
             "選項3 :哪個運算式等於題目函式中的運算式？</code></pre>"
@@ -639,7 +651,8 @@
             "2. 如果在晚上 11 點後返還，將被多收取額外一天的費用。",
             "3. 如果是在星期天租的，可享受 10% 的折扣。",
             "4. 如果是在星期四租的，可以享受 20% 的折扣。",
-            "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？","",
+            "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？",
+            "",
             "ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
             "days_rented = int(input(\"How many days was car rented?\"))",
             "day_rented = input(\"What day was the car rented?\").capitalize()",
@@ -678,7 +691,8 @@
         "id": 18,
         "type": "multioption",
         "question": [
-            "<pre><code class=\"language-python\">18. 【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：","a = 11\nb = 5\n答案選擇區\nprint(a / b)的輸出結果是？_(選項 1)_\nprint(a // b)的輸出結果是？_(選項 2)_\nprint(a % b)的輸出結果是？_(選項 3)_</code></pre>"
+            "<pre><code class=\"language-python\">18. 【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：",
+            "a = 11\nb = 5\n答案選擇區\nprint(a / b)的輸出結果是？_(選項 1)_\nprint(a // b)的輸出結果是？_(選項 2)_\nprint(a % b)的輸出結果是？_(選項 3)_</code></pre>"
         ],
         "options": [
             "<code>1|2|2.2</code>",
@@ -704,7 +718,8 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">19. 【CH02-12】你設計了一個比較數字的 Python 程式，內容如下：","01&nbsp;n1 = eval(input(\"Please enter the first number: \"))",
+            "<pre><code class=\"language-python\">19. 【CH02-12】你設計了一個比較數字的 Python 程式，內容如下：",
+            "01&nbsp;n1 = eval(input(\"Please enter the first number: \"))",
             "02&nbsp;n2 = eval(input(\"Please enter the second number: \"))",
             "03&nbsp;if n1 = n2:",
             "04&nbsp;    print(\"The two numbers are equal.\")",
@@ -746,7 +761,8 @@
         "id": 20,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">20. 【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：","x = 0\nwhile x < 4:\n    if  x % 4 == 0:\n        print(\"party\")\n    elif  x - 2 < 0:\n        print(\"cake\")\n    elif  x / 3 == 0:\n        print(\"greeting\")\n    else:\n        print(\"birthday\")\n    x = x + 1",
+            "<pre><code class=\"language-python\">20. 【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：",
+            "x = 0\nwhile x < 4:\n    if  x % 4 == 0:\n        print(\"party\")\n    elif  x - 2 < 0:\n        print(\"cake\")\n    elif  x / 3 == 0:\n        print(\"greeting\")\n    else:\n        print(\"birthday\")\n    x = x + 1",
             "請選擇正確的輸出結果。</code></pre>"
         ],
         "options": [
@@ -773,7 +789,8 @@
             "此公式描述 a 是先取得一個輸入值，而 b 等於 a 乘以 -1 之後再平方，所以 b 是結果。",
             "您所建立的程式碼片段如下。",
             "<pre><code class=\"language-python\">a = eval(input(\"Enter a number for the equation: \")))",
-            "b = 選項1 選項2 選項3 選項4 選項5","您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，",
+            "b = 選項1 選項2 選項3 選項4 選項5",
+            "您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，",
             "以完成第 2 行的程式碼。每個程式碼片段可能使用一次，也可能使用多次，甚至完全用不到。</code></pre>"
         ],
         "options": [
@@ -803,7 +820,8 @@
         "id": 22,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">22. 【CH03-1】你編寫了以下的程式碼：","list_1 = [1, 2, 3]\nlist_2 = [4, 5, 6]\nlist_3 = list_1 + list_2\nlist_4 = list_3 * 2\nprint(list_4)\n執行程式碼的輸出值是？</code></pre>"
+            "<pre><code class=\"language-python\">22. 【CH03-1】你編寫了以下的程式碼：",
+            "list_1 = [1, 2, 3]\nlist_2 = [4, 5, 6]\nlist_3 = list_1 + list_2\nlist_4 = list_3 * 2\nprint(list_4)\n執行程式碼的輸出值是？</code></pre>"
         ],
         "options": [
             "<code>[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]</code>",
@@ -818,7 +836,7 @@
         "image": null,
         "explanation": [
             "<pre><code class=\"language-python\">● list_4 的值是 [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]，因為 list_3 包含了",
-			"list_1 和 list_2 的所有元素，然後再乘以 2，這樣就重複了兩次。</code></pre>"
+            "list_1 和 list_2 的所有元素，然後再乘以 2，這樣就重複了兩次。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -826,7 +844,8 @@
         "id": 23,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">23. 【CH03-2】在下列的程式碼中：","aList = [0, 1, 2, 3, 4]\nprint(4 in aList)會輸出列印的內容？</code></pre>"
+            "<pre><code class=\"language-python\">23. 【CH03-2】在下列的程式碼中：",
+            "aList = [0, 1, 2, 3, 4]\nprint(4 in aList)會輸出列印的內容？</code></pre>"
         ],
         "options": [
             "<code>4</code>",
@@ -851,8 +870,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">24. 【CH03-3】你為公司開發了一個 Python 應用程式，設計了以下的程式碼：",
-			"aList = [\"a\", \"b\", \"c\", \"d\", \"e\"]\nbList = [1,2,3,4,5]\nprint(aList is bList)\nprint(aList == bList)\naList = bList\nprint(aList is bList)\nprint(aList == bList)",
-			"根據程式碼片段中提供的資訊選擇每個問題的答案選項。",
+            "aList = [\"a\", \"b\", \"c\", \"d\", \"e\"]\nbList = [1,2,3,4,5]\nprint(aList is bList)\nprint(aList == bList)\naList = bList\nprint(aList is bList)\nprint(aList == bList)",
+            "根據程式碼片段中提供的資訊選擇每個問題的答案選項。",
             "選項 1. 第一次 print (第 3 行)後會顯示什麼？\n選項 2. 第二次 print (第 4 行)後會顯示什麼？\n選項 3. 第三次 print (第 6 行)後會顯示什麼？\n選項 4. 第四次 print (第 7 行)後會顯示什麼？</code></pre>"
         ],
         "options": [
@@ -883,9 +902,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">25. 【CH03-4】同事開發一個將產品名稱輸入到資料庫的程式，但是其中發生了錯誤，每個存入的名稱字母順序都顛倒了。",
-            "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：","def reverse_pname(backwards_pname):\n    forward_pname = ''\n    for index in _(選項 1)_\n        forward_pname += _(選項 2)_\n    return forward_pname\nprint(reverse_pname(\"klim\"))",
-			"\n選項 1 答案選擇區\n答案 A.backwards _pname\n答案 B.len(backwards _pname)\n答案 C.range(0, len(backwards _pname),-1)\n答案 D.range(len(backwards_pname)-1,-1,-1) ",
-			"選項 2 答案選擇區\n答案 A.backwards_pname[index-1]\n答案 B.backwards_pname[len(forward_pname)-1)\n答案 C.backwards_pname[len(backward_pname)-len(forward_pname)]\n答案 D.backwards_pname[index]</code></pre>"
+            "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：",
+            "def reverse_pname(backwards_pname):\n    forward_pname = ''\n    for index in _(選項 1)_\n        forward_pname += _(選項 2)_\n    return forward_pname\nprint(reverse_pname(\"klim\"))",
+            "\n選項 1 答案選擇區\n答案 A.backwards _pname\n答案 B.len(backwards _pname)\n答案 C.range(0, len(backwards _pname),-1)\n答案 D.range(len(backwards_pname)-1,-1,-1) ",
+            "選項 2 答案選擇區\n答案 A.backwards_pname[index-1]\n答案 B.backwards_pname[len(forward_pname)-1)\n答案 C.backwards_pname[len(backward_pname)-len(forward_pname)]\n答案 D.backwards_pname[index]</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -911,9 +931,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">26. 【CH03-5】你有以下清單結構：alph = \"abcdefghijklmnopqrstuvwxyz\"",
-			"以下各個程式碼片段的結果各是如何？",
+            "以下各個程式碼片段的結果各是如何？",
             "請將回答區專案的選項正確填到程式碼片段的選項中",
-			"#程式碼片段\n1. alph[3: 15] = (_選項1_)\n2. alph[3:15:3] = (_選項2_)\n3. alph[15:3:-3] = (_選項3_)\n4. alph[::-3] = (_選項4_)\n答案選項區\nA. zwtqnkheb\nB. pmjg\nC. defghijklmno\nD. ponmlkjihgfe\nE. defghijklmnop\nF. dgjm\nG. olif</code></pre>"
+            "#程式碼片段\n1. alph[3: 15] = (_選項1_)\n2. alph[3:15:3] = (_選項2_)\n3. alph[15:3:-3] = (_選項3_)\n4. alph[::-3] = (_選項4_)\n答案選項區\nA. zwtqnkheb\nB. pmjg\nC. defghijklmno\nD. ponmlkjihgfe\nE. defghijklmnop\nF. dgjm\nG. olif</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E|F|G</code>",
@@ -944,7 +964,8 @@
         "question": [
             "<pre><code class=\"language-python\">27. 【CH03-6】你為學校設計了一個 Python 應用程式，在 classroom 的清單中包含了 60 位同學的姓名，最後 3 名是班上的幹部。",
             "你需要分割清單內容顯示除了幹部以外的所有同學，你可以利用以下哪二個程式碼達成？",
-            "可以答成回答 Yes ， 不能回答回答 No","1. classroom[0: -2] = _(選項 1)_\n2. classroom[0: -3] = _(選項 2)_\n3. classroom[1: -3] = _(選項 3)_\n4. classroom[: -3] = _(選項 4)_\n5. classroom[1: -3] = _(選項 5)_</code></pre>"
+            "可以答成回答 Yes ， 不能回答回答 No",
+            "1. classroom[0: -2] = _(選項 1)_\n2. classroom[0: -3] = _(選項 2)_\n3. classroom[1: -3] = _(選項 3)_\n4. classroom[: -3] = _(選項 4)_\n5. classroom[1: -3] = _(選項 5)_</code></pre>"
         ],
         "options": [
             "<code>Yes|No</code>",
@@ -989,7 +1010,8 @@
         "explanation": [
             "<pre><code class=\"language-python\">● Python 陣列元素值由 0 開始算， 0 = 第 1 個元素 , 1 = 第 2 個元素，以此類推。",
             "● month[2:2] 這會建立一個從索引 2 開始到索引 2 (不包含) 的切片，結果會是一個空清單。",
-            "● month[::2] 這會從清單的開頭 (索引 0) 開始，每間隔一個值取一個元素。這會包含第一個月份，","\t\t但題目要求從第二個月份開始。",
+            "● month[::2] 這會從清單的開頭 (索引 0) 開始，每間隔一個值取一個元素。這會包含第一個月份，",
+            "\t\t但題目要求從第二個月份開始。",
             "● month[1::2] 從索引 1 (第二個元素) 開始一直取到清單的末尾，每次取一個元素後，跳過接下來的一個元素 (步長為 2)。",
             "● month[1:2]: 這會建立一個從索引 1 開始到索引 2 (不包含) 的切片，結果只會包含第二個月份的名稱。</code></pre>"
         ],
@@ -1001,7 +1023,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">29. 【CH03-8】你設計了一個函式來執行除法，因為除法的除數不能為零，所以在函式中必須要針對這個重點進行檢查。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","def safe_divide(numerator, denominator):\n    _(選項 1)_\n        print(\"A required value is missing.\")\n    _(選項 2)_\n        print(\"The denominator is zero.\")\n    else:\n        return numerator / denominator_(選項 1)_\n答案選項\n答案 A. if numerator is None or denominator is None:\n答案 B. if numerator is None and denominator is None:\n答案 C. if numerator = None or denominator = None:\n答案 D. if numerator - None and denominator = None:\n\n_(選項 2)_\n答案選項\n答案 A. elif denominator == 0:\n答案 B. elif denominator = 0:\n答案 C. elif denominator != 0:\n答案 D, elif denominator in 0:</code></pre>"
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "def safe_divide(numerator, denominator):\n    _(選項 1)_\n        print(\"A required value is missing.\")\n    _(選項 2)_\n        print(\"The denominator is zero.\")\n    else:\n        return numerator / denominator_(選項 1)_\n答案選項\n答案 A. if numerator is None or denominator is None:\n答案 B. if numerator is None and denominator is None:\n答案 C. if numerator = None or denominator = None:\n答案 D. if numerator - None and denominator = None:\n\n_(選項 2)_\n答案選項\n答案 A. elif denominator == 0:\n答案 B. elif denominator = 0:\n答案 C. elif denominator != 0:\n答案 D, elif denominator in 0:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1026,9 +1049,10 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">30. 【CH03-9】您建立了下列程式來找出學生並顯示姓名。","01 students = {1: 'Jone',2: 'Mary'}\n02 student = input('Enter the student id: ')\n03 if student not in students:\n04    print('The student does not exist.')\n05 else:\n06    print('The student name is ' + students[student])",
-			"同事回報指出,這個程式有時候產生的結果不正確，請回答以下問題：",
-			"1.請問哪兩種資料型態儲存在第 1 行的 students 中？\n  A.整數和字串 B.整數和浮點數 c.字串和浮點數 D.字串和布林值\n\n2.第 2 行的 student 是哪種資料型態？\n  A.int   B.float   C.string   D.bool\n\n3.為什麼第 3 行找不到學生？\n  A.語法不正確   B.不符合的資料型態 c.變數命名錯誤</code></pre>"
+            "<pre><code class=\"language-python\">30. 【CH03-9】您建立了下列程式來找出學生並顯示姓名。",
+            "01 students = {1: 'Jone',2: 'Mary'}\n02 student = input('Enter the student id: ')\n03 if student not in students:\n04    print('The student does not exist.')\n05 else:\n06    print('The student name is ' + students[student])",
+            "同事回報指出,這個程式有時候產生的結果不正確，請回答以下問題：",
+            "1.請問哪兩種資料型態儲存在第 1 行的 students 中？\n  A.整數和字串 B.整數和浮點數 c.字串和浮點數 D.字串和布林值\n\n2.第 2 行的 student 是哪種資料型態？\n  A.int   B.float   C.string   D.bool\n\n3.為什麼第 3 行找不到學生？\n  A.語法不正確   B.不符合的資料型態 c.變數命名錯誤</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1045,7 +1069,8 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個程式中，students 是一個字典，包含了整數和字串兩種資料型態。",
             "● student 變數是由使用者輸入的，因此它的資料型態是字串。",
-            "● 第 3 行找不到學生的原因是因為 student 變數的資料型態是字串，而 students 字典的鍵是整數，","\t\t\t這導致了不符合的資料型態。</code></pre>"
+            "● 第 3 行找不到學生的原因是因為 student 變數的資料型態是字串，而 students 字典的鍵是整數，",
+            "\t\t\t這導致了不符合的資料型態。</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1058,7 +1083,8 @@
             "該程式必須允許使用者輸入他們的名字和當前分數。",
             "該程式將輸出使用者名和使用者的平均分數。",
             "輸出必須符合以下要求：●  使用者姓名必須是靠左對齊的。\n●  如果使用者姓名少於 20 個字元，則必須在右側新增額外的空間。\n●  平均分數在小數點左方是三位數，小數點右方是二位數。(XXX.XX)。",
-			"你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。","name = input('Please enter your name:')\nscore = count = 0\ntotal = 0\nwhile (score != -1):\n   score = int(input('Enter your score,-1 for done:'))\n   if score == -1:\n      break\n   total += score\n   count += 1\n   average = total / count\n   print('_(選項 1)_, your average is _(選項 2)_' %(name, average))",
+            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
+            "name = input('Please enter your name:')\nscore = count = 0\ntotal = 0\nwhile (score != -1):\n   score = int(input('Enter your score,-1 for done:'))\n   if score == -1:\n      break\n   total += score\n   count += 1\n   average = total / count\n   print('_(選項 1)_, your average is _(選項 2)_' %(name, average))",
             "問題回答區",
             "選項 1. 答案 A. %-20i\t答案 B. %-20d\t答案 C. %-20f\t答案 D. %-20s",
             "選項 2. 答案 A. %1.6s\t答案 B. %6.2f\t答案 C. %6.2d\t答案 D. %2.6f</code></pre>"
@@ -1075,7 +1101,7 @@
         "image": null,
         "explanation": [
             "<pre><code class=\"language-python\">● name 變數的資料型態是字串(使用 s)。",
-            "●  average 變數的資料型態是浮點數(使用 f)，且需要有小數2位，即 %6.2f 符合。</code></pre>"
+            "● average 變數的資料型態是浮點數(使用 f)，且需要有小數2位，即 %6.2f 符合。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1087,11 +1113,12 @@
             "<pre><code class=\"language-python\">32. 【CH04-2】你正在設計一個函式以讀取資料檔案並將結果列印為格式化表格。",
             "資料檔案中包含有關蔬菜的資訊。每個記錄都包含蔬菜的名稱、重量和價格。",
             "你需要列印資料，使其看起來像下面的範例：\nPotatos  5.4   2.33\nCarrots  2.5   1.50\nCorns   5.2   5.96\n",
-			"具體地說，列印輸出必須符合以下要求：",
-			"● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。",
+            "具體地說，列印輸出必須符合以下要求：",
+            "● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。",
             "● 重量必須印在 5 個空格範圍內並靠右對齊，小數點最多一個位數。",
             "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。",
-            "你建立了以下的程式碼。","def print _table(file):\n   data = open(file,'r')\n   for record in data:\n      fields = record.split(',')\n？？？？",
+            "你建立了以下的程式碼。",
+            "def print _table(file):\n   data = open(file,'r')\n   for record in data:\n      fields = record.split(',')\n？？？？",
             "你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。",
             "每個程式碼片段都可以使用一次、多次，或者不使用。",
             "問題選項區\n(選項1) (選項2) (選項3) (選項4)'\n.format(fields[0], eval(fields(1)), eval(fields[2])))",
@@ -1123,7 +1150,7 @@
         "image03": "images/32_3.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 在第 5 行的程式碼中，應該使用print('{0: 10} {1: 5.1f} {2: 7.2f}'.format(fields[0], eval(fields[1]), eval(fields[2])))</code></pre>",
-			"[[image01]][[image02]][[image03]]"
+            "[[image01]][[image02]][[image03]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1132,8 +1159,9 @@
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">33. 【CH04-3】你正在設計一個電子商務程式，它可以接受來自使用者輸入，並以逗號分隔的格式輸出資料。",
-            "你可以編寫以下程式碼接受資料輸入：","product = input('Enter product name:')\nqty = input('Input quantity:')",
-			"輸出必須符合以下要求：\n●字串必須括在雙引號內。\n●數字不得用引號或其他字元括起來。\n●每個產品必須用逗號隔開。你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？</code></pre>"
+            "你可以編寫以下程式碼接受資料輸入：",
+            "product = input('Enter product name:')\nqty = input('Input quantity:')",
+            "輸出必須符合以下要求：\n●字串必須括在雙引號內。\n●數字不得用引號或其他字元括起來。\n●每個產品必須用逗號隔開。你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？</code></pre>"
         ],
         "options": [
             "<code>print('\"{0}\", {1} '.format(product, qty))</code>",
@@ -1162,7 +1190,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">34. 【CH04-4】請檢視下面的程式碼：",
-			"x = 'Tiger'\ny = 'Lion'\nz = 'Jaguar'\nanimals = '{1} and {0} and {2}'\nprint(animals.format(x, y, z))輸出的結果為？</code></pre>"
+            "x = 'Tiger'\ny = 'Lion'\nz = 'Jaguar'\nanimals = '{1} and {0} and {2}'\nprint(animals.format(x, y, z))輸出的結果為？</code></pre>"
         ],
         "options": [
             "<code>Lion and Tiger and Jaguar</code>",
@@ -1187,7 +1215,8 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">35. 【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。",
-			"你的程式碼如下：","print('Enter product name: ')\n?\nprint(product_name)\n在02行應該編寫哪個程式碼？</code></pre>"
+            "你的程式碼如下：",
+            "print('Enter product name: ')\n?\nprint(product_name)\n在02行應該編寫哪個程式碼？</code></pre>"
         ],
         "options": [
             "<code>product_name = input()</code>",
@@ -1215,8 +1244,9 @@
             "<pre><code class=\"language-python\">36. 【CH04-6】有一個旅行社需要一個簡單的程式用來輸入合作飯店及民宿的調查資料。",
             "● 程式必須接受輸入並返回基於五顆星規模的平均評等。\n● 輸出必須四捨五入到小數第二位。",
             "你必須完成這個程式碼以符合需求，你要如何完成這個程式碼？",
-            "請在答案選擇區選擇適當的程式碼片段。","sum = count = done = 0\naverage = 0.0\nwhile (done != -1):\n   rating = _(選項 1)_\n   if rating == -1:\n      break\n   sum += rating\n   count += 1\n   average = float(sum / count)\n   _(選項 2)_ + _(選項 3)_",
-			"\n選項1答案選擇區\n答案 A. print('Enter next rating (1-5),-1 for done')\n答案 B. float(input('Enter next rating (1-5),-1 for done'))\n答案 C. input('Enter next rating (1-5),-1 for done')\n答案 D. input 'Enter next rating (1-5),-1 for done')\n\n選項2答案選擇區\n答案 A. output('The average star rating for this hotel is:'\n答案 B. console.input('The average star rating for this hotel is:'\n答案 C. printline('The average star rating for this hotel is:'\n答案 D. print('The average star rating for this hotel is:'\n\n選項3答案選擇區\n答案 A. format(average, '.2f'))\n答案 B. format(average, '.2d'))\n答案 C. (average, '.2f')\n答案 D. format.average.(2d)</code></pre>"
+            "請在答案選擇區選擇適當的程式碼片段。",
+            "sum = count = done = 0\naverage = 0.0\nwhile (done != -1):\n   rating = _(選項 1)_\n   if rating == -1:\n      break\n   sum += rating\n   count += 1\n   average = float(sum / count)\n   _(選項 2)_ + _(選項 3)_",
+            "\n選項1答案選擇區\n答案 A. print('Enter next rating (1-5),-1 for done')\n答案 B. float(input('Enter next rating (1-5),-1 for done'))\n答案 C. input('Enter next rating (1-5),-1 for done')\n答案 D. input 'Enter next rating (1-5),-1 for done')\n\n選項2答案選擇區\n答案 A. output('The average star rating for this hotel is:'\n答案 B. console.input('The average star rating for this hotel is:'\n答案 C. printline('The average star rating for this hotel is:'\n答案 D. print('The average star rating for this hotel is:'\n\n選項3答案選擇區\n答案 A. format(average, '.2f'))\n答案 B. format(average, '.2d'))\n答案 C. (average, '.2f')\n答案 D. format.average.(2d)</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1245,10 +1275,11 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">37. 【CH04-7】你必須開發一個簡單的 Python 檔案程式來執行以下的動作：",
-			"● 檢查檔案是否存在。\n● 如果該檔案存在，就顯示檔案內容。\n● 如果該檔案不存在，就使用指定的名稱新增檔案。\n● 在檔案最後加入文字：'End of file'。",
-			"你需要完成程式碼以符合要求。你要如何完成這段程式碼？",
-            "請在回答區選擇適當的程式碼片段。","import os\nif _(選項 1)_\n   file = open('theFile.txt')\n   _(選項 2)_\nfile.close()\nfile = _(選項 3)_\n_(選項 4)_ ('End of file')\nfile.close()",
-			"\n選項1答案選擇區\n答案 A. isfile('theFile.txt')\n答案 B. os.exist('theFile.txt')\n答案 C. os.find('theFile.txt')\n答案 D. os.path.isfile('theFile.txt')\n\n選項2答案選擇區\n答案 A. output(theFile.txt')\n答案 B. print(file.get('theFile.txt'))\n答案 C. print(file.read())\n答案 D. print('theFile.txt')\n\n選項3答案選擇區\n答案 A. open('theFile.txt', 'a')\n答案 B. open('theFile.txt', 'at')\n答案 C. open('theFile,txt', 'w')\n答案 D. open('theFile.txt', 'wt')\n\n選項3答案選擇區\n答案 A. Append\n答案 B. file.add\n答案 C. file.write\n答案 D. write</code></pre>"
+            "● 檢查檔案是否存在。\n● 如果該檔案存在，就顯示檔案內容。\n● 如果該檔案不存在，就使用指定的名稱新增檔案。\n● 在檔案最後加入文字：'End of file'。",
+            "你需要完成程式碼以符合要求。你要如何完成這段程式碼？",
+            "請在回答區選擇適當的程式碼片段。",
+            "import os\nif _(選項 1)_\n   file = open('theFile.txt')\n   _(選項 2)_\nfile.close()\nfile = _(選項 3)_\n_(選項 4)_ ('End of file')\nfile.close()",
+            "\n選項1答案選擇區\n答案 A. isfile('theFile.txt')\n答案 B. os.exist('theFile.txt')\n答案 C. os.find('theFile.txt')\n答案 D. os.path.isfile('theFile.txt')\n\n選項2答案選擇區\n答案 A. output(theFile.txt')\n答案 B. print(file.get('theFile.txt'))\n答案 C. print(file.read())\n答案 D. print('theFile.txt')\n\n選項3答案選擇區\n答案 A. open('theFile.txt', 'a')\n答案 B. open('theFile.txt', 'at')\n答案 C. open('theFile,txt', 'w')\n答案 D. open('theFile.txt', 'wt')\n\n選項3答案選擇區\n答案 A. Append\n答案 B. file.add\n答案 C. file.write\n答案 D. write</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1278,9 +1309,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">38. 【CH04-8】你正在設計一個 Python 處理檔案的函式。",
-			"● 如果檔案不存在，則返回 '檔案不存在'。\n● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",
-			"<pre><code class=\"language-python\">import os\n  def get _ file_message(file):\n  _(選項1)_\n  _(選項2)_\n  _(選項3)_\n  _(選項4)_\n  _(選項5)_",
-			"你應該如何安排這些程式碼片段的順序來完成函式？",
+            "● 如果檔案不存在，則返回 '檔案不存在'。\n● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",
+            "<pre><code class=\"language-python\">import os\n  def get _ file_message(file):\n  _(選項1)_\n  _(選項2)_\n  _(選項3)_\n  _(選項4)_\n  _(選項5)_",
+            "你應該如何安排這些程式碼片段的順序來完成函式？",
             "請將適合的程式碼片段移動到回答區，並按正確的順序排列。\n程式碼片段\nA.with open(file, 'r') as file:\nB.return 'File dose not exist'\nC.return file.readline()\nD.if os.path.isfile(file):\nE.else:</code></pre>"
         ],
         "options": [
@@ -1301,7 +1332,8 @@
         "image": null,
         "image01": "images/38_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\">● 在這個函式中，首先檢查檔案是否存在(if os.path.isfile(file):)，並以唯讀模式開啟檔案(with open(file, 'r') as file:)，並返回第一行的內容(return file.readline())。",
+            "<pre><code class=\"language-python\">● 在這個函式中，首先檢查檔案是否存在(if os.path.isfile(file):)，",
+			"  並以唯讀模式開啟檔案(with open(file, 'r') as file:)，並返回第一行的內容(return file.readline())。",
             "● 如果不存在(else:)在則返回 '檔案不存在'(return 'File dose not exist')。[[image01]]</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
@@ -1337,10 +1369,11 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">40. 【CH04-10】你正在設計一個 Python 程式來讀取學生資料的檔案，檔案中包含了學生的班級、座號和姓名，",
-			"下面顯示的是檔案中的資料範例：",
+            "下面顯示的是檔案中的資料範例：",
             "'1A',1,'David'\n'1A',2,'Mary'\n程式碼必須符合以下的需求：● 檔案的每一行都必須讀取和列印。\n● 如果遇到空行，則必須忽略。\n● 在完成所有行的讀取後,必須關閉檔案。",
-			"你建立了以下的程式碼：","students = open('students.txt', 'r')\neof = False\nwhile eof == False:\n   line = students.readline()\n(程式碼1)\n(程式碼2)\n           print(line.strip())\n   else:\n       print('End of file')\n       eof = True\nstudents.close()",
-			"在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
+            "你建立了以下的程式碼：",
+            "students = open('students.txt', 'r')\neof = False\nwhile eof == False:\n   line = students.readline()\n(程式碼1)\n(程式碼2)\n           print(line.strip())\n   else:\n       print('End of file')\n       eof = True\nstudents.close()",
+            "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
         ],
         "options": [
             "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n':</code>",
@@ -1368,9 +1401,10 @@
         "question": [
             "<pre><code class=\"language-python\">41. 【CH04-11】某間公司需要有人協助更新他們的檔案系統。",
             "您必須建立一個執行下列動作的簡易檔案操作程式：",
-			"1. 檢視檔案是否存在。",
-			"2. 如果檔案存在，則顯示其內容。\n請選取正確的程式碼片段以完成程式碼。","#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()",
-			"\n選項1答案選擇區\nA. os.path.isfile('myFile.txt)\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>"
+            "1. 檢視檔案是否存在。",
+            "2. 如果檔案存在，則顯示其內容。\n請選取正確的程式碼片段以完成程式碼。",
+            "#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()",
+            "\n選項1答案選擇區\nA. os.path.isfile('myFile.txt)\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1440,15 +1474,16 @@
             "    <tr>",
             "      <td><b>0 through 59</b></td>",
             "      <td>F</td>",
-            "    </tr>", 
+            "    </tr>",
             "  </tbody></table>",
             "<pre><code class=\"language-python\">例如，如果使用者輸入 90 ，則輸出應該是 '你的成績為 A (甲等)'。",
             "如果使用者輸入 89 ，則輸出應該是 '你的成績為 B (乙等)'。你要如何完成這段程式碼？",
-            "請在回答區選擇適當的程式碼片段。","# Letter Grade Converter\ngrade = int(input('Enter a numeric grade:'))\n_(選項 1)_\nletter_grade = 'A'\n_(選項 2)_\nletter_grade = 'B'\n_(選項 3)_\nletter_grade = 'C'\n_(選項 4)_\nletter_grade = 'D'\nelse:\nletter_grade = 'F'\nprint('Your letter grade is :', letter_grade)",
-			"\n選項1答案選擇區\n答案 A. if grade <= 90:\n答案 B. if grade >= 90:\n答案 C. elif grade > 90:\n答案 D. elif grade >= 90:",
-			"選項2答案選擇區\n答案 A. if grade > 80:\n答案 B. if grade >= 80:\n答案 C. elif grade > 80:\n答案 D. elif grade >= 80:",
-			"選項3答案選擇區\nA. if grade > 70:\nB. if grade >= 70:\nC. elif grade > 70:\nD. elif grade >= 70:",
-			"選項4答案選擇區\nA. if grade > 60:\nB. if grade >= 60:\nC. elif grade > 60:\nD. elif grade >= 60:</code></pre>"
+            "請在回答區選擇適當的程式碼片段。",
+            "# Letter Grade Converter\ngrade = int(input('Enter a numeric grade:'))\n_(選項 1)_\nletter_grade = 'A'\n_(選項 2)_\nletter_grade = 'B'\n_(選項 3)_\nletter_grade = 'C'\n_(選項 4)_\nletter_grade = 'D'\nelse:\nletter_grade = 'F'\nprint('Your letter grade is :', letter_grade)",
+            "\n選項1答案選擇區\n答案 A. if grade <= 90:\n答案 B. if grade >= 90:\n答案 C. elif grade > 90:\n答案 D. elif grade >= 90:",
+            "選項2答案選擇區\n答案 A. if grade > 80:\n答案 B. if grade >= 80:\n答案 C. elif grade > 80:\n答案 D. elif grade >= 80:",
+            "選項3答案選擇區\nA. if grade > 70:\nB. if grade >= 70:\nC. elif grade > 70:\nD. elif grade >= 70:",
+            "選項4答案選擇區\nA. if grade > 60:\nB. if grade >= 60:\nC. elif grade > 60:\nD. elif grade >= 60:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1477,10 +1512,11 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">44. 【CH05-2】你要設計一款以使用者年齢進行電影分級的程式，必須符合以下要求：",
-			"● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。\n● 任何 13 歲或以上，但小於 18 歲的人都會顯示 '輔導級' 的訊息。\n● 任何 12 歲或或更年輕的人都會顯示 '普通級' 的訊息。\n● 如果年齡未知，則會顯示 '未知' 的訊息。",
-			"你需要完成程式以符合要求，應該要如何完成這段程式碼？",
-			"#程式碼片段","def get_rating(age):\n    rating = ''\n    if _(選項 1)_\n    elif _(選項 2)_\n    elif _(選項 3)_\n    else_(選項 4)_\n    return rating",
-			"\n答案選擇區\n答案 A. age<13: rating='普通級'\n答案 B. age<18: rating='輔導級'\n答案 C. :rating='限制級'\n答案 D. age is None: rating='未知'</code></pre>"
+            "● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。\n● 任何 13 歲或以上，但小於 18 歲的人都會顯示 '輔導級' 的訊息。\n● 任何 12 歲或或更年輕的人都會顯示 '普通級' 的訊息。\n● 如果年齡未知，則會顯示 '未知' 的訊息。",
+            "你需要完成程式以符合要求，應該要如何完成這段程式碼？",
+            "#程式碼片段",
+            "def get_rating(age):\n    rating = ''\n    if _(選項 1)_\n    elif _(選項 2)_\n    elif _(選項 3)_\n    else_(選項 4)_\n    return rating",
+            "\n答案選擇區\n答案 A. age<13: rating='普通級'\n答案 B. age<18: rating='輔導級'\n答案 C. :rating='限制級'\n答案 D. age is None: rating='未知'</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1510,8 +1546,9 @@
         "id": 45,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">45. 【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：","if grade > 80 and rank >= 3:\n   grade += 10\nif grade > 70 and rank > 3:\n   grade += 5\nelse:\n   grade -= 5",
-			"\n當 grade = 76，rand = 3 時，執行程式碼的輸出值是？</code></pre>"
+            "<pre><code class=\"language-python\">45. 【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：",
+            "if grade > 80 and rank >= 3:\n   grade += 10\nif grade > 70 and rank > 3:\n   grade += 5\nelse:\n   grade -= 5",
+            "\n當 grade = 76，rand = 3 時，執行程式碼的輸出值是？</code></pre>"
         ],
         "options": [
             "<code>71</code>",
@@ -1535,9 +1572,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">46. 【CH05-4】你正在編寫一個函式來判別負數與非負數。這個函式必須符合以下要求：",
-			"● 如果 a 是負數，則回傳 'The result is a negative number'\n● 如果 a 不是負數，則為非負數，再繼續判別。\n● 如果 a 大於 0，則回傳 'The result is a positive number'\n● 否則回傳 'The result is a zero'",
-			"你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","def reResult(a):\n    if _(選項 1)_\n        answer = 'The result is a negative number'\n    _(選項 2)_\n        if _(選項 3)_\n            answer = 'The result is a positive number'\n        _(選項 4)_\n            answer = 'The result is a zero'\n    return answer",
-			"\n答案選擇區\n答案 A. if a < 0:\n答案 B. if a > 0:\n答案 C. else:\n答案 D. elif:</code></pre>"
+            "● 如果 a 是負數，則回傳 'The result is a negative number'\n● 如果 a 不是負數，則為非負數，再繼續判別。\n● 如果 a 大於 0，則回傳 'The result is a positive number'\n● 否則回傳 'The result is a zero'",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "def reResult(a):\n    if _(選項 1)_\n        answer = 'The result is a negative number'\n    _(選項 2)_\n        if _(選項 3)_\n            answer = 'The result is a positive number'\n        _(選項 4)_\n            answer = 'The result is a zero'\n    return answer",
+            "\n答案選擇區\n答案 A. if a < 0:\n答案 B. if a > 0:\n答案 C. else:\n答案 D. elif:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1567,9 +1605,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">47. 【CH05-5】你設計了一個電影票收費的函式，票價的規則如下：",
-			"● 5 歲以下 = 免費入場\n● 5 歲及以上的學生 = 60 元\n● 5 歲到 17 歲但不是學生 = 120 元\n● 17 歲以上但不是學生 = 180 元",
-			"你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","def ticket_fee(age, school):\n    fee = 0\n    _(選項 1)_\n        fee = 60\n    _(選項 2)_\n        _(選項 3)_\n            fee = 120\n        else:\n            fee = 180\n    return fee",
-			"\n答案選擇區\n答案 A. if age >= 5 and school:\n答案 B. elif age >= 5 and not school:\n答案 C. if age <= 17:</code></pre>"
+            "● 5 歲以下 = 免費入場\n● 5 歲及以上的學生 = 60 元\n● 5 歲到 17 歲但不是學生 = 120 元\n● 17 歲以上但不是學生 = 180 元",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "def ticket_fee(age, school):\n    fee = 0\n    _(選項 1)_\n        fee = 60\n    _(選項 2)_\n        _(選項 3)_\n            fee = 120\n        else:\n            fee = 180\n    return fee",
+            "\n答案選擇區\n答案 A. if age >= 5 and school:\n答案 B. elif age >= 5 and not school:\n答案 C. if age <= 17:</code></pre>"
         ],
         "options": [
             "<code>A|B|C</code>",
@@ -1596,8 +1635,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">48. 【CH05-6】你設計一個 Python 程式來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，\n其中規定輸入的值必須是正整數。你要如何完成這段程式碼？",
-			"num = int(input('Enter a number with 1 or 2 digits:'))\ndigits = '0'\nif num > 0:\n    _(選項 1)_\n        digits = '1'\n    _(選項 2)_\n        digits = '2'\n    _(選項 3)_\n        digits = '>2'\n    print(digits + ' digits.')\nelif num == 0:\n    print('The number is 0')\nelse:\n    print('The number is not a positive number')",
-			"\n答案選擇區\n答案 A. if num < 10:\n答案 B. if num < 100:\n答案 C. elif num < 100:\n答案 D. else:</code></pre>"
+            "num = int(input('Enter a number with 1 or 2 digits:'))\ndigits = '0'\nif num > 0:\n    _(選項 1)_\n        digits = '1'\n    _(選項 2)_\n        digits = '2'\n    _(選項 3)_\n        digits = '>2'\n    print(digits + ' digits.')\nelif num == 0:\n    print('The number is 0')\nelse:\n    print('The number is not a positive number')",
+            "\n答案選擇區\n答案 A. if num < 10:\n答案 B. if num < 100:\n答案 C. elif num < 100:\n答案 D. else:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1624,10 +1663,11 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">49. 【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。",
-            "程式碼如下：","from random import randint\ntarget = randint(1,100)\nchance = 1\nprint('Guess an integer from 1 to 10. You will have 3 chances.')\n_(選項 1)_\n    guess = int(input('Guess an integer:'))\n    if guess > target:\n        print('Guess is too high')\n    elif guess < target:\n        print('Guess is too low')\n    else:\n        print('Guess is just right')\n        _(選項 2)_\n    _(選項 3)_",
-			"程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
+            "程式碼如下：",
+            "from random import randint\ntarget = randint(1,100)\nchance = 1\nprint('Guess an integer from 1 to 10. You will have 3 chances.')\n_(選項 1)_\n    guess = int(input('Guess an integer:'))\n    if guess > target:\n        print('Guess is too high')\n    elif guess < target:\n        print('Guess is too low')\n    else:\n        print('Guess is just right')\n        _(選項 2)_\n    _(選項 3)_",
+            "程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
             "請將回答區專案的選到正確的程式碼片段",
-			"\n答案選擇區\n答案 A. while chance < 3:\n答案 B. break\n答案 C. pass\n答案 D. chance += 1\n答案 E. while chance < 3\n答案 F. chance = 2</code></pre>"
+            "\n答案選擇區\n答案 A. while chance < 3:\n答案 B. break\n答案 C. pass\n答案 D. chance += 1\n答案 E. while chance < 3\n答案 F. chance = 2</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E|F</code>",
@@ -1655,8 +1695,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">50. 【CH05-8】在以下的程式碼中，要加入哪些程式碼片段讓 print 語法可以正確執行？",
-            "你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。","aList = 1,2,3]\nbList = ['a', 'b', 'c']\n_(選項 1)_\n   print('aList is equal to bList')\n_(選項 2)_\n   print('aList is not equal to bList')",
-			"\n答案選擇區\nA. if aList == bList:\nB. if alist == blist\nC. else:\nD. else</code></pre>"
+            "你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。",
+            "aList = 1,2,3]\nbList = ['a', 'b', 'c']\n_(選項 1)_\n   print('aList is equal to bList')\n_(選項 2)_\n   print('aList is not equal to bList')",
+            "\n答案選擇區\nA. if aList == bList:\nB. if alist == blist\nC. else:\nD. else</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1680,7 +1721,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">51. 【CH05-9】你設計了一個 Python 程式來檢查輸入英文姓名的大小寫，請在下方選擇四個程式碼到回答區中進行順序排列。",
-			"第 1 段程式為 _(選項 1)\n第 2 段程式為 _(選項 2)\n第 3 段程式為 _(選項 3)\n第 4 段程式為 _(選項 4)","答案選擇區\n答案 A.\nname = input('Enter your English name:')\n答案 B.\nelif name.lower() == name:\n   print(name, 'is all lower case.')\n答案 C.\nelse:\n   print(name, 'is upper case.')\n答案 D.\nelse:\n   print(name, 'is mixed case.')\n答案 E.\nif name.upper() == name:\n   print(name, 'is all upper case.')\n答案 F.\nelse:\n   print(name, 'is lower case.')</code></pre>"
+            "第 1 段程式為 _(選項 1)\n第 2 段程式為 _(選項 2)\n第 3 段程式為 _(選項 3)\n第 4 段程式為 _(選項 4)",
+            "答案選擇區\n答案 A.\nname = input('Enter your English name:')\n答案 B.\nelif name.lower() == name:\n   print(name, 'is all lower case.')\n答案 C.\nelse:\n   print(name, 'is upper case.')\n答案 D.\nelse:\n   print(name, 'is mixed case.')\n答案 E.\nif name.upper() == name:\n   print(name, 'is all upper case.')\n答案 F.\nelse:\n   print(name, 'is lower case.')</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E|F</code>",
@@ -1710,10 +1752,11 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">52. 【CH05-10】公司決定要幫所有年薪不到 50 萬的員工調升基本工資 5%，並給予獎金 1 萬元，以下是計算公式：",
-			"● 新工資 = 目前工資 X 105% + $10000 獎金。\n● 程式會將每個人調整後的年薪資料存入 salaryList 清單中。你要如何完成這段程式碼？",
-			"請在回答區選擇適當的程式碼片段。\n#清單中的每個人的工資都根據增加而更新。\n#年薪50萬元以上的員工將不會得到加薪。\n# salaryList 是由員工資料庫中取得，程式碼不會顯示。","\n_(選項 1)_\n    if salaryList[index] >= 500000:\n        _(選項 2)_\n     salaryList[index] = int((salaryList[index] * 1.05) + 10000)",
-			"\n選項 1 答案選擇區\n答案 A. for index in range(len(salaryList)+1):\n答案 B. for index in range(len(salaryList)-1):\n答案 C. for index in range(len(salaryList)):\n答案 D. for index in salaryList:",
-			"選項 2 答案選擇區\nA. exit()\nB. continue\nC. break\nD. end</code></pre>"
+            "● 新工資 = 目前工資 X 105% + $10000 獎金。\n● 程式會將每個人調整後的年薪資料存入 salaryList 清單中。你要如何完成這段程式碼？",
+            "請在回答區選擇適當的程式碼片段。\n#清單中的每個人的工資都根據增加而更新。\n#年薪50萬元以上的員工將不會得到加薪。\n# salaryList 是由員工資料庫中取得，程式碼不會顯示。",
+            "\n_(選項 1)_\n    if salaryList[index] >= 500000:\n        _(選項 2)_\n     salaryList[index] = int((salaryList[index] * 1.05) + 10000)",
+            "\n選項 1 答案選擇區\n答案 A. for index in range(len(salaryList)+1):\n答案 B. for index in range(len(salaryList)-1):\n答案 C. for index in range(len(salaryList)):\n答案 D. for index in salaryList:",
+            "選項 2 答案選擇區\nA. exit()\nB. continue\nC. break\nD. end</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1738,9 +1781,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">53. 【CH05-11】你設計了一個函式計算並顯示從 2 到 9 的所有乘法組合的九九乘法表。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","# Displays times tables 2 - 9\ndef times_tables():\n    _(選項 1)_\n        _(選項 2)_\n            print(row * col, end=' ')\n        print()\n# main\ntimes_tables()",
-			"\n選項 1 答案選擇區\n答案 A. for col in range(9):\n答案 B. for col in range(2, 10):\n答案 C. for col in range(2, 9, 1):\n答案 D. for col in range(10):",
-			"\n選項 2 答案選擇區\n答案 A. for row in range(9):\n答案 B. for row in range(2, 9, 1):\n答案 C. for row in range(2, 10):\n答案 D. for row in range(10):</code></pre>"
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "# Displays times tables 2 - 9\ndef times_tables():\n    _(選項 1)_\n        _(選項 2)_\n            print(row * col, end=' ')\n        print()\n# main\ntimes_tables()",
+            "\n選項 1 答案選擇區\n答案 A. for col in range(9):\n答案 B. for col in range(2, 10):\n答案 C. for col in range(2, 9, 1):\n答案 D. for col in range(10):",
+            "\n選項 2 答案選擇區\n答案 A. for row in range(9):\n答案 B. for row in range(2, 9, 1):\n答案 C. for row in range(2, 10):\n答案 D. for row in range(10):</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1769,8 +1813,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">54. 【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。",
-			"第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_",
-			"  if is_prime:\n     print(n)\n第 4 段程式為 _(選項 4)_",
+            "第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_",
+            "  if is_prime:\n     print(n)\n第 4 段程式為 _(選項 4)_",
             "\n答案選擇區",
             "答案 A.",
             "n = 2",
@@ -1823,9 +1867,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">55. 【CH05-13】你用 Python 設計了一個比大小函式，必須符合以下的需求：",
-			"● 這個函式有二個引數：一個整數清單和一個整數作為引數。\n● 該函式必須在清單中以整數進行比較。\n● 如果在清單中的整數有一個比引數整數大，則該函式必須列印一則訊息，\n  指示已經找到的整數比引數整數大，然後停止檢視清單的動作。\n● 如果找不到比引數整數大的數，則該函式必須列印一則訊息，\n  指示在清單中找不到比引數整數大的數。你應該如何安排這些程式碼片段的順序來開發解決方案？",
-            "請將適合的程式碼片段從程式碼片段清單移動到回答區，並按正確的順序排列。","第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_\n第 4 段程式為 _(選項 4)_\n第 5 段程式為 _(選項 5)_",
-			"\n答案選擇區\n答案 A.\n   for i in range(len(nums)):\n答案 B.\n      if nums[i] > num:\n         print('A value greater than {0} is found in the list of {1}'.format(num, nums))\n答案 C.\n      else:\n         print('A value greater than {0} cannot be found in the list of {1}'.format(num, nums))\n答案 D.\n         break\n答案 E.\ndef search(nums, num):</code></pre>"
+            "● 這個函式有二個引數：一個整數清單和一個整數作為引數。\n● 該函式必須在清單中以整數進行比較。\n● 如果在清單中的整數有一個比引數整數大，則該函式必須列印一則訊息，\n  指示已經找到的整數比引數整數大，然後停止檢視清單的動作。\n● 如果找不到比引數整數大的數，則該函式必須列印一則訊息，\n  指示在清單中找不到比引數整數大的數。你應該如何安排這些程式碼片段的順序來開發解決方案？",
+            "請將適合的程式碼片段從程式碼片段清單移動到回答區，並按正確的順序排列。",
+            "第 1 段程式為 _(選項 1)_\n第 2 段程式為 _(選項 2)_\n第 3 段程式為 _(選項 3)_\n第 4 段程式為 _(選項 4)_\n第 5 段程式為 _(選項 5)_",
+            "\n答案選擇區\n答案 A.\n   for i in range(len(nums)):\n答案 B.\n      if nums[i] > num:\n         print('A value greater than {0} is found in the list of {1}'.format(num, nums))\n答案 C.\n      else:\n         print('A value greater than {0} cannot be found in the list of {1}'.format(num, nums))\n答案 D.\n         break\n答案 E.\ndef search(nums, num):</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E</code>",
@@ -1858,9 +1903,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">56. 【CH05-14】你正在設計一個 Python 程式驗證產品編號。",
-			"● 產品編號的格式必須為 dd-dddd，並且只包含數字和破折號。\n● 如果格式正確則程式必須列印 True，如果格式不正確，則列印 False。",
-			"你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","_(選項 1)_\nparts = ''\n_(選項 2)_\n    _(選項 3)_\n    product_no = input('Enter product number (dd-dddd): ')\n    parts = product_no.split('-')\n    if len(parts) == 2:\n        if len(parts[0]) == 2 and len(parts[1]) == 4:\n            if parts[0].isdigit() and parts[1].isdigit():\n                _(選項 4)_\n    print(valid)",
-			"\n選項 1 答案選擇區\nA. product_no = ''\nB. product_no = 'sentinel'\n\n選項 2 答案選擇區\nA. while product_no != '':\nB. while product_no != 'sentinel':\n\n選項 3 答案選擇區\nA. valid = False\nB. valid = True\n\n選項 4 答案選擇區\nA. valid = False\nB. valid = True</code></pre>"
+            "● 產品編號的格式必須為 dd-dddd，並且只包含數字和破折號。\n● 如果格式正確則程式必須列印 True，如果格式不正確，則列印 False。",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "_(選項 1)_\nparts = ''\n_(選項 2)_\n    _(選項 3)_\n    product_no = input('Enter product number (dd-dddd): ')\n    parts = product_no.split('-')\n    if len(parts) == 2:\n        if len(parts[0]) == 2 and len(parts[1]) == 4:\n            if parts[0].isdigit() and parts[1].isdigit():\n                _(選項 4)_\n    print(valid)",
+            "\n選項 1 答案選擇區\nA. product_no = ''\nB. product_no = 'sentinel'\n\n選項 2 答案選擇區\nA. while product_no != '':\nB. while product_no != 'sentinel':\n\n選項 3 答案選擇區\nA. valid = False\nB. valid = True\n\n選項 4 答案選擇區\nA. valid = False\nB. valid = True</code></pre>"
         ],
         "options": [
             "<code>A|B</code>",
@@ -1878,7 +1924,13 @@
         "image": null,
         "image01": "images/56_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\"><b>【解析】</b>此程式採「預設為假」的驗證邏輯，並透過迴圈持續輸入。","<b>1. 迴圈設計 (選項 1, 2)：</b>● 答案選擇 while product_no != ''，表示當使用者輸入<b>空字串</b>時結束程式。● 為了第一次能進入迴圈，初始變數 product_no 必須給予任意非空值 (如 'sentinel')。<b>2. 驗證旗標 (選項 3, 4)：</b>● 每一輪檢查開始前，先將 valid 重置為 False (預設格式錯誤)。● 唯有通過所有 if 條件檢查 (長度正確且為數字)，才在最內層將 valid 設為 True。[[image01]]</code></pre>"
+            "<pre><code class=\"language-python\"><b>【解析】</b>此程式採「預設為假」的驗證邏輯，並透過迴圈持續輸入。",
+            "<b>1. 迴圈設計 (選項 1, 2)：</b>",
+			"● 答案選擇 while product_no != ''，表示當使用者輸入<b>空字串</b>時結束程式。",
+			"● 為了第一次能進入迴圈，初始變數 product_no 必須給予任意非空值 (如 'sentinel')。",
+			"<b>2. 驗證旗標 (選項 3, 4)：</b>",
+			"● 每一輪檢查開始前，先將 valid 重置為 False (預設格式錯誤)。",
+			"● 唯有通過所有 if 條件檢查 (長度正確且為數字)，才在最內層將 valid 設為 True。[[image01]]</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1888,8 +1940,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">57. 【CH05-15】你正在設計 Python 應用程式。該程式將逐一檢視數字清單，並在找到 4 時進行跳脫的動作。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。","nList = [0,1,2,3,4,5,6,6,7,8,9]\nindex = 0\n_(選項 1)_ index < 10:\n    print(nList[index])\n    if nList[index] == 4:\n        _(選項 2)_\n    else:\n        _(選項 3)_",
-			"\n選項 1 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 2 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 3 答案選擇區\nA. continue\nB. break\nC. index += 1\nD. index = 1</code></pre>"
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "nList = [0,1,2,3,4,5,6,6,7,8,9]\nindex = 0\n_(選項 1)_ index < 10:\n    print(nList[index])\n    if nList[index] == 4:\n        _(選項 2)_\n    else:\n        _(選項 3)_",
+            "\n選項 1 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 2 答案選擇區\nA. while\nB. for\nC. if\nD. break\n\n選項 3 答案選擇區\nA. continue\nB. break\nC. index += 1\nD. index = 1</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1916,8 +1969,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">58. 【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。● 您需要列印五行程式碼。\n● 其中第一行第三行和第五行各有四個星星。\n● 而第二行和第四行各有一個星。",
-			"如下所示：請在下列位置中選擇正確的數字以完成程式碼。","result_str = ''\nfor row in range(1, _(選項 1)_):\n    for column in range(1, _(選項 2)_):\n        if row == 1 or row == 3 or row == 5:\n            result_str = result_str + '*'\n        elif column == 1:\n            result_str = result_str + '*'\n    result_str += '\\ n'\nprint(result_str)",
-			"\n答案選擇區\nA. 3  B. 4  C. 5 D. 6</code></pre>"
+            "如下所示：請在下列位置中選擇正確的數字以完成程式碼。",
+            "result_str = ''\nfor row in range(1, _(選項 1)_):\n    for column in range(1, _(選項 2)_):\n        if row == 1 or row == 3 or row == 5:\n            result_str = result_str + '*'\n        elif column == 1:\n            result_str = result_str + '*'\n    result_str += '\\ n'\nprint(result_str)",
+            "\n答案選擇區\nA. 3  B. 4  C. 5 D. 6</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1932,7 +1986,16 @@
         "image01": "images/58_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">這道題目主要測試對 Python range() 函式「終止值不包含在內」特性的理解，以及巢狀迴圈的運作邏輯。",
-            "<b>【解析】</b>此程式透過巢狀迴圈來繪製 'E' 字形，外層迴圈控制「列 (Row)」，內層迴圈控制「欄 (Column)」。<b>1. 外層迴圈 (控制高度/行數)：</b>● 題目要求列印 <b>5 行</b>。● range(start, stop) 函式是包含 start 但<b>不包含 stop</b>。● 若要產生 1, 2, 3, 4, 5 的序列，stop 必須設為 <b>6</b>。● 故 (選項 1) 應填入 <b>6</b> (對應選項 D)。<b>2. 內層迴圈 (控制寬度/星星數)：</b>● 題目要求第 1, 3, 5 行需有 <b>4 個星星</b>。● 若要讓內層迴圈執行 4 次 (產生 1, 2, 3, 4)，stop 必須設為 <b>5</b>。● 故 (選項 2) 應填入 <b>5</b> (對應選項 C)。<b>【邏輯驗證】</b>當 row 為 1, 3, 5 時，內層迴圈跑 4 次都會印星 (共4星)。當 row 為 2, 4 時，只符合 elif column == 1，故只印第 1 顆星。[[image01]]</code></pre>"
+            "<b>【解析】</b>此程式透過巢狀迴圈來繪製 'E' 字形，外層迴圈控制「列 (Row)」，內層迴圈控制「欄 (Column)」。",
+			"<b>1. 外層迴圈 (控制高度/行數)：</b>",
+			"● 題目要求列印 <b>5 行</b>。",
+			"● range(start, stop) 函式是包含 start 但<b>不包含 stop</b>。",
+			"● 若要產生 1, 2, 3, 4, 5 的序列，stop 必須設為 <b>6</b>。",
+			"● 故 (選項 1) 應填入 <b>6</b> (對應選項 D)。",
+			"<b>2. 內層迴圈 (控制寬度/星星數)：</b>",
+			"● 題目要求第 1, 3, 5 行需有 <b>4 個星星</b>。● 若要讓內層迴圈執行 4 次 (產生 1, 2, 3, 4)，stop 必須設為 <b>5</b>。",
+			"● 故 (選項 2) 應填入 <b>5</b> (對應選項 C)。",
+			"<b>【邏輯驗證】</b>當 row 為 1, 3, 5 時，內層迴圈跑 4 次都會印星 (共4星)。當 row 為 2, 4 時，只符合 elif column == 1，故只印第 1 顆星。[[image01]]</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1942,8 +2005,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">59. 【CH05-17】您正在撰寫程式碼來根據下列準則傳回字母成績：● 變數 grade 會將數字成績儲存成 0 到 100 之間的整數。\n● 90 到 100 的成績 = A。\n● 80 到 89 的成績 = B。\n● 70 到 7 9的成績 = C。\n● 其他所有成績都不及格。",
-			"請選取正確的程式碼片段以完成程式碼。","#程式碼片段\ngrade = int(input('Please enter your grade: '))\n _(選項 1)_ grade <= 100 and grade >= 0:\n     _(選項 2)_ grade >= 90:\n        print('Your grade is A.')\n     _(選項 3)_ grade >= 80:\n        print('Your grade is B.')\n     _(選項 4)_ grade < 80 and grade > 69:\n        print('Your grade is C.')\n     _(選項 5)_\n        print('Your grade is failing.')\n _(選項 6)_\n    print('Invalid grade entered.')",
-			"\n答案選擇區\nA. if   B. else:   C. elif   D. else if</code></pre>"
+            "請選取正確的程式碼片段以完成程式碼。",
+            "#程式碼片段\ngrade = int(input('Please enter your grade: '))\n _(選項 1)_ grade <= 100 and grade >= 0:\n     _(選項 2)_ grade >= 90:\n        print('Your grade is A.')\n     _(選項 3)_ grade >= 80:\n        print('Your grade is B.')\n     _(選項 4)_ grade < 80 and grade > 69:\n        print('Your grade is C.')\n     _(選項 5)_\n        print('Your grade is failing.')\n _(選項 6)_\n    print('Invalid grade entered.')",
+            "\n答案選擇區\nA. if   B. else:   C. elif   D. else if</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1966,7 +2030,18 @@
         "image01": "images/59_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">這道題目測試的是 Python 的 巢狀條件判斷 (Nested If-Else) 以及正確的關鍵字拼寫。",
-            "<b>【解析】</b>此程式碼採用<b>巢狀結構 (Nested Structure)</b>，分為「外層」與「內層」邏輯。<b>1. 外層：檢查數值有效性</b>● (選項1) if：檢查成績是否在 0~100 的合法範圍內。● (選項6) else:：若不符合上述範圍 (如 -5 或 105)，則印出錯誤訊息。<b>2. 內層：判斷成績等級 (當數值合法時)</b>● (選項2) if：第一個判斷條件 (>= 90)。● (選項3, 4) elif：<b>注意！</b>Python 的語法是 elif，而非 C/Java 的 else if。用於後續的條件判斷。● (選項5) else:：若上述條件皆不成立 (即 < 70)，則判定為不及格。<b>【語法重點】</b>● 條件式開頭必為 if。● 中間的條件分支使用 elif。● 最後的「其他所有情況」使用 else: (結尾需有冒號)。[[image01]]</code></pre>"
+            "<b>【解析】</b>此程式碼採用<b>巢狀結構 (Nested Structure)</b>，分為「外層」與「內層」邏輯。",
+			"<b>1. 外層：檢查數值有效性</b>",
+			"● (選項1) if：檢查成績是否在 0~100 的合法範圍內。",
+			"● (選項6) else:：若不符合上述範圍 (如 -5 或 105)，則印出錯誤訊息。",
+			"<b>2. 內層：判斷成績等級 (當數值合法時)</b>",
+			"● (選項2) if：第一個判斷條件 (>= 90)。",
+			"● (選項3, 4) elif：<b>注意！</b>Python 的語法是 elif，而非 C/Java 的 else if。用於後續的條件判斷。",
+			"● (選項5) else:：若上述條件皆不成立 (即 < 70)，則判定為不及格。",
+			"<b>【語法重點】</b>",
+			"● 條件式開頭必為 if。",
+			"● 中間的條件分支使用 elif。",
+			"● 最後的「其他所有情況」使用 else: (結尾需有冒號)。[[image01]]</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1976,8 +2051,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">60. 【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？",
-			"#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)",
-			"選項 1 答案選擇區\nA. word_list in word:\nB. word in word_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>"
+            "#程式碼片段\n# Function accepts list of words from a file\n# word_list = ['apple', 'banana', 'peach', 'grape']\n# and letter to search for.\n# Returns count of a particular letter in that list.\ndef count_letter(letter, word_list):\n    count = 0\n    for_(選項 1)_\n        if _(選項 2)_\n            count += 1\n    return count\n\n\n# word_list is populated from a file. Code not shown. here we use a sample list.\nword_list = ['apple', 'banana', 'peach', 'grape']\nletter = input('which letter would you like to count: ')\nletter_count = count_letter(letter, word_list)\nprint('There are:', letter_count, 'instances of', letter)",
+            "選項 1 答案選擇區\nA. word_list in word:\nB. word in word_list:\nC. word == letter_list:\nD. word is letter_list:\n\n選項 2 答案選擇區\nA. word is letter:\nB. letter is word:\nC. word in letter:\nD. letter in word:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1991,7 +2066,15 @@
         "image": null,
         "image01": "images/60_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\"><b>【解析】</b>1. <b>填空 1 (迴圈迭代)</b>：Python 的 for 迴圈語法為 for 變數 in 容器:。雖然參數名稱是 word_list，但選項 B (word in letter_list) 是唯一符合 for...in 語法結構的選項 (可能是題目變數名稱誤植)。2. <b>填空 2 (成員運算子)</b>：要檢查字串中是否包含某個字元，需使用 in 關鍵字。● 語法：if 子字串 in 母字串:● 本題要檢查 letter 是否在 word 中，故選 letter in word (選項 D)。<b>【in 的雙重用途】</b>● 在 for 迴圈中：代表「從裡面依序取出」。● 在 if 條件中：代表「檢查是否存在其中」。[[image01]]</code></pre>"
+            "<pre><code class=\"language-python\"><b>【解析】</b>",
+			"1. <b>填空 1 (迴圈迭代)</b>：Python 的 for 迴圈語法為 for 變數 in 容器:。雖然參數名稱是 word_list，",
+			"但選項 B (word in letter_list) 是唯一符合 for...in 語法結構的選項 (可能是題目變數名稱誤植)。",
+			"2. <b>填空 2 (成員運算子)</b>：要檢查字串中是否包含某個字元，需使用 in 關鍵字。",
+			"● 語法：if 子字串 in 母字串:",
+			"● 本題要檢查 letter 是否在 word 中，故選 letter in word (選項 D)。",
+			"<b>【in 的雙重用途】</b>",
+			"● 在 for 迴圈中：代表「從裡面依序取出」。",
+			"● 在 if 條件中：代表「檢查是否存在其中」。[[image01]]</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -2000,9 +2083,10 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">61. 【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：","#程式碼片段\nscores = [80,90,75,85]\ncount = 0\nsum = 0\n# 在以下的程式碼有二個錯誤：\nfor index in range(_(選項 1)_):\n    count += 1\n    sum += scores[index]\naverage = _(選項 2)_\nprint('The total scords is:', sum)\nprint('The average scords is:', average)",
-			"你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。</code></pre>",
-			"選項 1 答案選擇區\nA. size(scores)\nB. size(scores) - 1\nC. len(scores) + 1\nD. len(scores)\n\n選項 2 答案選擇區\nA. sum / count\nB. sum**count\nC. sum * count\nD. sum // count</code></pre>"
+            "<pre><code class=\"language-python\">61. 【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：",
+            "#程式碼片段\nscores = [80,90,75,85]\ncount = 0\nsum = 0\n# 在以下的程式碼有二個錯誤：\nfor index in range(_(選項 1)_):\n    count += 1\n    sum += scores[index]\naverage = _(選項 2)_\nprint('The total scords is:', sum)\nprint('The average scords is:', average)",
+            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。</code></pre>",
+            "選項 1 答案選擇區\nA. size(scores)\nB. size(scores) - 1\nC. len(scores) + 1\nD. len(scores)\n\n選項 2 答案選擇區\nA. sum / count\nB. sum**count\nC. sum * count\nD. sum // count</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2016,7 +2100,13 @@
         "image": null,
         "image01": "images/61_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\"><b>【解析】</b>1. <b>迴圈範圍 (選項 1)</b>：要遍歷列表 scores，我們需要產生對應的索引值 (0 到 3)。● len(scores) 會回傳列表長度 (4)。● range(len(scores)) 等同於 range(4)，會產生索引 0, 1, 2, 3，剛好能取出所有分數。● 注意：Python 沒有 size() 函式；且若用 len()+1 會導致 IndexOutOfRange 錯誤。2. <b>平均值 (選項 2)</b>：● 平均公式為「總和除以數量」。● Python 的除法符號是 / (會保留小數)，例如 330 / 4 = 82.5。● // 是整數除法 (捨去小數)，較不精確。[[image01]]</code></pre>"
+            "<pre><code class=\"language-python\"><b>【解析】</b>",
+            "1. <b>迴圈範圍 (選項 1)</b>：要遍歷列表 scores，我們需要產生對應的索引值 (0 到 3)。",
+            "● len(scores) 會回傳列表長度 (4)。",
+            "● range(len(scores)) 等同於 range(4)，會產生索引 0, 1, 2, 3，剛好能取出所有分數。",
+            "● 注意：Python 沒有 size() 函式；且若用 len()+1 會導致 IndexOutOfRange 錯誤。",
+            "2. <b>平均值 (選項 2)</b>：● 平均公式為「總和除以數量」。",
+            "● Python 的除法符號是 / (會保留小數)，例如 330 / 4 = 82.5。● // 是整數除法 (捨去小數)，較不精確。[[image01]]</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -2026,8 +2116,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">62. 【CH05-20】您正在撰寫符合下列需求的程式碼：",
-			"● 允許使用者不斷輸入字詞。\n● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。","#程式碼片段\nx = 'Hello World'\n_(選項 1)_ x != 'QUIT':\n    num = 0\n    _(選項 2)_ char _(選項 3)_ x:\n        num += 1\n    print(num)\n    x = input('Enter a new word or QUIT to exit: ')",
-			"\n選項 1 答案選擇區\n A. while B. for C. if D. in</code></pre>"
+            "● 允許使用者不斷輸入字詞。\n● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。",
+            "#程式碼片段\nx = 'Hello World'\n_(選項 1)_ x != 'QUIT':\n    num = 0\n    _(選項 2)_ char _(選項 3)_ x:\n        num += 1\n    print(num)\n    x = input('Enter a new word or QUIT to exit: ')",
+            "\n選項 1 答案選擇區\n A. while B. for C. if D. in</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2053,7 +2144,8 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">63. 【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。","\n01  numList = [0,1,2,3,4,5,6,7,8,9]",
+            "<pre><code class=\"language-python\">63. 【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。",
+            "\n01  numList = [0,1,2,3,4,5,6,7,8,9]",
             "02  i = 0",
             "03  while (i < 10)",
             "04   print(numList[i])",
@@ -2160,8 +2252,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">66. 【CH06-3】一家運動器材公司正在設計一個程式用來記錄客戶跑步時的距離，你設計以下的 Python 程式碼:",
-			"_(選項 1)_\n    name = input('What is your name?')\n    return name\n_(選項 2)_\n    calories = kms * calories_per_km\n    return calories\ndistance = int(input('How many kilometers did you run this week?'))\nburn_rate = 80\nrunner = get_name()\ncalories_burned = calc_calories(distance, burn_rate)\nprint(runner, ', you burned about ', calories_burned, 'calories.')",
-			"在程式中必須要定義二個必要的函式。你將在第 1 及第 4 行中使用哪些程式碼片段？</code></pre>"
+            "_(選項 1)_\n    name = input('What is your name?')\n    return name\n_(選項 2)_\n    calories = kms * calories_per_km\n    return calories\ndistance = int(input('How many kilometers did you run this week?'))\nburn_rate = 80\nrunner = get_name()\ncalories_burned = calc_calories(distance, burn_rate)\nprint(runner, ', you burned about ', calories_burned, 'calories.')",
+            "在程式中必須要定義二個必要的函式。你將在第 1 及第 4 行中使用哪些程式碼片段？</code></pre>"
         ],
         "options": [
             "<code>def get_name():|def get_name(runner):|def get_name(name):</code>",
@@ -2184,7 +2276,7 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">67. 【CH06-4】你正在設計一個線上遊戲記記分的 Python 應用程式。需要符合以下條件的函式：",
-			"● 函式名為 calc_score\n● 函式接收二個引數：目前分數和一個值\n● 函式將值增加到目前分數\n● 函式返回新分數你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。\n#程式碼片段\n_(選項 1)_   _(選項 2)_\ncurrent += value\n__(選項 3)_選項 1 答案選擇區\nA. calc_score\nB. def calc_score\nC. return calc_score\n\n選項 2 答案選擇區\nA. (current, value):\nB. ():\nC. (current, value)\nD. ()\n\n選項 3 答案選擇區\nA. pass current\nB. return current\nC. return\nD. pass</code></pre>"
+            "● 函式名為 calc_score\n● 函式接收二個引數：目前分數和一個值\n● 函式將值增加到目前分數\n● 函式返回新分數你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。\n#程式碼片段\n_(選項 1)_   _(選項 2)_\ncurrent += value\n__(選項 3)_選項 1 答案選擇區\nA. calc_score\nB. def calc_score\nC. return calc_score\n\n選項 2 答案選擇區\nA. (current, value):\nB. ():\nC. (current, value)\nD. ()\n\n選項 3 答案選擇區\nA. pass current\nB. return current\nC. return\nD. pass</code></pre>"
         ],
         "options": [
             "<code>A|B|C</code>",
@@ -2332,9 +2424,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">72. 【CH06-7】請從選取正確的選項以回答有關記錄 Python 程式碼的問題：",
-			"\n選項 1 答案選擇區\n請問哪些字元代表單行文件字串的開頭和結尾？\nA. 單引號\nB. 雙引號\nC. 二個雙引號\nD. 三個雙引號\n",
-			"選項 2 答案選擇區\n在記錄函式時，檔案字串的標準位置在哪裡？\nA. 在函式宣告區塊前\nB. 緊接在函式標頭後面\nC. 在函式宣告區塊後\nD. 在程式的最後",
-			"選項 3 答案選擇區\n請閱下列函式：\ndef cube (n):\n\"\"\" Returns the cube of number n \"\"\"\nreturn n*n*n\n\n請問哪個命令可列印檔案字串？\nA. print( __doc___)\nB. print(cube(doc))\nC. print(cube.__doc__)\nD. print(cube(docstring))</code></pre>"
+            "\n選項 1 答案選擇區\n請問哪些字元代表單行文件字串的開頭和結尾？\nA. 單引號\nB. 雙引號\nC. 二個雙引號\nD. 三個雙引號\n",
+            "選項 2 答案選擇區\n在記錄函式時，檔案字串的標準位置在哪裡？\nA. 在函式宣告區塊前\nB. 緊接在函式標頭後面\nC. 在函式宣告區塊後\nD. 在程式的最後",
+            "選項 3 答案選擇區\n請閱下列函式：\ndef cube (n):\n\"\"\" Returns the cube of number n \"\"\"\nreturn n*n*n\n\n請問哪個命令可列印檔案字串？\nA. print( __doc___)\nB. print(cube(doc))\nC. print(cube.__doc__)\nD. print(cube(docstring))</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2412,7 +2504,7 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">74. 【CH06-9】學生們正在參加學校活動之夜。下列函式會告訴學生該前往何處參加活動：",
-			"def roomAssignment(student, year):\n    \"\"\"Assign rooms to students\"\"\"\n    if year == 1:\n        print(f'{student.title()}, please report to room 115')\n    elif year == 2:\n        print(f'{student.title()}, please report to room 210')\n    elif year == 3:\n        print(f'{student.title()}, please report to room 320')\n    elif year == 4:\n        print(f'{student.title()}, please report to room 405')\n    elif year == 5:\n        print(f'{student.title()}, please report to room 515')\n    else:\n        print(f'{student.title()}, please report to room 625')\n請問哪兩個函式呼叫是正確的？請選擇 2個答案。",
+            "def roomAssignment(student, year):\n    \"\"\"Assign rooms to students\"\"\"\n    if year == 1:\n        print(f'{student.title()}, please report to room 115')\n    elif year == 2:\n        print(f'{student.title()}, please report to room 210')\n    elif year == 3:\n        print(f'{student.title()}, please report to room 320')\n    elif year == 4:\n        print(f'{student.title()}, please report to room 405')\n    elif year == 5:\n        print(f'{student.title()}, please report to room 515')\n    else:\n        print(f'{student.title()}, please report to room 625')\n請問哪兩個函式呼叫是正確的？請選擇 2個答案。",
             "\n答案選擇區\n選項 1.\nname = input('What is your name?')\ngrade = 0\nwhile grade not in (1,2,3,4,5,6):\n    grade = int(input('What grade are you in (1-6)?'))\n    roomAssignment(name, year=grade)\n\n選項 2.\nname = input('What is your name?')\ngrade = 0\nwhile grade not in (1,2,3,4,5,6):\n    grade = int(input('What grade are you in (1-6)?'))\n    roomAssignment(student, year)\n\n選項 3.\nroomAssignment('Sherlock Sassafrass',4)\n\n選項 4.\nroomAssignment(year=6, name='Minnie George')</code></pre>"
         ],
         "options": [
@@ -2442,7 +2534,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">75. 【CH06-10】您為公司開發了一個 Python 應用程式，您想要在自己的程式碼中加入附註，好讓其他團隊成員能夠瞭解。",
-			"請問您應該採取下列哪一項做法？</code></pre>"
+            "請問您應該採取下列哪一項做法？</code></pre>"
         ],
         "options": [
             "<code>在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。</code>",
@@ -2493,7 +2585,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">77. 【CH07-2】你設計一個讀取檔案後將檔案中的每一行列印出來的函式。程式碼如下：",
-			"def print_file(filename):\n    line = None\n    if os.path.isfile(filename):\n        data = open(filename, 'r')\n    for line in data:\n        print(line)當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？</code></pre>"
+            "def print_file(filename):\n    line = None\n    if os.path.isfile(filename):\n        data = open(filename, 'r')\n    for line in data:\n        print(line)當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？</code></pre>"
         ],
         "options": [
             "<code>你需匯入 os 模組。</code>",
@@ -2568,8 +2660,8 @@
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">80. 【CH07-5】你設計程式碼來產生一個隨機數數來符合以下要求：",
-			"● 數字是 2 的倍數。\n● 最低的數字是 2。\n● 最高的數字是 50。哪兩個程式碼片段將符合要求？",
-			"\n答案選擇區\n選項 1.\nfrom random import randint\nprint(randint(1,25) * 2)\n\n選項 2.\nfrom random import randint\nprint(randint(1,50))\n\n選項 3.\nfrom random import randrange\nprint(randrange(2,50,2))\n\n選項 4.\nfrom random import randrange\nprint(randrange(2,50,1))</code></pre>"
+            "● 數字是 2 的倍數。\n● 最低的數字是 2。\n● 最高的數字是 50。哪兩個程式碼片段將符合要求？",
+            "\n答案選擇區\n選項 1.\nfrom random import randint\nprint(randint(1,25) * 2)\n\n選項 2.\nfrom random import randint\nprint(randint(1,50))\n\n選項 3.\nfrom random import randrange\nprint(randrange(2,50,2))\n\n選項 4.\nfrom random import randrange\nprint(randrange(2,50,1))</code></pre>"
         ],
         "options": [
             "<code>選項 1 程式碼片段符合要求</code>",
@@ -2596,7 +2688,7 @@
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">81. 【CH07-6】你正在設計一個處理數字的函式。該函式具有以下要求：",
-			"● 將浮點數傳遞到函式中\n● 函式必須取浮點數的絕對值\n● 函式必須無條件進位到整數你應該使用哪兩個數學函式？</code></pre>"
+            "● 將浮點數傳遞到函式中\n● 函式必須取浮點數的絕對值\n● 函式必須無條件進位到整數你應該使用哪兩個數學函式？</code></pre>"
         ],
         "options": [
             "<code>math.fabs(x)</code>",
@@ -2631,23 +2723,23 @@
         "question": [
             "<pre><code class=\"language-python\">82. 【CH07-7】您正在撰寫一個程式來顯示 My Healthy Eata Delivery 的特價優惠。\n",
             "01 import datetime",
-			"02 dailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')",
-			"03 weekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')",
-			"04",
-			"05",
-			"06 print('My Healthy Eats Delivery')",
-			"07 if today == 'Friday' or today == 'Saturday' or today == 'Sunday':",
-			"08    print('The weekend specials include:')",
-			"09    for item in weekendspecials:",
-			"10        print(item)",
-			"11 else:",
-			"12    print('The weekday specials include: ')",
-			"13    for item in dailySpecials:",
-			"14        print(item)",
-			"15",
-			"16 print(f'Pricing specials change in (daysLeft) days')",
-			"請選取正確的還項以完成第 4、 5 和 15 行的程式碼。",
-			"\n答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()</code></pre>"
+            "02 dailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')",
+            "03 weekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')",
+            "04",
+            "05",
+            "06 print('My Healthy Eats Delivery')",
+            "07 if today == 'Friday' or today == 'Saturday' or today == 'Sunday':",
+            "08    print('The weekend specials include:')",
+            "09    for item in weekendspecials:",
+            "10        print(item)",
+            "11 else:",
+            "12    print('The weekday specials include: ')",
+            "13    for item in dailySpecials:",
+            "14        print(item)",
+            "15",
+            "16 print(f'Pricing specials change in (daysLeft) days')",
+            "請選取正確的還項以完成第 4、 5 和 15 行的程式碼。",
+            "\n答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2675,9 +2767,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">83. 【CH07-8】您正在撰寫一個程式來隨機指派房間(roomnumber)和隊建立組別(group)以進行公司培訓活動。",
-			"請選取正確的程式碼片段以完成程式碼。",
-			"import random\n\nroomsAssigned = [1]\ngroupList = ['Ropes', 'Rafting', 'Obstacle', 'Wellness']\ncount = 0\nprint('Welcome to CompanyPro's Team-Building Weekend!')\nname = input('Please enter your name (q to quit)? ')\nwhile name != 'q' and count < 50:\n    room_number = random.randint(1,50)\n    while room_number in roomsAssigned:\n        _(選項 1)_\n    print(f'{name}, your room number is {room_number}')\n    roomsAssigned.append(room_number)\n    _(選項 2)_\n    print(f'You will meet with the {group} Group this afternoon.')\n    count += 1\n    name = input('Please enter your name (q to quit)? ')",
-			"\n答案選擇區\n選項 1\nA. room_number = random.randint(1,50)\nB. room_number = random.randint(1,51)\nC. room_number = random.randrange(50)\nD. room_number = random.randrange(51)\n\n選項 2\nA. group = random.choice(groupList)\nB. group = random.shuffle(groupList)\nC. group = random.random(groupList)\nD. group = random.uniform(groupList)</code></pre>"
+            "請選取正確的程式碼片段以完成程式碼。",
+            "import random\n\nroomsAssigned = [1]\ngroupList = ['Ropes', 'Rafting', 'Obstacle', 'Wellness']\ncount = 0\nprint('Welcome to CompanyPro's Team-Building Weekend!')\nname = input('Please enter your name (q to quit)? ')\nwhile name != 'q' and count < 50:\n    room_number = random.randint(1,50)\n    while room_number in roomsAssigned:\n        _(選項 1)_\n    print(f'{name}, your room number is {room_number}')\n    roomsAssigned.append(room_number)\n    _(選項 2)_\n    print(f'You will meet with the {group} Group this afternoon.')\n    count += 1\n    name = input('Please enter your name (q to quit)? ')",
+            "\n答案選擇區\n選項 1\nA. room_number = random.randint(1,50)\nB. room_number = random.randint(1,51)\nC. room_number = random.randrange(50)\nD. room_number = random.randrange(51)\n\n選項 2\nA. group = random.choice(groupList)\nB. group = random.shuffle(groupList)\nC. group = random.random(groupList)\nD. group = random.uniform(groupList)</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2702,7 +2794,7 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">84. 【CH08-1】針對下列有關 Python 例外處理 (try-except-finally) 的語法敘述，",
-			"如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：",
+            "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：",
             "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。",
             "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。",
             "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。",
@@ -2736,9 +2828,9 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">85. 【CH08-2】你製作一個程式詢問使用者家中有多少個小孩，使用者必須輸入整數，如果輸入值不是整數，",
-			"程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-			"程式碼片段\n\nwhile True:\n    _(選項 1)_\n        x = int(input('How many children do you have? '))\n        break\n    _(選項 2)_ ValueError:\n        print('Please make sure you entered an integer, please try again...')",
-			"\n答案選擇區\n選項 1\nA. try:\nB. else:\nC. except:\nD. raise:\nE. finally:\n選項 2\nA. try\nB. else\nC. except\nD. raise\nE. finally</code></pre>"
+            "程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
+            "程式碼片段\n\nwhile True:\n    _(選項 1)_\n        x = int(input('How many children do you have? '))\n        break\n    _(選項 2)_ ValueError:\n        print('Please make sure you entered an integer, please try again...')",
+            "\n答案選擇區\n選項 1\nA. try:\nB. else:\nC. except:\nD. raise:\nE. finally:\n選項 2\nA. try\nB. else\nC. except\nD. raise\nE. finally</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E</code>",
@@ -2793,8 +2885,8 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">87. 【CH08-4】你需要測試某個物件是否為特定類別的執行個體，請問如何進行單元測試？",
-			"程式碼片段\n_(選項 1)_ unittest\nclass TestIsInstance(_(選項 2)_)\ndef _(選項 3)_:\n   _(選項 4)_\nif __name__ == \"__main__\"\n   unittest.main()",
-			"\n答案選擇區\n\n選項 1\nA. from\nB. include\nC. import\nD. use\n\n選項 2\nA. TestCase\nB. unittest.TestCase\nC. unittest\nD. TestCase.unittest\n\n選項 3\nA. test isInstance()\nB. isInstance()\nC. test_isInstance(self)\nD. isInstance(self)\n\n選項 4\nA. assertIsInstance(obj, cls, msg=None)\nB. self.assertIsInstance(obj, cls, msg-None)\nC. assertIsInstance(obj, cls)\nD. self.assertIsInstance(obj, cls)</code></pre>"
+            "程式碼片段\n_(選項 1)_ unittest\nclass TestIsInstance(_(選項 2)_)\ndef _(選項 3)_:\n   _(選項 4)_\nif __name__ == \"__main__\"\n   unittest.main()",
+            "\n答案選擇區\n\n選項 1\nA. from\nB. include\nC. import\nD. use\n\n選項 2\nA. TestCase\nB. unittest.TestCase\nC. unittest\nD. TestCase.unittest\n\n選項 3\nA. test isInstance()\nB. isInstance()\nC. test_isInstance(self)\nD. isInstance(self)\n\n選項 4\nA. assertIsInstance(obj, cls, msg=None)\nB. self.assertIsInstance(obj, cls, msg-None)\nC. assertIsInstance(obj, cls)\nD. self.assertIsInstance(obj, cls)</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -2825,10 +2917,10 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">88. 【CH08-5】您需要撰寫執行下列工作的程式碼：",
-			"1. 呼叫 process() 函式。\n2. 如果 process() 函式回傳錯誤，則呼叫 logError() 函式。\n3. 呼叫 process() 函式之後一律呼叫 displayResult()函式。",
-			"你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-			"程式碼片段\n_(選項 1)_:\n    process()\n_(選項 2)_:\n    logError()\n_(選項 3)_:\n    displayResult()",
-			"\n答案選擇區\nA. assert\nB. raise\nC. except\nD. try\nE. finally</code></pre>"
+            "1. 呼叫 process() 函式。\n2. 如果 process() 函式回傳錯誤，則呼叫 logError() 函式。\n3. 呼叫 process() 函式之後一律呼叫 displayResult()函式。",
+            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
+            "程式碼片段\n_(選項 1)_:\n    process()\n_(選項 2)_:\n    logError()\n_(選項 3)_:\n    displayResult()",
+            "\n答案選擇區\nA. assert\nB. raise\nC. except\nD. try\nE. finally</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D|E</code>",
@@ -3102,7 +3194,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">98. 【CH04-補充】使用 f-String (Python 3.6+) 格式化字串，若變數 name='Alice' 和 age=20，",
-			"下列哪種寫法可以正確輸出 Alice is 20？</code></pre>"
+            "下列哪種寫法可以正確輸出 Alice is 20？</code></pre>"
         ],
         "options": [
             "<code>f'{name} is {age}'</code>",
@@ -3185,7 +3277,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● random.sample(population, k) 用於<b>不重複</b>取樣 (Without replacement)。● random.choices(population, k=N) 用於<b>可重複</b>取樣 (With replacement)。<b>【常用方法對照表】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>方法 (Method)</th><th style='background-color: #f2f2f2;'>功能描述</th><th style='background-color: #f2f2f2;'>語法範例</th><th style='background-color: #f2f2f2;'>引數 k (Count)</th><th style='background-color: #f2f2f2;'>取樣性質</th></tr><tr><td><b>sample</b></td><td>取多個</td><td>sample(seq, 3)</td><td><b>k=3</b> (取 3 個)<span style='color:red; font-size:0.8em;'>⚠️ 必填 (未填報錯)</span></td><td>✅ <b>不重複</b> (Unique)</td></tr><tr><td><b>choices</b></td><td>取多個</td><td>choices(seq, k=3)</td><td><b>k=3</b> (取 3 個)<span style='color:gray; font-size:0.8em;'>🔹 選填 (預設 k=1)</span></td><td>🔄 <b>可重複</b> (Repeats)</td></tr><tr><td><b>choice</b></td><td>取單個</td><td>choice(seq)</td><td>❌ <b>不支援</b></td><td>1️⃣ <b>單一值</b> (Single)</td></tr><tr><td><b>pick</b></td><td>(錯誤)</td><td>pick(...)</td><td>N/A</td><td>❌ <b>不存在此語法</b></td></tr></table></code></pre>"
+            "<pre><code class=\"language-python\">● random.sample(population, k) -> 「不重覆」抽樣\n● random.choices(population, k=N) -> 「可重覆」抽樣</code></pre>",
+            "<b>⭐ 常用隨機方法功能比較表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>方法 (Method)</th><th>功能</th><th>語法範例</th><th>參數 k</th><th>特點</th></tr></thead><tbody><tr><td><b>sample</b></td><td>抽樣</td><td>sample(seq, 3)</td><td>k=3 (必填)</td><td>不重覆</td></tr><tr><td><b>choices</b></td><td>抽樣</td><td>choices(seq, k=3)</td><td>k=3 (選填)</td><td>可重覆</td></tr><tr><td><b>choice</b></td><td>隨機挑一</td><td>choice(seq)</td><td>不支援</td><td>單次不可重覆</td></tr></tbody></table>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -3211,7 +3305,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **random.choices** 支援 weights 引數來設定每個元素的權重 (機率)，且支援可重複取樣 (k 可大於清單長度)。● **random.sample** **不支援** weights 引數，且無法在母體不足時取出比母體更多的元素 (會報錯)。<b>【選項解析】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th style='background-color: #f2f2f2;'>語法特徵</th><th style='background-color: #f2f2f2;'>結果與問題</th></tr><tr><td><b>1 (正確)</b></td><td>choices(..., weights=[...], k=5)</td><td>✅ <b>成功</b>。依指定機率 (10:30:60) 隨機選 5 次。</td></tr><tr><td><b>2</b></td><td>sample(..., weights=...)</td><td>❌ <b>錯誤 (TypeError)</b>。sample 不接受 weights 引數。</td></tr><tr><td><b>3</b></td><td>choices(..., k=5)</td><td>⚠️ <b>機率相等</b>。未設權重，每個獎品機率皆為 33.3%。</td></tr><tr><td><b>4</b></td><td>sample(..., 5)</td><td>❌ <b>錯誤 (ValueError)</b>。母體只有 3 個，無法取出 5 個不重複元素。</td></tr></table></code></pre>"
+            "<pre><code class=\"language-python\">● random.choices：支援 weights 參數。\n● random.sample：不支援 weights 參數。</code></pre>",
+            "<b>⭐ 選項解析與錯誤原因：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>序號</th><th>語法範例</th><th>結果與錯誤說明</th></tr></thead><tbody><tr><td>1 (正確)</td><td>choices(..., weights=[...], k=5)</td><td>成功依權重抽取 5 次</td></tr><tr><td>2</td><td>sample(..., weights=...)</td><td>引發 TypeError</td></tr><tr><td>3</td><td>choices(..., k=5)</td><td>機率均等 (各 33.3%)</td></tr><tr><td>4</td><td>sample(..., 5)</td><td>引發 ValueError (樣本不足)</td></tr></tbody></table>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -3330,7 +3426,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● assertTrue(x) (選項1) 是 unittest 的標準方法。● assertIsTrue (選項2) 不是標準方法，執行會報錯。<b>【正確對照表】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>檢查目標</th><th>❌ 錯誤寫法 (不存在)</th><th>✅ 正確寫法</th></tr><tr><td>驗證 True</td><td>assertIsTrue</td><td><b>assertTrue</b></td></tr><tr><td>驗證 False</td><td>assertIsFalse</td><td><b>assertFalse</b></td></tr></table></code></pre>"
+            "<pre><code class=\"language-python\">● assertTrue(x)：驗證 x 是否為 True。\n● assertIs(x, True)：驗證 x 是否「就是」True 物件。</code></pre>",
+            "<b>⭐ unittest 正確斷言對照表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>驗證目標</th><th>錯誤用法</th><th>正確用法</th></tr></thead><tbody><tr><td>判斷為 True</td><td>assertIsTrue</td><td><b>assertTrue</b></td></tr><tr><td>判斷為 False</td><td>assertIsFalse</td><td><b>assertFalse</b></td></tr></tbody></table>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -3376,11 +3474,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 選項 1 錯：值相等應為 assertEqual。",
-            "● 選項 2 錯：物件相同應為 assertIs。",
-            "● 選項 3 對：包含關係應為 assertIn。",
-            "● 選項 4 錯：應為assertIsNone(x)",
-            "<b>【unittest 常用指令與使用物件對照表】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>斷言指令 (Method)</th><th style='background-color: #f2f2f2;'>對應 Python 語法</th><th style='background-color: #f2f2f2;'>使用物件 / 時機</th></tr><tr><td><b>assertEqual(a, b)</b></td><td>a == b</td><td><b>數值、字串、清單內容</b>檢查「值」是否相等 (最常用)。</td></tr><tr><td><b>assertIs(a, b)</b></td><td>a is b</td><td><b>物件實體 (Identity)</b>檢查是否為「同一個」物件。</td></tr><tr><td><b>assertIn(a, b)</b></td><td>a in b</td><td><b>容器 (List, Dict, Set)</b>檢查 a 是否存在於 b 之中。</td></tr><tr><td><b>assertIsInstance(a, b)</b></td><td>isinstance(a, b)</td><td><b>資料型態 (Type)</b>檢查 a 是否為類別 b 的例項。</td></tr></table></code></pre>"
+            "<b>⭐ unittest 常用斷言方法比較表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>方法 (Method)</th><th>對應語法</th><th>說明</th></tr></thead><tbody><tr><td>assertEqual(a, b)</td><td>a == b</td><td>內容相等</td></tr><tr><td>assertIs(a, b)</td><td>a is b</td><td>同一物件</td></tr><tr><td>assertIn(a, b)</td><td>a in b</td><td>包含於容器中</td></tr><tr><td>assertIsInstance(a, b)</td><td>isinstance(a, b)</td><td>類型檢查</td></tr></tbody></table>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -3429,7 +3524,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 選項 1 正確：Tuple 一旦建立就無法修改 (Immutable)；List 可以隨時修改 (Mutable)。● 選項 2 正確：語法符號不同，Tuple 用 ()，List 用 []。● 選項 3 正確：兩者都是異質容器，可以包含混合型別。● 選項 4 錯誤：Tuple 是不可變的，因此**沒有** append() 或 extend() 方法。<b>【1. 符號與空值設定表】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>型別</th><th>符號</th><th>一般定義 (範例)</th><th>空內容設定</th></tr><tr><td>清單 (List)</td><td>[]</td><td>[1, 2]</td><td>[]</td></tr><tr><td>元組 (Tuple)</td><td>()</td><td>(1, 2)</td><td>()</td></tr><tr><td>字典 (Dict)</td><td>{}</td><td>{'k': 'v'}</td><td>{}</td></tr><tr><td>集合 (Set)</td><td>{}</td><td>{1, 2}</td><td>set() <span style='color:red;'>*注意</span></td></tr></table><small>*註：空集合必須使用 set()。</small><b>【2. 集合運算子號 (Set Operations)】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>運算</th><th style='text-align:center;'>符號</th><th>邏輯 / 用途</th></tr><tr><td>交集 (Intersection)</td><td style='text-align:center;'>&</td><td><b>且 (AND)</b>找共同點 (兩人都有)</td></tr><tr><td>聯集 (Union)</td><td style='text-align:center;'>|</td><td><b>或 (OR)</b>合併所有 (去除重複)</td></tr><tr><td>差集 (Difference)</td><td style='text-align:center;'>-</td><td><b>扣除</b>A有但B沒有的</td></tr></table><b>【3. Python List/Tuple vs 傳統 Array (如 C#/Java)】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>特性</th><th>Python List / Tuple</th><th>C# Array (int[])</th></tr><tr><td><b>型別限制</b></td><td><b>無限制 (可混合)</b></td><td><b>嚴格限制 (單一型別)</b></td></tr><tr><td><b>底層實作</b></td><td>儲存物件參考 (指標)</td><td>連續記憶體儲存數值</td></tr><tr><td><b>範例</b></td><td>[1, 'A', 3.5] ✅ OK</td><td>[1, 'A'] ❌ Error</td></tr></table></code></pre>"
+            "<b>⭐ 1. 容器類型定義語法對照表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>型別</th><th>符號</th><th>範例</th></tr></thead><tbody><tr><td>List</td><td>[]</td><td>[1, 2]</td></tr><tr><td>Tuple</td><td>()</td><td>(1, 2)</td></tr><tr><td>Dict</td><td>{}</td><td>{'k': 'v'}</td></tr><tr><td>Set</td><td>{}</td><td>{1, 2}</td></tr></tbody></table>",
+            "<b>⭐ 2. 集合運算符號表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>運算</th><th>符號</th><th>功能</th></tr></thead><tbody><tr><td>交集</td><td>&</td><td>AND (兩者皆有)</td></tr><tr><td>聯集</td><td>|</td><td>OR (合併)</td></tr><tr><td>差集</td><td>-</td><td>移除 (A有B沒有)</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3477,7 +3575,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● insert(index, element) 方法可以在指定索引位置插入元素。insert(0, 'orange') 會將 'orange' 插入到清單的最前面。● append() 只能加在末尾。● add() 是集合 (Set) 的方法。● fruits[0] = ... 會<b>取代</b>原本的第一個元素，而不是插入。<b>【資料新增與插入綜合比較】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>型別</th><th>方法</th><th>核心特性</th></tr><tr><td><b>清單 (List)</b></td><td>.append(x).insert(i, x)</td><td><b>append</b>: 排在最後<b>insert</b>: 插在指定位置 (i)</td></tr><tr><td><b>集合 (Set)</b></td><td>.add(x)</td><td><b>無序</b>，沒有所謂「插入位置」。不能用 append。</td></tr><tr><td><b>字典 (Dict)</b></td><td>d[key] = val</td><td>直接指定 Key 賦值。若 Key 存在則覆蓋，不存在則新增。</td></tr><tr><td><b>元組 (Tuple)</b></td><td>❌ 無</td><td><b>不可變 (Immutable)</b>無法新增或插入資料。</td></tr></table></code></pre>"
+            "<b>⭐ 容器新增/修改方法比較表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>型別</th><th>主要方法</th><th>說明</th></tr></thead><tbody><tr><td>List</td><td>append, insert</td><td>有序、可修改</td></tr><tr><td>Set</td><td>add</td><td>無序、不重覆</td></tr><tr><td>Dict</td><td>d[key] = val</td><td>鍵值對</td></tr><tr><td>Tuple</td><td>不支援</td><td>不可修改</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3499,7 +3598,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● list.sort() 是清單物件的方法，它會**原地 (in-place)** 修改清單順序，回傳 None。● sorted() 是內建函式，它會接受一個可迭代物件，並**回傳一個新的**已排序清單，原始清單不會改變。<b>【範例比較】</b># 1. sorted()：原清單不變，回傳新清單",
+            "<pre><code class=\"language-python\">● list.sort() 是清單物件的方法，它會**原地 (in-place)** 修改清單順序，回傳 None。",
+			"● sorted() 是內建函式，它會接受一個可迭代物件，並**回傳一個新的**已排序清單，原始清單不會改變。",
+			"<b>【範例比較】</b># 1. sorted()：原清單不變，回傳新清單",
             "a = [3, 1, 2]",
             "b = sorted(a)",
             "print(a)  # [3, 1, 2] (原封不動)",
@@ -3532,7 +3633,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● list.reverse() 是清單的方法，會直接修改原始清單，回傳 None。● reversed(list) 是內建函式，會回傳一個新的迭代器，不會修改原始清單。● [::-1] 會產生一個新的清單複本。</code></pre>"
+            "<pre><code class=\"language-python\">● list.reverse() 是清單的方法，會直接修改原始清單，回傳 None。",
+			"● reversed(list) 是內建函式，會回傳一個新的迭代器，不會修改原始清單。",
+			"● [::-1] 會產生一個新的清單複本。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3555,7 +3658,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題考查了三個步驟的邏輯變化：<b>【步驟解析】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>步驟程式碼</th><th>資料變化</th><th>說明</th></tr><tr><td>nums = [1, 2, 2, 3]</td><td>[1, 2, 2, 3]</td><td>初始清單，包含重複的 2。</td></tr><tr><td>set(nums)</td><td>{1, 2, 3}</td><td>轉為集合，<b>自動去除重複值</b>。</td></tr><tr><td>list(...)</td><td>[1, 2, 3]</td><td>再轉回清單，準備進行修改。</td></tr><tr><td>nums.append(4)</td><td>[1, 2, 3, 4]</td><td>清單是<b>可變</b>的，加入新元素 4。</td></tr></table><b>【錯誤選項分析】</b>● 選項 B：錯誤，因為轉為 set 時重複的 2 已經被移除了。● 選項 C：錯誤，最終已轉回 List，符號應為 [] 而非 {}。● 選項 D：錯誤，這是 Tuple 的符號。</code></pre>"
+            "<b>⭐ 程式執行步驟拆解表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>步驟</th><th>數據變化</th><th>說明</th></tr></thead><tbody><tr><td>nums = [1, 2, 2, 3]</td><td>[1, 2, 2, 3]</td><td>初始列表</td></tr><tr><td>set(nums)</td><td>{1, 2, 3}</td><td>轉集合 (去重)</td></tr><tr><td>list(...)</td><td>[1, 2, 3]</td><td>轉回列表</td></tr><tr><td>append(4)</td><td>[1, 2, 3, 4]</td><td>新增元素</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3578,7 +3682,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題考查集合 (Set) 的交集運算子號 &。<b>【解析步驟】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>符號</th><th>名稱</th><th>邏輯</th><th>計算結果</th></tr><tr><td>&</td><td>交集 (Intersection)</td><td><b>且 (AND)</b>兩個集合都有的元素</td><td>set_a 有 3,4set_b 有 3,4結果: {3, 4}</td></tr></table><b>【錯誤選項排除】</b>● 選項 A：這是聯集 (Union, 符號 |) 的結果。● 選項 C：集合運算的結果依然是集合 {}，不會自動變成清單 []。● 選項 D：這是差集的概念 (互有的差異)。</code></pre>"
+            "<b>⭐ 集合運算 (Intersection) 說明：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>符號</th><th>名稱</th><th>結果</th></tr></thead><tbody><tr><td>&</td><td>交集</td><td>{3, 4} (重疊部分)</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3600,7 +3705,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">字典 (Dictionary) 是透過<b>鍵 (Key)</b> 來查詢值 (Value)，而不是透過數字索引。<b>【選項解析】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>程式碼</th><th>結果 / 原因</th></tr><tr><td>A</td><td>data[1]</td><td><span style='color:red;'>報錯 (KeyError)</span>字典沒有順序，不能用數字索引。</td></tr><tr><td>B</td><td>data['b']</td><td><span style='color:green;'>正確</span>透過 Key 'b' 找到對應的 Value 20。</td></tr><tr><td>C</td><td>data.b</td><td><span style='color:red;'>報錯 (AttributeError)</span>Python 字典不支援點號 (.) 訪問屬性。</td></tr><tr><td>D</td><td>data(20)</td><td><span style='color:red;'>報錯 (TypeError)</span>字典不是函式，不能用小括號呼叫。</td></tr></table></code></pre>"
+            "<b>⭐ Dictionary 取值方式對照表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>方式</th><th>範例</th><th>結果</th></tr></thead><tbody><tr><td>Key 取值</td><td>data['b']</td><td>20 (正確)</td></tr><tr><td>Index 取值</td><td>data[1]</td><td>KeyError</td></tr><tr><td>屬性取值</td><td>data.b</td><td>AttributeError</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3622,7 +3728,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查資料結構的<b>可變性 (Mutability)</b>。<b>【逐項分析】</b><ul style='margin-top:5px; padding-left:20px;'><li><b>A (List):</b> 清單是可變的 (Mutable)，可以修改指定位置的值。 -> <span style='color:green;'>Pass</span></li><li><b>B (Dict):</b> 字典是可變的，可以更新 Key 對應的值。 -> <span style='color:green;'>Pass</span></li><li><b>C (Tuple):</b> <span style='color:red;'><b>錯誤 (TypeError)</b></span>元組是<b>不可變 (Immutable)</b> 的，一旦建立，不能修改內部元素。</li><li><b>D (Set):</b> 集合可以透過 add() 方法新增資料。 -> <span style='color:green;'>Pass</span></li></ul></code></pre>"
+            "<pre><code class=\"language-python\">本題考查資料結構的<b>可變性 (Mutability)</b>。",
+			"<b>【逐項分析】</b>",
+			"<ul style='margin-top:5px; padding-left:20px;'><li><b>A (List):</b> 清單是可變的 (Mutable)，可以修改指定位置的值。 -> <span style='color:green;'>Pass</span></li><li>",
+			"<b>B (Dict):</b> 字典是可變的，可以更新 Key 對應的值。 -> <span style='color:green;'>Pass</span></li><li>",
+			"<b>C (Tuple):</b> <span style='color:red;'><b>錯誤 (TypeError)</b></span>元組是<b>不可變 (Immutable)</b> 的，一旦建立，不能修改內部元素。</li><li>",
+			"<b>D (Set):</b> 集合可以透過 add() 方法新增資料。 -> <span style='color:green;'>Pass</span></li></ul></code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3645,7 +3756,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題考查集合 (Set) 的專用新增方法。<b>【分析】</b>● <b>選項 B (正確)：</b> 集合是無序的，像是把東西丟進籃子，所以使用 add()。● 選項 A (錯誤)：append() 是清單 (List) 專用的，集合沒有順序，不能「排在最後」。● 選項 C (錯誤)：集合沒有索引，無法使用 insert() 指定位置。● 選項 D (錯誤)：集合不支援索引賦值 (Item Assignment)。</code></pre>"
+            "<pre><code class=\"language-python\">此題考查集合 (Set) 的專用新增方法。",
+			"<b>【分析】</b>",
+			"● <b>選項 B (正確)：</b> 集合是無序的，像是把東西丟進籃子，所以使用 add()。",
+			"● 選項 A (錯誤)：append() 是清單 (List) 專用的，集合沒有順序，不能「排在最後」。",
+			"● 選項 C (錯誤)：集合沒有索引，無法使用 insert() 指定位置。",
+			"● 選項 D (錯誤)：集合不支援索引賦值 (Item Assignment)。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3667,7 +3783,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查不同資料結構的可用方法 (Method)。<b>【逐項檢查】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>選項</th><th>型別</th><th>程式碼</th><th>結果</th></tr><tr><td>A</td><td>清單 (List)</td><td>.append(3)</td><td><span style='color:green;'>成功</span> (加入末尾)</td></tr><tr><td>B</td><td>集合 (Set)</td><td>.add(3)</td><td><span style='color:green;'>成功</span> (新增元素)</td></tr><tr><td>C</td><td>字典 (Dict)</td><td>['b'] = 2</td><td><span style='color:green;'>成功</span> (新增 Key-Value)</td></tr><tr><td>D</td><td>元組 (Tuple)</td><td>.append(3)</td><td><span style='color:red;'><b>報錯</b></span>元組是不可變的，且本身沒有 append 方法。</td></tr></table></code></pre>"
+            "<b>⭐ 數據型別與修改方法合法性檢查：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>型別</th><th>方法</th><th>結果</th></tr></thead><tbody><tr><td>List</td><td>append</td><td>合法</td></tr><tr><td>Set</td><td>add</td><td>合法</td></tr><tr><td>Tuple</td><td>append</td><td>錯誤 (AttributeError)</td></tr></tbody></table>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3690,7 +3807,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題考查 insert(index, value) 的運作邏輯。<b>【圖解步驟】</b>1. 初始清單：[10, 30] (索引 0 是 10，索引 1 是 30)2. 執行 insert(1, 20)：意思是「我要插隊佔領<b>索引 1</b> 的位置，把原本的人往後擠」。3. 結果：   索引 0: 10 (不動)   索引 1: <b>20</b> (新來的)   索引 2: 30 (原本的索引 1 被擠到了 2)故結果為 [10, 20, 30]。</code></pre>"
+            "<pre><code class=\"language-python\">此題考查 insert(index, value) 的運作邏輯。",
+			"<b>【圖解步驟】</b>",
+			"1. 初始清單：[10, 30] (索引 0 是 10，索引 1 是 30)",
+			"2. 執行 insert(1, 20)：意思是「我要插隊佔領<b>索引 1</b> 的位置，把原本的人往後擠」。",
+			"3. 結果：索引 0: 10(不動),索引 1:<b>20</b>(新來的),索引 2: 30(原本的索引 1 被擠到了 2),故結果為 [10, 20, 30]。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3714,7 +3835,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 在 Python (IEEE 754 標準) 中，NaN (Not a Number) 有一個特殊性質：**它不等於自己**。● 因此 x == math.nan 永遠會回傳 False。● 必須使用專用函式 math.isnan(x) 來檢查。</code></pre>"
+            "<pre><code class=\"language-python\">● 在 Python (IEEE 754 標準) 中，NaN (Not a Number) 有一個特殊性質：**它不等於自己**。",
+			"● 因此 x == math.nan 永遠會回傳 False。",
+			"● 必須使用專用函式 math.isnan(x) 來檢查。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3737,7 +3860,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● math.fmod(-10, 3) 會得到 -1.0 (符號跟隨 -10)。● -10 % 3 會得到 2 (符號跟隨 3)。● 這是 ITS/Python 考試中關於數學模組的經典細節題。</code></pre>"
+            "<pre><code class=\"language-python\">● math.fmod(-10, 3) 會得到 -1.0 (符號跟隨 -10)。",
+			"● -10 % 3 會得到 2 (符號跟隨 3)。",
+			"● 這是 ITS/Python 考試中關於數學模組的經典細節題。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3759,16 +3884,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 中刪除檔案的標準函式是 os.remove() (或是 os.unlink()，兩者功能相同)。● **注意：** os.remove 只能刪除檔案，不能刪除資料夾。● (本題庫為 1-based 索引，故選 [2])<b>【刪除指令總整理】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>對象</th><th>指令 (os / shutil)</th><th>指令 (pathlib - 推薦)</th><th>備註</th></tr><tr><td><b>刪除檔案</b></td><td>os.remove('a.txt')os.unlink('a.txt')</td><td>Path('a.txt').unlink()</td><td>若檔案不存在會報錯 FileNotFoundError</td></tr><tr><td><b>刪除空資料夾</b></td><td>os.rmdir('folder')</td><td>Path('folder').rmdir()</td><td>若資料夾內有東西會報錯</td></tr><tr><td><b>刪除整包資料夾</b>(含內容)</td><td>shutil.rmtree('folder')</td><td>無直接對應</td><td>危險操作，請小心使用</td></tr></table><b>【範例：安全刪除】</b>import os",
-            "",
-            "file_path = 'temp.txt'",
-            "",
-            "# 先檢查是否存在，避免報錯",
-            "if os.path.exists(file_path):",
-            "os.remove(file_path)",
-            "print('已刪除')",
-            "else:",
-            "print('檔案不存在')</code></pre>"
+            "<b>⭐ 檔案與目錄刪除指令對照表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>目標</th><th>os / shutil</th><th>pathlib</th></tr></thead><tbody><tr><td>刪除檔案</td><td>os.remove()</td><td>Path.unlink()</td></tr><tr><td>刪除空目錄</td><td>os.rmdir()</td><td>Path.rmdir()</td></tr><tr><td>刪除整棵樹</td><td>shutil.rmtree()</td><td>不可直接刪除</td></tr></tbody></table>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3790,7 +3907,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● list.remove(x)：移除清單中**第一個**值為 x 的元素。● list.pop(i)：移除**索引**為 i 的元素 (若不填則移除最後一個)。● pop(80) 會試圖移除索引 80 的元素，導致 IndexError。</code></pre>"
+            "<pre><code class=\"language-python\">● list.remove(x)：移除清單中**第一個**值為 x 的元素。",
+			"● list.pop(i)：移除**索引**為 i 的元素 (若不填則移除最後一個)。",
+			"● pop(80) 會試圖移除索引 80 的元素，導致 IndexError。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3812,7 +3931,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● math.pi 提供比 3.14 更精確的圓周率數值。● math.pow(x, y) 是計算 x 的 y 次方。● 雖然 math.pi * r**2 也是對的，但在考題選項中，通常測試對 math 模組函式 (pow, pi) 的認識。</code></pre>"
+            "<pre><code class=\"language-python\">● math.pi 提供比 3.14 更精確的圓周率數值。",
+			"● math.pow(x, y) 是計算 x 的 y 次方。● 雖然 math.pi * r**2 也是對的，但在考題選項中，通常測試對 math 模組函式 (pow, pi) 的認識。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3821,7 +3941,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">127. 【CH03-補充】你這在編寫一個程式，需要將清單 list_b 的**所有元素**合併到 list_a 的尾端，形成一個長清單。",
-			"應該使用哪種方法？",
+            "應該使用哪種方法？",
             "list_a = [1, 2]\nlist_b = [3, 4]\n# 預期結果: [1, 2, 3, 4]</code></pre>"
         ],
         "options": [
@@ -3836,7 +3956,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● extend() 會將另一個清單的內容**拆解**後加入。● append() 會將整個清單當作**一個元素**加入 (變成 [1, 2, [3, 4]])。● 這是 ITS 考試中關於 List Merging 的常見考點。</code></pre>"
+            "<pre><code class=\"language-python\">● extend() 會將另一個清單的內容**拆解**後加入。",
+			"● append() 會將整個清單當作**一個元素**加入 (變成 [1, 2, [3, 4]])。",
+			"● 這是 ITS 考試中關於 List Merging 的常見考點。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3845,7 +3967,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">128. 【CH03-補充】你有一個學生成績清單 grades = [85, 92, 78, 90, 55]。若要快速找出清單中的**最高分**與**最低分**，",
-			"應使用哪些內建函式？</code></pre>"
+            "應使用哪些內建函式？</code></pre>"
         ],
         "options": [
             "<code>max(grades), min(grades)</code>",
@@ -3859,7 +3981,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 提供內建函式 max() 和 min() 來處理序列資料。● List 物件本身沒有 .max() 或 .min() 方法。</code></pre>"
+            "<pre><code class=\"language-python\">● Python 提供內建函式 max() 和 min() 來處理序列資料。",
+			"● List 物件本身沒有 .max() 或 .min() 方法。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -3881,7 +4004,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● math.sqrt(10) 回傳 3.16... (float)。● math.isqrt(10) 回傳 3 (int)，即整數平方根 (Integer Square Root)。● 這是 Python 3.8 新增的函式，也在 ITS 考綱範圍內。</code></pre>"
+            "<pre><code class=\"language-python\">● math.sqrt(10) 回傳 3.16... (float)。",
+			"● math.isqrt(10) 回傳 3 (int)，即整數平方根 (Integer Square Root)。",
+			"● 這是 Python 3.8 新增的函式，也在 ITS 考綱範圍內。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3903,7 +4028,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● math.frexp(x) 是 ITS 考綱中列出的較冷門函式。● 它會將浮點數分解為 (m, e)，使得 x = m * (2 ** e)。● 例如 math.frexp(8.0) 回傳 (0.5, 4)，因為 0.5 * 16 = 8。</code></pre>"
+            "<pre><code class=\"language-python\">● math.frexp(x) 是 ITS 考綱中列出的較冷門函式。",
+			"● 它會將浮點數分解為 (m, e)，使得 x = m * (2 ** e)。",
+			"● 例如 math.frexp(8.0) 回傳 (0.5, 4)，因為 0.5 * 16 = 8。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -3927,7 +4054,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 在 Python 的 datetime.weekday() 方法中：● **0 代表星期一**● **6 代表星期日**● 注意與某些資料庫或語言 (如 1=Sunday) 的差異。</code></pre>"
+            "<pre><code class=\"language-python\">● 在 Python 的 datetime.weekday() 方法中：",
+			"● **0 代表星期一**",
+			"● **6 代表星期日**",
+			"● 注意與某些資料庫或語言 (如 1=Sunday) 的差異。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -3936,7 +4066,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">132. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。",
-			"應該使用 random 模組的哪個函式？</code></pre>"
+            "應該使用 random 模組的哪個函式？</code></pre>"
         ],
         "options": [
             "<code>random.random()</code>",
@@ -3950,7 +4080,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● random.random()：回傳 [0.0, 1.0) 之間的浮點數，這是最基礎的隨機函式。● random.randint(a, b)：回傳整數。● random.uniform(a, b)：回傳指定範圍內的浮點數。● 沒有 random.float() 這個函式。<b>【random 模組範圍與型態對照表】</b><table border='1' cellpadding='5' style='border-collapse: collapse; width: 100%; text-align: left; font-size: 0.9em;'><tr><th style='background-color: #f2f2f2;'>函式</th><th>回傳型態</th><th>範圍定義</th><th>備註</th></tr><tr><td><b>random()</b></td><td>Float</td><td>0.0 到 1.0 (不含 1.0)</td><td>[0.0, 1.0)</td></tr><tr><td><b>randint(a, b)</b></td><td>Int</td><td>a 到 b (包含 b)</td><td>[a, b]</td></tr><tr><td><b>randrange(a, b)</b></td><td>Int</td><td>a 到 b (不含 b)</td><td>[a, b)</td></tr><tr><td><b>uniform(a, b)</b></td><td>Float</td><td>a 到 b (包含 b)</td><td>[a, b]</td></tr></table></code></pre>"
+            "<b>⭐ random 模組常用函式比較表：</b>",
+            "<table class=\"q-table w-100 t-left\"><thead><tr><th>函式</th><th>型別</th><th>範圍</th></tr></thead><tbody><tr><td>random()</td><td>Float</td><td>[0.0, 1.0)</td></tr><tr><td>randint(a, b)</td><td>Int</td><td>[a, b] (包含b)</td></tr><tr><td>randrange(a, b)</td><td>Int</td><td>[a, b) (不含b)</td></tr><tr><td>uniform(a, b)</td><td>Float</td><td>[a, b]</td></tr></tbody></table>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -3959,7 +4090,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">133. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，",
-			"應使用哪個斷言方法？</code></pre>"
+            "應使用哪個斷言方法？</code></pre>"
         ],
         "options": [
             "<code>self.assertIs(a, b)</code>",
@@ -3973,7 +4104,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● assertIs(a, b)：檢查 a is b (是否為同一物件)。● assertEqual(a, b)：檢查 a == b (值是否相等)。● 例如：a = [1]; b = [1]，它們的值相等 (Equal) 但不是同一個物件 (Not Is)。</code></pre>"
+            "<pre><code class=\"language-python\">● assertIs(a, b)：檢查 a is b (是否為同一物件)。",
+			"● assertEqual(a, b)：檢查 a == b (值是否相等)。",
+			"● 例如：a = [1]; b = [1]，它們的值相等 (Equal) 但不是同一個物件 (Not Is)。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -3982,7 +4115,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">134. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。",
-			"push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？",
+            "push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？",
             "q = []\nhead = 0\ndef push(q, c):\n    x\n#\ndef pop(q):\n    c = q[head]\n    y\n    return c</code></pre>"
         ],
         "options": [
@@ -4020,7 +4153,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">135. 【演算法-堆疊】此程式中 s 是用來當作一個後進先出的堆疊 (Stack)。",
-			"push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？",
+            "push 與 pop 兩函式中所缺的指令 x 與 y 應填入下列何者？",
             "s = []\ndef push(s, c):\n    x\n#\ndef pop(s):\n    y\n    return c</code></pre>"
         ],
         "options": [
@@ -4035,7 +4168,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查堆疊 (Stack) 的 LIFO (後進先出) 實作邏輯。<b>【解析】</b>1. <b>Push (堆疊)</b>：將資料加入頂端。在 Python List 中，append(c) 會加到 List 尾端 (視為頂端)。2. <b>Pop (取出)</b>：將資料從頂端取出。pop() (不帶參數) 會移除並回傳 List 的最後一個元素 (尾端)，符合後進先出的原則。<b>【比較】</b>● 選項 1 (pop(0))：是取出第一個元素，變成 Queue (FIFO) 行為。● 選項 2 (pop())：是取出最後一個元素，符合 Stack (LIFO) 行為。● (本題庫為 1-based 索引，故選 [2])</code></pre>"
+            "<pre><code class=\"language-python\">本題考查堆疊 (Stack) 的 LIFO (後進先出) 實作邏輯。",
+			"<b>【解析】</b>1. <b>Push (堆疊)</b>：將資料加入頂端。在 Python List 中，append(c) 會加到 List 尾端 (視為頂端)。",
+			"2. <b>Pop (取出)</b>：將資料從頂端取出。pop() (不帶參數) 會移除並回傳 List 的最後一個元素 (尾端)，符合後進先出的原則。",
+			"<b>【比較】</b>● 選項 1 (pop(0))：是取出第一個元素，變成 Queue (FIFO) 行為。",
+			"● 選項 2 (pop())：是取出最後一個元素，符合 Stack (LIFO) 行為。",
+			"● (本題庫為 1-based 索引，故選 [2])</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4059,7 +4197,15 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查 Python 對負數進行除法與取餘數的規則。<b>【解析】</b>1. <b>a = 13 % 5</b>：   13 除以 5，商 2 餘 3。結果為 <b>3</b>。2. <b>c = -13 // 5 (地板除法)</b>：   Python 的 // 是<b>向負無限大方向取整</b> (Floor Division)。   -13 ÷ 5 = -2.6，向負無限大取整後為 <b>-3</b>。3. <b>b = -13 % 5 (取餘數)</b>：   公式為：a % b = a - (b * (a // b))。   代入數值：-13 - (5 * (-3)) = -13 - (-15) = -13 + 15 = 2。   或者記憶口訣：<b>Python 取餘數的符號永遠與除數 (後者) 相同</b>。因為除數 5 是正數，餘數必為正數 <b>2</b>。故輸出為 3 2 -3，選 (B)。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查 Python 對負數進行除法與取餘數的規則。",
+			"<b>【解析】</b>",
+			"1. <b>a = 13 % 5</b>：   13 除以 5，商 2 餘 3。結果為 <b>3</b>。",
+			"2. <b>c = -13 // 5 (地板除法)</b>：Python 的 // 是<b>向負無限大方向取整</b> (Floor Division)。",
+			"\t-13 ÷ 5 = -2.6，向負無限大取整後為 <b>-3</b>。",
+			"3. <b>b = -13 % 5 (取餘數)</b>：公式為：a % b = a - (b * (a // b))。",
+			"\t代入數值：-13 - (5 * (-3)) = -13 - (-15) = -13 + 15 = 2。",
+			"或者記憶口訣：<b>Python 取餘數的符號永遠與除數 (後者) 相同</b>。因為除數 5 是正數，餘數必為正數 <b>2</b>。",
+			"故輸出為 3 2 -3，選 (B)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4083,7 +4229,19 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題模擬了一個類似佇列 (Queue) 的消去過程：正數入列，負數則從隊頭開始抵銷正數。<b>【執行步驟追蹤】</b>1. s 為輸入列表，q 為正數佇列，h 指向 q 目前有效的開頭索引。2. <b>遇到 1, 1</b>：q=[1, 1]。3. <b>遇到 -3</b>：抵銷 q[0] (1) 剩 -2，h=1；再抵銷 q[1] (1) 剩 -1，h=2。q 有效部分為空。4. <b>遇到 2, 4</b>：q=[1, 1, 2, 4] (有效部分: 2, 4)，h=2。5. <b>遇到 -1</b>：抵銷 q[2] (2) 剩 1，h=3。v 變正數，停止抵銷。6. <b>遇到 2, 3</b>：q=[..., 4, 2, 3] (有效部分: 4, 2, 3)，h=3。7. <b>遇到 -5</b>：抵銷 q[3] (4) 剩 -1，h=4；再抵銷 q[4] (2) 剩 1，h=5。停止。8. <b>遇到 2</b>：q=[..., 3, 2] (有效部分: 3, 2)，h=5。9. <b>遇到 -1</b>：抵銷 q[5] (3) 剩 2，h=6。停止。10. <b>遇到 1</b>：q=[..., 2, 1] (有效部分: 2, 1)，h=6。最後 q[h:] 即 q[6:]，內容為 [2, 1]，總和為 3。故選 (B)。</code></pre>"
+            "<pre><code class=\"language-python\">此題模擬了一個類似佇列 (Queue) 的消去過程：正數入列，負數則從隊頭開始抵銷正數。",
+			"<b>【執行步驟追蹤】</b>",
+			"1. s 為輸入列表，q 為正數佇列，h 指向 q 目前有效的開頭索引。",
+			"2. <b>遇到 1, 1</b>：q=[1, 1]。",
+			"3. <b>遇到 -3</b>：抵銷 q[0] (1) 剩 -2，h=1；再抵銷 q[1] (1) 剩 -1，h=2。q 有效部分為空。",
+			"4. <b>遇到 2, 4</b>：q=[1, 1, 2, 4] (有效部分: 2, 4)，h=2。",
+			"5. <b>遇到 -1</b>：抵銷 q[2] (2) 剩 1，h=3。v 變正數，停止抵銷。",
+			"6. <b>遇到 2, 3</b>：q=[..., 4, 2, 3] (有效部分: 4, 2, 3)，h=3。",
+			"7. <b>遇到 -5</b>：抵銷 q[3] (4) 剩 -1，h=4；再抵銷 q[4] (2) 剩 1，h=5。停止。",
+			"8. <b>遇到 2</b>：q=[..., 3, 2] (有效部分: 3, 2)，h=5。",
+			"9. <b>遇到 -1</b>：抵銷 q[5] (3) 剩 2，h=6。停止。",
+			"10. <b>遇到 1</b>：q=[..., 2, 1] (有效部分: 2, 1)，h=6。最後 q[h:] 即 q[6:]，內容為 [2, 1]，總和為 3。",
+			"故選 (B)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4106,7 +4264,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題模擬佇列 (Queue) 行為：1. 遇到正數時，將數字轉為字串並加入清單 q (Enqueue)。2. 遇到負數時，從清單 q 的 h 位置取出字串並串接到 s，同時將 h 加 1 (Dequeue)。<b>【執行過程】</b>● 入列: '3', '12'● 出列: '3' (s='3')● 入列: '765', '23'● 出列: '12' (s='312')● 出列: '765' (s='312765')故結果為 312765。</code></pre>"
+            "<pre><code class=\"language-python\">此題模擬佇列 (Queue) 行為：",
+			"1. 遇到正數時，將數字轉為字串並加入清單 q (Enqueue)。",
+			"2. 遇到負數時，從清單 q 的 h 位置取出字串並串接到 s，同時將 h 加 1 (Dequeue)。",
+			"<b>【執行過程】</b>",
+			"● 入列: '3', '12'",
+			"● 出列: '3' (s='3')● 入列: '765', '23'",
+			"● 出列: '12' (s='312')● 出列: '765' (s='312765')故結果為 312765。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4130,7 +4294,18 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">此題模擬正負數抵銷的過程：正數入列，負數則從隊尾取出正數進行抵銷。<b>【關鍵邏輯】</b>當遇到負數 v 時，會不斷從 q 尾端 pop() 出正數加到 v 上，直到 v 變成非負數 (>=0) 或 q 變空為止。<b>注意：抵銷後若 v 變為正數，該數值會被捨棄，不會加回 q。</b><b>【執行追蹤】</b>1. 1, 1 入列 -> q=[1, 1]2. -3 抵銷 -> pop 1 (剩-2), pop 1 (剩-1)。q=[]3. 3, 4 入列 -> q=[3, 4]4. -1 抵銷 -> pop 4 (剩3)。停止 (3>=0)。q=[3]5. 2, 3 入列 -> q=[3, 2, 3]6. -5 抵銷 -> pop 3 (剩-2), pop 2 (剩0)。停止 (0>=0)。q=[3]7. 2, 1 入列 -> q=[3, 2, 1]8. -1 抵銷 -> pop 1 (剩0)。停止。q=[3, 2]最後 sum([3, 2]) 為 5。</code></pre>"
+            "<pre><code class=\"language-python\">此題模擬正負數抵銷的過程：正數入列，負數則從隊尾取出正數進行抵銷。",
+			"<b>【關鍵邏輯】</b>當遇到負數 v 時，會不斷從 q 尾端 pop() 出正數加到 v 上，直到 v 變成非負數 (>=0) 或 q 變空為止。",
+			"<b>注意：抵銷後若 v 變為正數，該數值會被捨棄，不會加回 q。</b>",
+			"<b>【執行追蹤】</b>",
+			"1. 1, 1 入列 -> q=[1, 1]",
+			"2. -3 抵銷 -> pop 1 (剩-2), pop 1 (剩-1)。q=[]",
+			"3. 3, 4 入列 -> q=[3, 4]",
+			"4. -1 抵銷 -> pop 4 (剩3)。停止 (3>=0)。q=[3]",
+			"5. 2, 3 入列 -> q=[3, 2, 3]",
+			"6. -5 抵銷 -> pop 3 (剩-2), pop 2 (剩0)。停止 (0>=0)。q=[3]",
+			"7. 2, 1 入列 -> q=[3, 2, 1]",
+			"8. -1 抵銷 -> pop 1 (剩0)。停止。q=[3, 2]最後 sum([3, 2]) 為 5。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4158,7 +4333,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查 Python 3 中列表生成式 (List Comprehension) 的變數範圍規則。1. s = input()：讀取第一行，s 為 'hello py'。2. a = [s for s in input().split()]：讀取第二行並切割為 ['123', '45']。雖然生成式內部使用了變數名稱 s，但在 Python 3 中，這被視為區域變數，<b>不會覆蓋</b>外部原本的變數 s。3. 列表內容為字串，故輸出時會帶有引號。4. 最後 print(s, a) 輸出外部的 s 和列表 a，即 hello py ['123', '45']。註：若是 Python 2，變數 s 會被洩漏並覆蓋，輸出結果會不同，但 ITS 考試以 Python 3 為主。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查 Python 3 中列表生成式 (List Comprehension) 的變數範圍規則。",
+			"1. s = input()：讀取第一行，s 為 'hello py'。",
+			"2. a = [s for s in input().split()]：讀取第二行並切割為 ['123', '45']。雖然生成式內部使用了變數名稱 s，但在 Python 3 中，這被視為區域變數，<b>不會覆蓋</b>外部原本的變數 s。",
+			"3. 列表內容為字串，故輸出時會帶有引號。",
+			"4. 最後 print(s, a) 輸出外部的 s 和列表 a，即 hello py ['123', '45']。",
+			"註：若是 Python 2，變數 s 會被洩漏並覆蓋，輸出結果會不同，但 ITS 考試以 Python 3 為主。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4185,7 +4365,14 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查 input 讀取、split 切割、int 型別轉換以及列表解包 (List Unpacking)。<b>【解析步驟】</b>1. input().split() 將輸入字串 \"100 45\" 切割成列表 ['100', '45']。2. 列表生成式將元素轉為整數，得到 [100, 45]。3. a, b = ... 將列表解包，a 變成整數 100，b 變成整數 45。4. print(a + b) 執行數學加法 100 + 45 = 145。若未進行 int 轉換直接相加，結果才會是字串串接的 \"10045\" (選項 A)。本題有轉 int，故選 (C)。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查 input 讀取、split 切割、int 型別轉換以及列表解包 (List Unpacking)。",
+			"<b>【解析步驟】</b>",
+			"1. input().split() 將輸入字串 \"100 45\" 切割成列表 ['100', '45']。",
+			"2. 列表生成式將元素轉為整數，得到 [100, 45]。",
+			"3. a, b = ... 將列表解包，a 變成整數 100，b 變成整數 45。",
+			"4. print(a + b) 執行數學加法 100 + 45 = 14",
+			"5。 若未進行 int 轉換直接相加，結果才會是字串串接的 \"10045\" (選項 A)。",
+			"本題有轉 int，故選 (C)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4212,7 +4399,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查 Python 的解包 (Unpacking) 規則。<b>【解析】</b>1. 輸入 100 45 25 經過處理後會變成包含 3 個元素的列表 [100, 45, 25]。2. 左側只有 a, b 兩個變數。3. 當右側值的數量 (3個) 多於左側變數的數量 (2個) 時，Python 無法自動決定如何分配，因此會丟擲 ValueError: too many values to unpack。若要避免錯誤，需使用 *b (Extended Iterable Unpacking) 或確保數量一致。故本題為執行錯誤，選 (E)。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查 Python 的解包 (Unpacking) 規則。",
+			"<b>【解析】</b>",
+			"1. 輸入 100 45 25 經過處理後會變成包含 3 個元素的列表 [100, 45, 25]。",
+			"2. 左側只有 a, b 兩個變數。",
+			"3. 當右側值的數量 (3個) 多於左側變數的數量 (2個) 時，Python 無法自動決定如何分配，",
+			"因此會丟擲 ValueError: too many values to unpack。若要避免錯誤，",
+			"需使用 *b (Extended Iterable Unpacking) 或確保數量一致。故本題為執行錯誤，選 (E)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4237,7 +4430,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查 ord() 與 chr() 的轉換。<b>【解析】</b>1. a[3]='e', a[1]='a'。2. b = ord('e') - ord('a')，即 'e' 與 'a' 的距離，結果為 4。3. ord('f') + 4，即 'f' 往後推 4 個字母：g, h, i, j。4. chr() 轉回字元得到 'j'。5. 字串串接 \"fake\" + \"j\" = \"fakej\"。故選 (B)。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查 ord() 與 chr() 的轉換。",
+			"<b>【解析】</b>",
+			"1. a[3]='e', a[1]='a'。",
+			"2. b = ord('e') - ord('a')，即 'e' 與 'a' 的距離，結果為 4。",
+			"3. ord('f') + 4，即 'f' 往後推 4 個字母：g, h, i, j。",
+			"4. chr() 轉回字元得到 'j'。",
+			"5. 字串串接 \"fake\" + \"j\" = \"fakej\"。故選 (B)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4260,7 +4459,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查字串切片的步長 (Step) 與方向。<b>【解析】</b>語法為 s[start:end:step]。當 step 為負數 (-2) 時，表示<b>從後往前</b>每隔 2 個字元取一次。1. 取最後一個 'g' (索引 -1)2. 往前跳 2 格取 'e' (索引 -3)3. 往前跳 2 格取 'c' (索引 -5)4. 往前跳 2 格取 'a' (索引 -7)結果為 'geca'。ITS 較少考這種負數步長，但 APCS 必考。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查字串切片的步長 (Step) 與方向。",
+			"<b>【解析】</b>語法為 s[start:end:step]。當 step 為負數 (-2) 時，表示<b>從後往前</b>每隔 2 個字元取一次。",
+			"1. 取最後一個 'g' (索引 -1)",
+			"2. 往前跳 2 格取 'e' (索引 -3)",
+			"3. 往前跳 2 格取 'c' (索引 -5)",
+			"4. 往前跳 2 格取 'a' (索引 -7)結果為 'geca'。",
+			"ITS 較少考這種負數步長，但 APCS 必考。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4283,7 +4488,17 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查遞迴 (Recursion) 的執行流程。<b>【追蹤過程】</b>1. 呼叫 f(3)：回傳 3 + f(2)2. 呼叫 f(2)：回傳 2 + f(1)3. 呼叫 f(1)：回傳 1 + f(0)4. 呼叫 f(0)：遇到終止條件 (n==0)，回傳 0<b>【回溯計算】</b>f(1) = 1 + 0 = 1f(2) = 2 + 1 = 3f(3) = 3 + 3 = 6這其實就是在計算 0+1+2+3 的總和。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查遞迴 (Recursion) 的執行流程。",
+			"<b>【追蹤過程】</b>",
+			"1. 呼叫 f(3)：回傳 3 + f(2)",
+			"2. 呼叫 f(2)：回傳 2 + f(1)",
+			"3. 呼叫 f(1)：回傳 1 + f(0)",
+			"4. 呼叫 f(0)：遇到終止條件 (n==0)，回傳 0",
+			"<b>【回溯計算】</b>",
+			"f(1) = 1 + 0 = 1",
+			"f(2) = 2 + 1 = 3",
+			"f(3) = 3 + 3 = 6",
+			"這其實就是在計算 0+1+2+3 的總和。</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -4306,7 +4521,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">本題考查巢狀迴圈 (Nested Loop) 的執行次數計算。<b>【解析】</b>外層迴圈 i 從 1 跑到 4。內層迴圈 j 從 i 跑到 4。● i=1 時: j=1,2,3,4 (共 4 次)● i=2 時: j=2,3,4 (共 3 次)● i=3 時: j=3,4 (共 2 次)● i=4 時: j=4 (共 1 次)總次數 cnt = 4 + 3 + 2 + 1 = 10。這類題目考驗您是否能冷靜地追蹤變數變化，是 APCS 的核心考題。</code></pre>"
+            "<pre><code class=\"language-python\">本題考查巢狀迴圈 (Nested Loop) 的執行次數計算。",
+			"<b>【解析】</b>外層迴圈 i 從 1 跑到 4。內層迴圈 j 從 i 跑到 4。",
+			"● i=1 時: j=1,2,3,4 (共 4 次)",
+			"● i=2 時: j=2,3,4 (共 3 次)",
+			"● i=3 時: j=3,4 (共 2 次)",
+			"● i=4 時: j=4 (共 1 次)總次數 cnt = 4 + 3 + 2 + 1 = 10。",
+			"這類題目考驗您是否能冷靜地追蹤變數變化，是 APCS 的核心考題。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4315,7 +4536,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">147. 【CH06-補充】在 Python 中，若要取得「自 1970 年 1 月 1 日 00:00:00 (UTC) 起」經過的總秒數 (Unix Timestamp)，",
-			"應使用下列哪個函式？</code></pre>"
+            "應使用下列哪個函式？</code></pre>"
         ],
         "options": [
             "<code>time.clock()</code>",
@@ -4329,7 +4550,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● time.time()：回傳當前時間的時間戳記 (Timestamp)，型態為浮點數 (float)，單位為秒。● 這通常用於計算程式執行的時間差 (結束時間 - 開始時間)。● datetime.now() 才是取得日期格式，time.now() 不存在。</code></pre>"
+            "<pre><code class=\"language-python\">● time.time()：回傳當前時間的時間戳記 (Timestamp)，型態為浮點數 (float)，單位為秒。",
+			"● 這通常用於計算程式執行的時間差 (結束時間 - 開始時間)。",
+			"● datetime.now() 才是取得日期格式，time.now() 不存在。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4351,7 +4574,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● time.sleep(secs)：讓程式暫停指定的秒數。● 參數可以是整數 (int) 或浮點數 (float)，例如 3.5 代表 3.5 秒。● 其他選項如 stop, pause, wait 皆非標準 time 模組的函式。</code></pre>"
+            "<pre><code class=\"language-python\">● time.sleep(secs)：讓程式暫停指定的秒數。",
+			"● 參數可以是整數 (int) 或浮點數 (float)，例如 3.5 代表 3.5 秒。",
+			"● 其他選項如 stop, pause, wait 皆非標準 time 模組的函式。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4373,7 +4598,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● import time as t 意思是載入模組並給它一個別名 t。● 一旦定義了別名，原本的模組名稱 time 在該程式區塊中通常就無法直接使用了，必須使用別名 t 來呼叫函式，如 t.sleep(1)。</code></pre>"
+            "<pre><code class=\"language-python\">● import time as t 意思是載入模組並給它一個別名 t。",
+			"● 一旦定義了別名，原本的模組名稱 time 在該程式區塊中通常就無法直接使用了，必須使用別名 t 來呼叫函式，如 t.sleep(1)。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4395,7 +4621,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● from module import * 會將模組內所有公開的函式與變數直接匯入目前的命名空間 (Namespace)。● 優點：呼叫時方便，不用打模組名稱 (直接寫 sleep(1))。● 缺點：容易產生名稱衝突 (例如自定義變數剛好也叫 time)，通常不建議在大型專案使用。</code></pre>"
+            "<pre><code class=\"language-python\">● from module import * 會將模組內所有公開的函式與變數直接匯入目前的命名空間 (Namespace)。",
+			"● 優點：呼叫時方便，不用打模組名稱 (直接寫 sleep(1))。",
+			"● 缺點：容易產生名稱衝突 (例如自定義變數剛好也叫 time)，通常不建議在大型專案使用。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4404,7 +4632,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">151. 【CH06-補充】您想要從一個包含 50 個學生的清單中，隨機抽出 3 位幸運得主，且這 3 位不能重複。",
-			"應該使用 random 模組的哪一個函式？</code></pre>"
+            "應該使用 random 模組的哪一個函式？</code></pre>"
         ],
         "options": [
             "<code>random.choices(students, k=3)</code>",
@@ -4418,7 +4646,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● random.sample(population, k)：用於**不重複**取樣 (Without replacement)。● random.choices(population, k)：用於**可重複**取樣 (With replacement)。● random.shuffle()：是用來打亂順序，不回傳值。</code></pre>"
+            "<pre><code class=\"language-python\">● random.sample(population, k)：用於**不重複**取樣 (Without replacement)。",
+			"● random.choices(population, k)：用於**可重複**取樣 (With replacement)。",
+			"● random.shuffle()：是用來打亂順序，不回傳值。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4427,7 +4657,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">152. 【CH06-補充】您需要寫一個 Python 腳本，能夠讀取使用者在執行時傳入的「命令列參數」(Command Line Arguments)。",
-			"應該匯入哪個模組並使用哪個屬性？</code></pre>"
+            "應該匯入哪個模組並使用哪個屬性？</code></pre>"
         ],
         "options": [
             "<code>import os; os.args</code>",
@@ -4441,7 +4671,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● sys.argv 是一個清單，儲存了執行時傳入的所有參數。● sys.argv[0] 通常是腳本本身的檔名，參數從 sys.argv[1] 開始。● argparse 是更進階的解析模組，但最基礎的參數讀取是 sys.argv。</code></pre>"
+            "<pre><code class=\"language-python\">● sys.argv 是一個清單，儲存了執行時傳入的所有參數。",
+			"● sys.argv[0] 通常是腳本本身的檔名，參數從 sys.argv[1] 開始。",
+			"● argparse 是更進階的解析模組，但最基礎的參數讀取是 sys.argv。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4463,7 +4695,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● ceil (天花板)：無條件**進位** (往正無限大方向取整)，故 ceil(3.2) -> 4。● floor (地板)：無條件**捨去** (往負無限大方向取整)，故 floor(3.2) -> 3。● 記憶法：天花板在上面 (大)，地板在下面 (小)。</code></pre>"
+            "<pre><code class=\"language-python\">● ceil (天花板)：無條件**進位** (往正無限大方向取整)，故 ceil(3.2) -> 4。",
+			"● floor (地板)：無條件**捨去** (往負無限大方向取整)，故 floor(3.2) -> 3。",
+			"● 記憶法：天花板在上面 (大)，地板在下面 (小)。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4472,7 +4706,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">154. 【CH06-補充】您想知道目前的 Python 程式是在哪個作業系統下執行 (例如 Windows 或 Linux)，以決定檔案路徑的寫法。",
-			"可以使用下列哪個變數？</code></pre>"
+            "可以使用下列哪個變數？</code></pre>"
         ],
         "options": [
             "<code>os.name</code>",
@@ -4486,7 +4720,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● os.name 會回傳作業系統類型名稱。● Windows 通常回傳 'nt'。● Linux/Unix/Mac 通常回傳 'posix'。● 另外也可以用 platform.system() 取得更詳細的名稱 (如 'Windows', 'Linux')。</code></pre>"
+            "<pre><code class=\"language-python\">● os.name 會回傳作業系統類型名稱。",
+			"● Windows 通常回傳 'nt'。",
+			"● Linux/Unix/Mac 通常回傳 'posix'。",
+			"● 另外也可以用 platform.system() 取得更詳細的名稱 (如 'Windows', 'Linux')。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -4509,7 +4746,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● // 是**整除** (Floor Division)，10 // 3 等於 3 (無條件捨去小數)。● % 是**取餘數** (Modulus)，10 % 3 等於 1 (10 除以 3 餘 1)。● ** 是**次方** (Exponentiation)，2 ** 3 等於 2 的 3 次方 (8)。● 注意：2 ** 3 不是 2 * 3。</code></pre>"
+            "<pre><code class=\"language-python\">● // 是**整除** (Floor Division)，10 // 3 等於 3 (無條件捨去小數)。",
+			"● % 是**取餘數** (Modulus)，10 % 3 等於 1 (10 除以 3 餘 1)。",
+			"● ** 是**次方** (Exponentiation)，2 ** 3 等於 2 的 3 次方 (8)。",
+			"● 注意：2 ** 3 不是 2 * 3。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4531,7 +4771,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 字串切片語法為 str[start:end] (包含 start，**不包含** end)。● 字串索引從 0 開始：P(0), y(1), **t(2)**, **h(3)**, **o(4)**, n(5)。● 要取出索引 2 到 4 的字元，end 必須設為 5。● 故 s[2:5] 會取出 index 2, 3, 4 的字元，即 'tho'。</code></pre>"
+            "<pre><code class=\"language-python\">● Python 字串切片語法為 str[start:end] (包含 start，**不包含** end)。",
+			"● 字串索引從 0 開始：P(0), y(1), **t(2)**, **h(3)**, **o(4)**, n(5)。",
+			"● 要取出索引 2 到 4 的字元，end 必須設為 5。",
+			"● 故 s[2:5] 會取出 index 2, 3, 4 的字元，即 'tho'。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4554,7 +4797,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● and：兩者皆為 True 才為 True。True and False -> **False**。● or：只要有一個 True 即為 True。True or False -> **True**。● not：反轉布林值。not True -> **False**。</code></pre>"
+            "<pre><code class=\"language-python\">● and：兩者皆為 True 才為 True。True and False -> **False**。",
+			"● or：只要有一個 True 即為 True。True or False -> **True**。",
+			"● not：反轉布林值。not True -> **False**。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4576,7 +4821,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● x += 5 是 x = x + 5 的簡寫，這稱為複合賦值運算子。● x =+ 5 其實是 x = (+5) (將 x 設為正 5)。● Python 不支援 C/Java 風格的 ++ 運算子。</code></pre>"
+            "<pre><code class=\"language-python\">● x += 5 是 x = x + 5 的簡寫，這稱為複合賦值運算子。",
+			"● x =+ 5 其實是 x = (+5) (將 x 設為正 5)。",
+			"● Python 不支援 C/Java 風格的 ++ 運算子。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4585,7 +4832,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">159. 【CH08-補充】關於 Python 的例外處理結構，下列哪一個區塊中的程式碼是「無論是否發生錯誤，最後都**一定會執行**」的？",
-			"(常用於關閉檔案或釋放資源)</code></pre>"
+            "(常用於關閉檔案或釋放資源)</code></pre>"
         ],
         "options": [
             "<code>try</code>",
@@ -4599,7 +4846,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● try：嘗試執行可能出錯的程式碼。● except：發生錯誤時執行的區塊。● else：**沒有**發生錯誤時才會執行。● finally：**無論有無錯誤** (即使 try 區塊中有 return)，最終都一定會執行。常用於 resource cleanup (如 file.close())。</code></pre>"
+            "<pre><code class=\"language-python\">● try：嘗試執行可能出錯的程式碼。",
+			"● except：發生錯誤時執行的區塊。",
+			"● else：**沒有**發生錯誤時才會執行。",
+			"● finally：**無論有無錯誤** (即使 try 區塊中有 return)，最終都一定會執行。",
+			"常用於 resource cleanup (如 file.close())。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -4622,7 +4873,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">1. 執行 try，印出 **A**。2. 遇到 1/0 發生錯誤，跳過 try 剩下的部分，進入 except。3. 執行 except，印出 **B**。4. 因為發生了錯誤，**else 區塊不會執行** (跳過 C)。5. 最後執行 finally，印出 **D**。故輸出順序為 A -> B -> D。</code></pre>"
+            "<pre><code class=\"language-python\">1. 執行 try，印出 **A**。",
+			"2. 遇到 1/0 發生錯誤，跳過 try 剩下的部分，進入 except。",
+			"3. 執行 except，印出 **B**。",
+			"4. 因為發生了錯誤，**else 區塊不會執行** (跳過 C)。",
+			"5. 最後執行 finally，印出 **D**。故輸出順序為 A -> B -> D。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -4631,7 +4886,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">161. 【CH08-補充】在使用 Python 的 unittest 模組進行單元測試時，若要測試函式回傳值 result 是否等於整數 100，",
-			"應使用下列哪一個斷言方法 (Assertion Method)？</code></pre>"
+            "應使用下列哪一個斷言方法 (Assertion Method)？</code></pre>"
         ],
         "options": [
             "<code>self.checkEqual(result, 100)</code>",
@@ -4645,7 +4900,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● assertEqual(a, b)：測試 a 與 b 的**值 (Value)** 是否相等 (最常用)。● assertIs(a, b)：測試 a 與 b 是否為同一個**物件實體** (記憶體位址相同)。雖然 100 is 100 在 Python 通常為真，但標準數值比較應使用 Equal。● checkEqual 與單獨的 assert (方法) 並非 unittest.TestCase 的標準函式。</code></pre>"
+            "<pre><code class=\"language-python\">● assertEqual(a, b)：測試 a 與 b 的**值 (Value)** 是否相等 (最常用)。",
+			"● assertIs(a, b)：測試 a 與 b 是否為同一個**物件實體** (記憶體位址相同)。",
+			"\t\t雖然 100 is 100 在 Python 通常為真，但標準數值比較應使用 Equal。",
+			"● checkEqual 與單獨的 assert (方法) 並非 unittest.TestCase 的標準函式。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -4654,7 +4912,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">162. 【CH08-補充】若您在程式中偵測到使用者輸入了不合法的數值 (例如年齡輸入負數)，想要**主動觸發**一個錯誤讓上層程式處理，",
-			"應該使用哪個關鍵字？</code></pre>"
+            "應該使用哪個關鍵字？</code></pre>"
         ],
         "options": [
             "<code>throw ValueError('Age cannot be negative')</code>",
@@ -4668,7 +4926,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **raise**：Python 用來主動拋出 (Raise) 例外的關鍵字。● throw / catch 是 Java/C++ 等語言的用法。● return 只是回傳一個物件，並不會中斷程式流程進入例外處理機制。</code></pre>"
+            "<pre><code class=\"language-python\">● **raise**：Python 用來主動拋出 (Raise) 例外的關鍵字。",
+			"● throw / catch 是 Java/C++ 等語言的用法。",
+			"● return 只是回傳一個物件，並不會中斷程式流程進入例外處理機制。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -4690,7 +4950,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **Docstring** (文件字串) 是 Python 的標準文件格式。● 必須寫在函式、類別或模組定義的**第一行**。● 使用三引號 (\"\"\" 或 ''') 包圍，可支援多行文字。● 這些文字會被儲存在物件的 __doc__ 屬性中。</code></pre>"
+            "<pre><code class=\"language-python\">● **Docstring** (文件字串) 是 Python 的標準文件格式。",
+			"● 必須寫在函式、類別或模組定義的**第一行**。",
+			"● 使用三引號 (\"\"\" 或 ''') 包圍，可支援多行文字。",
+			"● 這些文字會被儲存在物件的 __doc__ 屬性中。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4712,7 +4975,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **變數 (Variable)** 與 **函式 (Function)**：應使用 **Snake Case** (全小寫，單字間用底線連接)，例如 user_name。● **類別 (Class)**：應使用 **Pascal Case** (大駝峰式，首字母大寫)，例如 StudentName。● 故 StudentName 作為變數名稱是不符合 PEP 8 慣例的。</code></pre>"
+            "<pre><code class=\"language-python\">● **變數 (Variable)** 與 **函式 (Function)**：應使用 **Snake Case** (全小寫，單字間用底線連接)，",
+			"    例如 user_name。",
+			"● **類別 (Class)**：應使用 **Pascal Case** (大駝峰式，首字母大寫)，例如 StudentName。",
+			"● 故 StudentName 作為變數名稱是不符合 PEP 8 慣例的。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4734,7 +5000,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 最顯著的特色是使用**縮排 (Indentation)** 來劃分程式區塊，而非 C/Java 的大括號 {}。● 同一區塊內的程式碼必須擁有**相同的縮排層級** (通常建議使用 4 個空白鍵)。</code></pre>"
+            "<pre><code class=\"language-python\">",
+			"● Python 最顯著的特色是使用**縮排 (Indentation)** 來劃分程式區塊，而非 C/Java 的大括號 {}。",
+			"● 同一區塊內的程式碼必須擁有**相同的縮排層級** (通常建議使用 4 個空白鍵)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4743,7 +5011,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">166. 【CH04-補充】若您定義了一個函式，但在開發階段還沒想好要寫什麼程式碼，卻又希望程式能先執行不報錯。",
-			"應該在函式主體中填入哪個關鍵字作為「佔位符 (Placeholder)」？</code></pre>"
+            "應該在函式主體中填入哪個關鍵字作為「佔位符 (Placeholder)」？</code></pre>"
         ],
         "options": [
             "<code>null</code>",
@@ -4757,7 +5025,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **pass** 是 Python 的空敘述 (Null Statement)。● 當語法上需要一行程式碼 (例如在 def 或 if 之後)，但邏輯上不需要做任何事時，使用 pass 可避免語法錯誤 (SyntaxError)。</code></pre>"
+            "<pre><code class=\"language-python\">● **pass** 是 Python 的空敘述 (Null Statement)。",
+			"● 當語法上需要一行程式碼 (例如在 def 或 if 之後)，但邏輯上不需要做任何事時，",
+			"  使用 pass 可避免語法錯誤 (SyntaxError)。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4779,7 +5049,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 的單行註解使用 **#** 符號。● 直譯器會忽略 # 之後的內容，因此可以寫在程式碼的**行尾** (Inline Comment)。● Python 沒有像 C/Java 的 /*...*/ 多行註解語法，通常使用連續的 # 或三引號字串來當作多行註解。</code></pre>"
+            "<pre><code class=\"language-python\">● Python 的單行註解使用 **#** 符號。",
+			"● 直譯器會忽略 # 之後的內容，因此可以寫在程式碼的**行尾** (Inline Comment)。",
+			"● Python 沒有像 C/Java 的 /*...*/ 多行註解語法，通常使用連續的 # 或三引號字串來當作多行註解。</code></pre>"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -4787,7 +5059,8 @@
         "id": 168,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">168. 【CH02-補充】執行下列程式碼，當迴圈結束後，螢幕上會印出什麼結果？","for i in range(1, 6):\n    if i == 3:\n        continue\n    print(i, end=' ')</code></pre>"
+            "<pre><code class=\"language-python\">168. 【CH02-補充】執行下列程式碼，當迴圈結束後，螢幕上會印出什麼結果？",
+            "for i in range(1, 6):\n    if i == 3:\n        continue\n    print(i, end=' ')</code></pre>"
         ],
         "options": [
             "<code>1 2 3 4 5</code>",
@@ -4801,7 +5074,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **continue** 指令會讓程式**跳過**本次迴圈的剩餘部分，直接進入下一輪迭代。● 當 i 為 3 時，執行 continue，因此 print(3) 不會被執行。● 最終輸出為 1 2 4 5。</code></pre>"
+            "<pre><code class=\"language-python\">● **continue** 指令會讓程式**跳過**本次迴圈的剩餘部分，直接進入下一輪迭代。",
+			"● 當 i 為 3 時，執行 continue，因此 print(3) 不會被執行。",
+			"● 最終輸出為 1 2 4 5。</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -4823,7 +5098,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 這是 Python 的特殊語法。● 迴圈的 else 區塊會在**「迴圈完整執行完畢，且中間沒有被 break 打斷」**的情況下執行。● 常用於搜尋演算法：若迴圈跑完都沒找到目標 (沒 break)，則執行 else (顯示「找不到」)。</code></pre>"
+            "<pre><code class=\"language-python\">● 這是 Python 的特殊語法。",
+			"● 迴圈的 else 區塊會在**「迴圈完整執行完畢，且中間沒有被 break 打斷」**的情況下執行。",
+			"● 常用於搜尋演算法：若迴圈跑完都沒找到目標 (沒 break)，則執行 else (顯示「找不到」)。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4832,7 +5109,7 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">170. 【CH02-補充】您想要將一行 if-else 判斷式寫得更簡潔 (單行語法/三元運算子)。",
-			"若 score >= 60 則 result 為 'Pass'，否則為 'Fail'。下列哪一行寫法正確？</code></pre>"
+            "若 score >= 60 則 result 為 'Pass'，否則為 'Fail'。下列哪一行寫法正確？</code></pre>"
         ],
         "options": [
             "<code>result = 'Pass' if score >= 60 else 'Fail'</code>",
@@ -4846,7 +5123,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 的三元運算語法為：值1 if 條件 else 值2。● 選項 2 是 C/Java/JavaScript 的語法 (? :)，Python 不支援。</code></pre>"
+            "<pre><code class=\"language-python\">● Python 的三元運算語法為：值1 if 條件 else 值2。",
+			"● 選項 2 是 C/Java/JavaScript 的語法 (? :)，Python 不支援。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4868,7 +5146,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● range(start, stop, step)。● start=10, stop=0 (不包含 0), step=-2 (每次減 2)。● 產生的序列為：10, 8, 6, 4, 2。● 因為不包含終止值 0，所以最後一個數是 2。</code></pre>"
+            "<pre><code class=\"language-python\">● range(start, stop, step)。",
+			"● start=10, stop=0 (不包含 0), step=-2 (每次減 2)。",
+			"● 產生的序列為：10, 8, 6, 4, 2。",
+			"● 因為不包含終止值 0，所以最後一個數是 2。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4890,7 +5171,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **列表生成式**是 Python 建立清單的精簡寫法。● 語法：[運算式 for 變數 in 可迭代物件]。● [x * x for x in range(1, 6)] 會依序取出 1~5，計算平方後放入新清單。</code></pre>"
+            "<pre><code class=\"language-python\">● **列表生成式**是 Python 建立清單的精簡寫法。",
+			"● 語法：[運算式 for 變數 in 可迭代物件]。",
+			"● [x * x for x in range(1, 6)] 會依序取出 1~5，計算平方後放入新清單。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -4912,7 +5195,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● __init__ 是初始化方法 (Initializer)，當物件被建立時會自動執行，通常用來設定屬性 (如 self.name = name)。● __new__ 是建構實體的方法 (較少直接使用)。● __str__ 是定義物件轉字串的顯示格式。</code></pre>"
+            "<pre><code class=\"language-python\">● __init__ 是初始化方法 (Initializer)，當物件被建立時會自動執行，通常用來設定屬性 ",
+			"\t\t(如 self.name = name)。",
+			"● __new__ 是建構實體的方法 (較少直接使用)。",
+			"● __str__ 是定義物件轉字串的顯示格式。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -4935,7 +5221,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● self 代表**當前的物件實體**。● 當我們呼叫 my_dog.bark() 時，Python 會自動將 my_dog 這個物件傳入 bark 方法的第一個參數 (self)，讓我們可以存取該物件的屬性。</code></pre>"
+            "<pre><code class=\"language-python\">● self 代表**當前的物件實體**。",
+			"● 當我們呼叫 my_dog.bark() 時，Python 會自動將 my_dog 這個物件傳入 bark 方法的第一個參數 (self)，讓我們可以存取該物件的屬性。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -4957,7 +5244,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **super()** 函式用來存取父類別 (Superclass) 的方法。● super().__init__() 是標準寫法，確保父類別的初始化邏輯 (如設定基本屬性) 被正確執行，這在繼承關係中非常重要。</code></pre>"
+            "<pre><code class=\"language-python\">● **super()** 函式用來存取父類別 (Superclass) 的方法。",
+			"● super().__init__() 是標準寫法，確保父類別的初始化邏輯 (如設定基本屬性) 被正確執行，這在繼承關係中非常重要。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -4979,7 +5267,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **雙底線 (__var)**：會觸發 Python 的名稱修飾 (Name Mangling) 機制，變成 _ClassName__var，讓外部難以直接存取，這是 Python 實作私有屬性的方式。● **單底線 (_var)**：僅是慣例，告訴程式設計師「這是內部使用的」，但程式上仍可直接存取。</code></pre>"
+            "<pre><code class=\"language-python\">● **雙底線 (__var)**：會觸發 Python 的名稱修飾 (Name Mangling) 機制，變成 _ClassName__var，讓外部難以直接存取，這是 Python 實作私有屬性的方式。",
+			"● **單底線 (_var)**：僅是慣例，告訴程式設計師「這是內部使用的」，但程式上仍可直接存取。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -5001,7 +5290,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● Python 建立物件不需要 new 關鍵字 (這是 Java/C++ 的語法)。● 直接像呼叫函式一樣呼叫類別名稱即可：obj = ClassName()。</code></pre>"
+            "<pre><code class=\"language-python\">● Python 建立物件不需要 new 關鍵字 (這是 Java/C++ 的語法)。",
+			"● 直接像呼叫函式一樣呼叫類別名稱即可：obj = ClassName()。</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -5023,7 +5313,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 所有使用者自定義的例外通常都應該繼承自 **Exception** 類別。● BaseException 是更底層的類別 (包含 SystemExit 等)，通常不建議直接繼承。● Error 不是 Python 的標準內建例外基底類別 (那是 Java/JS 的概念)。</code></pre>"
+            "<pre><code class=\"language-python\">● 所有使用者自定義的例外通常都應該繼承自 **Exception** 類別。",
+			"● BaseException 是更底層的類別 (包含 SystemExit 等)，通常不建議直接繼承。",
+			"● Error 不是 Python 的標準內建例外基底類別 (那是 Java/JS 的概念)。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -5045,7 +5337,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **assert 條件, 訊息**：用於開發階段的「自我檢查」。若條件為 False，則拋出 AssertionError。● 它不應用來處理一般的使用者錯誤 (該用 try-except)。● 當 Python 使用 python -O (最佳化模式) 執行時，所有 assert 語句都會被忽略 (被移除)。</code></pre>"
+            "<pre><code class=\"language-python\">● **assert 條件, 訊息**：用於開發階段的「自我檢查」。若條件為 False，則拋出 AssertionError。",
+			"● 它不應用來處理一般的使用者錯誤 (該用 try-except)。",
+			"● 當 Python 使用 python -O (最佳化模式) 執行時，所有 assert 語句都會被忽略 (被移除)。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -5053,7 +5347,8 @@
         "id": 180,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-python\">180. 【CH08-補充】請檢視下列程式碼，若 x = 'A'，執行時會發生什麼情況？","try:\n    print(int(x))\nexcept Exception:\n    print('General Error')\nexcept ValueError:\n    print('Value Error')</code></pre>"
+            "<pre><code class=\"language-python\">180. 【CH08-補充】請檢視下列程式碼，若 x = 'A'，執行時會發生什麼情況？",
+            "try:\n    print(int(x))\nexcept Exception:\n    print('General Error')\nexcept ValueError:\n    print('Value Error')</code></pre>"
         ],
         "options": [
             "<code>印出 'Value Error'</code>",
@@ -5067,7 +5362,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **陷阱題**：Python 的 except 是依序比對的。● 因為 ValueError 是 Exception 的**子類別**。● 程式碼先寫了 except Exception (父類別)，它會攔截所有的錯誤，導致後面的 except ValueError (子類別) **永遠無法被執行到**。● 正確寫法應將子類別 (ValueError) 寫在前面。</code></pre>"
+            "<pre><code class=\"language-python\">● **陷阱題**：Python 的 except 是依序比對的。",
+			"● 因為 ValueError 是 Exception 的**子類別**。",
+			"● 程式碼先寫了 except Exception (父類別)，它會攔截所有的錯誤，導致後面的 except ValueError (子類別) **永遠無法被執行到**。",
+			"● 正確寫法應將子類別 (ValueError) 寫在前面。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -5089,7 +5387,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● **語法錯誤 (Syntax Error)**：程式無法執行 (如缺冒號)。● **執行期錯誤 (Runtime Error)**：執行到一半崩潰 (如除以零、變數未定義)。● **邏輯錯誤 (Logic Error)**：程式可以正常執行到底，不會報錯，但**算出來的結果是錯的** (如公式寫錯)。這是最難除錯的類型。</code></pre>"
+            "<pre><code class=\"language-python\">● **語法錯誤 (Syntax Error)**：程式無法執行 (如缺冒號)。",
+			"● **執行期錯誤 (Runtime Error)**：執行到一半崩潰 (如除以零、變數未定義)。",
+			"● **邏輯錯誤 (Logic Error)**：程式可以正常執行到底，不會報錯，但**算出來的結果是錯的** (如公式寫錯)。",
+			"  這是最難除錯的類型。</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -5303,7 +5604,7 @@
                 return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
             }).join(', ');
 
-            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${imgHtml}<div class="review-opts" style="margin-left:0">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${imgHtml}<div class="review-opts" style="margin-left:0">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
             area.appendChild(div);
         });
         if(window.Prism) Prism.highlightAll();

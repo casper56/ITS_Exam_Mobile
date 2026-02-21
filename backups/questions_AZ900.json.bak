@@ -2,2420 +2,3002 @@
     {
         "id": 1,
         "type": "truefalse",
-        "question": "1. 您可以為 Microsoft Entra 使用者新增資源鎖定。",
+        "question": [
+            "<pre><code>1. 您可以為 Microsoft Entra 使用者新增資源鎖定。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 2,
         "type": "truefalse",
-        "question": "2. 您可以為相同 Azure 虛擬機器新增多個資源鎖定。",
+        "question": [
+            "<pre><code>2. 您可以為相同 Azure 虛擬機器新增多個資源鎖定。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 3,
         "type": "truefalse",
-        "question": "3. 您可以修改具有刪除鎖定之 Azure 資源的屬性。",
+        "question": [
+            "<pre><code>3. 您可以修改具有刪除鎖定之 Azure 資源的屬性。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 4,
         "type": "truefalse",
-        "question": "4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平臺即服務(PaaS)。",
+        "question": [
+            "<pre><code>4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平臺即服務(PaaS)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 5,
         "type": "truefalse",
-        "question": "5. Azure SQL Database 是一種平臺即服務(PaaS)。",
+        "question": [
+            "<pre><code>5. Azure SQL Database 是一種平臺即服務(PaaS)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 6,
         "type": "truefalse",
-        "question": "6. Azure Cosmos DB 是一種軟體即服務(SaaS)。",
+        "question": [
+            "<pre><code>6. Azure Cosmos DB 是一種軟體即服務(SaaS)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 7,
         "type": "truefalse",
-        "question": "7. 您只能從 Windows 裝置管理雲端服務。",
+        "question": [
+            "<pre><code>7. 您只能從 Windows 裝置管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 8,
         "type": "truefalse",
-        "question": "8. 您可以從命令列管理雲端服務。",
+        "question": [
+            "<pre><code>8. 您可以從命令列管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 9,
         "type": "truefalse",
-        "question": "9. 您可以使用網頁瀏覽器管理雲端服務。",
+        "question": [
+            "<pre><code>9. 您可以使用網頁瀏覽器管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 10,
         "type": "truefalse",
-        "question": "10. 雲端運算的資本支出(CapEx)成本低於內部部署。",
+        "question": [
+            "<pre><code>10. 雲端運算的資本支出(CapEx)成本低於內部部署。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 11,
         "type": "truefalse",
-        "question": "11. 雲端運算提供與內部部署相同的設定選項。",
+        "question": [
+            "<pre><code>11. 雲端運算提供與內部部署相同的設定選項。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 12,
         "type": "truefalse",
-        "question": "12. 雲端運算可在業務需要變更時進行調整。",
+        "question": [
+            "<pre><code>12. 雲端運算可在業務需要變更時進行調整。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 13,
         "type": "truefalse",
-        "question": "13. Azure 隨用隨付定價是 CapEx 範例。",
+        "question": [
+            "<pre><code>13. Azure 隨用隨付定價是 CapEx 範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 14,
         "type": "truefalse",
-        "question": "14. 支付資料中心的電費是 OpEx 範例。",
+        "question": [
+            "<pre><code>14. 支付資料中心的電費是 OpEx 範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 15,
         "type": "truefalse",
-        "question": "15. 部署您自己的資料中心是 CapEx 範例。",
+        "question": [
+            "<pre><code>15. 部署您自己的資料中心是 CapEx 範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 16,
         "type": "truefalse",
-        "question": "16. 在 Azure 訂用帳戶中新增資源群組會產生額外費用。",
+        "question": [
+            "<pre><code>16. 在 Azure 訂用帳戶中新增資源群組會產生額外費用。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 17,
         "type": "truefalse",
-        "question": "17. 透過 VPN 從內部部署網路將 10GB 的資料複製到 Azure 會產生額外的 Azure 資料傳輸費用。",
+        "question": [
+            "<pre><code>17. 透過 VPN 從內部部署網路將 10GB 的資料複製到 Azure 會產生額外的 Azure 資料傳輸費用。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 18,
         "type": "truefalse",
-        "question": "18. 透過 VPN 從 Azure 將 10GB 的資料複製到內部部署網路會產生額外的 Azure 資料傳輸費用。",
+        "question": [
+            "<pre><code>18. 透過 VPN 從 Azure 將 10GB 的資料複製到內部部署網路會產生額外的 Azure 資料傳輸費用。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 19,
         "type": "truefalse",
-        "question": "19. 您可以設定 Microsoft Entra 活動記錄,以在 Azure 監視器中顯示。",
+        "question": [
+            "<pre><code>19. 您可以設定 Microsoft Entra 活動記錄,以在 Azure 監視器中顯示。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 20,
         "type": "truefalse",
-        "question": "20. 您可以從 Azure 監視器建立警示。",
+        "question": [
+            "<pre><code>20. 您可以從 Azure 監視器建立警示。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 21,
         "type": "truefalse",
-        "question": "21. 您可以從 Azure 監視器監視多個 Azure 訂用帳戶的資源。",
+        "question": [
+            "<pre><code>21. 您可以從 Azure 監視器監視多個 Azure 訂用帳戶的資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 22,
         "type": "truefalse",
-        "question": "22. 擁有權總成本(TCO)計算機會顯示在資料中心內執行工作負載的成本。",
+        "question": [
+            "<pre><code>22. 擁有權總成本(TCO)計算機會顯示在資料中心內執行工作負載的成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 23,
         "type": "truefalse",
-        "question": "23. 擁有權總成本(TCO)計算機會顯示在 Azure 中執行工作負載的成本。",
+        "question": [
+            "<pre><code>23. 擁有權總成本(TCO)計算機會顯示在 Azure 中執行工作負載的成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 24,
         "type": "truefalse",
-        "question": "24. 擁有權總成本(TCO)計算機會產生圖形化報表。",
+        "question": [
+            "<pre><code>24. 擁有權總成本(TCO)計算機會產生圖形化報表。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 25,
         "type": "truefalse",
-        "question": "25. Azure 儲存體中的極非經常性存取層會針對至少90天的資料儲存體最佳化。",
+        "question": [
+            "<pre><code>25. Azure 儲存體中的極非經常性存取層會針對至少90天的資料儲存體最佳化。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 26,
         "type": "truefalse",
-        "question": "26. Azure 儲存體中的非經常性存取層會針對至少 90 天的資料儲存體最佳化。",
+        "question": [
+            "<pre><code>26. Azure 儲存體中的非經常性存取層會針對至少 90 天的資料儲存體最佳化。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 27,
         "type": "truefalse",
-        "question": "27. Azure 儲存體中的封存存取層會針對至少 180 天的資料儲存體最佳化。",
+        "question": [
+            "<pre><code>27. Azure 儲存體中的封存存取層會針對至少 180 天的資料儲存體最佳化。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 28,
         "type": "truefalse",
-        "question": "28. Microsoft Entra 可用於管理對內部部署應用程式的存取。",
+        "question": [
+            "<pre><code>28. Microsoft Entra 可用於管理對內部部署應用程式的存取。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 29,
         "type": "truefalse",
-        "question": "29. Microsoft Entra 提供單一登入(SSO)。",
+        "question": [
+            "<pre><code>29. Microsoft Entra 提供單一登入(SSO)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 30,
         "type": "truefalse",
-        "question": "30. iOS 裝置可以在 Microsoft Entra 租使用者內註冊。",
+        "question": [
+            "<pre><code>30. iOS 裝置可以在 Microsoft Entra 租使用者內註冊。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 31,
         "type": "truefalse",
-        "question": "31. AzCopy 是一個用來在儲存體帳戶之間來回複製 Blob 或檔案的命令列公用程式。",
+        "question": [
+            "<pre><code>31. AzCopy 是一個用來在儲存體帳戶之間來回複製 Blob 或檔案的命令列公用程式。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 32,
         "type": "truefalse",
-        "question": "32. Azure 儲存體總管是一項用來傳輸大量資料的雲端託管移轉服務。",
+        "question": [
+            "<pre><code>32. Azure 儲存體總管是一項用來傳輸大量資料的雲端託管移轉服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 33,
         "type": "truefalse",
-        "question": "33. Azure 檔案同步會在 Azure 檔案儲存體與 Windows 檔案伺服器之間同步檔案和資料夾。",
+        "question": [
+            "<pre><code>33. Azure 檔案同步會在 Azure 檔案儲存體與 Windows 檔案伺服器之間同步檔案和資料夾。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 34,
         "type": "truefalse",
-        "question": "34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租使用者建立關聯。",
+        "question": [
+            "<pre><code>34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租使用者建立關聯。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 35,
         "type": "truefalse",
-        "question": "35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租使用者。",
+        "question": [
+            "<pre><code>35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租使用者。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 36,
         "type": "truefalse",
-        "question": "36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租使用者。",
+        "question": [
+            "<pre><code>36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租使用者。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 37,
         "type": "truefalse",
-        "question": "37. Azure 虛擬桌面工作階段主機只能執行 Windows 10 或 Windows 11。",
+        "question": [
+            "<pre><code>37. Azure 虛擬桌面工作階段主機只能執行 Windows 10 或 Windows 11。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 38,
         "type": "truefalse",
-        "question": "38. 一個包含 20 部工作階段主機的 Azure 虛擬桌面主機集區,最多可支援 20 位使用者同時連線。",
+        "question": [
+            "<pre><code>38. 一個包含 20 部工作階段主機的 Azure 虛擬桌面主機集區,最多可支援 20 位使用者同時連線。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 39,
         "type": "truefalse",
-        "question": "39. Azure 虛擬桌面支援桌面與應用程式虛擬化。",
+        "question": [
+            "<pre><code>39. Azure 虛擬桌面支援桌面與應用程式虛擬化。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 40,
         "type": "truefalse",
-        "question": "40. 建立和設定虛擬網路是平臺即服務(PaaS)雲端服務模型的一部分。",
+        "question": [
+            "<pre><code>40. 建立和設定虛擬網路是平臺即服務(PaaS)雲端服務模型的一部分。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 41,
         "type": "truefalse",
-        "question": "41. 在平臺即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。",
+        "question": [
+            "<pre><code>41. 在平臺即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 42,
         "type": "truefalse",
-        "question": "42. 設定平臺即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。",
+        "question": [
+            "<pre><code>42. 設定平臺即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 43,
         "type": "truefalse",
-        "question": "43. 適用於雲端的 Microsoft Defender 可以監視 Azure 資源與內部部署資源。",
+        "question": [
+            "<pre><code>43. 適用於雲端的 Microsoft Defender 可以監視 Azure 資源與內部部署資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 44,
         "type": "truefalse",
-        "question": "44. 所有適用於雲端的 Microsoft Defender 功能皆為免費。",
+        "question": [
+            "<pre><code>44. 所有適用於雲端的 Microsoft Defender 功能皆為免費。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 45,
         "type": "truefalse",
-        "question": "45. 您可以從適用於雲端的 Microsoft Defender 下載法規合規性報告。",
+        "question": [
+            "<pre><code>45. 您可以從適用於雲端的 Microsoft Defender 下載法規合規性報告。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 46,
         "type": "truefalse",
-        "question": "46. 單一Microsoft 帳戶可用於管理多個 Azure 訂用帳戶。",
+        "question": [
+            "<pre><code>46. 單一Microsoft 帳戶可用於管理多個 Azure 訂用帳戶。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 47,
         "type": "truefalse",
-        "question": "47. 兩個 Azure 訂用帳戶可合併為單一訂用帳戶。",
+        "question": [
+            "<pre><code>47. 兩個 Azure 訂用帳戶可合併為單一訂用帳戶。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 48,
         "type": "truefalse",
-        "question": "48. 公司可以使用多個 Azure 訂用帳戶的資源。",
+        "question": [
+            "<pre><code>48. 公司可以使用多個 Azure 訂用帳戶的資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 49,
         "type": "truefalse",
-        "question": "49. 唯讀鎖定會防止使用者刪除 Azure 資源。",
+        "question": [
+            "<pre><code>49. 唯讀鎖定會防止使用者刪除 Azure 資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 50,
         "type": "truefalse",
-        "question": "50. 使用者可以修改已套用刪除鎖定的 Azure 資源。",
+        "question": [
+            "<pre><code>50. 使用者可以修改已套用刪除鎖定的 Azure 資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 51,
         "type": "truefalse",
-        "question": "51. 所有 Azure 資源都會繼承指派給其上層資源群組的鎖定。",
+        "question": [
+            "<pre><code>51. 所有 Azure 資源都會繼承指派給其上層資源群組的鎖定。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 52,
         "type": "truefalse",
-        "question": "52. 使用按使用量計費的方案時,所有傳送到雲端裝載之虛擬機器的資料,或從該機器中接收的資料,一律支付固定的費率。",
+        "question": [
+            "<pre><code>52. 使用按使用量計費的方案時,所有傳送到雲端裝載之虛擬機器的資料,或從該機器中接收的資料,一律支付固定的費率。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 53,
         "type": "truefalse",
-        "question": "53. 使用按使用量計費的方案時,因為只要支付所需的額外容量,所以可以降低整體成本。",
+        "question": [
+            "<pre><code>53. 使用按使用量計費的方案時,因為只要支付所需的額外容量,所以可以降低整體成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 54,
         "type": "truefalse",
-        "question": "54. 無伺服器運算是按使用量計費的方案範例。",
+        "question": [
+            "<pre><code>54. 無伺服器運算是按使用量計費的方案範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 55,
         "type": "truefalse",
-        "question": "55. Azure 中國由 Microsoft 營運。",
+        "question": [
+            "<pre><code>55. Azure 中國由 Microsoft 營運。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 56,
         "type": "truefalse",
-        "question": "56. Azure Government 由 Microsoft 營運。",
+        "question": [
+            "<pre><code>56. Azure Government 由 Microsoft 營運。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 57,
         "type": "truefalse",
-        "question": "57. Azure Government 僅適用於美國政府機構及其合作夥伴。",
+        "question": [
+            "<pre><code>57. Azure Government 僅適用於美國政府機構及其合作夥伴。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 58,
         "type": "truefalse",
-        "question": "58. 若要實作 Azure Multi-Factor Authentication(MFA)解決方案,您必須將內部部署身分識別同步至雲端。",
+        "question": [
+            "<pre><code>58. 若要實作 Azure Multi-Factor Authentication(MFA)解決方案,您必須將內部部署身分識別同步至雲端。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 59,
         "type": "truefalse",
-        "question": "59. Azure Multi-Factor Authentication(MFA)有兩種有效方法,就是照片識別與護照號碼。",
+        "question": [
+            "<pre><code>59. Azure Multi-Factor Authentication(MFA)有兩種有效方法,就是照片識別與護照號碼。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 60,
         "type": "truefalse",
-        "question": "60. 系統管理與非系統管理使用者帳戶皆可要求 Azure Multi-Factor Authentication(MFA)。",
+        "question": [
+            "<pre><code>60. 系統管理與非系統管理使用者帳戶皆可要求 Azure Multi-Factor Authentication(MFA)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 61,
         "type": "truefalse",
-        "question": "61. 部署到資源群組的所有 Azure 資源都必須位於相同的 Azure 區域。",
+        "question": [
+            "<pre><code>61. 部署到資源群組的所有 Azure 資源都必須位於相同的 Azure 區域。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 62,
         "type": "truefalse",
-        "question": "62. 如果您將標籤指派給某個資源群組,則該資源群組中的所有 Azure 資源都會獲指派相同的標籤。",
+        "question": [
+            "<pre><code>62. 如果您將標籤指派給某個資源群組,則該資源群組中的所有 Azure 資源都會獲指派相同的標籤。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 63,
         "type": "truefalse",
-        "question": "63. 如果您將某個資源群組的管理許可權指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。",
+        "question": [
+            "<pre><code>63. 如果您將某個資源群組的管理許可權指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 64,
         "type": "truefalse",
-        "question": "64. 系統管理員可以在 Azure 服務健康狀態中,檢視 Azure 環境中所有服務的健康情況。",
+        "question": [
+            "<pre><code>64. 系統管理員可以在 Azure 服務健康狀態中,檢視 Azure 環境中所有服務的健康情況。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 65,
         "type": "truefalse",
-        "question": "65. 系統管理員可以在 Azure 服務健康狀態中建立規則,以便在 Azure 服務失敗時收到警示。",
+        "question": [
+            "<pre><code>65. 系統管理員可以在 Azure 服務健康狀態中建立規則,以便在 Azure 服務失敗時收到警示。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 66,
         "type": "truefalse",
-        "question": "66. 系統管理員可以在 Azure 服務健康狀態中防止服務失敗。",
+        "question": [
+            "<pre><code>66. 系統管理員可以在 Azure 服務健康狀態中防止服務失敗。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 67,
         "type": "truefalse",
-        "question": "67. Azure DNS 僅支援公用 DNS 網域名稱。",
+        "question": [
+            "<pre><code>67. Azure DNS 僅支援公用 DNS 網域名稱。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 68,
         "type": "truefalse",
-        "question": "68. Azure 虛擬機器可以自動在 Azure DNS 中註冊名稱。",
+        "question": [
+            "<pre><code>68. Azure 虛擬機器可以自動在 Azure DNS 中註冊名稱。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 69,
         "type": "truefalse",
-        "question": "69. Azure DNS 可以裝載自訂 DNS 網域。",
+        "question": [
+            "<pre><code>69. Azure DNS 可以裝載自訂 DNS 網域。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 70,
         "type": "truefalse",
-        "question": "70. 您必須擁有實體伺服器才能使用雲端運算。",
+        "question": [
+            "<pre><code>70. 您必須擁有實體伺服器才能使用雲端運算。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 71,
         "type": "truefalse",
-        "question": "71. 您必須擁有網際網路連線能力才能使用雲端運算。",
+        "question": [
+            "<pre><code>71. 您必須擁有網際網路連線能力才能使用雲端運算。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 72,
         "type": "truefalse",
-        "question": "72. 提高雲端運算容量的成本低於提高內部部署資料中心運算容量的成本。",
+        "question": [
+            "<pre><code>72. 提高雲端運算容量的成本低於提高內部部署資料中心運算容量的成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 73,
         "type": "truefalse",
-        "question": "73. 若您使用軟體即服務(SaaS),則必須套用軟體更新。",
+        "question": [
+            "<pre><code>73. 若您使用軟體即服務(SaaS),則必須套用軟體更新。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 74,
         "type": "truefalse",
-        "question": "74. 若您使用基礎結構即服務(IaaS),則必須安裝欲使用的軟體。",
+        "question": [
+            "<pre><code>74. 若您使用基礎結構即服務(IaaS),則必須安裝欲使用的軟體。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 75,
         "type": "truefalse",
-        "question": "75. Azure 備份是一種平臺即服務(PaaS)。",
+        "question": [
+            "<pre><code>75. Azure 備份是一種平臺即服務(PaaS)。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 76,
         "type": "truefalse",
-        "question": "76. 您必須擁有網際網路連線能力才能管理雲端服務。",
+        "question": [
+            "<pre><code>76. 您必須擁有網際網路連線能力才能管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 77,
         "type": "truefalse",
-        "question": "77. 您必須安裝管理應用程式才能管理雲端服務。",
+        "question": [
+            "<pre><code>77. 您必須安裝管理應用程式才能管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 78,
         "type": "truefalse",
-        "question": "78. 您可以從任何新式網頁瀏覽器管理雲端服務。",
+        "question": [
+            "<pre><code>78. 您可以從任何新式網頁瀏覽器管理雲端服務。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 79,
         "type": "truefalse",
-        "question": "79. Azure Resource Manager(ARM)範本是一種基礎結構即程式碼(laC)的範例。",
+        "question": [
+            "<pre><code>79. Azure Resource Manager(ARM)範本是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 80,
         "type": "truefalse",
-        "question": "80. Bicep檔案是一種基礎結構即程式碼(laC)的範例。",
+        "question": [
+            "<pre><code>80. Bicep檔案是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 81,
         "type": "truefalse",
-        "question": "81. Microsoft Excel範本是一種基礎結構即程式碼(laC)的範例。",
+        "question": [
+            "<pre><code>81. Microsoft Excel範本是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 82,
         "type": "truefalse",
-        "question": "82. 建置資料中心基礎設施是一種營運支出(OpEx)成本。",
+        "question": [
+            "<pre><code>82. 建置資料中心基礎設施是一種營運支出(OpEx)成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 83,
         "type": "truefalse",
-        "question": "83. 技術人員的每月薪資是一種營運支出(OpEx)成本。",
+        "question": [
+            "<pre><code>83. 技術人員的每月薪資是一種營運支出(OpEx)成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 84,
         "type": "truefalse",
-        "question": "84. 租用軟體是一種營運支出(OpEx)成本。",
+        "question": [
+            "<pre><code>84. 租用軟體是一種營運支出(OpEx)成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 85,
         "type": "truefalse",
-        "question": "85. Microsoft Purview 會提供資料備份。",
+        "question": [
+            "<pre><code>85. Microsoft Purview 會提供資料備份。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平臺，<br>\n它透過資料生命週期管理（保留/刪除規則）和電子檔案探索功能協助管理資料，並在內部提供資料目錄、譜系等功能來瞭解和追蹤資料，<br>\n但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份) <br>\n或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。",
+        "explanation": [
+            "<pre><code>Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平臺，",
+            "它透過資料生命週期管理（保留/刪除規則）和電子檔案探索功能協助管理資料，並在內部提供資料目錄、譜系等功能來瞭解和追蹤資料，",
+            "但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份)",
+            "或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。</code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 86,
         "type": "truefalse",
-        "question": "86. Microsoft Purview 會提供資料探索。",
+        "question": [
+            "<pre><code>86. Microsoft Purview 會提供資料探索。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 87,
         "type": "truefalse",
-        "question": "87. Microsoft Purview 會提供資料分類。",
+        "question": [
+            "<pre><code>87. Microsoft Purview 會提供資料分類。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 88,
         "type": "truefalse",
-        "question": "88. 水平調整可以自動增加虛擬機器執行個體的數目。",
+        "question": [
+            "<pre><code>88. 水平調整可以自動增加虛擬機器執行個體的數目。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 89,
         "type": "truefalse",
-        "question": "89. 垂直調整可以自動為虛擬機器新增額外的記憶體。",
+        "question": [
+            "<pre><code>89. 垂直調整可以自動為虛擬機器新增額外的記憶體。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 90,
         "type": "truefalse",
-        "question": "90. 調整可用於根據服務需求降低成本。",
+        "question": [
+            "<pre><code>90. 調整可用於根據服務需求降低成本。</code></pre>"
+        ],
         "options": [
-            "O",
-            "X"
+            "<code>O</code>",
+            "<code>X</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 91,
         "type": "single",
-        "question": "91. 下列何者是雲端環境中垂直調整的範例?",
+        "question": [
+            "<pre><code>91. 下列何者是雲端環境中垂直調整的範例?</code></pre>"
+        ],
         "options": [
-            "針對現有的 Azure 虛擬機器新增額外的 CPU",
-            "新增額外的 Azure 虛擬桌面工作階段主機",
-            "自動新增額外的 Azure App Service 執行個體",
-            "新增額外的 Azure 虛擬機器"
+            "<code>針對現有的 Azure 虛擬機器新增額外的 CPU</code>",
+            "<code>新增額外的 Azure 虛擬桌面工作階段主機</code>",
+            "<code>自動新增額外的 Azure App Service 執行個體</code>",
+            "<code>新增額外的 Azure 虛擬機器</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 92,
         "type": "single",
-        "question": "92. 貴公司裝載了名為 App1 的會計應用程式,供公司全體客戶使用。 App1 的使用量在每月的前三週都很低,但最後一週卻很高。 Azure 雲端服務有哪一項優點,可支援這類使用模式的成本管理?",
+        "question": [
+            "<pre><code>92. 貴公司裝載了名為 App1 的會計應用程式,供公司全體客戶使用。 App1 的使用量在每月的前三週都很低,但最後一週卻很高。 Azure 雲端服務有哪一項優點,可支援這類使用模式的成本管理?</code></pre>"
+        ],
         "options": [
-            "高可用性",
-            "負載平衡",
-            "彈性",
-            "高延遲"
+            "<code>高可用性</code>",
+            "<code>負載平衡</code>",
+            "<code>彈性</code>",
+            "<code>高延遲</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 93,
         "type": "single",
-        "question": "93. 裝載於雲端中,並且由 Azure 管理軟體更新的 Microsoft SQL Server 資料庫是一種__________",
+        "question": [
+            "<pre><code>93. 裝載於雲端中,並且由 Azure 管理軟體更新的 Microsoft SQL Server 資料庫是一種__________</code></pre>"
+        ],
         "options": [
-            "災害復原即服務(DRaaS)。",
-            "基礎結構即服務(IaaS)。",
-            "平臺即服務(PaaS)。",
-            "軟體即服務(SaaS)。"
+            "<code>災害復原即服務(DRaaS)。</code>",
+            "<code>基礎結構即服務(IaaS)。</code>",
+            "<code>平臺即服務(PaaS)。</code>",
+            "<code>軟體即服務(SaaS)。</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 94,
         "type": "single",
-        "question": "94. 請問應用程式該使用下列何者,才能與 Azure 互動及管理資源?",
+        "question": [
+            "<pre><code>94. 請問應用程式該使用下列何者,才能與 Azure 互動及管理資源?</code></pre>"
+        ],
         "options": [
-            "Azure 命令列介面(CLI)",
-            "Azure Cloud Shell",
-            "API",
-            "Azure Resource Manager(ARM)範本"
+            "<code>Azure 命令列介面(CLI)</code>",
+            "<code>Azure Cloud Shell</code>",
+            "<code>API</code>",
+            "<code>Azure Resource Manager(ARM)範本</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 95,
         "type": "single",
-        "question": "95. __________可以超低折扣提供未使用的 Azure 計算容量。",
+        "question": [
+            "<pre><code>95. __________可以超低折扣提供未使用的 Azure 計算容量。</code></pre>"
+        ],
         "options": [
-            "Azure 容器執行個體",
-            "Azure 保留的虛擬機器執行個體",
-            "Azure 現成虛擬機器執行個體",
-            "Azure 虛擬機器擴充套件集"
+            "<code>Azure 容器執行個體</code>",
+            "<code>Azure 保留的虛擬機器執行個體</code>",
+            "<code>Azure 現成虛擬機器執行個體</code>",
+            "<code>Azure 虛擬機器擴充套件集</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 96,
         "type": "single",
-        "question": "96. 您的公司擁有 Azure 訂用帳戶,其中包含多個區域的資源。 您需要確保系統管理員只能在這些區域中建立資源。 您應該使用下列哪一項?",
+        "question": [
+            "<pre><code>96. 您的公司擁有 Azure 訂用帳戶,其中包含多個區域的資源。 您需要確保系統管理員只能在這些區域中建立資源。 您應該使用下列哪一項?</code></pre>"
+        ],
         "options": [
-            "唯讀鎖定",
-            "Azure 原則",
-            "保留",
-            "管理群組"
+            "<code>唯讀鎖定</code>",
+            "<code>Azure 原則</code>",
+            "<code>保留</code>",
+            "<code>管理群組</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 97,
         "type": "single",
-        "question": "97. 當 Microsoft 計劃執行維護,並可能影響部署至 Azure 訂閱的資源時,您需要收到通知。 您應該使用下列哪一項?",
+        "question": [
+            "<pre><code>97. 當 Microsoft 計劃執行維護,並可能影響部署至 Azure 訂閱的資源時,您需要收到通知。 您應該使用下列哪一項?</code></pre>"
+        ],
         "options": [
-            "Azure 監視器",
-            "Azure 服務健康狀態",
-            "Azure Advisor",
-            "Microsoft信任中心"
+            "<code>Azure 監視器</code>",
+            "<code>Azure 服務健康狀態</code>",
+            "<code>Azure Advisor</code>",
+            "<code>Microsoft信任中心</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 98,
         "type": "single",
-        "question": "98. 以下哪一項會提供 Azure 服務和區域的健康狀態概觀。",
+        "question": [
+            "<pre><code>98. 以下哪一項會提供 Azure 服務和區域的健康狀態概觀。</code></pre>"
+        ],
         "options": [
-            "Azure 監視器",
-            "Azure 資源健康狀態",
-            "Azure 服務健康狀態",
-            "Azure 狀態"
+            "<code>Azure 監視器</code>",
+            "<code>Azure 資源健康狀態</code>",
+            "<code>Azure 服務健康狀態</code>",
+            "<code>Azure 狀態</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 99,
         "type": "single",
-        "question": "99. 您要在 Azure Resource Manager 中建立名為 RG1 的資源群組。 您需要防止意外刪除 RG1 中的資源。您應該使用下列哪項設定?",
+        "question": [
+            "<pre><code>99. 您要在 Azure Resource Manager 中建立名為 RG1 的資源群組。 您需要防止意外刪除 RG1 中的資源。您應該使用下列哪項設定?</code></pre>"
+        ],
         "options": [
-            "部署",
-            "原則",
-            "屬性",
-            "鎖定"
+            "<code>部署</code>",
+            "<code>原則</code>",
+            "<code>屬性</code>",
+            "<code>鎖定</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": "images//q99.jpg",
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 100,
         "type": "single",
-        "question": "100. 如果一個名為 RG1 的資源群組具有刪除鎖定,__________可以刪除 RG1。",
+        "question": [
+            "<pre><code>100. 如果一個名為 RG1 的資源群組具有刪除鎖定,__________可以刪除 RG1。</code></pre>"
+        ],
         "options": [
-            "只有全域管理員群組的成員",
-            "必須先移除刪除鎖定,然後管理員才",
-            "必須先修改 Azure 原則,然後管理員才",
-            "必須先新增 Azure 標籤,然後管理員才"
+            "<code>只有全域管理員群組的成員</code>",
+            "<code>必須先移除刪除鎖定,然後管理員才</code>",
+            "<code>必須先修改 Azure 原則,然後管理員才</code>",
+            "<code>必須先新增 Azure 標籤,然後管理員才</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 101,
         "type": "single",
-        "question": "101. 您有一些執行 Windows Server 的內部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?",
+        "question": [
+            "<pre><code>101. 您有一些執行 Windows Server 的內部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?</code></pre>"
+        ],
         "options": [
-            "Docker",
-            "角色型存取控制(RBAC)",
-            "Azure Arc",
-            "Azure Kubernetes Service(AKS)"
+            "<code>Docker</code>",
+            "<code>角色型存取控制(RBAC)</code>",
+            "<code>Azure Arc</code>",
+            "<code>Azure Kubernetes Service(AKS)</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 102,
         "type": "single",
-        "question": "102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼專案?",
+        "question": [
+            "<pre><code>102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼專案?</code></pre>"
+        ],
         "options": [
-            "管理群組",
-            "訂用帳戶",
-            "虛擬網路",
-            "資源群組"
+            "<code>管理群組</code>",
+            "<code>訂用帳戶</code>",
+            "<code>虛擬網路</code>",
+            "<code>資源群組</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 103,
         "type": "single",
-        "question": "103. ExpressRoute 是在哪一個 OSI 層運作?",
+        "question": [
+            "<pre><code>103. ExpressRoute 是在哪一個 OSI 層運作?</code></pre>"
+        ],
         "options": [
-            "第 5 層",
-            "第 2 層",
-            "第 7 層",
-            "第 3 層"
+            "<code>第 5 層</code>",
+            "<code>第 2 層</code>",
+            "<code>第 7 層</code>",
+            "<code>第 3 層</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 104,
         "type": "single",
-        "question": "104. Azure 中國(Azure China)在架構或營運上有什麼特殊之處?",
+        "question": [
+            "<pre><code>104. Azure 中國(Azure China)在架構或營運上有什麼特殊之處?</code></pre>"
+        ],
         "options": [
-            "由 Microsoft 提供。",
-            "功能等同於 Azure 全球。",
-            "服務只能從中國存取。",
-            "是個別獨立的 Microsoft Azure 執行個體。"
+            "<code>由 Microsoft 提供。</code>",
+            "<code>功能等同於 Azure 全球。</code>",
+            "<code>服務只能從中國存取。</code>",
+            "<code>是個別獨立的 Microsoft Azure 執行個體。</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 105,
         "type": "single",
-        "question": "105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些專案?",
+        "question": [
+            "<pre><code>105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些專案?</code></pre>"
+        ],
         "options": [
-            "儲存體帳戶中的檔案服務",
-            "虛擬機器資料磁碟",
-            "Azure SQL 資料庫",
-            "儲存體帳戶中的 Blob 服務"
+            "<code>儲存體帳戶中的檔案服務</code>",
+            "<code>虛擬機器資料磁碟</code>",
+            "<code>Azure SQL 資料庫</code>",
+            "<code>儲存體帳戶中的 Blob 服務</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 106,
         "type": "single",
-        "question": "106. ____________是一項實體移轉服務,用以快速、便宜且可靠地傳輸大量資料。",
+        "question": [
+            "<pre><code>106. ____________是一項實體移轉服務,用以快速、便宜且可靠地傳輸大量資料。</code></pre>"
+        ],
         "options": [
-            "Azure 資料箱",
-            "Azure Databricks",
-            "Azure 檔案同步",
-            "Azure Migrate"
+            "<code>Azure 資料箱</code>",
+            "<code>Azure Databricks</code>",
+            "<code>Azure 檔案同步</code>",
+            "<code>Azure Migrate</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 107,
         "type": "single",
-        "question": "107. 您計劃將 20 部 Azure 虛擬機器部署至 Azure 環境。為了確保一部名為VM1 的虛擬機器無法連線到其他虛擬機器,VM1 必須____________",
+        "question": [
+            "<pre><code>107. 您計劃將 20 部 Azure 虛擬機器部署至 Azure 環境。為了確保一部名為VM1 的虛擬機器無法連線到其他虛擬機器,VM1 必須____________</code></pre>"
+        ],
         "options": [
-            "部署至不同的虛擬網路。",
-            "執行與其他虛擬機器不同的作業系統。",
-            "部署至不同的資源群組。",
-            "具有兩個網路介面。"
+            "<code>部署至不同的虛擬網路。</code>",
+            "<code>執行與其他虛擬機器不同的作業系統。</code>",
+            "<code>部署至不同的資源群組。</code>",
+            "<code>具有兩個網路介面。</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 108,
         "type": "single",
-        "question": "108. 您可以將 Azure 原則定義指派給____________",
+        "question": [
+            "<pre><code>108. 您可以將 Azure 原則定義指派給____________</code></pre>"
+        ],
         "options": [
-            "容器應用程式。",
-            "資源群組",
-            "資源鎖定。",
-            "安全性群組。"
+            "<code>容器應用程式。</code>",
+            "<code>資源群組</code>",
+            "<code>資源鎖定。</code>",
+            "<code>安全性群組。</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 109,
         "type": "single",
-        "question": "109. 您可以使用____________以確保雲端資源始終符合公司標準和法規要求。",
+        "question": [
+            "<pre><code>109. 您可以使用____________以確保雲端資源始終符合公司標準和法規要求。</code></pre>"
+        ],
         "options": [
-            "彈性",
-            "水平縮放",
-            "角色型存取控制(RBAC)",
-            "ARM 範本"
+            "<code>彈性</code>",
+            "<code>水平縮放</code>",
+            "<code>角色型存取控制(RBAC)</code>",
+            "<code>ARM 範本</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 110,
         "type": "single",
-        "question": "110. 許多 Azure 資源會要求您指定應該部署的目標____________",
+        "question": [
+            "<pre><code>110. 許多 Azure 資源會要求您指定應該部署的目標____________</code></pre>"
+        ],
         "options": [
-            "地理位置",
-            "區域",
-            "資料中心",
-            "城市"
+            "<code>地理位置</code>",
+            "<code>區域</code>",
+            "<code>資料中心</code>",
+            "<code>城市</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 111,
         "type": "single",
-        "question": "111. 即使 Azure 虛擬機器的狀態為已停止(已解除配置),您仍將繼續支付____________",
+        "question": [
+            "<pre><code>111. 即使 Azure 虛擬機器的狀態為已停止(已解除配置),您仍將繼續支付____________</code></pre>"
+        ],
         "options": [
-            "計算容量的費用",
-            "I/O 作業的費用",
-            "網路的費用",
-            "儲存體的費用"
+            "<code>計算容量的費用</code>",
+            "<code>I/O 作業的費用</code>",
+            "<code>網路的費用</code>",
+            "<code>儲存體的費用</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 112,
         "type": "single",
-        "question": "112. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure 虛擬機器:___________",
+        "question": [
+            "<pre><code>112. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure 虛擬機器:___________</code></pre>"
+        ],
         "options": [
-            "基礎結構即服務(IaaS)",
-            "平臺即服務(PaaS)",
-            "軟體即服務(SaaS)"
+            "<code>基礎結構即服務(IaaS)</code>",
+            "<code>平臺即服務(PaaS)</code>",
+            "<code>軟體即服務(SaaS)</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 113,
         "type": "single",
-        "question": "113. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure SQL 資料庫:___________",
+        "question": [
+            "<pre><code>113. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure SQL 資料庫:___________</code></pre>"
+        ],
         "options": [
-            "基礎結構即服務(IaaS)",
-            "平臺即服務(PaaS)",
-            "軟體即服務(SaaS)"
+            "<code>基礎結構即服務(IaaS)</code>",
+            "<code>平臺即服務(PaaS)</code>",
+            "<code>軟體即服務(SaaS)</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 114,
         "type": "single",
-        "question": "114. ___________可確保 Azure 服務具有備援能力並防止資料中心故障。",
+        "question": [
+            "<pre><code>114. ___________可確保 Azure 服務具有備援能力並防止資料中心故障。</code></pre>"
+        ],
         "options": [
-            "可用性區域",
-            "Azure 原則",
-            "Azure 服務健康狀態",
-            "本地備援儲存體(LRS)"
+            "<code>可用性區域</code>",
+            "<code>Azure 原則</code>",
+            "<code>Azure 服務健康狀態</code>",
+            "<code>本地備援儲存體(LRS)</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 115,
         "type": "single",
-        "question": "115. ___________是用來將相關的 Azure 原則分組。",
+        "question": [
+            "<pre><code>115. ___________是用來將相關的 Azure 原則分組。</code></pre>"
+        ],
         "options": [
-            "計劃",
-            "管理群組",
-            "引數",
-            "資源群組"
+            "<code>計劃</code>",
+            "<code>管理群組</code>",
+            "<code>引數</code>",
+            "<code>資源群組</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 116,
         "type": "single",
-        "question": "116. 當您需要同時委派許可權給多部 Azure 虛擬機器時,您必須___________",
+        "question": [
+            "<pre><code>116. 當您需要同時委派許可權給多部 Azure 虛擬機器時,您必須___________</code></pre>"
+        ],
         "options": [
-            "將 Azure 虛擬機器部署至同一個 Azure 區域。",
-            "使用相同的 Azure Resource Manager 範本部署 Azure 虛擬機器。",
-            "將 Azure 虛擬機器部署至同一個資源群組。",
-            "將 Azure 虛擬機器部署至同一個可用性區域。"
+            "<code>將 Azure 虛擬機器部署至同一個 Azure 區域。</code>",
+            "<code>使用相同的 Azure Resource Manager 範本部署 Azure 虛擬機器。</code>",
+            "<code>將 Azure 虛擬機器部署至同一個資源群組。</code>",
+            "<code>將 Azure 虛擬機器部署至同一個可用性區域。</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 117,
         "type": "single",
-        "question": "117. ___________支援內部部署儲存體與 Azure 儲存體之間的同步處理。",
+        "question": [
+            "<pre><code>117. ___________支援內部部署儲存體與 Azure 儲存體之間的同步處理。</code></pre>"
+        ],
         "options": [
-            "Azure Blob 儲存體",
-            "Azure 檔案儲存體",
-            "Azure 佇列儲存體",
-            "Azure 表格儲存體"
+            "<code>Azure Blob 儲存體</code>",
+            "<code>Azure 檔案儲存體</code>",
+            "<code>Azure 佇列儲存體</code>",
+            "<code>Azure 表格儲存體</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 118,
         "type": "single",
-        "question": "118. Azure 容器執行個體是一種 Azure___________",
+        "question": [
+            "<pre><code>118. Azure 容器執行個體是一種 Azure___________</code></pre>"
+        ],
         "options": [
-            "計算服務。",
-            "身分識別服務。",
-            "網路服務。",
-            "儲存體服務"
+            "<code>計算服務。</code>",
+            "<code>身分識別服務。</code>",
+            "<code>網路服務。</code>",
+            "<code>儲存體服務</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 119,
         "type": "single",
-        "question": "119. ___________讓組織能夠管理多個訂用帳戶間的 Azure 資源合規性。",
+        "question": [
+            "<pre><code>119. ___________讓組織能夠管理多個訂用帳戶間的 Azure 資源合規性。</code></pre>"
+        ],
         "options": [
-            "資源群組",
-            "管理群組",
-            "Azure 原則",
-            "Azure App Service"
+            "<code>資源群組</code>",
+            "<code>管理群組</code>",
+            "<code>Azure 原則</code>",
+            "<code>Azure App Service</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 120,
         "type": "single",
-        "question": "120. 儲存在 Azure 儲存體帳戶封存存取層中的資料___________",
+        "question": [
+            "<pre><code>120. 儲存在 Azure 儲存體帳戶封存存取層中的資料___________</code></pre>"
+        ],
         "options": [
-            "隨時都可以使用 azcopy.exe 來存取。",
-            "只能使用 Azure 備份來讀取。",
-            "必須先還原,才能存取資料。",
-            "必須先解除凍結,才能存取資料。"
+            "<code>隨時都可以使用 azcopy.exe 來存取。</code>",
+            "<code>只能使用 Azure 備份來讀取。</code>",
+            "<code>必須先還原,才能存取資料。</code>",
+            "<code>必須先解除凍結,才能存取資料。</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 121,
         "type": "single",
-        "question": "121. 查詢內部部署 Microsoft SQL 伺服器的 Azure Web 應用程式是____________雲端範例。",
+        "question": [
+            "<pre><code>121. 查詢內部部署 Microsoft SQL 伺服器的 Azure Web 應用程式是____________雲端範例。</code></pre>"
+        ],
         "options": [
-            "混合式",
-            "多供應商",
-            "私人",
-            "公用"
+            "<code>混合式</code>",
+            "<code>多供應商</code>",
+            "<code>私人</code>",
+            "<code>公用</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 122,
         "type": "single",
-        "question": "122. 需要使用者在登入 Microsoft Entra 時輸入密碼並提供單次密碼是一種____________",
+        "question": [
+            "<pre><code>122. 需要使用者在登入 Microsoft Entra 時輸入密碼並提供單次密碼是一種____________</code></pre>"
+        ],
         "options": [
-            "企業對客戶(B2C)識別服務。",
-            "受控識別。",
-            "多重要素驗證(MFA)。",
-            "角色型存取控制(RBAC)。"
+            "<code>企業對客戶(B2C)識別服務。</code>",
+            "<code>受控識別。</code>",
+            "<code>多重要素驗證(MFA)。</code>",
+            "<code>角色型存取控制(RBAC)。</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 123,
         "type": "single",
-        "question": "123. 您有一個具有唯讀鎖定的儲存體帳戶。 請問帳戶擁有者可以對儲存體帳戶執行下列哪一項動作?",
+        "question": [
+            "<pre><code>123. 您有一個具有唯讀鎖定的儲存體帳戶。 請問帳戶擁有者可以對儲存體帳戶執行下列哪一項動作?</code></pre>"
+        ],
         "options": [
-            "將[鎖定型別]設定為[刪除]。",
-            "修改儲存體帳戶的許可權。",
-            "重新命名鎖定。",
-            "移除鎖定。"
+            "<code>將[鎖定型別]設定為[刪除]。</code>",
+            "<code>修改儲存體帳戶的許可權。</code>",
+            "<code>重新命名鎖定。</code>",
+            "<code>移除鎖定。</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 124,
         "type": "single",
-        "question": "124. 您有一個在 Azure 中執行的 Web 應用程式。 您需要確認在使用者瀏覽器中載入網頁所需的時間。 您應該使用下列何者?",
+        "question": [
+            "<pre><code>124. 您有一個在 Azure 中執行的 Web 應用程式。 您需要確認在使用者瀏覽器中載入網頁所需的時間。 您應該使用下列何者?</code></pre>"
+        ],
         "options": [
-            "Log Analytics",
-            "Azure 網路監看員",
-            "Azure 監視器警示",
-            "Azure 監視器的 Application Insights"
+            "<code>Log Analytics</code>",
+            "<code>Azure 網路監看員</code>",
+            "<code>Azure 監視器警示</code>",
+            "<code>Azure 監視器的 Application Insights</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 125,
         "type": "single",
-        "question": "125. 您可以在 Azure 中使用____________傳送電子郵件警示, 當 Azure 訂用帳戶於目前計費週期的費用超過指定限制時。",
+        "question": [
+            "<pre><code>125. 您可以在 Azure 中使用____________傳送電子郵件警示, 當 Azure 訂用帳戶於目前計費週期的費用超過指定限制時。</code></pre>"
+        ],
         "options": [
-            "Advisor 建議",
-            "存取控制(IAM)",
-            "預算警示",
-            "合規性"
+            "<code>Advisor 建議</code>",
+            "<code>存取控制(IAM)</code>",
+            "<code>預算警示</code>",
+            "<code>合規性</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 126,
         "type": "single",
-        "question": "126. 如果系統管理員停止 Azure 虛擬機器,您可以使用下列何者來自動傳送警示?",
+        "question": [
+            "<pre><code>126. 如果系統管理員停止 Azure 虛擬機器,您可以使用下列何者來自動傳送警示?</code></pre>"
+        ],
         "options": [
-            "Azure 網路監看員",
-            "Azure 監視器",
-            "Azure 服務健康狀態",
-            "Azure Advisor"
+            "<code>Azure 網路監看員</code>",
+            "<code>Azure 監視器</code>",
+            "<code>Azure 服務健康狀態</code>",
+            "<code>Azure Advisor</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 127,
         "type": "single",
-        "question": "127. 您的公司有一個 Azure 訂用帳戶和三個業務單位。 您計劃為每個業務單位部署新的資源。 您需要確保部署新的資源時會利用一種可重複且可靠的方法,將相同的設定套用至每項資源。 您應該使用下列何者?",
+        "question": [
+            "<pre><code>127. 您的公司有一個 Azure 訂用帳戶和三個業務單位。 您計劃為每個業務單位部署新的資源。 您需要確保部署新的資源時會利用一種可重複且可靠的方法,將相同的設定套用至每項資源。 您應該使用下列何者?</code></pre>"
+        ],
         "options": [
-            "Azure 原則",
-            "Azure Resource Manager(ARM)範本",
-            "資源群組",
-            "Azure Arc"
+            "<code>Azure 原則</code>",
+            "<code>Azure Resource Manager(ARM)範本</code>",
+            "<code>資源群組</code>",
+            "<code>Azure Arc</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 128,
         "type": "single",
-        "question": "128. 您的公司擁有一份包含多項資源的 Azure 訂用帳戶。 您需要確認哪一個部門該為每項資源的成本負責。 您應該使用下列何者?",
+        "question": [
+            "<pre><code>128. 您的公司擁有一份包含多項資源的 Azure 訂用帳戶。 您需要確認哪一個部門該為每項資源的成本負責。 您應該使用下列何者?</code></pre>"
+        ],
         "options": [
-            "標籤",
-            "警示",
-            "預算"
+            "<code>標籤</code>",
+            "<code>警示</code>",
+            "<code>預算</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 129,
         "type": "single",
-        "question": "129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同型別的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些專案?",
+        "question": [
+            "<pre><code>129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同型別的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些專案?</code></pre>"
+        ],
         "options": [
-            "Azure API 管理服務",
-            "虛擬機器擴充套件集",
-            "管理群組",
-            "Azure Resource Manager 範本"
+            "<code>Azure API 管理服務</code>",
+            "<code>虛擬機器擴充套件集</code>",
+            "<code>管理群組</code>",
+            "<code>Azure Resource Manager 範本</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 130,
         "type": "single",
-        "question": "130. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源型別」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源型別。VNET1____________",
+        "question": [
+            "<pre><code>130. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源型別」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源型別。VNET1____________</code></pre>"
+        ],
         "options": [
-            "會自動遭刪除。",
-            "會自動移至另一個資源群組。",
-            "會持續正常運作。",
-            "目前是唯讀物件。"
+            "<code>會自動遭刪除。</code>",
+            "<code>會自動移至另一個資源群組。</code>",
+            "<code>會持續正常運作。</code>",
+            "<code>目前是唯讀物件。</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 131,
         "type": "single",
-        "question": "131. 自動調整是一種____________",
+        "question": [
+            "<pre><code>131. 自動調整是一種____________</code></pre>"
+        ],
         "options": [
-            "敏捷度。",
-            "彈性。",
-            "地理位置散發。",
-            "可預測性。"
+            "<code>敏捷度。</code>",
+            "<code>彈性。</code>",
+            "<code>地理位置散發。</code>",
+            "<code>可預測性。</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 132,
         "type": "single",
-        "question": "132. Azure Cosmos DB是____________供應專案的範例。",
+        "question": [
+            "<pre><code>132. Azure Cosmos DB是____________供應專案的範例。</code></pre>"
+        ],
         "options": [
-            "平臺即服務(PaaS)",
-            "基礎結構即服務(IaaS)",
-            "內容即服務",
-            "軟體即服務(SaaS)"
+            "<code>平臺即服務(PaaS)</code>",
+            "<code>基礎結構即服務(IaaS)</code>",
+            "<code>內容即服務</code>",
+            "<code>軟體即服務(SaaS)</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 133,
         "type": "single",
-        "question": "133. 當雲端應用程式可以配置及釋放資源時,就表示它具有____________",
+        "question": [
+            "<pre><code>133. 當雲端應用程式可以配置及釋放資源時,就表示它具有____________</code></pre>"
+        ],
         "options": [
-            "彈性。",
-            "治理能力。",
-            "高可用性。",
-            "可預測性。"
+            "<code>彈性。</code>",
+            "<code>治理能力。</code>",
+            "<code>高可用性。</code>",
+            "<code>可預測性。</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 134,
         "type": "single",
-        "question": "134. 能購買的 Azure 保留的 VM 執行個體最長天期為何?",
+        "question": [
+            "<pre><code>134. 能購買的 Azure 保留的 VM 執行個體最長天期為何?</code></pre>"
+        ],
         "options": [
-            "4年",
-            "5年",
-            "3年",
-            "1年"
+            "<code>4年</code>",
+            "<code>5年</code>",
+            "<code>3年</code>",
+            "<code>1年</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 135,
         "type": "single",
-        "question": "135. 在軟體即服務(SaaS)雲端服務中,哪一項責任由 Microsoft 與客戶共同承擔?",
+        "question": [
+            "<pre><code>135. 在軟體即服務(SaaS)雲端服務中,哪一項責任由 Microsoft 與客戶共同承擔?</code></pre>"
+        ],
         "options": [
-            "作業系統更新",
-            "身分識別和目錄基礎結構管理",
-            "應用程式管理",
-            "資訊和資料管理"
+            "<code>作業系統更新</code>",
+            "<code>身分識別和目錄基礎結構管理</code>",
+            "<code>應用程式管理</code>",
+            "<code>資訊和資料管理</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 136,
         "type": "single",
-        "question": "136. 您擁有 50 部裝載於內部部署的虛擬機器與 50 部裝載於 Azure 中的虛擬機器。這些內部部署虛擬機器與 Azure 虛擬機器皆相互連線。 這是下列何種雲端模型?",
+        "question": [
+            "<pre><code>136. 您擁有 50 部裝載於內部部署的虛擬機器與 50 部裝載於 Azure 中的虛擬機器。這些內部部署虛擬機器與 Azure 虛擬機器皆相互連線。 這是下列何種雲端模型?</code></pre>"
+        ],
         "options": [
-            "混合式",
-            "私人",
-            "公用"
+            "<code>混合式</code>",
+            "<code>私人</code>",
+            "<code>公用</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 137,
         "type": "single",
-        "question": "137. 您必須使用 Azure Cloud Shell 管理 Azure。您該選取哪個 Azure入口網站圖示?<br>\n 1 2 3 4",
+        "question": [
+            "<pre><code>137. 您必須使用 Azure Cloud Shell 管理 Azure。您該選取哪個 Azure入口網站圖示?",
+            "1 2 3 4</code></pre>"
+        ],
         "options": [
-            "1",
-            "2",
-            "3",
-            "4"
+            "<code>1</code>",
+            "<code>2</code>",
+            "<code>3</code>",
+            "<code>4</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": "images//q139.jpg",
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 138,
         "type": "single",
-        "question": "138. 您可以使用____________提出節省成本的建議。",
+        "question": [
+            "<pre><code>138. 您可以使用____________提出節省成本的建議。</code></pre>"
+        ],
         "options": [
-            "Application Insights",
-            "Azure Advisor",
-            "Azure 資源標籤",
-            "Azure 服務健康狀態"
+            "<code>Application Insights</code>",
+            "<code>Azure Advisor</code>",
+            "<code>Azure 資源標籤</code>",
+            "<code>Azure 服務健康狀態</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 139,
         "type": "single",
-        "question": "139. 您在資料中心的 Hyper-V 主機上裝載了1,000部虛擬機器。 您計劃將所有虛擬機器全都移轉至 Azure 隨用隨付訂閱。 您必須確定適用於所規劃Azure 解決方案的支出模型。 您應該確定哪個支出模型?",
+        "question": [
+            "<pre><code>139. 您在資料中心的 Hyper-V 主機上裝載了1,000部虛擬機器。 您計劃將所有虛擬機器全都移轉至 Azure 隨用隨付訂閱。 您必須確定適用於所規劃Azure 解決方案的支出模型。 您應該確定哪個支出模型?</code></pre>"
+        ],
         "options": [
-            "運營型",
-            "可調整型",
-            "彈性型",
-            "資本型"
+            "<code>運營型</code>",
+            "<code>可調整型</code>",
+            "<code>彈性型</code>",
+            "<code>資本型</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 140,
         "type": "single",
-        "question": "140. Application Insights 這項功能屬於下列哪一個 Azure 服務?",
+        "question": [
+            "<pre><code>140. Application Insights 這項功能屬於下列哪一個 Azure 服務?</code></pre>"
+        ],
         "options": [
-            "Azure Advisor",
-            "Azure 應用程式閘道",
-            "Azure Arc",
-            "Azure 監視器"
+            "<code>Azure Advisor</code>",
+            "<code>Azure 應用程式閘道</code>",
+            "<code>Azure Arc</code>",
+            "<code>Azure 監視器</code>"
         ],
         "answer": [
             "D"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 141,
         "type": "single",
-        "question": "141. 雲端服務提供者的服務等級協定(SLA)會將 _______ 表示成指定一年內運作時間的百分比。",
+        "question": [
+            "<pre><code>141. 雲端服務提供者的服務等級協定(SLA)會將 _______ 表示成指定一年內運作時間的百分比。</code></pre>"
+        ],
         "options": [
-            "可用性",
-            "彈性",
-            "可靠性",
-            "可擴縮性"
+            "<code>可用性</code>",
+            "<code>彈性</code>",
+            "<code>可靠性</code>",
+            "<code>可擴縮性</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 142,
         "type": "single",
-        "question": "142. 哪一種雲端運算模型包含內部部署與雲端架構資源?",
+        "question": [
+            "<pre><code>142. 哪一種雲端運算模型包含內部部署與雲端架構資源?</code></pre>"
+        ],
         "options": [
-            "混合式",
-            "公用",
-            "私人"
+            "<code>混合式</code>",
+            "<code>公用</code>",
+            "<code>私人</code>"
         ],
         "answer": [
             "A"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 143,
         "type": "single",
-        "question": "143. ______ 可讓使用者使用單一登入 (SSO) 向多個應用程式進行驗證。",
+        "question": [
+            "<pre><code>143. ______ 可讓使用者使用單一登入 (SSO) 向多個應用程式進行驗證。</code></pre>"
+        ],
         "options": [
-            "Azure 中的應用程式安全性群組",
-            "Microsoft Entra ID",
-            "Azure Key Vault",
-            "適用於雲端的 Microsoft Defender"
+            "<code>Azure 中的應用程式安全性群組</code>",
+            "<code>Microsoft Entra ID</code>",
+            "<code>Azure Key Vault</code>",
+            "<code>適用於雲端的 Microsoft Defender</code>"
         ],
         "answer": [
             "B"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 144,
         "type": "single",
-        "question": "144. 您可以使用 ______ 對物件進行邏輯分組以報告部門成本和跟蹤預算。",
+        "question": [
+            "<pre><code>144. 您可以使用 ______ 對物件進行邏輯分組以報告部門成本和跟蹤預算。</code></pre>"
+        ],
         "options": [
-            "Azure 原則",
-            "Azure 服務健康狀態",
-            "資源標籤",
-            "安全性群組"
+            "<code>Azure 原則</code>",
+            "<code>Azure 服務健康狀態</code>",
+            "<code>資源標籤</code>",
+            "<code>安全性群組</code>"
         ],
         "answer": [
             "C"
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 145,
         "type": "multiple",
-        "question": "145. 您擁有 Azure 環境。 您需要在執行 Android 作業系統的平板電腦中建立新的 Azure 虛擬機器。 下列哪三種是可行的解決方案?",
+        "question": [
+            "<pre><code>145. 您擁有 Azure 環境。 您需要在執行 Android 作業系統的平板電腦中建立新的 Azure 虛擬機器。 下列哪三種是可行的解決方案?</code></pre>"
+        ],
         "options": [
-            "在 Azure Cloud Shell 中使用 Power Shell。",
-            "使用 Power Apps 入口網站。",
-            "使用安全性與合規性系統管理中心。",
-            "使用 Azure 入口網站。",
-            "在 Bash 中使用Azure Cloud Shell。"
+            "<code>在 Azure Cloud Shell 中使用 Power Shell。</code>",
+            "<code>使用 Power Apps 入口網站。</code>",
+            "<code>使用安全性與合規性系統管理中心。</code>",
+            "<code>使用 Azure 入口網站。</code>",
+            "<code>在 Bash 中使用Azure Cloud Shell。</code>"
         ],
         "answer": [
             "A",
@@ -2424,19 +3006,23 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 146,
         "type": "multiple",
-        "question": "146. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?每個正確答案都呈現一個完整的解決方案。",
+        "question": [
+            "<pre><code>146. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?每個正確答案都呈現一個完整的解決方案。</code></pre>"
+        ],
         "options": [
-            "作業系統的安裝和設定",
-            "資料中心基礎結構的實體安全性",
-            "網路設定",
-            "儲存體的設定和維護",
-            "維護硬體"
+            "<code>作業系統的安裝和設定</code>",
+            "<code>資料中心基礎結構的實體安全性</code>",
+            "<code>網路設定</code>",
+            "<code>儲存體的設定和維護</code>",
+            "<code>維護硬體</code>"
         ],
         "answer": [
             "B",
@@ -2444,19 +3030,23 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 147,
         "type": "multiple",
-        "question": "147. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?",
+        "question": [
+            "<pre><code>147. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?</code></pre>"
+        ],
         "options": [
-            "儲存體的設定和維護",
-            "網路設定",
-            "資料中心基礎結構的實體安全性",
-            "作業系統的安裝和設定",
-            "維護硬體"
+            "<code>儲存體的設定和維護</code>",
+            "<code>網路設定</code>",
+            "<code>資料中心基礎結構的實體安全性</code>",
+            "<code>作業系統的安裝和設定</code>",
+            "<code>維護硬體</code>"
         ],
         "answer": [
             "C",
@@ -2464,19 +3054,23 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 148,
         "type": "multiple",
-        "question": "148. 您需要管理容器。您可以使用哪兩項服務?",
+        "question": [
+            "<pre><code>148. 您需要管理容器。您可以使用哪兩項服務?</code></pre>"
+        ],
         "options": [
-            "Azure 虛擬機器",
-            "Azure 容器執行個體",
-            "Azure 虛擬桌面",
-            "Azure Functions",
-            "Azure Kubernetes Service(AKS)"
+            "<code>Azure 虛擬機器</code>",
+            "<code>Azure 容器執行個體</code>",
+            "<code>Azure 虛擬桌面</code>",
+            "<code>Azure Functions</code>",
+            "<code>Azure Kubernetes Service(AKS)</code>"
         ],
         "answer": [
             "B",
@@ -2484,19 +3078,23 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 149,
         "type": "multiple",
-        "question": "149. 您計劃降低持續的 Azure 支出。 您需要確認影響資源成本的因素。 您應該指定哪三個因素?每個正確答案都呈現一個完整的解決方案。",
+        "question": [
+            "<pre><code>149. 您計劃降低持續的 Azure 支出。 您需要確認影響資源成本的因素。 您應該指定哪三個因素?每個正確答案都呈現一個完整的解決方案。</code></pre>"
+        ],
         "options": [
-            "服務層",
-            "輸出資料量",
-            "Azure 區域",
-            "處理的資料型別",
-            "輸入資料量"
+            "<code>服務層</code>",
+            "<code>輸出資料量</code>",
+            "<code>Azure 區域</code>",
+            "<code>處理的資料型別</code>",
+            "<code>輸入資料量</code>"
         ],
         "answer": [
             "A",
@@ -2505,19 +3103,23 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D3_Azure 管理與治理"
     },
     {
         "id": 150,
         "type": "multiple",
-        "question": "150. Azure 系統管理員打算執行可建立 Azure 資源的 PowerShell 指令碼。 您需要建議執行此指令碼所用的電腦組態。 哪三部電腦可以執行此指令碼?",
+        "question": [
+            "<pre><code>150. Azure 系統管理員打算執行可建立 Azure 資源的 PowerShell 指令碼。 您需要建議執行此指令碼所用的電腦組態。 哪三部電腦可以執行此指令碼?</code></pre>"
+        ],
         "options": [
-            "執行 Windows10 且安裝了 Azure PowerShell 模組的電腦",
-            "執行 macOS 且安裝了 PowerShell 的電腦",
-            "執行 Linux 且安裝了 Azure CLI 工具的電腦",
-            "執行 Windows 11 且安裝了 Azure CLI 工具的電腦",
-            "執行 ChromeOS 且使用 Azure Cloud Shell 的電腦"
+            "<code>執行 Windows10 且安裝了 Azure PowerShell 模組的電腦</code>",
+            "<code>執行 macOS 且安裝了 PowerShell 的電腦</code>",
+            "<code>執行 Linux 且安裝了 Azure CLI 工具的電腦</code>",
+            "<code>執行 Windows 11 且安裝了 Azure CLI 工具的電腦</code>",
+            "<code>執行 ChromeOS 且使用 Azure Cloud Shell 的電腦</code>"
         ],
         "answer": [
             "A",
@@ -2526,16 +3128,26 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 151,
         "type": "multioption",
-        "question": "151. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:<br>\n- 您必須能夠修改App1的程式碼。<br>\n- 投入管理App1作業系統的資源必須降至最少。<br>\n- App2必須能夠與伺服器的作業系統互動。<br>\n這兩個應用程式各應使用何種型別的雲端服務?<br>\nApp1: (A)<br>\nApp2: (B)",
+        "question": [
+            "<pre><code>151. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:",
+            "- 您必須能夠修改App1的程式碼。",
+            "- 投入管理App1作業系統的資源必須降至最少。",
+            "- App2必須能夠與伺服器的作業系統互動。",
+            "這兩個應用程式各應使用何種型別的雲端服務?",
+            "App1: (A)",
+            "App2: (B)</code></pre>"
+        ],
         "options": [
-            "1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)"
+            "<code>1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+            "<code>1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>"
         ],
         "answer": [
             "B",
@@ -2543,17 +3155,25 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 152,
         "type": "multioption",
-        "question": "152. 請將雲端服務與適當的描述進行配對。<br>\n描述:<br>\nA. 針對雲端環境提供最大控制能力。<br>\nB. 針對資料庫設計提供最大控制能力,但不需要維護作業系統。<br>\nC. 用來裝載Azure虛擬機器。",
+        "question": [
+            "<pre><code>152. 請將雲端服務與適當的描述進行配對。",
+            "描述:",
+            "A. 針對雲端環境提供最大控制能力。",
+            "B. 針對資料庫設計提供最大控制能力,但不需要維護作業系統。",
+            "C. 用來裝載Azure虛擬機器。</code></pre>"
+        ],
         "options": [
-            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)",
-            "1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)"
+            "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+            "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+            "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>"
         ],
         "answer": [
             "A",
@@ -2562,17 +3182,25 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 153,
         "type": "multioption",
-        "question": "153. 雲端模型有三種:混合雲端、私人雲端、公共雲端,請依描述進行配對。<br>\n描述:<br>\nA. 無需資本支出。<br>\nB. 可提供對安全性的完整控制權。<br>\nC. 可選擇使用內部部署資源或雲端式資源。",
+        "question": [
+            "<pre><code>153. 雲端模型有三種:混合雲端、私人雲端、公共雲端,請依描述進行配對。",
+            "描述:",
+            "A. 無需資本支出。",
+            "B. 可提供對安全性的完整控制權。",
+            "C. 可選擇使用內部部署資源或雲端式資源。</code></pre>"
+        ],
         "options": [
-            "1.混合雲端|2.公共雲端|3.私人雲端",
-            "1.混合雲端|2.公共雲端|3.私人雲端",
-            "1.混合雲端|2.公共雲端|3.私人雲端"
+            "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>",
+            "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>",
+            "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>"
         ],
         "answer": [
             "C",
@@ -2581,17 +3209,25 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 154,
         "type": "multioption",
-        "question": "154. 請將 Azure 儲存體服務與適當的描述配對。<br>\n作答區<br>\n(A)用於應用程式之間的可靠傳訊<br>\n(B)可當做 Windows 裝置中的網路共用存取<br>\n(C)可設定成使用封存存取層",
+        "question": [
+            "<pre><code>154. 請將 Azure 儲存體服務與適當的描述配對。",
+            "作答區",
+            "(A)用於應用程式之間的可靠傳訊",
+            "(B)可當做 Windows 裝置中的網路共用存取",
+            "(C)可設定成使用封存存取層</code></pre>"
+        ],
         "options": [
-            "Azure Blob|Azure Queue|Azure Table|Azure File",
-            "Azure Blob|Azure Queue|Azure Table|Azure File",
-            "Azure Blob|Azure Queue|Azure Table|Azure File"
+            "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>",
+            "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>",
+            "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>"
         ],
         "answer": [
             "D",
@@ -2600,17 +3236,22 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 155,
         "type": "multioption",
-        "question": "155. 您需要完成資料中心內使用的縱深防禦策略。應採取什麼措施?<br>\n請依照順序作答:",
+        "question": [
+            "<pre><code>155. 您需要完成資料中心內使用的縱深防禦策略。應採取什麼措施?",
+            "請依照順序作答:</code></pre>"
+        ],
         "options": [
-            "1.實體安全性|2.周邊|3.應用程式|4.以上皆非",
-            "1.實體安全性|2.周邊|3.應用程式|4.以上皆非",
-            "1.實體安全性|2.周邊|3.應用程式|4.以上皆非"
+            "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>",
+            "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>",
+            "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>"
         ],
         "answer": [
             "A",
@@ -2619,17 +3260,21 @@
         ],
         "weight": 1,
         "image": "images//q157.jpg",
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     },
     {
         "id": 156,
         "type": "multioption",
-        "question": "156. 您需要根據雲端服務模型識別客戶的共同責任層級。 依照從最高客戶責任層級(頂端)到最低客戶責任層級(底部)的排列方式,您應該按照哪一種順序排列每個模型?",
+        "question": [
+            "<pre><code>156. 您需要根據雲端服務模型識別客戶的共同責任層級。 依照從最高客戶責任層級(頂端)到最低客戶責任層級(底部)的排列方式,您應該按照哪一種順序排列每個模型?</code></pre>"
+        ],
         "options": [
-            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)",
-            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)",
-            "1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)"
+            "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>",
+            "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>",
+            "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>"
         ],
         "answer": [
             "C",
@@ -2638,17 +3283,21 @@
         ],
         "weight": 1,
         "image": null,
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D1_雲端概念"
     },
     {
         "id": 157,
         "type": "multioption",
-        "question": "157. 請將驗證方法與適當的安全性層級依照順序進行配對。",
+        "question": [
+            "<pre><code>157. 請將驗證方法與適當的安全性層級依照順序進行配對。</code></pre>"
+        ],
         "options": [
-            "1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證",
-            "1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證",
-            "1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證"
+            "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>",
+            "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>",
+            "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>"
         ],
         "answer": [
             "A",
@@ -2657,7 +3306,9 @@
         ],
         "weight": 1,
         "image": "images//q159.jpg",
-        "explanation": "",
+        "explanation": [
+            "<pre><code></code></pre>"
+        ],
         "category": "D2_Azure 架構與服務"
     }
 ]
