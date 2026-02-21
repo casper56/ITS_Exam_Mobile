@@ -63,7 +63,7 @@ def clean_repair_all():
         .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
         #result-screen { display: none; text-align: center; padding: 50px 20px; }
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
-        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
 
         /* 表格樣式：黑色實線邊框 */
         table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
@@ -108,7 +108,7 @@ def clean_repair_all():
             .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
             .review-exp { font-size: 1.0rem !important; padding: 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
             .review-exp pre, .review-exp code { margin: 0 !important; padding: 0 !important; white-space: pre-wrap !important; background: transparent !important; word-break: break-all !important; }
-            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; }
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
             .category-title, .header-bg { -webkit-print-color-adjust: exact; background-color: #f0f0f0 !important; }
@@ -459,7 +459,7 @@ def clean_repair_all():
             .review-opt-line { padding-left: 2px !important; margin-bottom: 2px !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
             .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 5px !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; font-size: 1.0rem !important; }
             .review-exp-box { font-size: 1.0rem !important; padding: 10px !important; border-radius: 10px !important; border: 1px solid #eee !important; margin: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; background: #fafafa !important; width: calc(100% - 2px) !important; }
-            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; }
             .q-img { max-width: 300px !important; margin: 10px 0 !important; }
             h1 { font-size: 1.5rem !important; margin-bottom: 20px !important; }
             .q-table, table { font-size: 0.7rem !important; max-width: 98% !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; border-collapse: collapse !important; box-sizing: border-box !important; }
@@ -480,7 +480,7 @@ def clean_repair_all():
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
-        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; }
 
         /* 表格樣式：黑色實線邊框 */
         table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }

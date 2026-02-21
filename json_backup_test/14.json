@@ -1,0 +1,22 @@
+[
+    "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+    "<table class=\"q-table w-100 t-center\"><thead><tr class=\"header-bg\"><td>Percentage</td><td>rangeLetter</td></tr></thead><tbody>",
+    "    <tr>",
+    "      <td><b>grade90 through 100</b></td>",
+    "      <td>A</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>80 through 89</b></td>",
+    "      <td>B</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>70 through 79</b></td>",
+    "      <td>C</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>60 through 69</b></td>",
+    "      <td>D</td>",
+    "    </tr>",
+    "    <tr class=\"category-title\"><td colspan=\"2\">0 through 59F</td></tr>",
+    "  </tbody></table>"
+]

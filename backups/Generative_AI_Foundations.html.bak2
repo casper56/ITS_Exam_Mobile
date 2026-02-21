@@ -17,7 +17,7 @@
         .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; }
         .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; }
         code { color: #000 !important; background-color: transparent !important; }
-        pre { background-color: transparent !important; border: none !important; margin: 0 !important; }
+        pre { background-color: transparent !important; border: none !important; }
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
         .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
