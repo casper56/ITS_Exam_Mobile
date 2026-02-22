@@ -3679,7 +3679,7 @@
         container.innerHTML = `
             <div class="card question-card">
                 <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-                <div class="question-body"><div class="mb-3">${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area mt-3"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div>
+                <div class="question-body"><div class="mb-3">${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area mt-1"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div>
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
@@ -3696,7 +3696,7 @@
                 }
                 const displayLabel = customLabel || `選項 ${oIdx + 1}`;
 
-                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">${displayLabel}</div><div class="d-flex flex-wrap gap-2">`;
+                let sHtml = `<div class="mb-2"><div class="fw-bold mb-1 small">${displayLabel}</div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => { 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
                     if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
