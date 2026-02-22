@@ -2356,13 +2356,13 @@
     {
         "id": 64,
         "question": [
-            "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選取正確的選項以完成敘述。 </code></pre>"
+            "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選取正確的選項以完成敘述。</code></pre>"
         ],
 		"questionA": [
-		  "① 叢集索引可提升以下查詢的效能:"
+		  "<pre><code class=\"language-sql\">① 叢集索引可提升以下查詢的效能:</code></pre>"
 		],
 		"questionB": [
-		  "② 叢集索引可提升以下資料行查詢的:"
+		  "<pre><code class=\"language-sql\">② 叢集索引可提升以下資料行查詢的:</code></pre>"
 		],
 		
         "options": [
@@ -3473,7 +3473,7 @@
                             const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                             return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                         }).join(' ');
-                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>${displayLabel}:</b> ${subLabels}</div>`;
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                     }
                     else {
                         const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;

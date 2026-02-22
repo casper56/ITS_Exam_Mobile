@@ -68,7 +68,7 @@
                     customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
                 }
                 
-                html += `<div class="sub-question-label">${customLabel || ('選項 ' + (optIdx + 1))}</div>`;
+                html += `<div class="mt-2 mb-1"><code>${customLabel || ('選項 ' + (optIdx + 1))}</code></div>`;
                 
                 let sIdx = 0;
                 // 智慧標題：如果超過 3 個字且不是單一字母/數字/YesNo 才是標題

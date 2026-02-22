@@ -2345,11 +2345,17 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">69. 【CH06-6】你設計了以下的函式來計算薪水：\n#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate\n針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。",
-            "題一:getpay() 函式會發生錯誤。",
-            "題二:getpay(salary = 5000) 不會回傳任何值。",
-            "題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
+            "<pre><code class=\"language-python\">69. 【CH06-6】你設計了以下的函式來計算薪水：\n#程式碼片段\ndef getpay(hours=40, rate=25, qty=0, qtyrate=0, salary=0):\n    overtime = 0\n    if qty > 0:\n        return qty * qtyrate\n    if salary > 0:\n        return salary\n    if hours > 40:\n        overtime = (hours - 40) * (1.5 * rate)\n        return overtime + (40 * rate)\n    else:\n        return hours * rate\n針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。</code></pre>"
         ],
+		 "questionA": [
+			"<pre><code>題一:getpay() 函式會發生錯誤。</code></pre>"
+		],
+		"questionB": [
+			"<pre><code>題二:getpay(salary = 5000) 不會回傳任何值。</code></pre>"
+		],
+		"questionC": [
+			"<pre><code>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
+		],
         "options": [
             "<code>Yes|No</code>",
             "<code>Yes|No</code>",
@@ -2794,12 +2800,20 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">84. 【CH08-1】針對下列有關 Python 例外處理 (try-except-finally) 的語法敘述，",
-            "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：",
-            "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。",
-            "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。",
-            "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。",
-            "● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code></pre>"
+            "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：</code></pre>"
         ],
+		"questionA": [
+			"<pre><code>● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
+		],
+		"questionB": [
+			"<pre><code>● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code></pre>"
+		],
+		"questionC": [
+			"<pre><code>● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code></pre>"
+		],
+		"questionD": [
+			"<pre><code>● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code></pre>"
+		],
         "options": [
             "<code>Yes|No</code>",
             "<code>Yes|No</code>",
@@ -2854,8 +2868,17 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">86. 【CH08-3】關於 assert 方法的救述，請在回答區中選擇還適當的選頂。\n答案選擇區\n\n選項 1. 若要測試變數 x 與變數 y 的值是否相同·可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)\n\n選項 2. 若要測試物件 x 與物件 y 是否相同，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)\n\n選項 3. 若要測試清單中是否存在某個值，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)</code></pre>"
-        ],
+            "<pre><code class=\"language-python\">86. 【CH08-3】關於 assert 方法的救述，請在回答區中選擇還適當的選頂。\n答案選擇區</code></pre>"
+	    ],
+		"questionA": [
+			"<pre><code class=\"language-python\">選項 1. 若要測試變數 x 與變數 y 的值是否相同·可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)</code></pre>"
+		],
+		"questionB": [
+			"<pre><code class=\"language-python\">選項 2. 若要測試物件 x 與物件 y 是否相同，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)</code></pre>"
+		],
+		"questionC": [
+			"<pre><code class=\"language-python\">選項 3. 若要測試清單中是否存在某個值，可以使用：\nA. assertIs(x, y)\nB. assertIn(x, y)\nC. assertEqual(x, y)\nD. assertIsInstance(x, y)</code></pre>"
+		],
         "options": [
             "<code>A|B|C|D</code>",
             "<code>A|B|C|D</code>",
@@ -2982,12 +3005,20 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">90. 【CH08-7】您撰寫了以下這段程式碼：import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()\nout.txt 檔案不存在執行程式碼。\n針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
-            "題一:此程式碼將正常執行，不會發生錯誤。",
-            "題二:此程式碼將執行，但會產生邏輯錯誤。",
-            "題三:此程式碼將產生執行階段錯誤。",
-            "題四:此程式碼將產生語法錯誤。</code></pre>"
+            "<pre><code class=\"language-python\">90. 【CH08-7】您撰寫了以下這段程式碼：import sys\ntry:\n    file_in = open('in.txt', 'r')\n    file_out = open('out.txt', 'w+')\nexcept IOError:\n    print('cannot open', file_name)\nelse:\n    i = i + 1\n    for line in file_in:\n        print (line.rstrip())\n        file_out.write('line '+ str(i) + ': '+ line)\n        i = i + 1\n    file_in.close ()\n    file_out.close ()\nout.txt 檔案不存在執行程式碼。\n針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。</code></pre>"
         ],
+		"questionA": [
+			"題一:此程式碼將正常執行，不會發生錯誤。"
+		],
+		"questionB": [
+			"題二:此程式碼將執行，但會產生邏輯錯誤。"
+		],
+		"questionC": [
+			"題三:此程式碼將產生執行階段錯誤。"
+		],
+		"questionD": [
+			 "題一:此程式碼將正常執行，不會發生錯誤。"
+		],
         "options": [
             "<code>Yes|No</code>",
             "<code>Yes|No</code>",
@@ -5587,7 +5618,7 @@
                         const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                         return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                     }).join(' ');
-                    return `<div class="review-opt-line"><b>${displayLabel}:</b> ${subLabels}</div>`;
+                    return `<div class="review-opt-line"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                 } else {
                     const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
                     return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
@@ -5628,7 +5659,7 @@
         container.innerHTML = `
             <div class="card question-card">
                 <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-                <div class="question-body"><div class="mb-3">${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area mt-1"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div>
+                <div class="question-body"><div>${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div>
             </div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
@@ -5645,7 +5676,7 @@
                 }
                 const displayLabel = customLabel || `選項 ${oIdx + 1}`;
 
-                let sHtml = `<div class="mb-2"><div class="fw-bold mb-1 small">${displayLabel}</div><div class="d-flex flex-wrap gap-2">`;
+                let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => { 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
                     if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
