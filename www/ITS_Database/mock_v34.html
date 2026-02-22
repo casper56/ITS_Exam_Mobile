@@ -2358,9 +2358,15 @@
         "question": [
             "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選",
             "取正確的選項以完成敘述。",
-            "① 叢集索引可提升以下查詢的效能:",
-			"② 叢集索引可提升以下資料行查詢的: </code></pre>"
+            
+			" </code></pre>"
         ],
+		"questionA": [
+		  "① 叢集索引可提升以下查詢的效能:"
+		],
+		"questionB": [
+		  "② 叢集索引可提升以下資料行查詢的:"
+		],
         "options": [
             "<code>傳回大型結果集|傳回許多資料行|不用 ORDER BY 或GROUP BY 子句</code>",
             "<code>隨機存取|循序存取|並非唯一或包含許多共同的值</code>"
@@ -3377,7 +3383,15 @@
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
-                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[optIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                const displayLabel = customLabel || `選項 ${optIdx + 1}`;
+
+                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">${displayLabel}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
                 subOpts.forEach((sub, subIdx) => { 
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
@@ -3449,11 +3463,19 @@
                     const isNum = (item.labelType === 'num');
                     const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                     if (String(o).includes('|')) {
+                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        const customLabelField = "question" + alphabet[i];
+                        let customLabel = "";
+                        if (item[customLabelField]) {
+                            customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                        }
+                        const displayLabel = customLabel || `選項 ${i + 1}`;
+
                         const subLabels = o.split('|').map((s, si) => {
                             const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                             return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                         }).join(' ');
-                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>${displayLabel}:</b> ${subLabels}</div>`;
                     }
                     else {
                         const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;

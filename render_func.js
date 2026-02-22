@@ -59,7 +59,16 @@
 
             if (optStr.includes('|')) {
                 const parts = optStr.split('|');
-                html += `<div class="sub-question-label">選項 ${optIdx + 1}</div>`;
+                
+                // 優先使用 questionA, questionB... 作為標籤
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[optIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                
+                html += `<div class="sub-question-label">${customLabel || ('選項 ' + (optIdx + 1))}</div>`;
                 
                 let sIdx = 0;
                 // 智慧標題：如果超過 3 個字且不是單一字母/數字/YesNo 才是標題

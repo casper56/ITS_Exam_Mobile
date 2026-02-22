@@ -5061,11 +5061,19 @@
             
             let optHtml = opts.map((o, i) => {
                 if (String(o).includes('|')) {
+                    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    const customLabelField = "question" + alphabet[i];
+                    let customLabel = "";
+                    if (item[customLabelField]) {
+                        customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                    }
+                    const displayLabel = customLabel || `選項 ${i + 1}`;
+
                     const subLabels = o.split('|').map((s, si) => {
                         const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                         return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                     }).join(' ');
-                    return `<div class="review-opt-line"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                    return `<div class="review-opt-line"><b>${displayLabel}:</b> ${subLabels}</div>`;
                 } else {
                     const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
                     return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
@@ -5115,7 +5123,15 @@
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
 
             if (String(opt).includes('|')) {
-                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">選項 ${oIdx+1}</div><div class="d-flex flex-wrap gap-2">`;
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[oIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                const displayLabel = customLabel || `選項 ${oIdx + 1}`;
+
+                let sHtml = `<div class="mb-3"><div class="fw-bold mb-1 small">${displayLabel}</div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => { 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
                     if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
