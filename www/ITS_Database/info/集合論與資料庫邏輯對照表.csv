@@ -1,0 +1,7 @@
+﻿圖片標籤,紅色/橘色選中區域,集合代數公式,對應 SQL 關鍵字
+A,左圓全紅 (含交集),A,LEFT JOIN
+B,右圓全紅 (含交集),B,RIGHT JOIN
+A',A 留白，其餘全橘,A′=U−A,NOT A
+B',B 留白，其餘全橘,B′=U−B,NOT B
+A ∪ B,雙圓全紅 (聯集),A∪B,UNION
+A ∩ B,只有中間橄欖紅,A∩B,INTERSECT

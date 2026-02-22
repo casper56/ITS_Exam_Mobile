@@ -1,0 +1,5 @@
+運算元,邏輯,結果範圍,是否自動去重？
+UNION,聯集 (OR),全部 (A + B),是
+UNION ALL,聯集 (純合併),全部 (A + B),否 (保留重複)
+INTERSECT,交集 (AND),只有重疊的部分,是
+EXCEPT,差集 (Minus),A 有但 B 沒有的部分,是

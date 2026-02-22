@@ -1,4 +1,165 @@
-[
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS Database 模擬考試</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <style>
+        html { scrollbar-gutter: stable; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
+        .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 50px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 15px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                    white-space: pre-wrap; /* 核心修正：確保陣列結合後的 \n 能正常換行 */
+                }
+                
+                /* 預設題目與程式碼樣式 */                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                    white-space: pre-wrap; /* 確保字串陣列的 \n 換行生效 */
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                    white-space: pre-wrap; /* 全域保留換行 */
+                }
+        code[class*="language-"] { color: inherit; }
+
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
+        .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
+        #result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+
+        /* 表格樣式：黑色實線邊框 */
+        table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
+        th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
+        .w-5 { width: 5% !important; }
+        .w-10 { width: 10% !important; }
+        .w-15 { width: 15% !important; }
+        .w-20 { width: 20% !important; }
+        .w-25 { width: 25% !important; }
+        .w-30 { width: 30% !important; }
+        .w-35 { width: 35% !important; }
+        .w-40 { width: 40% !important; }
+        .w-45 { width: 45% !important; }
+        .w-50 { width: 50% !important; }
+        .w-60 { width: 60% !important; }
+        .w-70 { width: 70% !important; }
+        .w-75 { width: 75% !important; }
+        .w-80 { width: 80% !important; }
+        
+        /* 表格對齊輔助類別 */
+        .t-left { margin-left: 0 !important; margin-right: auto !important; }
+        .t-center { margin-left: auto !important; margin-right: auto !important; }
+        .t-right { margin-left: auto !important; margin-right: 0 !important; }
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
+        .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
+        .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+        .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
+        .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
+        @media print { 
+            @page { size: auto; margin: 10mm; }
+            * { overflow: visible !important; max-height: none !important; height: auto !important; }
+            body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
+            #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
+            #result-screen h2.text-center { margin-top: 0 !important; padding-top: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
+            .review-id { margin: 0 !important; padding: 5px 10px !important; border-radius: 0 !important; }
+            .review-q-text { display: flex !important; align-items: flex-start !important; padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-q-text b { margin-right: 8px !important; white-space: nowrap !important; }
+            .review-q-text .q-content { flex: 1 !important; }
+            .review-q-text .q-content pre, .review-q-text .q-content code { margin-top: 0 !important; padding-top: 0 !important; }
+            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
+            .review-q-text { padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-exp { font-size: 1.0rem !important; padding: 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-exp pre, .review-exp code { margin: 0 !important; padding: 0 !important; white-space: pre-wrap !important; background: transparent !important; word-break: break-all !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
+            .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
+            .category-title, .header-bg { -webkit-print-color-adjust: exact; background-color: #f0f0f0 !important; }
+        }
+        .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+    </style>
+</head>
+<body>
+<div class="zoom-controls no-print">
+    <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
+</div>
+<div id="exam-ui">
+    <header class="exam-header d-flex justify-content-between align-items-center">
+        <div><h5 class="m-0">ITS Database 模擬考試</h5><small id="q-progress">1 / 50</small></div>
+        <div class="timer-box" id="timer">50:00</div>
+        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+    </header>
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
+    <main class="container-fluid main-content" style="width: calc(100% - 50px); margin-top: 80px;"><div id="question-area"></div></main>
+</div>
+<div id="result-screen" class="container-fluid">
+    <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
+    <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
+    <div class="mt-5 no-print">
+        <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="window.print()">🖨️ 列印錯題</button>
+    </div>
+    <div id="review-area">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
+        <div id="review-list"></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    const EXAM_LIMIT = 50, WRONG_KEY = 'itsdb_exam_wrong_ids';
+    let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
+    let examQuestions = [];
+
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+
+    const allQuestions = [
     {
         "id": 1,
         "question": [
@@ -35,9 +196,9 @@
         "id": 2,
         "question": [
             "<pre><code class=\"language-sql\">2. 您接受了某間地方慈善機構的IT實習工作,該慈善機構的資料模型有兩個資料表,名",
-            "為 Chapter 和 Language,如下所示。</code></pre>",
-            "[[image01]][[image02]]",
-            "<pre><code class=\"language-sql\">您建立了名為 ChapterLanguage 的第三個資料表來關聯 Chapter 資料表和",
+            "為 Chapter 和 Language,如下所示。",
+            "<br>[[image01]][[image02]]",
+            "您建立了名為 ChapterLanguage 的第三個資料表來關聯 Chapter 資料表和",
             "Language 資料表。",
             "您需要從 Chapter 和 Language 資料表中選取資料行,以便為 ChapterLanguage 資",
             "料表建立複合主索引鍵。",
@@ -143,7 +304,9 @@
             "B"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。</code></pre><span style=\"color:#dc3545\">正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。</span> Oracle 或 MySQL用法(有括號)<style>.sql-master-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; margin: 15px 0; table-layout: fixed !important; } .sql-master-table td { border: 1px solid #000 !important; padding: 10px; vertical-align: middle; word-break: break-all; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; } .w-15 { width: 15% !important; } .w-42 { width: 42.5% !important; }</style>",
+            "<pre><code class=\"language-sql\">ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。</code></pre>",
+            "<span style=\"color:#dc3545\">正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。</span> Oracle 或 MySQL用法(有括號)",
+            "<style>.sql-master-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; margin: 15px 0; table-layout: fixed !important; } .sql-master-table td { border: 1px solid #000 !important; padding: 10px; vertical-align: middle; word-break: break-all; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; } .w-15 { width: 15% !important; } .w-42 { width: 42.5% !important; }</style>",
             "<table class=\"sql-master-table w-100 t-center\">",
             "  <thead>",
             "    <tr class=\"header-bg\">",
@@ -159,9 +322,9 @@
             "    <tr>",
             "      <td><b>CREATE</b></td>",
             "      <td class=\"code-font\">CREATE TABLE [表名] ([欄位] [型別] [約束])</td>",
-            "      <td>建立新的資料表、視圖或預存程序。",
-            "          &emsp;&emsp;CREATE TABLE Customer (  ",
-            "          &emsp;&emsp;&emsp;&emsp;CustomerID int PRIMARY KEY,",
+            "      <td>建立新的資料表、視圖或預存程序。<br>",
+            "          &emsp;&emsp;CREATE TABLE Customer (  <br>",
+            "          &emsp;&emsp;&emsp;&emsp;CustomerID int PRIMARY KEY,<br>",
             "          &emsp;&emsp;&emsp;&emsp;CustomerName nvarchar(255) NOT NULL);",
             "    </td>",
             "    </tr>",
@@ -169,22 +332,22 @@
             "      <td><b>ALTER</b></td>",
             "      <td class=\"code-font\">ALTER TABLE [表名] ADD/DROP COLUMN [欄位]</td>",
             "      <td>修改現有的資料庫結構，例如增加或刪除欄位。",
-            "      <span style=\"color:#dc3545\"><b>注意：</b>MSSQL(SQL Server / T-SQL) 不可加括號。</span>",
-			"      ALTER TABLE Customer ADD District INTEGER;",
-			"          //新增欄位District 型態(int)",
-			"      ALTER TABLE Customer ALTER COLUMN District bigint ;",
-			"          //修改欄位District 型態(bigint)</td>",
+            "      <br><span style=\"color:#dc3545\"><b>注意：</b>MSSQL(SQL Server / T-SQL) 不可加括號。</span>",
+			"      <br>ALTER TABLE Customer ADD District INTEGER;",
+			"      <br>    //新增欄位District 型態(int)",
+			"      <br>ALTER TABLE Customer ALTER COLUMN District bigint ;",
+			"      <br>    //修改欄位District 型態(bigint)</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>DROP</b></td>",
             "      <td class=\"code-font\">DROP TABLE/PROCEDURE [名稱]</td>",
-            "      <td>完全刪除物件（結構與內容皆不保留）。  DROP TABLE Customer</td>",
+            "      <td>完全刪除物件（結構與內容皆不保留）。<br>  DROP TABLE Customer</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>TRUNCATE</b></td>",
             "      <td class=\"code-font\">TRUNCATE TABLE [表名]</td>",
             "      <td>快速清空整張表的記錄，但保留表格結構。",
-            "      TRUNCATE TABLE Customer;</td>",
+            "      <br>TRUNCATE TABLE Customer;</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">二、 DML (Data Manipulation Language) - 資料操作語言：處理記錄內容</td>",
@@ -193,20 +356,20 @@
             "      <td><b>INSERT</b></td>",
             "      <td class=\"code-font\">INSERT INTO [表名] ([欄位]) VALUES ([值])</td>",
             "      <td>將新記錄插入資料表。",
-            "      INSERT INTO Customer (CustomerID, CustomerName, District)",
-            "      VALUES (1,N'張小明', 100) ;</td>",
+            "      <br>INSERT INTO Customer (CustomerID, CustomerName, District)",
+            "      <br>VALUES (1,N'張小明', 100) ;</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>UPDATE</b></td>",
             "      <td class=\"code-font\">UPDATE [表名] SET [欄位]=[值] WHERE [條件]</td>",
             "      <td>修改現有資料；省略 WHERE 會更新全表。",
-            "      UPDATE Customer SET District = 900 WHERE CustomerID = 1;</td>",
+            "      <br>UPDATE Customer SET District = 900 WHERE CustomerID = 1;</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>DELETE</b></td>",
             "      <td class=\"code-font\">DELETE FROM [表名] WHERE [條件]</td>",
             "      <td>刪除表中的特定記錄。",
-            "        DELETE FROM Customer WHERE CustomerID = 1</td>",
+            "      <br>  DELETE FROM Customer WHERE CustomerID = 1</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">三、 DQL (Data Query Language) - 資料查詢語言：檢索資料</td>",
@@ -215,18 +378,18 @@
             "      <td><b>SELECT</b></td>",
             "      <td class=\"code-font\">SELECT [欄位] FROM [表名] WHERE [條件]</td>",
             "      <td>從資料庫中檢索資料，是最常用的指令",
-            "       SELECT * FROM Customer;",
-            "       SELECT COLUMN_NAME, DATA_TYPE ",      
-            "       FROM INFORMATION_SCHEMA.COLUMNS ",
-            "       WHERE TABLE_NAME = 'Customer'</td>",
+            "       <br>SELECT * FROM Customer;",
+            "       <br>SELECT COLUMN_NAME, DATA_TYPE ",      
+            "       <br>FROM INFORMATION_SCHEMA.COLUMNS ",
+            "       <br>WHERE TABLE_NAME = 'Customer'</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>JOIN</b></td>",
             "      <td class=\"code-font\">SELECT * FROM A JOIN B ON A.ID = B.ID</td>",
             "      <td>結合多張表的資料（如 INNER, LEFT JOIN）。",
-            "      SELECT   A.CustomerName, B.OrderAmount",
-            "      FROM Customer A",
-            "      JOIN Orders B ON A.CustomerID = B.CustomerID;</td>",
+            "      <br>SELECT   A.CustomerName, B.OrderAmount",
+            "      <br>FROM Customer A",
+            "      <br>JOIN Orders B ON A.CustomerID = B.CustomerID;</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">四、 DCL (Data Control Language) - 資料控制語言：權限管理</td>",
@@ -258,28 +421,31 @@
             "      <td><b>ROLLBACK</b></td>",
             "      <td class=\"code-font\">ROLLBACK</td>",
             "      <td>將變更復原至交易前的狀態（撤銷操作）。</td>",
-            "    </tr></table><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\"><td class=\"w-33\">類別</td>      <td class=\"w-33\">指令公式 / 查詢對象</td>      <td class=\"w-33\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
-			"    <tr>",
-			"      <td><b>查欄位</b></td>",
-			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.COLUMNS</td>",
-			"      <td>查詢所有表或特定表的欄位名稱、型別、是否允許 NULL。</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>查表格</b></td>",
-			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.TABLES</td>",
-			"      <td>列出資料庫中所有的資料表 (Base Table) 與視圖 (View)。</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>查程序</b></td>",
-			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.ROUTINES</td>",
-			"      <td>查詢預存程序 (Stored Procedures) 與函數 (Functions) 的清單。</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>查參數</b></td>",
-			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.PARAMETERS</td>",
-			"      <td>查詢預存程序中定義的參數（如 @UserName, @Age）。</td>",
-			"    </tr>",
-			"  </tbody></table>"
+            "    </tr>",
+            "</table>",
+            "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+            "<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+            "    <tr>",
+            "      <td><b>查欄位</b></td>",
+            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.COLUMNS</td>",
+            "      <td>查詢所有表或特定表的欄位名稱、型別、是否允許 NULL。</td>",
+            "    </tr>",
+            "    <tr>",
+            "      <td><b>查表格</b></td>",
+            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.TABLES</td>",
+            "      <td>列出資料庫中所有的資料表 (Base Table) 與視圖 (View)。</td>",
+            "    </tr>",
+            "    <tr>",
+            "      <td><b>查程序</b></td>",
+            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.ROUTINES</td>",
+            "      <td>查詢預存程序 (Stored Procedures) 與函數 (Functions) 的清單。</td>",
+            "    </tr>",
+            "    <tr>",
+            "      <td><b>查參數</b></td>",
+            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.PARAMETERS</td>",
+            "      <td>查詢預存程序中定義的參數（如 @UserName, @Age）。</td>",
+            "    </tr>",
+            "  </tbody></table>"
         ],
         "image": null,
         "type": "single",
@@ -335,7 +501,7 @@
     {
         "id": 8,
         "question": [
-            "<pre><code class=\"language-sql\">8. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、EmployeeName。請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?</code></pre>"
+            "<pre><code class=\"language-sql\">8. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、EmployeeName。<br>請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">SELECT COUNT(rows) FROM Employee</code>",
@@ -377,7 +543,9 @@
             "鍵時，可以設定 ON DELETE CASCADE。",
             "這表示當主資料表（父資料表，如 order）中的一筆資料被刪除時，參考到這筆資",
             "料的從屬資料表（子資料表，如 orderltem）中的所有對應資料列也會被自動刪除",
-            "，以維持資料的參考完整性。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-90 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-33\">正確術語</td>      <td class=\"w-33\">英文名稱</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+            "，以維持資料的參考完整性。</code></pre>",
+			"<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+			"<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
 			"    <tr>",
 			"      <td><b>串聯刪除</b></td>",
 			"      <td class=\"code-font\">Cascade Delete</td>",
@@ -398,7 +566,8 @@
 			"      <td class=\"code-font\">Inherited</td>",
 			"      <td>錯誤。這通常指物件導向程式設計 (OOP) 的特性，而非刪除規則。</td>",
 			"    </tr>",
-			"  </tbody></table><pre><code class=\"language-sql\"><b>Demo code</b>",
+			"  </tbody></table>",
+            "<pre><code class=\"language-sql\"><b>Demo code</b>",
             "-- 1. 建立「父表」：客戶表",
             "CREATE TABLE Parent_Customer (",
             "    CustomerID int PRIMARY KEY,",
@@ -441,8 +610,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">複合鍵 (Composite Key) 是指由兩個或多個欄位共同組成的主索引鍵。",
-            "其建立語法是在所有欄位定義完之後，使用 PRIMARY KEY (欄位1, 欄位2, ...) 的形式來指定。",
+            "<pre><code class=\"language-sql\">複合鍵 (Composite Key) 是指由兩個或多個欄位共同組成的主索引鍵。其建立語法",
+            "是在所有欄位定義完之後，使用 PRIMARY KEY (欄位1, 欄位2, ...) 的形式來指定。",
             "選項 (A) 正確地使用了此語法。",
             "(B) 和 (D) 的語法是錯誤的，一個資料表只能有一個主索引鍵。",
             "(C) 的語法不完整，PRIMARY KEY 後面沒有指定任何欄位。</code></pre>"
@@ -473,28 +642,7 @@
             "，資料庫會遇到一個問題：對於那些已經存在的資料列，這個新欄位的值應該是什",
             "麼？因為不允許是 NULL，所以必須為這些舊資料列提供一個預設值。如果沒有使",
             "用 DEFAULT 關鍵字指定一個預設值，這個 ALTER TABLE 操作就會失敗。如果資料",
-            "表是空的，這個操作則會成功。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-80 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-10\">語法狀態</td>      <td class=\"w-30\">範例程式碼</td>      <td class=\"w-10\">執行結果</td>    </tr>  </thead>  <tbody>",
-			"    <tr>",
-			"      <td><b>錯誤語法</b></td>",
-			"      <td class=\"code-font\">ADD Prefix varchar(4) DEFAULT;</td>",
-			"      <td>ERROR</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>正確語法 (常數)</b></td>",
-			"      <td class=\"code-font\">ADD Prefix varchar(4) DEFAULT 'N/A'</td>",
-			"      <td>SUCCESS</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>正確語法 (數值)</b></td>",
-			"      <td class=\"code-font\">ADD Score int DEFAULT 0</td>",
-			"      <td>SUCCESS</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>正確語法 (函數)</b></td>",
-			"      <td class=\"code-font\">ADD CreateDate date DEFAULT GETDATE()</td>",
-			"      <td>SUCCESS</td>",
-			"    </tr>",
-			"  </tbody></table>"
+            "表是空的，這個操作則會成功。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -532,7 +680,7 @@
         "id": 13,
         "question": [
             "<pre><code class=\"language-sql\">13. 您正在建立一個名為Student 的資料庫物件儲存以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "請問您應該使用哪一個語法來建立物件?</code></pre>"
         ],
         "options": [
@@ -545,9 +693,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">建立資料表的標準 SQL 語法是",
-			"CREATE TABLE 資料表名稱 (欄位1 資料型態, 欄位2 資料型態, ...);。",
-			"選項 (A) 完全符合這個語法結構。",
+            "<pre><code class=\"language-sql\">建立資料表的標準 SQL 語法是 CREATE TABLE 資料表名稱 (欄位1 資料型態, 欄位2",
+            "資料型態, ...);。選項 (A) 完全符合這個語法結構。",
             "(B) 缺少了 TABLE 關鍵字。",
             "(C) 和 (D) 的括號位置不正確。</code></pre>"
         ],
@@ -586,11 +733,7 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">建立檢視表的完整語法是 CREATE VIEW 檢視表名稱 AS SELECT 欄位... FROM 資料表... WHERE 條件...;。",
-            "因此，正確的順序是：",
-			"A. CREATE VIEW [dbo].[NorthAmericaMammals_View]",
-			"D. AS SELECT a.Id, a.Name",
-			"E. FROM Animal a ",
-			"WHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1</code></pre>"
+            "因此，正確的順序是：</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -810,12 +953,12 @@
         "id": 23,
         "question": [
             "<pre><code class=\"language-sql\">23. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "您有下列需求:",
             "* StudentName 必須包含字元字串。",
             "* GradeLevel 必須是整數。",
             "* DaysAbsent可以在小數點後麵包含一位數字。",
-            "可使用的資料型別是:A. BITB. DECIMALC. VARCHARD. DATETIMEE. INTF. CHARStudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
+            "可使用的資料型別是:<br>A. BIT<br>B. DECIMAL<br>C. VARCHAR<br>D. DATETIME<br>E. INT<br>F. CHAR<br>StudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">C、E、B</code>",
@@ -887,15 +1030,7 @@
         "explanation": [
             "<pre><code class=\"language-sql\">題目的要求是「按照字母順序排列」。",
             "在 SQL 中，要對查詢結果進行排序，必須使用 ORDER BY 子句。因此，在建立檢",
-            "視表的 SELECT 陳述式中，需要包含 ORDER BY Name。",
-			"⚠️ 重要的實務修正：關於 (C) 的語法陷阱",
-			"在 MSSQL (SQL Server) 的實際運作中，直接執行選項 (C) 會報錯。",
-			"然而，許多認證考試（如早期版本的題庫或一般 SQL 理論）會將 ORDER BY 視為達成「排序要求」的唯一手段。",
-			"如果你在真實的 MSSQL 環境中練習，這就是為什麼我之前提到 View 內不能直接加 ORDER BY。",
-			"但為了應付認證考試，我們需要理解題目想考的核心觀念。",
-			"答案選它的理由：題目要求「字母順序排列」，只有它包含 ORDER BY。但在實務上，必須搭配 TOP 100 PERCENT 才能執行。",
-			"CREATE VIEW Employeeview AS SELECT TOP (100) PERCENT EmployeeName ",
-			"FROM Employee ORDER BY EmployeeID;</code></pre>"
+            "視表的 SELECT 陳述式中，需要包含 ORDER BY Name。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1016,10 +1151,10 @@
             "詢?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'OR academic_status='Graduated'OR graduation_date >= '2020-01-01'ORDER BY enrollment_date DESC</code>",
-            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'AND academic_status='Graduated'AND graduation_date >= '2020-01-01'ORDER BY enrollment_date ASC</code>",
-            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'OR academic_status='Graduated'AND graduation_date >= '2020-01-01'ORDER BY enrollment_date DESC</code>",
-            "<code class=\"language-sql\">SELECT * FROM studentsWHERE errollment_date >= '2020-06-01'AND academic_status='Graduated'OR graduation_date >= '2020-01-01'ORDER BY enrollment_date</code>"
+            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>OR academic_status='Graduated'<br>OR graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date DESC</code>",
+            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>AND academic_status='Graduated'<br>AND graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date ASC</code>",
+            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>OR academic_status='Graduated'<br>AND graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date DESC</code>",
+            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE errollment_date >= '2020-06-01'<br>AND academic_status='Graduated'<br>OR graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date</code>"
         ],
         "answer": [
             "C"
@@ -1044,10 +1179,10 @@
             "orderID 代表個別訂單、Country 代表國家地區,而orders 代表訂單數目。</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders GROUP BY Country HAVING COUNT(orderID) < 50;</code>",
-            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders WHERE COUNT(orderID) < 50; GROUP BY Country;</code>",
-            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders HAVING COUNT(orderID) < 50; GROUP BY Country</code>",
-            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders GROUP BY Country WHERE COUNT(orderID) < 50;</code>"
+            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders<br>GROUP BY Country HAVING COUNT(orderID) < 50;</code>",
+            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders <br>WHERE COUNT(orderID) < 50; GROUP BY Country;</code>",
+            "<code class=\"language-sql\">SELECT COUNT(orderID), Country <br>FROM Orders HAVING COUNT(orderID) < 50; GROUP BY Country</code>",
+            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders <br>GROUP BY Country WHERE COUNT(orderID) < 50;</code>"
         ],
         "answer": [
             "A"
@@ -1056,51 +1191,7 @@
             "<pre><code class=\"language-sql\">這題的關鍵是要對「彙總函式的結果」進行篩選。",
             "WHERE 子句是在分組和彙總「之前」對個別資料列進行篩選。",
             "而 HAVING 子句則是在 GROUP BY 分組和彙總「之後」對分組結果進行篩選。因",
-            "為我們要篩選的是 COUNT(orderID) < 50，所以必須使用 HAVING 子句。",
-			"請記住這個黃金序列，考試時如果順序顛倒（例如把 ORDER BY 放在 GROUP BY 前面），該選項一定是錯的：</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-60 t-left\">  <thead>    <tr class=\"header-bg\">",
-			"<td class=\"w-10\">執行順序</td>      <td class=\"w-15\">關鍵字</td>      <td class=\"w-25\">作用</td>      <td class=\"w-50\">備註</td>    </tr>  </thead>  <tbody>",
-    "    <tr>",
-    "      <td><b>1</b></td>",
-    "      <td class=\"code-font\">FROM</td>",
-    "      <td>找資料表</td>",
-    "      <td>先確定要去哪張表拿資料。</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>2</b></td>",
-    "      <td class=\"code-font\">WHERE</td>",
-    "      <td>初步過濾</td>",
-    "      <td>在分組前先篩選掉不想要的資料。</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>3</b></td>",
-    "      <td class=\"code-font\">GROUP BY</td>",
-    "      <td>分組</td>",
-    "      <td>依照特定欄位把資料「打包」。</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>4</b></td>",
-    "      <td class=\"code-font\">HAVING</td>",
-    "      <td>分組後過濾</td>",
-    "      <td>專門過濾聚合函數 (如 COUNT, SUM)。</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>5</b></td>",
-    "      <td class=\"code-font\">SELECT</td>",
-    "      <td>選取欄位</td>",
-    "      <td>決定最後要顯示哪些欄位。</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>6</b></td>",
-    "      <td class=\"code-font\">ORDER BY</td>",
-    "      <td>排序</td>",
-    "      <td>最後才進行視覺上的排列。</td>",
-    "    </tr>",
-			"<pre><code class=\"language-sql\">SELECT COUNT(orderID) AS Total, Country -- 5",
-			"FROM Orders                    \t\t\t-- 1",
-			"WHERE orderID > 0              \t\t\t-- 2. 先濾掉不合格 ID",
-			"GROUP BY Country               \t\t\t-- 3. 按國家打包",
-			"HAVING COUNT(orderID) > 50     \t\t\t-- 4. 濾掉小單國家",
-			"ORDER BY Total DESC;           \t\t\t-- 6. 最後按總數「由大到小」排好</code></pre>"
+            "為我們要篩選的是 COUNT(orderID) < 50，所以必須使用 HAVING 子句。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1109,16 +1200,16 @@
     {
         "id": 32,
         "question": [
-            "<pre><code class=\"language-sql\">32. 有一個名為 Playerstat 資料表包含以下欄位:</code></pre>",
-            "[[image01]]",
-            "<pre><code class=\"language-sql\">您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:",
+            "<pre><code class=\"language-sql\">32. 有一個名為 Playerstat 資料表包含以下欄位:",
+            "<br>[[image01]]",
+            "您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:",
             "SELECT PlayerID, (1)",
             "FROM PlayerStat (2) TeamID = 1",
             "(3) (4)",
             "請將下方A~G的程式碼片段排列到上方缺失的正確位置。",
             "每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。",
-            "A. PlayerID \nB. COUNT \nC. GROUP BY",
-            "D. TeamID \nE. WHERE \nF. SUM(Points)",
+            "A. PlayerID <br>B. COUNT <br>C. GROUP BY",
+            "D. TeamID <br>E. WHERE <br>F. SUM(Points)",
             "G. HAVING",
             "請問填入的程式碼片段順序為何?</code></pre>"
         ],
@@ -1133,16 +1224,12 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">這個查詢的目的是：",
-            "1. 計算總分，所以 (1) 應填入 SUM(Points)\t(F)。",
+            "1. 計算總分，所以 (1) 應填入 SUM(Points) (F)。",
             "2. 篩選出 TeamID 為 1 的隊伍，所以 (2) 應填入 WHERE (E)。",
-            "3. (3) 已經給定條件 TeamID=1。 \t\t\t(C)",
+            "3. (3) 已經給定條件 TeamID=1。",
             "4. 要「每位」隊員的總分，代表要根據 PlayerID 進行分組",
-            "所以 (4) 應填入 GROUP BY PlayerID。 \t\t(A)",
-            "組合起來的順序是 F, E, C, A",
-			"SELECT PlayerID, SUM(Points)",
-			"FROM PlayerStat ",
-			"WHERE TeamID = 1",
-			"GROUP BY PlayerID</code></pre>"
+            "所以 (4) 應填入 GROUP BY PlayerID (C, A)。",
+            "組合起來的順序是 F, E, C, A</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1152,7 +1239,8 @@
     {
         "id": 33,
         "question": [
-            "<pre><code class=\"language-sql\">33. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料中。",
+            "<pre><code class=\"language-sql\">33. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料",
+            "中。",
             "這個資料表具有一個名為 courseID 的外部索引鍵,可連結至 courses 資料表中的主",
             "索引鍵。",
             "您需要使用這兩個根據 courseID 配對的資料表來傳回學生姓名和課程名稱。",
@@ -1164,10 +1252,10 @@
             "請問您該如何修正查詢?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SELECT students.Name, courses.Name FROM students INNER JOIN ON courses WHERE students.courseID = courses.CourseID</code>",
-            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN courses ON students.courseID = courses.courseID</code>",
-            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN ON students.courseID = courses.courseID</code>",
-            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN courses WHERE students.courseID = courses.courseID</code>"
+            "<code class=\"language-sql\"><br>SELECT students.Name, courses.Name <br>FROM students INNER JOIN ON courses <br>WHERE students.courseID = courses.CourseID</code>",
+            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN courses ON students.courseID = courses.courseID</code>",
+            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN ON students.courseID = courses.courseID</code>",
+            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN courses <br>WHERE students.courseID = courses.courseID</code>"
         ],
         "answer": [
             "B"
@@ -1177,40 +1265,7 @@
             "ON 關鍵字來指定，而不是放在 WHERE 子句中。OUTER JOIN 是一個不完整的語",
             "法，應該明確指定是 LEFT OUTER JOIN, RIGHT OUTER JOIN 還是 FULL OUTER",
             "JOIN。但此題的重點在於 JOIN 的語法結構，正確的結構是 FROM table1 JOIN",
-            "table2 ON table1.key = table2.key。選項 (B) 是唯一符合此結構的。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
-			"    <tr>",
-			"      <td><b>OUTER JOIN</b></td>",
-			"      <td class=\"code-font\">改為 LEFT OUTER JOIN</td>",
-			"      <td>SQL 需要明確方向（左、右或全連線）。</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>WHERE</b></td>",
-			"      <td class=\"code-font\">改為 ON</td>",
-			"      <td>ON 用於定義表與表之間的「橋樑」；WHERE 用於橋蓋好後的「資料過濾」。</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>student.courseID</b></td>",
-			"      <td class=\"code-font\">改為 students.courseID</td>",
-			"      <td>注意資料表名稱的單複數（小細節，但考試常考拼字一致性）。</td>",
-			"    </tr>",
-			"  </tbody></table><b>但答案有INNER JOIN說明如下</b><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
-    "    <tr>",
-    "      <td><b>SELECT</b></td>",
-    "      <td class=\"code-font\">students.name, courses.name</td>",
-    "      <td>選取結果：你想從這兩張表分別拿什麼資料？</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>FROM + JOIN</b></td>",
-    "      <td class=\"code-font\">students INNER JOIN courses</td>",
-    "      <td>設定橋樑：哪兩張表要黏在一起？</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>ON</b></td>",
-    "      <td class=\"code-font\">students.courseID = courses.courseID</td>",
-    "      <td>匹配規則：靠哪個欄位來對齊資料？</td>",
-    "    </tr>",
-	"  </tbody></table>"
-	
+            "table2 ON table1.key = table2.key。選項 (B) 是唯一符合此結構的。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1261,83 +1316,17 @@
         "explanation": [
             "<pre><code class=\"language-sql\">INTERSECT (交集) 運運算元會比較兩個 SELECT 陳述式的結果集，並只傳回在「兩個」",
             "結果集中都存在的資料列。它會自動移除重複的資料列。",
-            "(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。</code><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-60 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-25\">運算元</td>      <td class=\"w-25\">邏輯</td>      <td class=\"w-25\">結果範圍</td>      <td class=\"w-25\">是否自動去重複？</td>    </tr>  </thead>  <tbody>",
-			"    <tr>",
-			"      <td><b>UNION</b></td>",
-			"      <td class=\"code-font\">聯集 (OR)A∪B</td>",
-			"      <td>全部 (A + B)</td>",
-			"      <td>是</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>UNION ALL</b></td>",
-			"      <td class=\"code-font\">聯集 (純合併)A∪B</td>",
-			"      <td>全部 (A + B)</td>",
-			"      <td>否 (保留重複)</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>INTERSECT</b></td>",
-			"      <td class=\"code-font\">交集 (AND)A∩B</td>",
-			"      <td>只有重疊的部分</td>",
-			"      <td>是</td>",
-			"    </tr>",
-			"    <tr>",
-			"      <td><b>EXCEPT</b></td>",
-			"      <td class=\"code-font\">差集 (Minus)\nA−(A∩B) 或 A∖B</td>",
-			"      <td>A 有但 B 沒有的部分</td>",
-			"      <td>是</td>",
-			"    </tr>",
-			"  </tbody></table>",
-			"[[image01]]<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
-    "<table class=\"q-table w-50 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-10\">圖片標籤</td>      <td class=\"w-15\">紅色/橘色選中區域</td>      <td class=\"w-10\">集合代數公式</td>      <td class=\"w-15\">對應 SQL 關鍵字</td>    </tr>  </thead>  <tbody>",
-    "    <tr>",
-    "      <td><b>A</b></td>",
-    "      <td class=\"code-font\">左圓全紅 (含交集)</td>",
-    "      <td>A</td>",
-    "      <td>LEFT JOIN</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>B</b></td>",
-    "      <td class=\"code-font\">右圓全紅 (含交集)</td>",
-    "      <td>B</td>",
-    "      <td>RIGHT JOIN</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>A'</b></td>",
-    "      <td class=\"code-font\">A 留白，其餘全橘</td>",
-    "      <td>A′=U−A</td>",
-    "      <td>NOT A</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>B'</b></td>",
-    "      <td class=\"code-font\">B 留白，其餘全橘</td>",
-    "      <td>B′=U−B</td>",
-    "      <td>NOT B</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>A ∪ B</b></td>",
-    "      <td class=\"code-font\">雙圓全紅 (聯集)</td>",
-    "      <td>A∪B</td>",
-    "      <td>UNION</td>",
-    "    </tr>",
-    "    <tr>",
-    "      <td><b>A ∩ B</b></td>",
-    "      <td class=\"code-font\">只有中間橄欖紅</td>",
-    "      <td>A∩B</td>",
-    "      <td>INTERSECT</td>",
-    "    </tr>",
-    "  </tbody></table>"
-			
+            "(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。</code></pre>"
         ],
         "image": null,
-		"image01": "images/Venn.png",
         "type": "single",
         "category": "D2_資料庫設計"
     },
     {
         "id": 36,
         "question": [
-            "<pre><code class=\"language-sql\">36. 有一個名為Cars 的資料庫資料表,其定義如下所示。</code></pre>",
-            "[[image01]]<pre><code class=\"language-sql\">您設有下列SQL 陳述式:",
+            "<pre><code class=\"language-sql\">36. 有一個名為Cars 的資料庫資料表,其定義如下所示。",
+            "<br>[[image01]]\n您設有下列SQL 陳述式:",
             "SELECT *",
             "FROM Cars c",
             "WHERE c. Origin <> 'USA' AND c.Color <> 'Black'",
@@ -1424,10 +1413,10 @@
     {
         "id": 39,
         "question": [
-            "<pre><code class=\"language-sql\">39. 您 其中包含名為CustomerID、Firstname 和 DateJoined 資料列。",
+            "<pre><code class=\"language-sql\">39. 您 其中包含名為CustomerID、Firstname 和 Date Joined 資料列。",
             "CustomerID 是主索引鍵。",
             "您執行了下列查詢:",
-            "SELECT CustomerID, FirstName, DateJoined",
+            "SELECT CustomerID, FirstName, Date Joined",
             "FROM Customer",
             "請問結果集會以哪種方式組織資料列?</code></pre>"
         ],
@@ -1538,19 +1527,18 @@
         ],
         "options": [
             "<code class=\"language-sql\">DELETE FROM Customer WHERE CustomerID = 12345</code>",
-            "<code class=\"language-sql\">DELETE CustomerID FROM Customer WHERE CustomerID = 12345</code>",
+            "<code class=\"language-sql\">DELETE Customer ID FROM Customer WHERE CustomerID = 12345</code>",
             "<code class=\"language-sql\">UPDATE Customer DELETE * WHERE CustomerID = 12345</code>",
-            "<code class=\"language-sql\">UPDATE CustomerID FROM Customer DELETE * WHERE CustomerID = 12345</code>"
+            "<code class=\"language-sql\">UPDATE Customer ID FROM Customer DELETE * WHERE CustomerID = 12345</code>"
         ],
         "answer": [
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">選項 (A) 完全符合這個語法。刪除特定資料列的標準 SQL 語法是",
-			"\tDELETE FROM [資料表名稱] WHERE [條件];。",
+            "<pre><code class=\"language-sql\">選項 (A) 完全符合這個語法。刪除特定資料列的標準 SQL 語法是 DELETE FROM [",
+            "資料表名稱] WHERE [條件];。",
             "(B) DELETE 後面不需指定欄位名稱。",
-            "(C) 和 (D) 的語法完全錯誤，混用了 UPDATE 和 DELETE。",
-			"\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;<code></pre>"
+            "(C) 和 (D) 的語法完全錯誤，混用了 UPDATE 和 DELETE。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1559,8 +1547,8 @@
     {
         "id": 44,
         "question": [
-            "<pre><code class=\"language-sql\">44. 您有一個名為 Product 的資料表包含以下資料。</code></pre>",
-            "[[image01]]<pre><code class=\"language-sql\">ProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表",
+            "<pre><code class=\"language-sql\">44. 您有一個名為 Product 的資料表包含以下資料。",
+            "[[image01]]\nProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表",
             "的外部索引鍵。您執行了下列陳述式:",
             "INSERT INTO Product VALUES (3296, 'Table', 4444) 請問結果為何?</code></pre>"
         ],
@@ -1588,8 +1576,8 @@
     {
         "id": 45,
         "question": [
-            "<pre><code class=\"language-sql\">45. 您有一個資料庫資料表(AddressInfo) 包含以下資料行</code></pre>[[image01]]<pre><code class=\"language-sql\">您必須在資料表中插入下列記錄:",
-            "</code></pre>[[image02]]<pre><code class=\"language-sql\">請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)</code></pre>"
+            "<pre><code class=\"language-sql\">45. 您有一個資料庫資料表(AddressInfo) 包含以下資料行:\n<[[image01]]\n您必須在資料表中插入下列記錄:",
+            "[[image02]]請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">INSERT INTO AddressInfo VALUES ('1234 Main Street', 'Dallas', 'TX', ' 75201')</code>",
@@ -1619,7 +1607,7 @@
         "question": [
             "<pre><code class=\"language-sql\">46. 您接受了某間地方慈善機構的IT實習工作該慈善機構要求您使用一個名為",
             "Volunteer 的資料庫資料表來保留志工的記錄。",
-            "這個資料表包含以下資料行和資料列:</code></pre>[[image01]]<pre><code class=\"language-sql\">當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請",
+            "這個資料表包含以下資料行和資料列:<br>[[image01]]\n當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請",
             "問您應該選擇哪一個陳述式?</code></pre>"
         ],
         "options": [
@@ -1632,8 +1620,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是",
-			"\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;",
+            "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是 UPDATE [資料表名稱] SET [欄位名稱] = [新值]",
+            "WHERE [條件];。",
             "*UPDATE Volunteer: 指定要更新的資料表。",
             "*SET GivenName = 'Kimberly': 指定要將 GivenName 欄位的值設定為 'Kimberly'。",
             "*WHERE GivenName = 'Tia': 指定要更新的是哪一筆紀錄。",
@@ -1665,7 +1653,7 @@
             "(C) ALTER TABLE 是 DDL (Data Definition Language)，用於修改資料庫物件的結",
             "構。",
             "(A) 和 (D) 的 SELECT 也是 DML (或稱 DQL, Data Query Language)。但 INSERT",
-            "是更典型的「操作」語言。在此選項中，B 是最明確的 DML 範例。參閱題5</code></pre>"
+            "是更典型的「操作」語言。在此選項中，B 是最明確的 DML 範例。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1674,7 +1662,7 @@
     {
         "id": 48,
         "question": [
-            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。</code></pre><pre>[[image01]][[image02]]<code class=\"language-sql\">舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
+            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。<br>[[image01]][[image02]]\n舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = ' San Francisco')</code>",
@@ -1686,8 +1674,10 @@
             "C"
         ],
         "explanation": [
-		   "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是",
-           "\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;</code></pre>"
+            "<pre><code class=\"language-sql\">要在一個字串中搜尋是否「包含」某個子字串，應使用 ‘LIKE’ 運運算元搭配萬用字",
+            "元 ‘%’。’%’ 代表零個或多個任意字元。所以 ‘LIKE '%chocolate%'‘ 的意",
+            "思是，只要 ‘ItemDescription’ 欄位中的任何位置出現 'chocolate' 這個詞，不",
+            "論前後是否有其他文字，都符合條件。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1698,7 +1688,7 @@
     {
         "id": 49,
         "question": [
-            "<pre><code class=\"language-sql\">49. Products 資料表包含以下資料:</code></pre>[[image01]]<pre><code class=\"language-sql\">請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和",
+            "<pre><code class=\"language-sql\">49. Products 資料表包含以下資料:<br>[[image01]]\n請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和",
             "Price?</code></pre>"
         ],
         "options": [
@@ -1725,7 +1715,7 @@
         "id": 50,
         "question": [
             "<pre><code class=\"language-sql\">50. 有一個名為Flight 的資料表包含以下欄位:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果",
             "應該依照最新的抵達時間來排序,程式碼如下:",
             "SELECT FlightNumber",
@@ -1751,17 +1741,7 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">這個查詢需要組合多個條件：",
-			"1. 目的地是 LGA: WHERE DestinationAirport = 'LGA'。",
-			"2. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的函數)。所以 ArrivalTime > GETDATE()。",
-			"3. 依照最新的抵達時間排序: (3) ORDER BY，",
-			"4. ArrivalTime DESC (DESC 是遞減排序，最新的在最前面)。",
-			"組合起來，順序是 B, B, B, B。",
-			"SELECT FlightNumber",
-			"FROM Flight ",
-			"WHERE DestinationAirport = 'LGA' AND",
-			"ArrivalTime > GETDATE() ",
-			"ORDER BY ArrivalTime DESC;</code></pre>"
+            "<pre><code class=\"language-sql\">這個查詢需要組合多個條件：</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1776,7 +1756,7 @@
             "(RoadID INTEGER NOT NULL,",
             "Distance INTEGER NOT NULL)",
             "Road 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "您執行了下列陳述式: INSERT INTO Road VALUES (1234, 36) 請問結果為何?</code></pre>"
         ],
         "options": [
@@ -1817,13 +1797,11 @@
             "B"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">將一個查詢的結果集插入到另一個已存在的資料表，標準的 SQL 語法是 ",
-            "\tINSERT INTO [目標資料表] SELECT ... FROM [來源資料表];。",
+            "<pre><code class=\"language-sql\">將一個查詢的結果集插入到另一個已存在的資料表，標準的 SQL 語法是 INSERT",
+            "INTO [目標資料表] SELECT ... FROM [來源資料表];。",
             "選項 (B) 完全符合這個語法。",
             "(D)SELECT INTO 是某些資料庫系統（如 SQL Server）支援的語法，可以用來「建",
-            "立新資料表並插入資料」，但 ‘INSERT INTO ... SELECT’ 是更通用的標準語法。,",
-			"「將查詢結果直接備份（複製）到一張新表中」",
-			"\t SELECT 欄位1, 欄位2 INTO 新表格名稱 FROM 舊表格名稱 WHERE 條件;</code></pre>"
+            "立新資料表並插入資料」，但 ‘INSERT INTO ... SELECT’ 是更通用的標準語法。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1839,8 +1817,8 @@
             "述式?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SET Product TO ProductCategory = 43 WHERE ProductDescription = ' spoon'</code>",
-            "<code class=\"language-sql\">UPDATE Product SET ProductCategory = 43 WHERE ProductDescription = ' spoon'</code>",
+            "<code class=\"language-sql\">SET Product TO ProductCategory = 43 WHERE Product Description = ' spoon'</code>",
+            "<code class=\"language-sql\">UPDATE Product SET ProductCategory = 43 WHERE Product Description = ' spoon'</code>",
             "<code class=\"language-sql\">SET Product WHERE Product Description 'spoon' TO ProductCategory = 43</code>",
             "<code class=\"language-sql\">UPDATE Product WHERE Product Description SET ProductCategory = 43</code>"
         ],
@@ -1910,7 +1888,7 @@
         "id": 56,
         "question": [
             "<pre><code class=\"language-sql\">56. Customers 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "您要建立一個查詢來傳回包含LastName、Phonenumber 及 Extension 分機為有",
             "效號碼的結果集。此結果集應該依照客戶的姓氏來排序,程式碼如下:",
             "SELECT LastName, Phone Number, Extension",
@@ -1919,10 +1897,7 @@
             "(3) LastName;",
             "請將下方程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次,",
             "也可能使用多次,甚至完全用不到。",
-            "① (A) PhonesNumber \t(B) NOT NULL \t(C) IS NOT NULL \t(D) Extension \t(E) <>NULL",
-			"② (A) PhonesNumber \t(B) NOT NULL \t(C) IS NOT NULL \t(D) Extension \t(E) <> NULL ",
-			"③ (A) GROUP BY \t\t(B) HAVING \t\t(C) ORDER BY \t\t(D) SORT BY ",
-			"請問填入的程式碼片段順序為何?</code></pre>"
+            "① (A) PhonesNumber ,(B) NOT NULL ,(C) IS NOT NULL ,(D) Extension (E) <>NULL<br>② (A) Phones Number ,(B) NOT NULL ,(C) IS NOT NULL ,(D) Extension ,(E) <> NULL <br>③ (A) GROUP BY ,(B) HAVING ,(C) ORDER BY ,(D) SORT BY <br>請問填入的程式碼片段順序為何?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">A、B、D</code>",
@@ -1949,17 +1924,17 @@
         "id": 57,
         "question": [
             "<pre><code class=\"language-sql\">57. 下列名為Building 的資料儲存了數棟大樓的相關資料及其最新的檢查日期。",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "Address 欄位儲存的是大樓的地址。InspectionDate 欄位儲存的是最新的檢查日期。",
-            "InspectionDate 欄位中的NULL 值代表該大樓尚未檢查過。",
+            "Inspection Date 欄位中的NULL 值代表該大樓尚未檢查過。",
             "您需要顯示最早完成檢查的10棟大樓地址,程式碼如下:",
             "SELECT (1) Address",
             "FROM Building",
             "WHERE InspectionDate (2) (3) InspectionDate請將下方的程式碼片段排列到上方",
             "缺失的正確位置。",
             "每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。",
-            "A. COUNT \t\tB. \t\tIS NOT NULL \t\tC. ORDER BY",
-            "D. HAVING \t\tE. \t\tGROUP BY \t\t\tF. IS NULL",
+            "A. COUNT B. IS NOT NULL C. ORDER BY",
+            "D. HAVING E. GROUP BY F. IS NULL",
             "G. TOP 10",
             "請問填入的程式碼片段順序為何?</code></pre>"
         ],
@@ -1978,12 +1953,7 @@
             "2. 要找「已完成」檢查的，所以檢查日期不能是 NULL。所以 (2) 應填入 IS NOT NULL (B)。",
             "3. 要找「最早」完成的，所以要排序。 (3) 應填入 ORDER BY (C)。",
             "4. (4) 則指定排序的欄位 InspectionDate (預設為 ASC 升序，即最早的在前面)。",
-            "組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E 視為 C 的筆誤，",
-			"則是唯一包含 G 和 B 的選項。",
-			"\tSELECT TOP 10 Address ",
-			"\tFROM Building",
-			"\tWHERE InspectionDate IS NOT NULL",
-			"\tORDER BY InspectionDate;</code></pre>"
+            "組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E 視為 C 的筆誤，則是唯一包含 G 和 B 的選項。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1994,7 +1964,7 @@
         "id": 58,
         "question": [
             "<pre><code class=\"language-sql\">58. Items OnOrder 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "您需要建立一個查詢來顯示訂單總數、平均單行商品總計、最高單行商品總計,以及",
             "所有訂購商品的總計。",
             "LineltemTotal 代表單行商品總計。",
@@ -2046,11 +2016,10 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">在標準 SQL 查詢中，子句的執行順序是固定的：",
-			"FROM \t-> WHERE \t-> GROUP BY -> HAVING \t\t-> SELECT \t-> ORDER BY。 或",
-			"SELECT \t-> FROM \t-> WHERE \t-> GROUP BY \t-> HAVING  \t-> ORDER BY",
-			"這個查詢將 ORDER BY 子句放在了GROUP BY 子句的前面，這違反了 SQL 的語法規則，因此會產生錯誤。",
-            "將ORDER BY 子句移除，或將它移動到整個查詢的最後面，就可以修正這個語法錯誤。</code></pre>"
+            "<pre><code class=\"language-sql\">在標準 SQL 查詢中，子句的執行順序是固定的：FROM -> WHERE -> GROUP BY",
+            "-> HAVING -> SELECT -> ORDER BY。這個查詢將 ORDER BY 子句放在了",
+            "GROUP BY 子句的前面，這違反了 SQL 的語法規則，因此會產生錯誤。將",
+            "ORDERBY 子句移除，或將它移動到整個查詢的最後面，就可以修正這個語法錯誤。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2060,7 +2029,7 @@
         "id": 60,
         "question": [
             "<pre><code class=\"language-sql\">60. 您有兩個資料表,分別名為 Cars 與 Colors,其定義如下。這兩個資料表會透過",
-            "ColorID 建立關聯。</code></pre>[[image01]][[image02]]<pre><code class=\"language-sql\">您執行了下列SQL述式:",
+            "ColorID 建立關聯。<br>[[image01]][[image02]]<br>您執行了下列SQL述式:",
             "SELECT *",
             "FROM Cars",
             "LEFT OUTER JOIN Colors",
@@ -2077,15 +2046,11 @@
             "C"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">這題考的是 LEFT OUTER JOIN 的基本觀念，，我們來拆解這個查詢：",
-			"🔍 邏輯分析",
-			"1.左資料表 (Left Table)：Cars，共有 3 筆 資料（Sedan, Truck, Minivan）。",
-			"2.右資料表 (Right Table)：Colors，共有 2 筆 資料（Red, Gold）。",
-			"3.關聯條件 (ON)：Cars.ColorID = Colors.ColorID。",
-			"4.LEFT OUTER JOIN 的特性：",
-			"\t●它會回傳左表 (Cars) 的所有資料。",
-			"\t●如果右表有對應到的資料，就顯示出來。",
-			"\t●如果右表沒有對應到的資料（例如 Truck 的 ColorID 是 NULL），左表的資料依然會顯示，但右表的欄位會顯示為 NULL</code></pre>"
+            "<pre><code class=\"language-sql\">LEFT OUTER JOIN (左外部聯結) 會傳回左邊資料表 (Cars) 的「所有」資料列，無論",
+            "在右邊資料表 (Colors) 中是否有匹配的紀錄。Cars 資料表中有 3 筆資料列，所以這",
+            "個查詢的結果集一定會有 3 筆資料列。對於 ColorID 無法在 Colors 中找到匹配的",
+            "紀錄（如 Truck 的 ColorID 是 NULL），其對應的 Colors 資料表欄位將會以 NULL",
+            "值顯示。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2097,7 +2062,7 @@
         "id": 61,
         "question": [
             "<pre><code class=\"language-sql\">61. Products 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "請問哪一個查詢會將商品1價格提高6%?</code></pre>"
         ],
         "options": [
@@ -2110,8 +2075,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">要將一個數值提高 6%，就是將原來的數值乘以 1.06。更新資料的語法是",
-			"\t\tUPDATE [資料表] SET [欄位] = [新值] WHERE [條件]。",
+            "<pre><code class=\"language-sql\">要將一個數值提高 6%，就是將原來的數值乘以 1.06。更新資料的語法是 UPDATE",
+            "[資料表] SET [欄位] = [新值] WHERE [條件]。",
             "因此，正確的陳述式是 UPDATE Products SET Price = Price * 1.06 WHERE",
             "ItemNumber = 1。",
             "CH05</code></pre>"
@@ -2125,7 +2090,7 @@
         "id": 62,
         "question": [
             "<pre><code class=\"language-sql\">62. 您有一個資料表包含以下資料。",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "請問哪一個資料庫詞彙是用來描述 ProductID 與 Product Cateory 之間的關聯性?</code></pre>"
         ],
         "options": [
@@ -2166,26 +2131,9 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">在 SQL 中，管理許可權的指令是 GRANT (授予許可權) 和 REVOKE(撤銷許可權)。",
-            "1. 撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是",
-			"\t REVOKE 權限名稱1,權限名稱2... ON [物件名稱] FROM [使用者User1 或角色] CASCADE;。",
-			"\t 後面加 CASCADE; -- 這會把被 使用者User1 授權的所有人的權限一併收回",
-            "   選項 (D) 完全符合此語法。",
-			"2. 授予 User1 對 Customer 資料表的權限, 標準的語法是",
-			"\t GRANT 權限名稱1,權限名稱2... ON 物件名稱 (例如資料表) TO 用戶名稱 WITH GRANT OPTION;",
-			"\t 如果你在指令最後加上 WITH GRANT OPTION，使用者User1代表該用戶不僅獲得了權限，",
-			"\t 還可以把他擁有的權限再轉授權給其他人。",
-			"○權限名稱 :",
-			"\t●SELECT：允許用戶讀取資料（最常用）。",
-			"\t●INSERT：允許用戶新增資料。",
-			"\t●UPDATE：允許用戶修改現有資料。",
-			"\t●DELETE：允許用戶刪除資料。",
-			"\t●ALL PRIVILEGES：授予該物件的所有權限。",
-			"3. 拒絕 User1",
-			"\tDENY 權限名稱1,權限名稱2 ON 物件名稱 TO 用戶名稱; ",
-			"\t\t 只禁止列出的權限名稱",
-			"權限衝突判定：",
-			"\t\t\t 針對性：禁止 權限A 只會卡死 權限A，不影響已授權的 B。",
-			"\t\t\t 霸體性：對於同一個動作，DENY 永遠大於 GRANT</code></pre>"
+            "要撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是 REVOKE",
+            "SELECT ON [物件名稱] FROM [使用者或角色];。",
+            "選項 (D) 完全符合此語法。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2196,18 +2144,13 @@
         "question": [
             "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選",
             "取正確的選項以完成敘述。",
-            
-			" </code></pre>"
+            "① 叢集索引可提升以下查詢的效能:</code></pre>"
         ],
-		"questionA": [
-		  "① 叢集索引可提升以下查詢的效能:"
-		],
-		"questionB": [
-		  "② 叢集索引可提升以下資料行查詢的:"
-		],
         "options": [
-            "<code>傳回大型結果集|傳回許多資料行|不用 ORDER BY 或GROUP BY 子句</code>",
-            "<code>隨機存取|循序存取|並非唯一或包含許多共同的值</code>"
+            "<code class=\"language-sql\">傳回大型結果集 (B)傳回許多資料行</code>",
+            "<code class=\"language-sql\">不用 ORDER BY 或GROUP BY 子句 ② 叢集索引可提升以下資料行查詢的:</code>",
+            "<code class=\"language-sql\">隨機存取 (B) 循序存取</code>",
+            "<code class=\"language-sql\">並非唯一或包含許多共同的值</code>"
         ],
         "answer": [
             "A",
@@ -2222,7 +2165,7 @@
             "索引鍵）的效能提升最為顯著。</code></pre>"
         ],
         "image": null,
-        "type": "multioption",
+        "type": "multiple",
         "category": "D5_資料庫管理"
     },
     {
@@ -2230,7 +2173,7 @@
         "question": [
             "<pre><code class=\"language-sql\">65. 您建立了下列資料表,其中顯示過去寵物表演的獲勝者。",
             "寵物比賽獲勝者",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "<br>[[image01]]",
             "請問哪一個資料行可防止資料表成為第三正規形式?</code></pre>"
         ],
         "options": [
@@ -2297,7 +2240,7 @@
             "D"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
+            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
         ],
         "image": null,
         "type": "multiple",
@@ -2599,7 +2542,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2622,7 +2565,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2645,7 +2588,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2669,7 +2612,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2692,7 +2635,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -3116,4 +3059,224 @@
         "category": "D5_資料庫管理",
         "image": null
     }
-]
+];
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+            const el = document.getElementById('timer');
+            if (el) el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+        }, 1000);
+    }
+
+    function adjustZoom(delta) {
+        const body = document.body;
+        let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
+        body.style.zoom = currentZoom + delta;
+    }
+
+    function processContent(content, item) {
+        if (!content) return '';
+        const lines = Array.isArray(content) ? content : [String(content)];
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const src = item['image' + p1];
+            return src ? `<img src="${src}" style="max-width:100%; margin: 10px 0;">` : match;
+        });
+    }
+
+    function initExam() {
+        if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
+            console.error("題庫資料載入失敗！"); return;
+        }
+        const CUTOFF = 69;
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); 
+        
+        const categories = {};
+        const catNameMap = {}; 
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let m = fullCat.match(/^(D\d+)/);
+            let prefix = (m ? m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+        allQuestions.forEach(q => {
+            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
+            let prefix = (m ? m[1] : q.category || '一般');
+            let cat = catNameMap[prefix];
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+
+        let selected = [], usedIds = new Set();
+        const catNames = Object.keys(categories).sort();
+        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * 0.05));
+        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * 0.40);
+
+        catNames.forEach(cat => {
+            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
+            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            for (let i = 0; i < MIN_PER_CAT; i++) {
+                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
+                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            }
+        });
+
+        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        for (let q of offPool) {
+            if (selected.length >= TARGET_OFF_COUNT) break;
+            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
+            if (!qCat) continue;
+            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
+            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        }
+
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    }
+
+    function renderQuestion(index, scrollTop = true) {
+        currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); 
+        if (!container) return;
+        container.innerHTML = '';
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
+        
+        const card = document.createElement('div'); card.className = 'card question-card';
+        let qText = processContent(item.question, item);
+        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body"><div class="mb-4">${qText}</div>`;
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        const optionsRaw = item.quiz || item.options || [];
+        const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
+        const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
+        html += '<div class="mt-3">';
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            
+            if (optStr.includes('|')) {
+                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">選項 ${optIdx + 1}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => { 
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx); 
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
+                });
+                html += `</div>`;
+            } else {
+                const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
+            }
+        });
+        html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+    }
+
+    function selectOption(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (item.type === 'multiple') {
+            if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
+            const idx = userAnswers[currentIndex].indexOf(optIdx);
+            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
+            else userAnswers[currentIndex].push(optIdx);
+        } else { userAnswers[currentIndex] = optIdx; }
+        renderQuestion(currentIndex, false);
+    }
+    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
+    function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
+    function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
+
+    function submitExam() {
+        clearInterval(timerInterval); 
+        const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
+        if (ui) ui.style.display = 'none'; if (rs) rs.style.display = 'block';
+        let correctCount = 0, stats = {}, incorrectHTML = '';
+        const catNameMap = {};
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let _m = fullCat.match(/^(D\d+)/); let prefix = (_m ? _m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+        examQuestions.forEach((item, idx) => {
+            let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
+            const cat = catNameMap[prefix];
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0 }; stats[cat].total++;
+            const userAns = userAnswers[idx]; let isCorrect = false;
+            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+                isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+            } else if (item.type === 'multiple') {
+                const cIdxs = answers.map(a => parseAnswerToIndex(a));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+            
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
+            if (isCorrect) { correctCount++; stats[cat].correct++; }
+            else {
+                const optsRaw = item.quiz || item.options || [];
+                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+                let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
+                opts.forEach((o, i) => {
+                    const isNum = (item.labelType === 'num');
+                    const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                    if (String(o).includes('|')) {
+                        const subLabels = o.split('|').map((s, si) => {
+                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                            return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                        }).join(' ');
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><b>選項 ${i+1}:</b> ${subLabels}</div>`;
+                    }
+                    else {
+                        const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                    }
+                });
+                optionsHTML += '</div>';
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text"><div class="q-content">${processContent(item.question, item)}</div></div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+            }
+        });
+        const score = Math.round((correctCount / examQuestions.length) * 100);
+        document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
+        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th>分類</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
+        const sortedCats = Object.keys(stats).sort();
+        for (let cat of sortedCats) {
+            let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
+            catHTML += `<tr><td>${cat}</td><td>${total}</td><td>${p}%</td></tr>`;
+        }
+        catHTML += '</tbody></table>'; 
+        document.getElementById('category-stats').innerHTML = catHTML;
+        let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+        try {
+            let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+            examQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                let isCorr = false;
+                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
+                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
+            });
+            localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+        } catch(e) {}
+    }
+    initExam();
+</script>
+</body>
+</html>
