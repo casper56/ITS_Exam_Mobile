@@ -607,7 +607,7 @@
         ],
         "options": [
             "<code class=\"language-sql\">X、○、○</code>",
-            "<code class=\"language-sql\">○、○、X</code>",
+            "<code class=\"language-sql\">○、X、X</code>",
             "<code class=\"language-sql\">X、X、○</code>",
             "<code class=\"language-sql\">○、○、X</code>"
         ],
@@ -815,7 +815,8 @@
             "* StudentName 必須包含字元字串。",
             "* GradeLevel 必須是整數。",
             "* DaysAbsent可以在小數點後麵包含一位數字。",
-            "可使用的資料型別是:A. BITB. DECIMALC. VARCHARD. DATETIMEE. INTF. CHARStudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
+            "可使用的資料型別是:A. BIT\tB. DECIMAL\tC. VARCHAR\tD. DATETIME\tE. INT\tF. CHAR",
+			"StudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">C、E、B</code>",
@@ -2227,8 +2228,8 @@
 			"\tCREATE CLUSTERED INDEX IX_Ledger_Date ",
 			"\tON Ledger (TransactionDate);\n",
 			"●「叢集索引」（像字典的內文排序），那「非叢集索引 (Non-Clustered Index)」就更好理解了——",
-			"它就像是書本後面的「索引頁」或「關鍵字附錄」。如果搜尋的欄位不是主鍵（PK），通常就得靠它來提速</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
-			"<table class=\"q-table w-90 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-20\">特性</td>      <td class=\"w-40\">叢集索引 (Clustered)</td>      <td class=\"w-40\">非叢集索引 (Non-Clustered)</td>    </tr>  </thead>  <tbody>",
+			"它就像是書本後面的「索引頁」或「關鍵字附錄」。",
+			"如果搜尋的欄位不是主鍵（PK），通常就得靠它來提速</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-90 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-20\">特性</td>      <td class=\"w-40\">叢集索引 (Clustered)</td>      <td class=\"w-40\">非叢集索引 (Non-Clustered)</td>    </tr>  </thead>  <tbody>",
 			"    <tr>",
 			"      <td><b>數量</b></td>",
 			"      <td class=\"code-font\">一表僅限一個。</td>",
@@ -2327,7 +2328,10 @@
             "D"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
+            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：",
+			"1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。",
+			"2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。",
+			"因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
         ],
         "image": null,
         "type": "multiple",
@@ -2351,7 +2355,9 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'",
-            "這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。</code></pre>"
+            "這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。",
+			"如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有",
+			"'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2361,8 +2367,8 @@
         "id": 69,
         "question": [
             "<pre><code class=\"language-sql\">69. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。",
-            "①完整資料庫備份就是整個資料庫中所有資料的複本。",
-            "②交易記錄備份會備份資料庫中的所有資料。",
+            "① 完整資料庫備份就是整個資料庫中所有資料的複本。",
+            "② 交易記錄備份會備份資料庫中的所有資料。",
             "③ 差異備份只會複製上次完整備份之前變更的資料。",
             "④ 檔案或檔案群組還原會指定要復原的資料庫部分。",
             "請問填入正確或錯誤符號順序為何?</code></pre>"
@@ -2405,7 +2411,8 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。",
-            "在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。</code></pre>"
+            "在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。",
+			"必須將 Product 資訊獨立成另一個資料表。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2629,7 +2636,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：",
+			"● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。",
+			"● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。",
+			"● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2804,7 +2814,11 @@
             "C"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">TRUNCATE 會移除所有資料並將識別值 (Identity) 重設為初始值，且無法帶 WHERE。DELETE 則是逐行刪除，不會重設識別值。</code></pre>"
+            "<pre><code class=\"language-sql\">(A)TRUNCATE 會移除所有資料並將識別值 (Identity) 重設為初始值，且無法帶 WHERE。",
+			"(B)DELETE 則是逐行刪除，不會重設識別值。",
+			"(D)DELETE 是 DML (Data Manipulation Language)：因為它是對「資料內容」進行操作，你可以精確地選擇要刪除哪幾筆（配合 WHERE 條件）。",
+			"TRUNCATE 是 DDL (Data Definition Language)：因為它在資料庫底層被視為對「資料表結構」的操作（重新設定表格），",
+			"它會直接清空整張表，且無法針對單一資料列操作。</code></pre>"
         ],
         "type": "single",
         "category": "D5_資料庫管理",
