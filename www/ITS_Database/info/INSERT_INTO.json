@@ -1,0 +1,17 @@
+[
+    "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+    "<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-25\">指令</td>      <td class=\"w-25\">目標表是否存在？</td>      <td class=\"w-25\">語言類別</td>      <td class=\"w-25\">您的筆記重點</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>SELECT INTO</b></td>",
+    "      <td class=\"code-font\">不存在 (自動建立新表)</td>",
+    "      <td>DML</td>",
+    "      <td>快速備份，像「影印」出一張新紙。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>INSERT INTO ... SELECT</b></td>",
+    "      <td class=\"code-font\">已存在</td>",
+    "      <td>DML</td>",
+    "      <td>將資料「倒進」現有的容器中。</td>",
+    "    </tr>",
+    "  </tbody></table>"
+]

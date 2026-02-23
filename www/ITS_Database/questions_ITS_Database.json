@@ -72,8 +72,8 @@
         "id": 3,
         "question": [
             "<pre><code class=\"language-sql\">3. 您正在設定關聯式資料庫中某個資料表的結構。對於下列每一項敘述,若[正確]為○,[錯誤]為X。",
-            "①資料表中欄位的每個值都必須是唯一的。",
-            "②資料表中的每個資料列都必須是唯一的。",
+            "① 資料表中欄位的每個值都必須是唯一的。",
+            "② 資料表中的每個資料列都必須是唯一的。",
             "③ 資料表中的每個資料行名稱都必須是唯一的。",
             "請問填入正確或錯誤符號順序為何?</code></pre>"
         ],
@@ -144,12 +144,12 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。</code></pre><span style=\"color:#dc3545\">正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。</span> Oracle 或 MySQL用法(有括號)<style>.sql-master-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; margin: 15px 0; table-layout: fixed !important; } .sql-master-table td { border: 1px solid #000 !important; padding: 10px; vertical-align: middle; word-break: break-all; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; } .w-15 { width: 15% !important; } .w-42 { width: 42.5% !important; }</style>",
-            "<table class=\"sql-master-table w-100 t-center\">",
+            "<table class=\"sql-master-table w-90 t-left\">",
             "  <thead>",
             "    <tr class=\"header-bg\">",
-            "      <td class=\"w-15\">指令 (Command)</td>",
-            "      <td class=\"w-42\">公式 / 語法結構</td>",
-            "      <td class=\"w-42\">參數與功能說明</td>",
+            "      <td class=\"w-20\">指令 (Command)</td>",
+            "      <td class=\"w-35\">公式 / 語法結構</td>",
+            "      <td class=\"w-45\">參數與功能說明</td>",
             "    </tr>",
             "  </thead>",
             "  <tbody>",
@@ -167,7 +167,9 @@
             "    </tr>",
             "    <tr>",
             "      <td><b>ALTER</b></td>",
-            "      <td class=\"code-font\">ALTER TABLE [表名] ADD/DROP COLUMN [欄位]</td>",
+            "      <td class=\"code-font\">ALTER TABLE [表名] ADD [欄位]",
+			"ALTER TABLE [表名] DROP COLUMN [欄位]",
+			"ALTER TABLE [表名] ALTER COLUMN [欄位][型別] </td>",
             "      <td>修改現有的資料庫結構，例如增加或刪除欄位。",
             "      <span style=\"color:#dc3545\"><b>注意：</b>MSSQL(SQL Server / T-SQL) 不可加括號。</span>",
 			"      ALTER TABLE Customer ADD District INTEGER;",
@@ -258,7 +260,7 @@
             "      <td><b>ROLLBACK</b></td>",
             "      <td class=\"code-font\">ROLLBACK</td>",
             "      <td>將變更復原至交易前的狀態（撤銷操作）。</td>",
-            "    </tr></table><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\"><td class=\"w-33\">類別</td>      <td class=\"w-33\">指令公式 / 查詢對象</td>      <td class=\"w-33\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+            "    </tr></table><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-10\">類別</td>      <td class=\"w-25\">指令公式 / 查詢對象</td>      <td class=\"w-35\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
 			"    <tr>",
 			"      <td><b>查欄位</b></td>",
 			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.COLUMNS</td>",
@@ -278,6 +280,20 @@
 			"      <td><b>查參數</b></td>",
 			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.PARAMETERS</td>",
 			"      <td>查詢預存程序中定義的參數（如 @UserName, @Age）。</td>",
+			"    </tr>",
+			"<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+			"<table class=\"q-table w-60 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-25\">指令</td>      <td class=\"w-25\">目標表是否存在？</td>      <td class=\"w-25\">語言類別</td>      <td class=\"w-25\">您的筆記重點</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>SELECT INTO</b></td>",
+			"      <td class=\"code-font\">不存在 (自動建立新表)</td>",
+			"      <td>DML</td>",
+			"      <td>快速備份，像「影印」出一張新紙。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>INSERT INTO ... SELECT</b></td>",
+			"      <td class=\"code-font\">已存在</td>",
+			"      <td>DML</td>",
+			"      <td>將資料「倒進」現有的容器中。</td>",
 			"    </tr>",
 			"  </tbody></table>"
         ],
@@ -532,7 +548,7 @@
         "id": 13,
         "question": [
             "<pre><code class=\"language-sql\">13. 您正在建立一個名為Student 的資料庫物件儲存以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問您應該使用哪一個語法來建立物件?</code></pre>"
         ],
         "options": [
@@ -810,7 +826,7 @@
         "id": 23,
         "question": [
             "<pre><code class=\"language-sql\">23. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您有下列需求:",
             "* StudentName 必須包含字元字串。",
             "* GradeLevel 必須是整數。",
@@ -1675,7 +1691,7 @@
     {
         "id": 48,
         "question": [
-            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。</code></pre><pre>[[image01]][[image02]]<code class=\"language-sql\">舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
+            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。</code></pre>[[image01]][[image02]]<pre><code class=\"language-sql\">舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = ' San Francisco')</code>",
@@ -1726,7 +1742,7 @@
         "id": 50,
         "question": [
             "<pre><code class=\"language-sql\">50. 有一個名為Flight 的資料表包含以下欄位:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果",
             "應該依照最新的抵達時間來排序,程式碼如下:",
             "SELECT FlightNumber",
@@ -1777,7 +1793,7 @@
             "(RoadID INTEGER NOT NULL,",
             "Distance INTEGER NOT NULL)",
             "Road 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您執行了下列陳述式: INSERT INTO Road VALUES (1234, 36) 請問結果為何?</code></pre>"
         ],
         "options": [
@@ -1911,7 +1927,7 @@
         "id": 56,
         "question": [
             "<pre><code class=\"language-sql\">56. Customers 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您要建立一個查詢來傳回包含LastName、Phonenumber 及 Extension 分機為有",
             "效號碼的結果集。此結果集應該依照客戶的姓氏來排序,程式碼如下:",
             "SELECT LastName, Phone Number, Extension",
@@ -1950,7 +1966,7 @@
         "id": 57,
         "question": [
             "<pre><code class=\"language-sql\">57. 下列名為Building 的資料儲存了數棟大樓的相關資料及其最新的檢查日期。",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "Address 欄位儲存的是大樓的地址。InspectionDate 欄位儲存的是最新的檢查日期。",
             "InspectionDate 欄位中的NULL 值代表該大樓尚未檢查過。",
             "您需要顯示最早完成檢查的10棟大樓地址,程式碼如下:",
@@ -1995,7 +2011,7 @@
         "id": 58,
         "question": [
             "<pre><code class=\"language-sql\">58. Items OnOrder 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您需要建立一個查詢來顯示訂單總數、平均單行商品總計、最高單行商品總計,以及",
             "所有訂購商品的總計。",
             "LineltemTotal 代表單行商品總計。",
@@ -2098,7 +2114,7 @@
         "id": 61,
         "question": [
             "<pre><code class=\"language-sql\">61. Products 資料表包含以下資料:",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個查詢會將商品1價格提高6%?</code></pre>"
         ],
         "options": [
@@ -2126,7 +2142,7 @@
         "id": 62,
         "question": [
             "<pre><code class=\"language-sql\">62. 您有一個資料表包含以下資料。",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個資料庫詞彙是用來描述 ProductID 與 Product Cateory 之間的關聯性?</code></pre>"
         ],
         "options": [
@@ -2261,7 +2277,7 @@
         "question": [
             "<pre><code class=\"language-sql\">65. 您建立了下列資料表,其中顯示過去寵物表演的獲勝者。",
             "寵物比賽獲勝者",
-            "</code></pre><pre>[[image01]]<code class=\"language-sql\">",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個資料行可防止資料表成為第三正規形式?</code></pre>"
         ],
         "options": [
