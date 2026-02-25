@@ -35,9 +35,9 @@
         "id": 2,
         "question": [
             "<pre><code class=\"language-sql\">2. 您接受了某間地方慈善機構的IT實習工作,該慈善機構的資料模型有兩個資料表,名",
-            "為 Chapter 和 Language,如下所示。",
-            "<br>[[image01]][[image02]]",
-            "您建立了名為 ChapterLanguage 的第三個資料表來關聯 Chapter 資料表和",
+            "為 Chapter 和 Language,如下所示。</code></pre>",
+            "[[image01]][[image02]]",
+            "<pre><code class=\"language-sql\">您建立了名為 ChapterLanguage 的第三個資料表來關聯 Chapter 資料表和",
             "Language 資料表。",
             "您需要從 Chapter 和 Language 資料表中選取資料行,以便為 ChapterLanguage 資",
             "料表建立複合主索引鍵。",
@@ -72,8 +72,8 @@
         "id": 3,
         "question": [
             "<pre><code class=\"language-sql\">3. 您正在設定關聯式資料庫中某個資料表的結構。對於下列每一項敘述,若[正確]為○,[錯誤]為X。",
-            "①資料表中欄位的每個值都必須是唯一的。",
-            "②資料表中的每個資料列都必須是唯一的。",
+            "① 資料表中欄位的每個值都必須是唯一的。",
+            "② 資料表中的每個資料列都必須是唯一的。",
             "③ 資料表中的每個資料行名稱都必須是唯一的。",
             "請問填入正確或錯誤符號順序為何?</code></pre>"
         ],
@@ -143,15 +143,13 @@
             "B"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。</code></pre>",
-            "<span style=\"color:#dc3545\">正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。</span> Oracle 或 MySQL用法(有括號)",
-            "<style>.sql-master-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; margin: 15px 0; table-layout: fixed !important; } .sql-master-table td { border: 1px solid #000 !important; padding: 10px; vertical-align: middle; word-break: break-all; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; } .w-15 { width: 15% !important; } .w-42 { width: 42.5% !important; }</style>",
-            "<table class=\"sql-master-table w-100 t-center\">",
+            "<pre><code class=\"language-sql\">ALTER TABLE 陳述式用於修改現有的資料表結構，而 ADD 子句則用於新增欄位。</code></pre><span style=\"color:#dc3545\">正確的語法是 ALTER TABLE table_name ADD (column_name data_type)。</span> Oracle 或 MySQL用法(有括號)<style>.sql-master-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; margin: 15px 0; table-layout: fixed !important; } .sql-master-table td { border: 1px solid #000 !important; padding: 10px; vertical-align: middle; word-break: break-all; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; } .w-15 { width: 15% !important; } .w-42 { width: 42.5% !important; }</style>",
+            "<table class=\"sql-master-table w-85 t-left\">",
             "  <thead>",
             "    <tr class=\"header-bg\">",
-            "      <td class=\"w-15\">指令 (Command)</td>",
-            "      <td class=\"w-42\">公式 / 語法結構</td>",
-            "      <td class=\"w-42\">參數與功能說明</td>",
+            "      <td class=\"w-10\">指令 (Command)</td>",
+            "      <td class=\"w-40\">公式 / 語法結構</td>",
+            "      <td class=\"w-50\">參數與功能說明</td>",
             "    </tr>",
             "  </thead>",
             "  <tbody>",
@@ -161,32 +159,34 @@
             "    <tr>",
             "      <td><b>CREATE</b></td>",
             "      <td class=\"code-font\">CREATE TABLE [表名] ([欄位] [型別] [約束])</td>",
-            "      <td>建立新的資料表、視圖或預存程序。<br>",
-            "          &emsp;&emsp;CREATE TABLE Customer (  <br>",
-            "          &emsp;&emsp;&emsp;&emsp;CustomerID int PRIMARY KEY,<br>",
+            "      <td>建立新的資料表、視圖或預存程序。",
+            "          &emsp;&emsp;CREATE TABLE Customer (  ",
+            "          &emsp;&emsp;&emsp;&emsp;CustomerID int PRIMARY KEY,",
             "          &emsp;&emsp;&emsp;&emsp;CustomerName nvarchar(255) NOT NULL);",
             "    </td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>ALTER</b></td>",
-            "      <td class=\"code-font\">ALTER TABLE [表名] ADD/DROP COLUMN [欄位]</td>",
+            "      <td class=\"code-font\">ALTER TABLE [表名] ADD [欄位]",
+			"ALTER TABLE [表名] DROP COLUMN [欄位]",
+			"ALTER TABLE [表名] ALTER COLUMN [欄位][型別] </td>",
             "      <td>修改現有的資料庫結構，例如增加或刪除欄位。",
-            "      <br><span style=\"color:#dc3545\"><b>注意：</b>MSSQL(SQL Server / T-SQL) 不可加括號。</span>",
-			"      <br>ALTER TABLE Customer ADD District INTEGER;",
-			"      <br>    //新增欄位District 型態(int)",
-			"      <br>ALTER TABLE Customer ALTER COLUMN District bigint ;",
-			"      <br>    //修改欄位District 型態(bigint)</td>",
+            "      <span style=\"color:#dc3545\"><b>注意：</b>MSSQL(SQL Server / T-SQL) 不可加括號。</span>",
+			"      ALTER TABLE Customer ADD District INTEGER;",
+			"          //新增欄位District 型態(int)",
+			"      ALTER TABLE Customer ALTER COLUMN District bigint ;",
+			"          //修改欄位District 型態(bigint)</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>DROP</b></td>",
             "      <td class=\"code-font\">DROP TABLE/PROCEDURE [名稱]</td>",
-            "      <td>完全刪除物件（結構與內容皆不保留）。<br>  DROP TABLE Customer</td>",
+            "      <td>完全刪除物件（結構與內容皆不保留）。  DROP TABLE Customer</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>TRUNCATE</b></td>",
             "      <td class=\"code-font\">TRUNCATE TABLE [表名]</td>",
             "      <td>快速清空整張表的記錄，但保留表格結構。",
-            "      <br>TRUNCATE TABLE Customer;</td>",
+            "      TRUNCATE TABLE Customer;</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">二、 DML (Data Manipulation Language) - 資料操作語言：處理記錄內容</td>",
@@ -195,20 +195,20 @@
             "      <td><b>INSERT</b></td>",
             "      <td class=\"code-font\">INSERT INTO [表名] ([欄位]) VALUES ([值])</td>",
             "      <td>將新記錄插入資料表。",
-            "      <br>INSERT INTO Customer (CustomerID, CustomerName, District)",
-            "      <br>VALUES (1,N'張小明', 100) ;</td>",
+            "      INSERT INTO Customer (CustomerID, CustomerName, District)",
+            "      VALUES (1,N'張小明', 100) ;</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>UPDATE</b></td>",
             "      <td class=\"code-font\">UPDATE [表名] SET [欄位]=[值] WHERE [條件]</td>",
             "      <td>修改現有資料；省略 WHERE 會更新全表。",
-            "      <br>UPDATE Customer SET District = 900 WHERE CustomerID = 1;</td>",
+            "      UPDATE Customer SET District = 900 WHERE CustomerID = 1;</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>DELETE</b></td>",
             "      <td class=\"code-font\">DELETE FROM [表名] WHERE [條件]</td>",
             "      <td>刪除表中的特定記錄。",
-            "      <br>  DELETE FROM Customer WHERE CustomerID = 1</td>",
+            "        DELETE FROM Customer WHERE CustomerID = 1</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">三、 DQL (Data Query Language) - 資料查詢語言：檢索資料</td>",
@@ -217,18 +217,18 @@
             "      <td><b>SELECT</b></td>",
             "      <td class=\"code-font\">SELECT [欄位] FROM [表名] WHERE [條件]</td>",
             "      <td>從資料庫中檢索資料，是最常用的指令",
-            "       <br>SELECT * FROM Customer;",
-            "       <br>SELECT COLUMN_NAME, DATA_TYPE ",      
-            "       <br>FROM INFORMATION_SCHEMA.COLUMNS ",
-            "       <br>WHERE TABLE_NAME = 'Customer'</td>",
+            "       SELECT * FROM Customer;",
+            "       SELECT COLUMN_NAME, DATA_TYPE ",      
+            "       FROM INFORMATION_SCHEMA.COLUMNS ",
+            "       WHERE TABLE_NAME = 'Customer'</td>",
             "    </tr>",
             "    <tr>",
             "      <td><b>JOIN</b></td>",
             "      <td class=\"code-font\">SELECT * FROM A JOIN B ON A.ID = B.ID</td>",
             "      <td>結合多張表的資料（如 INNER, LEFT JOIN）。",
-            "      <br>SELECT   A.CustomerName, B.OrderAmount",
-            "      <br>FROM Customer A",
-            "      <br>JOIN Orders B ON A.CustomerID = B.CustomerID;</td>",
+            "      SELECT   A.CustomerName, B.OrderAmount",
+            "      FROM Customer A",
+            "      JOIN Orders B ON A.CustomerID = B.CustomerID;</td>",
             "    </tr>",
             "    <tr class=\"category-title\">",
             "      <td colspan=\"3\">四、 DCL (Data Control Language) - 資料控制語言：權限管理</td>",
@@ -247,7 +247,7 @@
             "      <td colspan=\"3\">五、 TCL (Transaction Control Language) - 交易控制語言：確保原子性</td>",
             "    </tr>",
             "    <tr>",
-            "      <td><b>BEGIN TRANSACTION</b></td>",
+            "      <td><b>BEGIN\nTRANSACTION</b></td>",
             "      <td class=\"code-font\">BEGIN TRANSACTION</td>",
             "      <td>標記交易處理的開始點。</td>",
             "    </tr>",
@@ -260,31 +260,42 @@
             "      <td><b>ROLLBACK</b></td>",
             "      <td class=\"code-font\">ROLLBACK</td>",
             "      <td>將變更復原至交易前的狀態（撤銷操作）。</td>",
-            "    </tr>",
-            "</table>",
-            "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
-            "<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
-            "    <tr>",
-            "      <td><b>查欄位</b></td>",
-            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.COLUMNS</td>",
-            "      <td>查詢所有表或特定表的欄位名稱、型別、是否允許 NULL。</td>",
-            "    </tr>",
-            "    <tr>",
-            "      <td><b>查表格</b></td>",
-            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.TABLES</td>",
-            "      <td>列出資料庫中所有的資料表 (Base Table) 與視圖 (View)。</td>",
-            "    </tr>",
-            "    <tr>",
-            "      <td><b>查程序</b></td>",
-            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.ROUTINES</td>",
-            "      <td>查詢預存程序 (Stored Procedures) 與函數 (Functions) 的清單。</td>",
-            "    </tr>",
-            "    <tr>",
-            "      <td><b>查參數</b></td>",
-            "      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.PARAMETERS</td>",
-            "      <td>查詢預存程序中定義的參數（如 @UserName, @Age）。</td>",
-            "    </tr>",
-            "  </tbody></table>"
+            "    </tr></table><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-10\">類別</td>      <td class=\"w-25\">指令公式 / 查詢對象</td>      <td class=\"w-35\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>查欄位</b></td>",
+			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.COLUMNS</td>",
+			"      <td>查詢所有表或特定表的欄位名稱、型別、是否允許 NULL。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>查表格</b></td>",
+			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.TABLES</td>",
+			"      <td>列出資料庫中所有的資料表 (Base Table) 與視圖 (View)。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>查程序</b></td>",
+			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.ROUTINES</td>",
+			"      <td>查詢預存程序 (Stored Procedures) 與函數 (Functions) 的清單。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>查參數</b></td>",
+			"      <td class=\"code-font\">SELECT * FROM INFORMATION_SCHEMA.PARAMETERS</td>",
+			"      <td>查詢預存程序中定義的參數（如 @UserName, @Age）。</td>",
+			"    </tr>",
+			"<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+			"<table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-25\">指令</td>      <td class=\"w-25\">目標表是否存在？</td>      <td class=\"w-25\">語言類別</td>      <td class=\"w-25\">您的筆記重點</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>SELECT INTO</b></td>",
+			"      <td class=\"code-font\">不存在 (自動建立新表)</td>",
+			"      <td>DML</td>",
+			"      <td>快速備份，像「影印」出一張新紙。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>INSERT INTO ... \nSELECT</b></td>",
+			"      <td class=\"code-font\">已存在</td>",
+			"      <td>DML</td>",
+			"      <td>將資料「倒進」現有的容器中。</td>",
+			"    </tr>",
+			"  </tbody></table>"
         ],
         "image": null,
         "type": "single",
@@ -340,7 +351,7 @@
     {
         "id": 8,
         "question": [
-            "<pre><code class=\"language-sql\">8. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、EmployeeName。<br>請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?</code></pre>"
+            "<pre><code class=\"language-sql\">8. 您有一個名為Employee 的資料表,其中包含下列資料行: EmployeelD、EmployeeName。請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">SELECT COUNT(rows) FROM Employee</code>",
@@ -382,9 +393,7 @@
             "鍵時，可以設定 ON DELETE CASCADE。",
             "這表示當主資料表（父資料表，如 order）中的一筆資料被刪除時，參考到這筆資",
             "料的從屬資料表（子資料表，如 orderltem）中的所有對應資料列也會被自動刪除",
-            "，以維持資料的參考完整性。</code></pre>",
-			"<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
-			"<table class=\"q-table w-100 t-center\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+            "，以維持資料的參考完整性。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-90 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-33\">正確術語</td>      <td class=\"w-33\">英文名稱</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
 			"    <tr>",
 			"      <td><b>串聯刪除</b></td>",
 			"      <td class=\"code-font\">Cascade Delete</td>",
@@ -405,8 +414,7 @@
 			"      <td class=\"code-font\">Inherited</td>",
 			"      <td>錯誤。這通常指物件導向程式設計 (OOP) 的特性，而非刪除規則。</td>",
 			"    </tr>",
-			"  </tbody></table>",
-            "<pre><code class=\"language-sql\"><b>Demo code</b>",
+			"  </tbody></table><pre><code class=\"language-sql\"><b>Demo code</b>",
             "-- 1. 建立「父表」：客戶表",
             "CREATE TABLE Parent_Customer (",
             "    CustomerID int PRIMARY KEY,",
@@ -449,8 +457,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">複合鍵 (Composite Key) 是指由兩個或多個欄位共同組成的主索引鍵。其建立語法",
-            "是在所有欄位定義完之後，使用 PRIMARY KEY (欄位1, 欄位2, ...) 的形式來指定。",
+            "<pre><code class=\"language-sql\">複合鍵 (Composite Key) 是指由兩個或多個欄位共同組成的主索引鍵。",
+            "其建立語法是在所有欄位定義完之後，使用 PRIMARY KEY (欄位1, 欄位2, ...) 的形式來指定。",
             "選項 (A) 正確地使用了此語法。",
             "(B) 和 (D) 的語法是錯誤的，一個資料表只能有一個主索引鍵。",
             "(C) 的語法不完整，PRIMARY KEY 後面沒有指定任何欄位。</code></pre>"
@@ -481,7 +489,28 @@
             "，資料庫會遇到一個問題：對於那些已經存在的資料列，這個新欄位的值應該是什",
             "麼？因為不允許是 NULL，所以必須為這些舊資料列提供一個預設值。如果沒有使",
             "用 DEFAULT 關鍵字指定一個預設值，這個 ALTER TABLE 操作就會失敗。如果資料",
-            "表是空的，這個操作則會成功。</code></pre>"
+            "表是空的，這個操作則會成功。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-80 t-left\">  <thead>    <tr class=\"header-bg\"><td class=\"w-10\">語法狀態</td>      <td class=\"w-30\">範例程式碼</td>      <td class=\"w-10\">執行結果</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>錯誤語法</b></td>",
+			"      <td class=\"code-font\">ADD Prefix varchar(4) DEFAULT;</td>",
+			"      <td>ERROR</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>正確語法 (常數)</b></td>",
+			"      <td class=\"code-font\">ADD Prefix varchar(4) DEFAULT 'N/A'</td>",
+			"      <td>SUCCESS</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>正確語法 (數值)</b></td>",
+			"      <td class=\"code-font\">ADD Score int DEFAULT 0</td>",
+			"      <td>SUCCESS</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>正確語法 (函數)</b></td>",
+			"      <td class=\"code-font\">ADD CreateDate date DEFAULT GETDATE()</td>",
+			"      <td>SUCCESS</td>",
+			"    </tr>",
+			"  </tbody></table>"
         ],
         "image": null,
         "type": "single",
@@ -519,7 +548,7 @@
         "id": 13,
         "question": [
             "<pre><code class=\"language-sql\">13. 您正在建立一個名為Student 的資料庫物件儲存以下資料:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問您應該使用哪一個語法來建立物件?</code></pre>"
         ],
         "options": [
@@ -532,8 +561,9 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">建立資料表的標準 SQL 語法是 CREATE TABLE 資料表名稱 (欄位1 資料型態, 欄位2",
-            "資料型態, ...);。選項 (A) 完全符合這個語法結構。",
+            "<pre><code class=\"language-sql\">建立資料表的標準 SQL 語法是",
+			"CREATE TABLE 資料表名稱 (欄位1 資料型態, 欄位2 資料型態, ...);。",
+			"選項 (A) 完全符合這個語法結構。",
             "(B) 缺少了 TABLE 關鍵字。",
             "(C) 和 (D) 的括號位置不正確。</code></pre>"
         ],
@@ -572,7 +602,11 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">建立檢視表的完整語法是 CREATE VIEW 檢視表名稱 AS SELECT 欄位... FROM 資料表... WHERE 條件...;。",
-            "因此，正確的順序是：</code></pre>"
+            "因此，正確的順序是：",
+			"A. CREATE VIEW [dbo].[NorthAmericaMammals_View]",
+			"D. AS SELECT a.Id, a.Name",
+			"E. FROM Animal a ",
+			"WHERE a.Class = 'Mammals' AND a.InNorthAmerica = 1</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -589,7 +623,7 @@
         ],
         "options": [
             "<code class=\"language-sql\">X、○、○</code>",
-            "<code class=\"language-sql\">○、○、X</code>",
+            "<code class=\"language-sql\">○、X、X</code>",
             "<code class=\"language-sql\">X、X、○</code>",
             "<code class=\"language-sql\">○、○、X</code>"
         ],
@@ -792,12 +826,13 @@
         "id": 23,
         "question": [
             "<pre><code class=\"language-sql\">23. 有一個資料庫資料表儲存了學校出勤率的相關資訊,資料集定義如下:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您有下列需求:",
             "* StudentName 必須包含字元字串。",
             "* GradeLevel 必須是整數。",
             "* DaysAbsent可以在小數點後麵包含一位數字。",
-            "可使用的資料型別是:<br>A. BIT<br>B. DECIMAL<br>C. VARCHAR<br>D. DATETIME<br>E. INT<br>F. CHAR<br>StudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
+            "可使用的資料型別是:A. BIT\tB. DECIMAL\tC. VARCHAR\tD. DATETIME\tE. INT\tF. CHAR",
+			"StudentName、GradeLevel 及DaysAbsent 的資料型別為何?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">C、E、B</code>",
@@ -869,7 +904,15 @@
         "explanation": [
             "<pre><code class=\"language-sql\">題目的要求是「按照字母順序排列」。",
             "在 SQL 中，要對查詢結果進行排序，必須使用 ORDER BY 子句。因此，在建立檢",
-            "視表的 SELECT 陳述式中，需要包含 ORDER BY Name。</code></pre>"
+            "視表的 SELECT 陳述式中，需要包含 ORDER BY Name。",
+			"⚠️ 重要的實務修正：關於 (C) 的語法陷阱",
+			"在 MSSQL (SQL Server) 的實際運作中，直接執行選項 (C) 會報錯。",
+			"然而，許多認證考試（如早期版本的題庫或一般 SQL 理論）會將 ORDER BY 視為達成「排序要求」的唯一手段。",
+			"如果你在真實的 MSSQL 環境中練習，這就是為什麼我之前提到 View 內不能直接加 ORDER BY。",
+			"但為了應付認證考試，我們需要理解題目想考的核心觀念。",
+			"答案選它的理由：題目要求「字母順序排列」，只有它包含 ORDER BY。但在實務上，必須搭配 TOP 100 PERCENT 才能執行。",
+			"CREATE VIEW Employeeview AS SELECT TOP (100) PERCENT EmployeeName ",
+			"FROM Employee ORDER BY EmployeeID;</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -990,10 +1033,10 @@
             "詢?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>OR academic_status='Graduated'<br>OR graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date DESC</code>",
-            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>AND academic_status='Graduated'<br>AND graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date ASC</code>",
-            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE enrollment_date >= '2020-06-01'<br>OR academic_status='Graduated'<br>AND graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date DESC</code>",
-            "<code class=\"language-sql\"><br>SELECT * FROM students<br>WHERE errollment_date >= '2020-06-01'<br>AND academic_status='Graduated'<br>OR graduation_date >= '2020-01-01'<br>ORDER BY enrollment_date</code>"
+            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'OR academic_status='Graduated'OR graduation_date >= '2020-01-01'ORDER BY enrollment_date DESC</code>",
+            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'AND academic_status='Graduated'AND graduation_date >= '2020-01-01'ORDER BY enrollment_date ASC</code>",
+            "<code class=\"language-sql\">SELECT * FROM studentsWHERE enrollment_date >= '2020-06-01'OR academic_status='Graduated'AND graduation_date >= '2020-01-01'ORDER BY enrollment_date DESC</code>",
+            "<code class=\"language-sql\">SELECT * FROM studentsWHERE errollment_date >= '2020-06-01'AND academic_status='Graduated'OR graduation_date >= '2020-01-01'ORDER BY enrollment_date</code>"
         ],
         "answer": [
             "C"
@@ -1018,10 +1061,10 @@
             "orderID 代表個別訂單、Country 代表國家地區,而orders 代表訂單數目。</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders<br>GROUP BY Country HAVING COUNT(orderID) < 50;</code>",
-            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders <br>WHERE COUNT(orderID) < 50; GROUP BY Country;</code>",
-            "<code class=\"language-sql\">SELECT COUNT(orderID), Country <br>FROM Orders HAVING COUNT(orderID) < 50; GROUP BY Country</code>",
-            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders <br>GROUP BY Country WHERE COUNT(orderID) < 50;</code>"
+            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders GROUP BY Country HAVING COUNT(orderID) < 50;</code>",
+            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders WHERE COUNT(orderID) < 50; GROUP BY Country;</code>",
+            "<code class=\"language-sql\">SELECT COUNT(orderID), Country FROM Orders HAVING COUNT(orderID) < 50; GROUP BY Country</code>",
+            "<code class=\"language-sql\">SELECT Country, orderID FROM Orders GROUP BY Country WHERE COUNT(orderID) < 50;</code>"
         ],
         "answer": [
             "A"
@@ -1030,7 +1073,51 @@
             "<pre><code class=\"language-sql\">這題的關鍵是要對「彙總函式的結果」進行篩選。",
             "WHERE 子句是在分組和彙總「之前」對個別資料列進行篩選。",
             "而 HAVING 子句則是在 GROUP BY 分組和彙總「之後」對分組結果進行篩選。因",
-            "為我們要篩選的是 COUNT(orderID) < 50，所以必須使用 HAVING 子句。</code></pre>"
+            "為我們要篩選的是 COUNT(orderID) < 50，所以必須使用 HAVING 子句。",
+			"請記住這個黃金序列，考試時如果順序顛倒（例如把 ORDER BY 放在 GROUP BY 前面），該選項一定是錯的：</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-60 t-left\">  <thead>    <tr class=\"header-bg\">",
+			"<td class=\"w-10\">執行順序</td>      <td class=\"w-15\">關鍵字</td>      <td class=\"w-25\">作用</td>      <td class=\"w-50\">備註</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>1</b></td>",
+    "      <td class=\"code-font\">FROM</td>",
+    "      <td>找資料表</td>",
+    "      <td>先確定要去哪張表拿資料。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>2</b></td>",
+    "      <td class=\"code-font\">WHERE</td>",
+    "      <td>初步過濾</td>",
+    "      <td>在分組前先篩選掉不想要的資料。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>3</b></td>",
+    "      <td class=\"code-font\">GROUP BY</td>",
+    "      <td>分組</td>",
+    "      <td>依照特定欄位把資料「打包」。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>4</b></td>",
+    "      <td class=\"code-font\">HAVING</td>",
+    "      <td>分組後過濾</td>",
+    "      <td>專門過濾聚合函數 (如 COUNT, SUM)。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>5</b></td>",
+    "      <td class=\"code-font\">SELECT</td>",
+    "      <td>選取欄位</td>",
+    "      <td>決定最後要顯示哪些欄位。</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>6</b></td>",
+    "      <td class=\"code-font\">ORDER BY</td>",
+    "      <td>排序</td>",
+    "      <td>最後才進行視覺上的排列。</td>",
+    "    </tr>",
+			"<pre><code class=\"language-sql\">SELECT COUNT(orderID) AS Total, Country -- 5",
+			"FROM Orders                    \t\t\t-- 1",
+			"WHERE orderID > 0              \t\t\t-- 2. 先濾掉不合格 ID",
+			"GROUP BY Country               \t\t\t-- 3. 按國家打包",
+			"HAVING COUNT(orderID) > 50     \t\t\t-- 4. 濾掉小單國家",
+			"ORDER BY Total DESC;           \t\t\t-- 6. 最後按總數「由大到小」排好</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1039,16 +1126,16 @@
     {
         "id": 32,
         "question": [
-            "<pre><code class=\"language-sql\">32. 有一個名為 Playerstat 資料表包含以下欄位:",
-            "<br>[[image01]]",
-            "您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:",
+            "<pre><code class=\"language-sql\">32. 有一個名為 Playerstat 資料表包含以下欄位:</code></pre>",
+            "[[image01]]",
+            "<pre><code class=\"language-sql\">您需要針對 TeamID 為1的隊伍顯示每位隊員的總分數,程式碼如下:",
             "SELECT PlayerID, (1)",
             "FROM PlayerStat (2) TeamID = 1",
             "(3) (4)",
             "請將下方A~G的程式碼片段排列到上方缺失的正確位置。",
             "每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。",
-            "A. PlayerID <br>B. COUNT <br>C. GROUP BY",
-            "D. TeamID <br>E. WHERE <br>F. SUM(Points)",
+            "A. PlayerID \nB. COUNT \nC. GROUP BY",
+            "D. TeamID \nE. WHERE \nF. SUM(Points)",
             "G. HAVING",
             "請問填入的程式碼片段順序為何?</code></pre>"
         ],
@@ -1063,12 +1150,16 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">這個查詢的目的是：",
-            "1. 計算總分，所以 (1) 應填入 SUM(Points) (F)。",
+            "1. 計算總分，所以 (1) 應填入 SUM(Points)\t(F)。",
             "2. 篩選出 TeamID 為 1 的隊伍，所以 (2) 應填入 WHERE (E)。",
-            "3. (3) 已經給定條件 TeamID=1。",
+            "3. (3) 已經給定條件 TeamID=1。 \t\t\t(C)",
             "4. 要「每位」隊員的總分，代表要根據 PlayerID 進行分組",
-            "所以 (4) 應填入 GROUP BY PlayerID (C, A)。",
-            "組合起來的順序是 F, E, C, A</code></pre>"
+            "所以 (4) 應填入 GROUP BY PlayerID。 \t\t(A)",
+            "組合起來的順序是 F, E, C, A",
+			"SELECT PlayerID, SUM(Points)",
+			"FROM PlayerStat ",
+			"WHERE TeamID = 1",
+			"GROUP BY PlayerID</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1078,8 +1169,7 @@
     {
         "id": 33,
         "question": [
-            "<pre><code class=\"language-sql\">33. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料",
-            "中。",
+            "<pre><code class=\"language-sql\">33. 您是某間大學的資料庫管理員,該大學將學生資訊儲存在一個名為students 的資料中。",
             "這個資料表具有一個名為 courseID 的外部索引鍵,可連結至 courses 資料表中的主",
             "索引鍵。",
             "您需要使用這兩個根據 courseID 配對的資料表來傳回學生姓名和課程名稱。",
@@ -1091,10 +1181,10 @@
             "請問您該如何修正查詢?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\"><br>SELECT students.Name, courses.Name <br>FROM students INNER JOIN ON courses <br>WHERE students.courseID = courses.CourseID</code>",
-            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN courses ON students.courseID = courses.courseID</code>",
-            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN ON students.courseID = courses.courseID</code>",
-            "<code class=\"language-sql\"><br>SELECT students.name, courses.name <br>FROM students INNER JOIN courses <br>WHERE students.courseID = courses.courseID</code>"
+            "<code class=\"language-sql\">SELECT students.Name, courses.Name FROM students INNER JOIN ON courses WHERE students.courseID = courses.CourseID</code>",
+            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN courses ON students.courseID = courses.courseID</code>",
+            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN ON students.courseID = courses.courseID</code>",
+            "<code class=\"language-sql\">SELECT students.name, courses.name FROM students INNER JOIN courses WHERE students.courseID = courses.courseID</code>"
         ],
         "answer": [
             "B"
@@ -1104,7 +1194,40 @@
             "ON 關鍵字來指定，而不是放在 WHERE 子句中。OUTER JOIN 是一個不完整的語",
             "法，應該明確指定是 LEFT OUTER JOIN, RIGHT OUTER JOIN 還是 FULL OUTER",
             "JOIN。但此題的重點在於 JOIN 的語法結構，正確的結構是 FROM table1 JOIN",
-            "table2 ON table1.key = table2.key。選項 (B) 是唯一符合此結構的。</code></pre>"
+            "table2 ON table1.key = table2.key。選項 (B) 是唯一符合此結構的。</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>OUTER JOIN</b></td>",
+			"      <td class=\"code-font\">改為 LEFT OUTER JOIN</td>",
+			"      <td>SQL 需要明確方向（左、右或全連線）。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>WHERE</b></td>",
+			"      <td class=\"code-font\">改為 ON</td>",
+			"      <td>ON 用於定義表與表之間的「橋樑」；WHERE 用於橋蓋好後的「資料過濾」。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>student.courseID</b></td>",
+			"      <td class=\"code-font\">改為 students.courseID</td>",
+			"      <td>注意資料表名稱的單複數（小細節，但考試常考拼字一致性）。</td>",
+			"    </tr>",
+			"  </tbody></table><b>但答案有INNER JOIN說明如下</b><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-70 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">指令 (Command)</td>      <td class=\"w-42\">公式 / 語法結構</td>      <td class=\"w-42\">參數與功能說明</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>SELECT</b></td>",
+    "      <td class=\"code-font\">students.name, courses.name</td>",
+    "      <td>選取結果：你想從這兩張表分別拿什麼資料？</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>FROM + JOIN</b></td>",
+    "      <td class=\"code-font\">students INNER JOIN courses</td>",
+    "      <td>設定橋樑：哪兩張表要黏在一起？</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>ON</b></td>",
+    "      <td class=\"code-font\">students.courseID = courses.courseID</td>",
+    "      <td>匹配規則：靠哪個欄位來對齊資料？</td>",
+    "    </tr>",
+	"  </tbody></table>"
+	
         ],
         "image": null,
         "type": "single",
@@ -1155,17 +1278,83 @@
         "explanation": [
             "<pre><code class=\"language-sql\">INTERSECT (交集) 運運算元會比較兩個 SELECT 陳述式的結果集，並只傳回在「兩個」",
             "結果集中都存在的資料列。它會自動移除重複的資料列。",
-            "(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。</code></pre>"
+            "(A) UNION (聯集) 會傳回兩個結果集中的所有資料列，並移除重複項。</code><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-60 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-25\">運算元</td>      <td class=\"w-25\">邏輯</td>      <td class=\"w-25\">結果範圍</td>      <td class=\"w-25\">是否自動去重複？</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>UNION</b></td>",
+			"      <td class=\"code-font\">聯集 (OR)A∪B</td>",
+			"      <td>全部 (A + B)</td>",
+			"      <td>是</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>UNION ALL</b></td>",
+			"      <td class=\"code-font\">聯集 (純合併)A∪B</td>",
+			"      <td>全部 (A + B)</td>",
+			"      <td>否 (保留重複)</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>INTERSECT</b></td>",
+			"      <td class=\"code-font\">交集 (AND)A∩B</td>",
+			"      <td>只有重疊的部分</td>",
+			"      <td>是</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>EXCEPT</b></td>",
+			"      <td class=\"code-font\">差集 (Minus)\nA−(A∩B) 或 A∖B</td>",
+			"      <td>A 有但 B 沒有的部分</td>",
+			"      <td>是</td>",
+			"    </tr>",
+			"  </tbody></table>",
+			"[[image01]]<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
+    "<table class=\"q-table w-50 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-10\">圖片標籤</td>      <td class=\"w-15\">紅色/橘色選中區域</td>      <td class=\"w-10\">集合代數公式</td>      <td class=\"w-15\">對應 SQL 關鍵字</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>A</b></td>",
+    "      <td class=\"code-font\">左圓全紅 (含交集)</td>",
+    "      <td>A</td>",
+    "      <td>LEFT JOIN</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>B</b></td>",
+    "      <td class=\"code-font\">右圓全紅 (含交集)</td>",
+    "      <td>B</td>",
+    "      <td>RIGHT JOIN</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>A'</b></td>",
+    "      <td class=\"code-font\">A 留白，其餘全橘</td>",
+    "      <td>A′=U−A</td>",
+    "      <td>NOT A</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>B'</b></td>",
+    "      <td class=\"code-font\">B 留白，其餘全橘</td>",
+    "      <td>B′=U−B</td>",
+    "      <td>NOT B</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>A ∪ B</b></td>",
+    "      <td class=\"code-font\">雙圓全紅 (聯集)</td>",
+    "      <td>A∪B</td>",
+    "      <td>UNION</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>A ∩ B</b></td>",
+    "      <td class=\"code-font\">只有中間橄欖紅</td>",
+    "      <td>A∩B</td>",
+    "      <td>INTERSECT</td>",
+    "    </tr>",
+    "  </tbody></table>"
+			
         ],
         "image": null,
+		"image01": "images/Venn.png",
         "type": "single",
         "category": "D2_資料庫設計"
     },
     {
         "id": 36,
         "question": [
-            "<pre><code class=\"language-sql\">36. 有一個名為Cars 的資料庫資料表,其定義如下所示。",
-            "<br>[[image01]]\n您設有下列SQL 陳述式:",
+            "<pre><code class=\"language-sql\">36. 有一個名為Cars 的資料庫資料表,其定義如下所示。</code></pre>",
+            "[[image01]]<pre><code class=\"language-sql\">您設有下列SQL 陳述式:",
             "SELECT *",
             "FROM Cars c",
             "WHERE c. Origin <> 'USA' AND c.Color <> 'Black'",
@@ -1252,10 +1441,10 @@
     {
         "id": 39,
         "question": [
-            "<pre><code class=\"language-sql\">39. 您 其中包含名為CustomerID、Firstname 和 Date Joined 資料列。",
+            "<pre><code class=\"language-sql\">39. 您 其中包含名為CustomerID、Firstname 和 DateJoined 資料列。",
             "CustomerID 是主索引鍵。",
             "您執行了下列查詢:",
-            "SELECT CustomerID, FirstName, Date Joined",
+            "SELECT CustomerID, FirstName, DateJoined",
             "FROM Customer",
             "請問結果集會以哪種方式組織資料列?</code></pre>"
         ],
@@ -1366,18 +1555,19 @@
         ],
         "options": [
             "<code class=\"language-sql\">DELETE FROM Customer WHERE CustomerID = 12345</code>",
-            "<code class=\"language-sql\">DELETE Customer ID FROM Customer WHERE CustomerID = 12345</code>",
+            "<code class=\"language-sql\">DELETE CustomerID FROM Customer WHERE CustomerID = 12345</code>",
             "<code class=\"language-sql\">UPDATE Customer DELETE * WHERE CustomerID = 12345</code>",
-            "<code class=\"language-sql\">UPDATE Customer ID FROM Customer DELETE * WHERE CustomerID = 12345</code>"
+            "<code class=\"language-sql\">UPDATE CustomerID FROM Customer DELETE * WHERE CustomerID = 12345</code>"
         ],
         "answer": [
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">選項 (A) 完全符合這個語法。刪除特定資料列的標準 SQL 語法是 DELETE FROM [",
-            "資料表名稱] WHERE [條件];。",
+            "<pre><code class=\"language-sql\">選項 (A) 完全符合這個語法。刪除特定資料列的標準 SQL 語法是",
+			"\tDELETE FROM [資料表名稱] WHERE [條件];。",
             "(B) DELETE 後面不需指定欄位名稱。",
-            "(C) 和 (D) 的語法完全錯誤，混用了 UPDATE 和 DELETE。</code></pre>"
+            "(C) 和 (D) 的語法完全錯誤，混用了 UPDATE 和 DELETE。",
+			"\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;<code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1386,8 +1576,8 @@
     {
         "id": 44,
         "question": [
-            "<pre><code class=\"language-sql\">44. 您有一個名為 Product 的資料表包含以下資料。",
-            "[[image01]]\nProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表",
+            "<pre><code class=\"language-sql\">44. 您有一個名為 Product 的資料表包含以下資料。</code></pre>",
+            "[[image01]]<pre><code class=\"language-sql\">ProductID 資料行是主索引鍵。CategoryID 資料行是名為Category 之個別資料表",
             "的外部索引鍵。您執行了下列陳述式:",
             "INSERT INTO Product VALUES (3296, 'Table', 4444) 請問結果為何?</code></pre>"
         ],
@@ -1415,8 +1605,8 @@
     {
         "id": 45,
         "question": [
-            "<pre><code class=\"language-sql\">45. 您有一個資料庫資料表(AddressInfo) 包含以下資料行:\n<[[image01]]\n您必須在資料表中插入下列記錄:",
-            "[[image02]]請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)</code></pre>"
+            "<pre><code class=\"language-sql\">45. 您有一個資料庫資料表(AddressInfo) 包含以下資料行</code></pre>[[image01]]<pre><code class=\"language-sql\">您必須在資料表中插入下列記錄:",
+            "</code></pre>[[image02]]<pre><code class=\"language-sql\">請問您可以使用哪兩個SQL 陳述式?(請選擇2個答案。)</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">INSERT INTO AddressInfo VALUES ('1234 Main Street', 'Dallas', 'TX', ' 75201')</code>",
@@ -1446,7 +1636,7 @@
         "question": [
             "<pre><code class=\"language-sql\">46. 您接受了某間地方慈善機構的IT實習工作該慈善機構要求您使用一個名為",
             "Volunteer 的資料庫資料表來保留志工的記錄。",
-            "這個資料表包含以下資料行和資料列:<br>[[image01]]\n當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請",
+            "這個資料表包含以下資料行和資料列:</code></pre>[[image01]]<pre><code class=\"language-sql\">當志工資訊變更時您就必須更新資料表。您需要將 Tia 的名字變更為 Kimberly。請",
             "問您應該選擇哪一個陳述式?</code></pre>"
         ],
         "options": [
@@ -1459,8 +1649,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是 UPDATE [資料表名稱] SET [欄位名稱] = [新值]",
-            "WHERE [條件];。",
+            "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是",
+			"\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;",
             "*UPDATE Volunteer: 指定要更新的資料表。",
             "*SET GivenName = 'Kimberly': 指定要將 GivenName 欄位的值設定為 'Kimberly'。",
             "*WHERE GivenName = 'Tia': 指定要更新的是哪一筆紀錄。",
@@ -1492,7 +1682,7 @@
             "(C) ALTER TABLE 是 DDL (Data Definition Language)，用於修改資料庫物件的結",
             "構。",
             "(A) 和 (D) 的 SELECT 也是 DML (或稱 DQL, Data Query Language)。但 INSERT",
-            "是更典型的「操作」語言。在此選項中，B 是最明確的 DML 範例。</code></pre>"
+            "是更典型的「操作」語言。在此選項中，B 是最明確的 DML 範例。參閱題5</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1501,7 +1691,7 @@
     {
         "id": 48,
         "question": [
-            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。<br>[[image01]][[image02]]\n舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
+            "<pre><code class=\"language-sql\">48. 您建立了下列名為LoanedBooks 的資料,其中列出您借給朋友的書籍數目。</code></pre>[[image01]][[image02]]<pre><code class=\"language-sql\">舊金山的 Harry 歸還了您的書籍。請問哪一個陳述式可正確更新您的資料表?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = ' San Francisco')</code>",
@@ -1513,10 +1703,8 @@
             "C"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">要在一個字串中搜尋是否「包含」某個子字串，應使用 ‘LIKE’ 運運算元搭配萬用字",
-            "元 ‘%’。’%’ 代表零個或多個任意字元。所以 ‘LIKE '%chocolate%'‘ 的意",
-            "思是，只要 ‘ItemDescription’ 欄位中的任何位置出現 'chocolate' 這個詞，不",
-            "論前後是否有其他文字，都符合條件。</code></pre>"
+		   "<pre><code class=\"language-sql\">修改現有資料的標準 SQL 語法是",
+           "\tUPDATE 表格名稱 SET 欄位1 = 新值1, 欄位2 = 新值2 WHERE 過濾條件;</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1527,7 +1715,7 @@
     {
         "id": 49,
         "question": [
-            "<pre><code class=\"language-sql\">49. Products 資料表包含以下資料:<br>[[image01]]\n請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和",
+            "<pre><code class=\"language-sql\">49. Products 資料表包含以下資料:</code></pre>[[image01]]<pre><code class=\"language-sql\">請問哪一個查詢會在 Item Description 資料行出現 chocolate 時擷取 Item 和",
             "Price?</code></pre>"
         ],
         "options": [
@@ -1554,7 +1742,7 @@
         "id": 50,
         "question": [
             "<pre><code class=\"language-sql\">50. 有一個名為Flight 的資料表包含以下欄位:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果",
             "應該依照最新的抵達時間來排序,程式碼如下:",
             "SELECT FlightNumber",
@@ -1580,7 +1768,17 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">這個查詢需要組合多個條件：</code></pre>"
+            "<pre><code class=\"language-sql\">這個查詢需要組合多個條件：",
+			"1. 目的地是 LGA: WHERE DestinationAirport = 'LGA'。",
+			"2. 抵達時間比現在晚: (1) AND，(2) > GETDATE() (GETDATE() 是取得目前時間的函數)。所以 ArrivalTime > GETDATE()。",
+			"3. 依照最新的抵達時間排序: (3) ORDER BY，",
+			"4. ArrivalTime DESC (DESC 是遞減排序，最新的在最前面)。",
+			"組合起來，順序是 B, B, B, B。",
+			"SELECT FlightNumber",
+			"FROM Flight ",
+			"WHERE DestinationAirport = 'LGA' AND",
+			"ArrivalTime > GETDATE() ",
+			"ORDER BY ArrivalTime DESC;</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1595,7 +1793,7 @@
             "(RoadID INTEGER NOT NULL,",
             "Distance INTEGER NOT NULL)",
             "Road 資料表包含以下資料:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您執行了下列陳述式: INSERT INTO Road VALUES (1234, 36) 請問結果為何?</code></pre>"
         ],
         "options": [
@@ -1636,11 +1834,13 @@
             "B"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">將一個查詢的結果集插入到另一個已存在的資料表，標準的 SQL 語法是 INSERT",
-            "INTO [目標資料表] SELECT ... FROM [來源資料表];。",
+            "<pre><code class=\"language-sql\">將一個查詢的結果集插入到另一個已存在的資料表，標準的 SQL 語法是 ",
+            "\tINSERT INTO [目標資料表] SELECT ... FROM [來源資料表];。",
             "選項 (B) 完全符合這個語法。",
             "(D)SELECT INTO 是某些資料庫系統（如 SQL Server）支援的語法，可以用來「建",
-            "立新資料表並插入資料」，但 ‘INSERT INTO ... SELECT’ 是更通用的標準語法。</code></pre>"
+            "立新資料表並插入資料」，但 ‘INSERT INTO ... SELECT’ 是更通用的標準語法。,",
+			"「將查詢結果直接備份（複製）到一張新表中」",
+			"\t SELECT 欄位1, 欄位2 INTO 新表格名稱 FROM 舊表格名稱 WHERE 條件;</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1656,8 +1856,8 @@
             "述式?</code></pre>"
         ],
         "options": [
-            "<code class=\"language-sql\">SET Product TO ProductCategory = 43 WHERE Product Description = ' spoon'</code>",
-            "<code class=\"language-sql\">UPDATE Product SET ProductCategory = 43 WHERE Product Description = ' spoon'</code>",
+            "<code class=\"language-sql\">SET Product TO ProductCategory = 43 WHERE ProductDescription = ' spoon'</code>",
+            "<code class=\"language-sql\">UPDATE Product SET ProductCategory = 43 WHERE ProductDescription = ' spoon'</code>",
             "<code class=\"language-sql\">SET Product WHERE Product Description 'spoon' TO ProductCategory = 43</code>",
             "<code class=\"language-sql\">UPDATE Product WHERE Product Description SET ProductCategory = 43</code>"
         ],
@@ -1727,7 +1927,7 @@
         "id": 56,
         "question": [
             "<pre><code class=\"language-sql\">56. Customers 資料表包含以下資料:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您要建立一個查詢來傳回包含LastName、Phonenumber 及 Extension 分機為有",
             "效號碼的結果集。此結果集應該依照客戶的姓氏來排序,程式碼如下:",
             "SELECT LastName, Phone Number, Extension",
@@ -1736,7 +1936,10 @@
             "(3) LastName;",
             "請將下方程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次,",
             "也可能使用多次,甚至完全用不到。",
-            "① (A) PhonesNumber ,(B) NOT NULL ,(C) IS NOT NULL ,(D) Extension (E) <>NULL<br>② (A) Phones Number ,(B) NOT NULL ,(C) IS NOT NULL ,(D) Extension ,(E) <> NULL <br>③ (A) GROUP BY ,(B) HAVING ,(C) ORDER BY ,(D) SORT BY <br>請問填入的程式碼片段順序為何?</code></pre>"
+            "① (A) PhonesNumber \t(B) NOT NULL \t(C) IS NOT NULL \t(D) Extension \t(E) <>NULL",
+			"② (A) PhonesNumber \t(B) NOT NULL \t(C) IS NOT NULL \t(D) Extension \t(E) <> NULL ",
+			"③ (A) GROUP BY \t\t(B) HAVING \t\t(C) ORDER BY \t\t(D) SORT BY ",
+			"請問填入的程式碼片段順序為何?</code></pre>"
         ],
         "options": [
             "<code class=\"language-sql\">A、B、D</code>",
@@ -1763,17 +1966,17 @@
         "id": 57,
         "question": [
             "<pre><code class=\"language-sql\">57. 下列名為Building 的資料儲存了數棟大樓的相關資料及其最新的檢查日期。",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "Address 欄位儲存的是大樓的地址。InspectionDate 欄位儲存的是最新的檢查日期。",
-            "Inspection Date 欄位中的NULL 值代表該大樓尚未檢查過。",
+            "InspectionDate 欄位中的NULL 值代表該大樓尚未檢查過。",
             "您需要顯示最早完成檢查的10棟大樓地址,程式碼如下:",
             "SELECT (1) Address",
             "FROM Building",
             "WHERE InspectionDate (2) (3) InspectionDate請將下方的程式碼片段排列到上方",
             "缺失的正確位置。",
             "每個程式碼片段可能只使用一次,也可能使用多次,甚至完全用不到。",
-            "A. COUNT B. IS NOT NULL C. ORDER BY",
-            "D. HAVING E. GROUP BY F. IS NULL",
+            "A. COUNT \t\tB. \t\tIS NOT NULL \t\tC. ORDER BY",
+            "D. HAVING \t\tE. \t\tGROUP BY \t\t\tF. IS NULL",
             "G. TOP 10",
             "請問填入的程式碼片段順序為何?</code></pre>"
         ],
@@ -1792,7 +1995,12 @@
             "2. 要找「已完成」檢查的，所以檢查日期不能是 NULL。所以 (2) 應填入 IS NOT NULL (B)。",
             "3. 要找「最早」完成的，所以要排序。 (3) 應填入 ORDER BY (C)。",
             "4. (4) 則指定排序的欄位 InspectionDate (預設為 ASC 升序，即最早的在前面)。",
-            "組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E 視為 C 的筆誤，則是唯一包含 G 和 B 的選項。</code></pre>"
+            "組合起來，順序是 G, B, C。選項 (D) 的 G, B, E (GROUP BY) 是錯誤的，但如果將 E 視為 C 的筆誤，",
+			"則是唯一包含 G 和 B 的選項。",
+			"\tSELECT TOP 10 Address ",
+			"\tFROM Building",
+			"\tWHERE InspectionDate IS NOT NULL",
+			"\tORDER BY InspectionDate;</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1803,7 +2011,7 @@
         "id": 58,
         "question": [
             "<pre><code class=\"language-sql\">58. Items OnOrder 資料表包含以下資料:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "您需要建立一個查詢來顯示訂單總數、平均單行商品總計、最高單行商品總計,以及",
             "所有訂購商品的總計。",
             "LineltemTotal 代表單行商品總計。",
@@ -1855,10 +2063,11 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">在標準 SQL 查詢中，子句的執行順序是固定的：FROM -> WHERE -> GROUP BY",
-            "-> HAVING -> SELECT -> ORDER BY。這個查詢將 ORDER BY 子句放在了",
-            "GROUP BY 子句的前面，這違反了 SQL 的語法規則，因此會產生錯誤。將",
-            "ORDERBY 子句移除，或將它移動到整個查詢的最後面，就可以修正這個語法錯誤。</code></pre>"
+            "<pre><code class=\"language-sql\">在標準 SQL 查詢中，子句的執行順序是固定的：",
+			"FROM \t-> WHERE \t-> GROUP BY -> HAVING \t\t-> SELECT \t-> ORDER BY。 或",
+			"SELECT \t-> FROM \t-> WHERE \t-> GROUP BY \t-> HAVING  \t-> ORDER BY",
+			"這個查詢將 ORDER BY 子句放在了GROUP BY 子句的前面，這違反了 SQL 的語法規則，因此會產生錯誤。",
+            "將ORDER BY 子句移除，或將它移動到整個查詢的最後面，就可以修正這個語法錯誤。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1868,7 +2077,7 @@
         "id": 60,
         "question": [
             "<pre><code class=\"language-sql\">60. 您有兩個資料表,分別名為 Cars 與 Colors,其定義如下。這兩個資料表會透過",
-            "ColorID 建立關聯。<br>[[image01]][[image02]]<br>您執行了下列SQL述式:",
+            "ColorID 建立關聯。</code></pre>[[image01]][[image02]]<pre><code class=\"language-sql\">您執行了下列SQL述式:",
             "SELECT *",
             "FROM Cars",
             "LEFT OUTER JOIN Colors",
@@ -1885,11 +2094,15 @@
             "C"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">LEFT OUTER JOIN (左外部聯結) 會傳回左邊資料表 (Cars) 的「所有」資料列，無論",
-            "在右邊資料表 (Colors) 中是否有匹配的紀錄。Cars 資料表中有 3 筆資料列，所以這",
-            "個查詢的結果集一定會有 3 筆資料列。對於 ColorID 無法在 Colors 中找到匹配的",
-            "紀錄（如 Truck 的 ColorID 是 NULL），其對應的 Colors 資料表欄位將會以 NULL",
-            "值顯示。</code></pre>"
+            "<pre><code class=\"language-sql\">這題考的是 LEFT OUTER JOIN 的基本觀念，，我們來拆解這個查詢：",
+			"🔍 邏輯分析",
+			"1.左資料表 (Left Table)：Cars，共有 3 筆 資料（Sedan, Truck, Minivan）。",
+			"2.右資料表 (Right Table)：Colors，共有 2 筆 資料（Red, Gold）。",
+			"3.關聯條件 (ON)：Cars.ColorID = Colors.ColorID。",
+			"4.LEFT OUTER JOIN 的特性：",
+			"\t●它會回傳左表 (Cars) 的所有資料。",
+			"\t●如果右表有對應到的資料，就顯示出來。",
+			"\t●如果右表沒有對應到的資料（例如 Truck 的 ColorID 是 NULL），左表的資料依然會顯示，但右表的欄位會顯示為 NULL</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1901,7 +2114,7 @@
         "id": 61,
         "question": [
             "<pre><code class=\"language-sql\">61. Products 資料表包含以下資料:",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個查詢會將商品1價格提高6%?</code></pre>"
         ],
         "options": [
@@ -1914,8 +2127,8 @@
             "A"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">要將一個數值提高 6%，就是將原來的數值乘以 1.06。更新資料的語法是 UPDATE",
-            "[資料表] SET [欄位] = [新值] WHERE [條件]。",
+            "<pre><code class=\"language-sql\">要將一個數值提高 6%，就是將原來的數值乘以 1.06。更新資料的語法是",
+			"\t\tUPDATE [資料表] SET [欄位] = [新值] WHERE [條件]。",
             "因此，正確的陳述式是 UPDATE Products SET Price = Price * 1.06 WHERE",
             "ItemNumber = 1。",
             "CH05</code></pre>"
@@ -1929,7 +2142,7 @@
         "id": 62,
         "question": [
             "<pre><code class=\"language-sql\">62. 您有一個資料表包含以下資料。",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個資料庫詞彙是用來描述 ProductID 與 Product Cateory 之間的關聯性?</code></pre>"
         ],
         "options": [
@@ -1970,9 +2183,26 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">在 SQL 中，管理許可權的指令是 GRANT (授予許可權) 和 REVOKE(撤銷許可權)。",
-            "要撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是 REVOKE",
-            "SELECT ON [物件名稱] FROM [使用者或角色];。",
-            "選項 (D) 完全符合此語法。</code></pre>"
+            "1. 撤銷 User1 對 Customer 資料表的 SELECT (檢視) 許可權，標準的語法是",
+			"\t REVOKE 權限名稱1,權限名稱2... ON [物件名稱] FROM [使用者User1 或角色] CASCADE;。",
+			"\t 後面加 CASCADE; -- 這會把被 使用者User1 授權的所有人的權限一併收回",
+            "   選項 (D) 完全符合此語法。",
+			"2. 授予 User1 對 Customer 資料表的權限, 標準的語法是",
+			"\t GRANT 權限名稱1,權限名稱2... ON 物件名稱 (例如資料表) TO 用戶名稱 WITH GRANT OPTION;",
+			"\t 如果你在指令最後加上 WITH GRANT OPTION，使用者User1代表該用戶不僅獲得了權限，",
+			"\t 還可以把他擁有的權限再轉授權給其他人。",
+			"○權限名稱 :",
+			"\t●SELECT：允許用戶讀取資料（最常用）。",
+			"\t●INSERT：允許用戶新增資料。",
+			"\t●UPDATE：允許用戶修改現有資料。",
+			"\t●DELETE：允許用戶刪除資料。",
+			"\t●ALL PRIVILEGES：授予該物件的所有權限。",
+			"3. 拒絕 User1",
+			"\tDENY 權限名稱1,權限名稱2 ON 物件名稱 TO 用戶名稱; ",
+			"\t\t 只禁止列出的權限名稱",
+			"權限衝突判定：",
+			"\t\t\t 針對性：禁止 權限A 只會卡死 權限A，不影響已授權的 B。",
+			"\t\t\t 霸體性：對於同一個動作，DENY 永遠大於 GRANT</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -1981,15 +2211,18 @@
     {
         "id": 64,
         "question": [
-            "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選",
-            "取正確的選項以完成敘述。",
-            "① 叢集索引可提升以下查詢的效能:</code></pre>"
+            "<pre><code class=\"language-sql\">64. 您正在設定關聯式資料庫中某個資料表的結構。某個資料表有一個叢集索引,請選取正確的選項以完成敘述。</code></pre>"
         ],
+		"questionA": [
+		  "<pre><code class=\"language-sql\">① 叢集索引可提升以下查詢的效能:</code></pre>"
+		],
+		"questionB": [
+		  "<pre><code class=\"language-sql\">② 叢集索引可提升以下資料行查詢的:</code></pre>"
+		],
+		
         "options": [
-            "<code class=\"language-sql\">傳回大型結果集 (B)傳回許多資料行</code>",
-            "<code class=\"language-sql\">不用 ORDER BY 或GROUP BY 子句 ② 叢集索引可提升以下資料行查詢的:</code>",
-            "<code class=\"language-sql\">隨機存取 (B) 循序存取</code>",
-            "<code class=\"language-sql\">並非唯一或包含許多共同的值</code>"
+            "<code>傳回大型結果集|傳回許多資料行|不用 ORDER BY 或GROUP BY 子句</code>",
+            "<code>隨機存取|循序存取|並非唯一或包含許多共同的值</code>"
         ],
         "answer": [
             "A",
@@ -1997,14 +2230,46 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">(A) 叢集索引決定了資料的實體儲存順序。當查詢需要回傳大量資料，特別是連續範",
-            "圍的資料時，因為資料都實體上儲存在一起，",
-            "可以減少磁碟 I/O，從而提升效能。",
-            "(B) 因為資料是按照叢集索引的鍵值排序儲存的，所以對於",
-            "循序存取（例如範圍查詢 WHERE ID BETWEEN 100 AND 200 或 ORDER BY 叢集",
-            "索引鍵）的效能提升最為顯著。</code></pre>"
+            "圍的資料時，因為資料都實體上儲存在一起，可以減少磁碟 I/O，從而提升效能。",
+            "(B) 因為資料是按照叢集索引的鍵值排序儲存的，所以對於循序存取（例如範圍查詢 ",
+            "WHERE ID BETWEEN 100 AND 200 或 ORDER BY 叢集",
+            "索引鍵）的效能提升最為顯著。",
+			"1. 隨表建立 (最常見)",
+			"\tCREATE TABLE Ledger (",
+			"\tID INT PRIMARY KEY, -- 預設就會是 Clustered Index",
+			"\tAmount DECIMAL(18,2),",
+			"\tTransactionDate DATETIME",
+			"\t);",
+			"2.手動建立 (如果主鍵不想當索引時)",
+			"\tCREATE CLUSTERED INDEX IX_Ledger_Date ",
+			"\tON Ledger (TransactionDate);\n",
+			"●「叢集索引」（像字典的內文排序），那「非叢集索引 (Non-Clustered Index)」就更好理解了——",
+			"它就像是書本後面的「索引頁」或「關鍵字附錄」。",
+			"如果搜尋的欄位不是主鍵（PK），通常就得靠它來提速</code></pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-90 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-20\">特性</td>      <td class=\"w-40\">叢集索引 (Clustered)</td>      <td class=\"w-40\">非叢集索引 (Non-Clustered)</td>    </tr>  </thead>  <tbody>",
+			"    <tr>",
+			"      <td><b>數量</b></td>",
+			"      <td class=\"code-font\">一表僅限一個。</td>",
+			"      <td>一表可有多個。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>物理順序</b></td>",
+			"      <td class=\"code-font\">索引順序 = 資料存放順序。</td>",
+			"      <td>索引順序 ≠ 資料存放順序。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>內容</b></td>",
+			"      <td class=\"code-font\">葉層就是資料列本身。</td>",
+			"      <td>葉層是鍵值 + 指向資料的指標。</td>",
+			"    </tr>",
+			"    <tr>",
+			"      <td><b>搜尋效率</b></td>",
+			"      <td class=\"code-font\">極快（範圍查詢最強）。</td>",
+			"      <td>稍慢（找到索引後還要去「查表」）。</td>",
+			"    </tr>",
+			"  </tbody></table>"
         ],
         "image": null,
-        "type": "multiple",
+        "type": "multioption",
         "category": "D5_資料庫管理"
     },
     {
@@ -2012,7 +2277,7 @@
         "question": [
             "<pre><code class=\"language-sql\">65. 您建立了下列資料表,其中顯示過去寵物表演的獲勝者。",
             "寵物比賽獲勝者",
-            "<br>[[image01]]",
+            "</code></pre>[[image01]]<pre><code class=\"language-sql\">",
             "請問哪一個資料行可防止資料表成為第三正規形式?</code></pre>"
         ],
         "options": [
@@ -2079,7 +2344,10 @@
             "D"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：<br>1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。<br>2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。<br>因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
+            "<pre><code class=\"language-sql\">第一正規形式 (1NF) 的核心要求有兩個：",
+			"1. **原子性**: 資料表中的所有欄位都必須是「原子值」，不可再分割。這意味著不能有「重複群組」。",
+			"2. **唯一性**: 資料表中的每一筆資料列都必須是唯一的，可以透過主索引鍵來識別。",
+			"因此，(B) 和 (D) 是 1NF 的基本要求。</code></pre>"
         ],
         "image": null,
         "type": "multiple",
@@ -2103,7 +2371,9 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">解題分析：查詢的效能瓶頸在於 WHERE Category = 'Science Books'",
-            "這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有 'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。</code></pre>"
+            "這個篩選條件。如果沒有索引，資料庫需要逐筆掃描一百萬筆資料列來找出符合條件的紀錄 (稱為 Table Scan)。",
+			"如果在 Category 這個欄位上建立一個「非叢集索引」，資料庫就可以像查字典一樣，快速地透過索引找到所有",
+			"'Science Books' 的紀錄所在的位置，然後只讀取這些特定的紀錄，從而大幅提升查詢效率。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2113,8 +2383,8 @@
         "id": 69,
         "question": [
             "<pre><code class=\"language-sql\">69. 對於下列每一項敘述,若[正確]為○,[錯誤]為X。",
-            "①完整資料庫備份就是整個資料庫中所有資料的複本。",
-            "②交易記錄備份會備份資料庫中的所有資料。",
+            "① 完整資料庫備份就是整個資料庫中所有資料的複本。",
+            "② 交易記錄備份會備份資料庫中的所有資料。",
             "③ 差異備份只會複製上次完整備份之前變更的資料。",
             "④ 檔案或檔案群組還原會指定要復原的資料庫部分。",
             "請問填入正確或錯誤符號順序為何?</code></pre>"
@@ -2157,7 +2427,8 @@
         ],
         "explanation": [
             "<pre><code class=\"language-sql\">第二正規化 (2NF) 的規則是：必須先符合 1NF，且資料表中所有非主鍵欄位都必須「完全相依」於主索引鍵。",
-            "在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。必須將 Product 資訊獨立成另一個資料表。</code></pre>"
+            "在此例中，ProductName 只依賴於複合主鍵中的一部分 (ProductID)，這稱為「部分功能相依」，因此違反了 2NF。",
+			"必須將 Product 資訊獨立成另一個資料表。</code></pre>"
         ],
         "image": null,
         "type": "single",
@@ -2381,7 +2652,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：<br>● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。<br>● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。<br>● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：",
+			"● **雜湊 (Hashing)**：是單向的，無法被還原，最適合儲存密碼 (如 SHA-256)。",
+			"● **加密 (Encryption)**：是雙向的，有金鑰可以解密還原 (如儲存信用卡號)。",
+			"● **遮罩 (Masking)**：是顯示時隱藏部分資訊 (如 XXXXX-1234)，但底層資料未變。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2404,7 +2678,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：<br>● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2427,7 +2701,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：<br>● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。<br>在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2451,7 +2725,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：<br>● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。<br>當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2474,7 +2748,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：<br>● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。<br>● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2556,7 +2830,11 @@
             "C"
         ],
         "explanation": [
-            "<pre><code class=\"language-sql\">TRUNCATE 會移除所有資料並將識別值 (Identity) 重設為初始值，且無法帶 WHERE。DELETE 則是逐行刪除，不會重設識別值。</code></pre>"
+            "<pre><code class=\"language-sql\">(A)TRUNCATE 會移除所有資料並將識別值 (Identity) 重設為初始值，且無法帶 WHERE。",
+			"(B)DELETE 則是逐行刪除，不會重設識別值。",
+			"(D)DELETE 是 DML (Data Manipulation Language)：因為它是對「資料內容」進行操作，你可以精確地選擇要刪除哪幾筆（配合 WHERE 條件）。",
+			"TRUNCATE 是 DDL (Data Definition Language)：因為它在資料庫底層被視為對「資料表結構」的操作（重新設定表格），",
+			"它會直接清空整張表，且無法針對單一資料列操作。</code></pre>"
         ],
         "type": "single",
         "category": "D5_資料庫管理",
