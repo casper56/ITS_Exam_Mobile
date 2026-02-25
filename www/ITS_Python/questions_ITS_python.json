@@ -1247,7 +1247,7 @@
             "1. 檢視檔案是否存在。",
             "2. 如果檔案存在，則顯示其內容。\n請選取正確的程式碼片段以完成程式碼。",
             "#程式碼片段\nimport os\nif _(選項 1)_\n   file = open('myFile.txt')\n   _(選項 2)_\n   file.close()",
-            "\n選項1答案選擇區\nA. os.path.isfile('myFile.txt)\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>"
+            "\n選項1答案選擇區\nA. os.path.isfile('myFile.txt')\nB. os.path.isexists('myFile.txt')\nC. os.path.isdir('myFile.txt')\nD. os.path.exists('myFile.txt')\n\n選項2答案選擇區\nA. print(file.read())\nB. print(file.write())\nC. print(file.close())\nD. print(file,open())</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1417,7 +1417,7 @@
             "<pre><code class=\"language-python\">46. 【CH05-4】你正在編寫一個函式來判別負數與非負數。這個函式必須符合以下要求：",
             "● 如果 a 是負數，則回傳 'The result is a negative number'\n● 如果 a 不是負數，則為非負數，再繼續判別。\n● 如果 a 大於 0，則回傳 'The result is a positive number'\n● 否則回傳 'The result is a zero'",
             "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
-            "def reResult(a):\n    if _(選項 1)_\n        answer = 'The result is a negative number'\n    _(選項 2)_\n        if _(選項 3)_\n            answer = 'The result is a positive number'\n        _(選項 4)_\n            answer = 'The result is a zero'\n    return answer",
+            "def reResult(a):\n    _(選項 1)_\n        answer = 'The result is a negative number'\n    _(選項 2)_\n        _(選項 3)_\n            answer = 'The result is a positive number'\n        _(選項 4)_\n            answer = 'The result is a zero'\n    return answer",
             "\n答案選擇區\n答案 A. if a < 0:\n答案 B. if a > 0:\n答案 C. else:\n答案 D. elif:</code></pre>"
         ],
         "options": [
@@ -2860,7 +2860,7 @@
 			"題三:此程式碼將產生執行階段錯誤。"
 		],
 		"questionD": [
-			 "題一:此程式碼將正常執行，不會發生錯誤。"
+			 "題四:此程式碼將正常執行，不會發生錯誤。"
 		],
         "options": [
             "<code>Yes|No</code>",

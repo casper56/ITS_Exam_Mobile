@@ -118,7 +118,7 @@
 </div>
 <div id="exam-ui">
     <header class="exam-header d-flex justify-content-between align-items-center">
-        <div><h5 class="m-0">AI-900 模擬考試</h5><small id="q-progress">1 / 50</small></div>
+        <div><h5 class="m-0">AI-900 模擬考試</h5><small id="q-progress">1 / 60</small></div>
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
@@ -128,7 +128,7 @@
 </div>
 <div id="result-screen" class="container-fluid">
     <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
-    <p class="lead">答對題數：<span id="correct-count">0</span> / 50</p>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 60</p>
     <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
     <div class="mt-5 no-print">
         <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
@@ -144,7 +144,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
-    const EXAM_LIMIT = 50, WRONG_KEY = 'ai900_exam_wrong_ids';
+    const EXAM_LIMIT = 60, WRONG_KEY = 'ai900_exam_wrong_ids';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
@@ -4981,7 +4981,15 @@
             if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
         }
 
-        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort((a, b) => (b.id <= CUTOFF ? 1 : 0) - (a.id <= CUTOFF ? 1 : 0) || (0.5 - Math.random()));
+        // 核心修正：先抽模擬題填充剩下的 5% (3題)，確保不是 100% 官方題
+        const MOCK_TARGET = EXAM_LIMIT - TARGET_OFF_COUNT; 
+        let mockPool = allQuestions.filter(q => q.id > CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        while (selected.length < (TARGET_OFF_COUNT + MOCK_TARGET) && mockPool.length > 0) {
+            const q = mockPool.shift(); selected.push(q); usedIds.add(q.id);
+        }
+
+        // 最後如果還不夠 (例如模擬題太少)，再用剩餘題目補滿
+        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
         while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
 
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
