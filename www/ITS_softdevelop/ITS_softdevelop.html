@@ -130,7 +130,7 @@
                     <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
                 </div>
             </div>
-            <div id="progress-stats">✅0 ❌0 🟠0 / 121</div>
+            <div id="progress-stats">✅0 ❌0 🟠0 / 119</div>
         </div>
         <div class="sidebar-content">
             <div class="d-flex justify-content-between small mb-3 text-muted">
@@ -926,7 +926,6 @@
             " 額外的方法，將秒數換算成分鐘顯示。",
             "3. void IDisplayResult.Display() ",
             "介面 IDisplayResult 的顯式實作方法，印出秒數加上字串 \" seconds\"。",
-
             "<b>實作細節對照：</b></code></pre>",
             "<table class=\"q-table w-100 t-left\">",
             "  <thead>",
@@ -941,7 +940,6 @@
             "<pre><code class=\"language-csharp\">什麼是顯式介面實作？",
             "void IDisplayResult.Display() 是顯式介面實作，這種寫法不會在類別本身暴露該方法，只能透過介面型別呼叫。",
             "這是為了避免方法命名衝突或強制特定介面呼叫行為。",
-
             "<b>執行結果解析：</b>",
             "r1.Display() -> 執行 override -> 99\nr2.Display() -> 執行介面實作 -> 99 seconds\nr1.DisplayRaw() -> 執行新方法 -> 1.65 minutes",
             "小結: 這題考察 C# 的繼承、多型及介面實作方式。顯式介面實作可以讓類別同時有多個同名方法，透過不同型別參考呼叫不同版本。",
@@ -2274,60 +2272,6 @@
     {
         "id": 65,
         "question": [
-            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
-            "所有網頁伺服器會經由 ＿＿ 通訊協定接受用戶端要求，然後以網頁的形式將資料傳回用戶端來回應。</code></pre>"
-        ],
-        "options": [
-            "FTP",
-            "HTML",
-            "HTTP",
-            "IP"
-        ],
-        "answer": [
-            "C"
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">A. FTP\t//是檔案傳輸協定，用於上傳/下載檔案，不是用來傳送網頁資料",
-            "B. HTML\t//是網頁的內容格式，不是通訊協定",
-            "C. HTTP\t//是通訊協定「超文字傳輸協定」，專門用來傳送網頁資料, 如HTML、圖片、影片等",
-            "D. IP\t// 是網際網路上的數字位址，用來識別伺服器位置</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single",
-        "category": "D4_Web應用程式"
-    },
-    {
-        "id": 66,
-        "question": [
-            "<pre><code class=\"language-csharp\">請從清單中選取正確的選項以完成句子。",
-            "擁有存取權的用戶端可以經由 ＿＿ 通訊協定，修訂或移除裝載在網頁伺服器上的內容。</code></pre>"
-        ],
-        "options": [
-            "FTP",
-            "HTTP",
-            "IP",
-            "SMTP"
-        ],
-        "answer": [
-            "A"
-        ],
-        "explanation": [
-            "<pre><code class=\"language-csharp\">A. FTP (File Transfer Protocol)：專門用來在客戶端與伺服器之間傳輸檔案。 如果有權限，就能「上傳、下載、",
-            "\t修改、刪除」伺服器上的檔案，符合題目需求 → 正解！",
-            "B. HTTP (HyperText Transfer Protocol)：用於「讀取」網頁資源(GET/POST)： 雖然可透過 WebDAV 擴充支援檔案修改，",
-            " \t但題目強調「修訂或移除」伺服器檔案，典型答案不會選 HTTP。",
-            "C. IP (Internet Protocol)：只是網路封包的傳送協定，和檔案存取無直接關係。 ",
-            "D. SMTP (Simple Mail Transfer Protocol)：用來傳送電子郵件。和網頁伺服器檔案管理無關。</code></pre>"
-        ],
-        "weight": 1,
-        "image": null,
-        "type": "single",
-        "category": "D4_Web應用程式"
-    },
-    {
-        "id": 67,
-        "question": [
             "<pre><code class=\"language-csharp\">您的網站（sunsetweb.org）需要 SSL。",
             "您使用如下圖所示的設定建立了一個虛擬目錄。</code></pre>[[image01]]<pre><code class=\"language-csharp\">您將 Overview.jpg 檔案儲存在虛擬目錄中。",
             "您應該使用哪一個 URL 來存取該檔案？</code></pre>"
@@ -2350,7 +2294,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 68,
+        "id": 66,
         "question": [
             "<pre><code class=\"language-csharp\">下列 REST API Web 服務程式碼會在 www.sunsetweb.com 網域上執行：",
             "public class CarService",
@@ -2403,15 +2347,15 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 69,
+        "id": 67,
         "question": [
             "<pre><code class=\"language-csharp\">哪一個正規化要求資料表的屬性僅相依於主索引鍵？</code></pre>"
         ],
         "options": [
-            "CREATE PROCEDURE StoreData @UserName nvarchar (255), @Age int",
-            "CREATE PROCEDURE StoreData @UserName char, @Age double         ",
-            "UPDATE PROCEDURE StoreData @UserName nvarchar (255), @Age int",
-            "CREATE PROCEDURE StoreData (@UserName, @Age) "
+            "第一",
+            "第二",
+            "第三",
+            "第四"
         ],
         "answer": [
             "B"
@@ -2429,7 +2373,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 70,
+        "id": 68,
         "question": [
             "<pre><code class=\"language-sql\">您需要建立一個傳入人員 UserName 和 Age 的預存程序。",
             "Age 必須是以年為單位的整數。",
@@ -2463,7 +2407,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 71,
+        "id": 69,
         "question": [
             "<pre><code class=\"language-csharp\">在更新資料庫的多個資料表時，使用交易有何優點？</code></pre>"
         ],
@@ -2494,7 +2438,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 72,
+        "id": 70,
         "question": [
             "<pre><code class=\"language-csharp\">您有一部限制資料連線數目的伺服器。您應該使用下列何者，在使用者數目超過可用的連線數目時將連線能力最佳化？</code></pre>"
         ],
@@ -2519,7 +2463,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 73,
+        "id": 71,
         "question": [
             "<pre><code class=\"language-csharp\">您應該在有效的單元測試案例中納入哪兩種資訊？（請選擇 2 個答案）</code></pre>"
         ],
@@ -2549,7 +2493,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 74,
+        "id": 72,
         "question": [
             "<pre><code class=\"language-csharp\">下列哪兩項敘述正確描述了 JSON 物件？（請選擇 2 個答案）</code></pre>"
         ],
@@ -2579,7 +2523,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 75,
+        "id": 73,
         "question": [
             "<pre><code class=\"language-csharp\">下列哪兩項敘述正描述了將資料庫正規化的優點？</code></pre>"
         ],
@@ -2609,7 +2553,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 76,
+        "id": 74,
         "question": [
             "<pre><code class=\"language-csharp\">連線共用有哪三項優點？（請選擇 3 個答案。）</code></pre>"
         ],
@@ -2640,7 +2584,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 77,
+        "id": 75,
         "question": [
             "<pre><code class=\"language-csharp\">哪兩個程式碼片段可用來確保資源釋出？（請選擇 2 個答案。）</code></pre>"
         ],
@@ -2670,7 +2614,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 78,
+        "id": 76,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關單元測試的敘述：",
             "單元測試會測試整個應用程式的整合與相依性。</code></pre>"
@@ -2692,7 +2636,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 79,
+        "id": 77,
         "question": [
             "<pre><code class=\"language-csharp\">單元測試方法會呼叫目前測試的方法、傳遞資料，然後檢查傳回值是否正確。</code></pre>"
         ],
@@ -2713,7 +2657,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 80,
+        "id": 78,
         "question": [
             "<pre><code class=\"language-csharp\">單元測試的主要目標是取出應用程式中最小的可測試軟體部分，將此部分與其於程式碼隔離，",
             "然後判斷其行為表現是否完全符合預期。</code></pre>"
@@ -2734,7 +2678,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 81,
+        "id": 79,
         "question": [
             "<pre><code class=\"language-csharp\">連結清單可進行排序。</code></pre>"
         ],
@@ -2764,7 +2708,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 82,
+        "id": 80,
         "question": [
             "<pre><code class=\"language-csharp\">連結清單最多包含 100 個節點。</code></pre>"
         ],
@@ -2785,7 +2729,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 83,
+        "id": 81,
         "question": [
             "<pre><code class=\"language-csharp\">您可以在連結清單(Linked List)內任何位置加入新的節點。</code></pre>"
         ],
@@ -2805,7 +2749,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 84,
+        "id": 82,
         "question": [
             "<pre><code class=\"language-csharp\">數位簽章會使用寄件者的公開金鑰來加密訊息。</code></pre>"
         ],
@@ -2830,7 +2774,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 85,
+        "id": 83,
         "question": [
             "<pre><code class=\"language-csharp\">CSRF（跨網站偽造要求）權杖是用來防止攻擊。</code></pre>"
         ],
@@ -2852,7 +2796,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 86,
+        "id": 84,
         "question": [
             "<pre><code class=\"language-csharp\">防止 SQL 插入式攻擊的其中一種方式就是逸出使用者輸入。</code></pre>"
         ],
@@ -2873,7 +2817,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 87,
+        "id": 85,
         "question": [
             "<pre><code class=\"language-csharp\">Person 類別中的方法可以存取 co1or 屬性。</code></pre>"
         ],
@@ -2893,7 +2837,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 88,
+        "id": 86,
         "question": [
             "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
             "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
@@ -2916,7 +2860,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 89,
+        "id": 87,
         "question": [
             "<pre><code class=\"language-csharp\">某個專案包含一個名為 Person 的類別，以及一個名為 Tree 類別。",
             "Tree 類別具有一個名為 color 的屬性，以及一個名為 NumberOfLeaves 的受保護屬性。",
@@ -2924,8 +2868,8 @@
             "Tree 類別中的方法可以存取 Person 中的所有私用屬性。</code></pre>"
         ],
         "options": [
-            "Yes",
-            "No"
+            "正確",
+            "錯誤"
         ],
         "answer": [
             "B"
@@ -2951,7 +2895,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 90,
+        "id": 88,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
             "加上行號僅為參考之用。",
@@ -2996,7 +2940,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 91,
+        "id": 89,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
             "加上行號僅為參考之用。",
@@ -3034,7 +2978,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 92,
+        "id": 90,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關程式碼的敘述：",
             "加上行號僅為參考之用。",
@@ -3072,7 +3016,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 93,
+        "id": 91,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列的項目數有限制。</code></pre>"
@@ -3097,7 +3041,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 94,
+        "id": 92,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列是一種先進先出（FIFO）資料結構。</code></pre>"
@@ -3121,7 +3065,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 95,
+        "id": 93,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關佇列的敘述：",
             "佇列的項目是按照加入的順序儲存。</code></pre>"
@@ -3144,7 +3088,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 96,
+        "id": 94,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "文件資料庫會將資料儲存在類似 JSON 的檔案中。</code></pre>"
@@ -3168,7 +3112,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 97,
+        "id": 95,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "文件資料庫的設計目的是以預先定義的關聯處理資料。</code></pre>"
@@ -3189,7 +3133,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 98,
+        "id": 96,
         "question": [
             "<pre><code class=\"language-csharp\">請回答有關 NoSQL 資料庫的敘述：",
             "索引鍵值資料庫會將資料儲存成您可以修改或查詢其屬性的物件。</code></pre>"
@@ -3210,7 +3154,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 99,
+        "id": 97,
         "question": [
             "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）是專為物件導向的資料庫所設計。</code></pre>"
         ],
@@ -3231,7 +3175,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 100,
+        "id": 98,
         "question": [
             "<pre><code class=\"language-csharp\">實體關聯圖表（ERD）包含實體、關聯和屬性。</code></pre>"
         ],
@@ -3254,7 +3198,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 101,
+        "id": 99,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">基數是指資料表的互相連結方式，例如一對多。</code></pre>"
@@ -3278,7 +3222,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 102,
+        "id": 100,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【OOP-封裝】您正在設計一個銀行帳戶類別 `BankAccount`，其中的 `balance` (餘額) 欄位不應該讓外部程式碼直接修改，而應該透過 `Deposit()` 或 `Withdraw()` 方法來變更。請問您應該將 `balance` 設定為哪種存取修飾詞？</code></pre>"
@@ -3314,7 +3258,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 103,
+        "id": 101,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【OOP-多型】在 C# 中，如果父類別有一個方法 `Draw()`，而子類別想要提供該方法的不同實作（例如圓形和矩形的畫法不同），子類別應該使用哪個關鍵字？</code></pre>"
@@ -3344,7 +3288,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 104,
+        "id": 102,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【OOP-類別與物件】關於類別 (Class) 與物件 (Object) 的敘述，下列何者正確？</code></pre>"
@@ -3366,7 +3310,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 105,
+        "id": 103,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【ALM-生命週期】在應用程式生命週期管理 (ALM) 中，哪個階段主要負責定義「系統必須做什麼」以及蒐集使用者需求？</code></pre>"
@@ -3388,7 +3332,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 106,
+        "id": 104,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【ALM-測試】開發人員在寫完一個函式後，撰寫了一小段程式碼來驗證該函式的邏輯是否正確。這種測試稱為？</code></pre>"
@@ -3410,7 +3354,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 107,
+        "id": 105,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-基礎結構】在網頁開發中，負責定義網頁「結構」與「內容」的是哪種語言？</code></pre>"
@@ -3434,7 +3378,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 108,
+        "id": 106,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-CSS】如果您希望網頁上的某個按鈕背景變成藍色，字型變成白色，您應該使用哪種技術？</code></pre>"
@@ -3456,7 +3400,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 109,
+        "id": 107,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-執行環境】JavaScript 程式碼通常是在哪裡執行的？</code></pre>"
@@ -3478,7 +3422,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 110,
+        "id": 108,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-伺服器】哪一個術語是用來描述負責託管 (Hosting) 網頁應用程式並回應 HTTP 請求的軟體（如 IIS 或 Apache）？</code></pre>"
@@ -3507,7 +3451,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 111,
+        "id": 109,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【OOP-抽象】關於抽象類別 (Abstract Class) 與介面 (Interface)，下列敘述何者正確？</code></pre>"
@@ -3536,7 +3480,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 112,
+        "id": 110,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【C#-記憶體】在 C# 中，參考型別 (Reference Type) 的物件實體通常儲存在記憶體的哪個區域？</code></pre>"
@@ -3565,7 +3509,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 113,
+        "id": 111,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【ALM-排序】請排列軟體開發生命週期的正確順序：1.開發 2.需求分析 3.測試 4.設計 5.維護</code></pre>"
@@ -3597,7 +3541,7 @@
         "category": "D5_資料庫"
     },
     {
-        "id": 114,
+        "id": 112,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【C#-集合】您需要儲存一個沒有重複元素的數列，應該使用哪種集合型別？</code></pre>"
@@ -3625,7 +3569,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 115,
+        "id": 113,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-狀態】HTTP 協定本身是無狀態的 (Stateless)。為了在不同頁面間記住使用者的登入狀態，通常會使用什麼技術？</code></pre>"
@@ -3653,7 +3597,7 @@
         "category": "D4_Web應用程式"
     },
     {
-        "id": 116,
+        "id": 114,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">在物件導向程式設計 (OOP) 中，哪一個術語可以用來描述「類別繼承」的關係？</code></pre>"
@@ -3686,7 +3630,7 @@
         "category": "D2_物件導向程式設計"
     },
     {
-        "id": 117,
+        "id": 115,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【演算法-搜尋】在使用「二分搜尋法 (Binary Search)」搜尋特定數值之前，數列必須滿足哪一個先決條件？</code></pre>"
@@ -3714,7 +3658,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 118,
+        "id": 116,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【演算法-排序】哪一種排序演算法的運作方式是「重複走訪要排序的數列，比較相鄰的兩個元素，並在順序錯誤時交換它們」？</code></pre>"
@@ -3743,7 +3687,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 119,
+        "id": 117,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【安全性-雜湊】關於「雜湊 (Hashing)」與「加密 (Encryption)」的差異，下列敘述何者正確？</code></pre>"
@@ -3772,7 +3716,7 @@
         "category": "D3_一般軟體開發"
     },
     {
-        "id": 120,
+        "id": 118,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【Web-服務】哪一個開放標準協定被廣泛用於「授權 (Authorization)」，允許使用者讓第三方應用程式存取其資源（如 Google 帳號資訊）而不需要分享密碼？</code></pre>"
@@ -3801,7 +3745,7 @@
         "category": "D1_核心程式設計概念"
     },
     {
-        "id": 121,
+        "id": 119,
         "type": "single",
         "question": [
             "<pre><code class=\"language-csharp\">【架構-模式】在 MVVM 架構模式中，哪一個元件負責作為 Model 與 View 之間的橋樑，並處理資料繫結 (Data Binding) 的邏輯？</code></pre>"

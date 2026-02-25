@@ -80,7 +80,7 @@
             "該程式詢問使用者的年齡和當前年份，",
             "然後輸出使用者的出生年份。",
             "你編寫以下程式碼：</code>",
-            "<code class=\"language-python\">age = input(\"Enter your age: \")\nyear = input(\"Enter the four digit year: \")\nborn = eval(year) - eval(age)\n04 message = \"You were born in \" + str(born)",
+            "<code class=\"language-python\">01 age = input(\"Enter your age: \")\n02 year = input(\"Enter the four digit year: \")\n03 born = eval(year) - eval(age)\n04 message = \"You were born in \" + str(born)",
             "下列選項正確答案為？</code></pre>"
         ],
         "options": [

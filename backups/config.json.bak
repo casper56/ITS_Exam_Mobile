@@ -51,8 +51,8 @@
             "title": "ITS Software Development",
             "id": "itscs",
             "html": "ITS_softdevelop.html",
-            "cutoff": 99,
-            "cutoff_info": "1-99 為官方版題數"
+            "cutoff": 101,
+            "cutoff_info": "1-101 為官方版題數"
         },
         {
             "dir": "www/ITS_Python",
