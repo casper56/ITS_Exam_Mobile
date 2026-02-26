@@ -2919,6 +2919,247 @@
     },
     {
         "id": 92,
+        "type": "multiple",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您正在建立一個電子商務指令碼來接受使用者輸入並以逗點分隔格式輸出資料。",
+            "您撰寫了下列程式碼以接受輸入:",
+            "item = input(\"Enter the item name: \")",
+            "sales = int(input(\"Enter the quantity: \"))",
+            "",
+            "輸出必須符合下列需求:",
+            "⚫ 以雙引號括住字串。",
+            "⚫ 不以引號或其他字元括住數字。",
+            "⚫ 以逗點分隔項目。",
+            "",
+            "請問您應該使用哪兩個程式碼片段? (選擇兩項)</code></pre>"
+        ],
+        "options": [
+            "<code>print(\"{0},{1}\".format(item, sales))</code>",
+            "<code>print(item + ',' + sales)</code>",
+            "<code>print('\"{0}\", {1}'.format(item, sales))</code>",
+            "<code>print('\"' + item + '\",', sales)</code>"
+        ],
+        "answer": [
+            "C",
+            "D"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">1. 需求：目標格式為 \"ItemName\", Quantity。",
+            "2. 選項 C：'\"{0}\", {1}' 手動在 {0} 外加上雙引號，符合需求。",
+            "3. 選項 D：print 使用逗號分隔參數時預設會加空格，'\"' + item + '\",' 串接後變成 \"ItemName\",，接著印出 sales，結果正確。</code></pre>"
+        ]
+    },
+    {
+        "id": 93,
+        "type": "multioption",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您建立了下列程式來找出會議室並顯示房間名稱。",
+            "當輸入值 1 或 2 時，程式輸出為 Room does not exist.。",
+            "01 rooms = {1: 'Foyer', 2: 'Conference Room'}",
+            "02 room = input('Enter the room number: ')",
+            "03 if not room in rooms:",
+            "04    print('Room does not exist.')",
+            "05 else:",
+            "06    print(\"The room name is \" + rooms[room])",
+            "",
+            "1. 請問第 01 行的 rooms 字典中儲存哪兩種資料類型？",
+            "2. 請問第 02 行的 room 是哪種資料類型？",
+            "3. 為什麼第 03 行無法尋找房間？</code></pre>"
+        ],
+        "options": [
+            "<code>A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數</code>",
+            "<code>A.bool|B.float|C.int|D.String</code>",
+            "<code>A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
+        ],
+        "answer": [
+            "C",
+            "D",
+            "B"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">1. 字典鍵 (Key) 1 是整數，值 (Value) 'Foyer' 是字串。",
+            "2. input() 函式回傳的永遠是字串 (str)。",
+            "3. 字典的鍵是整數 1，但 room 是字串 \"1\"，型態不匹配導致尋找失敗。</code></pre>"
+        ]
+    },
+    {
+        "id": 94,
+        "type": "single",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您撰寫了以下這段程式碼:",
+            "import datetime",
+            "d = datetime.datetime(2017, 4, 7)",
+            "print('{:%B-%d-%y}'.format(d))",
+            "請問輸出為何?</code></pre>"
+        ],
+        "options": [
+            "<code>04-07-17</code>",
+            "<code>2017-APRIL-07</code>",
+            "<code>APRIL-07-17</code>",
+            "<code>04-07-2017</code>"
+        ],
+        "answer": [
+            "C"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">%B：完整的月份名稱（APRIL）。",
+            "%d：兩位數日期（07）。",
+            "%y：兩位數年份（17）。</code></pre>"
+        ]
+    },
+    {
+        "id": 95,
+        "type": "multioption",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">請回答有關記錄 Python 程式碼的問題。",
+            "1. 請問哪些字元代表單行文件字串 (Docstring) 的開頭和結尾?",
+            "2. 在記錄函式時，文件字串的標準位置在哪裡?",
+            "3. 假設有函式 cube(n)，哪個命令可列印其文件字串?</code></pre>"
+        ],
+        "options": [
+            "<code>A. '|B. \"|C. \"\"|D. \"\"\"</code>",
+            "<code>A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾</code>",
+            "<code>A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
+        ],
+        "answer": [
+            "D",
+            "B",
+            "C"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">1. Docstring 使用三個雙引號 \\\"\\\"\\\"...\\\"\\\"\\\"。",
+            "2. 根據 PEP 257，Docstring 位於函式定義後的第一行。",
+            "3. 物件的內建屬性 __doc__ 儲存了文件字串。</code></pre>"
+        ]
+    },
+    {
+        "id": 96,
+        "type": "single",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您撰寫了以下這段程式碼:",
+            "import sys",
+            "print(sys.argv[2])",
+            "",
+            "執行下列命令: python Script.py Cheese Bacon Bread",
+            "請問此命令的輸出為何?</code></pre>"
+        ],
+        "options": [
+            "<code>Bread</code>",
+            "<code>Cheese</code>",
+            "<code>Script.py</code>",
+            "<code>Bacon</code>"
+        ],
+        "answer": [
+            "D"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">sys.argv 是清單：",
+            "sys.argv[0] = 'Script.py'",
+            "sys.argv[1] = 'Cheese'",
+            "sys.argv[2] = 'Bacon'",
+            "sys.argv[3] = 'Bread'</code></pre>"
+        ]
+    },
+    {
+        "id": 97,
+        "type": "multioption",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您需要測試某個物件是否為特定類別的執行個體。",
+            "請完成下列單元測試程式碼：",
+            "import _(1)_",
+            "class TestIsInstance(_(2)_):",
+            "    def _(3)_:",
+            "        _(4)_",
+            "if __name__ == '__main__':",
+            "    unittest.main()</code></pre>"
+        ],
+        "options": [
+            "<code>A.test|B.unittest</code>",
+            "<code>A.unittest.TestCase|B.test.Test</code>",
+            "<code>A.isInstance(self)|B.test_isInstance(self)</code>",
+            "<code>A.self.assertIsInstance(obj, cls)|B.check(obj, cls)</code>"
+        ],
+        "answer": [
+            "B",
+            "A",
+            "B",
+            "A"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">1. 模組名為 unittest。",
+            "2. 必須繼承自 unittest.TestCase。",
+            "3. 測試方法必須以 test_ 開頭。",
+            "4. 斷言方法為 assertIsInstance。</code></pre>"
+        ]
+    },
+    {
+        "id": 98,
+        "type": "multioption",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">請選擇正確的 assert 方法以完成敘述：",
+            "1. 若要測試變數 a 與 b 的「值」是否相同，請使用？",
+            "2. 若要測試物件 a 與 b 是否為「同一個物件」，請使用？",
+            "3. 若要測試「清單中是否存在某個值」，請使用？</code></pre>"
+        ],
+        "options": [
+            "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
+            "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
+            "<code>assertEqual|assertTrue|assertIs|assertIn</code>"
+        ],
+        "answer": [
+            "A",
+            "C",
+            "D"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">1. assertEqual 測試值 (==)。",
+            "2. assertIs 測試物件身分 (is)。",
+            "3. assertIn 測試成員關係 (in)。</code></pre>"
+        ]
+    },
+    {
+        "id": 99,
+        "type": "multiple",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您正在建立一個函式，將傳入函式的數字當作浮點數 (float) 值操作。",
+            "此函式必須執行下列工作:",
+            "⚫ 提取浮點數 (float) 的絕對值。",
+            "⚫ 移除整數後面的任何小數點 (無條件捨去)。",
+            "請問您應該使用哪兩個數學函式? (選擇兩項)</code></pre>"
+        ],
+        "options": [
+            "<code>math.floor(x)</code>",
+            "<code>math.fabs(x)</code>",
+            "<code>math.frexp(x)</code>",
+            "<code>math.fmod(x)</code>"
+        ],
+        "answer": [
+            "A",
+            "B"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">math.fabs(x) 回傳絕對值 (浮點數)。",
+            "math.floor(x) 回傳小於或等於 x 的最大整數，達成移除小數點的效果。</code></pre>"
+        ]
+    },
+    {
+        "id": 100,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">92. 【CH04-補充】你編寫了以下程式來處理字串：",
@@ -2944,7 +3185,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 93,
+        "id": 101,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">93. 【CH06-補充】關於變數的區域範圍 (Scope)，請檢視以下程式碼：",
@@ -2970,7 +3211,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 94,
+        "id": 102,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">94. 【CH02-補充】在 Python 中執行以下數學運算，結果為何？",
@@ -2995,7 +3236,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 95,
+        "id": 103,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">95. 【CH04-補充】使用 with open('data.txt', 'r') as f: 語法的主要好處是什麼？</code></pre>"
@@ -3018,7 +3259,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 96,
+        "id": 104,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">96. 【CH08-補充】檢視以下錯誤處理程式碼：",
@@ -3044,7 +3285,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 97,
+        "id": 105,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">97. 【CH05-補充】執行以下敘述程式碼，最後會列印出什麼？",
@@ -3070,7 +3311,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 98,
+        "id": 106,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">98. 【CH04-補充】使用 f-String (Python 3.6+) 格式化字串，若變數 name='Alice' 和 age=20，",
@@ -3094,7 +3335,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 99,
+        "id": 107,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">99. 【CH06-補充】如果你想為你的 Python 模組 my_module.py 生成 HTML 格式的說明檔案，應該在命令列使用什麼指令？</code></pre>"
@@ -3117,7 +3358,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 100,
+        "id": 108,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">100. 【CH07-補充】關於 math.trunc() 和 math.floor() 處理負數時的行為，下列何者正確？ (例如處理 -3.5)</code></pre>"
@@ -3140,7 +3381,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 101,
+        "id": 109,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">101. 【CH07-補充】你希望從清單 [1, 2, 3, 4, 5] 中**隨機選取 3 個不重複**的元素，應該使用 random 模組的哪個方法？</code></pre>"
@@ -3164,7 +3405,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 102,
+        "id": 110,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">102. 【CH07-補充】你正在設計一個遊戲的抽獎系統，獎品有三種：",
@@ -3192,7 +3433,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 103,
+        "id": 111,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">103. 【CH07-補充】執行以下程式碼後，變數 nums 的狀態為何？",
@@ -3220,7 +3461,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 104,
+        "id": 112,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">104. 【CH08-補充】在函式中，如果你檢測到一個不合法的引數值，",
@@ -3245,7 +3486,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 105,
+        "id": 113,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">105. 【CH06-補充】你需要測試一段會輸出文字到控制檯 (stdout) 的程式碼，但不希望文字真的印在螢幕上，而是想存在記憶體中以便分析。可以使用哪個模組？</code></pre>"
@@ -3289,7 +3530,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 106,
+        "id": 114,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">106. 【CH08-補充】在 unittest 模組中，若要驗證 x 的值是否為 True，應使用哪個斷言方法？</code></pre>"
@@ -3313,7 +3554,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 107,
+        "id": 115,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">107. 【CH08-補充】在 unittest 中，若要驗證變數 x 的資料型態是否為整數 (int)，最推薦使用的斷",
@@ -3336,7 +3577,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 108,
+        "id": 116,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">108. 【CH08-補充】在 unittest 測試中，關於各種斷言指令 (Assert Methods)的使用時機",
@@ -3360,7 +3601,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 109,
+        "id": 117,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">109. 【CH03-補充】你有一個名為 colors 的清單：",
@@ -3384,7 +3625,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 110,
+        "id": 118,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">110. 【CH03-補充】關於 Python 中的元組 (Tuple) 和清單 (List)，",
@@ -3412,7 +3653,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 111,
+        "id": 119,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">111. 【CH03-補充】你有一個字典 student = {'name': 'John', 'age': 18}。",
@@ -3438,7 +3679,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 112,
+        "id": 120,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">112. 【CH03-補充】你希望在清單 fruits = ['apple', 'banana'] 的**開頭**插入一個元素 'orange'。應該使用哪種方法？</code></pre>"
@@ -3461,7 +3702,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 113,
+        "id": 121,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">113. 【CH03-補充】關於 sort() 和 sorted() 的區別，下列敘述何者正確？</code></pre>"
@@ -3495,7 +3736,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 114,
+        "id": 122,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">114. 【CH03-補充】你想要將一個清單 nums = [1, 2, 3] 的順序**原地 (in-place) 反轉**，",
@@ -3520,7 +3761,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 115,
+        "id": 123,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">115. 【CH03-綜合應用】執行下列 Python 程式碼後，最終列印出的結果為何？",
@@ -3544,7 +3785,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 116,
+        "id": 124,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">116. 【CH03-集合運算】觀察下列程式碼，print(result) 的輸出結果為何？",
@@ -3568,7 +3809,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 117,
+        "id": 125,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">117. 【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？</code></pre>"
@@ -3591,7 +3832,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 118,
+        "id": 126,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">118. 【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？</code></pre>"
@@ -3618,7 +3859,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 119,
+        "id": 127,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">119. 【CH03-集合操作】你想要在一個集合 my_set = {1, 2, 3} 中加入數字 4。",
@@ -3646,7 +3887,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 120,
+        "id": 128,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">120. 【CH03-除錯】執行下列哪一段程式碼會導致 AttributeError (屬性錯誤)？</code></pre>"
@@ -3669,7 +3910,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 121,
+        "id": 129,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">121. 【CH03-清單邏輯】執行下列程式碼後，nums 的內容為何？",
@@ -3696,7 +3937,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 122,
+        "id": 130,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">122. 【CH06-補充】你正在開發一個科學計算程式，",
@@ -3722,7 +3963,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 123,
+        "id": 131,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">123. 【CH06-補充】關於 math.fmod(x, y) 與模數運運算元 x % y 的差異，",
@@ -3747,7 +3988,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 124,
+        "id": 132,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">124. 【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 temp.txt，應該使用 os 模組的哪個函式？</code></pre>"
@@ -3770,7 +4011,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 125,
+        "id": 133,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">125. 【CH03-補充】你有一個清單 scores = [100, 80, 90, 80]。你想要移除**第一個**出現的 80 分。應該使用哪個方法？</code></pre>"
@@ -3794,7 +4035,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 126,
+        "id": 134,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">126. 【CH06-補充】你的程式需要計算一個圓的面積，公式為 &pi;r^2$。使用 math 模組時，下列寫法何者最精確且標準？</code></pre>"
@@ -3817,7 +4058,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 127,
+        "id": 135,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">127. 【CH03-補充】你這在編寫一個程式，需要將清單 list_b 的**所有元素**合併到 list_a 的尾端，形成一個長清單。",
@@ -3843,7 +4084,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 128,
+        "id": 136,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">128. 【CH03-補充】你有一個學生成績清單 grades = [85, 92, 78, 90, 55]。若要快速找出清單中的**最高分**與**最低分**，",
@@ -3867,7 +4108,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 129,
+        "id": 137,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">129. 【CH06-補充】關於 math.sqrt(x) 與 math.isqrt(x) 的差異，下列何者正確？</code></pre>"
@@ -3891,7 +4132,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 130,
+        "id": 138,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">130. 【CH06-補充】你需要分析浮點數的底層結構。請問 math.frexp(x) 函式的作用是什麼？</code></pre>"
@@ -3915,7 +4156,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 131,
+        "id": 139,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">131. 【CH07-補充】你使用 datetime 模組查詢今天是星期幾：",
@@ -3942,7 +4183,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 132,
+        "id": 140,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">132. 【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。",
@@ -3966,7 +4207,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 133,
+        "id": 141,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">133. 【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，",
@@ -3991,7 +4232,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 134,
+        "id": 142,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">134. 【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。",
@@ -4029,7 +4270,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 135,
+        "id": 143,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">135. 【演算法-堆疊】此程式中 s 是用來當作一個後進先出的堆疊 (Stack)。",
@@ -4058,7 +4299,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 136,
+        "id": 144,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">136. 【Python運算元】執行下列程式碼後，輸出為何？",
@@ -4090,7 +4331,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 137,
+        "id": 145,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">137. 【Python迴圈邏輯】執行下列程式碼後，輸出為何？",
@@ -4126,7 +4367,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 138,
+        "id": 146,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">138. 【Python流程控制】執行下列程式碼後，輸出為何？",
@@ -4155,7 +4396,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 139,
+        "id": 147,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">139. 【Python迴圈與列表】執行下列程式碼後，輸出為何？",
@@ -4190,7 +4431,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 140,
+        "id": 148,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">140. 【Python變數範圍】執行下列程式碼：",
@@ -4223,7 +4464,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 141,
+        "id": 149,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">141. 【Python輸入與運算】執行下列程式碼：",
@@ -4257,7 +4498,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 142,
+        "id": 150,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">142. 【Python解包錯誤】執行下列程式碼：",
@@ -4290,7 +4531,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 143,
+        "id": 151,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">143. 【Python字元編碼】執行下列程式碼：",
@@ -4321,7 +4562,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 144,
+        "id": 152,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">144. 【APCS-進階切片】執行下列程式碼後，輸出為何？",
@@ -4350,7 +4591,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 145,
+        "id": 153,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">145. 【APCS-遞迴邏輯】執行下列函式 f(3) 的回傳值為何？",
@@ -4383,7 +4624,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 146,
+        "id": 154,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">146. 【APCS-迴圈追蹤】執行下列程式碼後，cnt 的值為何？",
@@ -4412,7 +4653,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 147,
+        "id": 155,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">147. 【CH06-補充】在 Python 中，若要取得「自 1970 年 1 月 1 日 00:00:00 (UTC) 起」經過的總秒數 (Unix Timestamp)，",
@@ -4437,7 +4678,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 148,
+        "id": 156,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">148. 【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？</code></pre>"
@@ -4461,7 +4702,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 149,
+        "id": 157,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">149. 【CH06-補充】若您在程式開頭使用了 import time as t，則下列哪一行程式碼是**正確**的呼叫方式？</code></pre>"
@@ -4484,7 +4725,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 150,
+        "id": 158,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">150. 【CH06-補充】關於 from time import * 的用法，下列敘述何者正確？</code></pre>"
@@ -4508,7 +4749,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 151,
+        "id": 159,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">151. 【CH06-補充】您想要從一個包含 50 個學生的清單中，隨機抽出 3 位幸運得主，且這 3 位不能重複。",
@@ -4533,7 +4774,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 152,
+        "id": 160,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">152. 【CH06-補充】您需要寫一個 Python 腳本，能夠讀取使用者在執行時傳入的「命令列參數」(Command Line Arguments)。",
@@ -4558,7 +4799,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 153,
+        "id": 161,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">153. 【CH06-補充】關於 math 模組中的 math.ceil() 與 math.floor() 函式，下列敘述何者正確？</code></pre>"
@@ -4582,7 +4823,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 154,
+        "id": 162,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">154. 【CH06-補充】您想知道目前的 Python 程式是在哪個作業系統下執行 (例如 Windows 或 Linux)，以決定檔案路徑的寫法。",
@@ -4608,7 +4849,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 155,
+        "id": 163,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">155. 【CH01-補充】關於 Python 的算術運算子，下列程式碼的執行結果為何？",
@@ -4634,7 +4875,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 156,
+        "id": 164,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">156. 【CH01-補充】您有一個字串變數 s = 'Python'。請問下列哪一個指令可以取出 'tho' 這段子字串？</code></pre>"
@@ -4659,7 +4900,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 157,
+        "id": 165,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">157. 【CH01-補充】關於布林邏輯運算子，下列程式碼的輸出結果為何？",
@@ -4684,7 +4925,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 158,
+        "id": 166,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">158. 【CH01-補充】下列哪一行程式碼使用了「複合賦值運算子」，且其執行結果與 x = x + 5 相同？</code></pre>"
@@ -4708,7 +4949,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 159,
+        "id": 167,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">159. 【CH08-補充】關於 Python 的例外處理結構，下列哪一個區塊中的程式碼是「無論是否發生錯誤，最後都**一定會執行**」的？",
@@ -4735,7 +4976,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 160,
+        "id": 168,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">160. 【CH08-補充】請分析下列程式碼的執行結果：",
@@ -4762,7 +5003,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 161,
+        "id": 169,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">161. 【CH08-補充】在使用 Python 的 unittest 模組進行單元測試時，若要測試函式回傳值 result 是否等於整數 100，",
@@ -4788,7 +5029,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 162,
+        "id": 170,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">162. 【CH08-補充】若您在程式中偵測到使用者輸入了不合法的數值 (例如年齡輸入負數)，想要**主動觸發**一個錯誤讓上層程式處理，",
@@ -4813,7 +5054,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 163,
+        "id": 171,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">163. 【CH04-補充】在 Python 中，若要為一個自定義函式編寫「說明文件 (Documentation String)」，以便其他人可以透過 help(func_name) 查詢其功能，應該使用下列哪種語法？</code></pre>"
@@ -4838,7 +5079,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 164,
+        "id": 172,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">164. 【CH04-補充】您正在閱讀一份符合 PEP 8 風格指南的 Python 程式碼。請問下列哪一個變數名稱**不符合**標準的命名慣例？</code></pre>"
@@ -4863,7 +5104,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 165,
+        "id": 173,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">165. 【CH04-補充】Python 使用什麼方式來定義程式碼區塊 (Block) 的範圍 (例如 if 語句或 for 迴圈內部的程式碼)？</code></pre>"
@@ -4887,7 +5128,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 166,
+        "id": 174,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">166. 【CH04-補充】若您定義了一個函式，但在開發階段還沒想好要寫什麼程式碼，卻又希望程式能先執行不報錯。",
@@ -4912,7 +5153,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 167,
+        "id": 175,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">167. 【CH04-補充】關於 Python 的註解 (Comment)，下列敘述何者正確？</code></pre>"
@@ -4936,7 +5177,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 168,
+        "id": 176,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">168. 【CH02-補充】執行下列程式碼，當迴圈結束後，螢幕上會印出什麼結果？",
@@ -4961,7 +5202,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 169,
+        "id": 177,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">169. 【CH02-補充】關於 Python 迴圈獨有的 else 子句 (例如 for...else 或 while...else)，下列敘述何者正確？</code></pre>"
@@ -4985,7 +5226,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 170,
+        "id": 178,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">170. 【CH02-補充】您想要將一行 if-else 判斷式寫得更簡潔 (單行語法/三元運算子)。",
@@ -5009,7 +5250,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 171,
+        "id": 179,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">171. 【CH02-補充】執行 list(range(10, 0, -2)) 會產生下列哪一個數列？</code></pre>"
@@ -5034,7 +5275,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 172,
+        "id": 180,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">172. 【CH02-補充】下列哪一段程式碼使用了「列表生成式 (List Comprehension)」來產生一個包含 1 到 5 平方數 ([1, 4, 9, 16, 25]) 的清單？</code></pre>"
@@ -5058,7 +5299,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 173,
+        "id": 181,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">173. 【CH07-補充】在 Python 中定義一個類別 (Class) 時，下列哪一個特殊方法是用來**初始化**物件屬性的（建構子）？</code></pre>"
@@ -5083,7 +5324,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 174,
+        "id": 182,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">174. 【CH07-補充】觀察下列程式碼，請問 self 代表什麼意義？",
@@ -5107,7 +5348,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 175,
+        "id": 183,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">175. 【CH07-補充】若 Cat 類別繼承自 Animal 類別，且您希望在 Cat 的 __init__ 方法中，先執行 Animal 的初始化邏輯，應該使用下列哪個函式？</code></pre>"
@@ -5130,7 +5371,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 176,
+        "id": 184,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">176. 【CH07-補充】在 Python 類別中，若您希望某個屬性變為「私有 (Private)」，不讓外部輕易存取，根據慣例應該如何在變數名稱前加上前綴？</code></pre>"
@@ -5153,7 +5394,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 177,
+        "id": 185,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">177. 【CH07-補充】下列哪一段程式碼正確地建立了一個 Student 類別的**物件實體** (Instance)？</code></pre>"
@@ -5176,7 +5417,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 178,
+        "id": 186,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">178. 【CH08-補充】若您需要為特定的應用程式邏輯定義一個「自定義例外 (Custom Exception)」，應該建立一個類別並繼承自下列哪一個內建類別？</code></pre>"
@@ -5200,7 +5441,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 179,
+        "id": 187,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">179. 【CH08-補充】關於 assert 關鍵字的使用，下列敘述何者正確？</code></pre>"
@@ -5224,7 +5465,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 180,
+        "id": 188,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">180. 【CH08-補充】請檢視下列程式碼，若 x = 'A'，執行時會發生什麼情況？",
@@ -5250,7 +5491,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 181,
+        "id": 189,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">181. 【CH05-補充】下列哪一種錯誤屬於「邏輯錯誤 (Logic Error)」，且 Python 直譯器**無法**在執行前或執行中自動偵測並報錯？</code></pre>"
@@ -5275,7 +5516,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 182,
+        "id": 190,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">182.【補充】在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？</code></pre>"
@@ -5296,246 +5537,5 @@
             "<pre><code class=\"language-python\">[[image01]]</code></pre>"
         ],
         "category": "D6_模組與常用工具"
-    },
-    {
-        "id": 183,
-        "type": "multiple",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您正在建立一個電子商務指令碼來接受使用者輸入並以逗點分隔格式輸出資料。",
-            "您撰寫了下列程式碼以接受輸入:",
-            "item = input(\"Enter the item name: \")",
-            "sales = int(input(\"Enter the quantity: \"))",
-            "",
-            "輸出必須符合下列需求:",
-            "⚫ 以雙引號括住字串。",
-            "⚫ 不以引號或其他字元括住數字。",
-            "⚫ 以逗點分隔項目。",
-            "",
-            "請問您應該使用哪兩個程式碼片段? (選擇兩項)</code></pre>"
-        ],
-        "options": [
-            "<code>print(\"{0},{1}\".format(item, sales))</code>",
-            "<code>print(item + ',' + sales)</code>",
-            "<code>print('\"{0}\", {1}'.format(item, sales))</code>",
-            "<code>print('\"' + item + '\",', sales)</code>"
-        ],
-        "answer": [
-            "C",
-            "D"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">1. 需求：目標格式為 \"ItemName\", Quantity。",
-            "2. 選項 C：'\"{0}\", {1}' 手動在 {0} 外加上雙引號，符合需求。",
-            "3. 選項 D：print 使用逗號分隔參數時預設會加空格，'\"' + item + '\",' 串接後變成 \"ItemName\",，接著印出 sales，結果正確。</code></pre>"
-        ]
-    },
-    {
-        "id": 184,
-        "type": "multioption",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您建立了下列程式來找出會議室並顯示房間名稱。",
-            "當輸入值 1 或 2 時，程式輸出為 Room does not exist.。",
-            "01 rooms = {1: 'Foyer', 2: 'Conference Room'}",
-            "02 room = input('Enter the room number: ')",
-            "03 if not room in rooms:",
-            "04    print('Room does not exist.')",
-            "05 else:",
-            "06    print(\"The room name is \" + rooms[room])",
-            "",
-            "1. 請問第 01 行的 rooms 字典中儲存哪兩種資料類型？",
-            "2. 請問第 02 行的 room 是哪種資料類型？",
-            "3. 為什麼第 03 行無法尋找房間？</code></pre>"
-        ],
-        "options": [
-            "<code>A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數</code>",
-            "<code>A.bool|B.float|C.int|D.String</code>",
-            "<code>A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
-        ],
-        "answer": [
-            "C",
-            "D",
-            "B"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">1. 字典鍵 (Key) 1 是整數，值 (Value) 'Foyer' 是字串。",
-            "2. input() 函式回傳的永遠是字串 (str)。",
-            "3. 字典的鍵是整數 1，但 room 是字串 \"1\"，型態不匹配導致尋找失敗。</code></pre>"
-        ]
-    },
-    {
-        "id": 185,
-        "type": "single",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您撰寫了以下這段程式碼:",
-            "import datetime",
-            "d = datetime.datetime(2017, 4, 7)",
-            "print('{:%B-%d-%y}'.format(d))",
-            "請問輸出為何?</code></pre>"
-        ],
-        "options": [
-            "<code>04-07-17</code>",
-            "<code>2017-APRIL-07</code>",
-            "<code>APRIL-07-17</code>",
-            "<code>04-07-2017</code>"
-        ],
-        "answer": [
-            "C"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">%B：完整的月份名稱（APRIL）。",
-            "%d：兩位數日期（07）。",
-            "%y：兩位數年份（17）。</code></pre>"
-        ]
-    },
-    {
-        "id": 186,
-        "type": "multioption",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">請回答有關記錄 Python 程式碼的問題。",
-            "1. 請問哪些字元代表單行文件字串 (Docstring) 的開頭和結尾?",
-            "2. 在記錄函式時，文件字串的標準位置在哪裡?",
-            "3. 假設有函式 cube(n)，哪個命令可列印其文件字串?</code></pre>"
-        ],
-        "options": [
-            "<code>A. '|B. \"|C. \"\"|D. \"\"\"</code>",
-            "<code>A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾</code>",
-            "<code>A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
-        ],
-        "answer": [
-            "D",
-            "B",
-            "C"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">1. Docstring 使用三個雙引號 \\\"\\\"\\\"...\\\"\\\"\\\"。",
-            "2. 根據 PEP 257，Docstring 位於函式定義後的第一行。",
-            "3. 物件的內建屬性 __doc__ 儲存了文件字串。</code></pre>"
-        ]
-    },
-    {
-        "id": 187,
-        "type": "single",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您撰寫了以下這段程式碼:",
-            "import sys",
-            "print(sys.argv[2])",
-            "",
-            "執行下列命令: python Script.py Cheese Bacon Bread",
-            "請問此命令的輸出為何?</code></pre>"
-        ],
-        "options": [
-            "<code>Bread</code>",
-            "<code>Cheese</code>",
-            "<code>Script.py</code>",
-            "<code>Bacon</code>"
-        ],
-        "answer": [
-            "D"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">sys.argv 是清單：",
-            "sys.argv[0] = 'Script.py'",
-            "sys.argv[1] = 'Cheese'",
-            "sys.argv[2] = 'Bacon'",
-            "sys.argv[3] = 'Bread'</code></pre>"
-        ]
-    },
-    {
-        "id": 188,
-        "type": "multioption",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您需要測試某個物件是否為特定類別的執行個體。",
-            "請完成下列單元測試程式碼：",
-            "import _(1)_",
-            "class TestIsInstance(_(2)_):",
-            "    def _(3)_:",
-            "        _(4)_",
-            "if __name__ == '__main__':",
-            "    unittest.main()</code></pre>"
-        ],
-        "options": [
-            "<code>A.test|B.unittest</code>",
-            "<code>A.unittest.TestCase|B.test.Test</code>",
-            "<code>A.isInstance(self)|B.test_isInstance(self)</code>",
-            "<code>A.self.assertIsInstance(obj, cls)|B.check(obj, cls)</code>"
-        ],
-        "answer": [
-            "B",
-            "A",
-            "B",
-            "A"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">1. 模組名為 unittest。",
-            "2. 必須繼承自 unittest.TestCase。",
-            "3. 測試方法必須以 test_ 開頭。",
-            "4. 斷言方法為 assertIsInstance。</code></pre>"
-        ]
-    },
-    {
-        "id": 189,
-        "type": "multioption",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">請選擇正確的 assert 方法以完成敘述：",
-            "1. 若要測試變數 a 與 b 的「值」是否相同，請使用？",
-            "2. 若要測試物件 a 與 b 是否為「同一個物件」，請使用？",
-            "3. 若要測試「清單中是否存在某個值」，請使用？</code></pre>"
-        ],
-        "options": [
-            "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
-            "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
-            "<code>assertEqual|assertTrue|assertIs|assertIn</code>"
-        ],
-        "answer": [
-            "A",
-            "C",
-            "D"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">1. assertEqual 測試值 (==)。",
-            "2. assertIs 測試物件身分 (is)。",
-            "3. assertIn 測試成員關係 (in)。</code></pre>"
-        ]
-    },
-    {
-        "id": 190,
-        "type": "multiple",
-        "category": "D0_官方鑑定考點",
-        "question": [
-            "<pre><code class=\"language-python\">您正在建立一個函式，將傳入函式的數字當作浮點數 (float) 值操作。",
-            "此函式必須執行下列工作:",
-            "⚫ 提取浮點數 (float) 的絕對值。",
-            "⚫ 移除整數後面的任何小數點 (無條件捨去)。",
-            "請問您應該使用哪兩個數學函式? (選擇兩項)</code></pre>"
-        ],
-        "options": [
-            "<code>math.floor(x)</code>",
-            "<code>math.fabs(x)</code>",
-            "<code>math.frexp(x)</code>",
-            "<code>math.fmod(x)</code>"
-        ],
-        "answer": [
-            "A",
-            "B"
-        ],
-        "weight": 1,
-        "explanation": [
-            "<pre><code class=\"language-python\">math.fabs(x) 回傳絕對值 (浮點數)。",
-            "math.floor(x) 回傳小於或等於 x 的最大整數，達成移除小數點的效果。</code></pre>"
-        ]
     }
 ]
