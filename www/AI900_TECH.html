@@ -1,12 +1,9 @@
-import os
-import json
-
-template = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPLACE_TITLE</title>
+    <title>AI900 TECH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <style>
@@ -119,7 +116,7 @@ template = r"""<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
-        const rawMd = REPLACE_MD_JSON;
+        const rawMd = "# AI-900: Azure AI Fundamentals 技術考點導讀 (AI900_TECH.md)\n\n本文件根據 `www/AI900/questions_AI900.json` 題庫內容進行深度分析，協助考生掌握微軟 Azure AI 認證的核心邏輯。\n\n---\n\n## 1. 責任 AI 準則 (Responsible AI) —— **絕對核心**\n微軟強調的六大 AI 準則在題庫中佔比極高：\n*   **公平性 (Fairness)**：AI 系統應公平對待所有人，避免偏見。\n*   **可靠性與安全性 (Reliability & Safety)**：AI 系統應在預期內運作，並能抵禦惡意攻擊。\n*   **隱私與安全性 (Privacy & Security)**：尊重個人隱私，保護數據安全。\n*   **包容性 (Inclusiveness)**：AI 應賦予每個人權力並吸引人們參與。\n*   **透明性 (Transparency)**：使用者應了解 AI 系統的運作方式與限制。\n*   **權責歸屬 (Accountability)**：設計與部署 AI 的人應對其行為負責。\n\n---\n\n## 2. 核心 AI 工作負載 (Workloads)\n*   **機器學習 (Machine Learning)**：預測性模型的基礎（回歸、分類、分群）。\n*   **異常偵測 (Anomaly Detection)**：識別資料中的異常變動（如詐欺偵測）。\n*   **電腦視覺 (Computer Vision)**：影像分析、臉部辨識、OCR（文字識別）。\n*   **自然語言處理 (NLP)**：文字分析、情感分析、語言翻譯。\n*   **對話式 AI (Conversational AI)**：機器人與虛擬助理（Bot Service）。\n\n---\n\n## 3. Azure AI 服務工具\n*   **Azure Machine Learning**：雲端端對端機器學習平台。\n*   **Azure Cognitive Services (現併入 Azure AI Services)**：\n    *   **Vision**: 影像處理。\n    *   **Speech**: 語音轉文字/文字轉語音。\n    *   **Language**: 語法分析、翻譯。\n*   **Azure OpenAI Service**：整合了 GPT-3, GPT-4, DALL-E 等先進模型。\n\n---\n\n## 4. 機器學習基礎概念\n*   **特徵 (Features)**：用於預測的輸入變數。\n*   **標籤 (Labels)**：模型嘗試預測的結果（僅監督式學習有標籤）。\n*   **模型評估**：\n    *   **回歸**: RMSE, R²。\n    *   **分類**: Accuracy, Precision, Recall。\n";
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         // Prism highlight
         document.querySelectorAll('pre code').forEach((block) => {
@@ -129,26 +126,3 @@ template = r"""<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-md_files = [
-    'ITS_AI_TECH.md', 'ITS_DATABASE_TECH.md', 'ITS_SOFTDEVELOP.md', 'ITS_Python_TECH.md',
-    'AI900_TECH.md', 'AZ900_TECH.md', 'Generative_AI_TECH.md'
-]
-
-for md_name in md_files:
-    path = os.path.join('www', md_name)
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        md_json = json.dumps(content, ensure_ascii=False)
-        title = md_name.replace('.md', '').replace('_', ' ')
-        html_content = template.replace('REPLACE_TITLE', title).replace('REPLACE_MD_JSON', md_json)
-        
-        output_name = md_name.replace('.md', '.html')
-        with open(os.path.join('www', output_name), 'w', encoding='utf-8', newline='\n') as f:
-            f.write(html_content)
-        print(f"Generated (GitHub Style): {output_name}")
-
-print("All technical HTML pages regenerated with professional GitHub styling.")

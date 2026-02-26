@@ -1,12 +1,9 @@
-import os
-import json
-
-template = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPLACE_TITLE</title>
+    <title>Generative AI TECH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <style>
@@ -119,7 +116,7 @@ template = r"""<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
-        const rawMd = REPLACE_MD_JSON;
+        const rawMd = "# Generative AI Foundations 技術考點導讀 (Generative_AI_TECH.md)\n\n本文件根據 `www/Generative_AI/questions_Generative_AI_Foundations.json` 題庫內容進行深度分析，涵蓋 LLM 架構、提示工程與 AI 倫理。\n\n---\n\n## 1. Transformer 架構與核心技術\n*   **Transformer 模型**：現代生成式 AI 的基石，基於 **自注意力機制 (Self-Attention)**。\n*   **編碼器 (Encoder) 與 解碼器 (Decoder)**：\n    *   BERT 主要使用編碼器（適合理解）。\n    *   GPT 系列主要使用解碼器（適合生成）。\n*   **詞元化 (Tokenization)**：將文字拆分為最小單位（Tokens）。\n*   **詞嵌入 (Embedding)**：將詞元轉為高維向量，捕捉語意關係。\n\n---\n\n## 2. 提示工程 (Prompt Engineering) —— **核心實務**\n*   **Zero-shot Learning**：直接下指令，不提供任何範例。\n*   **Few-shot Learning**：提供 1 到 3 個範例，引導模型學習任務模式。\n*   **思維鏈 (Chain of Thought, CoT)**：引導模型「一步步思考」，大幅提升複雜問題的準確度。\n*   **溫度 (Temperature)**：控制生成結果的隨機性（0 為最精確，1 為最具創意）。\n\n---\n\n## 3. 生成式 AI 的挑戰與倫理\n*   **AI 幻覺 (Hallucination)**：模型生成看似真實但事實錯誤的內容。\n*   **偏見 (Bias)**：訓練數據中的社會性偏見可能被模型放大。\n*   **安全性 (Safety)**：防止模型生成有害、仇恨或不當內容。\n*   **事實查核 (Fact-checking)**：生成式內容必須經過人工驗證。\n\n---\n\n## 4. 應用場景\n*   **內容生成**：自動寫作、翻譯、總結。\n*   **代碼輔助**：輔助編寫、調試與重構程式碼。\n*   **多模態 (Multimodal)**：結合文字、圖像、音訊的跨媒介生成。\n";
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         // Prism highlight
         document.querySelectorAll('pre code').forEach((block) => {
@@ -129,26 +126,3 @@ template = r"""<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-md_files = [
-    'ITS_AI_TECH.md', 'ITS_DATABASE_TECH.md', 'ITS_SOFTDEVELOP.md', 'ITS_Python_TECH.md',
-    'AI900_TECH.md', 'AZ900_TECH.md', 'Generative_AI_TECH.md'
-]
-
-for md_name in md_files:
-    path = os.path.join('www', md_name)
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        md_json = json.dumps(content, ensure_ascii=False)
-        title = md_name.replace('.md', '').replace('_', ' ')
-        html_content = template.replace('REPLACE_TITLE', title).replace('REPLACE_MD_JSON', md_json)
-        
-        output_name = md_name.replace('.md', '.html')
-        with open(os.path.join('www', output_name), 'w', encoding='utf-8', newline='\n') as f:
-            f.write(html_content)
-        print(f"Generated (GitHub Style): {output_name}")
-
-print("All technical HTML pages regenerated with professional GitHub styling.")

@@ -1,128 +1,87 @@
-# ITS Database 技術重點 - 全學科表格彙整 (Technical Tables Collection)
+# ITS Database 技術重點與考點分析 (ITS_DATABASE_TECH.md)
 
-本文件專門提取自 `www/ITS_Database/questions_ITS_Database.json`，將考卷中所有的 **技術對照表、語法架構表、與運算邏輯表** 獨立彙整，方便快速複習關鍵術語。
-
----
-
-## 📊 快速導覽目錄
-*   [DDL/DML/DQL 指令彙整](#題目-id-5) (ID 5)
-*   [SQL 內建系統表查詢](#題目-id-5-1) (ID 5)
-*   [串聯刪除 (Cascade Delete) 術語辨析](#題目-id-9) (ID 9)
-*   [DEFAULT 約束語法範例](#題目-id-11) (ID 11)
-*   [JOIN 語法結構優化](#題目-id-33) (ID 33)
-*   [集合運算子 (UNION/INTERSECT/EXCEPT)](#題目-id-35) (ID 35)
-*   [SQL 聯集與 Join 圖片標籤對照](#題目-id-35-1) (ID 35)
-*   [叢集與非叢集索引比較表](#題目-id-64) (ID 64)
+本文件根據 `www/ITS_Database/questions_ITS_Database.json` 題庫內容 (共 105 題) 進行深度分析，並整合核心技術對照表。
 
 ---
 
-## 題目 ID: 5
-### SQL 核心語言類別對照表 (DDL/DML/DQL/DCL/TCL)
+## 1. 題庫規模與組成 (2026-02-27 更新)
+*   **總題數**：105 題
+*   **官方版本 (1-69)**：69 題 (真正流出考點)
+*   **補充/模擬版本 (70-105)**：36 題
 
-| 指令 (Command) | 公式 / 語法結構 | 參數與功能說明 |
-| --- | --- | --- |
-| 一、 DDL (Data Definition Language) - 資料定義語言 |
-| CREATE | CREATE TABLE [表名] ([欄位] [型別] [約束]) | 建立新的資料表、視圖或預存程序。 |
-| ALTER | ALTER TABLE [表名] ADD/DROP/ALTER COLUMN | 修改資料庫結構。 |
-| DROP | DROP TABLE/PROCEDURE [名稱] | 完全刪除物件。 |
-| TRUNCATE | TRUNCATE TABLE [表名] | 快速清空記錄但保留結構。 |
-| 二、 DML (Data Manipulation Language) - 資料操作語言 |
-| INSERT | INSERT INTO [表名] VALUES ([值]) | 插入新記錄。 |
-| UPDATE | UPDATE [表名] SET [欄位]=[值] WHERE [條件] | 修改現有資料。 |
-| DELETE | DELETE FROM [表名] WHERE [條件] | 刪除特定記錄。 |
-| 三、 DQL (Data Query Language) - 資料查詢語言 |
-| SELECT | SELECT [欄位] FROM [表名] WHERE [條件] | 檢索資料（最常用）。 |
-| JOIN | SELECT * FROM A JOIN B ON A.ID = B.ID | 結合多張表。 |
-| 四、 DCL (Data Control Language) - 資料控制語言 |
-| GRANT | GRANT [權限] TO [使用者] | 賦予權限。 |
-| REVOKE | REVOKE [權限] FROM [使用者] | 撤銷權限。 |
-| 五、 TCL (Transaction Control Language) - 交易控制語言 |
-| BEGIN | BEGIN TRANSACTION | 標記交易開始。 |
-| COMMIT | COMMIT | 永久儲存變更。 |
-| ROLLBACK | ROLLBACK | 復原變更。 |
+## 2. 考點分佈與出題權重評估
 
-### SQL 內建資訊架構查詢表 (Metadata)
+若以正式考試 **40 題** 為抽題標準，建議分佈如下：
 
-| 類別 | 指令公式 / 查詢對象 | 參數與功能說明 |
-| --- | --- | --- |
-| 查欄位 | SELECT * FROM INFORMATION_SCHEMA.COLUMNS | 查詢欄位名稱、型別、NULL。 |
-| 查表格 | SELECT * FROM INFORMATION_SCHEMA.TABLES | 列出所有資料表與視圖。 |
-| 查程序 | SELECT * FROM INFORMATION_SCHEMA.ROUTINES | 查詢預存程序與函數。 |
-| 查參數 | SELECT * FROM INFORMATION_SCHEMA.PARAMETERS | 查詢預存程序定義參數。 |
+| 類別 | 母體題數 | 佔比 | 建議考題數 | 強度評估 |
+| :--- | :---: | :---: | :---: | :--- |
+| D1 資料庫概念 | 11 | 10.5% | 4 | 🟢 適中 |
+| D2 資料庫設計 | 28 | 26.7% | 11 | 🔴 高強度 |
+| D3 資料操作 (SQL) | 32 | 30.5% | 12 | 🔴 高強度 |
+| D4 安全性與維護 | 24 | 22.9% | 9 | 🔴 高強度 |
+| D5 資料庫維護(正規化) | 10 | 9.5% | 4 | 🟢 適中 |
 
-### 資料導入指令比較
-
-| 指令 | 目標表是否存在？ | 語言類別 | 筆記重點 |
-| --- | --- | --- | --- |
-| SELECT INTO | 不存在 (自動建立新表) | DML | 快速備份，像「影印」出一張新紙。 |
-| INSERT INTO ... SELECT | 已存在 | DML | 將資料「倒進」現有的容器中。 |
+> **維護提醒**：D2 (設計) 與 D3 (SQL 操作) 是獲取認證的基本盤，佔比超過 50%。
 
 ---
 
-## 題目 ID: 9
-### 刪除術語辨析
+## 3. 核心技術對照表 (Technical Reference)
 
-| 正確術語 | 英文名稱 | 參數與功能說明 |
-| --- | --- | --- |
-| **串聯刪除** | **Cascade Delete** | **唯一正確術語**。當父表一列被刪除時，自動刪除子表對應列。 |
-| 瀑布法 | Waterfall | 錯誤。這是軟體開發流程 (SDLC) 模型。 |
-| 骨牌法 | Domino | 錯誤。非 SQL 語法關鍵字。 |
-| 繼承法 | Inherited | 錯誤。通常指物件導向程式設計 (OOP)。 |
+### 📊 SQL 指令類別分佈 (ID 5)
+| 指令類別 (Command Type) | 核心語法 | 主要用途 |
+| :--- | :--- | :--- |
+| **DDL (資料定義)** | CREATE, ALTER, DROP, TRUNCATE | 定義、修改及刪除資料庫結構 (Table/Index)。 |
+| **DML (資料操作)** | INSERT, UPDATE, DELETE | 處理資料列的增、修、刪。 |
+| **DQL (資料查詢)** | SELECT, JOIN | 檢索與關聯資料。 |
+| **DCL (資料控制)** | GRANT, REVOKE, DENY | 管理使用者權限。 |
+| **TCL (事務控制)** | COMMIT, ROLLBACK, BEGIN | 保證資料一致性 (ACID)。 |
 
----
-
-## 題目 ID: 11
-### DEFAULT 約束範例
-
-| 語法狀態 | 範例程式碼 | 執行結果 |
-| --- | --- | --- |
-| 錯誤語法 | ADD Prefix varchar(4) DEFAULT; | ERROR |
-| 正確 (常數) | ADD Prefix varchar(4) DEFAULT 'N/A' | SUCCESS |
-| 正確 (數值) | ADD Score int DEFAULT 0 | SUCCESS |
-| 正確 (函數) | ADD CreateDate date DEFAULT GETDATE() | SUCCESS |
+### 🔍 系統結構查詢 (INFORMATION_SCHEMA)
+| 查詢對象 | 查詢方式 | 說明 |
+| :--- | :--- | :--- |
+| **欄位資訊** | `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` | 查詢欄位名稱、型別、是否可為 NULL。 |
+| **資料表清單** | `SELECT * FROM INFORMATION_SCHEMA.TABLES` | 列出資料庫中所有的實體表與檢視表。 |
+| **預存程序** | `SELECT * FROM INFORMATION_SCHEMA.ROUTINES` | 查詢所有 Procedure 或 Function。 |
 
 ---
 
-## 題目 ID: 33
-### SQL 連結語法修正建議
+## 4. 關鍵機制與陷阱 (Key Mechanisms)
 
-| 指令 (Command) | 公式 / 語法結構 | 參數與功能說明 |
-| --- | --- | --- |
-| OUTER JOIN | 改為 LEFT OUTER JOIN | SQL 需要明確方向。 |
-| WHERE | 改為 ON | ON 定義橋樑；WHERE 用於資料過濾。 |
-| student.courseID | 改為 students.courseID | 注意資料表名稱單複數一致性。 |
+### 🧩 刪除規則與機制 (ID 9)
+| 規則名稱 | 技術術語 | 說明 |
+| :--- | :--- | :--- |
+| **串聯刪除** | **Cascade Delete** | 當主鍵列被刪除時，自動刪除所有關聯的外鍵資料。 |
+| **預設值設定** | DEFAULT | 在 INSERT 時若未指定該欄位，自動填入預設值 (如 'N/A' 或 0)。 |
 
----
-
-## 題目 ID: 35
-### 集合運算子邏輯比較
-
-| 運算元 | 邏輯 | 結果範圍 | 是否自動去重複？ |
-| --- | --- | --- | --- |
-| UNION | 聯集 (OR) | 全部 (A + B) | **是** |
-| UNION ALL | 聯集 (純合併) | 全部 (A + B) | **否** (保留重複) |
-| INTERSECT | 交集 (AND) | 只有重疊的部分 | **是** |
-| EXCEPT | 差集 (Minus) | A 有但 B 沒有的部分 | **是** |
-
-### 集合代數與 SQL 關鍵字對照
-
-| 紅色/橘色選中區域 | 集合代數公式 | 對應 SQL 關鍵字 |
-| --- | --- | --- |
-| 左圓全紅 (含交集) | A | LEFT JOIN |
-| 右圓全紅 (含交集) | B | RIGHT JOIN |
-| A ∪ B | A∪B | UNION |
-| A ∩ B | A∩B | INTERSECT |
+### 🔗 集合運算子 (Set Operators) (ID 35)
+| 運算子 | 邏輯 | 結果描述 | 自動去重 |
+| :--- | :--- | :--- | :--- |
+| **UNION** | 聯集 (OR) | 合併 A 與 B，排除重複。 | **是** |
+| **UNION ALL** | 聯集 (加總) | 直接合併 A 與 B，保留重複。 | **否** |
+| **INTERSECT** | 交集 (AND) | 僅回傳 A 與 B 皆有的部分。 | **是** |
+| **EXCEPT** | 差集 (Minus) | 回傳 A 有但 B 沒有的部分。 | **是** |
 
 ---
 
-## 題目 ID: 64
-### 索引類型對照表 (Index Comparison)
+## 5. 效能優化與索引比較 (Index Comparison) (ID 64)
 
 | 特性 | 叢集索引 (Clustered) | 非叢集索引 (Non-Clustered) |
-| --- | --- | --- |
-| 數量 | 一表僅限一個。 | 一表可有多個。 |
-| 物理順序 | 索引順序 = 資料存放順序。 | 索引順序 ≠ 資料存放順序。 |
-| 內容 | 葉層就是資料列本身。 | 葉層是鍵值 + 資料指標。 |
-| 搜尋效率 | 極快（範圍查詢最強）。 | 稍慢（需查表回找資料）。 |
+| :--- | :--- | :--- |
+| **數量限制** | 每張表僅限 **1** 個。 | 每張表可有多個。 |
+| **資料排序** | 索引順序 = 實體資料存儲順序。 | 索引與資料分開存儲。 |
+| **結構** | 葉層節點即為資料頁。 | 葉層包含指向資料的指標。 |
+| **查詢速度** | 極快（直接定位）。 | 較慢（需透過指標回找資料）。 |
 
 ---
+
+## 6. 考前衝刺必勝策略 (超額訓練法)
+1. **耐力加強**：實際考試 40 題，模擬考 60 題，鍛鍊高強度專注力。
+2. **時間壓測**：平均 50 秒處理 1 題，確保實測時有充裕檢查時間。
+
+---
+
+### ITS SPECIALIST EXAM OBJECTIVES (DATABASE)
+*   **一、資料庫概念**：關聯式模型、基數、ACID。
+*   **二、資料庫設計**：DDL (Create/Alter)、資料型別、主鍵與外鍵。
+*   **三、資料操作**：DML (Select/Insert/Update/Delete)、Join、正規化 (1NF/2NF/3NF)。
+*   **四、安全性與維護**：DCL (Grant/Revoke)、備份與還原、View。

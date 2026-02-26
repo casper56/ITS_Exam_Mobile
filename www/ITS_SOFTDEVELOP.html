@@ -7,31 +7,121 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <style>
-        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; padding: 40px 0; }
-        .container { max-width: 950px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h1, h2, h3 { color: #0d6efd; border-bottom: 2px solid #0d6efd; padding-bottom: 10px; margin-top: 30px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #dee2e6; font-size: 0.95rem; }
-        th, td { border: 1px solid #dee2e6; padding: 12px; vertical-align: top; word-break: break-word; }
-        th { background-color: #212529; color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        code { color: #d63384; font-family: Consolas, monospace; background: #f1f1f1; padding: 2px 4px; border-radius: 4px; }
-        pre { background: #f1f1f1; padding: 15px; border-radius: 8px; overflow-x: auto; }
-        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-        @media (max-width: 768px) { .container { padding: 20px; } table { font-size: 0.8rem; } }
+        body { 
+            background-color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: #24292e;
+            padding: 40px 0; 
+        }
+        .container { 
+            max-width: 900px; 
+            background: white; 
+            padding: 45px; 
+            border: 1px solid #e1e4e8;
+            border-radius: 6px; 
+        }
+        h1 { 
+            font-size: 2rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h2 { 
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        p { margin-top: 0; margin-bottom: 16px; }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 0;
+            margin-bottom: 16px; 
+            font-size: 0.9rem;
+        }
+        th, td { 
+            border: 1px solid #dfe2e5; 
+            padding: 6px 13px; 
+        }
+        tr:nth-child(even) { background-color: #f6f8fa; }
+        th { background-color: #f6f8fa; font-weight: 600; }
+        
+        code { 
+            background-color: rgba(27,31,35,0.05); 
+            padding: 0.2em 0.4em; 
+            border-radius: 3px; 
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 85%;
+            color: #24292e;
+        }
+        pre { 
+            background-color: #f6f8fa; 
+            padding: 16px; 
+            border-radius: 6px; 
+            overflow: auto; 
+            font-size: 85%; 
+            line-height: 1.45;
+            border: 0;
+            margin-bottom: 16px;
+        }
+        pre code { background-color: transparent; padding: 0; font-size: 100%; color: inherit; }
+        
+        blockquote { 
+            padding: 0 1em; 
+            color: #6a737d; 
+            border-left: 0.25em solid #dfe2e5; 
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+        ul, ol { padding-left: 2em; margin-top: 0; margin-bottom: 16px; }
+        li + li { margin-top: 0.25em; }
+        hr { height: 0.25em; padding: 0; margin: 24px 0; background-color: #e1e4e8; border: 0; }
+        
+        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; border-radius: 6px; font-weight: 600; }
+        
+        /* Prism Theme Overrides */
+        .token.comment { color: #6a737d; }
+        .token.keyword { color: #d73a49; }
+        .token.string { color: #032f62; }
+        .token.function { color: #6f42c1; }
+        
+        @media (max-width: 768px) { 
+            body { padding: 20px 0; }
+            .container { padding: 20px; border: 0; } 
+            table { display: block; overflow-x: auto; }
+        }
     </style>
 </head>
 <body>
     <a href="../index.html" class="btn btn-dark btn-home">🏠 回首頁</a>
     <div class="container">
-        <div id="content"></div>
+        <article id="content" class="markdown-body"></article>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
         const rawMd = "# ITS Software Development 技術重點 (ITS_SOFTDEVELOP.md)\n\n本文件整理自 `www/ITS_softdevelop/questions_ITS_softdevelop.json`，涵蓋核心程式設計、物件導向、軟體開發流程、Web 與資料庫等技術重點。\n\n---\n\n## 0. 系統性觀念導讀\n\n軟體開發核心架構：\n*   **資料與型別**：理解記憶體分配（堆疊與堆積）與型別轉換（裝箱/拆箱）。\n*   **物件導向 (OOP)**：封裝、繼承、多型與抽象化。\n*   **開發流程**：版本控制 (Git) 與安全性（加密與簽章）。\n*   **Web 與資料庫**：MVC 架構、前端樣式與後端資料存取。\n\n---\n\n## D1_核心程式設計概念\n\n### 資料型別 (Data Types)\n*   **boolean**: 記錄正確或不正確，C# 中佔 1 位元組 (byte)。 (ID 1)\n*   **整數與浮點數**:\n    *   `int`: 4 位元組。\n    *   `float`: 32 位元，精確度約 7 位數。 (ID 40)\n    *   `double`: 64 位元，精確度 15-17 位數。 (ID 1, 40)\n    *   `decimal`: 128 位元，高精度 (28-29 位)，適合財務計算。 (ID 40)\n*   **string**: 字串型別，可儲存包含數字與字元的組合。 (ID 41)\n\n### 流程控制與例外處理\n*   **邏輯運算**: `&&` (AND), `||` (OR), `!` (NOT)。 (ID 3, 4, 43)\n*   **例外處理 (Try-Catch-Finally)**:\n    *   `catch`: 只有在擲回例外狀況時才執行。 (ID 5)\n    *   `finally`: 不論是否發生例外狀況都「一定執行」。 (ID 44)\n\n---\n\n## D2_物件導向程式設計\n\n### 類別修飾詞與存取權限\n| 修飾詞 | 實例化 (New) | 是否繼承 | 主要用途 | 題目 ID |\n| --- | --- | --- | --- | --- |\n| **abstract** | ❌ 禁止 | ✅ 必須 | 定義樣版，強制子類別實作。 | 10 |\n| **protected** | 視建構子而定 | ✅ 可以 | 限制存取，僅限類別內部與子類別。 | 10, 14, 18 |\n| **sealed** | ✅ 可以 | ❌ 禁止 | 封印類別，防止繼承。 | 10 |\n| **private** | ✅ | ❌ | 最嚴格，僅限類別內部。 | 14, 55 |\n| **internal** | ✅ | ✅ | 限同專案 (Assembly) 存取。 | 14 |\n\n### 屬性與多型\n| 關鍵字 | 用途 | 說明 | 題目 ID |\n| --- | --- | --- | --- |\n| **get / set** | 屬性存取 | `set` 用於寫入，`get` 用於讀取。 | 16 |\n| **virtual** | 虛擬方法 | 允許衍生類別覆寫。 | 20, 21 |\n| **override** | 覆寫 | 在子類別中重新定義父類別的虛擬方法。 | 20, 22 |\n| **delegate** | 委派 | 函式指標，可像呼叫方法一樣執行。 | 9, 45 |\n| **event** | 事件 | 外部只能用 `+=` 或 `-=`，不可直接用 `=` 指派。 | 9 |\n\n### 繼承關係\n*   **is-a 關聯**: 繼承的核心（例如：Dog is-a Animal）。 (ID 59)\n*   **has-a 關聯**: 組合/擁有的關係（例如：Car has-a Engine）。 (ID 59)\n*   **向上轉型 (Upcasting)**: 子類轉父類，百分之百安全。 (ID 19)\n*   **向下轉型 (Downcasting)**: 父類轉子類，需強制轉型。 (ID 19)\n\n---\n\n## D3_一般軟體開發\n\n### 記憶體管理 (Memory)\n*   **堆疊 (Stack)**: 儲存實值型別、函式呼叫的返回地址與區域變數。後進先出 (LIFO)。 (ID 2, 11)\n*   **堆積 (Heap)**: 用於動態記憶體分配（如物件、動態陣列）。 (ID 2)\n*   **Boxing (裝箱)**: 值型別 (Stack) -> 參考型別 (Heap)。 (ID 15)\n*   **Unboxing (拆箱)**: 參考型別 (Heap) -> 值型別 (Stack)。 (ID 15)\n\n### 版本控制 (Git/GitHub)\n*   **核心指令流**: `Branch` (分支) -> `Commit` (認可本機) -> `Push` (推送遠端) -> `Pull Request` (提取要求) -> `Merge` (合併)。 (ID 12, 13, 48)\n*   **其他指令**:\n    *   `Clone`: 複製整個遠端儲存庫。\n    *   `Fork`: 在 GitHub 上衍生副本。 (ID 50)\n    *   `Fetch/Pull`: 取得遠端最新修訂。 (ID 51)\n    *   `Staging (add)`: 回報變更前的暫存動作。 (ID 49)\n\n### 安全性 (Security)\n*   **數位簽章**: 使用「非對稱加密」，需要私密和公開鑰匙組合以驗證來源。 (ID 52, 53)\n*   **序列化**: 將物件轉換為可傳輸格式（如 XML 字串）。 (ID 30)\n\n---\n\n## D4_Web應用程式\n\n### 前端技術\n*   **CSS**: 外部樣式表 (.css) 是最方便套用至所有頁面的方式。 (ID 23)\n*   **JavaScript**:\n    *   `setInterval`: 定期重複執行（每秒更新）。 (ID 6, 7, 8)\n    *   `setTimeout`: 延遲執行一次。\n*   **協定**: IP (識別身分)、HTTP (網頁通訊)、FTP (檔案傳輸)。 (ID 27, 28, 29)\n\n### MVC 架構模式 (Model-View-Controller)\n*   **Model**: 模型，處理資料驗證、儲存與解譯。 (ID 31, 32)\n*   **View**: 檢視，負責顯示資料與使用者互動。 (ID 31, 32)\n*   **Controller**: 控制器，將事件轉換成要求並傳遞給模型。 (ID 31, 32)\n\n---\n\n## D5_資料庫 (Databases)\n\n### 關聯式與 NoSQL\n*   **關聯性**: 顧客 (Customer) 與 訂單 (Order) 通常為「一對多」。 (ID 33)\n*   **NoSQL (文件型)**: 資料結構由「節點、邏輯和屬性」組成，常存為 JSON 或 XML。 (ID 39)\n*   **LINQ**: `SelectMany` 用於壓平 (Flatten) 巢狀序列。 (ID 38)\n\n### SQL 交易與操作\n*   **交易控制**: `BEGIN TRAN` (開始)、`COMMIT` (提交)、`ROLLBACK` (取消/回滾)。 (ID 35, 36, 37)\n*   **刪除資料**: `DELETE FROM Items WHERE Completed = 1`。 (ID 34)\n";
         document.getElementById('content').innerHTML = marked.parse(rawMd);
+        // Prism highlight
+        document.querySelectorAll('pre code').forEach((block) => {
+            block.className = 'language-python'; // Default for these notes
+        });
         Prism.highlightAll();
     </script>
 </body>

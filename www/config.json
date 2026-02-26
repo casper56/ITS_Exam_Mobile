@@ -60,8 +60,8 @@
             "title": "ITS Python",
             "id": "itspy",
             "html": "ITS_Python.html",
-            "cutoff": 99,
-            "cutoff_info": "1-99 為官方版題數"
+            "cutoff": 94,
+            "cutoff_info": "1-94 為官方版題數"
         }
     ]
 }

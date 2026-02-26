@@ -1,12 +1,9 @@
-import os
-import json
-
-template = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPLACE_TITLE</title>
+    <title>AZ900 TECH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <style>
@@ -119,7 +116,7 @@ template = r"""<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
-        const rawMd = REPLACE_MD_JSON;
+        const rawMd = "# AZ-900: Azure Fundamentals 技術考點導讀 (AZ900_TECH.md)\n\n本文件根據 `www/AZ900/questions_AZ900.json` 題庫內容進行深度分析，涵蓋雲端基礎概念、Azure 架構與治理。\n\n---\n\n## 1. 雲端運算概念 (Cloud Concepts)\n*   **共享責任模型 (Shared Responsibility)**：明確區分雲端供應商與客戶在不同服務模式下的責任。\n*   **服務模式**：\n    *   **IaaS (基礎結構即服務)**：彈性最高，客戶負責操作系統與應用程式（如 VM）。\n    *   **PaaS (平台即服務)**：專注於開發應用，由 Azure 管理伺服器與運行環境（如 App Service）。\n    *   **SaaS (軟體即服務)**：直接使用軟體，由 Azure 管理一切（如 Office 365）。\n*   **雲端特性**：高可用性 (High Availability)、可延展性 (Scalability)、敏捷性 (Agility) 與災難復原 (Disaster Recovery)。\n\n---\n\n## 2. Azure 核心架構 (Architecture)\n*   **區域 (Region)**：資料中心的分組，地理上相互獨立。\n*   **可用性區域 (Availability Zones)**：單一區域內獨立的資料中心，防止機房級故障。\n*   **資源群組 (Resource Group)**：邏輯容器，用於管理生命週期相同的 Azure 資源。\n*   **管理群組 (Management Groups)**：管理多個訂閱 (Subscription) 的治理。\n\n---\n\n## 3. 治理與管理工具\n*   **Azure Policy**：強制執行規則，確保資源符合合規性。\n*   **RBAC (角色型存取控制)**：精確管理「誰可以對資源做什麼」。\n*   **Azure Resource Manager (ARM)**：部署與管理資源的入口。\n*   **成本管理 (TCO/Cost Management)**：預測、監控與優化 Azure 開銷。\n\n---\n\n## 4. Azure 安全性與識別\n*   **Microsoft Entra ID (原 AAD)**：核心身分識別服務（支援多重要素驗證 MFA）。\n*   **Zero Trust (零信任)**：核心原則為「不信任，始終驗證」。\n";
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         // Prism highlight
         document.querySelectorAll('pre code').forEach((block) => {
@@ -129,26 +126,3 @@ template = r"""<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-md_files = [
-    'ITS_AI_TECH.md', 'ITS_DATABASE_TECH.md', 'ITS_SOFTDEVELOP.md', 'ITS_Python_TECH.md',
-    'AI900_TECH.md', 'AZ900_TECH.md', 'Generative_AI_TECH.md'
-]
-
-for md_name in md_files:
-    path = os.path.join('www', md_name)
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        md_json = json.dumps(content, ensure_ascii=False)
-        title = md_name.replace('.md', '').replace('_', ' ')
-        html_content = template.replace('REPLACE_TITLE', title).replace('REPLACE_MD_JSON', md_json)
-        
-        output_name = md_name.replace('.md', '.html')
-        with open(os.path.join('www', output_name), 'w', encoding='utf-8', newline='\n') as f:
-            f.write(html_content)
-        print(f"Generated (GitHub Style): {output_name}")
-
-print("All technical HTML pages regenerated with professional GitHub styling.")

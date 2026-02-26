@@ -35,12 +35,85 @@
         .exam-card:hover { transform: translateY(-5px); background-color: #f8f9fa; }
         .tech-note-btn { position: absolute; top: 10px; left: 10px; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; background: #212529; color: #fff; text-decoration: none; font-weight: bold; z-index: 10; }
         .tech-note-btn:hover { background: #0d6efd; color: #fff; }
+        .analysis-top-btn { position: absolute; top: 10px; right: 10px; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; background: #198754; color: #fff; text-decoration: none; font-weight: bold; z-index: 10; border: none; }
+        .analysis-top-btn:hover { background: #157347; color: #fff; }
         .card-icon { font-size: 3rem; margin-bottom: 15px; color: #000; }
         .card-title { font-weight: 900; color: #000; }
         .text-muted { color: #333 !important; }
         .start-btn { border-radius: 8px; padding: 8px 25px; font-weight: bold; border: 1px solid #000; }
         footer { margin-top: 50px; padding: 30px 0; color: #000; border-top: 1px solid #000; }
+        /* 題庫分析彈窗專業風格：GitHub 文檔感 */
+        #analysis-content { 
+            font-size: 0.9rem; 
+            line-height: 1.6; 
+            color: #24292e; 
+            padding: 10px 15px;
+            background-color: #fff;
+        }
+        #analysis-content h1 { 
+            font-size: 1.4rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 15px;
+            margin-bottom: 16px;
+        }
+        #analysis-content h2 { 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+        #analysis-content h3 { 
+            font-size: 1.05rem; 
+            font-weight: 600; 
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        #analysis-content p { margin-bottom: 12px; }
+        #analysis-content img { max-width: 100%; border: 1px solid #ddd; border-radius: 4px; }
+        #analysis-content pre { 
+            background-color: #f6f8fa; 
+            padding: 12px; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            font-size: 0.85rem; 
+            border: 1px solid #dfe1e4;
+        }
+        #analysis-content code { 
+            background-color: rgba(27,31,35,0.05); 
+            padding: 0.2em 0.4em; 
+            border-radius: 3px; 
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        #analysis-content pre code { background-color: transparent; padding: 0; }
+        #analysis-content table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 16px; 
+            font-size: 0.85rem; 
+        }
+        #analysis-content th, #analysis-content td { 
+            border: 1px solid #dfe2e5; 
+            padding: 6px 13px; 
+        }
+        #analysis-content tr:nth-child(even) { background-color: #f6f8fa; }
+        #analysis-content th { background-color: #f6f8fa; font-weight: 600; }
+        #analysis-content blockquote { 
+            padding: 0 1em; 
+            color: #6a737d; 
+            border-left: 0.25em solid #dfe2e5; 
+            margin-bottom: 16px;
+        }
+        #analysis-content ul, #analysis-content ol { padding-left: 20px; margin-bottom: 12px; }
+        #analysis-content li + li { margin-top: 0.25em; }
     </style>
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Analysis bundle for local offline access -->
+    <script src="www/analysis_bundle.js"></script>
 </head>
 <body>
 
@@ -76,6 +149,7 @@
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
                 <a href="www/ITS_Python_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('itspy', 'ITS Python')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/ITS_Python/ITS_Python.html'">🐍</div>
                 <h3 class="card-title">ITS Python</h3>
                 <p class="card-text text-muted">程式語言核心能力</p>
@@ -90,6 +164,7 @@
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
                 <a href="www/ITS_SOFTDEVELOP.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('itscs', 'ITS Software Development')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/ITS_softdevelop/ITS_softdevelop.html'">🎯</div>
                 <h3 class="card-title">ITS Software Development</h3>
                 <p class="card-text text-muted">軟體研發核心能力</p>
@@ -103,7 +178,8 @@
         <!-- Database -->
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
-                <a href="www/ITS_DATABASE_TECH.html" class="tech-note-btn">Tech Table</a>
+                <a href="www/ITS_DATABASE_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('itsdb', 'ITS Database')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/ITS_Database/ITS_Database.html'">🗄️</div>
                 <h3 class="card-title">ITS Database</h3>
                 <p class="card-text text-muted">資料庫管理核心能力</p>
@@ -118,6 +194,7 @@
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
                 <a href="www/ITS_AI_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('itsai', 'ITS AI')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/ITS_AI/ITS_AI.html'">🤖</div>
                 <h3 class="card-title">ITS AI</h3>
                 <p class="card-text text-muted">人工智慧核心能力</p>
@@ -131,6 +208,8 @@
         <!-- AI-900 -->
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
+                <a href="www/AI900_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('ai900', 'AI-900')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/AI900/AI900.html'">☁️</div>
                 <h3 class="card-title">AI-900</h3>
                 <p class="card-text text-muted">Microsoft Azure AI Fundamentals</p>
@@ -144,6 +223,8 @@
         <!-- AZ-900 -->
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
+                <a href="www/AZ900_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('az900', 'AZ-900')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/AZ900/AZ900.html'">💻</div>
                 <h3 class="card-title">AZ-900</h3>
                 <p class="card-text text-muted">Microsoft Azure Fundamentals</p>
@@ -157,6 +238,8 @@
         <!-- Generative AI -->
         <div class="col-md-4">
             <div class="card exam-card text-center p-4">
+                <a href="www/Generative_AI_TECH.html" class="tech-note-btn">Tech Note</a>
+                <button class="analysis-top-btn" onclick="showAnalysis('genai', 'Generative AI')">題庫分析</button>
                 <div class="card-icon" onclick="location.href='www/Generative_AI/Generative_AI.html'">✨</div>
                 <h3 class="card-title">Generative AI</h3>
                 <p class="card-text text-muted">生成式人工智慧</p>
@@ -174,6 +257,25 @@
         <p>&copy; 2026 ITS Exam Simulator. All rights reserved. <button class="btn btn-link btn-sm text-dark no-print" onclick="logout()" style="text-decoration:none;">[登出]</button></p>
     </div>
 </footer>
+</div>
+
+<!-- Analysis Modal -->
+<div class="modal fade" id="analysisModal" tabindex="-1" aria-labelledby="analysisModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="analysisModalLabel">題庫分析</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="analysis-content">
+        <!-- Markdown content will be rendered here -->
+        載入中...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Bootstrap JS Bundle -->
@@ -200,6 +302,28 @@
         location.reload();
     }
 
+    function showAnalysis(subjectId, title) {
+        document.getElementById('analysis-content').innerHTML = '載入中...';
+        document.getElementById('analysisModalLabel').innerText = title + ' 題庫分析報告';
+        const modal = new bootstrap.Modal(document.getElementById('analysisModal'));
+        modal.show();
+        
+        try {
+            // 從記憶體物件讀取內容，徹底繞過 CORS 安全性限制
+            const markdown = (typeof ANALYSIS_BUNDLE !== 'undefined' && ANALYSIS_BUNDLE[subjectId]) 
+                             ? ANALYSIS_BUNDLE[subjectId] 
+                             : '# 找不到分析資料\n\n請確認 `www/analysis_bundle.js` 檔案是否已正確產生。';
+            
+            document.getElementById('analysis-content').innerHTML = marked.parse(markdown);
+        } catch (error) {
+            document.getElementById('analysis-content').innerHTML = `
+                <div class="alert alert-danger">
+                    <h5>讀取解析失敗</h5>
+                    <p>${error.message}</p>
+                </div>`;
+        }
+    }
+
     window.onload = function() {
         if (localStorage.getItem('isLoggedIn') === 'true') {
             showContent();
@@ -212,7 +336,5 @@
     });
   }
 </script>
-</body>
-</html>
 </body>
 </html>
