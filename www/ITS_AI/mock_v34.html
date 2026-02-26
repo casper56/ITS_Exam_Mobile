@@ -150,13 +150,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script>
-    const EXAM_LIMIT = 60, WRONG_KEY = 'itsai_exam_wrong_ids';
+    <script>
+    const EXAM_LIMIT = 60, WRONG_KEY = 'itsai_exam_wrong_ids', HISTORY_KEY = 'itsai_mock_history';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
-    function parseAnswerToIndex(val) {
-        if (typeof val === 'number') return val - 1;
+    function parseAnswerToIndex(val) {        if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
             const v = val.toUpperCase();
             if (v === 'Y') return 0; if (v === 'N') return 1;
@@ -3077,6 +3076,13 @@
         const CUTOFF = 94;
         const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); 
         
+        // --- 避免重複出題機制：讀取歷史紀錄 ---
+        let historySet = new Set();
+        try {
+            const savedHistory = localStorage.getItem(HISTORY_KEY);
+            if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
+        } catch(e) { console.warn("History parse failed", e); }
+
         const categories = {};
         const catNameMap = {}; 
         allQuestions.forEach(q => {
@@ -3098,16 +3104,31 @@
         const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * 0.05));
         const MAX_PER_CAT = Math.floor(EXAM_LIMIT * 0.40);
 
+        // 核心邏輯：過濾掉歷史紀錄中的 ID (如果有足夠題目的話)
+        const filterHistory = (list) => {
+            const filtered = list.filter(q => !historySet.has(q.id));
+            // 如果剩下的題目不夠湊一卷，則清空該科目的歷史紀錄，重新循環
+            return filtered.length < (list.length * 0.2) ? list : filtered;
+        };
+
         catNames.forEach(cat => {
-            const catOff = categories[cat].filter(q => q.id <= CUTOFF).sort(() => 0.5 - Math.random());
-            const catSupp = categories[cat].filter(q => q.id > CUTOFF).sort(() => 0.5 - Math.random());
+            // 嘗試從「未考過」的池子中抽
+            let catOffAll = categories[cat].filter(q => q.id <= CUTOFF);
+            let catSuppAll = categories[cat].filter(q => q.id > CUTOFF);
+            
+            let catOff = filterHistory(catOffAll).sort(() => 0.5 - Math.random());
+            let catSupp = filterHistory(catSuppAll).sort(() => 0.5 - Math.random());
+
             for (let i = 0; i < MIN_PER_CAT; i++) {
                 if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
                 else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
             }
         });
 
-        let offPool = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        // 填充官方題庫 (95%)
+        let offPoolAll = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id));
+        let offPool = filterHistory(offPoolAll).sort(() => 0.5 - Math.random());
+        
         for (let q of offPool) {
             if (selected.length >= TARGET_OFF_COUNT) break;
             let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
@@ -3116,16 +3137,24 @@
             if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
         }
 
-        // 核心修正：先抽模擬題填充剩下的 5% (3題)，確保不是 100% 官方題
+        // 填充模擬題 (5%)
         const MOCK_TARGET = EXAM_LIMIT - TARGET_OFF_COUNT; 
-        let mockPool = allQuestions.filter(q => q.id > CUTOFF && !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+        let mockPoolAll = allQuestions.filter(q => q.id > CUTOFF && !usedIds.has(q.id));
+        let mockPool = filterHistory(mockPoolAll).sort(() => 0.5 - Math.random());
+        
         while (selected.length < (TARGET_OFF_COUNT + MOCK_TARGET) && mockPool.length > 0) {
             const q = mockPool.shift(); selected.push(q); usedIds.add(q.id);
         }
 
-        // 最後如果還不夠 (例如模擬題太少)，再用剩餘題目補滿
+        // 兜底補滿
         let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
         while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+
+        // --- 儲存本次出題 ID 到歷史紀錄 ---
+        usedIds.forEach(id => historySet.add(id));
+        // 如果歷史累積超過總題數 80%，下回自動重置
+        if (historySet.size > (allQuestions.length * 0.8)) historySet.clear();
+        localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
