@@ -47,15 +47,17 @@
 <div id="login-overlay">
     <div class="login-box">
         <h2 class="fw-bold mb-4">系統登入</h2>
-        <div class="mb-3 text-start">
-            <label class="form-label">使用者帳號</label>
-            <input type="text" id="username" class="form-control border-dark" placeholder="請輸入帳號">
-        </div>
-        <div class="mb-4 text-start">
-            <label class="form-label">密碼</label>
-            <input type="password" id="password" class="form-control border-dark" placeholder="請輸入密碼">
-        </div>
-        <button onclick="checkLogin()" class="btn btn-dark w-100 fw-bold py-2">登入系統</button>
+        <form id="login-form" onsubmit="event.preventDefault(); checkLogin();">
+            <div class="mb-3 text-start">
+                <label class="form-label" for="username">使用者帳號</label>
+                <input type="text" id="username" name="username" class="form-control border-dark" placeholder="請輸入帳號" autocomplete="username" required>
+            </div>
+            <div class="mb-4 text-start">
+                <label class="form-label" for="password">密碼</label>
+                <input type="password" id="password" name="password" class="form-control border-dark" placeholder="請輸入密碼" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="btn btn-dark w-100 fw-bold py-2">登入系統</button>
+        </form>
         <div id="login-error" class="text-danger mt-3 small" style="display:none;">帳號或密碼錯誤！</div>
     </div>
 </div>
@@ -181,7 +183,7 @@
         const u = document.getElementById('username').value;
         const p = document.getElementById('password').value;
         if (u === 'admin' && p === '@wsx1qaz') {
-            sessionStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('isLoggedIn', 'true');
             showContent();
         } else {
             document.getElementById('login-error').style.display = 'block';
@@ -194,22 +196,14 @@
     }
 
     function logout() {
-        sessionStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('isLoggedIn');
         location.reload();
     }
 
     window.onload = function() {
-        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
             showContent();
         }
-        // 按下 Enter 鍵登入
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                if (document.getElementById('login-overlay').style.display !== 'none') {
-                    checkLogin();
-                }
-            }
-        });
     };
 
   if (window.location.protocol !== 'file:' && 'serviceWorker' in navigator) {
