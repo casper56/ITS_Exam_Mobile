@@ -1,6 +1,5 @@
-
 import os
-import re
+import json
 
 template = r"""<!DOCTYPE html>
 <html lang="zh-TW">
@@ -18,7 +17,7 @@ template = r"""<!DOCTYPE html>
         th, td { border: 1px solid #dee2e6; padding: 12px; vertical-align: top; word-break: break-word; }
         th { background-color: #212529; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
-        code { color: #d63384; font-family: Consolas, monospace; }
+        code { color: #d63384; font-family: Consolas, monospace; background: #f1f1f1; padding: 2px 4px; border-radius: 4px; }
         pre { background: #f1f1f1; padding: 15px; border-radius: 8px; overflow-x: auto; }
         .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; }
         @media (max-width: 768px) { .container { padding: 20px; } table { font-size: 0.8rem; } }
@@ -31,8 +30,10 @@ template = r"""<!DOCTYPE html>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script>
-        const rawMd = `REPLACE_MD_CONTENT`;
+        const rawMd = REPLACE_MD_JSON;
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         Prism.highlightAll();
     </script>
@@ -50,15 +51,15 @@ for md_name in md_files:
         with open(path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # 處理反引號轉義，防止破壞 JS 字串
-        safe_content = content.replace('', '').replace('`', '`').replace('$', '\$')
+        # Use json.dumps to safely encode the string for JS
+        md_json = json.dumps(content, ensure_ascii=False)
         
         title = md_name.replace('.md', '').replace('_', ' ')
-        html_content = template.replace('REPLACE_TITLE', title).replace('REPLACE_MD_CONTENT', safe_content)
+        html_content = template.replace('REPLACE_TITLE', title).replace('REPLACE_MD_JSON', md_json)
         
         output_name = md_name.replace('.md', '.html')
         with open(os.path.join('www', output_name), 'w', encoding='utf-8') as f:
             f.write(html_content)
         print(f"Generated: {output_name}")
 
-print("All technical HTML pages generated successfully.")
+print("All technical HTML pages regenerated successfully.")

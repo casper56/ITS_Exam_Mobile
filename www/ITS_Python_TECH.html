@@ -14,7 +14,7 @@
         th, td { border: 1px solid #dee2e6; padding: 12px; vertical-align: top; word-break: break-word; }
         th { background-color: #212529; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
-        code { color: #d63384; font-family: Consolas, monospace; }
+        code { color: #d63384; font-family: Consolas, monospace; background: #f1f1f1; padding: 2px 4px; border-radius: 4px; }
         pre { background: #f1f1f1; padding: 15px; border-radius: 8px; overflow-x: auto; }
         .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; }
         @media (max-width: 768px) { .container { padding: 20px; } table { font-size: 0.8rem; } }
@@ -27,22 +27,10 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script>
-        const rawMd = `# ITS Python 技術重點 (ITS_Python_TECH.md)
-
-整理自官方考點與 AI 深度解題分析。
-
----
-
-## 官方鑑定核心考點 (ID 1-99)
-
-*   **ID 183-190**: Unittest, sys.argv, math 模組等進階內容。
-*   **ID 20**: While 迴圈逐圈執行邏輯。
-*   **ID 70**: TypeError (字串次方運算陷阱)。
-
----
-
-`;
+        const rawMd = "# ITS Python 技術重點 (ITS_Python_TECH.md)\n\n整理自官方考點與 AI 深度解題分析。\n\n---\n\n## 官方鑑定核心考點 (ID 1-99)\n\n*   **ID 183-190**: Unittest, sys.argv, math 模組等進階內容。\n*   **ID 20**: While 迴圈逐圈執行邏輯。\n*   **ID 70**: TypeError (字串次方運算陷阱)。\n\n---\n\n";
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         Prism.highlightAll();
     </script>
