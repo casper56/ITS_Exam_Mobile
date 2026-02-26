@@ -2222,10 +2222,7 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\"><b>【2025 報錯分析】</b>",
-            "1. 第 03, 04 行：input() 回傳 str，這兩行語法本身正確，不會報錯。",
-            "2. 第 02, 05 行：這是報錯主因。calc_power(base, exponent) 傳入的是兩個字串。在第 02 行執行 a ** b (即 str ** str) 時，Python 不支援字串的次方運算，會引發 <b>TypeError</b>。",
-            "3. 修正：應在傳入前使用 eval()、int() 或 float() 將字串轉為數值。</code></pre>"
+            "<pre><code class=\"language-python\"></code></pre>"
         ],
         "category": "D4_函式與註解"
     },
@@ -2726,7 +2723,11 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 選項 1 的正確答案是 Yes ，因為 a 和 b 是字串型別，無法進行指數運算。",
             "● 選項 2 的正確答案是 Yes ，因為 result 是字串型別，無法與其他字串進行相加運算。",
-            "● 選項 3 的正確答案是 Yes ，因為 eval 函式可以將字串轉換為數值型別。</code></pre>"
+            "● 選項 3 的正確答案是 Yes ，因為 eval 函式可以將字串轉換為數值型別。</code></pre>",
+	    "<pre><code class=\"language-python\"><b>【2025 報錯分析】</b>",
+            "1. 第 03, 04 行：input() 回傳 str，這兩行語法本身正確，不會報錯。",
+            "2. 第 02, 05 行：這是報錯主因。calc_power(base, exponent) 傳入的是兩個字串。在第 02 行執行 a ** b (即 str ** str) 時，Python 不支援字串的次方運算，會引發 <b>TypeError</b>。",
+            "3. 修正：應在傳入前使用 eval()、int() 或 float() 將字串轉為數值。</code></pre>"
         ],
         "category": "D5_錯誤處理與測試"
     },

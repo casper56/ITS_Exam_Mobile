@@ -22,22 +22,22 @@
                     word-wrap: break-word; 
                     word-break: normal; 
                     overflow-x: hidden;
-                    white-space: pre-wrap; /* 核心修正：確保陣列結合後的 \n 能正常換行 */
+                    white-space: pre-wrap;
                 }
                 
-                /* 預設題目與程式碼樣式 */                code:not([class*="language-"]) { 
+                code:not([class*="language-"]) { 
                     display: inline-block; 
                     margin: 5px 0; 
                     line-height: 1.4; 
                     font-size: 1.0rem; 
                     color: #222222; 
-                    white-space: pre-wrap; /* 確保字串陣列的 \n 換行生效 */
+                    white-space: pre-wrap;
                 }
                 
                 code {
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-                    white-space: pre-wrap; /* 全域保留換行 */
+                    white-space: pre-wrap;
                 }
         code[class*="language-"] { color: inherit; }
 
@@ -52,35 +52,9 @@
         .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
 
-        /* 表格樣式：黑色實線邊框 */
         table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
         th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
-        /* 寬度輔助類別 1-100% */
-        .w-1 { width: 1% !important; } .w-2 { width: 2% !important; } .w-3 { width: 3% !important; } .w-4 { width: 4% !important; } .w-5 { width: 5% !important; }
-        .w-6 { width: 6% !important; } .w-7 { width: 7% !important; } .w-8 { width: 8% !important; } .w-9 { width: 9% !important; } .w-10 { width: 10% !important; }
-        .w-11 { width: 11% !important; } .w-12 { width: 12% !important; } .w-13 { width: 13% !important; } .w-14 { width: 14% !important; } .w-15 { width: 15% !important; }
-        .w-16 { width: 16% !important; } .w-17 { width: 17% !important; } .w-18 { width: 18% !important; } .w-19 { width: 19% !important; } .w-20 { width: 20% !important; }
-        .w-21 { width: 21% !important; } .w-22 { width: 22% !important; } .w-23 { width: 23% !important; } .w-24 { width: 24% !important; } .w-25 { width: 25% !important; }
-        .w-26 { width: 26% !important; } .w-27 { width: 27% !important; } .w-28 { width: 28% !important; } .w-29 { width: 29% !important; } .w-30 { width: 30% !important; }
-        .w-31 { width: 31% !important; } .w-32 { width: 32% !important; } .w-33 { width: 33% !important; } .w-34 { width: 34% !important; } .w-35 { width: 35% !important; }
-        .w-36 { width: 36% !important; } .w-37 { width: 37% !important; } .w-38 { width: 38% !important; } .w-39 { width: 39% !important; } .w-40 { width: 40% !important; }
-        .w-41 { width: 41% !important; } .w-42 { width: 42% !important; } .w-43 { width: 43% !important; } .w-44 { width: 44% !important; } .w-45 { width: 45% !important; }
-        .w-46 { width: 46% !important; } .w-47 { width: 47% !important; } .w-48 { width: 48% !important; } .w-49 { width: 49% !important; } .w-50 { width: 50% !important; }
-        .w-51 { width: 51% !important; } .w-52 { width: 52% !important; } .w-53 { width: 53% !important; } .w-54 { width: 54% !important; } .w-55 { width: 55% !important; }
-        .w-56 { width: 56% !important; } .w-57 { width: 57% !important; } .w-58 { width: 58% !important; } .w-59 { width: 59% !important; } .w-60 { width: 60% !important; }
-        .w-61 { width: 61% !important; } .w-62 { width: 62% !important; } .w-63 { width: 63% !important; } .w-64 { width: 64% !important; } .w-65 { width: 65% !important; }
-        .w-66 { width: 66% !important; } .w-67 { width: 67% !important; } .w-68 { width: 68% !important; } .w-69 { width: 69% !important; } .w-70 { width: 70% !important; }
-        .w-71 { width: 71% !important; } .w-72 { width: 72% !important; } .w-73 { width: 73% !important; } .w-74 { width: 74% !important; } .w-75 { width: 75% !important; }
-        .w-76 { width: 76% !important; } .w-77 { width: 77% !important; } .w-78 { width: 78% !important; } .w-79 { width: 79% !important; } .w-80 { width: 80% !important; }
-        .w-81 { width: 81% !important; } .w-82 { width: 82% !important; } .w-83 { width: 83% !important; } .w-84 { width: 84% !important; } .w-85 { width: 85% !important; }
-        .w-86 { width: 86% !important; } .w-87 { width: 87% !important; } .w-88 { width: 88% !important; } .w-89 { width: 89% !important; } .w-90 { width: 90% !important; }
-        .w-91 { width: 91% !important; } .w-92 { width: 92% !important; } .w-93 { width: 93% !important; } .w-94 { width: 94% !important; } .w-95 { width: 95% !important; }
-        .w-96 { width: 96% !important; } .w-97 { width: 97% !important; } .w-98 { width: 98% !important; } .w-99 { width: 99% !important; } .w-100 { width: 100% !important; }
         
-        /* 表格對齊輔助類別 */
-        .t-left { margin-left: 0 !important; margin-right: auto !important; }
-        .t-center { margin-left: auto !important; margin-right: auto !important; }
-        .t-right { margin-left: auto !important; margin-right: 0 !important; }
         .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
@@ -96,23 +70,15 @@
             body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
             #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
-            #result-screen h2.text-center { margin-top: 0 !important; padding-top: 0 !important; }
             #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
             .review-id { margin: 0 !important; padding: 5px 10px !important; border-radius: 0 !important; }
             .review-q-text { display: flex !important; align-items: flex-start !important; padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-q-text b { margin-right: 8px !important; white-space: nowrap !important; }
-            .review-q-text .q-content { flex: 1 !important; }
-            .review-q-text .q-content pre, .review-q-text .q-content code { margin-top: 0 !important; padding-top: 0 !important; }
-            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
-            .review-q-text { padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-exp { font-size: 1.0rem !important; padding: 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; margin-left: 0 !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-exp pre, .review-exp code { margin: 0 !important; padding: 0 !important; white-space: pre-wrap !important; background: transparent !important; word-break: break-all !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; }
+            .review-exp { font-size: 1.0rem !important; padding: 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; }
             pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
-            .category-title, .header-bg { -webkit-print-color-adjust: exact; background-color: #f0f0f0 !important; }
         }
         .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -138,7 +104,7 @@
     <p class="lead">答對題數：<span id="correct-count">0</span> / 60</p>
     <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
     <div class="mt-5 no-print">
-        <a href="../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <a href="../../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
         <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
         <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="window.print()">🖨️ 列印錯題</button>
     </div>
@@ -150,12 +116,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-    <script>
+<script>
     const EXAM_LIMIT = 60, WRONG_KEY = 'itscs_exam_wrong_ids', HISTORY_KEY = 'itscs_mock_history';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
-    function parseAnswerToIndex(val) {        if (typeof val === 'number') return val - 1;
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
             const v = val.toUpperCase();
             if (v === 'Y') return 0; if (v === 'N') return 1;
@@ -3790,86 +3757,82 @@
             console.error("題庫資料載入失敗！"); return;
         }
         const CUTOFF = 99;
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); 
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); // 57
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 3
         
-        // --- 避免重複出題機制：讀取歷史紀錄 ---
         let historySet = new Set();
         try {
             const savedHistory = localStorage.getItem(HISTORY_KEY);
             if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
-        } catch(e) { console.warn("History parse failed", e); }
+        } catch(e) {}
 
+        // 1. 池子拆分：官方與補充
+        const offPoolTotal = allQuestions.filter(q => q.id <= CUTOFF);
+        const suppPoolTotal = allQuestions.filter(q => q.id > CUTOFF);
+
+        // 2. 池內優先級排序 (未看優先)
+        const offUnseen = offPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const offSeen = offPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppUnseen = suppPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppSeen = suppPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+
+        let finalOffOrder = [...offUnseen, ...offSeen];
+        let finalSuppOrder = [...suppUnseen, ...suppSeen];
+
+        let selected = [], usedIds = new Set();
+        
+        // --- 階段 A：分類平衡 (優先從官方池抽) ---
         const categories = {};
-        const catNameMap = {}; 
         allQuestions.forEach(q => {
-            let fullCat = q.category || '一般';
-            let m = fullCat.match(/^(D\d+)/);
-            let prefix = (m ? m[1] : fullCat);
-            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
-        });
-        allQuestions.forEach(q => {
-            let m = (q.category ? q.category.match(/^(D\d+)/) : null);
-            let prefix = (m ? m[1] : q.category || '一般');
-            let cat = catNameMap[prefix];
+            const cat = q.category || '一般';
             if (!categories[cat]) categories[cat] = [];
             categories[cat].push(q);
         });
-
-        let selected = [], usedIds = new Set();
         const catNames = Object.keys(categories).sort();
-        const MIN_PER_CAT = Math.max(1, Math.floor(EXAM_LIMIT * 0.05));
-        const MAX_PER_CAT = Math.floor(EXAM_LIMIT * 0.40);
-
-        // 核心邏輯：過濾掉歷史紀錄中的 ID (如果有足夠題目的話)
-        const filterHistory = (list) => {
-            const filtered = list.filter(q => !historySet.has(q.id));
-            // 如果剩下的題目不夠湊一卷，則清空該科目的歷史紀錄，重新循環
-            return filtered.length < (list.length * 0.2) ? list : filtered;
-        };
-
+        
         catNames.forEach(cat => {
-            // 嘗試從「未考過」的池子中抽
-            let catOffAll = categories[cat].filter(q => q.id <= CUTOFF);
-            let catSuppAll = categories[cat].filter(q => q.id > CUTOFF);
-            
-            let catOff = filterHistory(catOffAll).sort(() => 0.5 - Math.random());
-            let catSupp = filterHistory(catSuppAll).sort(() => 0.5 - Math.random());
-
-            for (let i = 0; i < MIN_PER_CAT; i++) {
-                if (catOff.length > 0) { const q = catOff.shift(); selected.push(q); usedIds.add(q.id); }
-                else if (catSupp.length > 0) { const q = catSupp.shift(); selected.push(q); usedIds.add(q.id); }
+            let pool = finalOffOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            if (pool.length === 0) pool = finalSuppOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            for (let i = 0; i < 3; i++) {
+                if (pool.length > 0) {
+                    const q = pool.shift();
+                    selected.push(q);
+                    usedIds.add(q.id);
+                }
             }
         });
 
-        // 填充官方題庫 (95%)
-        let offPoolAll = allQuestions.filter(q => q.id <= CUTOFF && !usedIds.has(q.id));
-        let offPool = filterHistory(offPoolAll).sort(() => 0.5 - Math.random());
-        
-        for (let q of offPool) {
-            if (selected.length >= TARGET_OFF_COUNT) break;
-            let qCat = catNames.find(c => categories[c].some(cq => cq.id === q.id));
-            if (!qCat) continue;
-            let currentInCat = selected.filter(sq => categories[qCat].some(cq => cq.id === sq.id)).length;
-            if (currentInCat < MAX_PER_CAT) { selected.push(q); usedIds.add(q.id); }
+        // --- 階段 B：死守官方 95% 配額 ---
+        for (let q of finalOffOrder) {
+            if (selected.filter(s => s.id <= CUTOFF).length >= TARGET_OFF_COUNT) break;
+            if (!usedIds.has(q.id)) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
         }
 
-        // 填充模擬題 (5%)
-        const MOCK_TARGET = EXAM_LIMIT - TARGET_OFF_COUNT; 
-        let mockPoolAll = allQuestions.filter(q => q.id > CUTOFF && !usedIds.has(q.id));
-        let mockPool = filterHistory(mockPoolAll).sort(() => 0.5 - Math.random());
-        
-        while (selected.length < (TARGET_OFF_COUNT + MOCK_TARGET) && mockPool.length > 0) {
-            const q = mockPool.shift(); selected.push(q); usedIds.add(q.id);
+        // --- 階段 C：填滿補充 5% 配額 ---
+        for (let q of finalSuppOrder) {
+            if (selected.length >= EXAM_LIMIT) break;
+            if (!usedIds.has(q.id)) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
         }
 
-        // 兜底補滿
-        let finalPool = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
-        while (selected.length < EXAM_LIMIT && finalPool.length > 0) { const q = finalPool.shift(); selected.push(q); usedIds.add(q.id); }
+        // --- 階段 D：兜底 ---
+        if (selected.length < EXAM_LIMIT) {
+            const fallback = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+            while (selected.length < EXAM_LIMIT && fallback.length > 0) {
+                const q = fallback.shift();
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
 
-        // --- 儲存本次出題 ID 到歷史紀錄 ---
-        usedIds.forEach(id => historySet.add(id));
-        // 如果歷史累積超過總題數 80%，下回自動重置
-        if (historySet.size > (allQuestions.length * 0.8)) historySet.clear();
+        // 3. 更新歷史
+        selected.forEach(q => historySet.add(q.id));
+        if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
         localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
@@ -3954,7 +3917,9 @@
         examQuestions.forEach((item, idx) => {
             let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
             const cat = catNameMap[prefix];
-            if (!stats[cat]) stats[cat] = { total: 0, correct: 0 }; stats[cat].total++;
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
+            stats[cat].total++;
+            stats[cat].ids.push(item.id);
             const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
             if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
@@ -4006,11 +3971,15 @@
         });
         const score = Math.round((correctCount / examQuestions.length) * 100);
         document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
-        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th>分類</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
+        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th class="text-start">分類</th><th class="text-start">出題編號</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
+        const CUTOFF = 99;
         for (let cat of sortedCats) {
             let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
-            catHTML += `<tr><td>${cat}</td><td>${total}</td><td>${p}%</td></tr>`;
+            let sortedIds = stats[cat].ids.sort((a, b) => a - b).map(id => {
+                return id > CUTOFF ? `<span style="color:red; font-weight:bold;">${id}</span>` : id;
+            }).join(', ');
+            catHTML += `<tr><td class="text-start fw-bold">${cat}</td><td class="text-start small" style="max-width:400px; word-break:break-all;">${sortedIds}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
         catHTML += '</tbody></table>'; 
         document.getElementById('category-stats').innerHTML = catHTML;
