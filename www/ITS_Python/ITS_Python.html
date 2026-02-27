@@ -85,20 +85,39 @@
 
 
         /* 完全復刻配對題樣式 */
-        .matching-wrapper { position: relative; margin: 20px 0; padding: 15px; user-select: none; }
-        .match-header-row { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .match-header-title { flex: 1; font-weight: bold; color: #666; font-size: 1.1rem; }
-        .match-header-left { text-align: left; padding-left: 10px; }
-        .match-header-right { text-align: left; padding-left: 55px; } /* 對齊右側圓點 */
+        .matching-wrapper { position: relative; margin: 40px auto; padding: 10px; max-width: 900px; user-select: none; }
         
-        .matching-columns { display: flex; justify-content: space-between; gap: 40px; position: relative; z-index: 2; }
-        .match-col { flex: 1; display: flex; flex-direction: column; gap: 30px; }
+        .matching-columns { 
+            display: flex; 
+            justify-content: center; /* 整個區塊置中 */
+            gap: 100px; /* 控制左右兩欄之間的連線距離 */
+            position: relative; 
+            z-index: 2; 
+        }
         
-        .match-item { display: flex; align-items: center; min-height: 40px; cursor: pointer; transition: all 0.2s; }
-        .match-item-left { justify-content: flex-end; }
-        .match-item-right { justify-content: flex-start; }
+        .match-col { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+            min-width: 250px; /* 確保欄位有足夠空間 */
+        }
         
-        /* 1:1 復刻圓點視覺 (⦿) */
+        /* 標題樣式：直接放在欄位頂部 */
+        .match-title { 
+            font-weight: bold; 
+            color: #333; 
+            font-size: 1.2rem; 
+            margin-bottom: 15px; 
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .match-title-left { text-align: left; padding-left: 0; }
+        .match-title-right { text-align: left; padding-left: 55px; } /* 對齊圓點後的文字 */
+        
+        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
+        .match-item-left { justify-content: flex-end; text-align: right; }
+        .match-item-right { justify-content: flex-start; text-align: left; }
+        
         .match-dot {
             width: 22px; height: 22px;
             border: 1.5px solid #333; border-radius: 50%;
@@ -109,11 +128,11 @@
             content: ""; width: 10px; height: 10px;
             background: transparent; border-radius: 50%; transition: all 0.1s;
         }
-        /* 答對或選取時顯示黑色內芯 */
         .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
-        .match-item.selected .match-dot { border-color: #0d6efd; box-shadow: 0 0 8px rgba(13,110,253,0.3); }
+        .match-item.selected .match-dot { border-color: #0d6efd; }
         
         #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
 
     </style>
 </head>
@@ -5600,31 +5619,33 @@
             <div class="question-body" style="color:#000;">
                 <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
         
+        
         html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
-                    <!-- 標題標頭 -->
-                    <div class="match-header-row">
-                        <div class="match-header-title match-header-left">程式碼片段</div>
-                        <div class="match-header-title match-header-right">回答區</div>
-                    </div>
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col">`;
+                        <!-- 左側：程式碼片段欄 -->
+                        <div class="match-col left-col">
+                            <div class="match-title match-title-left">程式碼片段</div>`;
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}">
-                        <div style="font-family:Consolas,monospace;">${text}</div>
+                        <div style="font-family:Consolas,monospace; font-size:1.1rem;">${text}</div>
                         <div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"></div>
                      </div>`;
         });
-        html += `</div><div class="match-col right-col">`;
+        html += `</div>
+                        <!-- 右側：回答區欄 -->
+                        <div class="match-col right-col">
+                            <div class="match-title match-title-right">回答區</div>`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}">
                         <div class="match-dot" id="dot-right-${rIdx}"></div>
-                        <div style="font-family:sans-serif;">${text}</div>
+                        <div style="font-family:sans-serif; font-size:1.1rem;">${text}</div>
                      </div>`;
         });
         html += `</div></div></div>`;
+
         
         if (!completed) {
             html += `<div class="text-center mt-5 mb-3 border-top pt-4">
