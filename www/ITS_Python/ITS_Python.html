@@ -5614,9 +5614,13 @@
     let dragStartPoint = null;
     let tempLine = null;
 
+    
     function renderMatchingQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         const container = document.getElementById('question-container');
+        
+        // 修正：補回導覽按鈕邏輯
+        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
@@ -5665,9 +5669,16 @@
 
         html += `</div></div></div>`;
         container.innerHTML = html;
-        updateUI(); saveState();
+        updateUI(); 
+        if(window.Prism) Prism.highlightAll(); 
+        saveState();
+        
+        // 修正：重新套用目前的縮放比例
+        if (window.changeZoom) window.changeZoom(0);
+        
         setTimeout(drawLines, 150);
     }
+
 
     
     window.handleDragStart = function(e, side, idx) {
