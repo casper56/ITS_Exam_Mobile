@@ -78,10 +78,10 @@
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
         
         
-    #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+    #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
     .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 37, 41, 0.85); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; user-select: none; }
     #question-container, #question-area { transform-origin: top center; transition: none !important; }
-    .matching-wrapper { touch-action: pan-y pinch-zoom; position: relative; margin: 30px 0; padding: 10px; }
+    .matching-wrapper { touch-action: pan-y pinch-zoom; position: relative; margin: 30px 0; padding: 10px; z-index: 10; overflow: visible !important; }
 
 
         /* 完全復刻配對題樣式 */
@@ -5619,7 +5619,7 @@
 
     
     function renderMatchingQuestion(index) {
-        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        currentIndex = index; const item = quizData[index];
         const container = document.getElementById('question-container');
         
         // 修正：補回導覽按鈕邏輯
@@ -5773,17 +5773,18 @@
         renderMatchingQuestion(currentIndex);
     };
 
+    
     window.drawLines = function() {
         const svg = document.getElementById('matching-svg');
         const wrapper = document.getElementById('matching-wrapper');
         if (!svg || !wrapper) return;
         
         const zoom = window.globalZoom || 1.0;
-        const rect = wrapper.getBoundingClientRect();
+        const wrapperRect = wrapper.getBoundingClientRect();
         
-        // 設定畫布大小 (原始尺寸)
-        svg.setAttribute('width', rect.width / zoom);
-        svg.setAttribute('height', rect.height / zoom);
+        // 強制 SVG 內部座標系與 wrapper 同步 (不除以 zoom 以維持 1:1)
+        svg.setAttribute('width', wrapperRect.width / zoom);
+        svg.setAttribute('height', wrapperRect.height / zoom);
         svg.innerHTML = '';
 
         const currentAns = userAnswers[currentIndex];
@@ -5791,17 +5792,17 @@
         
         currentAns.forEach((rIdx, lIdx) => {
             if (rIdx === null) return;
-            const dotL = document.getElementById(`dot-left-${lIdx}`);
-            const dotR = document.getElementById(`dot-right-${rIdx}`);
+            const dotL = document.getElementById("dot-left-" + lIdx);
+            const dotR = document.getElementById("dot-right-" + rIdx);
             if (dotL && dotR) {
                 const rectL = dotL.getBoundingClientRect();
                 const rectR = dotR.getBoundingClientRect();
                 
-                // 計算相對於 wrapper 的原始座標 (排除 zoom 影響)
-                const x1 = (rectL.left + rectL.width/2 - rect.left) / zoom;
-                const y1 = (rectL.top + rectL.height/2 - rect.top) / zoom;
-                const x2 = (rectR.left + rectR.width/2 - rect.left) / zoom;
-                const y2 = (rectR.top + rectR.height/2 - rect.top) / zoom;
+                // 計算相對於 wrapper 的原始座標 (排除縮放帶來的視覺位移)
+                const x1 = (rectL.left + rectL.width/2 - wrapperRect.left) / zoom;
+                const y1 = (rectL.top + rectL.height/2 - wrapperRect.top) / zoom;
+                const x2 = (rectR.left + rectR.width/2 - wrapperRect.left) / zoom;
+                const y2 = (rectR.top + rectR.height/2 - wrapperRect.top) / zoom;
 
                 const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
                 line.setAttribute('x1', x1); line.setAttribute('y1', y1);
@@ -5812,6 +5813,7 @@
             }
         });
     };
+
 
 
     window.submitMatching = function() {
@@ -5999,7 +6001,7 @@
         if(window.Prism) Prism.highlightAll(); setTimeout(() => { window.print(); }, 100);
     }
     function renderQuestion(index) {
-        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        currentIndex = index; const item = quizData[index];
         if (item.type === 'matching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
