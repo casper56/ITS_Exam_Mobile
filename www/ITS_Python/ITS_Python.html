@@ -84,7 +84,7 @@
         #question-container { transform-origin: top center; transition: transform 0.1s ease-out; }
 
         /* 完全復刻配對題樣式 */
-        .matching-wrapper { 
+        .matching-wrapper { touch-action: none;  
             position: relative; 
             margin: 30px 0; 
             padding: 10px;
@@ -5682,9 +5682,9 @@
         setTimeout(drawLines, 150);
     }
 
+    
     window.handleDragStart = function(e, side, idx) {
         if (side !== 'left') return;
-        // 如果已經有配對，點擊則清除
         if (userAnswers[currentIndex][idx] !== null) {
             userAnswers[currentIndex][idx] = null;
             renderMatchingQuestion(currentIndex);
@@ -5694,12 +5694,28 @@
         const dot = document.getElementById(`dot-left-${idx}`);
         const rect = dot.getBoundingClientRect();
         const wrapperRect = document.getElementById('matching-wrapper').getBoundingClientRect();
+        const zoom = window.globalZoom || 1.0;
         
         dragStartPoint = {
             lIdx: idx,
-            x: rect.left + rect.width/2 - wrapperRect.left,
-            y: rect.top + rect.height/2 - wrapperRect.top
+            x: (rect.left + rect.width/2 - wrapperRect.left) / zoom,
+            y: (rect.top + rect.height/2 - wrapperRect.top) / zoom
         };
+
+        const svg = document.getElementById('matching-svg');
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute('x1', dragStartPoint.x);
+        tempLine.setAttribute('y1', dragStartPoint.y);
+        tempLine.setAttribute('x2', dragStartPoint.x);
+        tempLine.setAttribute('y2', dragStartPoint.y);
+        tempLine.setAttribute('stroke', '#0d6efd');
+        tempLine.setAttribute('stroke-width', '2.5');
+        tempLine.setAttribute('opacity', '0.6');
+        svg.appendChild(tempLine);
+    };
+
+    
+
 
         // 建立暫時線
         const svg = document.getElementById('matching-svg');
@@ -5754,38 +5770,7 @@
         renderMatchingQuestion(currentIndex);
     }
 
-    window.drawLines = function() {
-        const svg = document.getElementById('matching-svg');
-        const wrapper = document.getElementById('matching-wrapper');
-        if (!svg || !wrapper) return;
-        svg.innerHTML = '';
-        const rect = wrapper.getBoundingClientRect();
-        svg.setAttribute('width', rect.width);
-        svg.setAttribute('height', rect.height);
-
-        const currentAns = userAnswers[currentIndex];
-        currentAns.forEach((rIdx, lIdx) => {
-            if (rIdx === null) return;
-            const dotL = document.getElementById(`dot-left-${lIdx}`);
-            const dotR = document.getElementById(`dot-right-${rIdx}`);
-            if (dotL && dotR) {
-                const rectL = dotL.getBoundingClientRect();
-                const rectR = dotR.getBoundingClientRect();
-                
-                const x1 = rectL.left + rectL.width/2 - rect.left;
-                const y1 = rectL.top + rectL.height/2 - rect.top;
-                const x2 = rectR.left + rectR.width/2 - rect.left;
-                const y2 = rectR.top + rectR.height/2 - rect.top;
-
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-                line.setAttribute('stroke', '#0d6efd');
-                line.setAttribute('stroke-width', '2.5'); // 實線，加粗
-                svg.appendChild(line);
-            }
-        });
-    };
+    
 
     window.selectMatch = function(side, idx) {
         if (side === 'left') {
