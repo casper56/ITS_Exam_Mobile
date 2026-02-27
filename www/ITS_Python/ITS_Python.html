@@ -5714,22 +5714,6 @@
         svg.appendChild(tempLine);
     };
 
-    
-
-
-        // 建立暫時線
-        const svg = document.getElementById('matching-svg');
-        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        tempLine.setAttribute('x1', dragStartPoint.x);
-        tempLine.setAttribute('y1', dragStartPoint.y);
-        tempLine.setAttribute('x2', dragStartPoint.x);
-        tempLine.setAttribute('y2', dragStartPoint.y);
-        tempLine.setAttribute('stroke', '#0d6efd');
-        tempLine.setAttribute('stroke-width', '2.5');
-        tempLine.setAttribute('opacity', '0.6');
-        svg.appendChild(tempLine);
-    };
-
     window.handleDragMove = function(e) {
         if (!isDragging || !tempLine) return;
         const wrapper = document.getElementById('matching-wrapper');
@@ -5772,38 +5756,7 @@
 
     
 
-    window.selectMatch = function(side, idx) {
-        if (side === 'left') {
-            // 如果點擊左側，先清除該行已有的配對 (方便重選)
-            userAnswers[currentIndex][idx] = null;
-            currentSelection = { side: 'left', index: idx };
-        } else if (side === 'right' && currentSelection.side === 'left') {
-            // 如果點擊右側且之前選了左側，則建立連線
-            userAnswers[currentIndex][currentSelection.index] = idx;
-            currentSelection = { side: null, index: null };
-        } else {
-            // 直接點右側不給操作，引導先點左側
-            currentSelection = { side: side, index: idx };
-        }
-        renderMatchingQuestion(currentIndex);
-    };
-
-    window.addEventListener('resize', drawLines);
-
-    window.selectMatch = function(side, idx) {
-        if (currentSelection.side === side) {
-            currentSelection = { side, index: idx };
-        } else if (currentSelection.side === null) {
-            currentSelection = { side, index: idx };
-        } else {
-            const leftIdx = side === 'left' ? idx : currentSelection.index;
-            const rightIdx = side === 'right' ? idx : currentSelection.index;
-            userAnswers[currentIndex][leftIdx] = rightIdx;
-            currentSelection = { side: null, index: null };
-            renderMatchingQuestion(currentIndex);
-        }
-        renderMatchingQuestion(currentIndex);
-    };
+    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
 
     window.clearMatch = function(lIdx) {
         userAnswers[currentIndex][lIdx] = null;
