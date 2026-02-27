@@ -1,3 +1,6 @@
+    let currentSelection = { side: null, index: null };
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+
     function parseAnswerToIndex(val) {
         if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
@@ -9,6 +12,104 @@
         }
         return -1;
     }
+
+    function renderMatchingQuestion(item, index, savedAns) {
+        const container = document.getElementById('question-area');
+        let qText = item.question.replace(/^\d+\.\s*/, '');
+        
+        // 初始化答案
+        if (!userAnswers[index]) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+
+        let html = `<div class="card question-card">
+            <div class="question-header">Question ${index + 1} / 50 <span class="badge bg-light text-dark float-end">${item.category || ''}</span></div>
+            <div class="question-body" style="color:#000;">
+                <div class="mb-4" style="font-weight:500; font-size:1.1rem; line-height:1.6; white-space: pre-wrap;">${qText}</div>`;
+        
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd;"></div>`;
+        
+        html += `<div class="mt-4 pt-3" style="border-top: 1px dashed #ccc;"><h6 class="fw-bold text-dark mb-3">📍 拖拉/點選配對區 (${isMobile ? '手機模式: 請依序點選左側與右側' : '電腦模式: 支援拖拉或點選'})</h6>`;
+        
+        html += `<div class="matching-container d-flex flex-column gap-3">`;
+        
+        item.left.forEach((leftText, lIdx) => {
+            const matchedRightIdx = currentAns[lIdx];
+            const rightText = matchedRightIdx !== null ? item.right[matchedRightIdx] : "請點選右側選項或拖曳至此";
+            const isMatchSelected = (currentSelection.side === 'left' && currentSelection.index === lIdx);
+
+            html += `
+            <div class="match-row d-flex align-items-stretch gap-2" style="min-height: 60px;">
+                <div class="match-left flex-fill p-2 border rounded ${isMatchSelected ? 'bg-primary text-white border-primary' : 'bg-light'}" 
+                     onclick="selectMatch('left', ${lIdx})" 
+                     ondrop="dropMatch(event, ${lIdx})" ondragover="allowDrop(event)"
+                     style="cursor:pointer; display:flex; align-items:center;">
+                    ${leftText}
+                </div>
+                <div class="match-connector d-flex align-items-center">
+                    <i class="bi bi-arrow-right-short fs-4"></i>
+                </div>
+                <div class="match-right flex-fill p-2 border rounded ${matchedRightIdx !== null ? 'border-success bg-white' : 'border-dashed text-muted'}" 
+                     style="display:flex; align-items:center; min-width: 150px; position:relative;">
+                    ${rightText}
+                    ${matchedRightIdx !== null ? `<span class="badge bg-danger position-absolute top-0 end-0 m-1" onclick="clearMatch(${lIdx}); event.stopPropagation();" style="cursor:pointer;">&times;</span>` : ''}
+                </div>
+            </div>`;
+        });
+
+        html += `</div>`;
+        
+        // 右側候選清單
+        html += `<div class="mt-4 mb-2"><small class="text-secondary fw-bold">可選項目：</small></div>
+                 <div class="d-flex flex-wrap gap-2">`;
+        
+        item.right.forEach((rightText, rIdx) => {
+            const isUsed = currentAns.includes(rIdx);
+            const isMatchSelected = (currentSelection.side === 'right' && currentSelection.index === rIdx);
+            
+            html += `
+            <div class="option-pill p-2 border rounded ${isUsed ? 'opacity-50' : 'bg-white shadow-sm'} ${isMatchSelected ? 'border-primary ring' : ''}" 
+                 draggable="${!isUsed}" ondragstart="dragStart(event, ${rIdx})"
+                 onclick="${isUsed ? '' : `selectMatch('right', ${rIdx})`}"
+                 style="cursor:${isUsed ? 'not-allowed' : 'pointer'}; font-size: 0.9rem;">
+                ${rightText}
+            </div>`;
+        });
+        
+        html += `</div></div></div></div>`;
+        container.innerHTML = html;
+        Prism.highlightAll();
+    }
+
+    window.selectMatch = function(side, idx) {
+        if (currentSelection.side === side) {
+            currentSelection = { side, index: idx }; // 切換同側選取
+        } else if (currentSelection.side === null) {
+            currentSelection = { side, index: idx };
+        } else {
+            // 不同側，執行連線
+            const leftIdx = side === 'left' ? idx : currentSelection.index;
+            const rightIdx = side === 'right' ? idx : currentSelection.index;
+            
+            userAnswers[currentIndex][leftIdx] = rightIdx;
+            currentSelection = { side: null, index: null };
+            renderQuestion(currentIndex);
+        }
+        renderQuestion(currentIndex);
+    };
+
+    window.clearMatch = function(lIdx) {
+        userAnswers[currentIndex][lIdx] = null;
+        renderQuestion(currentIndex);
+    };
+
+    window.allowDrop = (e) => e.preventDefault();
+    window.dragStart = (e, rIdx) => e.dataTransfer.setData("text", rIdx);
+    window.dropMatch = (e, lIdx) => {
+        e.preventDefault();
+        const rIdx = parseInt(e.dataTransfer.getData("text"));
+        userAnswers[currentIndex][lIdx] = rIdx;
+        renderQuestion(currentIndex);
+    };
 
     function renderQuestion(index) {
         currentIndex = index;
@@ -29,6 +130,12 @@
         } else {
             nextBtn.classList.remove('btn-success', 'text-white');
             nextBtn.title = "下一題";
+        }
+
+        // 分流：配對題
+        if (item.type === 'matching') {
+            renderMatchingQuestion(item, index, userAnswers[index]);
+            return;
         }
 
         // 常規處理：僅移除數字編號，交給 CSS (pre-wrap) 處理換行

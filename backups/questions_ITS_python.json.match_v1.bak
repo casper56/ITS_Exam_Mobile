@@ -776,35 +776,33 @@
     },
     {
         "id": 26,
-        "type": "matching",
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">26. 【CH03-5】你有以下清單結構：alph = \"abcdefghijklmnopqrstuvwxyz\"",
             "以下各個程式碼片段的結果各是如何？",
-            "請將右側的執行結果拖拉或點選至左側對應的程式碼中：</code></pre>"
+            "請將回答區專案的選項正確填到程式碼片段的選項中",
+            "#程式碼片段\n1. alph[3: 15] = (_選項1_)\n2. alph[3:15:3] = (_選項2_)\n3. alph[15:3:-3] = (_選項3_)\n4. alph[::-3] = (_選項4_)\n答案選項區\nA. zwtqnkheb\nB. pmjg\nC. defghijklmno\nD. ponmlkjihgfe\nE. defghijklmnop\nF. dgjm\nG. olif</code></pre>"
         ],
-        "left": [
-            "(1) alph[3:15]",
-            "(2) alph[3:15:3]",
-            "(3) alph[15:3:-3]",
-            "(4) alph[::-3]"
+        "options": [
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>"
         ],
-        "right": [
-            "A. zwtqnkheb",
-            "B. pmjg",
-            "C. defghijklmno",
-            "D. ponmlkjihgfe",
-            "E. defghijklmnop",
-            "F. dgjm",
-            "G. olif"
+        "answer": [
+            "C",
+            "F",
+            "B",
+            "A"
         ],
-        "answer": [2, 5, 1, 0],
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● alph[3:15] -> 從索引 3 到 14 (d...o)，結果為 C (defghijklmno)",
-            "● alph[3:15:3] -> 從索引 3 開始每隔 3 格取一字 (d, g, j, m)，結果為 F (dgjm)",
-            "● alph[15:3:-3] -> 從索引 15 (p) 倒退回 3，每隔 3 格取一字 (p, m, j, g)，結果為 B (pmjg)",
-            "● alph[::-3] -> 全字串倒退，從最後一字 (z) 開始每隔 3 格取一字，結果為 A (zwtqnkheb)</code></pre>"
+            "<pre><code class=\"language-python\">● 在第一個程式碼片段中，alph[3: 15] 會返回從索引 3 到 14 的子字串，即 defghijklmno。",
+            "● 在第二個程式碼片段中，alph[3: 15: 3] 會返回從索引 3 開始，每隔 3 個字元取一個，即 dgjm。",
+            "● 在第三個程式碼片段中，alph[15: 3: -3] 會返回從索引 15 到 4 的子字串，每隔 3 個字元取一個，即 ponmlkjihgfe。",
+            "● 在第四個程式碼片段中，alph[::-3] 會返回整個字串的反向，每隔 3 個字元取一個，即 olif.</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },

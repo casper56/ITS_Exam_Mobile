@@ -76,6 +76,70 @@
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        /* 完全復刻配對題樣式 */
+        .matching-wrapper { 
+            position: relative; 
+            margin: 30px 0; 
+            padding: 10px;
+            user-select: none;
+        }
+        .matching-columns { 
+            display: flex; 
+            justify-content: space-between; 
+            gap: 100px; /* 中間連線留白區 */
+            position: relative;
+            z-index: 2;
+        }
+        .match-col { flex: 1; display: flex; flex-column: column; gap: 25px; }
+        
+        .match-item { 
+            display: flex; 
+            align-items: center; 
+            min-height: 40px; 
+            font-family: Consolas, monospace; 
+            font-size: 1.05rem;
+            cursor: pointer;
+        }
+        .match-item-left { justify-content: flex-end; text-align: right; }
+        .match-item-right { justify-content: flex-start; text-align: left; }
+        
+        /* 復刻圖片中的圓點 (⦿) */
+        .match-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .match-dot::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: transparent;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        /* 選取中或已連線的狀態 */
+        .match-item.selected .match-dot, .match-item.matched .match-dot {
+            border-color: #0d6efd;
+        }
+        .match-item.selected .match-dot::after, .match-item.matched .match-dot::after {
+            background: #333; /* 復刻圖片中的黑色內芯 */
+        }
+        
+        #matching-svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -885,33 +949,35 @@
     },
     {
         "id": 26,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "matching",
         "question": [
             "<pre><code class=\"language-python\">26. 【CH03-5】你有以下清單結構：alph = \"abcdefghijklmnopqrstuvwxyz\"",
             "以下各個程式碼片段的結果各是如何？",
-            "請將回答區專案的選項正確填到程式碼片段的選項中",
-            "#程式碼片段\n1. alph[3: 15] = (_選項1_)\n2. alph[3:15:3] = (_選項2_)\n3. alph[15:3:-3] = (_選項3_)\n4. alph[::-3] = (_選項4_)\n答案選項區\nA. zwtqnkheb\nB. pmjg\nC. defghijklmno\nD. ponmlkjihgfe\nE. defghijklmnop\nF. dgjm\nG. olif</code></pre>"
+            "請將右側的執行結果拖拉或點選至左側對應的程式碼中：</code></pre>"
         ],
-        "options": [
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>"
+        "left": [
+            "(1) alph[3:15]",
+            "(2) alph[3:15:3]",
+            "(3) alph[15:3:-3]",
+            "(4) alph[::-3]"
         ],
-        "answer": [
-            "C",
-            "F",
-            "B",
-            "A"
+        "right": [
+            "A. zwtqnkheb",
+            "B. pmjg",
+            "C. defghijklmno",
+            "D. ponmlkjihgfe",
+            "E. defghijklmnop",
+            "F. dgjm",
+            "G. olif"
         ],
+        "answer": [2, 5, 1, 0],
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">● 在第一個程式碼片段中，alph[3: 15] 會返回從索引 3 到 14 的子字串，即 defghijklmno。",
-            "● 在第二個程式碼片段中，alph[3: 15: 3] 會返回從索引 3 開始，每隔 3 個字元取一個，即 dgjm。",
-            "● 在第三個程式碼片段中，alph[15: 3: -3] 會返回從索引 15 到 4 的子字串，每隔 3 個字元取一個，即 ponmlkjihgfe。",
-            "● 在第四個程式碼片段中，alph[::-3] 會返回整個字串的反向，每隔 3 個字元取一個，即 olif.</code></pre>"
+            "<pre><code class=\"language-python\">● alph[3:15] -> 從索引 3 到 14 (d...o)，結果為 C (defghijklmno)",
+            "● alph[3:15:3] -> 從索引 3 開始每隔 3 格取一字 (d, g, j, m)，結果為 F (dgjm)",
+            "● alph[15:3:-3] -> 從索引 15 (p) 倒退回 3，每隔 3 格取一字 (p, m, j, g)，結果為 B (pmjg)",
+            "● alph[::-3] -> 全字串倒退，從最後一字 (z) 開始每隔 3 格取一字，結果為 A (zwtqnkheb)</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -5511,6 +5577,230 @@
         "category": "D6_模組與常用工具"
     }
 ];
+    let currentSelection = { side: null, index: null };
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+
+    let isDragging = false;
+    let dragStartPoint = null;
+    let tempLine = null;
+
+    function renderMatchingQuestion(index) {
+        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        const container = document.getElementById('question-container');
+        
+        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+        const completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
+
+        let html = `<div class="card question-card">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">配對題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body" style="color:#333;">
+                <div class="mb-5" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
+        
+        if (item.image) html += `<div class="text-center mb-5"><img src="${item.image}" class="q-img"></div>`;
+        
+        html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+                    <svg id="matching-svg"></svg>
+                    <div class="matching-columns">
+                        <div class="match-col left-col d-flex flex-column gap-4">`;
+        item.left.forEach((text, lIdx) => {
+            const isMatched = currentAns[lIdx] !== null;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}">
+                        <div style="flex:1;">${text}</div>
+                        <div class="match-dot" id="dot-left-${lIdx}" 
+                             onmousedown="handleDragStart(event, 'left', ${lIdx})" 
+                             ontouchstart="handleDragStart(event, 'left', ${lIdx})"></div>
+                     </div>`;
+        });
+        html += `</div>
+                        <div class="match-col right-col d-flex flex-column gap-4">`;
+        item.right.forEach((text, rIdx) => {
+            const isMatchedByAny = currentAns.includes(rIdx);
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}">
+                        <div class="match-dot" id="dot-right-${rIdx}" 
+                             onmouseup="handleTargetDrop(event, ${rIdx})"
+                             ontouchend="handleTargetDrop(event, ${rIdx})"></div>
+                        <div style="flex:1;">${text}</div>
+                     </div>`;
+        });
+        html += `</div></div></div>`;
+        
+        if (!completed) {
+            html += `<div class="text-center mt-5 mb-3 border-top pt-4">
+                        <button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認完成配對並提交</button>
+                        <p class="text-muted mt-2 small">按住左側圓點拖曳至右側圓點即可連線。點擊左側圓點可清除該行連線。</p>
+                     </div>`;
+        } else {
+            html += `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示解析</button></div>
+                     <div class="answer-section" id="ans-section" style="display:block;"><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+        }
+
+        html += `</div></div></div>`;
+        container.innerHTML = html;
+        updateUI(); saveState();
+        setTimeout(drawLines, 150);
+    }
+
+    window.handleDragStart = function(e, side, idx) {
+        if (side !== 'left') return;
+        // 如果已經有配對，點擊則清除
+        if (userAnswers[currentIndex][idx] !== null) {
+            userAnswers[currentIndex][idx] = null;
+            renderMatchingQuestion(currentIndex);
+        }
+
+        isDragging = true;
+        const dot = document.getElementById(`dot-left-${idx}`);
+        const rect = dot.getBoundingClientRect();
+        const wrapperRect = document.getElementById('matching-wrapper').getBoundingClientRect();
+        
+        dragStartPoint = {
+            lIdx: idx,
+            x: rect.left + rect.width/2 - wrapperRect.left,
+            y: rect.top + rect.height/2 - wrapperRect.top
+        };
+
+        // 建立暫時線
+        const svg = document.getElementById('matching-svg');
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute('x1', dragStartPoint.x);
+        tempLine.setAttribute('y1', dragStartPoint.y);
+        tempLine.setAttribute('x2', dragStartPoint.x);
+        tempLine.setAttribute('y2', dragStartPoint.y);
+        tempLine.setAttribute('stroke', '#0d6efd');
+        tempLine.setAttribute('stroke-width', '2.5');
+        tempLine.setAttribute('opacity', '0.6');
+        svg.appendChild(tempLine);
+    };
+
+    window.handleDragMove = function(e) {
+        if (!isDragging || !tempLine) return;
+        e.preventDefault();
+        
+        const wrapper = document.getElementById('matching-wrapper');
+        const rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        
+        const x2 = clientX - rect.left;
+        const y2 = clientY - rect.top;
+        
+        tempLine.setAttribute('x2', x2);
+        tempLine.setAttribute('y2', y2);
+    };
+
+    window.handleTargetDrop = function(e, rIdx) {
+        if (!isDragging) return;
+        userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+        finishDrag();
+    };
+
+    window.handleDragEnd = function(e) {
+        if (!isDragging) return;
+        // 延遲一點點檢查，確保 handleTargetDrop 先觸發（如果是 mouseup）
+        setTimeout(() => {
+            if (isDragging) finishDrag();
+        }, 10);
+    };
+
+    function finishDrag() {
+        isDragging = false;
+        dragStartPoint = null;
+        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
+        tempLine = null;
+        renderMatchingQuestion(currentIndex);
+    }
+
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg');
+        const wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        svg.innerHTML = '';
+        const rect = wrapper.getBoundingClientRect();
+        svg.setAttribute('width', rect.width);
+        svg.setAttribute('height', rect.height);
+
+        const currentAns = userAnswers[currentIndex];
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById(`dot-left-${lIdx}`);
+            const dotR = document.getElementById(`dot-right-${rIdx}`);
+            if (dotL && dotR) {
+                const rectL = dotL.getBoundingClientRect();
+                const rectR = dotR.getBoundingClientRect();
+                
+                const x1 = rectL.left + rectL.width/2 - rect.left;
+                const y1 = rectL.top + rectL.height/2 - rect.top;
+                const x2 = rectR.left + rectR.width/2 - rect.left;
+                const y2 = rectR.top + rectR.height/2 - rect.top;
+
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', '#0d6efd');
+                line.setAttribute('stroke-width', '2.5'); // 實線，加粗
+                svg.appendChild(line);
+            }
+        });
+    };
+
+    window.selectMatch = function(side, idx) {
+        if (side === 'left') {
+            // 如果點擊左側，先清除該行已有的配對 (方便重選)
+            userAnswers[currentIndex][idx] = null;
+            currentSelection = { side: 'left', index: idx };
+        } else if (side === 'right' && currentSelection.side === 'left') {
+            // 如果點擊右側且之前選了左側，則建立連線
+            userAnswers[currentIndex][currentSelection.index] = idx;
+            currentSelection = { side: null, index: null };
+        } else {
+            // 直接點右側不給操作，引導先點左側
+            currentSelection = { side: side, index: idx };
+        }
+        renderMatchingQuestion(currentIndex);
+    };
+
+    window.addEventListener('resize', drawLines);
+
+    window.selectMatch = function(side, idx) {
+        if (currentSelection.side === side) {
+            currentSelection = { side, index: idx };
+        } else if (currentSelection.side === null) {
+            currentSelection = { side, index: idx };
+        } else {
+            const leftIdx = side === 'left' ? idx : currentSelection.index;
+            const rightIdx = side === 'right' ? idx : currentSelection.index;
+            userAnswers[currentIndex][leftIdx] = rightIdx;
+            currentSelection = { side: null, index: null };
+            renderMatchingQuestion(currentIndex);
+        }
+        renderMatchingQuestion(currentIndex);
+    };
+
+    window.clearMatch = function(lIdx) {
+        userAnswers[currentIndex][lIdx] = null;
+        renderMatchingQuestion(currentIndex);
+    };
+
+    window.allowDrop = (e) => e.preventDefault();
+    window.dragStart = (e, rIdx) => e.dataTransfer.setData("text", rIdx);
+    window.dropMatch = (e, lIdx) => {
+        e.preventDefault();
+        const rIdx = parseInt(e.dataTransfer.getData("text"));
+        userAnswers[currentIndex][lIdx] = rIdx;
+        renderMatchingQuestion(currentIndex);
+    };
+
+    window.submitMatching = function() {
+        const item = quizData[currentIndex];
+        const ans = userAnswers[currentIndex];
+        if (ans.includes(null)) { alert("請完成所有配對後再提交！"); return; }
+        
+        const isCorrect = JSON.stringify(ans) === JSON.stringify(item.answer);
+        if (isCorrect) correctSet.add(currentIndex); else incorrectSet.add(currentIndex);
+        renderMatchingQuestion(currentIndex);
+    };
+
     function parseAnswerToIndex(val) {
         if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
@@ -5687,6 +5977,7 @@
     }
     function renderQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
