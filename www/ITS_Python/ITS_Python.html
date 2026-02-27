@@ -141,7 +141,7 @@
             background: #333; /* 復刻圖片中的黑色內芯 */
         }
         
-        #matching-svg {
+        #matching-svg { width: 100%; height: 100%; 
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
@@ -5774,6 +5774,7 @@
     };
 
     
+    
     window.drawLines = function() {
         const svg = document.getElementById('matching-svg');
         const wrapper = document.getElementById('matching-wrapper');
@@ -5782,9 +5783,12 @@
         const zoom = window.globalZoom || 1.0;
         const wrapperRect = wrapper.getBoundingClientRect();
         
-        // 強制 SVG 內部座標系與 wrapper 同步 (不除以 zoom 以維持 1:1)
-        svg.setAttribute('width', wrapperRect.width / zoom);
-        svg.setAttribute('height', wrapperRect.height / zoom);
+        // 取得設計階段的原始寬高 (視覺寬高 / 縮放比例)
+        const baseW = wrapperRect.width / zoom;
+        const baseH = wrapperRect.height / zoom;
+        
+        // 設定 viewBox，讓 SVG 內部的單位自動與設計座標對齊
+        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
         svg.innerHTML = '';
 
         const currentAns = userAnswers[currentIndex];
@@ -5798,7 +5802,7 @@
                 const rectL = dotL.getBoundingClientRect();
                 const rectR = dotR.getBoundingClientRect();
                 
-                // 計算相對於 wrapper 的原始座標 (排除縮放帶來的視覺位移)
+                // 計算相對於 wrapper 左上角的視覺距離，並除以 zoom 還原為原始單位
                 const x1 = (rectL.left + rectL.width/2 - wrapperRect.left) / zoom;
                 const y1 = (rectL.top + rectL.height/2 - wrapperRect.top) / zoom;
                 const x2 = (rectR.left + rectR.width/2 - wrapperRect.left) / zoom;
@@ -5813,6 +5817,7 @@
             }
         });
     };
+
 
 
 
