@@ -3548,14 +3548,16 @@
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="font-family:Consolas,monospace; white-space:nowrap;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
         html += `</div><div class="match-col right-col">
                     <div class="match-header-title">回答區</div>`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div style="font-family:Consolas,monospace;">${text}</div></div>`;
+            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div class="q-text-part-right">${cleanText}</div></div>`;
         });
         html += `</div></div></div>`;
         if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
