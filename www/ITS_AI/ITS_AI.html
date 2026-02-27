@@ -3034,7 +3034,7 @@
         if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
         const container = document.getElementById('question-container');
         if (container) {
-            container.style.transform = `scale(${window.itspyZoom})`;
+            container.style.transform = "scale(" + window.itspyZoom + ")";
             container.style.transformOrigin = "top center";
             if (window.itspyZoom > 1.0) container.style.marginBottom = ((window.itspyZoom - 1.0) * 100) + "%";
             else container.style.marginBottom = "0";
@@ -3072,7 +3072,7 @@
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
@@ -3084,37 +3084,43 @@
         if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
-        const completed = correctSet.has(index) || incorrectSet.has(index);
+        const isCorrect = correctSet.has(index);
+        const isCorrected = correctedSet.has(index);
+        const isWrong = incorrectSet.has(index);
+        const completed = isCorrect || isCorrected;
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">配對題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
             <div class="question-body" style="color:#333;">
                 <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
+        if (isWrong && !completed) html += `<div class="alert alert-danger py-2 small mb-3">❌ 答案不正確，請檢查連線後再次提交。</div>`;
         html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <div class="match-header-row">
-                        <div class="match-header-title">程式碼片段</div>
-                        <div class="match-header-title">回答區</div>
+                        <div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div>
                     </div>
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
                         <div class="match-col left-col">`;
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}">
-                        <div style="font-family:Consolas,monospace;">${text}</div>
-                        <div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"></div>
-                     </div>`;
+            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div style="font-family:Consolas,monospace;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
         html += `</div><div class="match-col right-col">`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}">
-                        <div class="match-dot" id="dot-right-${rIdx}"></div>
-                        <div>${text}</div>
-                     </div>`;
+            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div>${text}</div></div>`;
         });
         html += `</div></div></div>`;
         if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
-        else html += `<div class="answer-section" style="display:block;"><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+        else {
+            const ansText = item.answer.join(', ');
+            html += `<div class="answer-section" style="display:block;">
+                        <div class="fw-bold mb-2 ${isCorrected?'text-warning':'text-success'}">${isCorrected?'🟠 已更正成功！':'✅ 答對了！'}</div>
+                        <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
+                        <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
+                     </div>`;
+        }
         html += `</div></div></div>`; container.innerHTML = html; updateUI(); saveState();
         window.changeZoom(0); setTimeout(drawLines, 100);
     }
@@ -3179,12 +3185,14 @@
     window.submitMatching = function() {
         const item = quizData[currentIndex], ans = userAnswers[currentIndex];
         if (!ans || ans.includes(null)) { alert("請完成所有配對！"); return; }
-        
-        // 關鍵修正：將 0-based 的 index 轉換為對應字母 (0->A, 1->B, 2->C...) 進行比對
         const userAnswersAsLetters = ans.map(idx => String.fromCharCode(65 + idx));
         const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
-        
-        if (isCorrect) correctSet.add(currentIndex); else incorrectSet.add(currentIndex);
+        if (isCorrect) {
+            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+            else { correctSet.add(currentIndex); }
+        } else {
+            incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
+        }
         renderMatchingQuestion(currentIndex);
     };
     function toggleExplanation(forceShow = null) {

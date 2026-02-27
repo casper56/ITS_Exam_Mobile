@@ -5571,7 +5571,7 @@
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
