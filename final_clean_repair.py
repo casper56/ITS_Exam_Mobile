@@ -75,10 +75,10 @@ def clean_repair_all():
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
-        .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
-        .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
-        .review-ans { color: #198754; font-weight: bold; background: #fff; padding: 15px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; border: 1px solid #eee; border-left-width: 5px; }
-        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
+        .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
+        .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px; border: 1px solid #000; margin: 10px 0; border-left-width: 5px; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 10px; border: 1px solid #000; }
         @media print { 
             @page { size: auto; margin: 10mm; }
             * { overflow: visible !important; max-height: none !important; height: auto !important; }
@@ -86,11 +86,11 @@ def clean_repair_all():
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
             #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
             #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 2px !important; padding: 0 !important; }
-            .review-id { margin: 0 !important; padding: 3px 10px !important; border-radius: 0 !important; font-size: 0.9rem !important; }
-            .review-q-text { display: flex !important; align-items: flex-start !important; padding: 2px 10px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; margin-top: 2px !important; margin-bottom: 2px !important; }
-            .review-exp { font-size: 0.95rem !important; padding: 8px 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; line-height: 1.5 !important; }
+            .review-item { border: 2px solid #000 !important; width: 100% !important; page-break-inside: auto !important; margin-bottom: 5px !important; padding: 10px !important; border-radius: 0 !important; }
+            .review-id { margin: 0 0 5px 0 !important; padding: 0 0 2px 0 !important; border-bottom: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
+            .review-q-text { display: block !important; padding: 2px 0 !important; font-size: 1.0rem !important; width: 100% !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border: 1px solid #000 !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
+            .review-exp { font-size: 0.95rem !important; padding: 5px 10px !important; border: 1px solid #000 !important; line-height: 1.4 !important; }
             
             /* 強效鎖定列印配對圖佈局 */
             .print-matching { 
@@ -125,15 +125,15 @@ def clean_repair_all():
         
         /* 配對題樣式 */
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-row { display: flex; justify-content: flex-start; gap: 60px; margin: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #eee; padding: 0 !important; padding-bottom: 5px !important; padding-left: 10px !important; }
-        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
-        .matching-columns { display: flex; justify-content: flex-start; gap: 60px; position: relative; z-index: 2; padding-left: 10px; }
-        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 150px; }
-        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
-        .match-item-left { justify-content: flex-end; text-align: right; }
-        .match-item-right { justify-content: flex-start; text-align: left; }
-        .match-dot { width: 22px; height: 22px; border: 1.5px solid #333; border-radius: 50%; margin: 0 15px; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; flex-shrink: 0; }
-        .match-dot::after { content: ""; width: 10px; height: 10px; background: transparent; border-radius: 50%; transition: none; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
+        .right-col .match-header-title { margin-left: 10px; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 25px !important; width: max-content !important; flex: none !important; }
+        .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
+        .match-item-left { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-right { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-left .q-text-part { display: inline-block !important; }
+        .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
         .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
         #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         @media (max-width: 768px) {
@@ -208,20 +208,32 @@ def clean_repair_all():
         const currentAns = userAnswers[index];
         
         let qText = processContent(item.question, item);
-        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body"><div class="q-content mb-0" style="margin: 0 !important; padding: 0 !important; display: block;">${qText}</div><div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)"><div class="match-header-row"><div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div></div><svg id="matching-svg"></svg><div class="matching-columns"><div class="match-col left-col">`;
+        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body"><div class="q-content mb-0" style="margin: 0 !important; padding: 0 !important; display: block;">${qText}</div><div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+        <svg id="matching-svg"></svg>
+        <div class="matching-columns">
+            <div class="match-col left-col">
+                <div class="match-header-title">程式碼片段</div>`;
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = isMatched ? '#333' : 'transparent';
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div style="font-family:Consolas,monospace;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="font-family:Consolas,monospace; white-space:nowrap;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
-        html += `</div><div class="match-col right-col">`;
+        html += `</div><div class="match-col right-col">
+            <div class="match-header-title">回答區</div>`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             const dotColor = isMatchedByAny ? '#333' : 'transparent';
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div>${text}</div></div>`;
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div style="font-family:Consolas,monospace;">${text}</div></div>`;
         });
         html += `</div></div></div></div></div>`;
-        container.innerHTML = html; setTimeout(drawLines, 50); if(window.Prism) Prism.highlightAll();
+        container.innerHTML = html; 
+        setTimeout(() => {
+            const parts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
+            parts.forEach(p => p.style.width = (maxW + 2) + 'px');
+            drawLines();
+        }, 15);
+        if(window.Prism) Prism.highlightAll();
     }
 
     let isDragging = false, dragStartPoint = null, tempLine = null;
@@ -356,7 +368,8 @@ def clean_repair_all():
         catNames.forEach(cat => {
             let pool = finalOffOrder.filter(q => q.category === cat && !usedIds.has(q.id));
             if (pool.length === 0) pool = finalSuppOrder.filter(q => q.category === cat && !usedIds.has(q.id));
-            for (let i = 0; i < 3; i++) {
+            const limit = (cat.includes('D0')) ? 2 : 3;
+            for (let i = 0; i < limit; i++) {
                 if (pool.length > 0) {
                     const q = pool.shift();
                     selected.push(q);
@@ -369,6 +382,11 @@ def clean_repair_all():
         for (let q of finalOffOrder) {
             if (selected.filter(s => s.id <= CUTOFF).length >= TARGET_OFF_COUNT) break;
             if (!usedIds.has(q.id)) {
+                // 如果是 D0 類別，且已經有 2 題，則跳過
+                if (q.category && q.category.includes('D0')) {
+                    const curD0 = selected.filter(s => s.category && s.category.includes('D0')).length;
+                    if (curD0 >= 2) continue;
+                }
                 selected.push(q);
                 usedIds.add(q.id);
             }
@@ -398,7 +416,11 @@ def clean_repair_all():
         if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
         localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
-        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        examQuestions = selected.sort((a, b) => {
+            const catA = a.category || "";
+            const catB = b.category || "";
+            return catA.localeCompare(catB) || (a.id - b.id);
+        }).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
 
@@ -675,9 +697,9 @@ def clean_repair_all():
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
         .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
         .option-item pre { margin: 0; display: inline-block; width: 100%; }
-        .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #0f5132 !important; }
-        .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #842029 !important; }
-        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; }
+        .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #000 !important; }
+        .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #000 !important; }
+        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; color: #000 !important; }
         .q-node { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff; cursor: pointer; font-size: 0.85rem; }
         .q-node.correct { background-color: #d1e7dd; color: #0f5132; }
         .q-node.incorrect { background-color: #f8d7da; color: #842029; }
@@ -740,20 +762,20 @@ def clean_repair_all():
         .zoom-btn { width: 52px; height: 52px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; user-select: none; transition: none !important; }
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-row { display: flex; justify-content: flex-start; gap: 60px; margin: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #eee; padding: 0 !important; padding-bottom: 5px !important; padding-left: 10px !important; }
-        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
-        .matching-columns { display: flex; justify-content: flex-start; gap: 60px; position: relative; z-index: 2; padding-left: 10px; }
-        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 150px; }
-        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
-        .match-item-left { justify-content: flex-end; text-align: right; }
-        .match-item-right { justify-content: flex-start; text-align: left; }
-        .match-dot { width: 22px; height: 22px; border: 1.5px solid #333; border-radius: 50%; margin: 0 15px; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; flex-shrink: 0; }
-        .match-dot::after { content: ""; width: 10px; height: 10px; background: transparent; border-radius: 50%; transition: none; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
+        .right-col .match-header-title { margin-left: 10px; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 25px !important; width: max-content !important; flex: none !important; }
+        .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
+        .match-item-left { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-right { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-left .q-text-part { display: inline-block !important; }
+        .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
         .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
         .match-item.selected .match-dot { border-color: #0d6efd; }
         #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         @media (max-width: 768px) {
-            .matching-columns, .match-header-row { gap: 30px !important; }
+            .matching-columns, .match-header-row { gap: 60px !important; }
             .match-col { min-width: 140px !important; }
             .match-header-title { font-size: 1rem !important; }
             .match-item { font-size: 0.9rem !important; }
@@ -878,22 +900,21 @@ def clean_repair_all():
                                                                                         <div class="mb-0" style="font-weight:600; font-size:1.1rem; margin: 0 !important; padding: 0 !important; display: block;">${processContent(item.question, item)}</div>
                                                                         `;
                                                                     html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
-                    <div class="match-header-row">
-                        <div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div>
-                    </div>
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col">`;
+                        <div class="match-col left-col">
+                            <div class="match-header-title">程式碼片段</div>`;
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div style="font-family:Consolas,monospace;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="font-family:Consolas,monospace; white-space:nowrap;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
-        html += `</div><div class="match-col right-col">`;
+        html += `</div><div class="match-col right-col">
+                    <div class="match-header-title">回答區</div>`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div>${text}</div></div>`;
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div style="font-family:Consolas,monospace;">${text}</div></div>`;
         });
         html += `</div></div></div>`;
         if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
@@ -906,7 +927,14 @@ def clean_repair_all():
                      </div>`;
         }
         html += `</div></div></div>`; container.innerHTML = html; updateUI(); saveState();
-        window.changeZoom(0); setTimeout(drawLines, 100);
+        window.changeZoom(0); 
+        // 動態偵測字寬對齊 (V3.5.3 結構化對齊)
+        setTimeout(() => {
+            const parts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
+            parts.forEach(p => p.style.width = (maxW + 2) + 'px');
+            drawLines();
+        }, 30);
     }
     let isDragging = false, dragStartPoint = null, tempLine = null;
     window.handleDragStart = function(e, side, idx) {
