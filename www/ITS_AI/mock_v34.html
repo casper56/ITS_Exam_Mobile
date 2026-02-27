@@ -3067,7 +3067,8 @@
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
         
-        let qText = processContent(item.question, item);
+        let qRaw = processContent(item.question, item);
+        let qText = qRaw.includes('<code') ? qRaw : `<code>${qRaw}</code>`;
         let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body"><div class="q-content mb-0" style="margin: 0 !important; padding: 0 !important; display: block;">${qText}</div><div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
         <svg id="matching-svg"></svg>
         <div class="matching-columns">
@@ -3299,7 +3300,8 @@
         if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
         
         const card = document.createElement('div'); card.className = 'card question-card';
-        let qText = processContent(item.question, item);
+        let qRaw = processContent(item.question, item);
+        let qText = qRaw.includes('<code') ? qRaw : `<code>${qRaw}</code>`;
         let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body"><div class="mb-4">${qText}</div>`;
         if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
         const optionsRaw = item.quiz || item.options || [];
