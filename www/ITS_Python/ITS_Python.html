@@ -76,6 +76,13 @@
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        
+        /* 縮放工具樣式 */
+        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+        .zoom-btn { width: 48px; height: 48px; border-radius: 50%; background: rgba(33, 37, 41, 0.85); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; user-select: none; transition: background 0.2s, transform 0.1s; }
+        .zoom-btn:active { transform: scale(0.9); background: #000; }
+        #question-container { transform-origin: top center; transition: transform 0.1s ease-out; }
+
         /* 完全復刻配對題樣式 */
         .matching-wrapper { 
             position: relative; 
@@ -143,7 +150,13 @@
     </style>
 </head>
 <body>
-<div class="main-wrapper">
+    <!-- 縮放工具欄 (手機版雙指縮放受限時的備案) -->
+    <div id="zoom-controls">
+        <div class="zoom-btn" onclick="changeZoom(0.1)" title="放大題目"><b>+</b></div>
+        <div class="zoom-btn" onclick="changeZoom(-0.1)" title="縮小題目"><b>−</b></div>
+    </div>
+    <div class="main-wrapper">
+
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -171,6 +184,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
+
+    window.globalZoom = 1.0;
+    window.changeZoom = function(delta) {
+        window.globalZoom = (Math.round((window.globalZoom + delta) * 10) / 10);
+        if (window.globalZoom < 0.7) window.globalZoom = 0.7;
+        if (window.globalZoom > 2.0) window.globalZoom = 2.0;
+        const container = document.getElementById('question-container');
+        if (container) {
+            container.style.transform = `scale(${window.globalZoom})`;
+            container.style.transformOrigin = 'top center';
+            if (window.globalZoom > 1) container.style.marginBottom = ((window.globalZoom - 1) * 100) + "%";
+            else container.style.marginBottom = "0";
+            if (window.drawLines) setTimeout(window.drawLines, 100);
+        }
+    };
+    
     const quizData = [
     {
         "id": 1,
@@ -5578,6 +5607,20 @@
     }
 ];
     let currentSelection = { side: null, index: null };
+    let globalZoom = 1.0;
+    window.changeZoom = function(delta) {
+        globalZoom = (Math.round((globalZoom + delta) * 10) / 10);
+        if (globalZoom < 0.7) globalZoom = 0.7;
+        if (globalZoom > 2.0) globalZoom = 2.0;
+        const container = document.getElementById('question-container');
+        if (container) {
+            container.style.transform = `scale(${globalZoom})`;
+            container.style.transformOrigin = 'top center';
+            if (globalZoom > 1) container.style.marginBottom = ((globalZoom - 1) * 100) + "%";
+            else container.style.marginBottom = "0";
+            if (window.drawLines) setTimeout(window.drawLines, 100);
+        }
+    };
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
 
     let isDragging = false;
