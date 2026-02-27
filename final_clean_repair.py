@@ -21,6 +21,11 @@ def clean_repair_all():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
+        /* 強制去除選項內代碼底色與黑字規範 */
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item, .sub-opt-container { color: #000 !important; }
+        code { background-color: transparent !important; }
+
         html { scrollbar-gutter: stable; }
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
         .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
@@ -52,7 +57,7 @@ def clean_repair_all():
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
                 }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: #fdfdfd !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
@@ -207,9 +212,8 @@ def clean_repair_all():
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
         
-        let qRaw = processContent(item.question, item);
-        let qText = qRaw.includes('<code') ? qRaw : `<code>${qRaw}</code>`;
-        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body"><div class="q-content mb-0" style="margin: 0 !important; padding: 0 !important; display: block;">${qText}</div><div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+        let qText = processContent(item.question, item);
+        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body">${qText}<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
         <svg id="matching-svg"></svg>
         <div class="matching-columns">
             <div class="match-col left-col">
@@ -440,9 +444,8 @@ def clean_repair_all():
         if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
         
         const card = document.createElement('div'); card.className = 'card question-card';
-        let qRaw = processContent(item.question, item);
-        let qText = qRaw.includes('<code') ? qRaw : `<code>${qRaw}</code>`;
-        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body"><div class="mb-4">${qText}</div>`;
+        let qText = processContent(item.question, item);
+        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body">${qText}</div>`;
         if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
         const optionsRaw = item.quiz || item.options || [];
         const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
@@ -591,7 +594,7 @@ def clean_repair_all():
                     });
                 }
                 optionsHTML += '</div>';
-                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text"><div class="q-content">${processContent(item.question, item)}</div></div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
         });
         const score = Math.round((correctCount / examQuestions.length) * 100);
@@ -681,6 +684,11 @@ def clean_repair_all():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
+        /* 強制去除選項內代碼底色與黑字規範 */
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item, .sub-opt-container { color: #000 !important; }
+        code { background-color: transparent !important; }
+
         html { scrollbar-gutter: stable; }
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
         .main-wrapper { display: flex; min-height: 100vh; }
@@ -692,9 +700,10 @@ def clean_repair_all():
         .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; flex-shrink: 0; }
         .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; overflow-x: hidden !important; }
         
-        code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #222222; }
-        code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: #fdfdfd !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #000 !important; background-color: transparent !important; }
+        code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; color: inherit; }
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
@@ -718,6 +727,9 @@ def clean_repair_all():
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
         .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
         
+        table, .q-table { border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; width: auto; max-width: 100%; }
+        table td, table th, .q-table td, .q-table th { border: 1px solid #000 !important; padding: 8px 12px; vertical-align: middle; }
+
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
                     .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 2px 0 !important; padding: 0 !important; }
                     .review-q-text { font-size: 1.0rem; line-height: 1.6 !important; margin-bottom: 2px !important; color: #333; }
@@ -901,7 +913,7 @@ def clean_repair_all():
         let html = `<div class="card question-card">
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
                                                                                     <div class="question-body" style="color:#333;">
-                                                                                        <div class="mb-0" style="font-weight:600; font-size:1.1rem; margin: 0 !important; padding: 0 !important; display: block;">${(() => { const q = processContent(item.question, item); return q.includes('<code') ? q : `<code>${q}</code>`; })()}</div>
+                                                                                        ${processContent(item.question, item)}
                                                                         `;
                                                                     html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <svg id="matching-svg"></svg>
@@ -1176,7 +1188,7 @@ def clean_repair_all():
                 const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
                     const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
                 }).join(', ');
-                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
                 area.appendChild(div);
             });
             
@@ -1227,13 +1239,14 @@ def clean_repair_all():
                                                                                                                                                                     }
     
     function renderQuestion(index) {
+        console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
-        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body"><div>${(() => { const q = processContent(item.question, item); return q.includes('<code') ? q : `<code>${q}</code>`; })()}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
+        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
