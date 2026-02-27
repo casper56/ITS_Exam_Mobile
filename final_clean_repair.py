@@ -25,19 +25,20 @@ def clean_repair_all():
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
         .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
-        .main-content { margin-top: 80px; padding-bottom: 100px; max-width: calc(100% - 50px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; width: calc(100% - 60px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
                 .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
                 .question-body, .explanation, .review-q-text, .review-exp { 
-                    padding: 15px 20px; 
+                    padding: 5px 20px; 
                     font-size: 1.05rem; 
                     background-color: #fff; 
                     color: #000; 
                     word-wrap: break-word; 
                     word-break: normal; 
                     overflow-x: hidden;
-                    white-space: pre-wrap;
                 }
+                
+                .q-content { white-space: pre-wrap; }
                 
                 code:not([class*="language-"]) { 
                     display: inline-block; 
@@ -45,15 +46,14 @@ def clean_repair_all():
                     line-height: 1.4; 
                     font-size: 1.0rem; 
                     color: #222222; 
-                    white-space: pre-wrap;
                 }
                 
                 code {
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-                    white-space: pre-wrap;
                 }
-        code[class*="language-"] { color: inherit; }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: #fdfdfd !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
         .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
@@ -65,6 +65,7 @@ def clean_repair_all():
         .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
         .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin: 0 !important; padding: 0 !important; }
 
         table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
         th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
@@ -76,7 +77,7 @@ def clean_repair_all():
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
         .review-id { font-weight: bold; color: #fff; background: #212529; margin: -15px -15px 15px -15px; padding: 8px 15px; border-radius: 8px 8px 0 0; }
-        .review-ans { color: #198754; font-weight: bold; background: #e9f7ef; padding: 10px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; }
+        .review-ans { color: #198754; font-weight: bold; background: #fff; padding: 15px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #198754; border: 1px solid #eee; border-left-width: 5px; }
         .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
         @media print { 
             @page { size: auto; margin: 10mm; }
@@ -85,17 +86,60 @@ def clean_repair_all():
             #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
             #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
             #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 5px !important; padding: 0 !important; }
-            .review-id { margin: 0 !important; padding: 5px 10px !important; border-radius: 0 !important; }
-            .review-q-text { display: flex !important; align-items: flex-start !important; padding: 10px 15px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
-            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; }
-            .review-exp { font-size: 1.0rem !important; padding: 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; }
+            .review-item { border: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin-bottom: 2px !important; padding: 0 !important; }
+            .review-id { margin: 0 !important; padding: 3px 10px !important; border-radius: 0 !important; font-size: 0.9rem !important; }
+            .review-q-text { display: flex !important; align-items: flex-start !important; padding: 2px 10px !important; font-size: 1.0rem !important; white-space: pre-wrap !important; word-break: break-all !important; width: calc(100% - 2px) !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border-left: 5px solid #198754 !important; margin-left: 0 !important; margin-top: 2px !important; margin-bottom: 2px !important; }
+            .review-exp { font-size: 0.95rem !important; padding: 8px 15px !important; border-radius: 10px !important; border: 1px solid #eee !important; line-height: 1.5 !important; }
+            
+            /* 強效鎖定列印配對圖佈局 */
+            .print-matching { 
+                display: block !important; 
+                width: 100% !important; 
+                position: relative !important; 
+                margin: 15px 0 !important; 
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
+            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
+            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
+            .print-svg { 
+                position: absolute !important; 
+                top: 0 !important; 
+                left: 0 !important; 
+                width: 100% !important; 
+                height: 100% !important; 
+                z-index: 99 !important; 
+                visibility: visible !important;
+                display: block !important;
+                overflow: visible !important;
+            }
+            line { stroke-opacity: 1 !important; }
             pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
         }
         .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+        
+        /* 配對題樣式 */
+        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-row { display: flex; justify-content: flex-start; gap: 60px; margin: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #eee; padding: 0 !important; padding-bottom: 5px !important; padding-left: 10px !important; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
+        .matching-columns { display: flex; justify-content: flex-start; gap: 60px; position: relative; z-index: 2; padding-left: 10px; }
+        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 150px; }
+        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
+        .match-item-left { justify-content: flex-end; text-align: right; }
+        .match-item-right { justify-content: flex-start; text-align: left; }
+        .match-dot { width: 22px; height: 22px; border: 1.5px solid #333; border-radius: 50%; margin: 0 15px; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; flex-shrink: 0; }
+        .match-dot::after { content: ""; width: 10px; height: 10px; background: transparent; border-radius: 50%; transition: none; }
+        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
+        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        @media (max-width: 768px) {
+            .matching-columns, .match-header-row { gap: 30px !important; }
+            .match-col { min-width: 140px !important; }
+        }
     </style>
 </head>
 <body>
@@ -111,7 +155,7 @@ def clean_repair_all():
     </header>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
-    <main class="container-fluid main-content" style="width: calc(100% - 50px); margin-top: 80px;"><div id="question-area"></div></main>
+    <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; max-width: none !important;"><div id="question-area"></div></main>
 </div>
 <div id="result-screen" class="container-fluid">
     <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
@@ -150,6 +194,101 @@ def clean_repair_all():
     const allQuestions = """
 
     mock_bottom_tmpl = r"""
+    function renderMatchingQuestion(index) {
+        currentIndex = index; const item = examQuestions[index];
+        const container = document.getElementById('question-area');
+        if (!container) return;
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = 'flex';
+        
+        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+        
+        let qText = processContent(item.question, item);
+        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body"><div class="q-content mb-0" style="margin: 0 !important; padding: 0 !important; display: block;">${qText}</div><div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)"><div class="match-header-row"><div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div></div><svg id="matching-svg"></svg><div class="matching-columns"><div class="match-col left-col">`;
+        item.left.forEach((text, lIdx) => {
+            const isMatched = currentAns[lIdx] !== null;
+            const dotColor = isMatched ? '#333' : 'transparent';
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div style="font-family:Consolas,monospace;">${text}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+        });
+        html += `</div><div class="match-col right-col">`;
+        item.right.forEach((text, rIdx) => {
+            const isMatchedByAny = currentAns.includes(rIdx);
+            const dotColor = isMatchedByAny ? '#333' : 'transparent';
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div>${text}</div></div>`;
+        });
+        html += `</div></div></div></div></div>`;
+        container.innerHTML = html; setTimeout(drawLines, 50); if(window.Prism) Prism.highlightAll();
+    }
+
+    let isDragging = false, dragStartPoint = null, tempLine = null;
+    window.handleDragStart = function(e, side, idx) {
+        if (side !== 'left') return;
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        isDragging = true; if(e.cancelable) e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
+        const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
+        const svg = document.getElementById("matching-svg");
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute("x1", dragStartPoint.x); tempLine.setAttribute("y1", dragStartPoint.y);
+        tempLine.setAttribute("x2", dragStartPoint.x); tempLine.setAttribute("y2", dragStartPoint.y);
+        tempLine.setAttribute("stroke", "#0d6efd"); tempLine.setAttribute("stroke-width", "2.5");
+        tempLine.setAttribute("opacity", "0.6"); svg.appendChild(tempLine);
+    };
+    window.handleDragMove = function(e) {
+        if (!isDragging || !tempLine) return;
+        const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
+    };
+    window.handleDragEnd = function(e) {
+        if (!isDragging) return;
+        let x = window.lastClientX, y = window.lastClientY;
+        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
+        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+            if (rightItem) {
+                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+            }
+        }
+        isDragging = false; dragStartPoint = null;
+        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
+        tempLine = null; renderMatchingQuestion(currentIndex);
+    };
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0, rect = wrapper.getBoundingClientRect();
+        const baseW = rect.width / zoom, baseH = rect.height / zoom;
+        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
+        svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById("dot-left-" + lIdx), dotR = document.getElementById("dot-right-" + rIdx);
+            if (dotL && dotR) {
+                const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                const x1 = (rL.left + rL.width/2 - rect.left) / zoom, y1 = (rL.top + rL.height/2 - rect.top) / zoom;
+                const x2 = (rR.left + rR.width/2 - rect.left) / zoom, y2 = (rR.top + rR.height/2 - rect.top) / zoom;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
+            }
+        });
+    };
+
     function startTimer() {
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -264,7 +403,9 @@ def clean_repair_all():
     }
 
     function renderQuestion(index, scrollTop = true) {
-        currentIndex = index; const item = examQuestions[index]; const container = document.getElementById('question-area'); 
+        currentIndex = index; const item = examQuestions[index]; 
+        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        const container = document.getElementById('question-area'); 
         if (!container) return;
         container.innerHTML = '';
         const progressEl = document.getElementById('q-progress');
@@ -346,7 +487,10 @@ def clean_repair_all():
             stats[cat].ids.push(item.id);
             const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-            if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+            if (item.type === 'matching') {
+                const userLetters = (userAns || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
+                isCorrect = JSON.stringify(userLetters) === JSON.stringify(answers);
+            } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
@@ -366,29 +510,60 @@ def clean_repair_all():
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
-                opts.forEach((o, i) => {
-                    const isNum = (item.labelType === 'num');
-                    const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-                    if (String(o).includes('|')) {
-                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                        const customLabelField = "question" + alphabet[i];
-                        let customLabel = "";
-                        if (item[customLabelField]) {
-                            customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
-                        }
-                        const displayLabel = customLabel || `選項 ${i + 1}`;
+                
+                if (item.type === 'matching') {
+                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                        <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                        <table style="width:100%; border-collapse:collapse; border:1px solid #333; position:relative; z-index:5;">
+                            <thead>
+                                <tr style="background:#f8f9fa;">
+                                    <th style="width:46%; text-align:left; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">程式碼片段</th>
+                                    <th style="width:8%; border:1px solid #333;"></th>
+                                    <th style="width:46%; text-align:right; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">正確對應回答</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+                    
+                    const maxRows = Math.max(item.left.length, item.right.length);
+                    for (let r = 0; r < maxRows; r++) {
+                        const lText = item.left[r] || "";
+                        const rText = item.right[r] || "";
+                        optionsHTML += `<tr>
+                            <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                ${lText ? `<div style="display:flex; align-items:center; justify-content:flex-end;"><div style="font-family:Consolas,monospace;">${lText}</div><div class="match-dot" id="mdl-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>` : ''}
+                            </td>
+                            <td style="border:1px solid #333;"></td>
+                            <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                ${rText ? `<div style="display:flex; align-items:center; justify-content:flex-start;"><div class="match-dot" id="mdr-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div style="font-family:Consolas,monospace;">${rText}</div></div>` : ''}
+                            </td>
+                        </tr>`;
+                    }
+                    optionsHTML += `</tbody></table></div>`;
+                } else {
+                    opts.forEach((o, i) => {
+                        const isNum = (item.labelType === 'num');
+                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        if (String(o).includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const customLabelField = "question" + alphabet[i];
+                            let customLabel = "";
+                            if (item[customLabelField]) {
+                                customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                            }
+                            const displayLabel = customLabel || `選項 ${i + 1}`;
 
-                        const subLabels = o.split('|').map((s, si) => {
-                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
-                            return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
-                        }).join(' ');
-                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                    }
-                    else {
-                        const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
-                        optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
-                    }
-                });
+                            const subLabels = o.split('|').map((s, si) => {
+                                const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                            }).join(' ');
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        }
+                        else {
+                            const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                        }
+                    });
+                }
                 optionsHTML += '</div>';
                 incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text"><div class="q-content">${processContent(item.question, item)}</div></div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
@@ -409,7 +584,49 @@ def clean_repair_all():
         document.getElementById('category-stats').innerHTML = catHTML;
         let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
         document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
-        setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+        // 確保結果區塊已顯示，以便正確計算 getBoundingClientRect (使用已宣告的 rs)
+        if (rs) rs.style.display = 'block';
+        
+        // 繪製模擬考試報告中的正確連線 (視窗座標差值法修正)
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width);
+                svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px';
+                svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+            if(window.Prism) Prism.highlightAll();
+        }, 2000);
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {
@@ -451,7 +668,8 @@ def clean_repair_all():
         
         code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #222222; }
         code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; }
-        code[class*="language-"] { color: inherit; }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: #fdfdfd !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
@@ -470,15 +688,23 @@ def clean_repair_all():
         .type-badge { font-size: 0.75rem; vertical-align: middle; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
         .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
-        .question-body { padding: 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
+        .question-body { padding: 5px 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
         .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
         
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
-        .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .review-q-text { font-size: 1.0rem; line-height: 1.8; margin-bottom: 5px; color: #333; }
-        .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 5px 0; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
-        .review-exp-box { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; font-size: 1.0rem; }
+                    .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 2px 0 !important; padding: 0 !important; }
+                    .review-q-text { font-size: 1.0rem; line-height: 1.6 !important; margin-bottom: 2px !important; color: #333; }
+                    .review-ans { color: #198754; font-weight: bold; padding: 4px 15px !important; margin: 2px 0 !important; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
+            .review-exp-box { background: #f8f9fa; padding: 8px !important; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.5 !important; color: #333; font-size: 0.95rem; }
+            
+            /* 列印版配對題佈局鎖定 */
+            .print-matching { display: block !important; width: 100% !important; position: relative !important; margin: 15px 0 !important; }
+            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
+            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
+            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
+            .print-svg { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; z-index: 10 !important; background: none !important; }
+        
         @media print {
             @page { size: auto; margin: 8mm !important; }
             * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
@@ -507,16 +733,17 @@ def clean_repair_all():
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin-bottom: 0 !important; }
         
         /* 縮放與配對題樣式整合 */
         #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
         .zoom-btn { width: 52px; height: 52px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; user-select: none; transition: none !important; }
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
-        .matching-wrapper { position: relative; margin: 30px 0; padding: 10px; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-row { display: flex; justify-content: flex-start; gap: 120px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; padding-left: 10px; }
+        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-row { display: flex; justify-content: flex-start; gap: 60px; margin: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #eee; padding: 0 !important; padding-bottom: 5px !important; padding-left: 10px !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
-        .matching-columns { display: flex; justify-content: flex-start; gap: 120px; position: relative; z-index: 2; padding-left: 10px; }
-        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 200px; }
+        .matching-columns { display: flex; justify-content: flex-start; gap: 60px; position: relative; z-index: 2; padding-left: 10px; }
+        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 150px; }
         .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
         .match-item-left { justify-content: flex-end; text-align: right; }
         .match-item-right { justify-content: flex-start; text-align: left; }
@@ -560,7 +787,7 @@ def clean_repair_all():
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
-    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 50px); padding: 0; margin-left: auto; margin-right: auto;"><div id="question-container"></div></div></main>
+    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -647,10 +874,10 @@ def clean_repair_all():
         const completed = isCorrect || isCorrected;
         let html = `<div class="card question-card">
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body" style="color:#333;">
-                <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
-        if (isWrong && !completed) html += `<div class="alert alert-danger py-2 small mb-3">❌ 答案不正確，請檢查連線後再次提交。</div>`;
-        html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+                                                                                    <div class="question-body" style="color:#333;">
+                                                                                        <div class="mb-0" style="font-weight:600; font-size:1.1rem; margin: 0 !important; padding: 0 !important; display: block;">${processContent(item.question, item)}</div>
+                                                                        `;
+                                                                    html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <div class="match-header-row">
                         <div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div>
                     </div>
@@ -686,6 +913,8 @@ def clean_repair_all():
         if (side !== 'left') return;
         if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
         isDragging = true; if(e.cancelable) e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
         const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
         const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
         const zoom = window.itspyZoom || 1.0;
@@ -707,12 +936,17 @@ def clean_repair_all():
     };
     window.handleDragEnd = function(e) {
         if (!isDragging) return;
-        const x = window.lastClientX, y = window.lastClientY;
-        const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
-        if (rightItem) {
-            const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-            if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
-            userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+        let x = window.lastClientX, y = window.lastClientY;
+        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
+        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
+        
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+            if (rightItem) {
+                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+            }
         }
         isDragging = false; dragStartPoint = null;
         if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
@@ -741,8 +975,8 @@ def clean_repair_all():
     };
     window.submitMatching = function() {
         const item = quizData[currentIndex], ans = userAnswers[currentIndex];
-        if (!ans || ans.includes(null)) { alert("請完成所有配對！"); return; }
-        const userAnswersAsLetters = ans.map(idx => String.fromCharCode(65 + idx));
+        // 允許部分提交：移除 ans.includes(null) 的強制攔截
+        const userAnswersAsLetters = (ans || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
         const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
         if (isCorrect) {
             if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
@@ -840,42 +1074,124 @@ def clean_repair_all():
     function nextQuestion() { evaluateCurrentQuestion(); if (currentIndex < quizData.length-1) renderQuestion(currentIndex+1); }
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
-    function prepareAndPrint(onlyMistakes = false) {
-        const area = document.getElementById('review-area');
-        let title = "REPLACE_TITLE 認證完整解析";
-        let targetItems = quizData.map((item, idx) => ({ item, idx }));
-        if (onlyMistakes) {
-            targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-            if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-            title = "REPLACE_TITLE 訂正解析講義";
-        }
-        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
-        targetItems.forEach(({ item, idx }) => {
-            const div = document.createElement('div'); div.className = 'review-item';
-            const optsRaw = item.quiz || item.options || [];
-            const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-            const isNum = (item.labelType === 'num');
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            let optHtml = opts.map((o, i) => {
-                if (String(o).includes('|')) {
-                    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
-                    const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
-                    return `<div class="review-opt-line"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                } else {
-                    return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+            function prepareAndPrint(onlyMistakes = false) {
+                const area = document.getElementById('review-area');
+                if (!area) return;
+                area.style.display = 'block'; // 強制顯示以計算座標
+                let title = "REPLACE_TITLE 認證完整解析";
+        
+            let targetItems = quizData.map((item, idx) => ({ item, idx }));
+            if (onlyMistakes) {
+                targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+                if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+                title = "REPLACE_TITLE 訂正解析講義";
+            }
+            area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+            targetItems.forEach(({ item, idx }) => {
+                const div = document.createElement('div'); div.className = 'review-item';
+                const optsRaw = item.quiz || item.options || [];
+                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+                const isNum = (item.labelType === 'num');
+                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                
+                let optHtml = "";
+                            if (item.type === 'matching') {
+                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                                    <table style="width:100%; border-collapse:collapse; border:1px solid #333; position:relative; z-index:5;">
+                                        <thead>
+                                            <tr style="background:#f8f9fa;">
+                                                <th style="width:46%; text-align:left; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">程式碼片段</th>
+                                                <th style="width:8%; border:1px solid #333;"></th>
+                                                <th style="width:46%; text-align:right; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">正確對應回答</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+                                
+                                const maxRows = Math.max(item.left.length, item.right.length);
+                                for (let r = 0; r < maxRows; r++) {
+                                    const lText = item.left[r] || "";
+                                    const rText = item.right[r] || "";
+                                    optHtml += `<tr>
+                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                            ${lText ? `<div style="display:flex; align-items:center; justify-content:flex-end;"><div style="font-family:Consolas,monospace;">${lText}</div><div class="match-dot" id="pdl-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>` : ''}
+                                        </td>
+                                        <td style="border:1px solid #333;"></td>
+                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                            ${rText ? `<div style="display:flex; align-items:center; justify-content:flex-start;"><div class="match-dot" id="pdr-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div style="font-family:Consolas,monospace;">${rText}</div></div>` : ''}
+                                        </td>
+                                    </tr>`;
+                                }
+                                optHtml += `</tbody></table></div>`;
+                            } else {
+                
+                    optHtml = opts.map((o, i) => {
+                        if (String(o).includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
+                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        } else {
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+                        }
+                    }).join('');
                 }
-            }).join('');
-            let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-            if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '$1');
-            const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
-                const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
-            }).join(', ');
-            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
-            area.appendChild(div);
-        });
-        if(window.Prism) Prism.highlightAll(); setTimeout(() => { window.print(); }, 100);
-    }
+    
+                let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
+                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
+                const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
+                    const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
+                }).join(', ');
+                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+                area.appendChild(div);
+            });
+            
+                            // 繪製列印頁面的連線 (正確答案連線 - 標準答案畫上去)
+                                                                                    // 繪製列印頁面的連線 (正確答案連線 - 視窗座標差值法)
+                                                                                    setTimeout(() => {
+                                                                                        document.querySelectorAll('.print-matching').forEach(wrapper => {
+                                                                                            const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                                                                                            const item = quizData[qIdx];
+                                                                                            const svg = wrapper.querySelector('.print-svg');
+                                                                                            const wRect = wrapper.getBoundingClientRect();
+                                                                                            if (wRect.width === 0) return;
+                                                                                            
+                                                                                            svg.setAttribute('width', wRect.width);
+                                                                                            svg.setAttribute('height', wRect.height);
+                                                                                            svg.style.width = wRect.width + 'px';
+                                                                                            svg.style.height = wRect.height + 'px';
+                                                                                            svg.innerHTML = ''; 
+                                                                                            
+                                                                                            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                                                                                            answers.forEach((ansVal, lIdx) => {
+                                                                                                const rIdx = parseAnswerToIndex(ansVal);
+                                                                                                const dotL = document.getElementById(`pdl-${qIdx}-${lIdx}`);
+                                                                                                const dotR = document.getElementById(`pdr-${qIdx}-${rIdx}`);
+                                                                                                if (dotL && dotR) {
+                                                                                                    const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                                                                                                    // 計算相對於 wrapper 的精確座標
+                                                                                                    const x1 = rL.left - wRect.left + rL.width/2;
+                                                                                                    const y1 = rL.top - wRect.top + rL.height/2;
+                                                                                                    const x2 = rR.left - wRect.left + rR.width/2;
+                                                                                                    const y2 = rR.top - wRect.top + rR.height/2;
+                                                                                                    
+                                                                                                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                                                                                                    line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                                                                                                    line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                                                                                                    line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                                                                                                    line.setAttribute('stroke-linecap', "round"); 
+                                                                                                    line.setAttribute('style', "stroke-opacity:1 !important;");
+                                                                                                    svg.appendChild(line);
+                                                                                                }
+                                                                                            });
+                                                                                            // 強制重繪 SVG
+                                                                                            const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+                                                                                        });
+                                                                                        if(window.Prism) Prism.highlightAll(); 
+                                                                                        setTimeout(() => { window.print(); }, 1000);
+                                                                                    }, 2500);
+                                                                                                                                                                    }
+    
     function renderQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching') { renderMatchingQuestion(index); return; }

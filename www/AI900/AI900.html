@@ -20,7 +20,8 @@
         
         code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #222222; }
         code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; }
-        code[class*="language-"] { color: inherit; }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: #fdfdfd !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
         .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
@@ -39,15 +40,23 @@
         .type-badge { font-size: 0.75rem; vertical-align: middle; }
         .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
         .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
-        .question-body { padding: 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
+        .question-body { padding: 5px 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
         .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
         .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
         
         #review-area { display: none; text-align: left; padding: 20px; background: white; }
-        .review-item { margin-bottom: 10px; padding: 0; border: none; background: white; page-break-inside: auto; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .review-q-text { font-size: 1.0rem; line-height: 1.8; margin-bottom: 5px; color: #333; }
-        .review-ans { color: #198754; font-weight: bold; padding: 10px 15px; margin: 5px 0; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
-        .review-exp-box { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.8; color: #333; font-size: 1.0rem; }
+                    .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 2px 0 !important; padding: 0 !important; }
+                    .review-q-text { font-size: 1.0rem; line-height: 1.6 !important; margin-bottom: 2px !important; color: #333; }
+                    .review-ans { color: #198754; font-weight: bold; padding: 4px 15px !important; margin: 2px 0 !important; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
+            .review-exp-box { background: #f8f9fa; padding: 8px !important; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.5 !important; color: #333; font-size: 0.95rem; }
+            
+            /* 列印版配對題佈局鎖定 */
+            .print-matching { display: block !important; width: 100% !important; position: relative !important; margin: 15px 0 !important; }
+            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
+            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
+            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
+            .print-svg { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; z-index: 10 !important; background: none !important; }
+        
         @media print {
             @page { size: auto; margin: 8mm !important; }
             * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
@@ -76,16 +85,17 @@
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin-bottom: 0 !important; }
         
         /* 縮放與配對題樣式整合 */
         #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
         .zoom-btn { width: 52px; height: 52px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; user-select: none; transition: none !important; }
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
-        .matching-wrapper { position: relative; margin: 30px 0; padding: 10px; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-row { display: flex; justify-content: flex-start; gap: 120px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; padding-left: 10px; }
+        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-row { display: flex; justify-content: flex-start; gap: 60px; margin: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #eee; padding: 0 !important; padding-bottom: 5px !important; padding-left: 10px !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
-        .matching-columns { display: flex; justify-content: flex-start; gap: 120px; position: relative; z-index: 2; padding-left: 10px; }
-        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 200px; }
+        .matching-columns { display: flex; justify-content: flex-start; gap: 60px; position: relative; z-index: 2; padding-left: 10px; }
+        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 150px; }
         .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
         .match-item-left { justify-content: flex-end; text-align: right; }
         .match-item-right { justify-content: flex-start; text-align: left; }
@@ -129,7 +139,7 @@
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
     <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
-    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 50px); padding: 0; margin-left: auto; margin-right: auto;"><div id="question-container"></div></div></main>
+    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -4962,10 +4972,10 @@
         const completed = isCorrect || isCorrected;
         let html = `<div class="card question-card">
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body" style="color:#333;">
-                <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
-        if (isWrong && !completed) html += `<div class="alert alert-danger py-2 small mb-3">❌ 答案不正確，請檢查連線後再次提交。</div>`;
-        html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+                                                                                    <div class="question-body" style="color:#333;">
+                                                                                        <div class="mb-0" style="font-weight:600; font-size:1.1rem; margin: 0 !important; padding: 0 !important; display: block;">${processContent(item.question, item)}</div>
+                                                                        `;
+                                                                    html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <div class="match-header-row">
                         <div class="match-header-title">程式碼片段</div><div class="match-header-title">回答區</div>
                     </div>
@@ -5001,6 +5011,8 @@
         if (side !== 'left') return;
         if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
         isDragging = true; if(e.cancelable) e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
         const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
         const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
         const zoom = window.itspyZoom || 1.0;
@@ -5022,12 +5034,17 @@
     };
     window.handleDragEnd = function(e) {
         if (!isDragging) return;
-        const x = window.lastClientX, y = window.lastClientY;
-        const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
-        if (rightItem) {
-            const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-            if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
-            userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+        let x = window.lastClientX, y = window.lastClientY;
+        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
+        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
+        
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+            if (rightItem) {
+                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+            }
         }
         isDragging = false; dragStartPoint = null;
         if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
@@ -5056,8 +5073,8 @@
     };
     window.submitMatching = function() {
         const item = quizData[currentIndex], ans = userAnswers[currentIndex];
-        if (!ans || ans.includes(null)) { alert("請完成所有配對！"); return; }
-        const userAnswersAsLetters = ans.map(idx => String.fromCharCode(65 + idx));
+        // 允許部分提交：移除 ans.includes(null) 的強制攔截
+        const userAnswersAsLetters = (ans || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
         const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
         if (isCorrect) {
             if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
@@ -5155,42 +5172,124 @@
     function nextQuestion() { evaluateCurrentQuestion(); if (currentIndex < quizData.length-1) renderQuestion(currentIndex+1); }
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
-    function prepareAndPrint(onlyMistakes = false) {
-        const area = document.getElementById('review-area');
-        let title = "AI-900 認證完整解析";
-        let targetItems = quizData.map((item, idx) => ({ item, idx }));
-        if (onlyMistakes) {
-            targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-            if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-            title = "AI-900 訂正解析講義";
-        }
-        area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
-        targetItems.forEach(({ item, idx }) => {
-            const div = document.createElement('div'); div.className = 'review-item';
-            const optsRaw = item.quiz || item.options || [];
-            const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-            const isNum = (item.labelType === 'num');
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            let optHtml = opts.map((o, i) => {
-                if (String(o).includes('|')) {
-                    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
-                    const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
-                    return `<div class="review-opt-line"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                } else {
-                    return `<div class="review-opt-line"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+            function prepareAndPrint(onlyMistakes = false) {
+                const area = document.getElementById('review-area');
+                if (!area) return;
+                area.style.display = 'block'; // 強制顯示以計算座標
+                let title = "AI-900 認證完整解析";
+        
+            let targetItems = quizData.map((item, idx) => ({ item, idx }));
+            if (onlyMistakes) {
+                targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+                if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+                title = "AI-900 訂正解析講義";
+            }
+            area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+            targetItems.forEach(({ item, idx }) => {
+                const div = document.createElement('div'); div.className = 'review-item';
+                const optsRaw = item.quiz || item.options || [];
+                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+                const isNum = (item.labelType === 'num');
+                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                
+                let optHtml = "";
+                            if (item.type === 'matching') {
+                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                                    <table style="width:100%; border-collapse:collapse; border:1px solid #333; position:relative; z-index:5;">
+                                        <thead>
+                                            <tr style="background:#f8f9fa;">
+                                                <th style="width:46%; text-align:left; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">程式碼片段</th>
+                                                <th style="width:8%; border:1px solid #333;"></th>
+                                                <th style="width:46%; text-align:right; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">正確對應回答</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+                                
+                                const maxRows = Math.max(item.left.length, item.right.length);
+                                for (let r = 0; r < maxRows; r++) {
+                                    const lText = item.left[r] || "";
+                                    const rText = item.right[r] || "";
+                                    optHtml += `<tr>
+                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                            ${lText ? `<div style="display:flex; align-items:center; justify-content:flex-end;"><div style="font-family:Consolas,monospace;">${lText}</div><div class="match-dot" id="pdl-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>` : ''}
+                                        </td>
+                                        <td style="border:1px solid #333;"></td>
+                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
+                                            ${rText ? `<div style="display:flex; align-items:center; justify-content:flex-start;"><div class="match-dot" id="pdr-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div style="font-family:Consolas,monospace;">${rText}</div></div>` : ''}
+                                        </td>
+                                    </tr>`;
+                                }
+                                optHtml += `</tbody></table></div>`;
+                            } else {
+                
+                    optHtml = opts.map((o, i) => {
+                        if (String(o).includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
+                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        } else {
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+                        }
+                    }).join('');
                 }
-            }).join('');
-            let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-            if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '$1');
-            const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
-                const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
-            }).join(', ');
-            div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
-            area.appendChild(div);
-        });
-        if(window.Prism) Prism.highlightAll(); setTimeout(() => { window.print(); }, 100);
-    }
+    
+                let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
+                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
+                const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
+                    const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
+                }).join(', ');
+                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> <div class="q-content">${processContent(cleanQ, item)}</div></div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+                area.appendChild(div);
+            });
+            
+                            // 繪製列印頁面的連線 (正確答案連線 - 標準答案畫上去)
+                                                                                    // 繪製列印頁面的連線 (正確答案連線 - 視窗座標差值法)
+                                                                                    setTimeout(() => {
+                                                                                        document.querySelectorAll('.print-matching').forEach(wrapper => {
+                                                                                            const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                                                                                            const item = quizData[qIdx];
+                                                                                            const svg = wrapper.querySelector('.print-svg');
+                                                                                            const wRect = wrapper.getBoundingClientRect();
+                                                                                            if (wRect.width === 0) return;
+                                                                                            
+                                                                                            svg.setAttribute('width', wRect.width);
+                                                                                            svg.setAttribute('height', wRect.height);
+                                                                                            svg.style.width = wRect.width + 'px';
+                                                                                            svg.style.height = wRect.height + 'px';
+                                                                                            svg.innerHTML = ''; 
+                                                                                            
+                                                                                            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                                                                                            answers.forEach((ansVal, lIdx) => {
+                                                                                                const rIdx = parseAnswerToIndex(ansVal);
+                                                                                                const dotL = document.getElementById(`pdl-${qIdx}-${lIdx}`);
+                                                                                                const dotR = document.getElementById(`pdr-${qIdx}-${rIdx}`);
+                                                                                                if (dotL && dotR) {
+                                                                                                    const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                                                                                                    // 計算相對於 wrapper 的精確座標
+                                                                                                    const x1 = rL.left - wRect.left + rL.width/2;
+                                                                                                    const y1 = rL.top - wRect.top + rL.height/2;
+                                                                                                    const x2 = rR.left - wRect.left + rR.width/2;
+                                                                                                    const y2 = rR.top - wRect.top + rR.height/2;
+                                                                                                    
+                                                                                                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                                                                                                    line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                                                                                                    line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                                                                                                    line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                                                                                                    line.setAttribute('stroke-linecap', "round"); 
+                                                                                                    line.setAttribute('style', "stroke-opacity:1 !important;");
+                                                                                                    svg.appendChild(line);
+                                                                                                }
+                                                                                            });
+                                                                                            // 強制重繪 SVG
+                                                                                            const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+                                                                                        });
+                                                                                        if(window.Prism) Prism.highlightAll(); 
+                                                                                        setTimeout(() => { window.print(); }, 1000);
+                                                                                    }, 2500);
+                                                                                                                                                                    }
+    
     function renderQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching') { renderMatchingQuestion(index); return; }

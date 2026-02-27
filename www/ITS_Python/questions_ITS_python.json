@@ -1091,7 +1091,7 @@
             "<pre><code class=\"language-python\">● 選項 1 使用了 float 函式來將輸入的字串轉換為浮點數。",
             "● 選項 2 使用了 print 函式來顯示提示訊息。",
             "● 選項 3 使用了舊式的格式化方法 %。",
-            "[[image01]]</code></pre>"
+            "</code></pre>[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1160,7 +1160,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個函式中，首先檢查檔案是否存在(if os.path.isfile(file):)，",
             "  並以唯讀模式開啟檔案(with open(file, 'r') as file:)，並返回第一行的內容(return file.readline())。",
-            "● 如果不存在(else:)在則返回 '檔案不存在'(return 'File dose not exist')。[[image01]]</code></pre>"
+            "● 如果不存在(else:)在則返回 '檔案不存在'(return 'File dose not exist')。</code></pre>[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1186,7 +1186,7 @@
         "image01": "images/39_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個情況下，使用 open('file_data', 'a') 可以以附加模式(append mode)開啟檔案，",
-            "如果檔案不存在則會建立它，如果檔案已存在則會將新內容新增到檔案的末尾。[[image01]]</code></pre>"
+            "如果檔案不存在則會建立它，如果檔案已存在則會將新內容新增到檔案的末尾。</code></pre>[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1216,7 +1216,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個程式碼中，(程式碼1)和(程式碼2)的條件判斷都是用來檢查讀取的行是否為空行，如果不是空行則進行處理。",
             "● 因此，正確的選擇是 (程式碼1).if line != '': (程式碼2).if line != '\\n':。",
-            "● 這樣可以確保只處理非空行，並且在讀取完所有行後關閉檔案。[[image01]]</code></pre>"
+            "● 這樣可以確保只處理非空行，並且在讀取完所有行後關閉檔案。</code></pre>[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1246,7 +1246,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 在選項 1 中，os.path.isfile('myFile.txt') 用來檢查檔案是否存在。",
             "● 在選項 2 中，print(file.read()) 用來顯示檔案的內容。",
-            "這樣可以確保程式能夠正確地檢查檔案是否存在並顯示其內容。[[image01]]</code></pre>"
+            "這樣可以確保程式能夠正確地檢查檔案是否存在並顯示其內容。</code></pre>[[image01]]"
         ],
         "category": "D3_輸入輸出與檔案"
     },
@@ -1328,7 +1328,7 @@
         "image01": "images/43_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個程式碼中，使用了多個條件判斷來確定學生的成績等級，並根據不同的成績範圍給予相應的字母等級。",
-            "這道題目是關於 Python 的多重條件判斷（if-elif-else 結構）。根據題目提供的成績對照表，等級判斷的邏輯是由高分往下檢查。[[image01]]</code></pre>"
+            "這道題目是關於 Python 的多重條件判斷（if-elif-else 結構）。根據題目提供的成績對照表，等級判斷的邏輯是由高分往下檢查。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1364,7 +1364,7 @@
             "●  優先處理例外 (Slot 1 -> D)：    必須先檢查 if age is None。<b>重要原因</b>：若先進行數字比較 (如 age < 13)，當 age 為 None 時，Python 會報錯 (TypeError)，因為 None 不能與整數比較。",
             "●  依序過濾年齡 (Slot 2 -> A)：elif age < 13：先過濾掉 12 歲以下 (普通級)。",
             "●  中間範圍 (Slot 3 -> B)：elif age < 18：程式跑到這行時，代表已經大於等於 13 歲了。所以這裡只要檢查是否小於 18，即可涵蓋 13~17 歲 (輔導級)。",
-            "●  剩餘情況 (Slot 4 -> C)：else：排除掉未知、<13、<18 的情況後，剩下的自然是 18 歲以上 (限制級)。選項 C (: rating='限制級') 補上了 else 後面的冒號與執行內容。[[image01]]</code></pre>",
+            "●  剩餘情況 (Slot 4 -> C)：else：排除掉未知、<13、<18 的情況後，剩下的自然是 18 歲以上 (限制級)。選項 C (: rating='限制級') 補上了 else 後面的冒號與執行內容。</code></pre>[[image01]]",
             "<pre><code class=\"language-python\"><b>【2025 邏輯優化建議】</b>",
             "官方邏輯採「漏斗式過濾」，但 PDF 分析指出其順序有瑕疵：",
             "1. 必須先處理 None：if age is None 必須最先檢查，否則與整數比較會噴 TypeError。",
@@ -1456,7 +1456,7 @@
         "image01": "images/47_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 在這個程式碼中，首先檢查 age 是否大於等於 5 且 school 為真，如果是，則票價為 60 元。",
-            "● 接著，如果 age 大於等於 5 且 school 為假，則進一步檢查 age 是否小於等於 17，如果是，則票價為 120 元；否則票價為 180[[image01]]</code></pre>"
+            "● 接著，如果 age 大於等於 5 且 school 為假，則進一步檢查 age 是否小於等於 17，如果是，則票價為 120 元；否則票價為 180</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1484,7 +1484,7 @@
         "image01": "images/48_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 這道題目考的是 Python 的巢狀 if-elif-else 邏輯，用來判斷數字的大小範圍",
-            "在這個程式碼中，使用了多個條件判斷來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，並根據不同的數字範圍給予相應的提示訊息。[[image01]]</code></pre>"
+            "在這個程式碼中，使用了多個條件判斷來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，並根據不同的數字範圍給予相應的提示訊息。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1493,16 +1493,16 @@
         "type": "matching",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">49. 【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。",
+            "<pre><code class=\"language-python\">【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。",
             "程式碼如下：",
             "from random import randint\ntarget = randint(1,100)\nchance = 1\nprint('Guess an integer from 1 to 10. You will have 3 chances.')\n_(選項 1)_\n    guess = int(input('Guess an integer:'))\n    if guess > target:\n        print('Guess is too high')\n    elif guess < target:\n        print('Guess is too low')\n    else:\n        print('Guess is just right')\n        _(選項 2)_\n    _(選項 3)_",
             "程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
             "請將回答區專案的選到正確的程式碼片段</code></pre>"
         ],
         "left": [
-            "A. 在05行你要使用哪個程式碼片段?",
-            "B. 在13行你要使用哪個程式碼片段?",
-            "C. 在14行你要使用哪個程式碼片段?"
+            "1. 在05行你要使用哪個程式碼片段?",
+            "2. 在13行你要使用哪個程式碼片段?",
+            "3. 在14行你要使用哪個程式碼片段?"
         ],
         "right": [
             "A. while chance <= 3:",
@@ -1581,7 +1581,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 首先檢查 name 是否為全大寫，如果是，則印出 'is all upper case.'。",
             "● 接著，如果 name 為全小寫，則印出 'is all lower case.'。",
-            "● 如果 name 同時包含大寫和小寫字母，則印出 'is mixed case.'。[[image01]]</code></pre>"
+            "● 如果 name 同時包含大寫和小寫字母，則印出 'is mixed case.'。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1642,7 +1642,7 @@
             "● 使用了兩個 for 迴圈來遍歷從 2 到 9 的所有乘法組合。",
             "● 第一個迴圈遍歷列(col)，第二個迴圈遍歷行(row)。",
             "● range(2, 10) 為產生從 2 到 9 的整數序列（注意 Python 的 range 不包含結束值）",
-            "如果要符合您的記憶（包含 2x1）如果要讓程式跑出「2 一得 2、2 二得 4...」，我們需要修改內層迴圈的起始值，把它從 2 改成 1。[[image01]]</code></pre>"
+            "如果要符合您的記憶（包含 2x1）如果要讓程式跑出「2 一得 2、2 二得 4...」，我們需要修改內層迴圈的起始值，把它從 2 改成 1。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1696,7 +1696,7 @@
         "explanation": [
             "<pre><code class=\"language-python\">● 使用了 while 迴圈來遍歷從 2 到 100 的所有整數。",
             "● 對於每個整數 n，使用 for 迴圈來檢查是否為質數，如果 n 可以被任何小於 n 的整數整除(餘數為0, 'if n % i == 0:')，則不是質數。",
-            "● 如果是質數，則印出該質數。[[image01]]</code></pre>"
+            "● 如果是質數，則印出該質數。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1732,7 +1732,7 @@
             "<pre><code class=\"language-python\">● 首先定義了一個函式 search(nums, num)，該函式接受一個整數清單和一個整數作為引數。",
             "● 接著使用 for 迴圈遍歷清單中的每個整數，檢查是否有比引數整數大的數字。",
             "● 如果找到比引數整數大的數字，則印出相應的訊息並停止迴圈。",
-            "● 如果沒有找到比引數整數大的數字，則印出另一條訊息。[[image01]]</code></pre>"
+            "● 如果沒有找到比引數整數大的數字，則印出另一條訊息。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1769,7 +1769,7 @@
             "● 為了第一次能進入迴圈，初始變數 product_no 必須給予任意非空值 (如 'sentinel')。",
             "<b>2. 驗證旗標 (選項 3, 4)：</b>",
             "● 每一輪檢查開始前，先將 valid 重置為 False (預設格式錯誤)。",
-            "● 唯有通過所有 if 條件檢查 (長度正確且為數字)，才在最內層將 valid 設為 True。[[image01]]</code></pre>"
+            "● 唯有通過所有 if 條件檢查 (長度正確且為數字)，才在最內層將 valid 設為 True。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1798,7 +1798,7 @@
         "image01": "images/57_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">這題主要考驗 while 迴圈的控制以及如何手動管理索引（Index）變數。",
-            "● 使用了 while 迴圈來遍歷數字清單，並在找到 4 時使用 break 跳出迴圈。[[image01]]</code></pre>"
+            "● 使用了 while 迴圈來遍歷數字清單，並在找到 4 時使用 break 跳出迴圈。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1807,9 +1807,17 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。● 您需要列印五行程式碼。\n● 其中第一行第三行和第五行各有四個星星。\n● 而第二行和第四行各有一個星。",
+            "<pre><code class=\"language-python\">【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。\n● 您需要列印五行程式碼。\n● 其中第一行第三行和第五行各有四個星星。\n● 而第二行和第四行各有一個星。",
             "如下所示：請在下列位置中選擇正確的數字以完成程式碼。",
-            "result_str = ''\nfor row in range(1, _(選項 1)_):\n    for column in range(1, _(選項 2)_):\n        if row == 1 or row == 3 or row == 5:\n            result_str = result_str + '*'\n        elif column == 1:\n            result_str = result_str + '*'\n    result_str += '\\ n'\nprint(result_str)",
+            "01 result_str = ''",
+	    "02 for row in range(1, _(選項 1)_):",
+	    "03     for column in range(1, _(選項 2)_):",
+	    "04         if row == 1 or row == 3 or row == 5:",
+	    "05             result_str = result_str + '*'",
+	    "06         elif column == 1:",
+	    "07             result_str = result_str + '*'",
+	    "08     result_str += '\\ n'",
+	    "09 print(result_str)",
             "\n答案選擇區\nA. 3  B. 4  C. 5 D. 6</code></pre>"
         ],
         "options": [
@@ -1834,7 +1842,7 @@
             "<b>2. 內層迴圈 (控制寬度/星星數)：</b>",
             "● 題目要求第 1, 3, 5 行需有 <b>4 個星星</b>。● 若要讓內層迴圈執行 4 次 (產生 1, 2, 3, 4)，stop 必須設為 <b>5</b>。",
             "● 故 (選項 2) 應填入 <b>5</b> (對應選項 C)。",
-            "<b>【邏輯驗證】</b>當 row 為 1, 3, 5 時，內層迴圈跑 4 次都會印星 (共4星)。當 row 為 2, 4 時，只符合 elif column == 1，故只印第 1 顆星。[[image01]]</code></pre>"
+            "<b>【邏輯驗證】</b>當 row 為 1, 3, 5 時，內層迴圈跑 4 次都會印星 (共4星)。當 row 為 2, 4 時，只符合 elif column == 1，故只印第 1 顆星。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1880,7 +1888,7 @@
             "<b>【語法重點】</b>",
             "● 條件式開頭必為 if。",
             "● 中間的條件分支使用 elif。",
-            "● 最後的「其他所有情況」使用 else: (結尾需有冒號)。[[image01]]</code></pre>"
+            "● 最後的「其他所有情況」使用 else: (結尾需有冒號)。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1913,7 +1921,7 @@
             "● 本題要檢查 letter 是否在 word 中，故選 letter in word (選項 D)。",
             "<b>【in 的雙重用途】</b>",
             "● 在 for 迴圈中：代表「從裡面依序取出」。",
-            "● 在 if 條件中：代表「檢查是否存在其中」。[[image01]]</code></pre>"
+            "● 在 if 條件中：代表「檢查是否存在其中」。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -1945,7 +1953,8 @@
             "● range(len(scores)) 等同於 range(4)，會產生索引 0, 1, 2, 3，剛好能取出所有分數。",
             "● 注意：Python 沒有 size() 函式；且若用 len()+1 會導致 IndexOutOfRange 錯誤。",
             "2. <b>平均值 (選項 2)</b>：● 平均公式為「總和除以數量」。",
-            "● Python 的除法符號是 / (會保留小數)，例如 330 / 4 = 82.5。● // 是整數除法 (捨去小數)，較不精確。[[image01]]</code></pre>",
+            "● Python 的除法符號是 / (會保留小數)，例如 330 / 4 = 82.5。",
+	    "● // 是整數除法 (捨去小數)，較不精確。</code></pre>[[image01]]",
             "<pre><code class=\"language-python\"><b>【2025 複合陷阱分析】</b>",
             "此題包含兩個技術關鍵點：",
             "1. 模式 'w+'：這是一個「讀寫+自動建立」模式。即使 out.txt 不存在，open('out.txt', 'w+') 也會自動建立它，因此**不會**觸發 IOError。",
@@ -1978,7 +1987,7 @@
         "image01": "images/62_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">這道題目考的是 Python 的 while 迴圈（用於持續執行直到條件改變）以及 for 迴圈（用於遍歷字串內容）。",
-            "● 使用了 while 迴圈來持續接收使用者輸入，並使用 for 迴圈來計算字詞的字元數。[[image01]]</code></pre>"
+            "● 使用了 while 迴圈來持續接收使用者輸入，並使用 for 迴圈來計算字詞的字元數。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
@@ -2053,14 +2062,13 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH06-2】你設計一個函式，使用 Python 計算矩形的面積。在函式中有加入注釋，程式碼如下：",
-            "",
-            "# The area_rectangle function calculates the area of rectangle",
-            "# x is the length",
-            "# y is the width",
-            "# return the value of x*y",
-            "def area_retangle(x, y):",
-            "comment = '# Retrun the value'",
-            "return x*y # x*y",
+            "01  # The area_rectangle function calculates the area of rectangle",
+            "02  # x is the length",
+            "03  # y is the width",
+            "04  # return the value of x*y",
+            "05  def area_retangle(x, y):",
+            "06     comment = '# Retrun the value'",
+            "07     return x*y # x*y",
             "針對下列每個敘述，如果是正確的就選擇 Yes，否則請選擇 No。",
             "題1:第 1 到 4 行在語法檢查時將被忽略。",
             "題2:第 2 和第 3 行中的井字元號(#)非必填的。",
@@ -2395,7 +2403,7 @@
             "<pre><code class=\"language-python\">● 在 Python 中，使用 from datetime import datetime as dt 可以將 datetime 模組中的 datetime 函式匯入並設定為替代名稱 dt。",
             "● 選擇 1 是錯誤的，因為它沒有指定要匯入的函式。",
             "● 選擇 3 和選擇 4 的語法都是錯誤的。",
-            "from 模組 import 類別 as 別名datetime 模組有[[image01]]</code></pre>"
+            "from 模組 import 類別 as 別名datetime 模組有</code></pre>[[image01]]"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -2541,22 +2549,22 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH07-7】您正在撰寫一個程式來顯示 My Healthy Eata Delivery 的特價優惠。\n",
-            "import datetime",
-            "dailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')",
-            "weekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')",
-            "",
-            "",
-            "print('My Healthy Eats Delivery')",
-            "if today == 'Friday' or today == 'Saturday' or today == 'Sunday':",
-            "print('The weekend specials include:')",
-            "for item in weekendspecials:",
-            "print(item)",
-            "else:",
-            "print('The weekday specials include: ')",
-            "for item in dailySpecials:",
-            "print(item)",
-            "",
-            "print(f'Pricing specials change in (daysLeft) days')",
+            "01 import datetime",
+            "02 dailySpecials('Spaghetti', 'Macaroni & Cheese', 'Meatloaf', 'Fried Chicken')",
+            "03 weekendSpecials = ('Lobster', 'Prime Rib', 'Parmesan-Crusted Cod')",
+            "04",
+            "05",
+            "06 print('My Healthy Eats Delivery')",
+            "07 if today == 'Friday' or today == 'Saturday' or today == 'Sunday':",
+            "08    print('The weekend specials include:')",
+            "09    for item in weekendspecials:",
+            "10        print(item)",
+            "11 else:",
+            "12    print('The weekday specials include: ')",
+            "13    for item in dailySpecials:",
+            "14        print(item)",
+            "15",
+            "16 print(f'Pricing specials change in (daysLeft) days')",
             "請選取正確的還項以完成第 4、 5 和 15 行的程式碼。",
             "\n答案選擇區\n選項 1. 在第 4 行，擷取目前的日期。\nA. now = datetime.datetime.now()\nB. now = datetime.datetime.today()\nC. now = datetime.datetime.day()\nD. now = datetime.datetime()\n\n選項 2. 在第 5 行，擷取工作日。\nA. today = now.strftime('&A')\nB. today = now.strftime('&B')\nC. today = now.strftime('*')\nD. today = now.strftime('SY')\n\n選項 3. 在第 15 行，計算週剩餘天數。\nA. daysLeft = now.weekday()\nB. daysLeft = 6 - now.weekday()\nC. daysLeft = 6 + now.weekday()\nD. daysLeft = 6 + now.week()</code></pre>"
         ],
@@ -2711,13 +2719,13 @@
         "type": "multioption",
         "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">【CH08-6】下列函式會計算使用指數之運算式的值。\n",
-            "def calc_power(a, b):",
-            "return a**b",
-            "base = input('Enter the number for the base: ')",
-            "exponent = input('Enter the number for the exponent: ')",
-            "result = calc_power(base, exponent)",
-            "print('The result is ' + result)",
+            "<pre><code class=\"language-python\">【CH08-6】下列函式會計算使用指數之運算式的值。",
+            "01 def calc_power(a, b):",
+            "02   return a**b",
+            "03 base = input('Enter the number for the base: ')",
+            "04 exponent = input('Enter the number for the exponent: ')",
+            "05 result = calc_power(base, exponent)",
+            "06 print('The result is ' + result)",
             "針對下列每個敘述，如果是正確的就選擇 Yes，否則請選揮No。",
             "題一:第 2 行會造成執行階段錯誤。",
             "題二:第 6 行會造成執行階段錯誤。",
@@ -5412,7 +5420,7 @@
         "image": null,
         "image01": "images/180.png",
         "explanation": [
-            "<pre><code class=\"language-python\">[[image01]]</code></pre>"
+            "<pre><code class=\"language-python\"></code></pre>[[image01]]"
         ],
         "category": "D6_模組與常用工具"
     }
