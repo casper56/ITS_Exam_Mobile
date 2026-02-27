@@ -5659,10 +5659,8 @@
                         <div class="match-col right-col d-flex flex-column gap-4">`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}">
-                        <div class="match-dot" id="dot-right-${rIdx}" 
-                             onmouseup="handleTargetDrop(event, ${rIdx})"
-                             ontouchend="handleTargetDrop(event, ${rIdx})"></div>
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}">
+                        <div class="match-dot" id="dot-right-${rIdx}"></div>
                         <div style="flex:1;">${text}</div>
                      </div>`;
         });
@@ -5718,32 +5716,34 @@
 
     window.handleDragMove = function(e) {
         if (!isDragging || !tempLine) return;
-        e.preventDefault();
-        
         const wrapper = document.getElementById('matching-wrapper');
         const rect = wrapper.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
         
-        const x2 = clientX - rect.left;
-        const y2 = clientY - rect.top;
+        window.lastClientX = clientX;
+        window.lastClientY = clientY;
+
+        const zoom = window.globalZoom || 1.0;
+        const x2 = (clientX - rect.left) / zoom;
+        const y2 = (clientY - rect.top) / zoom;
         
         tempLine.setAttribute('x2', x2);
         tempLine.setAttribute('y2', y2);
     };
 
-    window.handleTargetDrop = function(e, rIdx) {
-        if (!isDragging) return;
-        userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
-        finishDrag();
-    };
-
     window.handleDragEnd = function(e) {
         if (!isDragging) return;
-        // 延遲一點點檢查，確保 handleTargetDrop 先觸發（如果是 mouseup）
-        setTimeout(() => {
-            if (isDragging) finishDrag();
-        }, 10);
+        const x = window.lastClientX;
+        const y = window.lastClientY;
+        const targetEl = document.elementFromPoint(x, y);
+        const rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+
+        if (rightItem) {
+            const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+            userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+        }
+        finishDrag();
     };
 
     function finishDrag() {
