@@ -76,9 +76,39 @@
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        
+        /* 縮放與配對題樣式整合 */
+        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
+        .zoom-btn { width: 52px; height: 52px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; user-select: none; transition: none !important; }
+        #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
+        .matching-wrapper { position: relative; margin: 30px 0; padding: 10px; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-row { display: flex; justify-content: flex-start; gap: 120px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; padding-left: 10px; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; }
+        .matching-columns { display: flex; justify-content: flex-start; gap: 120px; position: relative; z-index: 2; padding-left: 10px; }
+        .match-col { display: flex; flex-direction: column; gap: 25px; min-width: 200px; }
+        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
+        .match-item-left { justify-content: flex-end; text-align: right; }
+        .match-item-right { justify-content: flex-start; text-align: left; }
+        .match-dot { width: 22px; height: 22px; border: 1.5px solid #333; border-radius: 50%; margin: 0 15px; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; flex-shrink: 0; }
+        .match-dot::after { content: ""; width: 10px; height: 10px; background: transparent; border-radius: 50%; transition: none; }
+        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
+        .match-item.selected .match-dot { border-color: #0d6efd; }
+        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        @media (max-width: 768px) {
+            .matching-columns, .match-header-row { gap: 30px !important; }
+            .match-col { min-width: 140px !important; }
+            .match-header-title { font-size: 1rem !important; }
+            .match-item { font-size: 0.9rem !important; }
+            .match-dot { width: 18px !important; height: 18px !important; margin: 0 10px !important; }
+            .match-dot::after { width: 8px !important; height: 8px !important; }
+        }
     </style>
 </head>
 <body>
+    <div id="zoom-controls">
+        <button type="button" class="zoom-btn" onclick="changeZoom(0.1)"><b>+</b></button>
+        <button type="button" class="zoom-btn" onclick="changeZoom(-0.1)"><b>−</b></button>
+    </div>
 <div class="main-wrapper">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -3434,6 +3464,20 @@
     }
     let currentIndex = 0;
     let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
+    window.itspyZoom = 1.0;
+    window.changeZoom = function(delta) {
+        window.itspyZoom = Math.round((window.itspyZoom + delta) * 10) / 10;
+        if (window.itspyZoom < 0.6) window.itspyZoom = 0.6;
+        if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
+        const container = document.getElementById('question-container');
+        if (container) {
+            container.style.transform = `scale(${window.itspyZoom})`;
+            container.style.transformOrigin = "top center";
+            if (window.itspyZoom > 1.0) container.style.marginBottom = ((window.itspyZoom - 1.0) * 100) + "%";
+            else container.style.marginBottom = "0";
+            if (typeof window.drawLines === 'function') window.drawLines();
+        }
+    };
     const SUBJECT_ID = 'az900';
     const CORR_KEY = SUBJECT_ID + '_correct_v1', INCORR_KEY = SUBJECT_ID + '_incorrect_v1', CORR_EDIT_KEY = SUBJECT_ID + '_corrected_v1', INDEX_KEY = SUBJECT_ID + '_index_v1', ANSWERS_KEY = SUBJECT_ID + '_answers_v1';
     function loadState() {
@@ -3471,6 +3515,115 @@
             return src ? `<img src="${src}" class="q-img">` : match;
         });
     }
+    function renderMatchingQuestion(index) {
+        currentIndex = index; const item = quizData[index];
+        const container = document.getElementById('question-container');
+        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+        const completed = correctSet.has(index) || incorrectSet.has(index);
+        let html = `<div class="card question-card">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">配對題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body" style="color:#333;">
+                <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
+        html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+                    <div class="match-header-row">
+                        <div class="match-header-title">程式碼片段</div>
+                        <div class="match-header-title">回答區</div>
+                    </div>
+                    <svg id="matching-svg"></svg>
+                    <div class="matching-columns">
+                        <div class="match-col left-col">`;
+        item.left.forEach((text, lIdx) => {
+            const isMatched = currentAns[lIdx] !== null;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}">
+                        <div style="font-family:Consolas,monospace;">${text}</div>
+                        <div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"></div>
+                     </div>`;
+        });
+        html += `</div><div class="match-col right-col">`;
+        item.right.forEach((text, rIdx) => {
+            const isMatchedByAny = currentAns.includes(rIdx);
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}">
+                        <div class="match-dot" id="dot-right-${rIdx}"></div>
+                        <div>${text}</div>
+                     </div>`;
+        });
+        html += `</div></div></div>`;
+        if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
+        else html += `<div class="answer-section" style="display:block;"><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+        html += `</div></div></div>`; container.innerHTML = html; updateUI(); saveState();
+        window.changeZoom(0); setTimeout(drawLines, 100);
+    }
+    let isDragging = false, dragStartPoint = null, tempLine = null;
+    window.handleDragStart = function(e, side, idx) {
+        if (side !== 'left') return;
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        isDragging = true; if(e.cancelable) e.preventDefault();
+        const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
+        const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
+        const zoom = window.itspyZoom || 1.0;
+        dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
+        const svg = document.getElementById("matching-svg");
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute("x1", dragStartPoint.x); tempLine.setAttribute("y1", dragStartPoint.y);
+        tempLine.setAttribute("x2", dragStartPoint.x); tempLine.setAttribute("y2", dragStartPoint.y);
+        tempLine.setAttribute("stroke", "#0d6efd"); tempLine.setAttribute("stroke-width", "2.5");
+        tempLine.setAttribute("opacity", "0.6"); svg.appendChild(tempLine);
+    };
+    window.handleDragMove = function(e) {
+        if (!isDragging || !tempLine) return;
+        const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const zoom = window.itspyZoom || 1.0;
+        tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
+    };
+    window.handleDragEnd = function(e) {
+        if (!isDragging) return;
+        const x = window.lastClientX, y = window.lastClientY;
+        const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+        if (rightItem) {
+            const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+            if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+            userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+        }
+        isDragging = false; dragStartPoint = null;
+        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
+        tempLine = null; renderMatchingQuestion(currentIndex);
+    };
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        const zoom = window.itspyZoom || 1.0, rect = wrapper.getBoundingClientRect();
+        const baseW = rect.width / zoom, baseH = rect.height / zoom;
+        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
+        svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById("dot-left-" + lIdx), dotR = document.getElementById("dot-right-" + rIdx);
+            if (dotL && dotR) {
+                const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                const x1 = (rL.left + rL.width/2 - rect.left) / zoom, y1 = (rL.top + rL.height/2 - rect.top) / zoom;
+                const x2 = (rR.left + rR.width/2 - rect.left) / zoom, y2 = (rR.top + rR.height/2 - rect.top) / zoom;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
+            }
+        });
+    };
+    window.submitMatching = function() {
+        const item = quizData[currentIndex], ans = userAnswers[currentIndex];
+        if (!ans || ans.includes(null)) { alert("請完成所有配對！"); return; }
+        
+        // 關鍵修正：將 0-based 的 index 轉換為對應字母 (0->A, 1->B, 2->C...) 進行比對
+        const userAnswersAsLetters = ans.map(idx => String.fromCharCode(65 + idx));
+        const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
+        
+        if (isCorrect) correctSet.add(currentIndex); else incorrectSet.add(currentIndex);
+        renderMatchingQuestion(currentIndex);
+    };
     function toggleExplanation(forceShow = null) {
         const el = document.getElementById('ans-section'), btn = document.getElementById('toggle-exp-btn');
         if (!el || !btn) return;
@@ -3597,6 +3750,7 @@
     }
     function renderQuestion(index) {
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
+        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
@@ -3633,7 +3787,7 @@
             if(completed) cIdxs.forEach(ci => { const inp = document.getElementById(`o${ci}`); if (inp) inp.closest('.option-item').classList.add('correct'); });
         }
         if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
-        updateUI(); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50); saveState();
+        updateUI(); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50); saveState(); window.changeZoom(0);
     }
     function updateUI() {
         const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
@@ -3644,7 +3798,7 @@
             n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
         });
     }
-    loadState(); renderQuestion(currentIndex);
+    loadState(); window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); }); renderQuestion(currentIndex);
 </script>
 </body>
 </html>

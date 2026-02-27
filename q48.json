@@ -1,0 +1,25 @@
+{
+    "id": 48,
+    "type": "matching",
+    "question": [
+        "<pre><code class=\"language-python\">【CH05-6】你設計一個 Python 程式來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上。請將正確的 Python 條件判斷式配對到對應的邏輯描述中：</code></pre>"
+    ],
+    "left": [
+        "(1) 判斷是否為 1 位數 ( < 10 )",
+        "(2) 判斷是否為 2 位數 ( 10 ~ 99 )",
+        "(3) 判斷是否為 2 位數以上 ( >= 100 )"
+    ],
+    "right": [
+        "A. if num < 10:",
+        "B. if num < 100:",
+        "C. elif num < 100:",
+        "D. else:"
+    ],
+    "answer": [0, 2, 3],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+        "<pre><code class=\"language-python\">● 第一步使用 if num < 10: 判斷 1 位數。● 第二步使用 elif num < 100: 判斷 2 位數 (此時已排除 < 10 的情況)。● 最後使用 else: 處理所有剩餘情況 (即 100 以上)。</code></pre>"
+    ],
+    "category": "D2_流程控制與判斷"
+}
