@@ -85,24 +85,24 @@
 
 
         /* 完全復刻配對題樣式 */
-        .matching-wrapper { position: relative; margin: 40px auto; padding: 10px; max-width: 900px; user-select: none; }
+        .matching-wrapper { position: relative; margin: 30px 0; padding: 10px; width: 100%; user-select: none; }
         
         .matching-columns { 
             display: flex; 
-            justify-content: center; /* 整個區塊置中 */
-            gap: 100px; /* 控制左右兩欄之間的連線距離 */
+            justify-content: flex-start; /* 靠左對齊 */
+            gap: 120px; /* 控制左右兩欄之間的連線距離 */
             position: relative; 
             z-index: 2; 
+            padding-left: 10px;
         }
         
         .match-col { 
             display: flex; 
             flex-direction: column; 
             gap: 25px; 
-            min-width: 250px; /* 確保欄位有足夠空間 */
+            min-width: 200px;
         }
         
-        /* 標題樣式：直接放在欄位頂部 */
         .match-title { 
             font-weight: bold; 
             color: #333; 
@@ -110,13 +110,14 @@
             margin-bottom: 15px; 
             padding-bottom: 10px;
             border-bottom: 2px solid #eee;
+            width: 100%;
         }
-        .match-title-left { text-align: left; padding-left: 0; }
-        .match-title-right { text-align: left; padding-left: 55px; } /* 對齊圓點後的文字 */
+        .match-title-left { text-align: left; }
+        .match-title-right { text-align: left; padding-left: 55px; } 
         
         .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
-        .match-item-left { justify-content: flex-end; text-align: right; }
-        .match-item-right { justify-content: flex-start; text-align: left; }
+        .match-item-left { justify-content: flex-end; } /* 內容靠右對齊圓點 */
+        .match-item-right { justify-content: flex-start; }
         
         .match-dot {
             width: 22px; height: 22px;
@@ -132,6 +133,7 @@
         .match-item.selected .match-dot { border-color: #0d6efd; }
         
         #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
 
 
     </style>
