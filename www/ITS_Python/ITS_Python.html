@@ -77,11 +77,12 @@
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
         
-        /* 縮放工具樣式 */
-        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
-        .zoom-btn { width: 48px; height: 48px; border-radius: 50%; background: rgba(33, 37, 41, 0.85); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; user-select: none; transition: background 0.2s, transform 0.1s; }
-        .zoom-btn:active { transform: scale(0.9); background: #000; }
-        #question-container { transform-origin: top center; transition: none !important; }
+        
+    #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+    .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 37, 41, 0.85); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; user-select: none; }
+    #question-container, #question-area { transform-origin: top center; transition: none !important; }
+    .matching-wrapper { touch-action: pan-y pinch-zoom; position: relative; margin: 30px 0; padding: 10px; }
+
 
         /* 完全復刻配對題樣式 */
         .matching-wrapper { touch-action: none;  
@@ -5620,7 +5621,7 @@
         const container = document.getElementById('question-container');
         
         // 修正：補回導覽按鈕邏輯
-        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
@@ -6016,7 +6017,7 @@
         if (item.type === 'matching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
-        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
         container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body"><div>${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');
