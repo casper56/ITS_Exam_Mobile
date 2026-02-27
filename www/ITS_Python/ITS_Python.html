@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITS Python 認證練習</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
@@ -76,76 +76,10 @@
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
-        
-        
-    #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
-    .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 37, 41, 0.85); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; user-select: none; }
-    #question-container, #question-area { transform-origin: top center; transition: none !important; }
-    .matching-wrapper { touch-action: pan-y pinch-zoom; position: relative; margin: 30px 0; padding: 10px; z-index: 10; overflow: visible !important; }
-
-
-        /* 完全復刻配對題樣式 */
-        .matching-wrapper { position: relative; margin: 30px 0; padding: 10px; width: 100%; user-select: none; }
-        
-        .matching-columns { 
-            display: flex; 
-            justify-content: flex-start; /* 靠左對齊 */
-            gap: 120px; /* 控制左右兩欄之間的連線距離 */
-            position: relative; 
-            z-index: 2; 
-            padding-left: 10px;
-        }
-        
-        .match-col { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 25px; 
-            min-width: 200px;
-        }
-        
-        .match-title { 
-            font-weight: bold; 
-            color: #333; 
-            font-size: 1.2rem; 
-            margin-bottom: 15px; 
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-            width: 100%;
-        }
-        .match-title-left { text-align: left; }
-        .match-title-right { text-align: left; padding-left: 55px; } 
-        
-        .match-item { display: flex; align-items: center; min-height: 45px; cursor: pointer; }
-        .match-item-left { justify-content: flex-end; } /* 內容靠右對齊圓點 */
-        .match-item-right { justify-content: flex-start; }
-        
-        .match-dot {
-            width: 22px; height: 22px;
-            border: 1.5px solid #333; border-radius: 50%;
-            margin: 0 15px; display: flex; align-items: center; justify-content: center;
-            background: #fff; position: relative; flex-shrink: 0;
-        }
-        .match-dot::after {
-            content: ""; width: 10px; height: 10px;
-            background: transparent; border-radius: 50%; transition: all 0.1s;
-        }
-        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
-        .match-item.selected .match-dot { border-color: #0d6efd; }
-        
-        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-
-
-
     </style>
 </head>
 <body>
-    <!-- 縮放工具欄 (手機版雙指縮放受限時的備案) -->
-    <div id="zoom-controls">
-        <button type="button" class="zoom-btn" onclick="changeZoom(0.1)" title="放大題目"><b>+</b></button>
-        <button type="button" class="zoom-btn" onclick="changeZoom(-0.1)" title="縮小題目"><b>−</b></button>
-    </div>
-    <div class="main-wrapper">
-
+<div class="main-wrapper">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -173,9 +107,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
-
-    
-    
     const quizData = [
     {
         "id": 1,
@@ -5582,240 +5513,6 @@
         "category": "D6_模組與常用工具"
     }
 ];
-    let currentSelection = { side: null, index: null };
-    window.itspyZoom = 1.0;
-    window.changeZoom = function(delta) {
-        window.itspyZoom = (Math.round((window.itspyZoom + delta) * 10) / 10);
-        if (window.itspyZoom < 0.6) window.itspyZoom = 0.6;
-        if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
-        const container = document.getElementById('question-container') || document.getElementById('question-area');
-        if (container) {
-            container.style.transform = `scale(${window.itspyZoom})`;
-            container.style.transformOrigin = 'top center';
-            container.style.transition = 'none';
-            if (window.itspyZoom > 1.0) container.style.marginBottom = ((window.itspyZoom - 1.0) * 100) + "%";
-            else container.style.marginBottom = "0";
-            if (typeof window.drawLines === 'function') window.drawLines();
-        }
-    };
-    window.globalZoom = window.itspyZoom; // 相容舊代碼
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
-
-    let isDragging = false;
-    let dragStartPoint = null;
-    let tempLine = null;
-
-    
-    
-    function renderMatchingQuestion(index) {
-        currentIndex = index; const item = quizData[index];
-        const container = document.getElementById('question-container');
-        
-        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
-        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
-        const currentAns = userAnswers[index];
-        const completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
-
-        let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">配對題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body" style="color:#000;">
-                <div class="mb-4" style="font-weight:600; font-size:1.1rem;">${processContent(item.question, item)}</div>`;
-        
-        
-        html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
-                    <svg id="matching-svg"></svg>
-                    <div class="matching-columns">
-                        <!-- 左側：程式碼片段欄 -->
-                        <div class="match-col left-col">
-                            <div class="match-title match-title-left">程式碼片段</div>`;
-        item.left.forEach((text, lIdx) => {
-            const isMatched = currentAns[lIdx] !== null;
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}">
-                        <div style="font-family:Consolas,monospace; font-size:1.1rem;">${text}</div>
-                        <div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"></div>
-                     </div>`;
-        });
-        html += `</div>
-                        <!-- 右側：回答區欄 -->
-                        <div class="match-col right-col">
-                            <div class="match-title match-title-right">回答區</div>`;
-        item.right.forEach((text, rIdx) => {
-            const isMatchedByAny = currentAns.includes(rIdx);
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}">
-                        <div class="match-dot" id="dot-right-${rIdx}"></div>
-                        <div style="font-family:sans-serif; font-size:1.1rem;">${text}</div>
-                     </div>`;
-        });
-        html += `</div></div></div>`;
-
-        
-        if (!completed) {
-            html += `<div class="text-center mt-5 mb-3 border-top pt-4">
-                        <button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認完成配對並提交</button>
-                        <p class="text-muted mt-2 small">操作指引：按住左側圓點拖曳至右側選項即可連線。點擊左側圓點可重選。</p>
-                     </div>`;
-        } else {
-            html += `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示解析</button></div>
-                     <div class="answer-section" id="ans-section" style="display:block;"><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
-        }
-
-        html += `</div></div></div>`;
-        container.innerHTML = html;
-        updateUI(); saveState();
-        if (window.changeZoom) window.changeZoom(0);
-        setTimeout(drawLines, 150);
-    }
-
-
-
-    
-    window.handleDragStart = function(e, side, idx) {
-        if (side !== 'left') return;
-        if (userAnswers[currentIndex][idx] !== null) {
-            userAnswers[currentIndex][idx] = null;
-            renderMatchingQuestion(currentIndex);
-        }
-
-        isDragging = true;
-        const dot = document.getElementById(`dot-left-${idx}`);
-        const rect = dot.getBoundingClientRect();
-        const wrapperRect = document.getElementById('matching-wrapper').getBoundingClientRect();
-        const zoom = window.globalZoom || 1.0;
-        
-        dragStartPoint = {
-            lIdx: idx,
-            x: (rect.left + rect.width/2 - wrapperRect.left) / zoom,
-            y: (rect.top + rect.height/2 - wrapperRect.top) / zoom
-        };
-
-        const svg = document.getElementById('matching-svg');
-        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        tempLine.setAttribute('x1', dragStartPoint.x);
-        tempLine.setAttribute('y1', dragStartPoint.y);
-        tempLine.setAttribute('x2', dragStartPoint.x);
-        tempLine.setAttribute('y2', dragStartPoint.y);
-        tempLine.setAttribute('stroke', '#0d6efd');
-        tempLine.setAttribute('stroke-width', '2.5');
-        tempLine.setAttribute('opacity', '0.6');
-        svg.appendChild(tempLine);
-    };
-
-    window.handleDragMove = function(e) {
-        if (!isDragging || !tempLine) return;
-        const wrapper = document.getElementById('matching-wrapper');
-        const rect = wrapper.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        
-        window.lastClientX = clientX;
-        window.lastClientY = clientY;
-
-        const zoom = window.globalZoom || 1.0;
-        const x2 = (clientX - rect.left) / zoom;
-        const y2 = (clientY - rect.top) / zoom;
-        
-        tempLine.setAttribute('x2', x2);
-        tempLine.setAttribute('y2', y2);
-    };
-
-    window.handleDragEnd = function(e) {
-        if (!isDragging) return;
-        const x = window.lastClientX;
-        const y = window.lastClientY;
-        const targetEl = document.elementFromPoint(x, y);
-        const rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
-
-        if (rightItem) {
-            const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-            userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
-        }
-        finishDrag();
-    };
-
-    function finishDrag() {
-        isDragging = false;
-        dragStartPoint = null;
-        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
-        tempLine = null;
-        renderMatchingQuestion(currentIndex);
-    }
-
-    
-
-    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
-
-    window.clearMatch = function(lIdx) {
-        userAnswers[currentIndex][lIdx] = null;
-        renderMatchingQuestion(currentIndex);
-    };
-
-    window.allowDrop = (e) => e.preventDefault();
-    window.dragStart = (e, rIdx) => e.dataTransfer.setData("text", rIdx);
-    window.dropMatch = (e, lIdx) => {
-        e.preventDefault();
-        const rIdx = parseInt(e.dataTransfer.getData("text"));
-        userAnswers[currentIndex][lIdx] = rIdx;
-        renderMatchingQuestion(currentIndex);
-    };
-
-    
-    
-    window.drawLines = function() {
-        const svg = document.getElementById('matching-svg');
-        const wrapper = document.getElementById('matching-wrapper');
-        if (!svg || !wrapper) return;
-        
-        const zoom = window.globalZoom || 1.0;
-        const wrapperRect = wrapper.getBoundingClientRect();
-        
-        // 取得設計階段的原始寬高 (視覺寬高 / 縮放比例)
-        const baseW = wrapperRect.width / zoom;
-        const baseH = wrapperRect.height / zoom;
-        
-        // 設定 viewBox，讓 SVG 內部的單位自動與設計座標對齊
-        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
-        svg.innerHTML = '';
-
-        const currentAns = userAnswers[currentIndex];
-        if (!currentAns) return;
-        
-        currentAns.forEach((rIdx, lIdx) => {
-            if (rIdx === null) return;
-            const dotL = document.getElementById("dot-left-" + lIdx);
-            const dotR = document.getElementById("dot-right-" + rIdx);
-            if (dotL && dotR) {
-                const rectL = dotL.getBoundingClientRect();
-                const rectR = dotR.getBoundingClientRect();
-                
-                // 計算相對於 wrapper 左上角的視覺距離，並除以 zoom 還原為原始單位
-                const x1 = (rectL.left + rectL.width/2 - wrapperRect.left) / zoom;
-                const y1 = (rectL.top + rectL.height/2 - wrapperRect.top) / zoom;
-                const x2 = (rectR.left + rectR.width/2 - wrapperRect.left) / zoom;
-                const y2 = (rectR.top + rectR.height/2 - wrapperRect.top) / zoom;
-
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-                line.setAttribute('stroke', '#0d6efd');
-                line.setAttribute('stroke-width', '2.5');
-                svg.appendChild(line);
-            }
-        });
-    };
-
-
-
-
-    window.submitMatching = function() {
-        const item = quizData[currentIndex];
-        const ans = userAnswers[currentIndex];
-        if (ans.includes(null)) { alert("請完成所有配對後再提交！"); return; }
-        
-        const isCorrect = JSON.stringify(ans) === JSON.stringify(item.answer);
-        if (isCorrect) correctSet.add(currentIndex); else incorrectSet.add(currentIndex);
-        renderMatchingQuestion(currentIndex);
-    };
-
     function parseAnswerToIndex(val) {
         if (typeof val === 'number') return val - 1;
         if (typeof val === 'string') {
@@ -5991,11 +5688,10 @@
         if(window.Prism) Prism.highlightAll(); setTimeout(() => { window.print(); }, 100);
     }
     function renderQuestion(index) {
-        currentIndex = index; const item = quizData[index];
-        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
-        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
         container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body"><div>${processContent(item.question, item)}</div>${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');

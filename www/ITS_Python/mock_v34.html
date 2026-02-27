@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITS Python 模擬考試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
@@ -82,13 +82,6 @@
         }
         .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-    
-        /* 縮放工具樣式 */
-        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 37, 41, 0.9); color: white; border: 2px solid rgba(255,255,255,0.5); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.5); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
-        .zoom-btn:active { transform: scale(0.9); background: #000; }
-        #question-area, #review-area { transform-origin: top center; transition: none !important; }
-    
     </style>
 </head>
 <body>
@@ -124,22 +117,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
-
-    window.globalZoom = 1.0;
-    window.changeZoom = function(delta) {
-        window.globalZoom = (Math.round((window.globalZoom + delta) * 10) / 10);
-        if (window.globalZoom < 0.7) window.globalZoom = 0.7;
-        if (window.globalZoom > 2.0) window.globalZoom = 2.0;
-        const container = document.getElementById('question-container');
-        if (container) {
-            container.style.transform = `scale(${window.globalZoom})`;
-            container.style.transformOrigin = 'top center';
-            if (window.globalZoom > 1) container.style.marginBottom = ((window.globalZoom - 1) * 100) + "%";
-            else container.style.marginBottom = "0";
-            if (window.drawLines) setTimeout(window.drawLines, 100);
-        }
-    };
-    
     const EXAM_LIMIT = 60, WRONG_KEY = 'itspy_exam_wrong_ids', HISTORY_KEY = 'itspy_mock_history';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
@@ -1432,14 +1409,7 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">43. 【CH05-1】你設計了一個程式要依學生的成績來顯示等級，它的規定如下：</code></pre>",
-            "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }
-        /* 縮放工具樣式 */
-        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 37, 41, 0.9); color: white; border: 2px solid rgba(255,255,255,0.5); font-size: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.5); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
-        .zoom-btn:active { transform: scale(0.9); background: #000; }
-        #question-area, #review-area { transform-origin: top center; transition: none !important; }
-    
-    </style>",
+            "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
             "<table class=\"q-table w-50 t-left\"><thead><tr class=\"header-bg\"><td>Percentage range</td><td>Letter grade</td></tr></thead><tbody>",
             "    <tr>",
             "      <td><b>90 through 100</b></td>",
