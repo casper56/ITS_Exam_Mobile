@@ -5772,6 +5772,42 @@
         renderMatchingQuestion(currentIndex);
     };
 
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg');
+        const wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        svg.innerHTML = '';
+        const zoom = window.globalZoom || 1.0;
+        const rect = wrapper.getBoundingClientRect();
+        
+        svg.setAttribute('width', rect.width / zoom);
+        svg.setAttribute('height', rect.height / zoom);
+
+        const currentAns = userAnswers[currentIndex];
+        if (!currentAns) return;
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById(`dot-left-${lIdx}`);
+            const dotR = document.getElementById(`dot-right-${rIdx}`);
+            if (dotL && dotR) {
+                const rectL = dotL.getBoundingClientRect();
+                const rectR = dotR.getBoundingClientRect();
+                
+                const x1 = (rectL.left + rectL.width/2 - rect.left) / zoom;
+                const y1 = (rectL.top + rectL.height/2 - rect.top) / zoom;
+                const x2 = (rectR.left + rectR.width/2 - rect.left) / zoom;
+                const y2 = (rectR.top + rectR.height/2 - rect.top) / zoom;
+
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', '#0d6efd');
+                line.setAttribute('stroke-width', '2.5');
+                svg.appendChild(line);
+            }
+        });
+    };
+
     window.submitMatching = function() {
         const item = quizData[currentIndex];
         const ans = userAnswers[currentIndex];
