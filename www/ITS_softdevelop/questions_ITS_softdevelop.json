@@ -670,7 +670,7 @@
             "C"
         ],
         "explanation": [
-            "<b>⭐ Override (覆寫) 的必要條件：</b>",
+            "[[image01]]\n<b>⭐ Override (覆寫) 的必要條件：</b>",
             "若要在子類別中覆寫父類別的方法，該方法必須在存取權限上允許存取，且具備 <code>virtual</code> 關鍵字。",
             "<b>條件對照表：</b>",
             "<table class=\"q-table w-100 t-left\"><thead><tr><th>宣告方式</th><th>可否覆寫</th><th>原因說明</th></tr></thead><tbody><tr><td>static</td><td>❌</td><td>靜態方法屬於類別，不屬於物件。</td></tr><tr><td>private virtual</td><td>❌</td><td>子類別根本看不到 private 方法。</td></tr><tr><td><b>protected virtual</b></td><td>✅</td><td><b>子類別可見且允許擴充。</b></td></tr><tr><td>Non-virtual</td><td>❌</td><td>基底類別未宣告允許覆寫。</td></tr></tbody></table>"
@@ -821,7 +821,7 @@
     {
         "id": 24,
         "question": [
-            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。",
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：綠色漸層至黑色的矩形。</code></pre>[[image01]]<pre><code class=\"language-csharp\">",
             "請選擇正確的選項以完成句子。",
             "對於 background-image 樣式，您應該使用此值：</code></pre>"
         ],
@@ -838,15 +838,14 @@
             "CSS 語法為 linear-gradient(to bottom, green, black);，會產生從上到下由綠到黑的線性漸層"
         ],
         "weight": 1,
-        "image": "images/id24.png",
+        "image01": "images/id24.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
     {
         "id": 25,
         "question": [
-            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：",
-            " ",
+            "<pre><code class=\"language-csharp\">您正在開發一個 Web 程式，您需要使用階層式樣式表（CSS）建立上列圖形：</code></pre>[[image01]]<pre><code class=\"language-csharp\">",
             "請選擇正確的選項以完成句子。",
             "對於 background-image 樣式，您應該使用此值：</code></pre>"
         ],
@@ -865,7 +864,7 @@
             "<pre><code class=\"language-csharp\">A. 10px;                        //CSS的border-radius屬性可以幫div添加圓角的效果\nB. 10px, 10px, 10px;\nC. inherit;\nD. initial;</code></pre>"
         ],
         "weight": 1,
-        "image": "images/id24.png",
+        "image01": "images/id24.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
@@ -1001,7 +1000,7 @@
     {
         "id": 31,
         "question": [
-            "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。",
+            "<pre><code class=\"language-csharp\">請選取正確的選項以完成圖表。請在圖表中指出 MVC 架構模式的正確元件對應順序。</code></pre>[[image01]]<pre><code class=\"language-csharp\">",
             "B1 是控制器，B2 是模型，B3 是檢視</code></pre>"
         ],
         "options": [
@@ -1025,14 +1024,14 @@
             "B1 是控制器，B2 是模型，B3 是檢視。因此答案是 123。</code></pre>"
         ],
         "weight": 1,
-        "image": "images/id31.png",
+        "image01": "images/id31.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
     {
         "id": 32,
         "question": [
-            "<pre><code class=\"language-csharp\">請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。",
+            "<pre><code class=\"language-csharp\">請完成圖表以解說 MVC 架構的核心功能。請將每個動作移至正確的位置。</code></pre>[[image01]]<pre><code class=\"language-csharp\">",
             "1. 將事件轉換成要求",
             "2. 顯示資料",
             "3. 解譯並傳遞資料",
@@ -1057,14 +1056,14 @@
             "2 顯示資料(View)。</code></pre>"
         ],
         "weight": 1,
-        "image": "images/id32.png",
+        "image01": "images/id32.png",
         "type": "single",
         "category": "D4_Web應用程式"
     },
     {
         "id": 33,
         "question": [
-            "<pre><code class=\"language-csharp\">您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>"
+            "<pre><code class=\"language-csharp\">您正在檢閱一項資料庫設計。此設計的其中一部分如下圖所示。哪一個詞能描述 Customer 與 Order 之間的關聯性？</code></pre>[[image01]]"
         ],
         "options": [
             "多對多",
@@ -1079,7 +1078,7 @@
             "<pre><code class=\"language-csharp\">一個 Customer（顧客）可以有多個 Order（訂單），但每筆 Order 只能屬於一個 Customer，因此這是典型的「一對多」關聯性</code></pre>"
         ],
         "weight": 1,
-        "image": "images/id33.png",
+        "image01": "images/id33.png",
         "type": "single",
         "category": "D5_資料庫"
     },
