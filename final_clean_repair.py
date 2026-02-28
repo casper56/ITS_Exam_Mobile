@@ -145,9 +145,17 @@ def clean_repair_all():
             .matching-columns, .match-header-row { gap: 30px !important; }
             .match-col { min-width: 140px !important; }
         }
+        /* 資料處理遮罩 */
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0d6efd; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
+<div id="loading-overlay" class="no-print">
+    <div class="spinner"></div>
+    <div>資料處理中，請稍候...</div>
+</div>
 <div class="zoom-controls no-print">
     <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
     <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
@@ -169,7 +177,7 @@ def clean_repair_all():
     <div class="mt-5 no-print">
         <a href="../../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
         <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
-        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="window.print()">🖨️ 列印錯題</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="prepareMockPrint()">🖨️ 列印錯題</button>
     </div>
     <div id="review-area">
         <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
@@ -180,6 +188,60 @@ def clean_repair_all():
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
+    function prepareMockPrint() {
+        const overlay = document.getElementById('loading-overlay');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        if (overlay) overlay.style.display = 'flex';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        const oldZoom = document.body.style.zoom || "1.0";
+        document.body.style.zoom = "1.0";
+
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                if (!svg) return;
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width); svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px'; svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2 + 5;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2 - 20;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+
+            setTimeout(() => {
+                window.print();
+                if (overlay) overlay.style.display = 'none';
+                if (zoomBtns) zoomBtns.style.display = 'flex';
+                document.body.style.zoom = oldZoom;
+            }, 1000);
+        }, 2500);
+    }
+
     const EXAM_LIMIT = 60, WRONG_KEY = 'REPLACE_SUBJECT_ID_exam_wrong_ids', HISTORY_KEY = 'REPLACE_SUBJECT_ID_mock_history';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
@@ -809,10 +871,18 @@ def clean_repair_all():
             .match-dot { width: 18px !important; height: 18px !important; margin: 0 10px !important; }
             .match-dot::after { width: 8px !important; height: 8px !important; }
         }
+        /* 資料處理遮罩 */
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0d6efd; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div id="zoom-controls">
+    <div id="loading-overlay" class="no-print">
+        <div class="spinner"></div>
+        <div>資料處理中，請稍候...</div>
+    </div>
+    <div id="zoom-controls" class="no-print">
         <button type="button" class="zoom-btn" onclick="changeZoom(0.1)"><b>+</b></button>
         <button type="button" class="zoom-btn" onclick="changeZoom(-0.1)"><b>−</b></button>
     </div>
@@ -1131,6 +1201,23 @@ def clean_repair_all():
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
             function prepareAndPrint(onlyMistakes = false) {
+                // 顯示處理中遮罩並隱藏縮放按鈕
+                const overlay = document.getElementById('loading-overlay');
+                const zoomBtns = document.getElementById('zoom-controls');
+                if (overlay) overlay.style.display = 'flex';
+                if (zoomBtns) zoomBtns.style.display = 'none';
+
+                // 記錄原始狀態以便後續恢復
+                const oldZoom = document.body.style.zoom || "1.0";
+                const sidebar = document.querySelector('.sidebar');
+                const content = document.querySelector('.content-area');
+                const sidebarWasVisible = sidebar && (getComputedStyle(sidebar).display !== 'none');
+
+                // 暫時重置縮放與隱藏側邊欄，確保座標計算基準與列印佈局一致
+                document.body.style.zoom = "1.0";
+                if (sidebar) sidebar.style.display = 'none';
+                if (content) content.style.marginLeft = '0';
+                
                 const area = document.getElementById('review-area');
                 if (!area) return;
                 area.style.display = 'block'; // 強制顯示以計算座標
@@ -1152,33 +1239,22 @@ def clean_repair_all():
                 
                 let optHtml = "";
                             if (item.type === 'matching') {
-                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
-                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
-                                    <table style="width:100%; border-collapse:collapse; border:1px solid #333; position:relative; z-index:5;">
-                                        <thead>
-                                            <tr style="background:#f8f9fa;">
-                                                <th style="width:46%; text-align:left; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">程式碼片段</th>
-                                                <th style="width:8%; border:1px solid #333;"></th>
-                                                <th style="width:46%; text-align:right; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">正確對應回答</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>`;
+                                let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
+                                let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('');
                                 
-                                const maxRows = Math.max(item.left.length, item.right.length);
-                                for (let r = 0; r < maxRows; r++) {
-                                    const lText = item.left[r] || "";
-                                    const rText = item.right[r] || "";
-                                    optHtml += `<tr>
-                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
-                                            ${lText ? `<div style="display:flex; align-items:center; justify-content:flex-end;"><div style="font-family:Consolas,monospace;">${lText}</div><div class="match-dot" id="pdl-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>` : ''}
-                                        </td>
-                                        <td style="border:1px solid #333;"></td>
-                                        <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
-                                            ${rText ? `<div style="display:flex; align-items:center; justify-content:flex-start;"><div class="match-dot" id="pdr-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div style="font-family:Consolas,monospace;">${rText}</div></div>` : ''}
-                                        </td>
-                                    </tr>`;
-                                }
-                                optHtml += `</tbody></table></div>`;
+                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                                    <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
+                                        <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
+                                            ${leftItems}
+                                        </div>
+                                        <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
+                                            ${rightItems}
+                                        </div>
+                                    </div>
+                                </div>`;
                             } else {
                 
                     optHtml = opts.map((o, i) => {
@@ -1209,6 +1285,19 @@ def clean_repair_all():
                                                                                             const qIdx = parseInt(wrapper.getAttribute('data-idx'));
                                                                                             const item = quizData[qIdx];
                                                                                             const svg = wrapper.querySelector('.print-svg');
+                                                                                            if (!svg) return;
+                                                                                            
+                                                                                            // 實作左側動態字寬偵測 (練習區列印專用)
+                                                                                            const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+                                                                                            let maxW = 0;
+                                                                                            leftParts.forEach(p => {
+                                                                                                const w = p.getBoundingClientRect().width;
+                                                                                                if (w > maxW) maxW = w;
+                                                                                            });
+                                                                                            if (maxW > 0) {
+                                                                                                leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
+                                                                                            }
+
                                                                                             const wRect = wrapper.getBoundingClientRect();
                                                                                             if (wRect.width === 0) return;
                                                                                             
@@ -1244,8 +1333,17 @@ def clean_repair_all():
                                                                                             const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
                                                                                         });
                                                                                         if(window.Prism) Prism.highlightAll(); 
-                                                                                        setTimeout(() => { window.print(); }, 1000);
-                                                                                    }, 2500);
+                                                                                                                                                                                        setTimeout(() => { 
+                                                                                                                                                                                            window.print(); 
+                                                                                                                                                                                            // 列印後恢復原始 UI 狀態並隱藏遮罩
+                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
+                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.display = 'flex';
+                                                                                                                                                                                            document.body.style.zoom = oldZoom;
+                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
+                                                                                                                                                                                                sidebar.style.display = 'flex';
+                                                                                                                                                                                                content.style.marginLeft = '280px';
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }, 1200);                                                                                    }, 2500);
                                                                                                                                                                     }
     
     function renderQuestion(index) {
