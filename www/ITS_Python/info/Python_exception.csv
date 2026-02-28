@@ -1,0 +1,8 @@
+子類別,說明,觸發範例
+ValueError,傳入參數類型正確但「值」不合法,"int(""abc"")"
+TypeError,操作或函數應用於「類型」不正確的物件,"1 + ""2"""
+IndexError,序列（List/Tuple）索引超出範圍,l = [1]; l[5]
+KeyError,字典中找不到指定的鍵 (Key),"d = {}; d[""id""]"
+AttributeError,物件沒有這個屬性或方法,None.split()
+ZeroDivisionError,除以零,1 / 0
+FileNotFoundError,找不到檔案 (屬於 OSError),"open(""no.txt"")"

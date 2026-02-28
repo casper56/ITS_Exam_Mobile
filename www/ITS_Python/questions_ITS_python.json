@@ -40,20 +40,25 @@
     },
     {
         "id": 2,
-        "type": "multioption",
+        "type": "matching",
         "question": [
             "<pre><code class=\"language-python\">【CH01-2】你正在編寫一個 Python 程式用來記錄客戶資料並將其儲存在資料庫中。",
             "這個程式處理各種各樣的資料。",
-            "以下的變數宣告後它們的資料類別是？",
-            "選項 1. age = 12\n選項 2. minor = False\n選項 3. name = 'David'\n選項 4. weight = 64.5\n選項 5. zip = '545'</code></pre>"
+            "以下的變數宣告後它們的資料類別是？</code></pre>"
         ],
-        "options": [
-            "<code>int|bool|str|float</code>",
-            "<code>int|bool|str|float</code>",
-            "<code>int|bool|str|float</code>",
-            "<code>int|bool|str|float</code>",
-            "<code>int|bool|str|float</code>"
-        ],
+		"left" : [
+			"1. age = 12",
+			"2. minor = False",
+			"3. name = 'David",
+			"4. weight = 64.5",
+			"5. zip = '545'"
+		],
+		"right" : [
+			"int",
+			"bool",
+			"str",
+			"float"
+		],
         "answer": [
             "A",
             "B",
@@ -821,7 +826,7 @@
             "<pre><code class=\"language-python\">【CH03-6】你為學校設計了一個 Python 應用程式，在 classroom 的清單中包含了 60 位同學的姓名，最後 3 名是班上的幹部。",
             "你需要分割清單內容顯示除了幹部以外的所有同學，你可以利用以下哪二個程式碼達成？",
             "可以答成回答 Yes ， 不能回答回答 No",
-            "classroom[0: -2] = _(選項 1)_\n2. classroom[0: -3] = _(選項 2)_\n3. classroom[1: -3] = _(選項 3)_\n4. classroom[: -3] = _(選項 4)_\n5. classroom[1: -3] = _(選項 5)_</code></pre>"
+            "1. classroom[0: -2] = _(選項 1)_\n2. classroom[0: -3] = _(選項 2)_\n3. classroom[1: -3] = _(選項 3)_\n4. classroom[: -3] = _(選項 4)_\n5. classroom[1: -3] = _(選項 5)_</code></pre>"
         ],
         "options": [
             "<code>Yes|No</code>",
@@ -1495,8 +1500,21 @@
         "question": [
             "<pre><code class=\"language-python\">【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。",
             "程式碼如下：",
-            "from random import randint\ntarget = randint(1,100)\nchance = 1\nprint('Guess an integer from 1 to 10. You will have 3 chances.')\n_(選項 1)_\n    guess = int(input('Guess an integer:'))\n    if guess > target:\n        print('Guess is too high')\n    elif guess < target:\n        print('Guess is too low')\n    else:\n        print('Guess is just right')\n        _(選項 2)_\n    _(選項 3)_",
-            "程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
+			"from random import randint",
+			"target = randint(1,100)",
+			"chance = 1",
+			"print('Guess an integer from 1 to 10. You will have 3 chances.')",
+			"_(選項 1)_",
+			"    guess = int(input('Guess an integer:'))",
+			"    if guess > target:",
+			"        print('Guess is too high')",
+			"    elif guess < target:",
+			"        print('Guess is too low')",
+			"    else:",
+			"        print('Guess is just right')",
+			"        _(選項 2)_",
+			"    _(選項 3)_",
+             "程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
             "請將回答區專案的選到正確的程式碼片段</code></pre>"
         ],
         "left": [
@@ -1594,8 +1612,16 @@
             "● 新工資 = 目前工資 X 105% + $10000 獎金。\n● 程式會將每個人調整後的年薪資料存入 salaryList 清單中。你要如何完成這段程式碼？",
             "請在回答區選擇適當的程式碼片段。\n#清單中的每個人的工資都根據增加而更新。\n#年薪50萬元以上的員工將不會得到加薪。\n# salaryList 是由員工資料庫中取得，程式碼不會顯示。",
             "\n_(選項 1)_\n    if salaryList[index] >= 500000:\n        _(選項 2)_\n     salaryList[index] = int((salaryList[index] * 1.05) + 10000)",
-            "\n選項 1 答案選擇區\n答案 A. for index in range(len(salaryList)+1):\n答案 B. for index in range(len(salaryList)-1):\n答案 C. for index in range(len(salaryList)):\n答案 D. for index in salaryList:",
-            "選項 2 答案選擇區\nA. exit()\nB. continue\nC. break\nD. end</code></pre>"
+            "\n選項 1 答案選擇區",
+			" 答案 A. for index in range(len(salaryList)+1):",
+			" 答案 B. for index in range(len(salaryList)-1):",
+			" 答案 C. for index in range(len(salaryList)):",
+			" 答案 D. for index in salaryList:",
+			"選項 2 答案選擇區",
+			" A. exit()",
+			" B. continue",
+			" C. break",
+			" D. end</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1932,7 +1958,7 @@
         "question": [
             "<pre><code class=\"language-python\">【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：",
             "#程式碼片段\nscores = [80,90,75,85]\ncount = 0\nsum = 0\n# 在以下的程式碼有二個錯誤：\nfor index in range(_(選項 1)_):\n    count += 1\n    sum += scores[index]\naverage = _(選項 2)_\nprint('The total scords is:', sum)\nprint('The average scords is:', average)",
-            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。</code></pre>",
+            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。",
             "選項 1 答案選擇區\nA. size(scores)\nB. size(scores) - 1\nC. len(scores) + 1\nD. len(scores)\n\n選項 2 答案選擇區\nA. sum / count\nB. sum**count\nC. sum * count\nD. sum // count</code></pre>"
         ],
         "options": [
@@ -1997,7 +2023,7 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。",
-            "\n01  numList = [0,1,2,3,4,5,6,7,8,9]",
+            "01  numList = [0,1,2,3,4,5,6,7,8,9]",
             "02  i = 0",
             "03  while (i < 10)",
             "04   print(numList[i])",
@@ -2398,12 +2424,11 @@
         ],
         "weight": 1,
         "image": null,
-        "image01": "images/74_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">● 在 Python 中，使用 from datetime import datetime as dt 可以將 datetime 模組中的 datetime 函式匯入並設定為替代名稱 dt。",
             "● 選擇 1 是錯誤的，因為它沒有指定要匯入的函式。",
             "● 選擇 3 和選擇 4 的語法都是錯誤的。",
-            "from 模組 import 類別 as 別名datetime 模組有</code></pre>[[image01]]"
+            "from 模組 import 類別 as 別名datetime 模組有</code></pre>"
         ],
         "category": "D6_模組與常用工具"
     },
@@ -5372,7 +5397,43 @@
             "<pre><code class=\"language-python\">● **陷阱題**：Python 的 except 是依序比對的。",
             "● 因為 ValueError 是 Exception 的**子類別**。",
             "● 程式碼先寫了 except Exception (父類別)，它會攔截所有的錯誤，導致後面的 except ValueError (子類別) **永遠無法被執行到**。",
-            "● 正確寫法應將子類別 (ValueError) 寫在前面。</code></pre>"
+            "● 正確寫法應將子類別 (ValueError) 寫在前面。</pre><style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style><table class=\"q-table w-50 t-left\">  <thead>    <tr class=\"header-bg\">      <td class=\"w-15\">子類別</td>      <td class=\"w-42\">說明</td>      <td class=\"w-42\">觸發範例</td>    </tr>  </thead>  <tbody>",
+    "    <tr>",
+    "      <td><b>ValueError</b></td>",
+    "      <td class=\"code-font\">傳入參數類型正確但「值」不合法</td>",
+    "      <td>int(\"abc\")</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>TypeError</b></td>",
+    "      <td class=\"code-font\">操作或函數應用於「類型」不正確的物件</td>",
+    "      <td>1 + \"2\"</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>IndexError</b></td>",
+    "      <td class=\"code-font\">序列（List/Tuple）索引超出範圍</td>",
+    "      <td>l = [1]; l[5]</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>KeyError</b></td>",
+    "      <td class=\"code-font\">字典中找不到指定的鍵 (Key)</td>",
+    "      <td>d = {}; d[\"id\"]</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>AttributeError</b></td>",
+    "      <td class=\"code-font\">物件沒有這個屬性或方法</td>",
+    "      <td>None.split()</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>ZeroDivisionError</b></td>",
+    "      <td class=\"code-font\">除以零</td>",
+    "      <td>1 / 0</td>",
+    "    </tr>",
+    "    <tr>",
+    "      <td><b>FileNotFoundError</b></td>",
+    "      <td class=\"code-font\">找不到檔案 (屬於 OSError)</td>",
+    "      <td>open(\"no.txt\")</td>",
+    "    </tr>",
+    "  </tbody></table>"
         ],
         "category": "D5_錯誤處理與測試"
     },
@@ -5420,7 +5481,29 @@
         "image": null,
         "image01": "images/180.png",
         "explanation": [
-            "<pre><code class=\"language-python\"></code></pre>[[image01]]"
+            "<pre><code class=\"language-python\">● import datetime：你匯入的是整個工具箱（模組）。",
+            "● from datetime import datetime：你從工具箱裡拿出了那把叫做 datetime 的起子（類別）。",
+            "1. date ",
+			"   d=datetime.date(2026, 1, 01)     # 2026-01-01",
+            "2. datetime ",
+            "   d=datetime.datetime(2026, 1, 01) # 2026-01-01 00:00:00",
+            "   nowdate=datetime.datetime.now()  # 2026-02-28 10:35:31.844651",
+            "3. time",
+            "   now_time = datetime.now().time() # 輸出範例：10:55:12.456789",
+            "4. Timedelta",
+            "   #-----",
+            "   import datetime",
+            "   now = datetime.datetime.now()",
+            "   # 定義一段「長度」：45 天、10 小時、30 分鐘",
+            "   offset = datetime.timedelta(days=45, hours=10, minutes=30)",
+            "   # 直接做加法！",
+            "   future_date = now + offset",
+            "   print(f\"現在是：{now}\")",
+            "   print(f\"未來是：{future_date}\")",
+            "   #-----",
+            "   diff = nowdate - basedate # 這是一個 timedelta 物件",
+            "   print(diff.days)          # 只拿「天數」 (58)",
+            "   print(diff.total_seconds()) # 算出「總秒數」(</code></pre>[[image01]]"
         ],
         "category": "D6_模組與常用工具"
     }

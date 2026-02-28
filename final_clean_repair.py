@@ -225,7 +225,7 @@ def clean_repair_all():
             html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
         html += `</div><div class="match-col right-col">
-            <div class="match-header-title">回答區</div>`;
+            <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;
         item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             const dotColor = isMatchedByAny ? '#333' : 'transparent';
@@ -322,6 +322,7 @@ def clean_repair_all():
         const body = document.body;
         let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
         body.style.zoom = currentZoom + delta;
+        if (window.drawLines) window.drawLines();
     }
 
     function processContent(content, item) {
@@ -513,7 +514,7 @@ def clean_repair_all():
             const cat = catNameMap[prefix];
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
             stats[cat].total++;
-            stats[cat].ids.push(item.id);
+            
             const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
             if (item.type === 'matching') {
@@ -525,6 +526,8 @@ def clean_repair_all():
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
                 isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
             } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+
+            stats[cat].ids.push({ id: item.id, isWrong: !isCorrect });
             
             const isNum = (item.labelType === 'num');
             let ansText = answers.map(a => {
@@ -601,15 +604,22 @@ def clean_repair_all():
         document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
         let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th class="text-start">分類</th><th class="text-start">出題編號</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
         const sortedCats = Object.keys(stats).sort();
-        const CUTOFF = REPLACE_CUTOFF;
+        
         for (let cat of sortedCats) {
             let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
-            let sortedIds = stats[cat].ids.sort((a, b) => a - b).map(id => {
-                return id > CUTOFF ? `<span style="color:red; font-weight:bold;">${id}</span>` : id;
+            let sortedIds = stats[cat].ids.sort((a, b) => a.id - b.id).map(obj => {
+                let displayId = obj.id > 69 ? `(${obj.id})` : obj.id;
+                if (obj.isWrong) return `<span style="color:red; font-weight:bold;">${displayId}</span>`;
+                return displayId;
             }).join(', ');
             catHTML += `<tr><td class="text-start fw-bold">${cat}</td><td class="text-start small" style="max-width:400px; word-break:break-all;">${sortedIds}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
         catHTML += '</tbody></table>'; 
+        catHTML += '<div class="mt-2 mb-3 small text-start" style="padding-left:10px; border-left:3px solid #6c757d;">' + 
+                   '<span style="color:red; font-weight:bold;">紅色數字</span>：代表此題答錯；' + 
+                   '<span>(括號數字)</span>：代表 1-69 題以外的補充題。' +
+                   '</div>';
+        
         document.getElementById('category-stats').innerHTML = catHTML;
         let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
         document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
@@ -669,6 +679,7 @@ def clean_repair_all():
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
         } catch(e) {}
     }
+    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
     initExam();
 </script>
 </body>
@@ -926,9 +937,8 @@ def clean_repair_all():
             const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
             html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
-        html += `</div><div class="match-col right-col">
-                    <div class="match-header-title">回答區</div>`;
-        item.right.forEach((text, rIdx) => {
+                            html += `</div><div class="match-col right-col">
+                                <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;        item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
             const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
             const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
