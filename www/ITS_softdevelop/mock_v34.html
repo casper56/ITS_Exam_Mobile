@@ -177,8 +177,10 @@
     function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
+        const reviewArea = document.getElementById('review-area');
         if (overlay) overlay.style.display = 'flex';
         if (zoomBtns) zoomBtns.style.display = 'none';
+        if (reviewArea) reviewArea.style.display = 'block';
         const oldZoom = document.body.style.zoom || "1.0";
         document.body.style.zoom = "1.0";
 
@@ -188,6 +190,18 @@
                 const item = examQuestions[qIdx];
                 const svg = wrapper.querySelector('.print-svg');
                 if (!svg) return;
+
+                // 實作左側動態字寬偵測 (練習區列印專用)
+                const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+                let maxW = 0;
+                leftParts.forEach(p => {
+                    const w = p.getBoundingClientRect().width;
+                    if (w > maxW) maxW = w;
+                });
+                if (maxW > 0) {
+                    leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
+                }
+
                 const wRect = wrapper.getBoundingClientRect();
                 if (wRect.width === 0) return;
                 
@@ -202,9 +216,9 @@
                     const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
                     if (dotL && dotR) {
                         const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
-                        const x1 = rL.left - wRect.left + rL.width/2 + 5;
+                        const x1 = rL.left - wRect.left + rL.width/2;
                         const y1 = rL.top - wRect.top + rL.height/2;
-                        const x2 = rR.left - wRect.left + rR.width/2 - 20;
+                        const x2 = rR.left - wRect.left + rR.width/2;
                         const y2 = rR.top - wRect.top + rR.height/2;
                         
                         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -224,7 +238,7 @@
                 if (overlay) overlay.style.display = 'none';
                 if (zoomBtns) zoomBtns.style.display = 'flex';
                 document.body.style.zoom = oldZoom;
-            }, 1000);
+            }, 1200);
         }, 2500);
     }
 
@@ -3871,12 +3885,14 @@
         });
         html += `</div></div></div></div></div>`;
         container.innerHTML = html; 
+        
+        // 動態偵測字寬對齊 (同步練習區 V3.5.3)
         setTimeout(() => {
             const parts = container.querySelectorAll('.match-item-left .q-text-part');
             let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
             parts.forEach(p => p.style.width = (maxW + 2) + 'px');
             drawLines();
-        }, 15);
+        }, 30);
         if(window.Prism) Prism.highlightAll();
     }
 
@@ -4181,33 +4197,19 @@
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 
                 if (item.type === 'matching') {
-                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
                         <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
-                        <table style="width:100%; border-collapse:collapse; border:1px solid #333; position:relative; z-index:5;">
-                            <thead>
-                                <tr style="background:#f8f9fa;">
-                                    <th style="width:46%; text-align:left; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">程式碼片段</th>
-                                    <th style="width:8%; border:1px solid #333;"></th>
-                                    <th style="width:46%; text-align:right; color:#0d6efd; border:1px solid #333; padding:8px 12px; font-size:1.1rem;">正確對應回答</th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-                    
-                    const maxRows = Math.max(item.left.length, item.right.length);
-                    for (let r = 0; r < maxRows; r++) {
-                        const lText = item.left[r] || "";
-                        const rText = item.right[r] || "";
-                        optionsHTML += `<tr>
-                            <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
-                                ${lText ? `<div style="display:flex; align-items:center; justify-content:flex-end;"><div style="font-family:Consolas,monospace;">${lText}</div><div class="match-dot" id="mdl-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>` : ''}
-                            </td>
-                            <td style="border:1px solid #333;"></td>
-                            <td style="padding:10px; border:1px solid #333; vertical-align:middle;">
-                                ${rText ? `<div style="display:flex; align-items:center; justify-content:flex-start;"><div class="match-dot" id="mdr-${idx}-${r}" style="width:18px; height:18px; margin:0 10px; border:2.5px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div style="font-family:Consolas,monospace;">${rText}</div></div>` : ''}
-                            </td>
-                        </tr>`;
-                    }
-                    optionsHTML += `</tbody></table></div>`;
+                        <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
+                            <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
+                                ${item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="mdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                            </div>
+                            <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
+                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
                 } else {
                     opts.forEach((o, i) => {
                         const isNum = (item.labelType === 'num');
@@ -4260,8 +4262,10 @@
         document.getElementById('category-stats').innerHTML = catHTML;
         let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
         document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
-        // 確保結果區塊已顯示，以便正確計算 getBoundingClientRect (使用已宣告的 rs)
+        // 確保結果區塊與回顧區已顯示，以便正確計算 getBoundingClientRect
         if (rs) rs.style.display = 'block';
+        const reviewArea = document.getElementById('review-area');
+        if (reviewArea) reviewArea.style.display = 'block';
         
         // 繪製模擬考試報告中的正確連線 (視窗座標差值法修正)
         setTimeout(() => {
