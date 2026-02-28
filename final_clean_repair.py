@@ -97,18 +97,58 @@ def clean_repair_all():
             .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border: 1px solid #000 !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
             .review-exp { font-size: 0.95rem !important; padding: 5px 10px !important; border: 1px solid #000 !important; line-height: 1.4 !important; }
             
-            /* 強效鎖定列印配對圖佈局 */
+            /* 強效鎖定列印配對圖佈局 (同步 Flex 佈局防止 PDF 偏移) */
             .print-matching { 
                 display: block !important; 
                 width: 100% !important; 
                 position: relative !important; 
-                margin: 15px 0 !important; 
+                margin: 20px 0 !important; 
+                padding: 15px !important;
+                background: #fff !important;
+                border: 1px solid #333 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
-            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
-            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
+            .matching-columns { 
+                display: flex !important; 
+                flex-direction: row !important;
+                justify-content: flex-start !important; 
+                gap: 40px !important; 
+                width: 100% !important; 
+            }
+            .match-col { 
+                display: flex !important;
+                flex-direction: column !important;
+                flex: none !important; 
+                width: max-content !important; 
+                min-width: 150px !important;
+            }
+            .match-item { 
+                display: flex !important; 
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100% !important; 
+                height: 40px !important; 
+                margin-bottom: 10px !important; 
+                line-height: 1 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .q-text-part {
+                max-height: 40px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .match-dot {
+                width: 16px !important;
+                height: 16px !important;
+                margin: 0 10px !important;
+                border: 2px solid #198754 !important;
+                border-radius: 50% !important;
+                background: #fff !important;
+                flex-shrink: 0 !important;
+                display: inline-block !important;
+            }
             .print-svg { 
                 position: absolute !important; 
                 top: 0 !important; 
@@ -116,7 +156,6 @@ def clean_repair_all():
                 width: 100% !important; 
                 height: 100% !important; 
                 z-index: 99 !important; 
-                visibility: visible !important;
                 display: block !important;
                 overflow: visible !important;
             }
