@@ -884,6 +884,9 @@ def clean_repair_all():
             .side-nav-btn { width: 33px; height: 50px; font-size: 0.9rem; background: rgba(33, 37, 41, 0.6); }
             .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
+            .form-check-input { width: 22px !important; height: 22px !important; margin-top: 2px !important; }
+            .option-item { padding: 12px 15px !important; font-size: 1.1rem !important; }
+            .form-control { font-size: 1.1rem !important; padding: 12px !important; height: auto !important; }
         }
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
