@@ -265,8 +265,10 @@ def clean_repair_all():
         const homeBtn = document.querySelector('.home-float-btn');
         const reviewArea = document.getElementById('review-area');
         if (overlay) overlay.style.display = 'flex';
-        if (zoomBtns) zoomBtns.style.display = 'none';
-        if (homeBtn) homeBtn.style.display = 'none';
+        // 物理移除干擾按鈕
+        ['.zoom-controls', '.home-float-btn', '.side-nav-btn', '.mobile-toggle'].forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => el.remove());
+        });
         if (reviewArea) reviewArea.style.display = 'block';
         const oldZoom = document.body.style.zoom || "1.0";
         document.body.style.zoom = "1.0";
@@ -278,16 +280,18 @@ def clean_repair_all():
                 const svg = wrapper.querySelector('.print-svg');
                 if (!svg) return;
 
-                // 實作左側動態字寬偵測 (練習區列印專用)
+                // 實作左側動態字寬偵測 (對齊穩定化修正)
                 const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
                 let maxW = 0;
                 leftParts.forEach(p => {
+                    p.style.width = 'auto'; // 先重置寬度以利精確量測
                     const w = p.getBoundingClientRect().width;
                     if (w > maxW) maxW = w;
                 });
                 if (maxW > 0) {
                     leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
                 }
+                void wrapper.offsetWidth; // 強制回流 (Force Reflow)，確保座標更新
 
                 const wRect = wrapper.getBoundingClientRect();
                 if (wRect.width === 0) return;
