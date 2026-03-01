@@ -70,7 +70,7 @@
             @page { size: auto; margin: 8mm !important; }
             * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
             html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: white !important; font-size: 1.0rem !important; line-height: 1.8 !important; }
-            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar { display: none !important; }
+            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar, .zoom-controls, .home-float-btn { display: none !important; visibility: hidden !important; position: absolute !important; top: -9999px !important; }
             .content-area { margin-left: 0 !important; padding: 0 !important; margin-top: 0 !important; }
             #review-area { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 10px 0 !important; padding: 0 !important; }
@@ -6058,7 +6058,7 @@
                 }
     
                 let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
+                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '$1');
                 const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
                     const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
                 }).join(', ');
