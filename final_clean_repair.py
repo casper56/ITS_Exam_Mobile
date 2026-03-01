@@ -945,12 +945,12 @@ def clean_repair_all():
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: block !important; bottom: 20px; right: 15px; width: 80px; height: 80px; opacity: 1.0; font-size: 2.5rem; }
-            .home-float-btn { bottom: 110px; right: 15px; width: 80px; height: 80px; font-size: 2.5rem; opacity: 1.0; border-width: 3px !important; }
-            .zoom-controls { bottom: 200px; right: 15px; gap: 15px; }
-            .zoom-btn { width: 80px; height: 80px; font-size: 2.5rem; opacity: 1.0; border-width: 3px !important; }
+            .mobile-toggle { display: block !important; bottom: 20px; right: 15px; width: 45px; height: 45px; opacity: 1.0; font-size: 1.5rem; }
+            .home-float-btn { bottom: 75px; right: 15px; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; }
+            .zoom-controls { bottom: 130px; right: 15px; gap: 10px; }
+            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; }
 
-            .side-nav-btn { width: 45px; height: 70px; font-size: 1.2rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
+            .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
             .form-check-input { width: 22px !important; height: 22px !important; margin-top: 2px !important; }
             .option-item { padding: 12px 15px !important; font-size: 1.1rem !important; }
