@@ -941,6 +941,11 @@ def clean_repair_all():
             transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
         }
         .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
+        /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
+        
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
@@ -960,10 +965,6 @@ def clean_repair_all():
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
         .question-body pre { margin-bottom: 0 !important; }
         
-        /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
