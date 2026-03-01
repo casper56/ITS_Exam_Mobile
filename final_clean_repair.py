@@ -210,10 +210,10 @@ def clean_repair_all():
             .matching-columns, .match-header-row { gap: 30px !important; }
             .match-col { min-width: 140px !important; }
             
-            /* 手機端按鈕強化：調大並防誤觸 */
-            .zoom-controls { bottom: 20px; right: 20px; }
-            .home-float-btn { bottom: 20px; right: 110px; width: 45px; height: 45px; font-size: 24px; line-height: 45px; }
-            .zoom-btn { width: 45px; height: 45px; font-size: 22px; line-height: 45px; margin-bottom: 10px; }
+            /* 手機端按鈕強化：同步練習區垂直堆疊樣式 */
+            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; }
+            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
         }
         /* 資料處理遮罩 */
         #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
