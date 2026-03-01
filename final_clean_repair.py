@@ -209,6 +209,11 @@ def clean_repair_all():
         @media (max-width: 768px) {
             .matching-columns, .match-header-row { gap: 30px !important; }
             .match-col { min-width: 140px !important; }
+            
+            /* 手機端按鈕強化：調大並防誤觸 */
+            .zoom-controls { bottom: 20px; right: 20px; }
+            .home-float-btn { bottom: 20px; right: 110px; width: 45px; height: 45px; font-size: 24px; line-height: 45px; }
+            .zoom-btn { width: 45px; height: 45px; font-size: 22px; line-height: 45px; margin-bottom: 10px; }
         }
         /* 資料處理遮罩 */
         #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
@@ -257,9 +262,11 @@ def clean_repair_all():
     function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
+        const homeBtn = document.querySelector('.home-float-btn');
         const reviewArea = document.getElementById('review-area');
         if (overlay) overlay.style.display = 'flex';
         if (zoomBtns) zoomBtns.style.display = 'none';
+        if (homeBtn) homeBtn.style.display = 'none';
         if (reviewArea) reviewArea.style.display = 'block';
         const oldZoom = document.body.style.zoom || "1.0";
         document.body.style.zoom = "1.0";
@@ -316,8 +323,11 @@ def clean_repair_all():
             setTimeout(() => {
                 window.print();
                 if (overlay) overlay.style.display = 'none';
-                if (zoomBtns) zoomBtns.style.display = 'flex';
-                document.body.style.zoom = oldZoom;
+                // 注意：在「考試結束」畫面中，這些按鈕應保持隱藏，不可恢復 display: 'flex'
+                if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
+                // 確保縮放保持在 1.0
+                document.body.style.zoom = "1.0";
             }, 1200);
         }, 2500);
     }
@@ -465,7 +475,16 @@ def clean_repair_all():
     function adjustZoom(delta) {
         const body = document.body;
         let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
-        body.style.zoom = currentZoom + delta;
+        let newZoom = currentZoom + delta;
+        if (newZoom < 0.5) newZoom = 0.5;
+        if (newZoom > 3.0) newZoom = 3.0;
+        body.style.zoom = newZoom;
+        
+        let inverseZoom = 1 / newZoom;
+        document.querySelectorAll('.home-float-btn, .zoom-controls').forEach(el => {
+            el.style.zoom = inverseZoom;
+        });
+        
         if (window.drawLines) window.drawLines();
     }
 
@@ -645,7 +664,16 @@ def clean_repair_all():
     function submitExam() {
         clearInterval(timerInterval); 
         const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
-        if (ui) ui.style.display = 'none'; if (rs) rs.style.display = 'block';
+        const homeBtn = document.querySelector('.home-float-btn');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        if (ui) ui.style.display = 'none'; 
+        if (rs) rs.style.display = 'block';
+        if (homeBtn) homeBtn.style.display = 'none';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        
+        // 進入考試結束畫面時，強制重置縮放比例為 1.0，確保畫面排版正常
+        document.body.style.zoom = "1.0";
+        
         let correctCount = 0, stats = {}, incorrectHTML = '';
         const catNameMap = {};
         allQuestions.forEach(q => {
@@ -1297,11 +1325,21 @@ def clean_repair_all():
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
             function prepareAndPrint(onlyMistakes = false) {
+                let targetItems = quizData.map((item, idx) => ({ item, idx }));
+                let title = "REPLACE_TITLE 認證完整解析";
+                if (onlyMistakes) {
+                    targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+                    if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+                    title = "REPLACE_TITLE 訂正解析講義";
+                }
+
                 // 顯示處理中遮罩並隱藏縮放按鈕
                 const overlay = document.getElementById('loading-overlay');
-                const zoomBtns = document.getElementById('zoom-controls');
+                const zoomBtns = document.querySelector('.zoom-controls');
+                const homeBtn = document.querySelector('.home-float-btn');
                 if (overlay) overlay.style.display = 'flex';
                 if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
 
                 // 記錄原始狀態以便後續恢復
                 const oldZoom = document.body.style.zoom || "1.0";
@@ -1317,15 +1355,8 @@ def clean_repair_all():
                 const area = document.getElementById('review-area');
                 if (!area) return;
                 area.style.display = 'block'; // 強制顯示以計算座標
-                let title = "REPLACE_TITLE 認證完整解析";
-        
-            let targetItems = quizData.map((item, idx) => ({ item, idx }));
-            if (onlyMistakes) {
-                targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-                if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-                title = "REPLACE_TITLE 訂正解析講義";
-            }
-            area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+                
+                area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
             targetItems.forEach(({ item, idx }) => {
                 const div = document.createElement('div'); div.className = 'review-item';
                 const optsRaw = item.quiz || item.options || [];
@@ -1434,8 +1465,8 @@ def clean_repair_all():
                                                                                                                                                                                             // 列印後恢復原始 UI 狀態並隱藏遮罩
                                                                                                                                                                                             if (overlay) overlay.style.display = 'none';
                                                                                                                                                                                             if (zoomBtns) zoomBtns.style.display = 'flex';
-                                                                                                                                                                                            document.body.style.zoom = oldZoom;
-                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
+                                                                                                                                                                                            if (homeBtn) homeBtn.style.display = 'flex';
+                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
                                                                                                                                                                                                 sidebar.style.display = 'flex';
                                                                                                                                                                                                 content.style.marginLeft = '280px';
                                                                                                                                                                                             }

@@ -243,9 +243,11 @@
     function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
+        const homeBtn = document.querySelector('.home-float-btn');
         const reviewArea = document.getElementById('review-area');
         if (overlay) overlay.style.display = 'flex';
         if (zoomBtns) zoomBtns.style.display = 'none';
+        if (homeBtn) homeBtn.style.display = 'none';
         if (reviewArea) reviewArea.style.display = 'block';
         const oldZoom = document.body.style.zoom || "1.0";
         document.body.style.zoom = "1.0";
@@ -302,8 +304,11 @@
             setTimeout(() => {
                 window.print();
                 if (overlay) overlay.style.display = 'none';
-                if (zoomBtns) zoomBtns.style.display = 'flex';
-                document.body.style.zoom = oldZoom;
+                // 注意：在「考試結束」畫面中，這些按鈕應保持隱藏，不可恢復 display: 'flex'
+                if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
+                // 確保縮放保持在 1.0
+                document.body.style.zoom = "1.0";
             }, 1200);
         }, 2500);
     }
@@ -3325,7 +3330,16 @@
     function adjustZoom(delta) {
         const body = document.body;
         let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
-        body.style.zoom = currentZoom + delta;
+        let newZoom = currentZoom + delta;
+        if (newZoom < 0.5) newZoom = 0.5;
+        if (newZoom > 3.0) newZoom = 3.0;
+        body.style.zoom = newZoom;
+        
+        let inverseZoom = 1 / newZoom;
+        document.querySelectorAll('.home-float-btn, .zoom-controls').forEach(el => {
+            el.style.zoom = inverseZoom;
+        });
+        
         if (window.drawLines) window.drawLines();
     }
 
@@ -3505,7 +3519,16 @@
     function submitExam() {
         clearInterval(timerInterval); 
         const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
-        if (ui) ui.style.display = 'none'; if (rs) rs.style.display = 'block';
+        const homeBtn = document.querySelector('.home-float-btn');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        if (ui) ui.style.display = 'none'; 
+        if (rs) rs.style.display = 'block';
+        if (homeBtn) homeBtn.style.display = 'none';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        
+        // 進入考試結束畫面時，強制重置縮放比例為 1.0，確保畫面排版正常
+        document.body.style.zoom = "1.0";
+        
         let correctCount = 0, stats = {}, incorrectHTML = '';
         const catNameMap = {};
         allQuestions.forEach(q => {

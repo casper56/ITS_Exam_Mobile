@@ -115,8 +115,46 @@
             .btn-dark { width: 100%; padding: 12px !important; font-size: 1.1rem !important; }
             .hero-section { padding: 40px 0; }
         }
-        .input-group-text { cursor: pointer; background: #fff; border-color: #212529; }
-        .input-group-text:hover { background: #f8f9fa; }
+        
+        /* 自訂內置眼睛按鈕樣式 */
+        .password-field-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-field-wrapper .form-control {
+            padding-right: 45px !important; /* 為右側眼睛留空間 */
+            border-radius: 8px !important;
+        }
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1.2rem;
+            color: #333;
+            z-index: 10;
+            user-select: none;
+            line-height: 1;
+        }
+        .password-toggle-btn:hover {
+            color: #000;
+        }
+
+        /* 隱藏瀏覽器內建的密碼顯示/隱藏眼睛圖示 (Edge/Chrome) */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+        /* 隱藏自動填入圖示及其他內建雜項 */
+        input[type="password"]::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+        }
     </style>
     <!-- Marked.js for Markdown rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -131,16 +169,20 @@
         <form id="login-form" onsubmit="event.preventDefault(); checkLogin();">
             <div class="mb-3 text-start">
                 <label class="form-label" for="username">使用者帳號</label>
-                <div class="input-group">
+                <div class="password-field-wrapper">
                     <input type="password" id="username" name="username" class="form-control border-dark" placeholder="請輸入帳號" autocomplete="username" required>
-                    <span class="input-group-text border-dark" onclick="toggleField('username')">👁️</span>
+                    <button type="button" class="password-toggle-btn" onclick="toggleField('username')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
                 </div>
             </div>
             <div class="mb-4 text-start">
                 <label class="form-label" for="password">密碼</label>
-                <div class="input-group">
+                <div class="password-field-wrapper">
                     <input type="password" id="password" name="password" class="form-control border-dark" placeholder="請輸入密碼" autocomplete="current-password" required>
-                    <span class="input-group-text border-dark" onclick="toggleField('password')">👁️</span>
+                    <button type="button" class="password-toggle-btn" onclick="toggleField('password')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
                 </div>
             </div>
             <button type="submit" class="btn btn-dark w-100 fw-bold py-2">登入系統</button>
@@ -268,7 +310,7 @@
 
 <footer class="text-center">
     <div class="container">
-        <p>&copy; 2026 ITS Exam Simulator. All rights reserved. <button class="btn btn-link btn-sm text-dark no-print" onclick="logout()" style="text-decoration:none;">[登出]</button></p>
+        <p>&copy; 2026 ITS Exam Simulator. All rights reserved. <button class="btn btn-danger btn-sm fw-bold no-print ms-3" onclick="logout()" style="padding: 5px 15px; border-radius: 20px;">登出系統</button></p>
     </div>
 </footer>
 </div>
@@ -294,18 +336,21 @@
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function toggleField(id) {
-        const input = document.getElementById(id);
-        const icon = input.nextElementSibling;
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.innerText = '🔒';
-        } else {
-            input.type = 'password';
-            icon.innerText = '👁️';
+    <script>
+        const eyeIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
+        const eyeOffIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>`;
+
+        function toggleField(id) {
+            const input = document.getElementById(id);
+            const btn = input.nextElementSibling;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerHTML = eyeOffIconSvg;
+            } else {
+                input.type = 'password';
+                btn.innerHTML = eyeIconSvg;
+            }
         }
-    }
 
     function checkLogin() {
         const u = document.getElementById('username').value;

@@ -97,7 +97,11 @@
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: block !important; }
+            .mobile-toggle { display: block !important; bottom: 20px; right: 15px; width: 45px; height: 45px; opacity: 0.8; }
+            .home-float-btn { bottom: 75px; right: 15px; width: 45px; height: 45px; font-size: 1.3rem; opacity: 0.8; }
+            .zoom-controls { bottom: 130px; right: 15px; gap: 8px; }
+            .zoom-btn { width: 45px; height: 45px; font-size: 1.3rem; opacity: 0.8; }
+            
             .side-nav-btn { width: 33px; height: 50px; font-size: 0.9rem; background: rgba(33, 37, 41, 0.6); }
             .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
@@ -5980,11 +5984,21 @@
     function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
     function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
             function prepareAndPrint(onlyMistakes = false) {
+                let targetItems = quizData.map((item, idx) => ({ item, idx }));
+                let title = "ITS Python 認證完整解析";
+                if (onlyMistakes) {
+                    targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
+                    if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
+                    title = "ITS Python 訂正解析講義";
+                }
+
                 // 顯示處理中遮罩並隱藏縮放按鈕
                 const overlay = document.getElementById('loading-overlay');
-                const zoomBtns = document.getElementById('zoom-controls');
+                const zoomBtns = document.querySelector('.zoom-controls');
+                const homeBtn = document.querySelector('.home-float-btn');
                 if (overlay) overlay.style.display = 'flex';
                 if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
 
                 // 記錄原始狀態以便後續恢復
                 const oldZoom = document.body.style.zoom || "1.0";
@@ -6000,15 +6014,8 @@
                 const area = document.getElementById('review-area');
                 if (!area) return;
                 area.style.display = 'block'; // 強制顯示以計算座標
-                let title = "ITS Python 認證完整解析";
-        
-            let targetItems = quizData.map((item, idx) => ({ item, idx }));
-            if (onlyMistakes) {
-                targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-                if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-                title = "ITS Python 訂正解析講義";
-            }
-            area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
+                
+                area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
             targetItems.forEach(({ item, idx }) => {
                 const div = document.createElement('div'); div.className = 'review-item';
                 const optsRaw = item.quiz || item.options || [];
@@ -6117,8 +6124,8 @@
                                                                                                                                                                                             // 列印後恢復原始 UI 狀態並隱藏遮罩
                                                                                                                                                                                             if (overlay) overlay.style.display = 'none';
                                                                                                                                                                                             if (zoomBtns) zoomBtns.style.display = 'flex';
-                                                                                                                                                                                            document.body.style.zoom = oldZoom;
-                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
+                                                                                                                                                                                            if (homeBtn) homeBtn.style.display = 'flex';
+                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
                                                                                                                                                                                                 sidebar.style.display = 'flex';
                                                                                                                                                                                                 content.style.marginLeft = '280px';
                                                                                                                                                                                             }
