@@ -950,7 +950,7 @@ def clean_repair_all():
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: block !important; bottom: 20px; right: 15px; width: 45px; height: 45px; opacity: 1.0; font-size: 1.5rem; }
+            .mobile-toggle { display: flex !important; align-items: center; justify-content: center; bottom: 20px; right: 15px; width: 45px !important; height: 45px !important; opacity: 1.0; font-size: 1.5rem !important; border-width: 2px !important; }
             .home-float-btn { bottom: 75px; right: 15px; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; }
             .zoom-controls { bottom: 130px; right: 15px; gap: 10px; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; }
@@ -961,7 +961,8 @@ def clean_repair_all():
             .option-item { padding: 12px 15px !important; font-size: 1.1rem !important; }
             .form-control { font-size: 1.1rem !important; padding: 12px !important; height: auto !important; }
         }
-        .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: none; }
+        .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
+        .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
         .question-body pre { margin-bottom: 0 !important; }
         
