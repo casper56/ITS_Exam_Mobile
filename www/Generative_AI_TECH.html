@@ -1,6 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
+<script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = '../index.html';
+    }
+</script>
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generative AI TECH</title>
@@ -126,3 +132,4 @@
     </script>
 </body>
 </html>
+

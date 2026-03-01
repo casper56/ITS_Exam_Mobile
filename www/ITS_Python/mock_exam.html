@@ -1,6 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
+<script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = '../../index.html';
+    }
+</script>
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITS Python 模擬考試</title>
@@ -71,8 +77,13 @@
         }
 
         @media (max-width: 768px) {
-            .side-nav-btn { width: 35px; height: 80px; font-size: 1.2rem; background: rgba(33, 37, 41, 0.7); }
-            .side-nav-btn:hover { width: 40px; }
+            .side-nav-btn { 
+                width: 53px; 
+                height: 80px; 
+                font-size: 1.2rem;
+                background: rgba(33, 37, 41, 0.7);
+            }
+            .side-nav-btn:hover { width: 60px; }
         }
 
         /* 列印與預覽錯誤題目樣式 */

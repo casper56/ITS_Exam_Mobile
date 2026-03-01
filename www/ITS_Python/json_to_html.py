@@ -97,7 +97,7 @@ def create_html(json_file, output_html):
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
+            width: 60px;
             height: 100px;
             background: rgba(13, 110, 253, 0.85);
             color: white;
@@ -119,7 +119,7 @@ def create_html(json_file, output_html):
         }}
         .side-nav-btn:hover {{
             background: #0d6efd;
-            width: 50px;
+            width: 75px;
             color: white;
         }}
         .side-nav-prev {{ 
@@ -136,12 +136,12 @@ def create_html(json_file, output_html):
         @media (max-width: 992px) {{
             .side-nav-prev {{ left: 0; }}
             .side-nav-btn {{ 
-                width: 35px; 
+                width: 53px; 
                 height: 80px; 
                 font-size: 1.2rem;
                 background: rgba(33, 37, 41, 0.7);
             }}
-            .side-nav-btn:hover {{ width: 40px; }}
+            .side-nav-btn:hover {{ width: 60px; }}
         }}
 
         .mobile-toggle {{

@@ -92,7 +92,7 @@ def create_html(json_file, output_html):
             font-weight: bold; transform: scale(1.1); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }}
         .nav-btn-group {{ display: flex; gap: 15px; margin-top: 15px; justify-content: center; }}
-        .nav-btn {{ min-width: 120px; }}
+        .nav-btn {{ min-width: 180px; }}
         .mobile-toggle {{
             display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100;
             width: 50px; height: 50px; border-radius: 50%; background: #212529;
