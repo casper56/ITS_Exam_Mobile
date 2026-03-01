@@ -79,6 +79,32 @@ def clean_repair_all():
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 45px; }
         .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        
+        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
+        .home-float-btn {
+            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }
+        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
+        
+        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
+        .home-float-btn {
+            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }
+        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
+
+        /* 縮放控制位置調整，避免與回首頁按鈕重疊 */
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1080; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
+        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
+        
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
         .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
@@ -164,7 +190,7 @@ def clean_repair_all():
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
         }
-        .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         
         /* 配對題樣式 */
@@ -195,6 +221,7 @@ def clean_repair_all():
     <div class="spinner"></div>
     <div>資料處理中，請稍候...</div>
 </div>
+<a href="../../index.html" class="home-float-btn no-print">🏠</a>
 <div class="zoom-controls no-print">
     <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
     <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
@@ -876,11 +903,25 @@ def clean_repair_all():
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 45px; }
         .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        
+        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
+        .home-float-btn {
+            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }
+        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: block !important; }
+            .mobile-toggle { display: block !important; bottom: 20px; right: 15px; width: 45px; height: 45px; opacity: 0.8; }
+            .home-float-btn { bottom: 75px; right: 15px; width: 45px; height: 45px; font-size: 1.3rem; opacity: 0.8; }
+            .zoom-controls { bottom: 130px; right: 15px; gap: 8px; }
+            .zoom-btn { width: 45px; height: 45px; font-size: 1.3rem; opacity: 0.8; }
+            
             .side-nav-btn { width: 33px; height: 50px; font-size: 0.9rem; background: rgba(33, 37, 41, 0.6); }
             .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
             .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
@@ -892,9 +933,10 @@ def clean_repair_all():
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
         .question-body pre { margin-bottom: 0 !important; }
         
-        /* 縮放與配對題樣式整合 */
-        #zoom-controls { position: fixed; bottom: 85px; right: 20px; z-index: 2147483647; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; }
-        .zoom-btn { width: 52px; height: 52px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; user-select: none; transition: none !important; }
+        /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
@@ -928,10 +970,11 @@ def clean_repair_all():
         <div class="spinner"></div>
         <div>資料處理中，請稍候...</div>
     </div>
-    <div id="zoom-controls" class="no-print">
-        <button type="button" class="zoom-btn" onclick="changeZoom(0.1)"><b>+</b></button>
-        <button type="button" class="zoom-btn" onclick="changeZoom(-0.1)"><b>−</b></button>
+    <div class="zoom-controls no-print">
+        <div class="zoom-btn" onclick="changeZoom(0.1)">➕</div>
+        <div class="zoom-btn" onclick="changeZoom(-0.1)">➖</div>
     </div>
+    <a href="../../index.html" class="home-float-btn no-print">🏠</a>
 <div class="main-wrapper">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">

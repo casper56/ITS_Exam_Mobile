@@ -122,6 +122,14 @@ def create_html(json_file, output_html):
             width: 75px;
             color: white;
         }}
+        .home-float-btn {{
+            position: fixed; bottom: 85px; right: 20px; z-index: 1090;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }}
+        .home-float-btn:hover {{ background: #0a58ca; transform: scale(1.1); color: white !important; }}
         .side-nav-prev {{ 
             left: 280px; 
             border-radius: 0 50px 50px 0; 
@@ -175,6 +183,7 @@ def create_html(json_file, output_html):
         </div>
     </nav>
     <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+    <a href="../../index.html" class="home-float-btn no-print">🏠</a>
     
     <!-- Side Floating Navigation -->
     <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()" title="上一題">&#10094;</div>
