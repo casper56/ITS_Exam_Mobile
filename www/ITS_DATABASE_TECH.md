@@ -1,16 +1,15 @@
-# ITS Database 技術重點與考點分析 (ITS_DATABASE_TECH.md)
+# ITS Database (MTA 98-364) 技術題庫與維護手冊 (V3.5)
 
-本文件根據 `www/ITS_Database/questions_ITS_Database.json` 題庫內容 (共 105 題) 進行深度分析，並整合核心技術對照表。
+本文件根據 `www/ITS_Database/questions_ITS_Database.json` 題庫內容 (共 105 題) 進行深度分析，並整合核心技術對照表與維護規範。
 
 ---
 
-## 1. 題庫規模與組成 (2026-02-27 更新)
+## 一、 題庫規模與組成 (2026-03-02 更新)
 *   **總題數**：105 題
-*   **官方版本 (1-69)**：69 題 (真正流出考點)
-*   **補充/模擬版本 (70-105)**：36 題
+*   **官方核心版本 (1-69)**：69 題 (真正流出考點，務必優先掌握)
+*   **補充/模擬版本 (70-105)**：36 題 (用於強化觀念)
 
-## 2. 考點分佈與出題權重評估
-
+## 二、 考點分佈與出題權重評估
 若以正式考試 **40 題** 為抽題標準，建議分佈如下：
 
 | 類別 | 母體題數 | 佔比 | 建議考題數 | 強度評估 |
@@ -21,67 +20,61 @@
 | D4 安全性與維護 | 24 | 22.9% | 9 | 🔴 高強度 |
 | D5 資料庫維護(正規化) | 10 | 9.5% | 4 | 🟢 適中 |
 
-> **維護提醒**：D2 (設計) 與 D3 (SQL 操作) 是獲取認證的基本盤，佔比超過 50%。
+---
+
+## 三、 資料庫基礎理論 (Core Theory)
+
+### 1. 資料庫常規化 (Normalization)
+- **第一常規化 (1NF)**：欄位原子性。確保每個欄位只包含單一值，且沒有重複群組。
+- **第二常規化 (2NF)**：完全函數相依。符合 1NF，且非主鍵欄位必須完全相依於整個主鍵。
+- **第三常規化 (3NF)**：消除遞移相依。符合 2NF，且非主鍵欄位之間不得有相依關係。
+
+### 2. 交易 ACID 原則
+- **原子性 (Atomicity)**：操作要麼全做，要麼全不做。
+- **一致性 (Consistency)**：交易前後需符合所有完整性限制。
+- **隔離性 (Isolation)**：並發交易互不干擾。
+- **持續性 (Durability)**：一旦 Commit 則永久存儲。
 
 ---
 
-## 3. 核心技術對照表 (Technical Reference)
+## 四、 SQL 指令進階分類與語法細節
 
-### 📊 SQL 指令類別分佈 (ID 5)
-| 指令類別 (Command Type) | 核心語法 | 主要用途 |
+### 1. DDL (資料定義) vs DML (資料操作)
+| 指令類別 | 常用關鍵字 | 主要用途 |
 | :--- | :--- | :--- |
-| **DDL (資料定義)** | CREATE, ALTER, DROP, TRUNCATE | 定義、修改及刪除資料庫結構 (Table/Index)。 |
-| **DML (資料操作)** | INSERT, UPDATE, DELETE | 處理資料列的增、修、刪。 |
-| **DQL (資料查詢)** | SELECT, JOIN | 檢索與關聯資料。 |
-| **DCL (資料控制)** | GRANT, REVOKE, DENY | 管理使用者權限。 |
-| **TCL (事務控制)** | COMMIT, ROLLBACK, BEGIN | 保證資料一致性 (ACID)。 |
+| **DDL** | CREATE, ALTER, DROP, TRUNCATE | 定義、修改及刪除結構。TRUNCATE 會重設識別值。 |
+| **DML** | SELECT, INSERT, UPDATE, DELETE | 處理資料列內容。SELECT INTO 用於快速備份。 |
+| **DCL** | GRANT, REVOKE | 管理使用者權限與安全性。 |
+| **TCL** | BEGIN, COMMIT, ROLLBACK | 控制交易事務。 |
 
-### 🔍 系統結構查詢 (INFORMATION_SCHEMA)
-| 查詢對象 | 查詢方式 | 說明 |
-| :--- | :--- | :--- |
-| **欄位資訊** | `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` | 查詢欄位名稱、型別、是否可為 NULL。 |
-| **資料表清單** | `SELECT * FROM INFORMATION_SCHEMA.TABLES` | 列出資料庫中所有的實體表與檢視表。 |
-| **預存程序** | `SELECT * FROM INFORMATION_SCHEMA.ROUTINES` | 查詢所有 Procedure 或 Function。 |
+### 2. 查詢執行邏輯 (Execution Order)
+1. **FROM** -> 2. **WHERE** -> 3. **GROUP BY** -> 4. **HAVING** -> 5. **SELECT** -> 6. **ORDER BY**
 
 ---
 
-## 4. 關鍵機制與陷阱 (Key Mechanisms)
+## 五、 關鍵機制與陷阱 (Key Mechanisms)
 
-### 🧩 刪除規則與機制 (ID 9)
-| 規則名稱 | 技術術語 | 說明 |
-| :--- | :--- | :--- |
-| **串聯刪除** | **Cascade Delete** | 當主鍵列被刪除時，自動刪除所有關聯的外鍵資料。 |
-| **預設值設定** | DEFAULT | 在 INSERT 時若未指定該欄位，自動填入預設值 (如 'N/A' 或 0)。 |
+### 🧩 刪除規則與機制
+- **串聯刪除 (Cascade Delete)**：主鍵刪除時自動連帶刪除關聯外鍵資料。
+- **外部索引鍵 (Foreign Key)**：確保參考完整性的核心物件。
 
-### 🔗 集合運算子 (Set Operators) (ID 35)
-| 運算子 | 邏輯 | 結果描述 | 自動去重 |
-| :--- | :--- | :--- | :--- |
-| **UNION** | 聯集 (OR) | 合併 A 與 B，排除重複。 | **是** |
-| **UNION ALL** | 聯集 (加總) | 直接合併 A 與 B，保留重複。 | **否** |
-| **INTERSECT** | 交集 (AND) | 僅回傳 A 與 B 皆有的部分。 | **是** |
-| **EXCEPT** | 差集 (Minus) | 回傳 A 有但 B 沒有的部分。 | **是** |
+### 🔗 集合運算子 (Set Operators)
+- **UNION**：聯集，自動去重。
+- **UNION ALL**：聯集，保留重複項目（效能較佳）。
+- **INTERSECT**：交集，僅傳回重疊部分。
+- **EXCEPT**：差集，傳回 A 有但 B 沒有的部分。
 
 ---
 
-## 5. 效能優化與索引比較 (Index Comparison) (ID 64)
+## 六、 前端渲染技術規範 (Project UI Standards)
 
-| 特性 | 叢集索引 (Clustered) | 非叢集索引 (Non-Clustered) |
-| :--- | :--- | :--- |
-| **數量限制** | 每張表僅限 **1** 個。 | 每張表可有多個。 |
-| **資料排序** | 索引順序 = 實體資料存儲順序。 | 索引與資料分開存儲。 |
-| **結構** | 葉層節點即為資料頁。 | 葉層包含指向資料的指標。 |
-| **查詢速度** | 極快（直接定位）。 | 較慢（需透過指標回找資料）。 |
+### 1. UI 佈局規範
+- **容器寬度**：`width: calc(100% - 60px); margin: 20px auto;`。
+- **去粉紅規則**：區塊代碼背景必須透明 (`background: transparent !important`)。
 
----
-
-## 6. 考前衝刺必勝策略 (超額訓練法)
-1. **耐力加強**：實際考試 40 題，模擬考 60 題，鍛鍊高強度專注力。
-2. **時間壓測**：平均 50 秒處理 1 題，確保實測時有充裕檢查時間。
+### 2. 維護指令清單
+- **同步 JS 邏輯**：`python .\final_js_sync.py`
+- **修復佈局**：`python .\final_clean_repair.py`
 
 ---
-
-### ITS SPECIALIST EXAM OBJECTIVES (DATABASE)
-*   **一、資料庫概念**：關聯式模型、基數、ACID。
-*   **二、資料庫設計**：DDL (Create/Alter)、資料型別、主鍵與外鍵。
-*   **三、資料操作**：DML (Select/Insert/Update/Delete)、Join、正規化 (1NF/2NF/3NF)。
-*   **四、安全性與維護**：DCL (Grant/Revoke)、備份與還原、View。
+*最後更新日期：2026年3月2日*

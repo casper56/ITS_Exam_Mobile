@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <script>
     if (localStorage.getItem('isLoggedIn') !== 'true') {
@@ -6,109 +6,25 @@
     }
 </script>
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS DATABASE TECH</title>
+    <title>ITS DATABASE TECH - 技術題庫與維護手冊</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <style>
-        body { 
-            background-color: #ffffff; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-            line-height: 1.6;
-            color: #24292e;
-            padding: 40px 0; 
-        }
-        .container { 
-            max-width: 900px; 
-            background: white; 
-            padding: 45px; 
-            border: 1px solid #e1e4e8;
-            border-radius: 6px; 
-        }
-        h1 { 
-            font-size: 2rem; 
-            font-weight: 600; 
-            padding-bottom: 0.3em; 
-            border-bottom: 1px solid #eaecef; 
-            margin-top: 24px;
-            margin-bottom: 16px;
-        }
-        h2 { 
-            font-size: 1.5rem; 
-            font-weight: 600; 
-            padding-bottom: 0.3em; 
-            border-bottom: 1px solid #eaecef; 
-            margin-top: 24px;
-            margin-bottom: 16px;
-        }
-        h3 { 
-            font-size: 1.25rem; 
-            font-weight: 600; 
-            margin-top: 24px;
-            margin-bottom: 16px;
-        }
-        p { margin-top: 0; margin-bottom: 16px; }
-        
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 0;
-            margin-bottom: 16px; 
-            font-size: 0.9rem;
-        }
-        th, td { 
-            border: 1px solid #dfe2e5; 
-            padding: 6px 13px; 
-        }
-        tr:nth-child(even) { background-color: #f6f8fa; }
-        th { background-color: #f6f8fa; font-weight: 600; }
-        
-        code { 
-            background-color: rgba(27,31,35,0.05); 
-            padding: 0.2em 0.4em; 
-            border-radius: 3px; 
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 85%;
-            color: #24292e;
-        }
-        pre { 
-            background-color: #f6f8fa; 
-            padding: 16px; 
-            border-radius: 6px; 
-            overflow: auto; 
-            font-size: 85%; 
-            line-height: 1.45;
-            border: 0;
-            margin-bottom: 16px;
-        }
-        pre code { background-color: transparent; padding: 0; font-size: 100%; color: inherit; }
-        
-        blockquote { 
-            padding: 0 1em; 
-            color: #6a737d; 
-            border-left: 0.25em solid #dfe2e5; 
-            margin-bottom: 16px;
-            margin-top: 0;
-        }
-        ul, ol { padding-left: 2em; margin-top: 0; margin-bottom: 16px; }
-        li + li { margin-top: 0.25em; }
-        hr { height: 0.25em; padding: 0; margin: 24px 0; background-color: #e1e4e8; border: 0; }
-        
-        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; border-radius: 6px; font-weight: 600; }
-        
-        /* Prism Theme Overrides */
-        .token.comment { color: #6a737d; }
-        .token.keyword { color: #d73a49; }
-        .token.string { color: #032f62; }
-        .token.function { color: #6f42c1; }
-        
-        @media (max-width: 768px) { 
-            body { padding: 20px 0; }
-            .container { padding: 20px; border: 0; } 
-            table { display: block; overflow-x: auto; }
-        }
+        body { background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; color: #24292e; padding: 40px 0; }
+        .container { width: calc(100% - 60px); margin: 20px auto; max-width: none; background: white; padding: 45px; border: 1px solid #e1e4e8; border-radius: 6px; }
+        h1 { font-size: 2rem; color: #1a73e8; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { font-size: 1.5rem; color: #2c3e50; border-bottom: 1px solid #eaecef; margin-top: 24px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.95rem; }
+        th, td { border: 1px solid #dfe2e5; padding: 10px 15px; }
+        th { background-color: #f1f3f5; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        code { background-color: rgba(27,31,35,0.05) !important; color: #d63384; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre { background-color: #f6f8fa !important; padding: 16px; border-radius: 6px; border: 1px solid #e1e4e8; }
+        pre code { background-color: transparent !important; color: #24292e !important; text-shadow: none !important; padding: 0 !important; }
+        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        @media (max-width: 768px) { .container { width: 95%; padding: 20px; } table { display: block; overflow-x: auto; } }
     </style>
 </head>
 <body>
@@ -118,18 +34,13 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
-        const rawMd = "# ITS Database 技術重點與考點分析 (ITS_DATABASE_TECH.md)\n\n本文件根據 `www/ITS_Database/questions_ITS_Database.json` 題庫內容 (共 105 題) 進行深度分析，並整合核心技術對照表。\n\n---\n\n## 1. 題庫規模與組成 (2026-02-27 更新)\n*   **總題數**：105 題\n*   **官方版本 (1-69)**：69 題 (真正流出考點)\n*   **補充/模擬版本 (70-105)**：36 題\n\n## 2. 考點分佈與出題權重評估\n\n若以正式考試 **40 題** 為抽題標準，建議分佈如下：\n\n| 類別 | 母體題數 | 佔比 | 建議考題數 | 強度評估 |\n| :--- | :---: | :---: | :---: | :--- |\n| D1 資料庫概念 | 11 | 10.5% | 4 | 🟢 適中 |\n| D2 資料庫設計 | 28 | 26.7% | 11 | 🔴 高強度 |\n| D3 資料操作 (SQL) | 32 | 30.5% | 12 | 🔴 高強度 |\n| D4 安全性與維護 | 24 | 22.9% | 9 | 🔴 高強度 |\n| D5 資料庫維護(正規化) | 10 | 9.5% | 4 | 🟢 適中 |\n\n> **維護提醒**：D2 (設計) 與 D3 (SQL 操作) 是獲取認證的基本盤，佔比超過 50%。\n\n---\n\n## 3. 核心技術對照表 (Technical Reference)\n\n### 📊 SQL 指令類別分佈 (ID 5)\n| 指令類別 (Command Type) | 核心語法 | 主要用途 |\n| :--- | :--- | :--- |\n| **DDL (資料定義)** | CREATE, ALTER, DROP, TRUNCATE | 定義、修改及刪除資料庫結構 (Table/Index)。 |\n| **DML (資料操作)** | INSERT, UPDATE, DELETE | 處理資料列的增、修、刪。 |\n| **DQL (資料查詢)** | SELECT, JOIN | 檢索與關聯資料。 |\n| **DCL (資料控制)** | GRANT, REVOKE, DENY | 管理使用者權限。 |\n| **TCL (事務控制)** | COMMIT, ROLLBACK, BEGIN | 保證資料一致性 (ACID)。 |\n\n### 🔍 系統結構查詢 (INFORMATION_SCHEMA)\n| 查詢對象 | 查詢方式 | 說明 |\n| :--- | :--- | :--- |\n| **欄位資訊** | `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` | 查詢欄位名稱、型別、是否可為 NULL。 |\n| **資料表清單** | `SELECT * FROM INFORMATION_SCHEMA.TABLES` | 列出資料庫中所有的實體表與檢視表。 |\n| **預存程序** | `SELECT * FROM INFORMATION_SCHEMA.ROUTINES` | 查詢所有 Procedure 或 Function。 |\n\n---\n\n## 4. 關鍵機制與陷阱 (Key Mechanisms)\n\n### 🧩 刪除規則與機制 (ID 9)\n| 規則名稱 | 技術術語 | 說明 |\n| :--- | :--- | :--- |\n| **串聯刪除** | **Cascade Delete** | 當主鍵列被刪除時，自動刪除所有關聯的外鍵資料。 |\n| **預設值設定** | DEFAULT | 在 INSERT 時若未指定該欄位，自動填入預設值 (如 'N/A' 或 0)。 |\n\n### 🔗 集合運算子 (Set Operators) (ID 35)\n| 運算子 | 邏輯 | 結果描述 | 自動去重 |\n| :--- | :--- | :--- | :--- |\n| **UNION** | 聯集 (OR) | 合併 A 與 B，排除重複。 | **是** |\n| **UNION ALL** | 聯集 (加總) | 直接合併 A 與 B，保留重複。 | **否** |\n| **INTERSECT** | 交集 (AND) | 僅回傳 A 與 B 皆有的部分。 | **是** |\n| **EXCEPT** | 差集 (Minus) | 回傳 A 有但 B 沒有的部分。 | **是** |\n\n---\n\n## 5. 效能優化與索引比較 (Index Comparison) (ID 64)\n\n| 特性 | 叢集索引 (Clustered) | 非叢集索引 (Non-Clustered) |\n| :--- | :--- | :--- |\n| **數量限制** | 每張表僅限 **1** 個。 | 每張表可有多個。 |\n| **資料排序** | 索引順序 = 實體資料存儲順序。 | 索引與資料分開存儲。 |\n| **結構** | 葉層節點即為資料頁。 | 葉層包含指向資料的指標。 |\n| **查詢速度** | 極快（直接定位）。 | 較慢（需透過指標回找資料）。 |\n\n---\n\n## 6. 考前衝刺必勝策略 (超額訓練法)\n1. **耐力加強**：實際考試 40 題，模擬考 60 題，鍛鍊高強度專注力。\n2. **時間壓測**：平均 50 秒處理 1 題，確保實測時有充裕檢查時間。\n\n---\n\n### ITS SPECIALIST EXAM OBJECTIVES (DATABASE)\n*   **一、資料庫概念**：關聯式模型、基數、ACID。\n*   **二、資料庫設計**：DDL (Create/Alter)、資料型別、主鍵與外鍵。\n*   **三、資料操作**：DML (Select/Insert/Update/Delete)、Join、正規化 (1NF/2NF/3NF)。\n*   **四、安全性與維護**：DCL (Grant/Revoke)、備份與還原、View。\n";
+        const rawMd = `# ITS Database (MTA 98-364) 技術題庫與維護手冊 (V3.5)\n\n本文件根據 \`www/ITS_Database/questions_ITS_Database.json\` 題庫內容 (共 105 題) 進行深度分析，並整合核心技術對照表與維護規範。\n\n---\n\n## 一、 題庫規模與組成 (2026-03-02 更新)\n*   **總題數**：105 題\n*   **官方核心版本 (1-69)**：69 題 (真正流出考點，務必優先掌握)\n*   **補充/模擬版本 (70-105)**：36 題 (用於強化觀念)\n\n## 二、 考點分佈與出題權重評估\n\n| 類別 | 母體題數 | 佔比 | 建議考題數 | 強度評估 |\n| :--- | :---: | :---: | :---: | :--- |\n| D1 資料庫概念 | 11 | 10.5% | 4 | 🟢 適中 |\n| D2 資料庫設計 | 28 | 26.7% | 11 | 🔴 高強度 |\n| D3 資料操作 (SQL) | 32 | 30.5% | 12 | 🔴 高強度 |\n| D4 安全性與維護 | 24 | 22.9% | 9 | 🔴 高強度 |\n| D5 資料庫維護(正規化) | 10 | 9.5% | 4 | 🟢 適中 |\n\n---\n\n## 三、 資料庫基礎理論 (Core Theory)\n\n### 1. 資料庫常規化 (Normalization)\n- **第一常規化 (1NF)**：欄位原子性。確保每個欄位只包含單一值。\n- **第二常規化 (2NF)**：完全函數相依。符合 1NF，消除部分相依。\n- **第三常規化 (3NF)**：消除遞移相依。符合 2NF，消除非主鍵欄位相依。\n\n### 2. 交易 ACID 原則\n- **原子性 (Atomicity)**：操作全做或全不做。\n- **一致性 (Consistency)**：符合所有完整性限制。\n- **隔離性 (Isolation)**：並發交易互不干擾。\n- **持續性 (Durability)**：一旦 Commit 永久存儲。\n\n---\n\n## 四、 SQL 指令進階分類與語法細節\n\n### 1. DDL vs DML\n| 指令類別 | 常用關鍵字 | 主要用途 |\n| :--- | :--- | :--- |\n| **DDL** | CREATE, ALTER, DROP, TRUNCATE | 定義、修改及刪除結構。 |\n| **DML** | SELECT, INSERT, UPDATE, DELETE | 處理資料列內容。 |\n| **TCL** | COMMIT, ROLLBACK | 控制交易事務。 |\n\n### 2. 查詢執行邏輯\n1. **FROM** -> 2. **WHERE** -> 3. **GROUP BY** -> 4. **HAVING** -> 5. **SELECT** -> 6. **ORDER BY**\n\n---\n\n## 五、 關鍵機制與陷阱\n\n### 🧩 刪除規則與機制\n- **串聯刪除 (Cascade Delete)**：主鍵刪除時自動連帶刪除關聯外鍵資料。\n- **外部索引鍵 (Foreign Key)**：確保參考完整性的核心物件。\n\n### 🔗 集合運算子 (Set Operators)\n- **UNION**：聯集，自動去重。\n- **UNION ALL**：聯集，保留重複項目。\n- **INTERSECT**：交集，僅傳回重疊部分。\n\n---\n\n## 六、 系統維護規範\n\n### 1. UI 佈局規範\n- **容器寬度**：\`style=\"width: calc(100% - 60px); margin: 20px auto; max-width: none;\"\`。\n- **去粉紅規則**：區塊代碼背景必須透明。\n\n### 2. 維護指令清單\n- **同步 JS 邏輯**：\`python .\\\\final_js_sync.py\`\n- **修復佈局**：\`python .\\\\final_clean_repair.py\`\n\n---\n*最後更新日期：2026年3月2日*`;
+
         document.getElementById('content').innerHTML = marked.parse(rawMd);
-        // Prism highlight
-        document.querySelectorAll('pre code').forEach((block) => {
-            block.className = 'language-python'; // Default for these notes
-        });
+        document.querySelectorAll('table').forEach(table => table.classList.add('table', 'table-bordered', 'table-hover'));
         Prism.highlightAll();
     </script>
 </body>
 </html>
-
