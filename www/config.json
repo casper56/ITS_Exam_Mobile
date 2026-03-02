@@ -6,8 +6,8 @@
             "title": "AI-900",
             "id": "ai900",
             "html": "AI900.html",
-            "cutoff": 100,
-            "cutoff_info": "1-100 為官方版題數"
+            "cutoff": 213,
+            "cutoff_info": "1-213 為官方版題數"
         },
         {
             "dir": "www/AZ900",
