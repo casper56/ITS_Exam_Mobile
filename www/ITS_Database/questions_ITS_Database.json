@@ -413,7 +413,7 @@
 			"      <td class=\"code-font\">Inherited</td>",
 			"      <td>錯誤。這通常指物件導向程式設計 (OOP) 的特性，而非刪除規則。</td>",
 			"    </tr>",
-			"  </tbody></table><pre><code class=\"language-sql\"><b>Demo code</b>",
+			"  </tbody></table><pre><code class=\"language-sql\">Demo code",
             "-- 1. 建立「父表」：客戶表",
             "CREATE TABLE Parent_Customer (",
             "    CustomerID int PRIMARY KEY,",
