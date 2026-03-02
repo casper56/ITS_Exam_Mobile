@@ -211,8 +211,8 @@ def clean_repair_all():
             .match-col { min-width: 140px !important; }
             
             /* 手機端按鈕強化：絕對同步練習區垂直堆疊樣式 */
-            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex !important; }
+            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
         }
         /* 資料處理遮罩 */
@@ -237,8 +237,8 @@ def clean_repair_all():
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
-    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
-    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
+    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
+    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
     <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; max-width: none !important;"><div id="question-area"></div></main>
 </div>
 <div id="result-screen" class="container-fluid">
@@ -263,10 +263,14 @@ def clean_repair_all():
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
         const homeBtn = document.querySelector('.home-float-btn');
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
         const reviewArea = document.getElementById('review-area');
         if (overlay) overlay.style.display = 'flex';
-        if (zoomBtns) zoomBtns.style.display = 'none';
-        if (homeBtn) homeBtn.style.display = 'none';
+        if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
+        if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
+        if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
+        if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
         if (reviewArea) reviewArea.style.display = 'block';
         const oldZoom = document.body.style.zoom || "1.0";
         document.body.style.zoom = "1.0";
@@ -326,6 +330,8 @@ def clean_repair_all():
                 // 注意：在「考試結束」畫面中，這些按鈕應保持隱藏，不可恢復 display: 'flex'
                 if (zoomBtns) zoomBtns.style.display = 'none';
                 if (homeBtn) homeBtn.style.display = 'none';
+                if (sidePrev) sidePrev.style.display = 'none';
+                if (sideNext) sideNext.style.display = 'none';
                 // 確保縮放保持在 1.0
                 document.body.style.zoom = "1.0";
             }, 1200);
@@ -955,9 +961,9 @@ def clean_repair_all():
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: flex !important; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
-            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex !important; }
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
+            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
 
             .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
@@ -1022,9 +1028,9 @@ def clean_repair_all():
         </div>
         <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
     </nav>
-    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
-    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
+    <button class="mobile-toggle no-print" onclick="toggleSidebar()">☰</button>
+    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
+    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
     <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
@@ -1339,9 +1345,16 @@ def clean_repair_all():
                 const overlay = document.getElementById('loading-overlay');
                 const zoomBtns = document.querySelector('.zoom-controls');
                 const homeBtn = document.querySelector('.home-float-btn');
+                const mobileToggle = document.querySelector('.mobile-toggle');
+                const sidePrev = document.getElementById('side-btn-prev');
+                const sideNext = document.getElementById('side-btn-next');
+
                 if (overlay) overlay.style.display = 'flex';
-                if (zoomBtns) zoomBtns.style.display = 'none';
-                if (homeBtn) homeBtn.style.display = 'none';
+                if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
+                if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
+                if (mobileToggle) mobileToggle.style.setProperty('display', 'none', 'important');
+                if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
+                if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
 
                 // 記錄原始狀態以便後續恢復
                 const oldZoom = document.body.style.zoom || "1.0";
@@ -1465,11 +1478,13 @@ def clean_repair_all():
                                                                                                                                                                                         setTimeout(() => { 
                                                                                                                                                                                             window.print(); 
                                                                                                                                                                                             // 列印後恢復原始 UI 狀態並隱藏遮罩
-                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
-                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.display = 'flex';
-                                                                                                                                                                                            if (homeBtn) homeBtn.style.display = 'flex';
-                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
-                                                                                                                                                                                                sidebar.style.display = 'flex';
+                                                                                                                                                                                                                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
+                                                                                                                                                                                                                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (homeBtn) homeBtn.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (mobileToggle) mobileToggle.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (sidePrev) sidePrev.style.setProperty('display', (currentIndex === 0) ? 'none' : 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (sideNext) sideNext.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {                                                                                                                                                                                                sidebar.style.display = 'flex';
                                                                                                                                                                                                 content.style.marginLeft = '280px';
                                                                                                                                                                                             }
                                                                                                                                                                                         }, 1200);                                                                                    }, 2500);
