@@ -121,10 +121,10 @@
         
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
         .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
-        .match-col { display: flex !important; flex-direction: column !important; gap: 25px !important; width: max-content !important; flex: none !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
         .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
         .match-item-left { justify-content: flex-start !important; text-align: left !important; }
         .match-item-right { justify-content: flex-start !important; text-align: left !important; }
@@ -3571,63 +3571,109 @@
             return src ? `<img src="${src}" class="q-img">` : match;
         });
     }
-    function renderMatchingQuestion(index) {
-        currentIndex = index; const item = quizData[index];
-        const container = document.getElementById('question-container');
-        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+                        function renderMatchingQuestion(index) {
+        currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
+        const container = document.getElementById('question-container') || document.getElementById('question-area');
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
-        const isCorrect = correctSet.has(index);
-        const isCorrected = correctedSet.has(index);
-        const isWrong = incorrectSet.has(index);
-        // 已對或已更正才鎖定
+        
+        const isPractice = (typeof quizData !== 'undefined');
+        const isCorrect = isPractice ? correctSet.has(index) : false;
+        const isCorrected = isPractice ? correctedSet.has(index) : false;
+        const isWrong = isPractice ? incorrectSet.has(index) : false;
         const isLocked = isCorrect || isCorrected;
-        // 只要有點擊提交（無論對錯），就進入「完成顯示」狀態
-        const showResult = isLocked || isWrong;
+        const showAnswer = isLocked || isWrong;
+
+        let rightRowGroups = item.right.map(t => (t && t.includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        let totalRightRows = rightRowGroups.reduce((a, b) => a + b, 0);
+        let splitRatio = totalRightRows / item.left.length; 
+        let isSplitMode = (totalRightRows > item.left.length);
 
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-                                                                                    <div class="question-body" style="color:#333;">
-                                                                                        ${processContent(item.question, item)}
-                                                                        `;
-                                                                    html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col">
-                            <div class="match-header-title">程式碼片段</div>`;
+                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
+
+        // 左側：[文字] [圓圈]
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
-            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
+            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
+            
+            html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
+                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
+                <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
+            </div>`;
+            
+            if (isSplitMode && splitRatio > 1) {
+                for(let p=0; p < Math.floor(splitRatio - 1); p++) {
+                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
+                }
+            }
         });
-                            html += `</div><div class="match-col right-col">
-                                <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;        item.right.forEach((text, rIdx) => {
-            const isMatchedByAny = currentAns.includes(rIdx);
-            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div class="q-text-part-right">${cleanText}</div></div>`;
+
+        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
+
+        // 右側：[圓圈] [文字]
+        let rIdxCounter = 0;
+        item.right.forEach((text) => {
+            if (text && text.includes('|')) {
+                const parts = text.replace(/<\/?code>/g, '').split('|');
+                parts.forEach((partText) => {
+                    const rIdx = rIdxCounter++;
+                    const isMatchedByAny = currentAns.includes(rIdx);
+                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                        <div class="match-dot" id="dot-right-${rIdx}">
+                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                        </div>
+                        <div class="q-text-part-right"><code>${partText}</code></div>
+                    </div>`;
+                });
+            } else {
+                const rIdx = rIdxCounter++;
+                const isMatchedByAny = currentAns.includes(rIdx);
+                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                    <div class="match-dot" id="dot-right-${rIdx}">
+                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                    </div>
+                    <div class="q-text-part-right">${cleanText}</div>
+                </div>`;
+            }
         });
+
         html += `</div></div></div>`;
-        // 未鎖定時顯示按鈕，若已錯則改文字為「更正提交」
-        if (!isLocked) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
-        
-        if (showResult) {
-            const ansText = item.answer.join(', ');
+        if (!isLocked && isPractice) {
+            html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
+        }
+        if (showAnswer) {
+            const isJavaQ6 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 6);
+            const isJavaQ7 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 7);
+            const ansText = (isJavaQ6 || isJavaQ7) ? item.answer.join(', ') : (Array.isArray(item.answer) ? item.answer.join(', ') : item.answer);
+            const statusMsg = isCorrected ? '<div class="fw-bold mb-2 text-warning">🟠 已更正成功！</div>' : 
+                             (isWrong ? '<div class="fw-bold mb-2 text-danger">❌ 答錯了，請參考正確答案進行更正</div>' : 
+                             '<div class="fw-bold mb-2 text-success">✅ 答對了！</div>');
             html += `<div class="answer-section" style="display:block;">
-                        <div class="fw-bold mb-2 ${isCorrected?'text-warning':(isWrong?'text-danger':'text-success')}">${isCorrected?'🟠 已更正成功！':(isWrong?'❌ 答錯了，請參考答案更正':'✅ 答對了！')}</div>
+                        ${statusMsg}
                         <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
                         <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                      </div>`;
         }
-        html += `</div></div></div>`; container.innerHTML = html; updateUI(); saveState();
-        window.changeZoom(0); 
-        // 動態偵測字寬對齊 (V3.5.3 結構化對齊)
+        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); saveState();
         setTimeout(() => {
-            const parts = container.querySelectorAll('.match-item-left .q-text-part');
-            let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
-            parts.forEach(p => p.style.width = (maxW + 2) + 'px');
-            drawLines();
+            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
+            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
+
+            if (window.drawLines) window.drawLines();
+            if (window.Prism) Prism.highlightAll();
         }, 30);
     }
     let isDragging = false, dragStartPoint = null, tempLine = null;
@@ -3695,16 +3741,49 @@
             }
         });
     };
-    window.submitMatching = function() {
-        const item = quizData[currentIndex], ans = userAnswers[currentIndex];
-        // 允許部分提交：移除 ans.includes(null) 的強制攔截
-        const userAnswersAsLetters = (ans || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
-        const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
-        if (isCorrect) {
-            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-            else { correctSet.add(currentIndex); }
+        window.submitMatching = function() {
+        const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
+        const ans = userAnswers[currentIndex] || [];
+        let finalUserAns = [];
+        const isJavaSpecial = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && (item.id === 6 || item.id === 7));
+        
+        if (isJavaSpecial) {
+            // 自動計算比例進行轉譯
+            let totalRRows = 0; item.right.forEach(t => totalRRows += (t && t.includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
+            let ratio = totalRRows / item.left.length;
+            
+            finalUserAns = item.left.map((_, lIdx) => {
+                const rIdx = ans[lIdx];
+                if (rIdx === null || rIdx === undefined) return "";
+                // 轉譯連線點為大寫字母 (idx % ratio)
+                return String.fromCharCode(65 + (rIdx % ratio));
+            });
         } else {
-            incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
+            finalUserAns = item.left.map((_, i) => {
+                const rIdx = ans[i];
+                return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
+            });
+        }
+
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
+        let isCorrect = (finalUserAns.length === correctAns.length);
+        if (isCorrect) {
+            for (let i = 0; i < correctAns.length; i++) {
+                if (String(finalUserAns[i] || "").trim().toUpperCase() !== String(correctAns[i] || "").trim().toUpperCase()) {
+                    isCorrect = false; break;
+                }
+            }
+        }
+        
+        if (isCorrect) {
+            if (typeof correctSet !== 'undefined') {
+                if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+                else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
+            }
+        } else {
+            if (typeof incorrectSet !== 'undefined') {
+                incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
+            }
         }
         renderMatchingQuestion(currentIndex);
     };
