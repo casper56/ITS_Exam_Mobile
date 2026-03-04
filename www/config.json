@@ -62,6 +62,15 @@
             "html": "ITS_Python.html",
             "cutoff": 94,
             "cutoff_info": "1-94 為官方版題數"
+        },
+        {
+            "dir": "www/ITS_JAVA",
+            "json": "questions_ITS_JAVA.json",
+            "title": "ITS Java",
+            "id": "itsjava",
+            "html": "ITS_JAVA.html",
+            "cutoff": 80,
+            "cutoff_info": "1-80 為模擬試題題數"
         }
     ]
 }
