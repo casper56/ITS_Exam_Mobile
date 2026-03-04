@@ -663,7 +663,7 @@ def clean_repair_all():
 
     function renderQuestion(index, scrollTop = true) {
         currentIndex = index; const item = examQuestions[index]; 
-        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-area'); 
         if (!container) return;
         container.innerHTML = '';
@@ -753,11 +753,36 @@ def clean_repair_all():
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
             stats[cat].total++;
             
-            const userAns = userAnswers[idx]; let isCorrect = false;
+                        const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-            if (item.type === 'matching') {
-                const userLetters = (userAns || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
-                isCorrect = JSON.stringify(userLetters) === JSON.stringify(answers);
+            if (item.type === 'matching' || item.type === 'multimatching') {
+                let userLetters;
+                let totalRRows = 0; 
+                item.right.forEach(t => totalRRows += (t && String(t).includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
+                let isSplitMode = (totalRRows > item.left.length);
+                let ratio = isSplitMode ? (totalRRows / item.left.length) : 1;
+
+                if (isSplitMode) {
+                    userLetters = item.left.map((_, lIdx) => {
+                        const rIdx = (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null;
+                        if (rIdx === null || rIdx === undefined) return "";
+                        return String.fromCharCode(65 + (rIdx % ratio));
+                    });
+                } else {
+                    userLetters = item.left.map((_, i) => {
+                        const rIdx = (userAns && userAns[i] !== undefined) ? userAns[i] : null;
+                        return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
+                    });
+                }
+                
+                isCorrect = (userLetters.length === answers.length);
+                if (isCorrect) {
+                    for (let i = 0; i < answers.length; i++) {
+                        if (String(userLetters[i] || "").trim().toUpperCase() !== String(answers[i] || "").trim().toUpperCase()) {
+                            isCorrect = false; break;
+                        }
+                    }
+                }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
@@ -781,7 +806,7 @@ def clean_repair_all():
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 
-                if (item.type === 'matching') {
+                if (item.type === 'matching' || item.type === 'multimatching') {
                     optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
                         <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
                         <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
@@ -1344,22 +1369,30 @@ def clean_repair_all():
             }
         });
     };
-        window.submitMatching = function() {
+                                window.submitMatching = function() {
         const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
         const ans = userAnswers[currentIndex] || [];
         let finalUserAns = [];
-        const isJavaSpecial = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && (item.id === 6 || item.id === 7));
         
-        if (isJavaSpecial) {
-            // 自動計算比例進行轉譯
-            let totalRRows = 0; item.right.forEach(t => totalRRows += (t && t.includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
-            let ratio = totalRRows / item.left.length;
-            
+        let rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        let totalRRows = rightRowGroups.reduce((a, b) => a + b, 0);
+        let splitRatio = (totalRRows / item.left.length);
+
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
+        let maxAnsIdx = 0;
+        correctAns.forEach(a => {
+            const val = String(a).toUpperCase().charCodeAt(0) - 65;
+            if (val > maxAnsIdx) maxAnsIdx = val;
+        });
+
+        // 判定是否啟用分組轉譯 (題型為 multimatching 且 答案未超出比例範圍)
+        let useModulus = (item.type === 'multimatching' && maxAnsIdx < splitRatio);
+
+        if (useModulus) {
             finalUserAns = item.left.map((_, lIdx) => {
                 const rIdx = ans[lIdx];
                 if (rIdx === null || rIdx === undefined) return "";
-                // 轉譯連線點為大寫字母 (idx % ratio)
-                return String.fromCharCode(65 + (rIdx % ratio));
+                return String.fromCharCode(65 + (rIdx % splitRatio));
             });
         } else {
             finalUserAns = item.left.map((_, i) => {
@@ -1368,7 +1401,6 @@ def clean_repair_all():
             });
         }
 
-        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
         let isCorrect = (finalUserAns.length === correctAns.length);
         if (isCorrect) {
             for (let i = 0; i < correctAns.length; i++) {
@@ -1526,7 +1558,7 @@ def clean_repair_all():
                 const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                 
                 let optHtml = "";
-                            if (item.type === 'matching') {
+                            if (item.type === 'matching' || item.type === 'multimatching') {
                                 let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
                                 let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('');
                                 
@@ -1639,7 +1671,7 @@ def clean_repair_all():
     function renderQuestion(index) {
         console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
-        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';

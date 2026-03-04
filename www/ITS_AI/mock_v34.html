@@ -3582,7 +3582,7 @@
 
     function renderQuestion(index, scrollTop = true) {
         currentIndex = index; const item = examQuestions[index]; 
-        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-area'); 
         if (!container) return;
         container.innerHTML = '';
@@ -3672,11 +3672,36 @@
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
             stats[cat].total++;
             
-            const userAns = userAnswers[idx]; let isCorrect = false;
+                        const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-            if (item.type === 'matching') {
-                const userLetters = (userAns || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
-                isCorrect = JSON.stringify(userLetters) === JSON.stringify(answers);
+            if (item.type === 'matching' || item.type === 'multimatching') {
+                let userLetters;
+                let totalRRows = 0; 
+                item.right.forEach(t => totalRRows += (t && String(t).includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
+                let isSplitMode = (totalRRows > item.left.length);
+                let ratio = isSplitMode ? (totalRRows / item.left.length) : 1;
+
+                if (isSplitMode) {
+                    userLetters = item.left.map((_, lIdx) => {
+                        const rIdx = (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null;
+                        if (rIdx === null || rIdx === undefined) return "";
+                        return String.fromCharCode(65 + (rIdx % ratio));
+                    });
+                } else {
+                    userLetters = item.left.map((_, i) => {
+                        const rIdx = (userAns && userAns[i] !== undefined) ? userAns[i] : null;
+                        return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
+                    });
+                }
+                
+                isCorrect = (userLetters.length === answers.length);
+                if (isCorrect) {
+                    for (let i = 0; i < answers.length; i++) {
+                        if (String(userLetters[i] || "").trim().toUpperCase() !== String(answers[i] || "").trim().toUpperCase()) {
+                            isCorrect = false; break;
+                        }
+                    }
+                }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
@@ -3700,7 +3725,7 @@
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 
-                if (item.type === 'matching') {
+                if (item.type === 'matching' || item.type === 'multimatching') {
                     optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
                         <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
                         <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
