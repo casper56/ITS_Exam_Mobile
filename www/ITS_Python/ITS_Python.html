@@ -5796,9 +5796,13 @@
         const isCorrect = correctSet.has(index);
         const isCorrected = correctedSet.has(index);
         const isWrong = incorrectSet.has(index);
-        const completed = isCorrect || isCorrected;
+        // 已對或已更正才鎖定
+        const isLocked = isCorrect || isCorrected;
+        // 只要有點擊提交（無論對錯），就進入「完成顯示」狀態
+        const showResult = isLocked || isWrong;
+
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
                                                                                     <div class="question-body" style="color:#333;">
                                                                                         ${processContent(item.question, item)}
                                                                         `;
@@ -5809,23 +5813,25 @@
                             <div class="match-header-title">程式碼片段</div>`;
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
-            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
+            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
             const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
         });
                             html += `</div><div class="match-col right-col">
                                 <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;        item.right.forEach((text, rIdx) => {
             const isMatchedByAny = currentAns.includes(rIdx);
-            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
             const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
             html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div class="q-text-part-right">${cleanText}</div></div>`;
         });
         html += `</div></div></div>`;
-        if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
-        else {
+        // 未鎖定時顯示按鈕，若已錯則改文字為「更正提交」
+        if (!isLocked) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
+        
+        if (showResult) {
             const ansText = item.answer.join(', ');
             html += `<div class="answer-section" style="display:block;">
-                        <div class="fw-bold mb-2 ${isCorrected?'text-warning':'text-success'}">${isCorrected?'🟠 已更正成功！':'✅ 答對了！'}</div>
+                        <div class="fw-bold mb-2 ${isCorrected?'text-warning':(isWrong?'text-danger':'text-success')}">${isCorrected?'🟠 已更正成功！':(isWrong?'❌ 答錯了，請參考答案更正':'✅ 答對了！')}</div>
                         <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
                         <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                      </div>`;
