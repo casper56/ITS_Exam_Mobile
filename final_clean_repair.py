@@ -57,7 +57,7 @@ def clean_repair_all():
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
                 }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
@@ -257,6 +257,7 @@ def clean_repair_all():
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
@@ -965,7 +966,7 @@ def clean_repair_all():
         code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #000 !important; background-color: transparent !important; }
         code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; color: inherit; }
         .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
@@ -1122,6 +1123,7 @@ def clean_repair_all():
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>

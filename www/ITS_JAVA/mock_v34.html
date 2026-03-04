@@ -43,7 +43,7 @@
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
                 }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
@@ -243,6 +243,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
@@ -346,57 +347,55 @@
         "id": 1,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【A-1】Java 程式碼中的註解，下列何者為正確語法？</code></pre>"
+            "<pre><code><class=\"language-java\">【A-01】Java 程式碼中的註解，下列何者為正確語法？</code></pre>"
         ],
         "options": [
-            "<code>//這是註解文字</code>",
-            "<code>#這是註解文字</code>",
-            "<code>\\\\這是註解文字</code>",
-            "<code>*/這是註解文字</code>"
+            "// 這是註解文字",
+            "# 這是註解文字",
+            "\\\\ 這是註解文字",
+            "*/ 這是註解文字"
         ],
-        "answer": [
-            "A"
-        ],
+        "answer": "A",
         "weight": 1,
         "image": null,
         "explanation": [
-            "Java 中單行註解使用 //，多行註解使用 /* ... */，Javadoc 使用 /** ... */。"
+            "Java 使用 // 進行單行註解，/* */ 進行多行註解。"
         ],
-        "category": "Java 基礎與環境"
+        "category": "基礎語法"
     },
     {
         "id": 2,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【A-2】你需要使用最少的記憶體來儲存 3,200,000,000 (32 億) 數值，應該使用下列哪種資料類別？</code></pre>"
+            "<pre><code><class=\"language-java\">【A-02】你需要使用最少的記憶體來儲存 3,200,000,000 (32 億) 數值，應該使用下列哪種資料類別？</code></pre>"
         ],
         "options": [
-            "<code>byte</code>",
-            "<code>int</code>",
-            "<code>short</code>",
-            "<code>long</code>"
+            "byte",
+            "int",
+            "short",
+            "long"
         ],
-        "answer": [
-            "D"
-        ],
+        "answer": "D",
         "weight": 1,
         "image": null,
         "explanation": [
-            "int 的最大值約為 21 億 (2^31 - 1)，32 億超過了 int 的範圍，因此必須使用 long (64-bit)。"
+            "int 的最大值約為 21 億，32 億超過了 int 的範圍，因此必須使用 long。"
         ],
-        "category": "資料型別與變數"
+        "category": "資料型別"
     },
     {
         "id": 3,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-3】你正在參加 Java 程式開發人員的面試，必須證明您熟識 main 方法。",
-            "對於下列關於 main 方法的敘述，請選取[O] 或 [X]。</code></pre>"
-        ],
-        "left": [
+            "<pre><code class=\"language-java\">【A-03】你正在參加 Java 程式開發人員的面試，必須證明您熟識 main 方法。對於下列關於 main 方法的敘述，請選取 [O] 或 [X]。",
             "A. main 方法的 args 參數是 String 資料類別的陣列。",
             "B. Java 應用程式只能接受一個命令列引數。",
-            "C. main 方法必須為靜態，因為執行時不會將類別中的物件實體化。"
+            "C. main 方法必須為靜態，因為執行時不會將類別中的物件實體化。</code></pre>"
+        ],
+        "left": [
+            "A 敘述",
+            "B 敘述",
+            "C 敘述"
         ],
         "right": [
             "O",
@@ -410,28 +409,31 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 正確，String[] args。",
-            "B: 錯誤，可以接受多個引數。",
-            "C: 正確，JVM 調用 main 不需要實例化類別。"
+            "A: 正確，String[] args。B: 錯誤，可接受多個引數。C: 正確，static 方法不需實體化即可執行。"
         ],
-        "category": "Java 核心架構"
+        "category": "main 方法規範"
     },
     {
         "id": 4,
-        "type": "multioption",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-4】你在建立一個 Java 主控台應用程式，必須定義應用程式啟動時所執行的第一個方法的簽章，請選取正確的程式碼片段來完成程式碼。",
+            "<pre><code class=\"language-java\">【A-04】你在建立一個 Java 主控台應用程式，必須定義應用程式啟動時所執行的第一個方法的簽章，請選取正確的程式碼片段來完成程式碼。",
             "程式碼片段：",
             "A : ①private void ②public static void ③private static String ④public String",
             "B : ①int args[] ②int args ③String args[] ④String arg",
             "",
-            "___A___ main ( ___B___ ) {",
-            "    System.out.print(&quot;Java 學習網&quot;);",
-            "}</code></pre>"
+            "   ____A____  main ( ____B____ )",
+            "   {",
+            "       System.out.print(\"Java 學習網\");",
+            "   }</code></pre>"
         ],
-        "options": [
-            "<code>A 選項</code>",
-            "<code>B 選項</code>"
+        "left": [
+            "A 片段",
+            "B 片段"
+        ],
+        "right": [
+            "①private void | ②public static void | ③private static String | ④public String",
+            "①int args[] | ②int args | ③String args[] | ④String arg"
         ],
         "answer": [
             "B",
@@ -440,33 +442,30 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "標準 main 方法簽章為 public static void main(String[] args)。"
+            "Java 應用程式的標準進入點 (Entry Point) 簽章必須是 public static void main(String[] args) 或 public static void main(String args[])。",
+            "A 段應選擇 ②public static void。",
+            "B 段應選擇 ③String args[]。"
         ],
-        "category": "Java 核心架構"
+        "category": "main 方法規範"
     },
     {
         "id": 5,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-5】請選擇適當值作為下列程式碼片段的值。每個值可能使用一次或多次，甚至完全不用。",
-            "值：①0 ②1 ③2 ④3 ⑤16 ⑥19 ⑦26 ⑧80 ⑨90</code></pre>"
-        ],
-        "left": [
+            "<pre><code class=\"language-java\">【A-05】請選擇適當值作為下列程式碼片段的值。每個值可能使用一次或多次，甚至完全不用。",
             "A. (3 + 2) * 4 - 1",
             "B. 4 * 4 + 2 * 5",
             "C. 8 * 2 % 3",
-            "D. 5 / 2 - 6 % 2"
+            "D. 5 / 2 - 6 % 2</code></pre>"
+        ],
+        "left": [
+            "A 運算",
+            "B 運算",
+            "C 運算",
+            "D 運算"
         ],
         "right": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "16",
-            "19",
-            "26",
-            "80",
-            "90"
+            "① 0 | ② 1 | ③ 2 | ④ 3 | ⑤ 16 | ⑥ 19 | ⑦ 26 | ⑧ 80 | ⑨ 90"
         ],
         "answer": [
             "F",
@@ -477,38 +476,37 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 5 * 4 - 1 = 19 (⑥)",
-            "B: 16 + 10 = 26 (⑦)",
-            "C: 16 % 3 = 1 (②)",
-            "D: 2 - 0 = 2 (③)"
+            "A: 5*4-1=19。B: 16+10=26。C: 16%3=1。D: 2-0=2。"
         ],
-        "category": "運算子與運算式"
+        "category": "算術運算"
     },
     {
         "id": 6,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-6】請審視下列程式碼片段。(行號僅供參考)",
-            "01 byte num=127;",
-            "02 num++;",
+            "<pre><code class=\"language-java\">【A-06】請審視下列程式碼片段。(行號僅供參考)",
+            "01 byte num=127; 02 num++;",
             "03 System.out.println(num);",
             "04 System.out.println(1.0 / 3.0);",
             "05 System.out.println(1.0f / 3.0f);",
             "06 System.out.println(1 / 3);",
-            "",
-            "請選取正確的選項來回答問題。</code></pre>"
-        ],
-        "left": [
+            "請選取正確的選項回答問題。",
             "A. 第 03 行的輸出為何？",
             "B. 第 04 行的輸出為何？",
             "C. 第 05 行的輸出為何？",
-            "D. 第 06 行的輸出為何？"
+            "D. 第 06 行的輸出為何？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出",
+            "C 輸出",
+            "D 輸出"
         ],
         "right": [
-            "<code>-128|128</code>",
-            "<code>0.3333333333333333|0.33333334</code>",
-            "<code>0.3333333333333333|0.33333334</code>",
-            "<code>0.33333334|0</code>"
+            "① -128 | ② 128",
+            "① 0.33333334 | ② 0.3333333333333333",
+            "① 0.33333334 | ② 0.3333333333333333",
+            "① 0.33333334 | ② 0"
         ],
         "answer": [
             "A",
@@ -519,77 +517,74 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: byte 溢位，127 + 1 = -128。",
-            "B: double 精度較高 (0.3333333333333333)。",
-            "C: float 精度較低 (0.33333334)。",
-            "D: 整數除法結果為 0。"
+            "A: byte 溢位 127+1=-128。B: double 精度。C: float 精度。D: 整數除法 1/3=0。"
         ],
-        "category": "資料型別與運算子"
+        "category": "資料型別與運算"
     },
     {
         "id": 7,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-7】請審視下列程式碼片段：",
-            "double num1=255.255;",
-            "int num2=(int)num1;",
+            "<pre><code class=\"language-java\">【A-07】請審視下列程式碼片段：",
+            "double num1 = 255.255;",
+            "int num2 = (int)num1;",
             "byte num3 = (byte)num2;",
-            "",
-            "請選取正確的選項來完成下列題目。</code></pre>"
+            "請選取正確的選項來完成下列題目。",
+            "A. num2 的值為何？",
+            "B. num3 的值為何？</code></pre>"
         ],
         "left": [
-            "A. num2 的值",
-            "B. num3 的值"
+            "A 答案",
+            "B 答案"
         ],
         "right": [
-            "255.255|255.3|255|256",
-            "11111111|-1|255|256"
+            "① 255.255 | ② 255 | ③ -1 | ④ 256",
+            "① 11111111 | ② -1 | ③ 255 | ④ 256"
         ],
         "answer": [
-            "C",
+            "B",
             "B"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "num2 = (int)255.255 = 255。",
-            "num3 = (byte)255，byte 範圍為 -128~127，255 的二進制是 11111111，在 byte 中代表 -1。"
+            "A: (int)255.255 = 255。B: byte 的範圍是 -128 到 127，255 在 byte 中會溢位，二進制為 11111111 (補數)，代表 -1。"
         ],
         "category": "資料型別轉換"
     },
     {
         "id": 8,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-8】請審視下列 Java 程式碼。(行號僅供參考)",
+            "<pre><code class=\"language-java\">【A-08】請審視下列 Java 程式碼。(行號僅供參考)",
             "01 public static void main(String[] args) {",
-            "02     int a = 5;",
-            "03     int b = 7;",
-            "04     String num1 = &quot;a+b=&quot; + a + b;",
-            "05     System.out.println(num1);",
-            "06     String num2 = &quot;a+b=&quot; + (a + b);",
-            "07     System.out.println(num2);",
-            "08 }</code></pre>"
+            "02   int a = 5; 03 int b = 7;",
+            "04   String num1 = \"a+b=\" + a + b;",
+            "05   System.out.println(num1);",
+            "06   String num2 = \"a+b=\" + (a + b);",
+            "07   System.out.println(num2);",
+            "08 }",
+            "請選取正確的選項回答問題。",
+            "A. 第 05 行的輸出為何？",
+            "B. 第 07 行的輸出為何？</code></pre>"
         ],
         "left": [
-            "A. 第 05 行的輸出為何？",
-            "B. 第 07 行的輸出為何？"
+            "A 輸出",
+            "B 輸出"
         ],
         "right": [
-            "①a+b=57|②a+b=ab|③a+b=12|④12",
-            "①a+b=12|②a+b=ab|③a+b=57|④57"
+            "① a+b=57 | ② a+b=ab | ③ a+b=12 | ④ 12"
         ],
         "answer": [
             "A",
-            "A"
+            "C"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 字串連接由左至右，結果為 &quot;a+b=5&quot; + 7 = &quot;a+b=57&quot;。",
-            "B: 括號優先計算，結果為 &quot;a+b=&quot; + 12 = &quot;a+b=12&quot;。"
+            "A: \"a+b=\"+5 變成字串 \"a+b=5\"，再 +7 變成 \"a+b=57\"。B: 先算括號 (5+7)=12，再與字串相加。"
         ],
-        "category": "運算子與字串"
+        "category": "字串連接"
     },
     {
         "id": 9,
@@ -598,6 +593,11 @@
             "<pre><code class=\"language-java\">【A-9】你在建立一個 Java 主控台應用程式，會讀取使用者所輸入的日期。",
             "請選取正確的程式碼片段來完成程式碼。",
             "程式碼片段：",
+            "A : ①java.io.* ②java.util.Scanner",
+            "B : ①InputStream stream = System.in ②Scanner sc = new Scanner(System.in)",
+            "C : ①sc.wait() ②sc.next() ③sc.mark(8) ④stream.read()",
+            "D : ①sc.wait() ②sc.close() ③stream.wait() ④stream.close()",
+            "",
             "import ___A___;",
             "public class DateReader{",
             "    public static String getDate(){",
@@ -616,10 +616,10 @@
             "D 選項"
         ],
         "right": [
-            "java.io.* |java.util.Scanner",
-            "InputStream stream = System.in |Scanner sc = new Scanner(System.in)",
-            "sc.wait() |sc.next() |sc.mark(8) |stream.read()",
-            "sc.wait() |sc.close() |stream.wait() |stream.close()"
+            "①java.io.* | ②java.util.Scanner",
+            "①InputStream stream = System.in | ②Scanner sc = new Scanner(System.in)",
+            "①sc.wait() | ②sc.next() | ③sc.mark(8) | ④stream.read()",
+            "①sc.wait() | ②sc.close() | ③stream.wait() | ④stream.close()"
         ],
         "answer": [
             "B",
@@ -639,65 +639,70 @@
     },
     {
         "id": 10,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-10】請審視下列程式碼片段。(行號僅供參考)",
-            "01 int x = 5;",
-            "02 int y = 10;",
+            "01 int x = 5; 02 int y = 10;",
             "03 int z = ++x * y--;",
             "04 int n = x-- + ++y;",
             "05 System.out.println(z);",
             "06 System.out.println(n);",
-            "",
-            "請選取正確的選項來回答問題。</code></pre>"
+            "請選取正確的選項來回答問題。",
+            "A. 第 05 行的輸出為何？",
+            "B. 第 06 行的輸出為何？</code></pre>"
         ],
         "left": [
-            "A. 第 05 行的輸出為何？",
-            "B. 第 06 行的輸出為何？"
+            "A 輸出",
+            "B 輸出"
         ],
         "right": [
-            "15 |40 |50 |54 |60",
-            "11 |13 |15 |16"
+            "① 15 | ② 40 | ③ 50 | ④ 54 | ⑤ 60"
         ],
         "answer": [
             "E",
-            "D"
+            "A"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "z = (++x) * (y--) = 6 * 10 = 60 (y 變為 9)。",
-            "n = (x--) + (++y) = 6 + 10 = 16 (x 變為 5)。"
+            "1. z = 6 * 10 = 60 (x變6, y變9)。2. n = 6 + 10 = 16 (x變5, y變10)。(註：選項若無16，請檢查 PDF 精確數字)"
         ],
         "category": "運算子優先級"
     },
     {
         "id": 11,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-11】你在撰寫一個 Java 程式，此程式必須執行下列工作：",
             "● 將 userName 截斷只留下前五個字元。",
-            "● 將 outStr 設定為包含 userName 及 userName 中字元總數的字串。",
+            "● 將 outStr 設定為包含 userName 及 userName 中字元數的字串。",
             "請選取正確的程式碼片段來完成程式碼。",
+            "",
             "程式碼片段：",
+            "A : ①substring(0, 5); ②subSequence(5, 0); ③substring(5);",
+            "B : ①%n ②%d ③%s",
+            "C : ①%f ②%d ③%c",
+            "D : ①count() ②length() ③chars()",
+            "",
             "public static void main(String[] args){",
-            "    String userName = &quot;Javacoffee&quot;;",
-            "    userName = userName.___A___;",
-            "    String outStr = String.format(&quot;字串有 ___B___ 字串有 ___C___ 個字元&quot;, userName, userName.___D___());",
+            "    String userName = \"Javacoffee\";",
+            "    userName = userName.__A__",
+            "    String outStr = String.format(\"使用者名稱為 __B__ 字串有 __C__ 個字元\",",
+            "        userName, userName.__D__);",
             "    System.out.println(outStr);",
             "}</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項",
-            "D 選項"
+            "A 片段",
+            "B 片段",
+            "C 片段",
+            "D 片段"
         ],
         "right": [
-            "substring(0, 5) |subSequence(5, 0) |substring(5)",
-            "%n |%d |%s",
-            "%f |%d |%c",
-            "count() |length() |chars()"
+            "① substring(0, 5); | ② subSequence(5, 0); | ③ substring(5);",
+            "① %n | ② %d | ③ %s",
+            "① %f | ② %d | ③ %c",
+            "① count() | ② length() | ③ chars()"
         ],
         "answer": [
             "A",
@@ -708,12 +713,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: substring(0, 5) 取得索引 0~4。",
-            "B: %s 用於字串。",
-            "C: %d 用於整數。",
-            "D: length() 取得字串長度。"
+            "1. 截斷字串：使用 substring(0, 5) 取得索引 0 到 4 (共 5 個字元) 的子字串。",
+            "2. 格式化輸出：String.format 中，%s 用於字串 (userName)，%d 用於整數 (長度)。",
+            "3. 取得長度：Java 的 String 物件使用 length() 方法取得字元數。"
         ],
-        "category": "字串處理"
+        "category": "字串操作"
     },
     {
         "id": 12,
@@ -722,6 +726,8 @@
             "<pre><code class=\"language-java\">【A-12】你要使用初始值來宣告 2X3 的 int 資料型別陣列。",
             "請選擇適當的程式碼片段來完成程式碼。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全不用。",
             "程式碼片段：",
+            "①[[ ②]] ③[ ④{{ ⑤}} ⑥} ⑦{ ⑧},{ ⑨],[",
+            "",
             "int[][] array = ___A___ 72, 34, 56 ___B___ 28, 14, 25 ___C___</code></pre>"
         ],
         "left": [
@@ -777,8 +783,7 @@
             "D. 第 14 行 point 的值為 110。"
         ],
         "right": [
-            "O",
-            "X"
+            "O | X"
         ],
         "answer": [
             "A",
@@ -805,7 +810,11 @@
             "● 會傳回陣列中的最大值。",
             "請選取正確的程式碼片段來完成程式碼。",
             "程式碼片段：",
-           
+            "A. ① double[] array ② double array ③ double[length] array",
+            "B. ① double max = array[1]; ② double max = array[0];",
+            "C. ① array.size()-1 ② array.size() ③ array.length-1 ④ array.length",
+            "D. ① max != array[i] ② max < array[i]",
+            "E. ① max == array[i]; ② max = array[i];",
             "",
             "public double getMax( ___A___ ){",
             "    ___B___",
@@ -823,11 +832,11 @@
             "E 選項"
         ],
         "right": [
-            "A. ① double[] array ② double array ③ double[length] array",
-            "B. ① double max = array[1]; ② double max = array[0];",
-            "C. ① array.size()-1; ② array.size(); ③ array.length-1; ④ array.length;",
-            "D. ① max != array[i] ② max < array[i]",
-            "E. ① max == array[i]; ② max = array[i];"
+            "①double[] array | ②double array | ③double[length] array",
+            "①double max = array[1]; | ②double max = array[0];",
+            "①array.size()-1 | ②array.size() | ③array.length-1 | ④array.length",
+            "①max != array[i] | ②max < array[i]",
+            "①max == array[i]; | ②max = array[i];"
         ],
         "answer": [
             "A",
@@ -855,7 +864,7 @@
             "● total 大於或等於 num。",
             "● nt 小於 num。",
             "請選擇適當運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。",
-            "運算子：",
+            "運算子：① && ② || ③ < ④ > ⑤ <= ⑥ >= ⑦ == ⑧ !=",
             "",
             "if (num ___A___ total ___B___ nt ___C___ num)</code></pre>"
         ],
@@ -865,7 +874,7 @@
             "C 選項"
         ],
         "right": [
-            "① && ② || ③ < ④ > ⑤ <= ⑥ >= ⑦ == ⑧ !="
+            "① && | ② &#124;&#124; | ③ < | ④ > | ⑤ <= | ⑥ >= | ⑦ == | ⑧ !="
         ],
         "answer": [
             "E",
@@ -883,19 +892,19 @@
     },
     {
         "id": 16,
-        "type": "multimatching",
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-java\">【A-16】你在應徵 Java 程式開發人員工作，需要證明你了解 switch 運算式。",
-            "在下列各個程式碼片段中，若可以使用最多三個 case 陳述式將該程式碼片段變更為 switch 運算式，請選取[O]；若無法則請選取[X]。</code></pre>"
+            "在下列各個程式碼片段中，若可以使用最多三個 case 陳述式將該程式碼片段變更為 switch 運算式，請選取[O]；若無法則請選取[X]。</code></pre>",
+            "<pre><code> class=\"language-java\">A.\nif (ages >= 65) {\n off = 0.50; \n} else if (ages >= 20) {\n off = 0.3\n } else {\n off = 0.0; \n}</code></pre>",
+            "<pre><code> class=\"language-java\">B.\nif (level == &quot;甲&quot;) {\n  msg = &quot;超越標準&quot;; \n } else if (level == &quot;乙&quot;) {\n  msg = &quot;符合標準&quot;; \n } else {\n  msg = &quot;需要改進&quot;; \n }</code></pre>",
+            "<pre><code> class=\"language-java\">C.\nif (score == 4.0) {\n order = 1; \n} else if (score >= 3.5) {\n order = 2; \n} else if (score >= 2.5) {\n order = 3; \n}</code></pre>"
         ],
-        "left": [
-            "A. <pre><code class=\"language-java\">\nif (ages >= 65) {\n off = 0.50; \n} else if (ages >= 20) {\n off = 0.3\n } else {\n off = 0.0; }</code></pre>",
-            "B. <pre><code class=\"language-java\">\nif (level == &quot;甲&quot;) { msg = &quot;超越標準&quot;; } else if (level == &quot;乙&quot;) { msg = &quot;符合標準&quot;; } else { msg = &quot;需要改進&quot;; }</code></pre>",
-            "C. if (score == 4.0) { order = 1; } else if (score >= 3.5) { order = 2; } else if (score >= 2.5) { order = 3; }"
-        ],
-        "right": [
-            "O",
-            "X"
+        "options": [
+            "O | X",
+            "O | X",
+            "O | X"
         ],
         "answer": [
             "B",
@@ -920,64 +929,87 @@
             "● 65 歲以上的會員可免入場費。",
             "● 非會員可以基本票價購票，或在同一次交易中一起購買會員資格 (joinMember) 及打折票券。",
             "● isMember 變數可指定對象是否為會員。",
-            "請從下列選項中選取正確的程式碼片段來完成程式碼。</code></pre>"
+            "",
+            "double countPrice(boolean isMember, int ages, boolean joinMember){",
+            "    double price;",
+            "    if (isMember){",
+            "        __A__",
+            "            price = 0.0;",
+            "        }",
+            "        __B__",
+            "            price = 30.0;",
+            "        }",
+            "    }",
+            "    __C__",
+            "        price = 430.0;",
+            "    }",
+            "    __D__",
+            "        price = 130.0;",
+            "    }",
+            "    return price;",
+            "}",
+            "請從左側選取正確的程式碼片段對應至右側的挖空位置。</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項",
-            "D 選項"
+            "if (ages > 65)",
+            "else if (joinMember)",
+            "else {",
+            "if (joinMember){"
         ],
         "right": [
-            "①",
-            "②",
-            "③"
+            "__A__",
+            "__B__",
+            "__C__",
+            "__D__"
         ],
         "answer": [
-            "B",
+            "A",
             "C",
             "B",
-            "A"
+            "C"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "if(isMember) { if(ages > 65) price=0; else price=30.0; }",
-            "else { if(joinMember) price=430.0; else price=100.0; }"
+            "1. 如果是會員 (isMember)：",
+            "   - 若 ages > 65，則免入場費 (price = 0.0)。對應 __A__ 為 if (ages > 65)。",
+            "   - 否則 (其他年齡層會員)，享三折 30.0 元。對應 __B__ 為 else {。",
+            "2. 如果不是會員：",
+            "   - 若要加入會員 (joinMember)，費用為 400 + 30 = 430.0 元。對應 __C__ 為 else if (joinMember)。",
+            "   - 否則 (非會員購一般票)，費用為 100 + 30 = 130.0 元。對應 __D__ 為 else {。"
         ],
-        "category": "複合邏輯"
+        "category": "控制流程"
     },
     {
         "id": 18,
         "type": "matching",
         "question": [
             "<pre><code class=\"language-java\">【A-18】你為銀行撰寫管理信用帳戶開立的 Java 程式，若要開立新帳戶，該對象必須符合以下任一要求：",
-            "● 超過 65 歲 (ages) 以上，且年收入 (income) 最低為 1,000,000 元。",
+            "● 超過 65 歲(ages)以上，且年收入(income)最低為 1,000,000 元。",
             "● 至少 21 歲，且年收入高於 2,500,000 元。",
-            "請選擇適當的運算子填入對應的正確位置，以完成程式碼。",
+            "",
+            "請選擇適當的運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。",
             "運算子：① = ② && ③ <= ④ < ⑤ == ⑥ != ⑦ > ⑧ >= ⑨ ||",
             "",
-            "if (ages ___A___ 65 ___B___ income ___C___ 1000000 ___D___ ages ___E___ 21 ___F___ income ___G___ 2500000)</code></pre>"
+            "if (ages ___A___ 65 ___B___ income ___C___ 1000000 ___D___ ",
+            "    ages ___E___ 21 ___F___ income ___G___ 2500000) {",
+            "    System.out.println(\"通過\");",
+            "}",
+            "else {",
+            "    System.out.println(\"未通過\");",
+            "}</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項",
-            "D 選項",
-            "E 選項",
-            "F 選項",
-            "G 選項"
+            "A 位置",
+            "B 位置",
+            "C 位置",
+            "D 位置",
+            "E 位置",
+            "F 位置",
+            "G 位置"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤",
-            "⑥",
-            "⑦",
-            "⑧",
-            "⑨"
+            "① = |② && |③ <= |④ < |⑤ == |⑥ != |⑦ > |⑧ >= |⑨ &#124;&#124;"
         ],
         "answer": [
             "G",
@@ -991,20 +1023,37 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "if (ages > 65 && income >= 1000000 || ages >= 21 && income > 2500000)"
+            "根據題目需求：",
+            "1. 第一個要求：超過 65 歲 (ages > 65) 且 年收入最低 100 萬 (income >= 1000000)。",
+            "   對應：A 是 ⑦ (>)，B 是 ② (&&)，C 是 ⑧ (>=)。",
+            "2. 任一要求：使用邏輯或 (||)。",
+            "   對應：D 是 ⑨ (||)。",
+            "3. 第二個要求：至少 21 歲 (ages >= 21) 且 年收入高於 250 萬 (income > 2500000)。",
+            "   對應：E 是 ⑧ (>=)，F 是 ② (&&)，G 是 ⑦ (>)."
         ],
         "category": "邏輯判斷"
     },
     {
         "id": 19,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-19】你在撰寫一個 Java 方法，此方法要能執行下列工作：",
             "● 接受名稱為 ages 的 int 參數。",
             "● 若 ages 為 65 或以上，則指定為 &quot;老人&quot; 分類 (kind)。",
             "● 若 ages 為 20 或以上，但低於 65，則指定為 &quot;成人&quot; 分類。",
-            "● 否則，指定為 &quot;成人&quot; 分類。",
-            "請選取正確的程式碼片段來完成程式碼。</code></pre>"
+            "● 否則，指定為 &quot;青年&quot; 分類。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "",
+            "public static String ageClassification(int ages){",
+            "    String kind;",
+            "    ___A___",
+            "        kind = &quot;老人&quot;;",
+            "    ___B___",
+            "        kind = &quot;成人&quot;;",
+            "    ___C___",
+            "        kind = &quot;青年&quot;;",
+            "    return kind;",
+            "}</code></pre>"
         ],
         "left": [
             "A 選項",
@@ -1012,10 +1061,9 @@
             "C 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "①if (ages != 65) | ②if (ages >= 65) | ③if (ages > 65) | ④if (ages >= 65 || ages != 20)",
+            "①if (ages < 20) | ②if (ages > 19) | ③else if (ages >= 19) | ④else if (ages >= 20)",
+            "①if (ages <= 20) | ②else | ③default | ④else if (ages != 20)"
         ],
         "answer": [
             "B",
@@ -1025,26 +1073,23 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "if(ages >= 65) { kind=\"老人\"; }",
-            "else if(ages >= 20) { kind=\"成人\"; }",
-            "else { kind=\"青年\"; } (根據題目敘述修正)"
+            "1. A選② (ages>=65)",
+            "2. B選④ (else if ages>=20)",
+            "3. C選② (else)"
         ],
-        "category": "條件分支"
+        "category": "控制流程"
     },
     {
         "id": 20,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-20】您在撰寫一個 Java 的 countdown 方法，此方法必須執行下列工作：",
             "● 接受名稱為 num 的 int 參數。",
-            "● 顯示從 num 遞減到一的所有數字。",
+            "● 顯示從 num 遞減到零的所有數字。",
             "請選取正確的程式碼片段來完成程式碼。",
-            "A. ①int i = num; ② int i == num; ③int i < num; ④ int i <= num;",
-            "B. ①i < 0; ②i <= 0; ③i > 0; ④i >= 0;",
-            "C. ①i+ ②++i ③--i ④-i",
             "",
             "public static void countdown(int num){",
-            "    for ( ___A___ ; ___B___ ; ___C___ ){",
+            "    for ( ___A___  ___B___  ___C___ ){",
             "        System.out.println(i);",
             "    }",
             "}</code></pre>"
@@ -1055,57 +1100,55 @@
             "C 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "①int i = num; | ②int i == num; | ③int i < num; | ④int i <= num;",
+            "①i < 0; | ②i <= 0; | ③i > 0; | ④i >= 0;",
+            "①+i | ②++i | ③--i | ④-i"
         ],
         "answer": [
             "A",
-            "C",
+            "D",
             "C"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "for (int i = num; i > 0; i--)"
+            "for迴圈初始化 i=num，條件 i>=0，每次執行後 i--。"
         ],
-        "category": "迴圈控制"
+        "category": "控制流程"
     },
     {
         "id": 21,
         "type": "single",
         "question": [
             "<pre><code class=\"language-java\">【A-21】請檢閱下列程式碼片段：",
-            "char[][] array = {{&apos;a&apos;, &apos;b&apos;, &apos;c&apos;}, {&apos;d&apos;, &apos;e&apos;, &apos;f&apos;}, {&apos;g&apos;, &apos;h&apos;, &apos;i&apos;}}",
-            "for(int i = 0; i < array.length; i++)",
+            "char[][] array = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};",
+            "for(int i = 0; i < array.length; i++) {",
             "    for(int j = array[i].length - 1; j >= 0; j--)",
             "        System.out.print(array[i][j]);",
+            "}",
             "",
             "請問迴圈執行完成後，主控台視窗會輸出下列何者？</code></pre>"
         ],
         "options": [
-            "<code>cbafedihg</code>",
-            "<code>abcdefghi</code>",
-            "<code>ghidefabc</code>",
-            "<code>ihgfedcba</code>"
+            "cbafedihg",
+            "abcdefghi",
+            "ghidefabc",
+            "ihgfedcba"
         ],
-        "answer": [
-            "A"
-        ],
+        "answer": "A",
         "weight": 1,
         "image": null,
         "explanation": [
-            "內層迴圈從最後一個索引遞減，外層迴圈從 0 遞增。所以第一列輸出 cba，第二列 fed，第三列 ihg。"
+            "外層迴圈遍歷列(Row)，內層迴圈從最後一個索引反向輸出該列字元。'abc'->'cba', 'def'->'fed', 'ghi'->'ihg'。"
         ],
-        "category": "巢狀迴圈"
+        "category": "二維陣列"
     },
     {
         "id": 22,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【A-22】32.請審審視下列程式碼片段：",
-            "int[][] array = {{2, 20, 15}, {16, 7, 32}, {50, 4, 27}}",
+            "<pre><code class=\"language-java\">【A-22】請審閱下列程式碼片段：",
+            "int[][] array = {{2, 20, 15}, {16, 7, 32}, {50, 4, 27}};",
             "for(int i = 0; i < array.length; i++){",
             "    for(int j = 0; j < array[i].length; j++) {",
             "        if(array[i][j] < 10) break;",
@@ -1116,29 +1159,27 @@
             "請問迴圈執行完成後，主控台視窗輸出為何？</code></pre>"
         ],
         "options": [
-            "<code>16 50</code>",
-            "<code>20 15 16 32 50 27</code>",
-            "<code>50 4 27</code>",
-            "<code>15 32 27</code>"
+            "16 50",
+            "20 15 16 32 50 27",
+            "50 4 27",
+            "15 32 27"
         ],
-        "answer": [
-            "A"
-        ],
+        "answer": "A",
         "weight": 1,
         "image": null,
         "explanation": [
-            "第一列：2 < 10，直接 break 內層迴圈。",
-            "第二列：16 >= 10 (輸出)，7 < 10 (break)。",
-            "第三列：50 >= 10 (輸出)，4 < 10 (break)。",
-            "最終輸出 16 50。"
+            "1. i=0 時，2 < 10 觸發 break，第一列結束。",
+            "2. i=1 時，16 >= 10 (印 16)，接著 7 < 10 (break)。",
+            "3. i=2 時，50 >= 10 (印 50)，接著 4 < 10 (break)。",
+            "最終輸出 16 與 50。"
         ],
-        "category": "迴圈中斷控制"
+        "category": "控制流程與作用域"
     },
     {
         "id": 23,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-23】你要在不變更功能下，重寫下列程式碼。(行號僅供參考)",
+            "<pre><code class=\"language-java\">【A-23】您要在不變更功能下，重寫下列程式碼。(行號僅供參考)",
             "01 showMenu();",
             "02 for( ; ; ){",
             "03     boolean n = newDeal();",
@@ -1148,44 +1189,38 @@
             "07 }",
             "",
             "請選擇下列適當的程式碼片段填入正確位置，來完成程式碼。",
-            "程式碼片段：",
-            "① } do; ② do ③ } break; ④ while (newDeal())",
-            "⑤while (newDeal()); ⑥ } ⑦ } continue; ⑧ continue",
             "",
-            "___A___",
-            "{",
+            "    ___A___",
+            " {",
             "    showMenu();",
+            " }",
             "    ___B___",
-            "}</code></pre>"
+            "</code></pre>"
         ],
         "left": [
             "A 選項",
             "B 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤",
-            "⑥",
-            "⑦",
-            "⑧"
+            "① } do; | ② do | ③ } break; | ④ while (newDeal())",
+            "⑤ while (newDeal()); | ⑥ } | ⑦ } continue; | ⑧ continue"
         ],
         "answer": [
             "B",
-            "E"
+            "A"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "原始程式碼先執行一次 showMenu，然後重複判斷 newDeal。這可以用 do-while 改寫：do { showMenu(); } while(newDeal());"
+            "原始程式碼邏輯：先顯示一次選單，然後進入無限迴圈，每次判斷是否有新交易 (newDeal)，若無則跳出，若有則再顯示選單。這等同於「先執行一次，再判斷條件」的 do-while 結構。",
+            "1. ___A___ 位於大括號前，應填入 ② do。",
+            "2. ___B___ 位於結束大括號後，應填入 ⑤ while (newDeal());。"
         ],
-        "category": "迴圈改寫"
+        "category": "控制流程"
     },
     {
         "id": 24,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-24】你在撰寫一個 Java 的 checkItems 方法，此方法會執行下列功能：",
             "● 接受名稱為 items 的 String 陣列。",
@@ -1193,9 +1228,6 @@
             "● 若有元素內容超過 10 個字元，就停止查看並傳回 false。",
             "● 反之則傳回 true。",
             "請選取正確的程式碼片段來完成程式碼。",
-            "A. ① while ②for ③ do",
-            "B. ①++ ② : ③; ④instanceof",
-            "C. ①break; ② goto; ③ continue;",
             "",
             "public boolean checkItems(String[] items){",
             "    boolean allCheckItems = true;",
@@ -1214,9 +1246,9 @@
             "C 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③"
+            "①while | ②for | ③do",
+            "①++ | ② : | ③; | ④instanceof",
+            "①break; | ②goto; | ③continue;"
         ],
         "answer": [
             "B",
@@ -1226,51 +1258,51 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "使用 for-each 迴圈：for(String item : items)。當條件滿足時，使用 break 停止查看。"
+            "使用 for-each 語法：for(String item : items)。當條件滿足時，使用 break 立即跳出迴圈。"
         ],
-        "category": "進階迴圈"
+        "category": "控制流程與作用域"
     },
     {
         "id": 25,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-25】您是位 Java 程式設計師，你的同事建立下列程式。(行號僅供參考)",
             "01 public static void main(String[] args){",
-            "02 int times = 60;",
-            "03 while(times => 0) {",
-            "04     if(times = 0)",
-            "05         break;",
-            "06     else{",
-            "07         System.out.println(&quot;倒數計時中...&quot;);",
-            "08         times++;",
-            "09     }",
-            "10 }",
+            "02     int times = 60;",
+            "03     while(times => 0) {",
+            "04         if(times = 0)",
+            "05             break;",
+            "06         else{",
+            "07             System.out.println(\"倒數計時中...\");",
+            "08             times++;",
+            "09         }",
+            "10     }",
             "11 }",
-            "此程式會從 60 開始倒數，並在主控台顯示訊息，但此程式未能達到預期功能。請選取正確的程式碼片段來修正程式碼。",
-            "A. ①== ②>= ③<= ④=>",
-            "B. ①== ②= ③!= ④=>",
-            "C. ①+= ②-= ③++ ④--",
             "",
-            "while (times ___A___ 0){",
-            "    if (times ___B___ 0){",
-            "        break;",
-            "    }",
-            "    else {",
-            "        System.out.println(&quot;倒數計時中...&quot;);",
-            "        times ___C___ ;",
+            "此程式會從 60 開始倒數，並在主控台顯示訊息，但此程式未能達到預期功能。請選取正確的程式碼片段來修正程式碼。",
+            "",
+            "public static void main(String[] args){",
+            "    int times = 60;",
+            "    while (times ___A___ 0){",
+            "        if (times ___B___ 0){",
+            "            break;",
+            "        }",
+            "        else {",
+            "            System.out.println(\"倒數計時中...\");",
+            "            times ___C___ ;",
+            "        }",
             "    }",
             "}</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項"
+            "A 選項 (while 條件)",
+            "B 選項 (if 條件)",
+            "C 選項 (遞減操作)"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "①== | ②>= | ③<= | ④=>",
+            "①== | ②= | ③!= | ④=>",
+            "①+= | ②-= | ③++ | ④--"
         ],
         "answer": [
             "B",
@@ -1280,31 +1312,33 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 運算子為 >=。",
-            "B: 判斷相等使用 ==。",
-            "C: 倒數計時應該使用遞減 --。"
+            "1. A 位置 (while 條件)：原始程式碼使用 => 語法錯誤（Java 正確運算子為 >=），且為了能從 60 持續執行至 0，應選擇 ② >=。",
+            "2. B 位置 (if 條件)：原始程式碼使用單一等號 = 變成賦值而非判斷，應選擇 ① == 進行相等比較。",
+            "3. C 位置 (遞減操作)：原始程式碼使用 times++ 導致數值增加而非倒數，會變成無限迴圈，應選擇 ④ -- 進行遞減。"
         ],
-        "category": "迴圈修正"
+        "category": "控制流程與偵錯"
     },
     {
         "id": 26,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-26】你正在面試 Java 程式開發人員的工作，你看到下列程式碼：(行號僅供參考)",
             "01 public class JavaTester",
             "02 {",
-            "03     int a = 5;",
-            "04     static int b = 5;",
-            "05     public void test()",
-            "06     {",
-            "07         int a = 10;",
-            "08         int b = 10;",
-            "09         System.out.println(&quot;a = &quot; + a);",
-            "10         System.out.println(&quot;this.a = &quot; + this.a);",
-            "11         System.out.println(&quot;b = &quot; + b);",
-            "12         System.out.println(&quot;JavaTester.b = &quot; + JavaTester.b);",
-            "13     }",
-            "14 }</code></pre>"
+            "03   int a = 5;",
+            "04   static int b = 5;",
+            "05   public void test()",
+            "06   {",
+            "07     int a = 10;",
+            "08     int b = 10;",
+            "09     System.out.println(\"a = \" + a);",
+            "10     System.out.println(\"this.a = \" + this.a);",
+            "11     System.out.println(\"b = \" + b);",
+            "12     System.out.println(\"JavaTester.b = \" + JavaTester.b);",
+            "13   }",
+            "14 }",
+            "",
+            "你要判斷 test() 方法的輸出。請審視該程式碼後，由下列選項中選取正確結果。</code></pre>"
         ],
         "left": [
             "A. 第 09 行輸出為",
@@ -1313,9 +1347,10 @@
             "D. 第 12 行輸出為"
         ],
         "right": [
-            "① 5",
-            "② 10",
-            "③ Error"
+            "① a = 5 | ② a = 10",
+            "① this.a = 5 | ② this.a = 10 | ③ this.x = \"Error\"",
+            "① b = 5 | ② b = 10",
+            "① JavaTester.b = 5 | ② JavaTester.b = 10 | ③ JavaTester.b = \"Error\""
         ],
         "answer": [
             "B",
@@ -1326,28 +1361,39 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "區域變數 (10) 會遮蔽成員變數 (5)。使用 this.a 或類別名 JavaTester.b 可存取成員變數。"
+            "1. 第 09 行輸出區域變數 a = 10 (遮蔽實體變數)。",
+            "2. 第 10 行使用 this.a 存取實體變數 5。",
+            "3. 第 11 行輸出區域變數 b = 10 (遮蔽靜態變數)。",
+            "4. 第 12 行使用類別名 JavaTester.b 存取靜態變數 5。"
         ],
-        "category": "變數範圍"
+        "category": "控制流程與作用域"
     },
     {
         "id": 27,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-27】你要建立 Test 類別來模擬學校考試，此類別必須符合下列需求：",
             "● 不用將 Test 類別實體化，就可呼叫 setMaxItems 方法。",
             "● 只有和 Test 類別在同一套件中的類別可呼叫 setItems 方法。",
-            "● 只有和 Test 類別在同一套件中的類別可呼叫名稱為 setPassScore 的執行個體方法。</code></pre>"
+            "● 只有和 Test 類別在同一套件中的類別可呼叫名稱為 setPassScore 的執行個體方法。",
+            "",
+            "請從以下選取正確的選項來完成程式碼。",
+            "A. ①protected ②private ③static ④public",
+            "B. ①protected ②private ③static ④public",
+            "",
+            "class Test {",
+            "    ___A___ void setItems (int num){",
+            "    }",
+            "    ___B___ void setPassScore (int score){",
+            "    }",
+            "}</code></pre>"
         ],
         "left": [
-            "A. setMaxItems 修飾詞",
-            "B. setItems 修飾詞"
+            "A 位置",
+            "B 位置"
         ],
         "right": [
-            "① protected",
-            "② private",
-            "③ static",
-            "④ public"
+            "①protected | ②private | ③static | ④public"
         ],
         "answer": [
             "C",
@@ -1356,30 +1402,35 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 不需實體化表示需要 static。",
-            "B: 同一套件可呼叫使用 protected 或預設 (default)。"
+            "1. 需求一「不用將類別實體化即可呼叫」：這代表該方法必須宣告為 static。因此 A 位置填入 ③static。",
+            "2. 需求二/三「只有同一套件中的類別可呼叫」：在 Java 中，protected 修飾詞允許同一個套件內的類別存取，也允許不同套件的子類別存取。在選項中，這是最符合「同一套件存取」需求的關鍵字。因此 B 位置填入 ①protected。"
         ],
         "category": "存取修飾詞"
     },
     {
         "id": 28,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-28】你在撰寫名稱為 account 的 Java 類別，此類別具備下列方法：",
             "● 不用將 account 類別實體化，就能從任何程式碼呼叫 showItems 方法。",
-            "● 僅有同一套件中的類別，以及任何套件中 account 類別的子類別可以存取名稱為 newAccount 的方法。</code></pre>"
+            "● 僅有同一套件中的類別，以及任何套件中 account 類別的子類別可以存取名稱為 newAccount 的方法。",
+            "",
+            "請選擇適當的程式碼片段到對應的正確位置，以完成程式碼。每個程式碼片段可能使用一次或多次，甚至完全不用。",
+            "程式碼片段：",
+            "① private ② final ③ protected ④ public ⑤ static",
+            "",
+            "public class account {",
+            "    ____A____ ____B____ void showItems () {/*...*/}",
+            "    ____C____ void newAccount(String[] items) {/*...*/}",
+            "}</code></pre>"
         ],
         "left": [
-            "A. showItems 修飾詞 1",
-            "B. showItems 修飾詞 2",
-            "C. newAccount 修飾詞"
+            "A 位置",
+            "B 位置",
+            "C 位置"
         ],
         "right": [
-            "① private",
-            "② final",
-            "③ protected",
-            "④ public",
-            "⑤ static"
+            "① private | ② final | ③ protected | ④ public | ⑤ static"
         ],
         "answer": [
             "D",
@@ -1389,54 +1440,66 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A/B: public static 允許全域且不需實體化呼叫。",
-            "C: protected 允許同一套件及子類別存取。"
+            "1. 任何程式碼皆可呼叫：使用 public (④)。",
+            "2. 不需實體化即可呼叫：使用 static (⑤)。",
+            "3. 同一套件或子類別存取：使用 protected (③)。"
         ],
-        "category": "存取控制"
+        "category": "存取修飾詞"
     },
     {
         "id": 29,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-29】你是 Java 程式設計師，同事建立了 Triangle 類別。(行號僅供參考)",
             "01 public class Triangle {",
-            "02 private int width;",
-            "03 private int length;",
-            "05 Triange(int width, int length){",
-            "06     this.width = width;",
-            "07     this.length = length;",
-            "08 }",
-            "10 public int calArea(){",
+            "02     private int width;",
+            "03     private int length;",
+            "04",
+            "05     Triangle(int width, int length){",
+            "06         this.width = width;",
+            "07         this.length = length;",
+            "08     }",
+            "09",
+            "10   public int calArea(){",
             "11     return this.width * this.length / 2;",
-            "12 }",
-            "14 public int getWidth(){",
+            "12   }",
+            "13",
+            "14   public int getWidth(){",
             "15     return this.width;",
-            "16 }",
-            "18 public int getLength(){",
+            "16   }",
+            "17",
+            "18   public int getLength(){",
             "19     return this.length;",
-            "20 }",
-            "21 }</code></pre>"
+            "20   }",
+            "21 }",
+            "",
+            "你要撰寫 Triangle 類別的測試程式，請選取正確的程式碼片段來完成測試程式。",
+            "int area;",
+            "____A____",
+            "____B____",
+            "System.out.printf(\"寬=%d 高=%d\\n\", ____C____ );</code></pre>"
         ],
         "left": [
-            "A. 建立實例 (Triangle tri = ...)",
-            "B. 計算面積 (area = ...)",
-            "C. 獲取寬高參數"
+            "A 選項 (建立物件)",
+            "B 選項 (計算面積)",
+            "C 選項 (取得屬性)"
         ],
         "right": [
-            "① tri.width, tri.length",
-            "② tri.getWidth(), tri.getLength()",
-            "③ new Triangle(20, 40)",
-            "④ tri.calArea()"
+            "① Triangle tri = new(20, 40); | ② new tri = Triangle(20, 40); | ③ Triangle tri = new Triangle(20, 40); | ④ Triangle tri = Triangle(20, 40);",
+            "① area = tri() | ② area = tri.calArea() | ③ area = calArea.tri() | ④ area = Triangle.calArea()",
+            "① tri.Width, tri.Length | ② tri.getWidth(), tri.getLength() | ③ Triangle.width, Triangle.length | ④ tri.width, tri.length | ⑤ Triangle.getWidth(), Triangle.getLength()"
         ],
         "answer": [
             "C",
-            "D",
+            "B",
             "B"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 使用 new 關鍵字。B: 呼叫方法 calArea()。C: width/length 為私有，需透過 getter 存取。"
+            "A: 建立物件需使用 new Triangle(20, 40)。",
+            "B: 呼叫實體方法計算面積 area = tri.calArea()。",
+            "C: width 與 length 為 private，需透過 getter 方法 tri.getWidth(), tri.getLength() 存取。"
         ],
         "category": "物件實作"
     },
@@ -1446,49 +1509,54 @@
         "question": [
             "<pre><code class=\"language-java\">【A-30】你為學校撰寫下列程式碼。(行號僅供參考)",
             "01 public class Teacher {",
-            "02     public String tchName = &quot;Jack&quot;;",
+            "02     public String tchName = \"Jack\";",
+            "03",
+            "04     // 應在此行填入註釋",
             "05     public String toString(){",
             "06         return tchName;",
             "07     }",
-            "08 }</code></pre>"
+            "08 }",
+            "",
+            "Teacher 類別要使用自定的 toString 方法，而非標準方法。請問應該在第 04 行使用哪個註釋？</code></pre>"
         ],
         "options": [
-            "<code>@Override</code>",
-            "<code>@Rewrite</code>",
-            "<code>@Repeatable</code>",
-            "<code>@Inherited</code>"
+            "@Override",
+            "@Rewrite",
+            "@Repeatable",
+            "@Inherited"
         ],
-        "answer": [
-            "A"
-        ],
+        "answer": "A",
         "weight": 1,
         "image": null,
         "explanation": [
-            "覆寫 Object 類別的 toString 方法應標註 @Override。"
+            "覆寫 Object 類別的標準 toString() 方法，應使用 @Override 註釋。"
         ],
         "category": "註解標記"
     },
     {
         "id": 31,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-31】你是銀行的 Java 程式設計師，請審視下列 account 類別。(行號僅供參考)",
-            "01 public class account{",
-            "02 protected int amount;",
-            "03 public account() {",
-            "04     amount = 0;",
-            "05 }",
-            "06 public account(int total) {",
-            "07     amount = total;",
-            "08 }",
+            "01 public class account {",
+            "02     protected int amount;",
+            "03     public account() {",
+            "04         amount = 0;",
+            "05     }",
+            "06     public account(int total) {",
+            "07         amount = total;",
+            "08     }",
             "09 }",
             "",
-            "對於下列每一項敘述，請選取[O]或[X]。</code></pre>"
+            "對於下列每一項敘述，請選取 [O] 或 [X]。",
+            "A. account 類別只有一個建構函式。",
+            "B. 其他類別可以繼承 account 類別。",
+            "C. 第 07 行敘述可改寫為 this.amount = total;</code></pre>"
         ],
         "left": [
-            "A. account 類別只有單一建構函式。",
-            "B. 其他類別可以繼承 account 類別。",
-            "C. 第 07 行敘述可改寫為 this.amount = total;"
+            "A 敘述",
+            "B 敘述",
+            "C 敘述"
         ],
         "right": [
             "O",
@@ -1502,73 +1570,75 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 錯誤，有兩個建構子（多載）。",
-            "B: 正確，類別預設可繼承。",
-            "C: 正確，this 可明確指向成員變數。"
+            "A: 有兩個建構函式(第03與06行)。B: 類別未宣告為 final，可被繼承。C: this.amount 是指向實體成員的正確寫法。"
         ],
-        "category": "建構子與繼承"
+        "category": "建構函式與繼承"
     },
     {
         "id": 32,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-32】你要建立名稱為 Car 的 Java 類別用來模擬汽車，此類別必須符合下列需求：",
             "● 任何套件中的所有類別都可將 Car 類別實體化。",
             "● 只有 Car 類別可存取和修改 speed 資料成員。",
             "● 只有和 Car 類別同一套件中的類別才可存取和修改 color 資料成員。",
             "● 每一個已實體化的 Car 物件都可以擁有不同的資料成員。",
-            "請從以下選取正確的選項以完成程式碼。",
-            "A/B/C: ①private ②protected ③public ④final ⑤abstract</code></pre>"
+            "",
+            "    ___A___ class Car {",
+            "        ___B___ int speed;",
+            "        ___C___ String color;",
+            "    }</code></pre>"
         ],
         "left": [
-            "A 選項 (class 修飾詞)",
-            "B 選項 (speed 修飾詞)",
-            "C 選項 (color 修飾詞)"
+            "A 選項 (class)",
+            "B 選項 (speed)",
+            "C 選項 (color)"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤"
+            "①private | ②protected | ③public | ④final | ⑤abstract",
+            "①private | ②protected | ③public | ④final | ⑤abstract",
+            "①private | ②protected | ③public | ④final | ⑤abstract"
         ],
         "answer": [
             "C",
             "A",
             "B"
         ],
-        "weight": 1,
-        "image": null,
         "explanation": [
-            "A: 全域實體化需使用 public class。",
-            "B: 只有本身可存取需使用 private。",
-            "C: 同一套件可存取需使用 protected (或預設)。"
+            "1. 任何套件皆可存取：使用 public。",
+            "2. 僅類別內部存取：使用 private。",
+            "3. 同一套件成員存取：使用 protected (或預設，但在本選題中 ② 為正確選項)。"
         ],
-        "category": "封裝性"
+        "category": "封裝與存取修飾詞"
     },
     {
         "id": 33,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-33】你要建立 Freezer 類別用來模擬冰箱，此類別必須符合下列需求：",
             "● 只允許在同一套件中的類別可存取 Freezer 類別。",
-            "● 只允許 Freezer 類別本身存取及修改名稱為 temperature 的資料成員。",
-            "● 只允許與 Freezer 類別在同一套件中的類別存取名稱為 minTemperature 的資料成員。",
+            "● 只允許 Freezer 類別本身存取及修改名為 temperature 的資料成員。",
+            "● 只允許與 Freezer 類別在同一套件中的類別存取名為 minTemperature 的資料成員。",
             "● 確保 minTemperature 資料成員宣告後就無法修改。",
-            "A : ①public class ②class ③final ④private ⑤abstract",
-            "B/C 修飾詞比照 A 選項。</code></pre>"
+            "",
+            "請選擇適當的程式碼片段填入對應的正確位置，以完成程式碼。每個程式碼片段只使用一次或多次，甚至完全不用。",
+            "程式碼片段：",
+            "①public class ②class ③final ④private ⑤abstract",
+            "",
+            "    ___A___ Freezer {",
+            "        ___B___ int temperature;",
+            "        ___C___ int minTemperature = -15;",
+            "    }</code></pre>"
         ],
         "left": [
-            "A 選項 (class)",
-            "B 選項 (temperature)",
-            "C 選項 (minTemperature)"
+            "A 位置",
+            "B 位置",
+            "C 位置"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤"
+            "①public class | ②class | ③final | ④private | ⑤abstract",
+            "①public class | ②class | ③final | ④private | ⑤abstract",
+            "①public class | ②class | ③final | ④private | ⑤abstract"
         ],
         "answer": [
             "B",
@@ -1578,71 +1648,90 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 同一套件存取使用預設 class (不加 public)。",
-            "B: 只有本身存取使用 private。",
-            "C: 無法修改使用 final。"
+            "A: 只允許在同一套件中存取，宣告為預設修飾符 (class)，選 ②class。",
+            "B: 只允許類別本身存取及修改，宣告為 ④private。",
+            "C: 確保宣告後無法修改，宣告為 ③final。"
         ],
-        "category": "存取修飾詞進階"
+        "category": "存取控制與封裝"
     },
     {
         "id": 34,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-34】Song 類別包含一個只能從類別內部存取的 isInSinger 方法。isInSinger 方法接受歌手姓名，來和歌手清單進行比較。",
+            "請選取正確的選項來完成程式碼。",
             "選項：",
             "A. ①private ②public ③protected ④static",
-            "B. ①bool ②int ③void ④String ⑤Song",
-            "C. ①() ②(Song singer) ③(bool singer) ④(String singer)",
+            "B. ①bool ②int ③void ④String ⑤boolean",
+            "C. ①() ②(String singer) ③(bool singer) ④(String singer)",
             "D. ①return Song; ②return false; ③return singer; ④return true;",
-            "E. ①return Song; ②return false; ③return singer; ④return true;</code></pre>"
+            "E. ①return Song; ②return false; ③return singer; ④return true;",
+            "",
+            "    ___A___ ___B___ isInSinger ___C___ {",
+            "        for (int i = 0; i < numSingers; i++) {",
+            "            if (singers[i].equals(singer)) {",
+            "                ___D___",
+            "            }",
+            "        }",
+            "        ___E___",
+            "    }</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項",
-            "D 選項",
-            "E 選項"
+            "A 位置",
+            "B 位置",
+            "C 位置",
+            "D 位置",
+            "E 位置"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤"
+            "①private | ②public | ③protected | ④static",
+            "①bool | ②int | ③void | ④String | ⑤boolean",
+            "①() | ②(String singer) | ③(bool singer) | ④(String singer)",
+            "①return Song; | ②return false; | ③return singer; | ④return true;",
+            "①return Song; | ②return false; | ③return singer; | ④return true;"
         ],
         "answer": [
             "A",
-            "A",
-            "D",
+            "E",
+            "B",
             "D",
             "B"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 內部存取為 private。B: 布林回傳為 boolean (題目寫 bool)。C: 參數為 String。D/E: 成功回傳 true，結束回傳 false。"
+            "A: 題目要求「只能從類別內部存取」，應選 ①private。",
+            "B: 此方法用於比較並回傳是否存在，回傳型別應為 ⑤boolean。",
+            "C: 方法接受歌手姓名作為參數，應選 ②(String singer)。(註：選項 pool 中 ②④ 相同，選 ②)",
+            "D: 若找到匹配歌手，應立即傳回 ④return true;。",
+            "E: 若迴圈結束仍未找到，應傳回 ②return false;。"
         ],
         "category": "方法定義"
     },
     {
         "id": 35,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-35】你的程式使用 Student 類別來建立 Student 類型的物件。每個資料成員都具備存取子和更動子(getter and setter)方法。",
-            "A. ①student jack = new Student(); ②student jack = new student(); ③Student jack = new student(); ④Student jack = new Student();",
+            "<pre><code class=\"language-java\">【A-35】你的程式使用 Student 類別來建立 Student 類型的物件。每個資料成員都具備存取子和更動子(getter 和 setter)方法。",
+            "請選取正確的選項來完成句子。選項：",
+            "A. ①student jack = new Student(); ②student jack = new student();",
+            "   ③Student jack = new student(); ④Student jack = new Student();",
             "B. ①Private ②Public ③Protected",
-            "C. ①jack.show(); ②show(jack); ③show(Student.jack); ④jack -> show();</code></pre>"
+            "C. ①jack.show(); ②show(jack); ③show(Student.jack); ④jack -> show();",
+            "",
+            "若要建立名為 jack 的物件執行個體，需要使用 ___A___。",
+            "___B___ 資料成員只能使用其 getter 和 setter 函式從 main 方法存取。",
+            "若要將 jack 物件傳遞給名稱為 show 的非成員函式，需要從 main 方法使用 ___C___。</code></pre>"
         ],
         "left": [
-            "A. 建立名稱為 jack 的物件",
-            "B. 資料成員應使用的存取級別",
-            "C. 呼叫非成員方法 show"
+            "A 位置",
+            "B 位置",
+            "C 位置"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "①student jack = new Student(); | ②student jack = new student(); | ③Student jack = new student(); | ④Student jack = new Student();",
+            "①Private | ②Public | ③Protected",
+            "①jack.show(); | ②show(jack); | ③show(Student.jack); | ④jack -> show();"
         ],
         "answer": [
             "D",
@@ -1652,7 +1741,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: 類別名首字母大寫。B: 搭配 getter/setter 應使用 private。C: 非成員方法直接呼叫並傳入物件。"
+            "A: Java 類別名稱首字母應大寫，建構子需與類別名一致，選 ④Student jack = new Student();。",
+            "B: 封裝原則要求資料成員應設為 ①Private，透過 getter/setter 存取。",
+            "C: 呼叫非成員方法（靜態或外部方法）應直接傳入物件，選 ②show(jack);。"
         ],
         "category": "OOP 實作"
     },
@@ -1661,10 +1752,15 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-java\">【A-36】請審視下列程式碼片段：",
-            "public class DivisionMaker {",
-            "    public static int division(int a, int b) { return a / b; }",
-            "    public static void main(String[] args) {",
-            "        int a = 7; int b = 2;",
+            "public class DivisionMaker",
+            "{",
+            "    public static int division(int a, int b) {",
+            "        return a / b;",
+            "    }",
+            "",
+            "    public static void main(String []args) {",
+            "        int a = 7;",
+            "        int b = 2;",
             "        float c = division(a, b);",
             "        System.out.println(c);",
             "    }",
@@ -1672,14 +1768,12 @@
             "執行此程式碼時會產生下列何種錯誤？</code></pre>"
         ],
         "options": [
-            "<code>邏輯錯誤</code>",
-            "<code>編譯錯誤</code>",
-            "<code>執行階段錯誤</code>",
-            "<code>語法錯誤</code>"
+            "邏輯錯誤",
+            "編譯錯誤",
+            "執行階段錯誤",
+            "語法錯誤"
         ],
-        "answer": [
-            "A"
-        ],
+        "answer": "A",
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1693,30 +1787,32 @@
         "question": [
             "<pre><code class=\"language-java\">【A-37】請審視下列程式碼：",
             "public class SearchArray {",
-            "    public static void main(String[] args) {",
-            "        int[][] ary={{19, 25}, {28, 30, 50}};",
-            "        for (int x = 2; x >= 0; x--)",
-            "            for (int y = 2; y >= 0; y--)",
-            "                System.out.println(ary[x][y] + &quot; &quot;);",
+            "  public static void main(String[] args)",
+            "  {",
+            "    int[][] ary = {{19, 25}, {28, 30, 50}};",
+            "    for (int x = 2; x >= 0; x--){",
+            "      for (int y = 2; y >= 0; y--){",
+            "        System.out.println(ary[row][column] + \" \");",
+            "      }",
             "    }",
+            "  }",
             "}",
-            "執行此程式碼時的輸出為何？</code></pre>"
+            "",
+            "執行此程式時之輸出為何？</code>"
         ],
         "options": [
-            "<code>30 28 25 19</code>",
-            "<code>50 25 30 19 28</code>",
-            "<code>ArrayIndexOutOfBoundsException</code>",
-            "<code>編譯錯誤</code>"
+            "30 28 25 19",
+            "50 30 28 25 19 28",
+            "ArrayIndexOutOfBoundsException",
+            "編譯錯誤"
         ],
-        "answer": [
-            "C"
-        ],
+        "answer": "C",
         "weight": 1,
         "image": null,
         "explanation": [
-            "ary 的第一維索引只有 0 和 1。當 x = 2 時，存取 ary[2] 會發生陣列索引越界錯誤。"
+            "x=2 起跳，但 ary 只有兩列 (索引 0, 1)，故會丟出 ArrayIndexOutOfBoundsException。"
         ],
-        "category": "例外處理"
+        "category": "例外狀況"
     },
     {
         "id": 38,
@@ -1730,7 +1826,10 @@
             "05         id = 3;",
             "06         showId();",
             "07     }",
-            "09     protected void displayId() { System.out.println(id); }",
+	    "08",
+            "09     protected void displayId() { ",
+	    "10       System.out.println(id); ",
+            "11     }",
             "12 }",
             "上述程式碼無法編譯。若下列各項動作能解決編譯錯誤，請選取[O]，否則請選取[X]。</code></pre>"
         ],
@@ -1740,8 +1839,7 @@
             "C. 在第 05 與 06 行，將前置詞 student. 加到 id 及 displayId()之前。"
         ],
         "right": [
-            "O",
-            "X"
+            "O | X"
         ],
         "answer": [
             "B",
@@ -1757,23 +1855,33 @@
     },
     {
         "id": 39,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【A-39】你審視下列程式碼片段，要找出輸出結果。(行號僅供參考)",
-            "01 try {",
-            "02     int x = 1 / 0;",
-            "03     System.out.println(&quot;執行 try&quot;);",
-            "04 }",
-            "05 catch (ArithmeticException ex) { System.out.println(&quot;捕捉到 ArithmeticException&quot;); }",
-            "08 catch (Exception ex) { System.out.println(&quot;捕捉到 Exception&quot;); }",
-            "11 finally { System.out.println(&quot;執行 finally&quot;); }",
-            "若程式碼片段會顯示下列輸出，請選取[O]，若不是，請選取[X]。</code></pre>"
+            "<pre><code class=\"language-java\">【A-39】請審核下列程式碼片段，要找出輸出結果。(行號僅供參考)",
+            "01 try { ",
+			"02 int x = 1 / 0; ",
+			"03   System.out.println(\"執行 try\"); ",
+			"04 }",
+            "05 catch (ArithmeticException ex) { ",
+			"06   System.out.println(\"捕捉到 ArithmeticException\"); ",
+			"07 }",
+            "08 catch (Exception ex) { ",
+			"09   System.out.println(\"捕捉到 Exception\"); ",
+			"10 }",
+            "11 finally { ",
+			"12   System.out.println(\"執行 finally\"); ",
+			"13 }",
+            "對於下列敘述，請選取 [O] 或 [X]。",
+            "A. 輸出：執行 try",
+            "B. 輸出：捕捉到 ArithmeticException",
+            "C. 輸出：捕捉到 Exception",
+            "D. 輸出：執行 finally</code></pre>"
         ],
         "left": [
-            "A. 執行 try",
-            "B. 捕捉到 ArithmeticException",
-            "C. 捕捉到 Exception",
-            "D. 執行 finally"
+            "A 敘述",
+            "B 敘述",
+            "C 敘述",
+            "D 敘述"
         ],
         "right": [
             "O",
@@ -1788,38 +1896,43 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "1/0 觸發 ArithmeticException。跳過 try 剩餘部分，執行對應 catch，最後執行 finally。"
+            "1. 1/0 會引發 ArithmeticException。2. 被專屬 catch 捕捉，不進一般 Exception。3. finally 無論如何都會執行。"
         ],
-        "category": "例外流程控制"
+        "category": "例外處理"
     },
     {
         "id": 40,
         "type": "single",
         "question": [
             "<pre><code class=\"language-java\">【A-40】請審視下列程式碼：",
-            "public class Test {",
-            "    public static void main(String[] args) {",
-            "        try {",
-            "            int a = 0; int b = 20;",
+            "public class Test{",
+            "    public static void main(String []args) throws ",
+            "                            ArrayIndexOutOfBoundsException{",
+            "        try{",
+            "            int a = 0;",
+            "            int b = 20;",
             "            int division = b / a;",
             "            int ary[] = {1};",
             "            ary[10] = 10;",
+            "            System.out.println(\"相除結果: \" + division);",
             "        }",
-            "        catch(ArithmeticException ex) { System.out.println(&quot;例外發生原因: &quot; + ex); }",
-            "        catch(RuntimeException e) { System.out.println(&quot;例外發生原因: &quot; + e); }",
+            "        catch(ArithmeticException ex){",
+            "            System.out.println(\"例外發生原因: \" + ex);",
+            "        }",
+            "        catch(RuntimeException e){",
+            "            System.out.println(\"例外發生原因: \" + e);",
+            "        }",
             "    }",
             "}",
             "執行此程式碼時的輸出為何？</code></pre>"
         ],
         "options": [
-            "<code>相除結果: 20</code>",
-            "<code>例外發生原因: java.lang.ArithmeticException: / by zero</code>",
-            "<code>例外發生原因: java.lang.RuntimeException: Index 10 out of bounds</code>",
-            "<code>例外發生原因: java.lang.ArrayIndexOutOfBoundsException</code>"
+            "相除結果: 20",
+            "例外發生原因: java.lang.ArithmeticException: / by zero",
+            "例外發生原因: java.lang.RuntimeException: Index 10 out of bounds for length 1",
+            "例外發生原因: java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 1"
         ],
-        "answer": [
-            "B"
-        ],
+        "answer": "B",
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1831,7 +1944,7 @@
         "id": 41,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
+            "<pre><code><class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
         ],
         "options": [
             "<code>/* ... */</code>",
@@ -1863,8 +1976,7 @@
             "C. main 方法必須是靜態，因為其執行時不會將類別中的執行個體實體化。"
         ],
         "right": [
-            "O",
-            "X"
+            "O | X"
         ],
         "answer": [
             "A",
@@ -1896,10 +2008,9 @@
             "C 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "① do |② for |③ while",
+            "① = |② == |③ : |④ instanceof",
+            "① arg |② arg[0] |③ args"
         ],
         "answer": [
             "B",
@@ -1917,10 +2028,21 @@
         "id": 44,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【B-4】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作：",
+            "<pre><code class=\"language-java\">【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作：",
             "● 自命令列接受多個引數。",
             "● 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
-            "請問您應該依序使用哪三個程式碼片段來開發解決方案？</code></pre>"
+            "",
+            "請問您應該依序使用哪三個程式碼片段來開發解決方案？請將三個程式碼片段移至答案區，然後按照正確的順序排列。",
+            "程式碼片段：",
+            "① for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
+            "② System.out.println(arguments[x]);",
+            "   }",
+            "③ public static void main(String[] args) {",
+            "④ for (int x = 1; x <= arguments.length; x++) {",
+            "⑤ public static void main(String arguments) {",
+            "⑥ System.out.println(args[x]);",
+            "   }",
+            "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
         ],
         "options": [
             "<code>③ ⑦ ⑥</code>",
@@ -1942,24 +2064,29 @@
     },
     {
         "id": 45,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【B-5】請審視下列程式碼片段。(行號僅供參考)",
+            "<pre><code class=\"language-java\">【B-05】請審視下列程式碼片段。(行號僅供參考)",
             "01 byte V1 = 127;",
             "02 V1++;",
             "03 System.out.println(V1);",
             "04 System.out.println(1.0 / 3.0);",
-            "05 System.out.println(1.0f / 3.0f);</code></pre>"
+            "05 System.out.println(1.0f / 3.0f);",
+            "",
+            "請選取正確的選項來回答問題。",
+            "A. 執行第 03 行之後，螢幕會輸出什麼？",
+            "B. 執行第 04 行之後，螢幕會輸出什麼？",
+            "C. 執行第 05 行之後，螢幕會輸出什麼？</code></pre>"
         ],
         "left": [
-            "A. 執行第 03 行之後，螢幕會輸出什麼？ ①-128 ② 128 ③ 擲回例外狀況",
-            "B. 執行第 04 行之後，螢幕會輸出什麼？ ① 0.33333334 ② 0.3333333333333333",
-            "C. 執行第 05 行之後，螢幕會輸出什麼？ ① 0.33333334 ② 0.3333333333333333"
+            "A 輸出",
+            "B 輸出",
+            "C 輸出"
         ],
         "right": [
-            "①",
-            "②",
-            "③"
+            "① -128 | ② 128 | ③ 擲回例外狀況",
+            "① 0.33333334 | ② 0.3333333333333333 | ③ 擲回例外狀況",
+            "① 0.33333334 | ② 0.3333333333333333 | ③ 擲回例外狀況"
         ],
         "answer": [
             "A",
@@ -1969,9 +2096,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: byte 溢位變回最小值 -128。B: double 雙倍精度。C: float 單倍精度。"
+            "1. 執行第 03 行時：byte 的範圍是 -128 到 127。當 V1 為 127 執行 V1++ 會導致數值溢位 (Overflow)，根據補數運算，結果會回捲到最小值 -128。故 A 選 ①。",
+            "2. 執行第 04 行時：1.0 / 3.0 中的運算元均為 double 型別（Java 浮點數預設為 double），其具有較高的精度 (15-17 位有效數字)，結果為 0.3333333333333333。故 B 選 ②。",
+            "3. 執行第 05 行時：1.0f / 3.0f 中的運算元加上了 f 後綴，明確宣告為 float 型別，其精度較低 (約 7 位有效數字)，結果會四捨五入顯示為 0.33333334。故 C 選 ①。"
         ],
-        "category": "資料型別特性"
+        "category": "資料型別與精度"
     },
     {
         "id": 46,
@@ -1979,22 +2108,29 @@
         "question": [
             "<pre><code class=\"language-java\">【B-6】請檢閱下列程式碼。(行號僅供參考)",
             "01 public static void method1(){",
-            "02     int V1 = 1; int V2 = 1;",
-            "04     for(int i = 0; i < 10; i++) { V1 += i; }",
-            "07     for(int i = 0; i < 10; i++) { V2 += i; }",
+            "02     int V1 = 1; ",
+			"03     int V2 = 1;",
+            "04     for(int i = 0; i < 10; i++) {",
+			"05       V1 += i; ",
+			"06     }",
+            "07     for(int i = 0; i < 10; i++) {",
+			"08       V2 += i; ",
+			"09     }",
             "10 }",
             "11 public static void method2(){",
-            "12     int i = 1; int V1 = 0;",
-            "14     for(int i = 0; i < 10; i++) { V1 += i; }",
-            "16 }</code></pre>"
+            "12     int i = 1; ",
+			"13     int V1 = 0;",
+            "14     for(int i = 0; i < 10; i++) {",
+			"15       V1 += i; ",
+			"16     }",
+            "17 }</code></pre>"
         ],
         "left": [
             "A. method1() 會產生編譯錯誤",
             "B. method2() 會產生編譯錯誤"
         ],
         "right": [
-            "O",
-            "X"
+            "O | X"
         ],
         "answer": [
             "B",
@@ -2014,20 +2150,20 @@
         "question": [
             "<pre><code class=\"language-java\">【B-7】請檢閱下列程式碼。(行號僅供參考)",
             "01 public static void main(String[] args) {",
-            "02 double area = Math.PI * 1.0 * 1.0;",
-            "03 System.out.format(&quot;面積 = %.3f\\n&quot;, area);",
-            "04 System.out.format(&quot;面積 = %.0f\\n&quot;, area);",
-            "05 System.out.format(&quot;面積 = %09f\\n&quot;, area);",
+            "02   double area = Math.PI * 1.0 * 1.0;",
+            "03   System.out.format(&quot;面積 = %.3f\\n&quot;, area);",
+            "04   System.out.format(&quot;面積 = %.0f\\n&quot;, area);",
+            "05   System.out.format(&quot;面積 = %09f\\n&quot;, area);",
             "06 }</code></pre>"
         ],
         "left": [
-            "A. 第 03 行的輸出為何？ ①面積 = 3.14 ②面積 = 3.142",
-            "B. 第 04 行的輸出為何？ ①面積 = 3 ②面積 = 3.0",
-            "C. 第 05 行的輸出為何？ ①面積 = 03.141593 ②面積 = 00000003.14"
+            "A. 第 03 行的輸出為何？ ",
+            "B. 第 04 行的輸出為何？",
+            "C. 第 05 行的輸出為何？"
         ],
         "right": [
-            "①",
-            "②"
+            "①面積 = 3.14 |②面積 = 3.142",
+            "①面積 = 03.141593 |②面積 = 00000003.14"
         ],
         "answer": [
             "B",
@@ -2048,10 +2184,15 @@
             "<pre><code class=\"language-java\">【B-8】請審視下列程式碼片段。(行號僅供參考)",
             "01 public static void main(String[] args) {",
             "02     int sum = 55;",
-            "03     for (int i = 0; i < 10; i++) { add(sum); }",
+            "03     for (int i = 0; i < 10; i++) {",
+			"04       add(sum); ",
+			"05     }",
             "06     System.out.println(sum);",
+			"07",
             "08 }",
-            "09 public static void add(int sum) { sum++; }</code></pre>"
+            "09 public static void add(int sum) {",
+			"10   sum++; ",
+			"11}</code></pre>"
         ],
         "left": [
             "A. 執行第 04 行後，若變數 i 為 9，變數 sum 的值是什麼？",
@@ -2079,27 +2220,38 @@
     },
     {
         "id": 49,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【B-9】請審視下列程式碼片段。(行號僅供參考)",
+            "<pre><code class=\"language-java\">【B-09】請審視下列程式碼片段。(行號僅供參考)",
             "01 char V1 = 65;",
             "02 System.out.println(V1);",
+            "03",
             "04 long V2 = 20;",
             "05 System.out.println(V2);",
+            "06",
             "07 float V3 = new Float(&quot;-50.0&quot;);",
             "08 System.out.println(V3);",
-            "10 short V4 = new Short(&quot;65.0&quot;);</code></pre>"
+            "09",
+            "10 short V4 = new Short(&quot;65.0&quot;);",
+            "11 System.out.println(V4);",
+            "",
+            "請選取正確的選項來回答問題。",
+            "A. 執行第 01、02 行之後，螢幕會輸出什麼？",
+            "B. 執行第 04、05 行之後，螢幕會輸出什麼？",
+            "C. 執行第 07、08 行之後，螢幕會輸出什麼？",
+            "D. 執行第 10、11 行之後，螢幕會輸出什麼？</code></pre>"
         ],
         "left": [
-            "A. 執行第 01、02 行之後，螢幕會輸出什麼？ ① A ② 65 ③ 擲回例外狀況",
-            "B. 執行第 04、05 行之後，螢幕會輸出什麼？ ① 20.0 ② 20 ③ 擲回例外狀況",
-            "C. 執行第 07、08 行之後，螢幕會輸出什麼？ ① -50.0 ② -50 ③ 擲回例外狀況",
-            "D. 執行第 10、11 行之後，螢幕會輸出什麼？"
+            "A 輸出",
+            "B 輸出",
+            "C 輸出",
+            "D 輸出"
         ],
         "right": [
-            "①",
-            "②",
-            "③"
+            "① A | ② 65 | ③ 擲回例外狀況",
+            "① 20.0 | ② 20 | ③ 擲回例外狀況",
+            "① -50.0 | ② -50 | ③ 擲回例外狀況",
+            "① 650.0 | ② 65 | ③ 擲回例外狀況"
         ],
         "answer": [
             "A",
@@ -2110,9 +2262,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: char 65 對應字元 'A'。B: long 20 輸出為 20。C: float -50.0 輸出為 -50.0。D: Short constructor 傳入包含小數點的字串會擲回 NumberFormatException。"
+            "1. 執行第 01、02 行時：char 儲存的是字元編碼。65 在 Unicode/ASCII 中對應大寫字母 'A'，因此 println(V1) 會輸出字元 A。故 A 選 ①。",
+            "2. 執行第 04、05 行時：long 是 64 位元整數。20 作為整數輸出時不帶小數點。故 B 選 ②。",
+            "3. 執行第 07、08 行時：Float 的字串建構子可以正確解析包含負號與小數點的格式字串 &quot;-50.0&quot;，輸出為 -50.0。故 C 選 ①。",
+            "4. 執行第 10 行時：new Short(&quot;65.0&quot;) 會觸發錯誤。Java 的 Short 建構子呼叫 parseShort()，僅能解析整數格式字串。字串中包含 \".0\" 會被視為浮點格式，導致 NumberFormatException。故 D 選 ③。"
         ],
-        "category": "型別建構與輸出"
+        "category": "資料型別與例外處理"
     },
     {
         "id": 50,
@@ -2210,7 +2365,7 @@
         "id": 53,
         "type": "single",
         "question": [
-            "<pre><code class=\"language-java\">【B-13】下列哪個程式碼片段會在結束迴圈時保有 intList 陣列原始的元素？</code></pre>"
+            "<pre><code><class=\"language-java\">【B-13】下列哪個程式碼片段會在結束迴圈時保有 intList 陣列原始的元素？</code></pre>"
         ],
         "options": [
             "<code>for(int i : intList) { i *= 2; }</code>",
@@ -2265,34 +2420,41 @@
     },
     {
         "id": 55,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
-            "<pre><code class=\"language-java\">【B-15】請建立一個 int 陣列，名稱為 Ary，並使用 V1、V2 和 V3 進行初始化。",
-            "int V1 = 9; int V2 = 12; int V3 = 40;",
-            "___A___ Ary = ___B___ ___C___ ;</code></pre>"
+            "<pre><code class=\"language-java\">【B-15】你要建立一個 int 陣列，陣列名稱為 Ary，並使用 V1、V2 和 V3 進行初始化。",
+            "請由下列選項中選取正確的程式碼片段來完成程式碼。",
+            "程式碼片段：",
+            "A : ① int ② int[]",
+            "B : ① new int ② new int[]",
+            "C : ① (V1, V2, V3) ② [V1, V2, V3] ③ {V1, V2, V3}",
+            "",
+            "int V1 = 9;",
+            "int V2 = 12;",
+            "int V3 = 40;",
+            "____A____ Ary = ____B____ ____C____ ;</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項"
+            "A 位置",
+            "B 位置",
+            "C 位置"
         ],
         "right": [
-            "① int",
-            "② int[]",
-            "③ new int",
-            "④ new int[]",
-            "⑤ {V1, V2, V3}",
-            "⑥ (V1, V2, V3)"
+            "① int | ② int[]",
+            "① new int | ② new int[]",
+            "① (V1, V2, V3) | ② [V1, V2, V3] | ③ {V1, V2, V3}"
         ],
         "answer": [
             "B",
-            "D",
-            "E"
+            "B",
+            "C"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "陣列宣告使用 int[] Ary，初始化使用 new int[] {V1, V2, V3}。"
+            "1. A 位置：陣列宣告語法為資料型態加上方括號，即 int[] Ary。故選 ② int[]。",
+            "2. B 位置：建立陣列物件需使用 new 關鍵字，並指定型態與方括號，即 new int[]。故選 ② new int[]。",
+            "3. C 位置：使用大括號 {} 進行陣列初始化賦值。故選 ③ {V1, V2, V3}。"
         ],
         "category": "陣列語法"
     },
@@ -2414,7 +2576,7 @@
             "C 選項"
         ],
         "right": [
-            "① <= ",
+            "① <=",
             "② >= ",
             "③ &&",
             "④ <",
@@ -2514,14 +2676,7 @@
             "G 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④",
-            "⑤",
-            "⑥",
-            "⑦",
-            "⑧"
+            "① | ② | ③ | ④ | ⑤ | ⑥ | ⑦ | ⑧"
         ],
         "answer": [
             "F",
@@ -2559,7 +2714,7 @@
             "C 選項"
         ],
         "right": [
-            "① int n = seqStart; ",
+            "① int n = seqStart;",
             "② n >= 1;",
             "③ n--",
             "④ int n = 1;",
@@ -2660,8 +2815,7 @@
             "C. 第 07 行等同於 this.mathScore = score;"
         ],
         "right": [
-            "① 正確",
-            "② 錯誤"
+            "① 正確 | ② 錯誤"
         ],
         "answer": [
             "B",
@@ -2706,7 +2860,7 @@
         "id": 68,
         "type": "matching",
         "question": [
-            "<pre><code class=\"language-java\">【B-28】您有一個名稱為 Ccircle 的 Java 類別。您需要定義名稱為 PI 的常數資料成員。任何未將 Ccircle 實體化的類別都可以存取該資料成員。</code></pre>"
+            "<pre><code> class=\"language-java\">【B-28】您有一個名稱為 Ccircle 的 Java 類別。您需要定義名稱為 PI 的常數資料成員。任何未將 Ccircle 實體化的類別都可以存取該資料成員。</code></pre>"
         ],
         "left": [
             "A 修飾詞 1",
@@ -2714,11 +2868,7 @@
             "C 修飾詞 3"
         ],
         "right": [
-            "① public",
-            "② private",
-            "③ protected",
-            "④ static",
-            "⑤ final"
+            "① public | ② private | ③ protected | ④ static | ⑤ final"
         ],
         "answer": [
             "A",
@@ -2798,32 +2948,53 @@
         "id": 71,
         "type": "matching",
         "question": [
-            "<pre><code class=\"language-java\">【B-31】您撰寫了下列 Java 程式。請將適當程式碼移動至正確位置。(Candy 類別)",
+            "<pre><code class=\"language-java\">【B-31】您撰寫了下列 Java 程式。請將適當的程式碼片段選項移至程式的正確位置，以完成程式碼。(行號僅供參考)",
             "選項：",
             "A. ① Candy candy = new candy(); ② Candy candy = new Candy();",
-            "B. ① isPurchased = true; ② candy.isPurchased = true;",
-            "C. ① candy.overdue; ② candy.overdue();</code></pre>"
+            "   ③ candy Candy = new candy(); ④ candy Candy = new Candy();",
+            "B. ① isPurchased = true; ② Candy.isPurchased = true;",
+            "   ③ candy.isPurchased = true;",
+            "C. ① candy.overdue; ② candy.overdue();",
+            "   ③ Candy.overdue; ④ Candy.overdue();",
+            "",
+            "01 class Candy {",
+            "02     boolean isOverdued = false;",
+            "03     private boolean isPurchased = false;",
+            "04 ",
+            "05     void overdue() {",
+            "06         isOverdued = true;",
+            "07     }",
+            "08 ",
+            "09     public static void main(String[] args) {",
+            "10         ___A___",
+            "11         ___B___",
+            "12         ___C___",
+            "13     }",
+            "14 }</code></pre>"
         ],
         "left": [
-            "A 選項",
-            "B 選項",
-            "C 選項"
+            "A 段程式碼",
+            "B 段程式碼",
+            "C 段程式碼"
         ],
         "right": [
-            "①",
-            "②"
+            "①Candy candy = new candy(); | ②Candy candy = new Candy(); | ③candy Candy = new candy(); | ④candy Candy = new Candy();",
+            "①isPurchased = true; | ②Candy.isPurchased = true; | ③candy.isPurchased = true;",
+            "①candy.overdue; | ②candy.overdue(); | ③Candy.overdue; | ④Candy.overdue();"
         ],
         "answer": [
             "B",
-            "B",
+            "C",
             "B"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "A: Candy 為類別名。B: isPurchased 為非靜態成員，需透過 candy 實體存取。C: 呼叫方法需加括號。"
+            "A 段：建立物件需使用 new Candy()，且變數型別應為 Candy，故選 ② (B)。",
+            "B 段：isPurchased 是實例變數且為 private，在 static main 中須透過實體 candy 存取，故選 ③ (C)。",
+            "C 段：呼叫方法需加括號 ()，且需使用實體名稱 candy，故選 ② (B)。"
         ],
-        "category": "物件成員呼叫"
+        "category": "物件與成員存取"
     },
     {
         "id": 72,
@@ -2842,8 +3013,7 @@
             "D. 此例外狀況是由語法錯誤造成。"
         ],
         "right": [
-            "① 正確",
-            "② 錯誤"
+            "① 正確 | ② 錯誤"
         ],
         "answer": [
             "B",
@@ -2863,9 +3033,17 @@
         "type": "matching",
         "question": [
             "<pre><code class=\"language-java\">【B-33】Group 類別包含一個只能從類別內部存取的 isInGroup 方法。isInGroup 方法加入會員姓名，用來與會員清單進行比較。",
+            "程式碼片段：",
             "A : ① private ② protected ③ public ④ static",
             "B : ① bool ② int ③ String ④ void",
-            "C : ① () ② (bool member) ③ (Group member) ④ (String member)</code></pre>"
+            "C : ① () ② (bool member) ③ (Group member) ④ (String member)",
+            "",
+            "___A___ ___B___ isInGroup ___C___ {",
+            "    for(int i = 0; i < numMember; i++){",
+            "        if(members[i].equals(member)) ___D___",
+            "    }",
+            "    ___E___",
+            "}</code></pre>"
         ],
         "left": [
             "A 選項",
@@ -2873,10 +3051,9 @@
             "C 選項"
         ],
         "right": [
-            "①",
-            "②",
-            "③",
-            "④"
+            "①private | ②protected | ③public | ④static",
+            "①bool | ②int | ③String | ④void",
+            "①() | ②(bool member) | ③(Group member) | ④(String member)"
         ],
         "answer": [
             "A",
@@ -2959,7 +3136,13 @@
         "id": 76,
         "type": "matching",
         "question": [
-            "<pre><code class=\"language-java\">【B-36】Circle 類別的建構式接受名稱為 radius 的浮點數引數；且 radius 會在 main 中進行宣告，並指派使用者輸入的值。您需要針對名稱為 cir1 的 Circle 類別建立執行個體。</code></pre>"
+            "<pre><code class=\"language-java\">【B-36】Circle 類別的建構式接受名稱為 radius 的浮點數引數；且 radius 會在 main 中進行宣告，並指派由使用者輸入的值。",
+            "您需要針對名稱為 cir1 的 Circle 類別建立執行個體。",
+            "請從以下選取正確的選項以完成程式碼。每個程式碼片段可能使用一次或多次，甚至完全不用。",
+            "程式碼片段：",
+            "① new ② cir1 ③ Circle ④ Circle() ⑤ Circle(radius)",
+            "",
+            "____A____ ____B____ = ____C____ ____D____ ;</code></pre>"
         ],
         "left": [
             "A 選項",
@@ -2968,11 +3151,7 @@
             "D 選項"
         ],
         "right": [
-            "① new",
-            "② cir1",
-            "③ Circle",
-            "④ Circle()",
-            "⑤ Circle(radius)"
+            "①new | ②cir1 | ③Circle | ④Circle() | ⑤Circle(radius)"
         ],
         "answer": [
             "C",
@@ -3085,25 +3264,40 @@
         "id": 80,
         "type": "matching",
         "question": [
-            "<pre><code class=\"language-java\">【B-40】Book 類別包含私有成員：title, author, year, isbn。您需要將 Book 類別實體化為 book 變體，以便後續更新。</code></pre>"
+            "<pre><code class=\"language-java\">【B-40】Book 類別包含下列私有資料成員：",
+            "● String title;",
+            "● String author;",
+            "● int year;",
+            "● int isbn;",
+            "建構式預設會依此指派空字串及零，而多載的建構式則會以上列順序接受引數。",
+            "您需要完成程式碼，將名稱為 book 的 Book 類別物件實體化，以便使用者可以在之後的函數進行更新。",
+            "",
+            "請選取正確的以完成程式碼。",
+            "程式碼片段：",
+            "A. ① book ② Book ③ int ④ new",
+            "B. ① book ② Book ③ int ④ new",
+            "C. ① book ② Book ③ int ④ new",
+            "D. ① book() ② book(title, author, year, isbn) ③ Book() ④ Book(title, author, year, isbn)",
+            "",
+            "____A____ ____B____ = ____C____ ____D____ ;</code></pre>"
         ],
         "left": [
-            "A. 類別名",
-            "B. 變數名",
-            "C. 實體化關鍵字",
-            "D. 建構子呼叫"
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項"
         ],
         "right": [
-            "① book",
-            "② Book",
-            "③ new",
-            "④ Book()"
+            "①book | ②Book | ③int | ④new",
+            "①book | ②Book | ③int | ④new",
+            "①book | ②Book | ③int | ④new",
+            "①book() | ②book(title, author, year, isbn) | ③Book() | ④Book(title, author, year, isbn)"
         ],
         "answer": [
             "B",
             "A",
-            "C",
-            "D"
+            "D",
+            "C"
         ],
         "weight": 1,
         "image": null,
