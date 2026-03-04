@@ -453,7 +453,7 @@ def clean_repair_all():
                         <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                      </div>`;
         }
-        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); saveState();
+        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
         setTimeout(() => {
             const lParts = container.querySelectorAll('.match-item-left .q-text-part');
             let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
@@ -1269,7 +1269,7 @@ def clean_repair_all():
                         <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                      </div>`;
         }
-        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); saveState();
+        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
         setTimeout(() => {
             const lParts = container.querySelectorAll('.match-item-left .q-text-part');
             let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
