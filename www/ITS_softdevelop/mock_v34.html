@@ -183,7 +183,7 @@
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
-        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
         .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
         .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
         .match-item-left { justify-content: flex-start !important; text-align: left !important; }
@@ -340,6 +340,12 @@
             return parseInt(val) - 1;
         }
         return -1;
+    }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
     }
 
     const allQuestions = [

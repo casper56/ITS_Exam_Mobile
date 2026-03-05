@@ -123,7 +123,7 @@
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
-        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
         .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
         .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
         .match-item-left { justify-content: flex-start !important; text-align: left !important; }
@@ -3512,6 +3512,12 @@
         }
         return -1;
     }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
+    }
     let currentIndex = 0;
     let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
     window.itspyZoom = 1.0;
@@ -3767,7 +3773,7 @@
             const rIdx = ans[lIdx];
             if (rIdx === null || rIdx === undefined) return "";
             if (useRelative) {
-                // 找出 rIdx 屬於哪一個群組
+                // 精確計算：找出 rIdx 屬於哪一個群組
                 let gIdx = 0;
                 for (let i = 0; i < groupStarts.length; i++) {
                     if (rIdx >= groupStarts[i]) gIdx = i;
@@ -3784,7 +3790,7 @@
         let isCorrect = (finalUserAns.length === correctAns.length);
         if (isCorrect) {
             for (let i = 0; i < correctAns.length; i++) {
-                if (String(finalUserAns[i] || "").trim().toUpperCase() !== String(correctAns[i] || "").trim().toUpperCase()) {
+                if (parseAnswerToIndex(finalUserAns[i]) !== parseAnswerToIndex(correctAns[i])) {
                     isCorrect = false; break;
                 }
             }
@@ -4056,7 +4062,8 @@
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
-        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
+        const ansText = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(a => formatAnswer(a, item)).join(', ');
+        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${ansText}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;

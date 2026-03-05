@@ -4369,7 +4369,7 @@
             "s = input()\na = [s for s in input().split()]\nprint(s, a)",
             "若輸入為以下內容：",
             "hello py",
-            "45",
+            "123 45",
             "則輸出為何？</code></pre>"
         ],
         "options": [

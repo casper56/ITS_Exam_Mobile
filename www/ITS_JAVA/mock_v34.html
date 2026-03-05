@@ -183,7 +183,7 @@
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
-        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
         .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
         .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
         .match-item-left { justify-content: flex-start !important; text-align: left !important; }
@@ -341,6 +341,12 @@
         }
         return -1;
     }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
+    }
 
     const allQuestions = [
     {
@@ -355,7 +361,7 @@
             "\\\\ 這是註解文字",
             "*/ 這是註解文字"
         ],
-        "answer": "A",
+        "answer": 1,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -375,7 +381,7 @@
             "short",
             "long"
         ],
-        "answer": "D",
+        "answer": 4,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -403,9 +409,9 @@
             "X"
         ],
         "answer": [
-            "A",
-            "B",
-            "A"
+            1,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -433,12 +439,12 @@
             "B 片段"
         ],
         "right": [
-            "①private void|②public static void|③private static String|④public String",
-            "①int args[]|②int args|③String args[]|④String arg"
+            "①private void | ②public static void | ③private static String | ④public String",
+            "①int args[] | ②int args | ③String args[] | ④String arg"
         ],
         "answer": [
-            "B",
-            "C"
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -469,10 +475,10 @@
             "① 0 | ② 1 | ③ 2 | ④ 3 | ⑤ 16 | ⑥ 19 | ⑦ 26 | ⑧ 80 | ⑨ 90"
         ],
         "answer": [
-            "F",
-            "G",
-            "B",
-            "C"
+            6,
+            7,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -511,10 +517,10 @@
             "① 0.33333334 | ② 0"
         ],
         "answer": [
-            "A",
-            "B",
-            "A",
-            "B"
+            1,
+            2,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -544,8 +550,8 @@
             "① 11111111 | ② -1 | ③ 255 | ④ 256"
         ],
         "answer": [
-            "B",
-            "B"
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -579,8 +585,8 @@
             "① a+b=57 | ② a+b=ab | ③ a+b=12 | ④ 12"
         ],
         "answer": [
-            "A",
-            "C"
+            1,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -625,10 +631,10 @@
             "①sc.wait() | ②sc.close() | ③stream.wait() | ④stream.close()"
         ],
         "answer": [
-            "B",
-            "B",
-            "B",
-            "B"
+            2,
+            2,
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -646,7 +652,7 @@
         "question": [
             "<pre><code class=\"language-java\">【A-10】請審視下列程式碼片段。(行號僅供參考)",
             "01 int x = 5; ",
-			"02 int y = 10;",
+            "02 int y = 10;",
             "03 int z = ++x * y--;",
             "04 int n = x-- + ++y;",
             "05 System.out.println(z);",
@@ -660,11 +666,12 @@
             "B 輸出"
         ],
         "right": [
-            "① 15 | ② 40 | ③ 50 | ④ 54 | ⑤ 60"
+            "① 15 | ② 40 | ③ 50 | ④ 54 | ⑤ 60",
+            "① 11 | ② 13 | ③ 15 | ④ 16"
         ],
         "answer": [
-            "E",
-            "A"
+            5,
+            4
         ],
         "weight": 1,
         "image": null,
@@ -709,10 +716,10 @@
             "① count() | ② length() | ③ chars()"
         ],
         "answer": [
-            "A",
-            "C",
-            "B",
-            "B"
+            1,
+            3,
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -743,9 +750,9 @@
             "①[[ |②]] |③][ |④{{ |⑤}} |⑥}{ |⑦},{ |⑧],["
         ],
         "answer": [
-            "D",
-            "G",
-            "E"
+            4,
+            7,
+            5
         ],
         "weight": 1,
         "image": null,
@@ -790,10 +797,10 @@
             "O | X"
         ],
         "answer": [
-            "A",
-            "B",
-            "A",
-            "B"
+            1,
+            2,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -843,11 +850,11 @@
             "①max == array[i]; | ②max = array[i];"
         ],
         "answer": [
-            "A",
-            "B",
-            "D",
-            "B",
-            "B"
+            1,
+            2,
+            4,
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -881,9 +888,9 @@
             "① && | ② &#124;&#124; | ③ < | ④ > | ⑤ <= | ⑥ >= | ⑦ == | ⑧ !="
         ],
         "answer": [
-            "E",
-            "A",
-            "C"
+            5,
+            1,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -901,9 +908,9 @@
         "question": [
             "<pre><code class=\"language-java\">【A-16】你在應徵 Java 程式開發人員工作，需要證明你了解 switch 運算式。",
             "在下列各個程式碼片段中，若可以使用最多三個 case 陳述式將該程式碼片段變更為 switch 運算式，請選取[O]；若無法則請選取[X]。</code></pre>",
-            "<pre><code> class=\"language-java\">A.\nif (ages >= 65) {\n off = 0.50; \n} else if (ages >= 20) {\n off = 0.3\n } else {\n off = 0.0; \n}</code></pre>",
-            "<pre><code> class=\"language-java\">B.\nif (level == &quot;甲&quot;) {\n  msg = &quot;超越標準&quot;; \n } else if (level == &quot;乙&quot;) {\n  msg = &quot;符合標準&quot;; \n } else {\n  msg = &quot;需要改進&quot;; \n }</code></pre>",
-            "<pre><code> class=\"language-java\">C.\nif (score == 4.0) {\n order = 1; \n} else if (score >= 3.5) {\n order = 2; \n} else if (score >= 2.5) {\n order = 3; \n}</code></pre>"
+            "<pre><code class=\"language-java\">A.\nif (ages >= 65) {\n off = 0.50; \n} else if (ages >= 20) {\n off = 0.3\n } else {\n off = 0.0; \n}</code></pre>",
+            "<pre><code class=\"language-java\">B.\nif (level == &quot;甲&quot;) {\n  msg = &quot;超越標準&quot;; \n } else if (level == &quot;乙&quot;) {\n  msg = &quot;符合標準&quot;; \n } else {\n  msg = &quot;需要改進&quot;; \n }</code></pre>",
+            "<pre><code class=\"language-java\">C.\nif (score == 4.0) {\n order = 1; \n} else if (score >= 3.5) {\n order = 2; \n} else if (score >= 2.5) {\n order = 3; \n}</code></pre>"
         ],
         "options": [
             "O | X",
@@ -911,9 +918,9 @@
             "O | X"
         ],
         "answer": [
-            "B",
-            "A",
-            "B"
+            2,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -926,7 +933,7 @@
     },
     {
         "id": 17,
-        "type": "matching",
+        "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-17】你在撰寫一個 Java 程式，使用 countPrice 方法計算美術館的入場費 (price)。基本票價為 100.00 元。加入會員需要花費 400.00 元。此方法必須符合下列規則：",
             "● 會員可享基本票價的三折優惠。",
@@ -955,22 +962,22 @@
             "請從左側選取正確的程式碼片段對應至右側的挖空位置。</code></pre>"
         ],
         "left": [
-            "if (ages > 65)",
-            "else if (joinMember)",
-            "else {",
-            "if (joinMember){"
-        ],
-        "right": [
             "__A__",
             "__B__",
             "__C__",
             "__D__"
         ],
+        "right": [
+            "elif (ages > 65)|if (ages > 65)|else{",
+            "elif (ages > 65)|if (ages > 65)|else{",
+            "else{|else if (joinMember){|if (joinMember){",
+            "else{|else if (joinMember){|if (joinMember){"
+        ],
         "answer": [
-            "A",
-            "C",
-            "B",
-            "C"
+            2,
+            3,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1016,13 +1023,13 @@
             "① = |② && |③ <= |④ < |⑤ == |⑥ != |⑦ > |⑧ >= |⑨ &#124;&#124;"
         ],
         "answer": [
-            "G",
-            "B",
-            "H",
-            "I",
-            "H",
-            "B",
-            "G"
+            7,
+            2,
+            8,
+            9,
+            8,
+            2,
+            7
         ],
         "weight": 1,
         "image": null,
@@ -1065,14 +1072,14 @@
             "C 選項"
         ],
         "right": [
-            "①if (ages != 65) | ②if (ages >= 65) | ③if (ages > 65) | ④if (ages >= 65 || ages != 20)",
+            "①if (ages != 65) | ②if (ages >= 65) | ③if (ages > 65) | ④if (ages >= 65 &#124;&#124; ages != 20)",
             "①if (ages < 20) | ②if (ages > 19) | ③else if (ages >= 19) | ④else if (ages >= 20)",
             "①if (ages <= 20) | ②else | ③default | ④else if (ages != 20)"
         ],
         "answer": [
-            "B",
-            "D",
-            "B"
+            2,
+            4,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1109,9 +1116,9 @@
             "①+i | ②++i | ③--i | ④-i"
         ],
         "answer": [
-            "A",
-            "D",
-            "C"
+            1,
+            4,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1139,7 +1146,7 @@
             "ghidefabc",
             "ihgfedcba"
         ],
-        "answer": "A",
+        "answer": 1,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1168,7 +1175,7 @@
             "50 4 27",
             "15 32 27"
         ],
-        "answer": "A",
+        "answer": 1,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1210,8 +1217,8 @@
             "⑤ while (newDeal()); | ⑥ } | ⑦ } continue; | ⑧ continue"
         ],
         "answer": [
-            "B",
-            "A"
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1235,7 +1242,7 @@
             "",
             "public boolean checkItems(String[] items){",
             "    boolean allCheckItems = true;",
-            "    for ( ___A___ (String item ___B___ items) {",
+            "     ___A___ (String item ___B___ items) {",
             "        if(item.length() > 10) {",
             "            allCheckItems = false;",
             "            ___C___",
@@ -1255,9 +1262,9 @@
             "①break; | ②goto; | ③continue;"
         ],
         "answer": [
-            "B",
-            "B",
-            "A"
+            2,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1309,9 +1316,9 @@
             "①+= | ②-= | ③++ | ④--"
         ],
         "answer": [
-            "B",
-            "A",
-            "D"
+            2,
+            1,
+            4
         ],
         "weight": 1,
         "image": null,
@@ -1357,10 +1364,10 @@
             "① JavaTester.b = 5 | ② JavaTester.b = 10 | ③ JavaTester.b = \"Error\""
         ],
         "answer": [
-            "B",
-            "A",
-            "B",
-            "A"
+            2,
+            1,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1400,8 +1407,8 @@
             "①protected | ②private | ③static | ④public"
         ],
         "answer": [
-            "C",
-            "A"
+            3,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1437,9 +1444,9 @@
             "① private | ② final | ③ protected | ④ public | ⑤ static"
         ],
         "answer": [
-            "D",
-            "E",
-            "C"
+            4,
+            5,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1494,9 +1501,9 @@
             "① tri.Width, tri.Length | ② tri.getWidth(), tri.getLength() | ③ Triangle.width, Triangle.length | ④ tri.width, tri.length | ⑤ Triangle.getWidth(), Triangle.getLength()"
         ],
         "answer": [
-            "C",
-            "B",
-            "B"
+            3,
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1529,7 +1536,7 @@
             "@Repeatable",
             "@Inherited"
         ],
-        "answer": "A",
+        "answer": 1,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1567,9 +1574,9 @@
             "X"
         ],
         "answer": [
-            "B",
-            "A",
-            "A"
+            2,
+            1,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1604,9 +1611,9 @@
             "①private | ②protected | ③public | ④final | ⑤abstract"
         ],
         "answer": [
-            "C",
-            "A",
-            "B"
+            3,
+            1,
+            2
         ],
         "explanation": [
             "1. 任何套件皆可存取：使用 public。",
@@ -1645,9 +1652,9 @@
             "①public class | ②class | ③final | ④private | ⑤abstract"
         ],
         "answer": [
-            "B",
-            "D",
-            "C"
+            2,
+            4,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -1695,11 +1702,11 @@
             "①return Song; | ②return false; | ③return singer; | ④return true;"
         ],
         "answer": [
-            "A",
-            "E",
-            "B",
-            "D",
-            "B"
+            1,
+            5,
+            2,
+            4,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1738,9 +1745,9 @@
             "①jack.show(); | ②show(jack); | ③show(Student.jack); | ④jack -> show();"
         ],
         "answer": [
-            "D",
-            "A",
-            "B"
+            4,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1777,7 +1784,7 @@
             "執行階段錯誤",
             "語法錯誤"
         ],
-        "answer": "A",
+        "answer": 1,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1810,7 +1817,7 @@
             "ArrayIndexOutOfBoundsException",
             "編譯錯誤"
         ],
-        "answer": "C",
+        "answer": 3,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1846,9 +1853,9 @@
             "O | X"
         ],
         "answer": [
-            "B",
-            "B",
-            "A"
+            2,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1863,7 +1870,7 @@
         "question": [
             "<pre><code class=\"language-java\">【A-39】請審核下列程式碼片段，要找出輸出結果。(行號僅供參考)",
             "01 try { ",
-            "02 int x = 1 / 0; ",
+            "02   int x = 1 / 0; ",
             "03   System.out.println(\"執行 try\"); ",
             "04 }",
             "05 catch (ArithmeticException ex) { ",
@@ -1892,10 +1899,10 @@
             "X"
         ],
         "answer": [
-            "B",
-            "A",
-            "B",
-            "A"
+            2,
+            1,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -1911,7 +1918,7 @@
             "<pre><code class=\"language-java\">【A-40】請審視下列程式碼：",
             "public class Test{",
             "    public static void main(String []args) throws ",
-            "                            ArrayIndexOutOfBoundsException{",
+            "                   ArrayIndexOutOfBoundsException{",
             "        try{",
             "            int a = 0;",
             "            int b = 20;",
@@ -1936,7 +1943,7 @@
             "例外發生原因: java.lang.RuntimeException: Index 10 out of bounds for length 1",
             "例外發生原因: java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 1"
         ],
-        "answer": "B",
+        "answer": 2,
         "weight": 1,
         "image": null,
         "explanation": [
@@ -1957,8 +1964,8 @@
             "<code>//* ... //*</code>"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -1983,9 +1990,9 @@
             "O | X"
         ],
         "answer": [
-            "A",
-            "B",
-            "A"
+            1,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2017,9 +2024,9 @@
             "① arg |② arg[0] |③ args"
         ],
         "answer": [
-            "B",
-            "C",
-            "C"
+            2,
+            3,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2055,7 +2062,7 @@
             "<code>③ ① ②</code>"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2093,9 +2100,9 @@
             "① 0.33333334 | ② 0.3333333333333333 | ③ 擲回例外狀況"
         ],
         "answer": [
-            "A",
-            "B",
-            "A"
+            1,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2137,8 +2144,8 @@
             "O | X"
         ],
         "answer": [
-            "B",
-            "A"
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2170,9 +2177,9 @@
             "①面積 = 03.141593 |②面積 = 00000003.14"
         ],
         "answer": [
-            "B",
-            "A",
-            "A"
+            2,
+            1,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2210,9 +2217,9 @@
             "④ 58"
         ],
         "answer": [
-            "A",
-            "A",
-            "C"
+            1,
+            1,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2258,10 +2265,10 @@
             "① 650.0 | ② 65 | ③ 擲回例外狀況"
         ],
         "answer": [
-            "A",
-            "B",
-            "A",
-            "C"
+            1,
+            2,
+            1,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2289,7 +2296,7 @@
             "<code>擲回例外狀況</code>"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2320,10 +2327,10 @@
             "X"
         ],
         "answer": [
-            "A",
-            "A",
-            "A",
-            "A"
+            1,
+            1,
+            1,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2354,8 +2361,8 @@
             "③ x+y=x+y"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2378,7 +2385,7 @@
             "<code>while(count < intList.length) { intList[count] *= 3; count++; }</code>"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2410,10 +2417,10 @@
             "⑤ stack.add(ip, item)"
         ],
         "answer": [
-            "A",
-            "D",
-            "A",
-            "E"
+            1,
+            4,
+            1,
+            5
         ],
         "weight": 1,
         "image": null,
@@ -2449,9 +2456,9 @@
             "① (V1, V2, V3) | ② [V1, V2, V3] | ③ {V1, V2, V3}"
         ],
         "answer": [
-            "B",
-            "B",
-            "C"
+            2,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2477,7 +2484,7 @@
             "<code>48</code>"
         ],
         "answer": [
-            "A"
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2512,10 +2519,10 @@
             "⑥ 1.2"
         ],
         "answer": [
-            "B",
-            "C",
-            "E",
-            "F"
+            2,
+            3,
+            5,
+            6
         ],
         "weight": 1,
         "image": null,
@@ -2553,9 +2560,9 @@
             "③ 3000"
         ],
         "answer": [
-            "B",
-            "B",
-            "C"
+            2,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2586,12 +2593,12 @@
             "② >= ",
             "③ &&",
             "④ <",
-            "⑤ ||"
+            "⑤ &#124;&#124;"
         ],
         "answer": [
-            "A",
-            "C",
-            "D"
+            1,
+            3,
+            4
         ],
         "weight": 1,
         "image": null,
@@ -2626,8 +2633,8 @@
             "④ continue;"
         ],
         "answer": [
-            "A",
-            "C"
+            1,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2652,7 +2659,7 @@
             "<code>column < intList[row][column].length</code>"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2685,13 +2692,13 @@
             "① &#124;&#124 |② && |③ < |④ <= |⑤ >= |⑥ > |⑦ != |⑧ =="
         ],
         "answer": [
-            "F",
-            "B",
-            "E",
-            "A",
-            "E",
-            "B",
-            "F"
+            6,
+            2,
+            5,
+            1,
+            5,
+            2,
+            6
         ],
         "weight": 1,
         "image": null,
@@ -2728,9 +2735,9 @@
             "⑤ n++"
         ],
         "answer": [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
         ],
         "weight": 1,
         "image": null,
@@ -2763,9 +2770,9 @@
             "⑤ else"
         ],
         "answer": [
-            "A",
-            "D",
-            "E"
+            1,
+            4,
+            5
         ],
         "weight": 1,
         "image": null,
@@ -2798,9 +2805,9 @@
             "⑤ implements"
         ],
         "answer": [
-            "C",
-            "A",
-            "B"
+            3,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2834,9 +2841,9 @@
             "① 正確 | ② 錯誤"
         ],
         "answer": [
-            "B",
-            "A",
-            "A"
+            2,
+            1,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -2863,7 +2870,7 @@
             "<code>僅有在同一套件中的類別及繼承 Rectangle 類別的類別。</code>"
         ],
         "answer": [
-            "D"
+            4
         ],
         "weight": 1,
         "image": null,
@@ -2887,9 +2894,9 @@
             "① public | ② private | ③ protected | ④ finally | ⑤ static | ⑥ super | ⑦ void | ⑧ final"
         ],
         "answer": [
-            "A",
-            "E",
-            "H"
+            1,
+            5,
+            8
         ],
         "weight": 1,
         "image": null,
@@ -2917,7 +2924,7 @@
             "<code>所有套件中的任何類別。</code>"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -2977,9 +2984,9 @@
             "C ① rec.Width, rec.Length|② rec.getWide(), rec.getLen()|③ rec.width, rec.length|④ Crectangle.width, Crectangle.length|⑤ Crectangle.getWide(), Crectangle.getLen()"
         ],
         "answer": [
-            "D",
-            "C",
-            "B"
+            4,
+            3,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3027,9 +3034,9 @@
             "①candy.overdue; | ②candy.overdue(); | ③Candy.overdue; | ④Candy.overdue();"
         ],
         "answer": [
-            "B",
-            "C",
-            "B"
+            2,
+            3,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3061,10 +3068,10 @@
             "① 正確 | ② 錯誤"
         ],
         "answer": [
-            "B",
-            "A",
-            "A",
-            "B"
+            2,
+            1,
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3101,9 +3108,9 @@
             "①() | ②(bool member) | ③(Group member) | ④(String member)"
         ],
         "answer": [
-            "A",
-            "A",
-            "D"
+            1,
+            1,
+            4
         ],
         "weight": 1,
         "image": null,
@@ -3150,10 +3157,10 @@
             "① Error|② Exception|③ RuntimeException|④ IllegalArgumentException|⑤ ArrayIndexOutOfBoundsException"
         ],
         "answer": [
-            "C",
-            "B",
-            "B",
-            "B"
+            3,
+            2,
+            2,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3183,9 +3190,9 @@
             "④ return"
         ],
         "answer": [
-            "C",
-            "B",
-            "A"
+            3,
+            2,
+            1
         ],
         "weight": 1,
         "image": null,
@@ -3216,10 +3223,10 @@
             "A. new | B. cir1 | C. Circle | D. Circle() | E. Circle(radius)"
         ],
         "answer": [
-            "C",
-            "B",
-            "A",
-            "E"
+            3,
+            2,
+            1,
+            5
         ],
         "weight": 1,
         "image": null,
@@ -3250,7 +3257,7 @@
             "<code>編譯錯誤</code>"
         ],
         "answer": [
-            "C"
+            3
         ],
         "weight": 1,
         "image": null,
@@ -3284,7 +3291,7 @@
             "<code>例外內容: java.lang.ArrayIndexOutOfBoundsException</code>"
         ],
         "answer": [
-            "B"
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3314,8 +3321,8 @@
             "④ abstract"
         ],
         "answer": [
-            "A",
-            "B"
+            1,
+            2
         ],
         "weight": 1,
         "image": null,
@@ -3358,10 +3365,10 @@
             "①book() | ②book(title, author, year, isbn) | ③Book() | ④Book(title, author, year, isbn)"
         ],
         "answer": [
-            "B",
-            "A",
-            "D",
-            "C"
+            2,
+            1,
+            4,
+            3
         ],
         "weight": 1,
         "image": null,
