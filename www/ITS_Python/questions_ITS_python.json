@@ -112,10 +112,21 @@
     {
         "id": 4,
         "type": "multiple",
-        "question": [
-            "<pre><code class=\"language-python\">【CH01-4】在 Python 資料型別的課程中建立以下三個程式碼片段：",
-            "# 程式碼片段 1\nx1 = \"5\"\ny1 = 4\na = x1 * y1\n# 程式碼片段 2\nx2 = 10\ny2 = 4\nb = x2 / y2\n# 程式碼片段 3\nx3 = 5.5\ny3 = 1\nc = x3 / y3</code></pre>"
-        ],
+		"question": [
+			"4. 【CH01-4】在 Python 資料類型的課程中創建以下三個程式碼片段：",
+			"<pre><code class=\"language-python\"># 程式碼片段 1",
+			"x1 = \"5\"",
+			"y1 = 4",
+			"a = x1 * y1",
+			"# 程式碼片段 2",
+			"x2 = 10",
+			"y2 = 4",
+			"b = x2 / y2",
+			"# 程式碼片段 3",
+			"x3 = 5.5",
+			"y3 = 1",
+			"c = x3 / y3</code></pre>"
+		],
         "options": [
             "<code>執行程式碼片段 1 後，變數 a 的資料類為 str。</code>",
             "<code>執行程式碼片段 2 後，變數 b 的資料型別是 float</code>",
@@ -1666,10 +1677,27 @@
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-11】你設計了一個函式計算並顯示從 2 到 9 的所有乘法組合的九九乘法表。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
-            "# Displays times tables 2 - 9\ndef times_tables():\n    _(選項 1)_\n        _(選項 2)_\n            print(row * col, end=' ')\n        print()\n# main\ntimes_tables()",
-            "\n選項 1 答案選擇區\n答案 A. for col in range(9):\n答案 B. for col in range(2, 10):\n答案 C. for col in range(2, 9, 1):\n答案 D. for col in range(10):",
-            "\n選項 2 答案選擇區\n答案 A. for row in range(9):\n答案 B. for row in range(2, 9, 1):\n答案 C. for row in range(2, 10):\n答案 D. for row in range(10):</code></pre>"
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>[[image01]]<pre><code class=\"language-python\">",
+            "# Displays times tables 2 - 9",
+			"def times_tables():",
+			"    _(選項 1)_",
+			"        _(選項 2)_",
+			"            print(row * col, end=' ')",
+			"        print()",
+			"# main",
+			"times_tables()",
+            "",
+			"選項 1 答案選擇區",
+			"答案 A. for col in range(9):",
+			"答案 B. for col in range(2, 10):",
+			"答案 C. for col in range(2, 9, 1):",
+			"答案 D. for col in range(10):",
+            "",
+			"選項 2 答案選擇區",
+			"答案 A. for row in range(9):",
+			"答案 B. for row in range(2, 9, 1):",
+			"答案 C. for row in range(2, 10):",
+			"答案 D. for row in range(10):</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1681,7 +1709,7 @@
         ],
         "weight": 1,
         "image": null,
-        "image01": "images/53_1.png",
+		"image01": "images/52_1.png",
         "explanation": [
             "<pre><code class=\"language-python\">這道題目是關於 巢狀迴圈 (Nested Loop) 的應用，用來產生二維的數據（如九九乘法表）。",
             "這題的關鍵在於 Python 的 range(start, end) 函式是「包含 start，不包含 end」的。題目要求範圍是 2 到 9，所以 range 的結束值必須設為 10。",
