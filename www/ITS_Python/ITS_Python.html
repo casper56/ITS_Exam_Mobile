@@ -5838,7 +5838,7 @@
 
         // 右側：[圓圈] [文字]
         let rIdxCounter = 0;
-        item.right.forEach((text) => {
+        item.right.forEach((text, grpIdx) => {
             if (text && text.includes('|')) {
                 const parts = text.replace(/<\/?code>/g, '').split('|');
                 parts.forEach((partText) => {
@@ -5849,7 +5849,7 @@
                         <div class="match-dot" id="dot-right-${rIdx}">
                             <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
                         </div>
-                        <div class="q-text-part-right"><code>${partText}</code></div>
+                        <div class="q-text-part"><code>${partText}</code></div>
                     </div>`;
                 });
             } else {
@@ -5861,8 +5861,12 @@
                     <div class="match-dot" id="dot-right-${rIdx}">
                         <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
                     </div>
-                    <div class="q-text-part-right">${cleanText}</div>
+                    <div class="q-text-part">${cleanText}</div>
                 </div>`;
+            }
+            // 每群顯示後畫一條灰色線 (排除最後一組)
+            if (grpIdx < item.right.length - 1) {
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
             }
         });
 
@@ -5963,33 +5967,36 @@
         const ans = userAnswers[currentIndex] || [];
         let finalUserAns = [];
         
-        let rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-        let totalRRows = rightRowGroups.reduce((a, b) => a + b, 0);
-        let splitRatio = (totalRRows / item.left.length);
-
-        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
-        let maxAnsIdx = 0;
-        correctAns.forEach(a => {
-            const val = String(a).toUpperCase().charCodeAt(0) - 65;
-            if (val > maxAnsIdx) maxAnsIdx = val;
+        // 精確計算每個群組的起始索引
+        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        const groupStarts = [];
+        let currentStart = 0;
+        rightRowGroups.forEach(size => {
+            groupStarts.push(currentStart);
+            currentStart += size;
         });
 
-        // 判定是否啟用分組轉譯 (題型為 multimatching 且 答案未超出比例範圍)
-        let useModulus = (item.type === 'multimatching' && maxAnsIdx < splitRatio);
+        // 判定是否使用相對索引 (當左側題目數等於右側群組數時，如 Java Q9)
+        const useRelative = (item.right && item.right.length === item.left.length);
 
-        if (useModulus) {
-            finalUserAns = item.left.map((_, lIdx) => {
-                const rIdx = ans[lIdx];
-                if (rIdx === null || rIdx === undefined) return "";
-                return String.fromCharCode(65 + (rIdx % splitRatio));
-            });
-        } else {
-            finalUserAns = item.left.map((_, i) => {
-                const rIdx = ans[i];
-                return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
-            });
-        }
+        finalUserAns = item.left.map((_, lIdx) => {
+            const rIdx = ans[lIdx];
+            if (rIdx === null || rIdx === undefined) return "";
+            if (useRelative) {
+                // 找出 rIdx 屬於哪一個群組
+                let gIdx = 0;
+                for (let i = 0; i < groupStarts.length; i++) {
+                    if (rIdx >= groupStarts[i]) gIdx = i;
+                    else break;
+                }
+                const relRIdx = rIdx - groupStarts[gIdx];
+                return String.fromCharCode(65 + relRIdx);
+            } else {
+                return String.fromCharCode(65 + rIdx);
+            }
+        });
 
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
         let isCorrect = (finalUserAns.length === correctAns.length);
         if (isCorrect) {
             for (let i = 0; i < correctAns.length; i++) {

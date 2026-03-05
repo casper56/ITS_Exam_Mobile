@@ -3984,7 +3984,7 @@
 
         // 右側：[圓圈] [文字]
         let rIdxCounter = 0;
-        item.right.forEach((text) => {
+        item.right.forEach((text, grpIdx) => {
             if (text && text.includes('|')) {
                 const parts = text.replace(/<\/?code>/g, '').split('|');
                 parts.forEach((partText) => {
@@ -3995,7 +3995,7 @@
                         <div class="match-dot" id="dot-right-${rIdx}">
                             <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
                         </div>
-                        <div class="q-text-part-right"><code>${partText}</code></div>
+                        <div class="q-text-part"><code>${partText}</code></div>
                     </div>`;
                 });
             } else {
@@ -4007,8 +4007,12 @@
                     <div class="match-dot" id="dot-right-${rIdx}">
                         <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
                     </div>
-                    <div class="q-text-part-right">${cleanText}</div>
+                    <div class="q-text-part">${cleanText}</div>
                 </div>`;
+            }
+            // 每群顯示後畫一條灰色線 (排除最後一組)
+            if (grpIdx < item.right.length - 1) {
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
             }
         });
 
