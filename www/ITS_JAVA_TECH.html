@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = '../index.html';
+    }
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS Java 技術考點深度導讀</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        body { 
+            background-color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            padding: 40px 0; 
+        }
+        .container { 
+            max-width: 900px; 
+            background: white; 
+            padding: 45px; 
+            border: 1px solid #e1e4e8;
+            border-radius: 6px; 
+        }
+        h1, h2 { font-weight: 600; padding-bottom: 0.3em; border-bottom: 1px solid #eaecef; margin-top: 24px; margin-bottom: 16px; }
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-top: 24px; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.9rem; }
+        th, td { border: 1px solid #dfe2e5; padding: 6px 13px; }
+        th { background-color: #f6f8fa; font-weight: 600; }
+        code { background-color: rgba(27,31,35,0.05); padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 85%; }
+        pre { background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow: auto; font-size: 85%; margin-bottom: 16px; }
+        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; font-weight: 600; }
+        @media (max-width: 768px) { .container { padding: 20px; border: 0; } }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="btn btn-dark btn-home">🏠 回首頁</a>
+    <div class="container">
+        <article id="content" class="markdown-body"></article>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script>
+        const rawMd = `# ITS Java 技術考點深度導讀 (ITS_JAVA_TECH.md)\n\n本文件根據 \`questions_ITS_JAVA.json\` 題庫編寫，旨在幫助考生掌握 Java 認證的核心邏輯與 API 配對技巧。\n\n---\n\n## 1. 核心語法與入口點 (Main Method)\n*   **標準簽章**：\`public static void main(String[] args)\`。\n    *   必須是 \`static\` (靜態)。\n    *   傳回值必須是 \`void\`。\n    *   參數必須是 \`String\` 陣列 (也可寫為 \`String args[]\`)。\n\n---\n\n## 2. 存取修飾詞權限 (Access Modifiers)\nJava 考試極度強調這四種權限的範圍：\n\n| 修飾詞 | 同一類別 | 同一封包 | 衍生類別 (子類) | 世界 (全域) |\n| :--- | :---: | :---: | :---: | :---: |\n| **public** | ✅ | ✅ | ✅ | ✅ |\n| **protected** | ✅ | ✅ | ✅ | ❌ |\n| **default** | ✅ | ✅ | ❌ | ❌ |\n| **private** | ✅ | ❌ | ❌ | ❌ |\n\n---\n\n## 3. 資料型別與運算 (Data Types)\n*   **String 不可變性**：Java 中的 \`String\` 是 Immutable。使用 \`+\` 串接時會產生新的物件。\n*   **整數除法**：\`10 / 3\` 結果為 \`3\`。若要得到精確值，需有浮點數參與，如 \`10.0 / 3\`。\n*   **自增運算**：注意 \`i++\` (先用再加) 與 \`++i\` (先加再用) 的差別。\n\n---\n\n## 4. 核心類別庫 (API Mapping) - 必考大項\nJava 題庫中有高達 76% 的題目屬於 API 用途配對：\n\n### java.lang (自動匯入)\n*   **Math**：提供 \`abs()\`, \`sqrt()\`, \`random()\` 等數學運算。\n*   **String / StringBuilder**：字串處理。\n*   **System**：標準輸入輸出 (\`System.out\`) 與環境變數。\n\n### java.util (常用工具)\n*   **ArrayList**：可變長度的陣列實作。\n*   **HashMap**：鍵值對 (Key-Value) 儲存。\n*   **Scanner**：處理使用者鍵盤輸入。\n*   **Random**：產生各種型別的隨機數。\n\n### java.io (串流與檔案)\n*   **File**：檔案與目錄路徑操作。\n*   **PrintWriter**：將格式化內容寫入文字檔。\n*   **BufferedReader**：高效讀取文字檔。\n\n---\n\n## 5. 例外處理 (Exception Handling)\n*   **階層結構**：所有例外繼承自 \`Throwable\` -> \`Exception\`。\n*   **try-catch-finally**：\n    *   \`finally\` 區塊中的程式碼**無論是否發生例外**，都保證會執行。\n    *   通常用於釋放資源 (如 \`file.close()\`)。\n*   **Runtime vs Checked**：\`RuntimeException\` (如 \`NullPointerException\`) 不需要強制處理，而其他的 \`Exception\` 則必須捕獲或宣告拋出。\n\n---\n\n## 6. 物件導向 (OOP) 特性\n*   **封裝 (Encapsulation)**：將資料設為 \`private\`，透過 Getter/Setter 存取。\n*   **繼承 (Inheritance)**：使用 \`extends\` 關鍵字。\n*   **多型 (Polymorphism)**：父類別參考指向子類別物件，呼叫時執行子類別覆寫 (\`Override\`) 的方法。`;
+
+        document.getElementById('content').innerHTML = marked.parse(rawMd);
+        document.querySelectorAll('pre code').forEach((block) => {
+            block.className = 'language-java';
+        });
+        Prism.highlightAll();
+    </script>
+</body>
+</html>

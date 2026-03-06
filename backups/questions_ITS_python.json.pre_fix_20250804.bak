@@ -1,193 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS Python 認證練習</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-    <style>
-        /* 強制去除選項內代碼底色與黑字規範 */
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
-        .option-item, .sub-opt-container { color: #000 !important; }
-        code { background-color: transparent !important; }
-
-        html { scrollbar-gutter: stable; }
-        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
-        .main-wrapper { display: flex; min-height: 100vh; }
-        .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; height: 100vh; }
-        .sidebar-header { background: #212529; color: #fff; padding: 15px; border-bottom: 1px solid #dee2e6; flex-shrink: 0; }
-        .sidebar-header h5 { font-size: 1.25rem; font-weight: bold; color: #fff; margin-bottom: 0; }
-        #progress-stats { font-size: 1.2rem; font-weight: bold; color: #fff; }
-        .sidebar-content { flex: 1; overflow-y: auto !important; padding: 15px; }
-        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; flex-shrink: 0; }
-        .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; overflow-x: hidden !important; }
-        
-        code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #000 !important; background-color: transparent !important; }
-        code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; color: inherit; }
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
-        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
-        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
-
-        .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
-        .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
-        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
-        .option-item pre { margin: 0; display: inline-block; width: 100%; }
-        .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #000 !important; }
-        .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #000 !important; }
-        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; color: #000 !important; }
-        .q-node { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff; cursor: pointer; font-size: 0.85rem; }
-        .q-node.correct { background-color: #d1e7dd; color: #0f5132; }
-        .q-node.incorrect { background-color: #f8d7da; color: #842029; }
-        .q-node.corrected { background-color: #fd7e14; color: #fff; }
-        .q-node.active { background-color: #0d6efd; color: white; transform: scale(1.1); z-index: 1; }
-        .progress-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-        .category-tag { font-size: 0.8rem; color: #6c757d; background-color: #f8f9fa; padding: 2px 8px; border-radius: 12px; border: 1px solid #dee2e6; margin-top: 5px; display: inline-block; }
-        .type-badge { font-size: 0.75rem; vertical-align: middle; }
-        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
-        .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
-        .question-body { padding: 5px 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
-        .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
-        .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
-        
-        table, .q-table { border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; width: auto; max-width: 100%; }
-        table td, table th, .q-table td, .q-table th { border: 1px solid #000 !important; padding: 8px 12px; vertical-align: middle; }
-
-        #review-area { display: none; text-align: left; padding: 20px; background: white; }
-                    .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 2px 0 !important; padding: 0 !important; }
-                    .review-q-text { font-size: 1.0rem; line-height: 1.6 !important; margin-bottom: 2px !important; color: #333; }
-                    .review-ans { color: #198754; font-weight: bold; padding: 4px 15px !important; margin: 2px 0 !important; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
-            .review-exp-box { background: #f8f9fa; padding: 8px !important; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.5 !important; color: #333; font-size: 0.95rem; }
-            
-            /* 列印版配對題佈局鎖定 */
-            .print-matching { display: block !important; width: 100% !important; position: relative !important; margin: 15px 0 !important; }
-            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
-            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
-            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
-            .print-svg { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; z-index: 10 !important; background: none !important; }
-        
-        @media print {
-            @page { size: auto; margin: 8mm !important; }
-            * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
-            html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: white !important; font-size: 1.0rem !important; line-height: 1.8 !important; }
-            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar { display: none !important; }
-            .content-area { margin-left: 0 !important; padding: 0 !important; margin-top: 0 !important; }
-            #review-area { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 10px 0 !important; padding: 0 !important; }
-            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 5px !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
-            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
-            .q-table, table { font-size: 0.7rem !important; max-width: 98% !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; border-collapse: collapse !important; }
-            .q-table td, .q-table th, td, th { border: 1px solid #000 !important; padding: 6px !important; }
-        }
-        .side-nav-btn { position: fixed; top: 55%; width: 38px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; transform: translateY(-50%); }
-        .side-nav-btn:hover { background: #0d6efd; color: white; width: 45px; }
-        .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
-        .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
-        
-        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
-        .home-float-btn {
-            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
-            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
-            color: white !important; display: flex; align-items: center; justify-content: center;
-            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
-        }
-        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
-        /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
-        
-        .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
-        .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
-        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
-        .question-body pre { margin-bottom: 0 !important; }
-
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.active { transform: translateX(0); }
-            .content-area { margin-left: 0; }
-            .mobile-toggle { display: flex; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
-            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
-            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
-
-            .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
-            .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
-            .form-check-input { width: 22px !important; height: 22px !important; margin-top: 2px !important; }
-            .option-item { padding: 12px 15px !important; font-size: 1.1rem !important; }
-            .form-control { font-size: 1.1rem !important; padding: 12px !important; height: auto !important; }
-        }
-        
-        #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
-        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
-        .right-col .match-header-title { margin-left: 10px; }
-        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
-        .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
-        .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
-        .match-item-left { justify-content: flex-start !important; text-align: left !important; }
-        .match-item-right { justify-content: flex-start !important; text-align: left !important; }
-        .match-item-left .q-text-part { display: inline-block !important; }
-        .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
-        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
-        .match-item.selected .match-dot { border-color: #0d6efd; }
-        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        @media (max-width: 768px) {
-            .matching-columns, .match-header-row { gap: 60px !important; }
-            .match-col { min-width: 140px !important; }
-            .match-header-title { font-size: 1rem !important; }
-            .match-item { font-size: 0.9rem !important; }
-            .match-dot { width: 18px !important; height: 18px !important; margin: 0 10px !important; }
-            .match-dot::after { width: 8px !important; height: 8px !important; }
-        }
-        /* 資料處理遮罩 */
-        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
-        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0d6efd; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
-</head>
-<body>
-    <div id="loading-overlay" class="no-print">
-        <div class="spinner"></div>
-        <div>資料處理中，請稍候...</div>
-    </div>
-    <div class="zoom-controls no-print">
-        <div class="zoom-btn" onclick="changeZoom(0.1)">➕</div>
-        <div class="zoom-btn" onclick="changeZoom(-0.1)">➖</div>
-    </div>
-    <a href="../../index.html" class="home-float-btn no-print">🏠</a>
-<div class="main-wrapper">
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center"><a href="../../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題庫列表</h5></div>
-                <div class="d-flex gap-1">
-                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">完整解析</button>
-                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
-                </div>
-            </div>
-            <div id="progress-stats">✅0 ❌0 🟠0 / 185</div>
-        </div>
-        <div class="sidebar-content">
-            <div class="progress-grid" id="progress-grid"></div>
-        </div>
-        <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
-    </nav>
-    <button class="mobile-toggle no-print" onclick="toggleSidebar()">☰</button>
-    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
-    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
-    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
-</div>
-<div id="review-area"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script>
-    const quizData = [
+[
     {
         "id": 1,
         "type": "multioption",
@@ -223,11 +34,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 距離：距離測量通常需要精確，可能是小數，應使用 float 轉換輸入為浮點數以保留精度。",
-            "2. 分鐘：題目要求「分秒輸入值都要轉換為整數」，故使用 int。",
-            "3. 秒數：同理，使用 int 轉換為整數。",
-            "綜合以上分析，正確順序為 float, int, int。</code></pre>"
+            "<pre><code class=\"language-python\">● 使用 float() 將距離轉為浮點數，因為距離可能有小數（如 1500.5 公尺）。",
+            "● 使用 int() 將時間（分鐘和秒）轉為整數，因為這些值應該是整數。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -262,12 +70,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. age = 12: 沒有小數點的整數，屬於 int。",
-            "2. minor = False: 布林值，屬於 bool。",
-            "3. name = 'David': 雙引號包圍的文字，屬於 str。",
-            "4. weight = 64.5: 帶有小數點的數字，屬於 float。",
-            "5. zip = '545': 被雙引號包圍，視為文字，屬於 str。</code></pre>"
+            "<pre><code class=\"language-python\">● 使用 int 將年齡轉為整數，因為年齡應該是整數。",
+            "● 使用 bool 將未成年轉為布林值，因為這是一個是非題。",
+            "● 使用 str( 將姓名轉為字串，因為姓名應該是字串。",
+            "● 使用 float 將體重轉為浮點數，因為體重可能有小數（如 64.5 公斤）。",
+            "● 使用 str 將郵遞區號轉為字串，因為郵遞區號應該是字串。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -297,9 +104,10 @@
         "image": null,
         "explanation": [
             "<pre><code class=\"language-python\">解題分析：",
-            "A. 正確。input() 無論輸入什麼，一律以字串 (str) 回傳。",
-            "B. 錯誤。eval() 處理整數減法通常回傳 int (如 2024-30=1994)，除非輸入含小數點。",
-            "C. 錯誤。message 由字串串接而成，結果永遠是字串 (str)。</code></pre>"
+            "1. 第 01 行：input() 函式回傳的永遠是 字串 (str)。",
+            "2. 第 03 行：eval() 會計算字串運算式的值。整數減整數的結果仍為 整數 (int)。",
+            "3. 第 04-05 行：\"...\" + str(born) 是字串串接運算，結果為 字串 (str)。",
+            "本題詢問 age 的類型，故答案為 A (str)。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -393,11 +201,11 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 初次 is：alist 與 blist 是不同物件，記憶體位置不同，故為 False。",
-            "2. 初次 ==：內容分別是字串與數字，內容不同，故為 False。",
-            "3. 賦值：aList = bList 使兩者指向同一物件。",
-            "4. 賦值後 is 與 ==：指向同物件且內容相同，兩者皆為 True。</code></pre>"
+            "<pre><code class=\"language-python\">● 使用 int() 將年齡轉為整數，因為年齡應該是整數。",
+            "● 使用 bool() 將未成年轉為布林值，因為這是一個是非題。",
+            "● 使用 str() 將姓名轉為字串，因為姓名應該是字串。",
+            "● 使用 float() 將體重轉為浮點數，因為體重可能有小數（如 64.5 公斤）。",
+            "● 使用 str() 將郵遞區號轉為字串，因為郵遞區號應該是字串。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -423,10 +231,9 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "題目要求「a 乘以 -1 之後再平方」。這意指 (a * -1) 整體進行平方運算。",
-            "由於指數運算 (**) 優先級高於負號 (Unary negation)，",
-            "若寫 -a**2 會被解讀為 -(a**2)。因此必須加上括號寫成 (-a)**2。</code></pre>"
+            "<pre><code class=\"language-python\">● input() 函式功能可輸入值，轉成文字型別的值傳給變數。",
+            "● 因此需要使用 int() 將 start 和 end 先將輸入變數值轉換為整數，然後才能計算工作時數。",
+            "● 最後使用 str() 將結果轉換為字串以便與其他字串連線。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
@@ -484,10 +291,10 @@
         "explanation": [
             "<b>⭐ 運算順序拆解：</b>",
             "<pre><code class=\"language-python\">1. a % b (24 % 7) = 3",
-            "2. 3 * 100 = 300",
-            "3. 2.0 ** 3.0 = 8.0",
-            "4. 300 // 8.0 = 37.0 (註：地板除法結果為 float)",
-            "5. 37.0 - 7 = 30.0</code></pre>",
+			"2. 3 * 100 = 300",
+			"3. 2.0 ** 3.0 = 8.0",
+			"4. 300 // 8.0 = 37.0 (註：地板除法結果為 float)",
+			"5. 37.0 - 7 = 30.0</code></pre>",
             "<b>⭐ 補充：負數的地板除法與取餘數規則</b>",
             "<table class=\"q-table w-100 t-left\"><thead><tr><th>運算子</th><th>規則</th><th>正數範例</th><th>負數範例</th></tr></thead><tbody><tr><td><b>地板除 //</b></td><td>向左取整</td><td>7 // 2 = 3</td><td>-7 // 2 = -4</td></tr><tr><td><b>取餘數 %</b></td><td>r = a - (b * (a // b))</td><td>7 % 3 = 1</td><td>-7 % 3 = 2</td></tr></tbody></table>",
             "<b>💡 記住：</b>負數除法時，// 會向負無窮大方向靠攏（-3.5 變成 -4）。"
@@ -495,7 +302,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 10,
+        "id": 9,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">某間食品公司需要一套簡易程式，讓他們的客服中心能夠用來輸入新咖啡種類的問卷調查資料。",
@@ -534,7 +341,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 11,
+        "id": 10,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。",
@@ -562,7 +369,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 12,
+        "id": 11,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-4】你正在開發一個補習班的 Python 函式來計算折扣，補習班希望鼓勵小朋友和老年人報名，",
@@ -593,7 +400,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 13,
+        "id": 12,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)</code></pre>"
@@ -619,7 +426,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 14,
+        "id": 13,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-6】計算以下的 Python 數學運算式結果為何？",
@@ -637,17 +444,18 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 取餘數: 24 % 7 = 3。",
-            "2. 乘法: 3 * 100 = 300。",
-            "3. 指數: 2.0 ** 3.0 = 8.0。",
-            "4. 整數除法: 300 // 8.0 = 37.0 (浮點數參與運算，結果為浮點數但取整)。",
-            "5. 減法: 37.0 - 7 = 30.0。</code></pre>"
+            "<pre><code class=\"language-python\">● 首先計算括號內的部分：(1 + 2) 等於 3。",
+            "● 然後計算 3 ** 2，結果是 9。",
+            "● 接著計算 2 ** 2，結果是 4。",
+            "● 現在將這些值代入原式：",
+            "(3 * 9 - 4 * 3)",
+            "= (27 - 12)",
+            "= 15。</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 15,
+        "id": 14,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-7】你編寫了以下的程式碼：",
@@ -683,7 +491,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 16,
+        "id": 15,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-8】你為公司開發了一個 Python 應用程式，程式碼如下：",
@@ -715,7 +523,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 17,
+        "id": 16,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-9】請按先後順序從頭至尾排列這六類運算的正確順序：",
@@ -750,7 +558,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 18,
+        "id": 17,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">17. 【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，",
@@ -796,7 +604,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 19,
+        "id": 18,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：",
@@ -827,7 +635,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 20,
+        "id": 19,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -871,7 +679,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 21,
+        "id": 20,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：",
@@ -911,7 +719,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 22,
+        "id": 21,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-14】您正在撰寫一個 Python 程式評估算術公式。",
@@ -946,7 +754,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 23,
+        "id": 22,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-1】你編寫了以下的程式碼：",
@@ -975,7 +783,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 24,
+        "id": 23,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-2】在下列的程式碼中：",
@@ -1000,7 +808,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 25,
+        "id": 24,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1041,7 +849,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 26,
+        "id": 25,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1084,7 +892,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 27,
+        "id": 26,
         "type": "matching",
         "question": [
             "<pre><code class=\"language-python\">【CH03-5】你有以下清單結構：alph = \"abcdefghijklmnopqrstuvwxyz\"",
@@ -1115,16 +923,15 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. alph[3:15]: 取索引 3 到 14，即 'defghijklmno'。",
-            "2. alph[3:15:3]: 每隔 3 個取一個，取 3,6,9,12，即 'dgjm'。",
-            "3. alph[15:3:-3]: 反向，從 15 開始每隔 3 個，取 15,12,9,6，即 'pmjg'。",
-            "4. alph[::-3]: 從最後一個開始反向每隔 3 個，取 'zwtqnkheb'。</code></pre>"
+            "<pre><code class=\"language-python\">● alph[3:15] -> 從索引 3 到 14 (d...o)，結果為 C (defghijklmno)",
+            "● alph[3:15:3] -> 從索引 3 開始每隔 3 格取一字 (d, g, j, m)，結果為 F (dgjm)",
+            "● alph[15:3:-3] -> 從索引 15 (p) 倒退回 3，每隔 3 格取一字 (p, m, j, g)，結果為 B (pmjg)",
+            "● alph[::-3] -> 全字串倒退，從最後一字 (z) 開始每隔 3 格取一字，結果為 A (zwtqnkheb)</code></pre>"
         ],
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 28,
+        "id": 27,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1160,7 +967,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 29,
+        "id": 28,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-7】你開發了一個 Python 應用程式，其中有一個名為 month 的清單單儲存所有月份的英文。",
@@ -1188,7 +995,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 30,
+        "id": 29,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1233,7 +1040,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 31,
+        "id": 30,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1276,7 +1083,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 32,
+        "id": 31,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1335,7 +1142,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 33,
+        "id": 32,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH04-3】你正在設計一個電子商務程式，它可以接受來自使用者輸入，並以逗號分隔的格式輸出資料。",
@@ -1370,7 +1177,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 34,
+        "id": 33,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-4】請檢視下面的程式碼：",
@@ -1399,7 +1206,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 35,
+        "id": 34,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。",
@@ -1428,7 +1235,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 36,
+        "id": 35,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1488,7 +1295,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 37,
+        "id": 36,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1555,7 +1362,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 38,
+        "id": 37,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1603,7 +1410,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 39,
+        "id": 38,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-9】你設計一個 Python 應用程式，需要將資料讀寫到文字檔中。",
@@ -1629,7 +1436,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 40,
+        "id": 39,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-10】你正在設計一個 Python 程式來讀取學生資料的檔案，檔案中包含了學生的班級、座號和姓名，",
@@ -1674,7 +1481,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 41,
+        "id": 40,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1721,7 +1528,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 42,
+        "id": 41,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-12】請問下列陳述式有何功能？",
@@ -1745,7 +1552,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 43,
+        "id": 42,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1833,7 +1640,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 44,
+        "id": 43,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1888,7 +1695,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 45,
+        "id": 44,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：",
@@ -1918,7 +1725,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 46,
+        "id": 45,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1959,15 +1766,15 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 正數判斷：if a >= 0:。正數可直接開任意次方根。",
-            "2. 負偶數次方根：a < 0 且 b % 2 == 0。這會產生虛數 (Imaginary number)。",
-            "3. 負奇數次方根：a < 0 且 b 為奇數。數學上等於 -((-a) ** (1/b))。</code></pre>"
+            "<pre><code class=\"language-python\">● 在這個程式碼中，首先檢查 a 是否小於 0，如果是，則回傳 'The result is a negative number'。",
+            "● 接著，如果 a 大於 0，則回傳 'The result is a positive number'。",
+            "● 如果 a 等於 0，則回傳 'The result is a zero'。",
+            "<span style='color: red;'>注意!!</span>答案 D. elif: , 錯誤在於缺少了「判斷條件」</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 47,
+        "id": 46,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2007,15 +1814,13 @@
         "image": null,
         "image01": "images/47_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 5歲以上且是學生 (60元)：if age >= 5 and school == True:。",
-            "2. 5歲至17歲非學生 (120元)：elif age <= 17: (此處因前一條件已排除學生，故只需判斷年齡)。",
-            "3. 17歲以上非學生 (180元)：最後的 else 區塊。</code></pre>"
+            "<pre><code class=\"language-python\">● 在這個程式碼中，首先檢查 age 是否大於等於 5 且 school 為真，如果是，則票價為 60 元。",
+            "● 接著，如果 age 大於等於 5 且 school 為假，則進一步檢查 age 是否小於等於 17，如果是，則票價為 120 元；否則票價為 180</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 48,
+        "id": 47,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2062,7 +1867,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 49,
+        "id": 48,
         "type": "matching",
         "hideLabel": true,
         "question": [
@@ -2115,7 +1920,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 50,
+        "id": 49,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2151,7 +1956,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 51,
+        "id": 50,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2202,7 +2007,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 52,
+        "id": 51,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2250,7 +2055,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 53,
+        "id": 52,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2299,7 +2104,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 54,
+        "id": 53,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2364,7 +2169,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 55,
+        "id": 54,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2422,7 +2227,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 56,
+        "id": 55,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2485,7 +2290,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 57,
+        "id": 56,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2538,7 +2343,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 58,
+        "id": 57,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2587,7 +2392,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 59,
+        "id": 58,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2634,18 +2439,24 @@
         "image": null,
         "image01": "images/59_1.png",
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "這是一個典型的階梯式 if-elif-else 結構。",
-            "1. A 級 (90-100)：if grade >= 90:。",
-            "2. B 級 (80-89)：elif grade >= 80: (已隱含 < 90 的前提)。",
-            "3. C 級 (70-79)：elif grade >= 70:。",
-            "4. D 級 (60-69)：elif grade >= 60:。",
-            "5. 不及格：最後由 else 捕捉。</code></pre>"
+            "<pre><code class=\"language-python\">這道題目測試的是 Python 的 巢狀條件判斷 (Nested If-Else) 以及正確的關鍵字拼寫。",
+            "<b>【解析】</b>此程式碼採用<b>巢狀結構 (Nested Structure)</b>，分為「外層」與「內層」邏輯。",
+            "<b>1. 外層：檢查數值有效性</b>",
+            "● (選項1) if：檢查成績是否在 0~100 的合法範圍內。",
+            "● (選項6) else:：若不符合上述範圍 (如 -5 或 105)，則印出錯誤訊息。",
+            "<b>2. 內層：判斷成績等級 (當數值合法時)</b>",
+            "● (選項2) if：第一個判斷條件 (>= 90)。",
+            "● (選項3, 4) elif：<b>注意！</b>Python 的語法是 elif，而非 C/Java 的 else if。用於後續的條件判斷。",
+            "● (選項5) else:：若上述條件皆不成立 (即 < 70)，則判定為不及格。",
+            "<b>【語法重點】</b>",
+            "● 條件式開頭必為 if。",
+            "● 中間的條件分支使用 elif。",
+            "● 最後的「其他所有情況」使用 else: (結尾需有冒號)。</code></pre>[[image01]]"
         ],
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 60,
+        "id": 59,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2705,7 +2516,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 61,
+        "id": 60,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2762,7 +2573,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 62,
+        "id": 61,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2801,7 +2612,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 63,
+        "id": 62,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2846,7 +2657,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 64,
+        "id": 63,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-1】公司正將過去的進銷存程式碼轉移到 Python，以下哪個是正確的語法？選項 A",
@@ -2881,12 +2692,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：\nPython 註解使用 # 開頭，函式定義使用 def 關鍵字，主體必須縮排。</code></pre>"
+            "<pre><code class=\"language-python\">● 使用了正確的註解語法 (#) 來描述函式的功能。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
-        "id": 65,
+        "id": 64,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2927,7 +2738,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 66,
+        "id": 65,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2956,12 +2767,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：\n呼叫時傳入兩個引數 (distance, burn_rate)，故定義時參數名稱需對齊內部使用的 kms 與 calories_per_km。</code></pre>"
+            "<pre><code class=\"language-python\">● 使用了正確的函式定義方式，並且引數名稱也符合函式的功能。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
-        "id": 67,
+        "id": 66,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3003,12 +2814,13 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：\n1. 定義：def calc_score\n2. 參數：(current, value):\n3. 回傳：return current</code></pre>"
+            "<pre><code class=\"language-python\">● 首先定義了一個函式 calc_score，該函式接受兩個引數：目前分數和一個值。",
+            "● 接著將值增加到目前分數，並返回新的分數。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
-        "id": 68,
+        "id": 67,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3052,7 +2864,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 69,
+        "id": 68,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3100,7 +2912,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 70,
+        "id": 69,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】某位同事撰寫了一個程式來輸入名稱至資料庫中。然而,此程式卻將每個名稱中的字母前後顛倒。",
@@ -3126,14 +2938,12 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：",
-            "1. 初始化索引：Python 索引從 0 開始，最後一個字元索引為 len(s) - 1。",
-            "2. 取得字元：使用 backward_name[index] 取得當前指向的字元並串接。</code></pre>"
+            "<pre><code class=\"language-python\"></code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
-        "id": 71,
+        "id": 70,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">您任職於某個遊戲開發團隊。您需要撰寫程式碼來產生符合下列需求的隨機數字：",
@@ -3159,7 +2969,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 72,
+        "id": 71,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3209,7 +3019,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 73,
+        "id": 72,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3274,7 +3084,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 74,
+        "id": 73,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-10】您為公司開發了一個 Python 應用程式，您想要在自己的程式碼中加入附註，好讓其他團隊成員能夠瞭解。",
@@ -3299,7 +3109,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 75,
+        "id": 74,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？</code></pre>"
@@ -3324,7 +3134,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 76,
+        "id": 75,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-2】你設計一個讀取檔案後將檔案中的每一行列印出來的函式。程式碼如下：",
@@ -3354,7 +3164,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 77,
+        "id": 76,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？</code></pre>"
@@ -3379,7 +3189,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 78,
+        "id": 77,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code></pre>"
@@ -3404,7 +3214,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 79,
+        "id": 78,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-5】你設計程式碼來產生一個隨機數數來符合以下要求：",
@@ -3450,7 +3260,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 80,
+        "id": 79,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-6】你正在設計一個處理數字的函式。該函式具有以下要求：",
@@ -3485,7 +3295,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 81,
+        "id": 80,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3549,7 +3359,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 82,
+        "id": 81,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3604,7 +3414,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 83,
+        "id": 82,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3646,7 +3456,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 84,
+        "id": 83,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3693,7 +3503,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 85,
+        "id": 84,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3737,7 +3547,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 86,
+        "id": 85,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3777,7 +3587,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 87,
+        "id": 86,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3833,7 +3643,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 88,
+        "id": 87,
         "type": "multiple",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3861,13 +3671,16 @@
         ],
         "weight": 1,
         "explanation": [
-            "<pre><code class=\"language-python\">1. 需求：目標格式為 \"ItemName\", Quantity。",
-            "2. 選項 C：'\"{0}\", {1}' 手動在 {0} 外加上雙引號，符合需求。",
-            "3. 選項 D：print 使用逗號分隔參數時預設會加空格，'\"' + item + '\",' 串接後變成 \"ItemName\",，接著印出 sales，結果正確。</code></pre>"
+            "<pre><code class=\"language-python\">解題分析：",
+            "1. 需求分析：目標輸出格式為 \"ItemName\", Quantity。",
+            "2. 選項 A：\"{0},{1}\" 輸出結果為 ItemName,Quantity（字串沒有雙引號，逗號後沒有空格），不符需求。",
+            "3. 選項 B：item + ',' + sales 會引發 TypeError，因為 sales 是整數 (int)，不能直接與字串相加。",
+            "4. 選項 C：'\"{0}\", {1}' 手動在 {0} 外加上雙引號。輸出結果為 \"ItemName\", Quantity，符合需求。",
+            "5. 選項 D：print 函式使用逗號分隔參數時，預設會加入一個空格。'\"' + item + '\",' 串接後變成 \"ItemName\",，接著印出 sales。結果為 \"ItemName\", Quantity，符合需求。</code></pre>"
         ]
     },
     {
-        "id": 89,
+        "id": 88,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3903,7 +3716,7 @@
         ]
     },
     {
-        "id": 90,
+        "id": 89,
         "type": "single",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3932,7 +3745,7 @@
         ]
     },
     {
-        "id": 91,
+        "id": 90,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3959,7 +3772,7 @@
         ]
     },
     {
-        "id": 92,
+        "id": 91,
         "type": "single",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3989,7 +3802,7 @@
         ]
     },
     {
-        "id": 93,
+        "id": 92,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4023,7 +3836,7 @@
         ]
     },
     {
-        "id": 94,
+        "id": 93,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4050,6 +3863,38 @@
             "● assertIs(x, y) 測試的是「x 與 y 是同一個記憶體中的物件」",
             "● assertIn(x, y) # 是否存在於 y 裡面(如清單、字串、字典鍵等等)",
             "● assertIsInstance(x, y) #確認 x 是否是型別 y 的例項，如果不是，則丟擲 AssertionError</code></pre>"
+        ]
+    },
+    {
+        "id": 94,
+        "type": "multiple",
+        "category": "D0_官方鑑定考點",
+        "question": [
+            "<pre><code class=\"language-python\">您正在建立一個函式，將傳入函式的數字當作浮點數 (float) 值操作。",
+            "此函式必須執行下列工作:",
+            "⚫ 提取浮點數 (float) 的絕對值。",
+            "⚫ 移除整數後面的任何小數點 (無條件捨去)。",
+            "請問您應該使用哪兩個數學函式? (選擇兩項)</code></pre>"
+        ],
+        "options": [
+            "<code>math.floor(x)</code>",
+            "<code>math.fabs(x)</code>",
+            "<code>math.frexp(x)</code>",
+            "<code>math.fmod(x)</code>"
+        ],
+        "answer": [
+            "A",
+            "B"
+        ],
+        "weight": 1,
+        "explanation": [
+            "<pre><code class=\"language-python\">math.fabs(x) 回傳絕對值 (浮點數)。",
+            "math.floor(x) 回傳小於或等於 x 的最大整數，達成移除小數點的效果。",
+            "● math.fabs(x) = 傳回浮點數的絕對值",
+            "● math.floor(x) = #無條件捨去(向下取整)",
+            "● math.fmod(x) = 取餘數(浮點除法後的餘數)",
+            "● math.ceil(x) = 無條件進位(向上取整)",
+            "● math.frexp(x) = 將浮點數拆成底數和指數(主要用於底層表示)</code></pre>"
         ]
     },
     {
@@ -6602,613 +6447,4 @@
         ],
         "category": "D6_模組與常用工具"
     }
-];
-    function parseAnswerToIndex(val) {
-        if (typeof val === 'number') return val - 1;
-        if (typeof val === 'string') {
-            const v = val.toUpperCase();
-            if (v === 'Y') return 0; if (v === 'N') return 1;
-            const code = v.charCodeAt(0);
-            if (code >= 65 && code <= 90) return code - 65;
-            return parseInt(val) - 1;
-        }
-        return -1;
-    }
-    function formatAnswer(a, item) {
-        const idx = parseAnswerToIndex(a);
-        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
-        const actualIsNum = (item && item.labelType === 'num');
-        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
-    }
-    let currentIndex = 0;
-    let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
-    window.itspyZoom = 1.0;
-    window.changeZoom = function(delta) {
-        window.itspyZoom = Math.round((window.itspyZoom + delta) * 10) / 10;
-        if (window.itspyZoom < 0.6) window.itspyZoom = 0.6;
-        if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
-        const container = document.getElementById('question-container');
-        if (container) {
-            container.style.transform = "scale(" + window.itspyZoom + ")";
-            container.style.transformOrigin = "top center";
-            if (window.itspyZoom > 1.0) container.style.marginBottom = ((window.itspyZoom - 1.0) * 100) + "%";
-            else container.style.marginBottom = "0";
-            if (typeof window.drawLines === 'function') window.drawLines();
-        }
-    };
-    const SUBJECT_ID = 'itspy';
-    const CORR_KEY = SUBJECT_ID + '_correct_v1', INCORR_KEY = SUBJECT_ID + '_incorrect_v1', CORR_EDIT_KEY = SUBJECT_ID + '_corrected_v1', INDEX_KEY = SUBJECT_ID + '_index_v1', ANSWERS_KEY = SUBJECT_ID + '_answers_v1';
-    function loadState() {
-        try {
-            const sCorr = localStorage.getItem(CORR_KEY), sIncorr = localStorage.getItem(INCORR_KEY), sEdit = localStorage.getItem(CORR_EDIT_KEY), sIdx = localStorage.getItem(INDEX_KEY), sAns = localStorage.getItem(ANSWERS_KEY);
-            if (sCorr) correctSet = new Set(JSON.parse(sCorr));
-            if (sIncorr) incorrectSet = new Set(JSON.parse(sIncorr));
-            if (sEdit) correctedSet = new Set(JSON.parse(sEdit));
-            if (sIdx) currentIndex = parseInt(sIdx) || 0;
-            if (sAns) userAnswers = JSON.parse(sAns);
-        } catch(e) {}
-    }
-    function saveState() {
-        try {
-            localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
-            localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
-            localStorage.setItem(CORR_EDIT_KEY, JSON.stringify([...correctedSet]));
-            localStorage.setItem(INDEX_KEY, currentIndex.toString());
-            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
-        } catch(e) {}
-    }
-    function resetProgress() { 
-        if(confirm('確定清除紀錄嗎？')) { 
-            try { localStorage.removeItem(CORR_KEY); localStorage.removeItem(INCORR_KEY); localStorage.removeItem(CORR_EDIT_KEY); localStorage.removeItem(INDEX_KEY); localStorage.removeItem(ANSWERS_KEY); } catch(e) {}
-            location.reload(); 
-        } 
-    }
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-    document.addEventListener('click', function(e) {
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.querySelector('.mobile-toggle');
-        if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggle.contains(e.target)) {
-            sidebar.classList.remove('active');
-        }
-    });
-    function processContent(content, item) {
-        if (!content) return '';
-        const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-            const num = parseInt(p1, 10);
-            const src = item['image' + num] || item['image' + p1] || item['image'];
-            return src ? `<img src="${src}" class="q-img">` : match;
-        });
-    }
-                        function renderMatchingQuestion(index) {
-        currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
-        const container = document.getElementById('question-container') || document.getElementById('question-area');
-        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
-        const currentAns = userAnswers[index];
-        
-        const isPractice = (typeof quizData !== 'undefined');
-        const isCorrect = isPractice ? correctSet.has(index) : false;
-        const isCorrected = isPractice ? correctedSet.has(index) : false;
-        const isWrong = isPractice ? incorrectSet.has(index) : false;
-        const isLocked = isCorrect || isCorrected;
-        const showAnswer = isLocked || isWrong;
-
-        let rightRowGroups = item.right.map(t => (t && t.includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-        let totalRightRows = rightRowGroups.reduce((a, b) => a + b, 0);
-        let splitRatio = totalRightRows / item.left.length; 
-        let isSplitMode = (totalRightRows > item.left.length);
-
-        let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body">
-                ${processContent(item.question, item)}
-                <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
-                    <svg id="matching-svg"></svg>
-                    <div class="matching-columns">
-                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
-
-        // 左側：[文字] [圓圈]
-        item.left.forEach((text, lIdx) => {
-            const isMatched = currentAns[lIdx] !== null;
-            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
-            const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
-            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
-            
-            html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
-                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
-                <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
-            </div>`;
-            
-            if (isSplitMode && splitRatio > 1) {
-                for(let p=0; p < Math.floor(splitRatio - 1); p++) {
-                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
-                }
-            }
-        });
-
-        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
-
-        // 右側：[圓圈] [文字]
-        let rIdxCounter = 0;
-        item.right.forEach((text, grpIdx) => {
-            if (text && text.includes('|')) {
-                const parts = text.replace(/<\/?code>/g, '').split('|');
-                parts.forEach((partText) => {
-                    const rIdx = rIdxCounter++;
-                    const isMatchedByAny = currentAns.includes(rIdx);
-                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
-                        <div class="match-dot" id="dot-right-${rIdx}">
-                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
-                        </div>
-                        <div class="q-text-part"><code>${partText}</code></div>
-                    </div>`;
-                });
-            } else {
-                const rIdx = rIdxCounter++;
-                const isMatchedByAny = currentAns.includes(rIdx);
-                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
-                    <div class="match-dot" id="dot-right-${rIdx}">
-                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
-                    </div>
-                    <div class="q-text-part">${cleanText}</div>
-                </div>`;
-            }
-            // 每群顯示後畫一條灰色線 (排除最後一組)
-            if (grpIdx < item.right.length - 1) {
-                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
-            }
-        });
-
-        html += `</div></div></div>`;
-        if (!isLocked && isPractice) {
-            html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
-        }
-        if (showAnswer) {
-            const isJavaQ6 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 6);
-            const isJavaQ7 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 7);
-            const ansText = (isJavaQ6 || isJavaQ7) ? item.answer.join(', ') : (Array.isArray(item.answer) ? item.answer.join(', ') : item.answer);
-            const statusMsg = isCorrected ? '<div class="fw-bold mb-2 text-warning">🟠 已更正成功！</div>' : 
-                             (isWrong ? '<div class="fw-bold mb-2 text-danger">❌ 答錯了，請參考正確答案進行更正</div>' : 
-                             '<div class="fw-bold mb-2 text-success">✅ 答對了！</div>');
-            html += `<div class="answer-section" style="display:block;">
-                        ${statusMsg}
-                        <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
-                        <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
-                     </div>`;
-        }
-        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
-        setTimeout(() => {
-            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
-            let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
-            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
-
-            if (window.drawLines) window.drawLines();
-            if (window.Prism) Prism.highlightAll();
-        }, 30);
-    }
-    let isDragging = false, dragStartPoint = null, tempLine = null;
-    window.handleDragStart = function(e, side, idx) {
-        if (side !== 'left') return;
-        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
-        isDragging = true; if(e.cancelable) e.preventDefault();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        window.lastClientX = clientX; window.lastClientY = clientY;
-        const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
-        const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
-        const zoom = window.itspyZoom || 1.0;
-        dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
-        const svg = document.getElementById("matching-svg");
-        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        tempLine.setAttribute("x1", dragStartPoint.x); tempLine.setAttribute("y1", dragStartPoint.y);
-        tempLine.setAttribute("x2", dragStartPoint.x); tempLine.setAttribute("y2", dragStartPoint.y);
-        tempLine.setAttribute("stroke", "#0d6efd"); tempLine.setAttribute("stroke-width", "2.5");
-        tempLine.setAttribute("opacity", "0.6"); svg.appendChild(tempLine);
-    };
-    window.handleDragMove = function(e) {
-        if (!isDragging || !tempLine) return;
-        const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        window.lastClientX = clientX; window.lastClientY = clientY;
-        const zoom = window.itspyZoom || 1.0;
-        tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
-    };
-    window.handleDragEnd = function(e) {
-        if (!isDragging) return;
-        let x = window.lastClientX, y = window.lastClientY;
-        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
-        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
-        
-        if (Number.isFinite(x) && Number.isFinite(y)) {
-            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
-            if (rightItem) {
-                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
-                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
-            }
-        }
-        isDragging = false; dragStartPoint = null;
-        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
-        tempLine = null; renderMatchingQuestion(currentIndex);
-    };
-    window.drawLines = function() {
-        const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
-        if (!svg || !wrapper) return;
-        const zoom = window.itspyZoom || 1.0, rect = wrapper.getBoundingClientRect();
-        const baseW = rect.width / zoom, baseH = rect.height / zoom;
-        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
-        svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
-        currentAns.forEach((rIdx, lIdx) => {
-            if (rIdx === null) return;
-            const dotL = document.getElementById("dot-left-" + lIdx), dotR = document.getElementById("dot-right-" + rIdx);
-            if (dotL && dotR) {
-                const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
-                const x1 = (rL.left + rL.width/2 - rect.left) / zoom, y1 = (rL.top + rL.height/2 - rect.top) / zoom;
-                const x2 = (rR.left + rR.width/2 - rect.left) / zoom, y2 = (rR.top + rR.height/2 - rect.top) / zoom;
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-                line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
-            }
-        });
-    };
-                                window.submitMatching = function() {
-        const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
-        const ans = userAnswers[currentIndex] || [];
-        let finalUserAns = [];
-        
-        // 精確計算每個群組的起始索引
-        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-        const groupStarts = [];
-        let currentStart = 0;
-        rightRowGroups.forEach(size => {
-            groupStarts.push(currentStart);
-            currentStart += size;
-        });
-
-        // 判定是否使用相對索引 (當左側題目數等於右側群組數時，如 Java Q9)
-        const useRelative = (item.right && item.right.length === item.left.length);
-
-        finalUserAns = item.left.map((_, lIdx) => {
-            const rIdx = ans[lIdx];
-            if (rIdx === null || rIdx === undefined) return "";
-            if (useRelative) {
-                // 精確計算：找出 rIdx 屬於哪一個群組
-                let gIdx = 0;
-                for (let i = 0; i < groupStarts.length; i++) {
-                    if (rIdx >= groupStarts[i]) gIdx = i;
-                    else break;
-                }
-                const relRIdx = rIdx - groupStarts[gIdx];
-                return String.fromCharCode(65 + relRIdx);
-            } else {
-                return String.fromCharCode(65 + rIdx);
-            }
-        });
-
-        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
-        let isCorrect = (finalUserAns.length === correctAns.length);
-        if (isCorrect) {
-            for (let i = 0; i < correctAns.length; i++) {
-                if (parseAnswerToIndex(finalUserAns[i]) !== parseAnswerToIndex(correctAns[i])) {
-                    isCorrect = false; break;
-                }
-            }
-        }
-        
-        if (isCorrect) {
-            if (typeof correctSet !== 'undefined') {
-                if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-                else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
-            }
-        } else {
-            if (typeof incorrectSet !== 'undefined') {
-                incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
-            }
-        }
-        renderMatchingQuestion(currentIndex);
-    };
-    function toggleExplanation(forceShow = null) {
-        const el = document.getElementById('ans-section'), btn = document.getElementById('toggle-exp-btn');
-        if (!el || !btn) return;
-        const isShow = (forceShow !== null) ? forceShow : (el.style.display !== 'block');
-        el.style.display = isShow ? 'block' : 'none';
-        if (isShow) setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
-    }
-    function checkAnswer(element, qIdx, optIdx, event) {
-        const item = quizData[qIdx], isMultiple = item.type === 'multiple';
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseAnswerToIndex(a));
-        const input = element.querySelector('input');
-        if (event && event.target !== input) { if (isMultiple) input.checked = !input.checked; else input.checked = true; }
-        if (isMultiple) {
-            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
-            let selected = []; inputs.forEach((inp, idx) => { if (inp.checked) selected.push(idx); });
-            userAnswers[qIdx] = selected;
-            element.classList.toggle('correct', input.checked && correctIndices.includes(optIdx));
-            element.classList.toggle('incorrect', input.checked && !correctIndices.includes(optIdx));
-            const isPerfect = selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v));
-            if (isPerfect) {
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
-                inputs.forEach(i => i.disabled = true); toggleExplanation(true);
-            } else if (selected.some(v => !correctIndices.includes(v)) || selected.length > correctIndices.length) {
-                incorrectSet.add(qIdx); correctSet.delete(qIdx); correctedSet.delete(qIdx);
-            }
-        } else {
-            if (correctSet.has(qIdx) || correctedSet.has(qIdx)) return;
-            userAnswers[qIdx] = optIdx;
-            if (correctIndices.includes(optIdx)) {
-                element.classList.add('correct');
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else { correctSet.add(qIdx); }
-                document.querySelectorAll(`input[name="q${qIdx}"]`).forEach(i => i.disabled = true);
-            } else {
-                element.classList.add('incorrect'); incorrectSet.add(qIdx);
-                const ci = document.getElementById(`o${correctIndices[0]}`); if (ci) ci.closest('.option-item').classList.add('correct');
-            }
-            toggleExplanation(true);
-        }
-        saveState(); updateUI();
-    }
-    function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {
-        const item = quizData[qIdx];
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctSubIdx = parseAnswerToIndex(answers[optIdx]), input = element.querySelector('input');
-        if (event && event.target !== input) input.checked = true;
-        if (!userAnswers[qIdx]) userAnswers[qIdx] = {}; userAnswers[qIdx][optIdx] = subIdx;
-        element.parentElement.querySelectorAll('.sub-opt-container').forEach(el => el.classList.remove('selected'));
-        element.classList.add('selected');
-        if (subIdx === correctSubIdx) {
-            element.classList.add('correct');
-            const totalSub = (item.quiz || item.options || []).length;
-            const curCorrect = document.querySelectorAll('.sub-opt-container.correct').length;
-            if (curCorrect === totalSub) {
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
-                toggleExplanation(true);
-            }
-            document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`).forEach(i => i.disabled = true);
-        } else {
-            element.classList.add('incorrect'); incorrectSet.add(qIdx);
-            const ci = document.getElementById(`o${optIdx}_s${correctSubIdx}`); if (ci) ci.parentElement.classList.add('correct');
-            toggleExplanation(true);
-        }
-        saveState(); updateUI();
-    }
-    function evaluateCurrentQuestion() {
-        const item = quizData[currentIndex], qIdx = currentIndex;
-        if (correctSet.has(qIdx) || correctedSet.has(qIdx) || incorrectSet.has(qIdx)) return;
-        const saved = userAnswers[qIdx]; if (!saved) return; 
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseAnswerToIndex(a));
-        if (item.type === 'multiple') {
-            const selected = Array.isArray(saved) ? saved : []; if (selected.length === 0) return;
-            if (selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v))) correctSet.add(qIdx); else incorrectSet.add(qIdx);
-        } else if (String(item.quiz || item.options || "").includes('|')) {
-            const totalSub = (item.quiz || item.options || []).length;
-            let allCorrect = (Object.keys(saved).length === totalSub);
-            if (allCorrect) { for(let i=0; i<totalSub; i++) if (parseInt(saved[i]) != parseAnswerToIndex(answers[i])) { allCorrect = false; break; } }
-            if (allCorrect) correctSet.add(qIdx); else incorrectSet.add(qIdx);
-        }
-        saveState(); updateUI();
-    }
-    function nextQuestion() { evaluateCurrentQuestion(); if (currentIndex < quizData.length-1) renderQuestion(currentIndex+1); }
-    function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
-    function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
-            function prepareAndPrint(onlyMistakes = false) {
-                let targetItems = quizData.map((item, idx) => ({ item, idx }));
-                let title = "ITS Python 認證完整解析";
-                if (onlyMistakes) {
-                    targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-                    if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-                    title = "ITS Python 訂正解析講義";
-                }
-
-                // 顯示處理中遮罩並隱藏縮放按鈕
-                const overlay = document.getElementById('loading-overlay');
-                const zoomBtns = document.querySelector('.zoom-controls');
-                const homeBtn = document.querySelector('.home-float-btn');
-                const mobileToggle = document.querySelector('.mobile-toggle');
-                const sidePrev = document.getElementById('side-btn-prev');
-                const sideNext = document.getElementById('side-btn-next');
-
-                if (overlay) overlay.style.display = 'flex';
-                if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
-                if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
-                if (mobileToggle) mobileToggle.style.setProperty('display', 'none', 'important');
-                if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
-                if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
-
-                // 記錄原始狀態以便後續恢復
-                const oldZoom = document.body.style.zoom || "1.0";
-                const sidebar = document.querySelector('.sidebar');
-                const content = document.querySelector('.content-area');
-                const sidebarWasVisible = sidebar && (getComputedStyle(sidebar).display !== 'none');
-
-                // 暫時重置縮放與隱藏側邊欄，確保座標計算基準與列印佈局一致
-                document.body.style.zoom = "1.0";
-                if (sidebar) sidebar.style.display = 'none';
-                if (content) content.style.marginLeft = '0';
-                
-                const area = document.getElementById('review-area');
-                if (!area) return;
-                area.style.display = 'block'; // 強制顯示以計算座標
-                
-                area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
-            targetItems.forEach(({ item, idx }) => {
-                const div = document.createElement('div'); div.className = 'review-item';
-                const optsRaw = item.quiz || item.options || [];
-                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-                const isNum = (item.labelType === 'num');
-                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-                
-                let optHtml = "";
-                            if (item.type === 'matching' || item.type === 'multimatching') {
-                                let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
-                                let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('');
-                                
-                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
-                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
-                                    <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
-                                        <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
-                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
-                                            ${leftItems}
-                                        </div>
-                                        <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
-                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
-                                            ${rightItems}
-                                        </div>
-                                    </div>
-                                </div>`;
-                            } else {
-                
-                    optHtml = opts.map((o, i) => {
-                        if (String(o).includes('|')) {
-                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
-                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                        } else {
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
-                        }
-                    }).join('');
-                }
-    
-                let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
-                const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
-                    const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
-                }).join(', ');
-                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
-                area.appendChild(div);
-            });
-            
-                            // 繪製列印頁面的連線 (正確答案連線 - 標準答案畫上去)
-                                                                                    // 繪製列印頁面的連線 (正確答案連線 - 視窗座標差值法)
-                                                                                    setTimeout(() => {
-                                                                                        document.querySelectorAll('.print-matching').forEach(wrapper => {
-                                                                                            const qIdx = parseInt(wrapper.getAttribute('data-idx'));
-                                                                                            const item = quizData[qIdx];
-                                                                                            const svg = wrapper.querySelector('.print-svg');
-                                                                                            if (!svg) return;
-                                                                                            
-                                                                                            // 實作左側動態字寬偵測 (練習區列印專用)
-                                                                                            const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
-                                                                                            let maxW = 0;
-                                                                                            leftParts.forEach(p => {
-                                                                                                const w = p.getBoundingClientRect().width;
-                                                                                                if (w > maxW) maxW = w;
-                                                                                            });
-                                                                                            if (maxW > 0) {
-                                                                                                leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
-                                                                                            }
-
-                                                                                            const wRect = wrapper.getBoundingClientRect();
-                                                                                            if (wRect.width === 0) return;
-                                                                                            
-                                                                                            svg.setAttribute('width', wRect.width);
-                                                                                            svg.setAttribute('height', wRect.height);
-                                                                                            svg.style.width = wRect.width + 'px';
-                                                                                            svg.style.height = wRect.height + 'px';
-                                                                                            svg.innerHTML = ''; 
-                                                                                            
-                                                                                            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-                                                                                            answers.forEach((ansVal, lIdx) => {
-                                                                                                const rIdx = parseAnswerToIndex(ansVal);
-                                                                                                const dotL = document.getElementById(`pdl-${qIdx}-${lIdx}`);
-                                                                                                const dotR = document.getElementById(`pdr-${qIdx}-${rIdx}`);
-                                                                                                if (dotL && dotR) {
-                                                                                                    const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
-                                                                                                    // 計算相對於 wrapper 的精確座標
-                                                                                                    const x1 = rL.left - wRect.left + rL.width/2;
-                                                                                                    const y1 = rL.top - wRect.top + rL.height/2;
-                                                                                                    const x2 = rR.left - wRect.left + rR.width/2;
-                                                                                                    const y2 = rR.top - wRect.top + rR.height/2;
-                                                                                                    
-                                                                                                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                                                                                                    line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
-                                                                                                    line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
-                                                                                                    line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
-                                                                                                    line.setAttribute('stroke-linecap', "round"); 
-                                                                                                    line.setAttribute('style', "stroke-opacity:1 !important;");
-                                                                                                    svg.appendChild(line);
-                                                                                                }
-                                                                                            });
-                                                                                            // 強制重繪 SVG
-                                                                                            const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
-                                                                                        });
-                                                                                        if(window.Prism) Prism.highlightAll(); 
-                                                                                                                                                                                        setTimeout(() => { 
-                                                                                                                                                                                            window.print(); 
-                                                                                                                                                                                            // 列印後恢復原始 UI 狀態並隱藏遮罩
-                                                                                                                                                                                                                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
-                                                                                                                                                                                                                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (homeBtn) homeBtn.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (mobileToggle) mobileToggle.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (sidePrev) sidePrev.style.setProperty('display', (currentIndex === 0) ? 'none' : 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (sideNext) sideNext.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {                                                                                                                                                                                                sidebar.style.display = 'flex';
-                                                                                                                                                                                                content.style.marginLeft = '280px';
-                                                                                                                                                                                            }
-                                                                                                                                                                                        }, 1200);                                                                                    }, 2500);
-                                                                                                                                                                    }
-    
-    function renderQuestion(index) {
-        console.log("V3.5.4 Rendering Q:", index);
-        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
-        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
-        const container = document.getElementById('question-container');
-        const opts = item.quiz || item.options || [];
-        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
-        let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
-        const ansText = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(a => formatAnswer(a, item)).join(', ');
-        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${ansText}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
-        const optionsArea = container.querySelector('.options-area');
-        opts.forEach((opt, oIdx) => {
-            let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            if (String(opt).includes('|')) {
-                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                const displayLabel = item["question" + alphabet[oIdx]] || `選項 ${oIdx + 1}`;
-                let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
-                opt.split('|').forEach((s, subIdx) => { 
-                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 
-                });
-                optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${opt}</div>`; }
-        });
-        const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
-        let answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-        let cIdxs = answers.map(a => parseAnswerToIndex(a));
-        if (opts.some(o => String(o).includes('|'))) {
-            opts.forEach((opt, r) => {
-                const correctSubIdx = parseAnswerToIndex(answers[r]); const savedSubIdx = (saved && typeof saved === 'object') ? saved[r] : undefined;
-                opt.split('|').forEach((_, subIdx) => {
-                    const inp = document.getElementById(`o${r}_s${subIdx}`); if (!inp) return;
-                    if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) { inp.checked = true; inp.parentElement.classList.add('selected'); }
-                    if (completed) { if (subIdx === correctSubIdx) inp.parentElement.classList.add('correct'); else if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) inp.parentElement.classList.add('incorrect'); }
-                });
-            });
-        } else if (saved !== undefined) {
-            (Array.isArray(saved)?saved:[saved]).forEach(idx => { const inp = document.getElementById(`o${idx}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(idx) ? 'correct' : 'incorrect'); } });
-            if(completed) cIdxs.forEach(ci => { const inp = document.getElementById(`o${ci}`); if (inp) inp.closest('.option-item').classList.add('correct'); });
-        }
-        if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
-        updateUI(); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50); saveState(); window.changeZoom(0);
-    }
-    function updateUI() {
-        const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
-        const grid = document.getElementById('progress-grid'); grid.innerHTML = '';
-        quizData.forEach((_, i) => {
-            const n = document.createElement('div'); n.className = 'q-node'; if (i === currentIndex) { n.classList.add('active'); setTimeout(() => n.scrollIntoView({ block: 'center', behavior: 'smooth' }), 100); }
-            if (incorrectSet.has(i)) n.classList.add('incorrect'); else if (correctedSet.has(i)) n.classList.add('corrected'); else if (correctSet.has(i)) n.classList.add('correct');
-            n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
-        });
-    }
-    loadState(); window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); }); renderQuestion(currentIndex);
-</script>
-</body>
-</html>
+]
