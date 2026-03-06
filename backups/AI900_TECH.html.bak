@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI900 TECH</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        body { 
+            background-color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: #24292e;
+            padding: 40px 0; 
+        }
+        .container { 
+            max-width: 900px; 
+            background: white; 
+            padding: 45px; 
+            border: 1px solid #e1e4e8;
+            border-radius: 6px; 
+        }
+        h1 { 
+            font-size: 2rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h2 { 
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            padding-bottom: 0.3em; 
+            border-bottom: 1px solid #eaecef; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        p { margin-top: 0; margin-bottom: 16px; }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 0;
+            margin-bottom: 16px; 
+            font-size: 0.9rem;
+        }
+        th, td { 
+            border: 1px solid #dfe2e5; 
+            padding: 6px 13px; 
+        }
+        tr:nth-child(even) { background-color: #f6f8fa; }
+        th { background-color: #f6f8fa; font-weight: 600; }
+        
+        code { 
+            background-color: rgba(27,31,35,0.05); 
+            padding: 0.2em 0.4em; 
+            border-radius: 3px; 
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 85%;
+            color: #24292e;
+        }
+        pre { 
+            background-color: #f6f8fa; 
+            padding: 16px; 
+            border-radius: 6px; 
+            overflow: auto; 
+            font-size: 85%; 
+            line-height: 1.45;
+            border: 0;
+            margin-bottom: 16px;
+        }
+        pre code { background-color: transparent; padding: 0; font-size: 100%; color: inherit; }
+        
+        blockquote { 
+            padding: 0 1em; 
+            color: #6a737d; 
+            border-left: 0.25em solid #dfe2e5; 
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+        ul, ol { padding-left: 2em; margin-top: 0; margin-bottom: 16px; }
+        li + li { margin-top: 0.25em; }
+        hr { height: 0.25em; padding: 0; margin: 24px 0; background-color: #e1e4e8; border: 0; }
+        
+        .btn-home { position: fixed; top: 20px; right: 20px; z-index: 1000; border-radius: 6px; font-weight: 600; }
+        
+        /* Prism Theme Overrides */
+        .token.comment { color: #6a737d; }
+        .token.keyword { color: #d73a49; }
+        .token.string { color: #032f62; }
+        .token.function { color: #6f42c1; }
+        
+        @media (max-width: 768px) { 
+            body { padding: 20px 0; }
+            .container { padding: 20px; border: 0; } 
+            table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="btn btn-dark btn-home">🏠 回首頁</a>
+    <div class="container">
+        <article id="content" class="markdown-body"></article>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        const rawMd = "# AI-900: Azure AI Fundamentals 技術考點導讀 (AI900_TECH.md)\n\n本文件根據 `www/AI900/questions_AI900.json` 題庫內容進行深度分析，協助考生掌握微軟 Azure AI 認證的核心邏輯。\n\n---\n\n## 1. 責任 AI 準則 (Responsible AI) —— **絕對核心**\n微軟強調的六大 AI 準則在題庫中佔比極高：\n*   **公平性 (Fairness)**：AI 系統應公平對待所有人，避免偏見。\n*   **可靠性與安全性 (Reliability & Safety)**：AI 系統應在預期內運作，並能抵禦惡意攻擊。\n*   **隱私與安全性 (Privacy & Security)**：尊重個人隱私，保護數據安全。\n*   **包容性 (Inclusiveness)**：AI 應賦予每個人權力並吸引人們參與。\n*   **透明性 (Transparency)**：使用者應了解 AI 系統的運作方式與限制。\n*   **權責歸屬 (Accountability)**：設計與部署 AI 的人應對其行為負責。\n\n---\n\n## 2. 核心 AI 工作負載 (Workloads)\n*   **機器學習 (Machine Learning)**：預測性模型的基礎（回歸、分類、分群）。\n*   **異常偵測 (Anomaly Detection)**：識別資料中的異常變動（如詐欺偵測）。\n*   **電腦視覺 (Computer Vision)**：影像分析、臉部辨識、OCR（文字識別）。\n*   **自然語言處理 (NLP)**：文字分析、情感分析、語言翻譯。\n*   **對話式 AI (Conversational AI)**：機器人與虛擬助理（Bot Service）。\n\n---\n\n## 3. Azure AI 服務工具\n*   **Azure Machine Learning**：雲端端對端機器學習平台。\n*   **Azure Cognitive Services (現併入 Azure AI Services)**：\n    *   **Vision**: 影像處理。\n    *   **Speech**: 語音轉文字/文字轉語音。\n    *   **Language**: 語法分析、翻譯。\n*   **Azure OpenAI Service**：整合了 GPT-3, GPT-4, DALL-E 等先進模型。\n\n---\n\n## 4. 機器學習基礎概念\n*   **特徵 (Features)**：用於預測的輸入變數。\n*   **標籤 (Labels)**：模型嘗試預測的結果（僅監督式學習有標籤）。\n*   **模型評估**：\n    *   **回歸**: RMSE, R²。\n    *   **分類**: Accuracy, Precision, Recall。\n";
+        document.getElementById('content').innerHTML = marked.parse(rawMd);
+        // Prism highlight
+        document.querySelectorAll('pre code').forEach((block) => {
+            block.className = 'language-python'; // Default for these notes
+        });
+        Prism.highlightAll();
+    </script>
+</body>
+</html>

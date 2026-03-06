@@ -1,0 +1,3961 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS Java 模擬考試</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <style>
+        /* 強制去除選項內代碼底色與黑字規範 */
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item, .sub-opt-container { color: #000 !important; }
+        code { background-color: transparent !important; }
+
+        html { scrollbar-gutter: stable; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
+        .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; width: calc(100% - 60px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 5px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                }
+                
+                .q-content { white-space: pre-wrap; }
+                
+                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                }
+        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
+
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
+        .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
+        #result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin: 0 !important; padding: 0 !important; }
+
+        table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
+        th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
+        
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 38px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 45px; }
+        .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
+        .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        
+        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
+        .home-float-btn {
+            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }
+        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
+        
+        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
+        .home-float-btn {
+            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
+            color: white !important; display: flex; align-items: center; justify-content: center;
+            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
+        }
+        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
+
+        /* 縮放控制位置調整，避免與回首頁按鈕重疊 */
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1080; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
+        .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
+        
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
+        .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px; border: 1px solid #000; margin: 10px 0; border-left-width: 5px; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 10px; border: 1px solid #000; }
+        @media print { 
+            @page { size: auto; margin: 10mm; }
+            * { overflow: visible !important; max-height: none !important; height: auto !important; }
+            body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
+            #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border: 2px solid #000 !important; width: 100% !important; page-break-inside: auto !important; margin-bottom: 5px !important; padding: 10px !important; border-radius: 0 !important; }
+            .review-id { margin: 0 0 5px 0 !important; padding: 0 0 2px 0 !important; border-bottom: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
+            .review-q-text { display: block !important; padding: 2px 0 !important; font-size: 1.0rem !important; width: 100% !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border: 1px solid #000 !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
+            .review-exp { font-size: 0.95rem !important; padding: 5px 10px !important; border: 1px solid #000 !important; line-height: 1.4 !important; }
+            
+            /* 強效鎖定列印配對圖佈局 (同步 Flex 佈局防止 PDF 偏移) */
+            .print-matching { 
+                display: block !important; 
+                width: 100% !important; 
+                position: relative !important; 
+                margin: 20px 0 !important; 
+                padding: 15px !important;
+                background: #fff !important;
+                border: 1px solid #333 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .matching-columns { 
+                display: flex !important; 
+                flex-direction: row !important;
+                justify-content: flex-start !important; 
+                gap: 40px !important; 
+                width: 100% !important; 
+            }
+            .match-col { 
+                display: flex !important;
+                flex-direction: column !important;
+                flex: none !important; 
+                width: max-content !important; 
+                min-width: 150px !important;
+            }
+            .match-item { 
+                display: flex !important; 
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100% !important; 
+                height: 40px !important; 
+                margin-bottom: 10px !important; 
+                line-height: 1 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .q-text-part {
+                max-height: 40px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .match-dot {
+                width: 16px !important;
+                height: 16px !important;
+                margin: 0 10px !important;
+                border: 2px solid #198754 !important;
+                border-radius: 50% !important;
+                background: #fff !important;
+                flex-shrink: 0 !important;
+                display: inline-block !important;
+            }
+            .print-svg { 
+                position: absolute !important; 
+                top: 0 !important; 
+                left: 0 !important; 
+                width: 100% !important; 
+                height: 100% !important; 
+                z-index: 99 !important; 
+                display: block !important;
+                overflow: visible !important;
+            }
+            line { stroke-opacity: 1 !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
+            .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
+        }
+        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+        
+        /* 配對題樣式 */
+        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
+        .right-col .match-header-title { margin-left: 10px; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
+        .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
+        .match-item-left { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-right { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-left .q-text-part { display: inline-block !important; }
+        .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
+        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
+        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        @media (max-width: 768px) {
+            .matching-columns, .match-header-row { gap: 30px !important; }
+            .match-col { min-width: 140px !important; }
+            
+            /* 手機端按鈕強化：絕對同步練習區垂直堆疊樣式 */
+            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
+            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
+        }
+        /* 資料處理遮罩 */
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0d6efd; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+<div id="loading-overlay" class="no-print">
+    <div class="spinner"></div>
+    <div>資料處理中，請稍候...</div>
+</div>
+<a href="../../index.html" class="home-float-btn no-print">🏠</a>
+<div class="zoom-controls no-print">
+    <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
+</div>
+<div id="exam-ui">
+    <header class="exam-header d-flex justify-content-between align-items-center">
+        <div><h5 class="m-0">ITS Java 模擬考試</h5><small id="q-progress">1 / 60</small></div>
+        <div class="timer-box" id="timer">50:00</div>
+        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+    </header>
+    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
+    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
+    <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; max-width: none !important;"><div id="question-area"></div></main>
+</div>
+<div id="result-screen" class="container-fluid">
+    <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 60</p>
+    <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
+    <div class="mt-5 no-print">
+        <a href="../../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="prepareMockPrint()">🖨️ 列印錯題</button>
+    </div>
+    <div id="review-area">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
+        <div id="review-list"></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    function prepareMockPrint() {
+        const overlay = document.getElementById('loading-overlay');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        const homeBtn = document.querySelector('.home-float-btn');
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        const reviewArea = document.getElementById('review-area');
+        if (overlay) overlay.style.display = 'flex';
+        if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
+        if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
+        if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
+        if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
+        if (reviewArea) reviewArea.style.display = 'block';
+        const oldZoom = document.body.style.zoom || "1.0";
+        document.body.style.zoom = "1.0";
+
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                if (!svg) return;
+
+                // 實作左側動態字寬偵測 (練習區列印專用)
+                const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+                let maxW = 0;
+                leftParts.forEach(p => {
+                    const w = p.getBoundingClientRect().width;
+                    if (w > maxW) maxW = w;
+                });
+                if (maxW > 0) {
+                    leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
+                }
+
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width); svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px'; svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+
+            setTimeout(() => {
+                window.print();
+                if (overlay) overlay.style.display = 'none';
+                // 注意：在「考試結束」畫面中，這些按鈕應保持隱藏，不可恢復 display: 'flex'
+                if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
+                if (sidePrev) sidePrev.style.display = 'none';
+                if (sideNext) sideNext.style.display = 'none';
+                // 確保縮放保持在 1.0
+                document.body.style.zoom = "1.0";
+            }, 1200);
+        }, 2500);
+    }
+
+    const EXAM_LIMIT = 60, WRONG_KEY = 'itsjava_exam_wrong_ids', HISTORY_KEY = 'itsjava_mock_history';
+    let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
+    let examQuestions = [];
+
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
+    }
+
+    const allQuestions = [
+    {
+        "id": 1,
+        "type": "single",
+        "question": [
+            "<pre><code><class=\"language-java\">【A-01】Java 程式碼中的註解，下列何者為正確語法？</code></pre>"
+        ],
+        "options": [
+            "// 這是註解文字",
+            "# 這是註解文字",
+            "\\\\ 這是註解文字",
+            "*/ 這是註解文字"
+        ],
+        "answer": 1,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "Java 使用 // 進行單行註解，/* */ 進行多行註解。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 2,
+        "type": "single",
+        "question": [
+            "<pre><code><class=\"language-java\">【A-02】你需要使用最少的記憶體來儲存 3,200,000,000 (32 億) 數值，應該使用下列哪種資料類別？</code></pre>"
+        ],
+        "options": [
+            "byte",
+            "int",
+            "short",
+            "long"
+        ],
+        "answer": 4,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "int 的最大值約為 21 億，32 億超過了 int 的範圍，因此必須使用 long。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 3,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-03】你正在參加 Java 程式開發人員的面試，必須證明您熟識 main 方法。",
+            "對於下列關於 main 方法的敘述，請選取 [O] 或 [X]。",
+            "A. main 方法的 args 參數是 String 資料類別的陣列。",
+            "B. Java 應用程式只能接受一個命令列引數。",
+            "C. main 方法必須為靜態，因為執行時不會將類別中的物件實體化。</code></pre>"
+        ],
+        "left": [
+            "A 敘述",
+            "B 敘述",
+            "C 敘述"
+        ],
+        "right": [
+            "O",
+            "X"
+        ],
+        "answer": [
+            1,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 正確，String[] args。B: 錯誤，可接受多個引數。C: 正確，static 方法不需實體化即可執行。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 4,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-04】你在建立一個 Java 主控台應用程式，必須定義應用程式啟動時所執行的第一個方法的簽章，請選取正確的程式碼片段來完成程式碼。",
+            "程式碼片段：",
+            "A : ①private void ②public static void ③private static String ④public String",
+            "B : ①int args[] ②int args ③String args[] ④String arg",
+            "",
+            "   ____A____  main ( ____B____ )",
+            "   {",
+            "       System.out.print(\"Java 學習網\");",
+            "   }</code></pre>"
+        ],
+        "left": [
+            "A 片段",
+            "B 片段"
+        ],
+        "right": [
+            "①private void | ②public static void | ③private static String | ④public String",
+            "①int args[] | ②int args | ③String args[] | ④String arg"
+        ],
+        "answer": [
+            2,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "Java 應用程式的標準進入點 (Entry Point) 簽章必須是 public static void main(String[] args) 或 public static void main(String args[])。",
+            "A 段應選擇 ②public static void。",
+            "B 段應選擇 ③String args[]。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 5,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-05】請選擇適當值作為下列程式碼片段的值。每個值可能使用一次或多次，甚至完全不用。",
+            "A. (3 + 2) * 4 - 1",
+            "B. 4 * 4 + 2 * 5",
+            "C. 8 * 2 % 3",
+            "D. 5 / 2 - 6 % 2</code></pre>"
+        ],
+        "left": [
+            "A 運算",
+            "B 運算",
+            "C 運算",
+            "D 運算"
+        ],
+        "right": [
+            "① 0 | ② 1 | ③ 2 | ④ 3 | ⑤ 16 | ⑥ 19 | ⑦ 26 | ⑧ 80 | ⑨ 90"
+        ],
+        "answer": [
+            6,
+            7,
+            2,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 5*4-1=19。B: 16+10=26。C: 16%3=1。D: 2-0=2。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 6,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-06】請審視下列程式碼片段。(行號僅供參考)",
+            "01 byte num=127; ",
+            "02 num++;",
+            "03 System.out.println(num);",
+            "04 System.out.println(1.0 / 3.0);",
+            "05 System.out.println(1.0f / 3.0f);",
+            "06 System.out.println(1 / 3);",
+            "請選取正確的選項回答問題。",
+            "A. 第 03 行的輸出為何？",
+            "B. 第 04 行的輸出為何？",
+            "C. 第 05 行的輸出為何？",
+            "D. 第 06 行的輸出為何？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出",
+            "C 輸出",
+            "D 輸出"
+        ],
+        "right": [
+            "① -128 | ② 128",
+            "① 0.33333334 | ② 0.3333333333333333",
+            "① 0.33333334 | ② 0.3333333333333333",
+            "① 0.33333334 | ② 0"
+        ],
+        "answer": [
+            1,
+            2,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: byte 溢位 127+1=-128。B: double 精度。C: float 精度。D: 整數除法 1/3=0。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 7,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-07】請審視下列程式碼片段：",
+            "double num1 = 255.255;",
+            "int num2 = (int)num1;",
+            "byte num3 = (byte)num2;",
+            "請選取正確的選項來完成下列題目。",
+            "A. num2 的值為何？",
+            "B. num3 的值為何？</code></pre>"
+        ],
+        "left": [
+            "A 答案",
+            "B 答案"
+        ],
+        "right": [
+            "① 255.255 | ② 255 | ③ -1 | ④ 256",
+            "① 11111111 | ② -1 | ③ 255 | ④ 256"
+        ],
+        "answer": [
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: (int)255.255 = 255。B: byte 的範圍是 -128 到 127，255 在 byte 中會溢位，二進制為 11111111 (補數)，代表 -1。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 8,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-08】請審視下列 Java 程式碼。(行號僅供參考)",
+            "01 public static void main(String[] args) {",
+            "02   int a = 5; ",
+            "03   int b = 7;",
+            "04   String num1 = \"a+b=\" + a + b;",
+            "05   System.out.println(num1);",
+            "06   String num2 = \"a+b=\" + (a + b);",
+            "07   System.out.println(num2);",
+            "08 }",
+            "請選取正確的選項回答問題。",
+            "A. 第 05 行的輸出為何？",
+            "B. 第 07 行的輸出為何？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出"
+        ],
+        "right": [
+            "① a+b=57 | ② a+b=ab | ③ a+b=12 | ④ 12"
+        ],
+        "answer": [
+            1,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: \"a+b=\"+5 變成字串 \"a+b=5\"，再 +7 變成 \"a+b=57\"。B: 先算括號 (5+7)=12，再與字串相加。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 9,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-9】你在建立一個 Java 主控台應用程式，會讀取使用者所輸入的日期。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "程式碼片段：",
+            "A : ①java.io.* ②java.util.Scanner",
+            "B : ①InputStream stream = System.in ②Scanner sc = new Scanner(System.in)",
+            "C : ①sc.wait() ②sc.next() ③sc.mark(8) ④stream.read()",
+            "D : ①sc.wait() ②sc.close() ③stream.wait() ④stream.close()",
+            "",
+            "import ___A___;",
+            "public class DateReader{",
+            "    public static String getDate(){",
+            "        System.out.println(&quot;輸入就職日期格式為 MMDDYYYY&quot;);",
+            "        ___B___;",
+            "        String firstDate = ___C___;",
+            "        ___D___;",
+            "        return firstDate;",
+            "    }",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項"
+        ],
+        "right": [
+            "①java.io.* | ②java.util.Scanner",
+            "①InputStream stream = System.in | ②Scanner sc = new Scanner(System.in)",
+            "①sc.wait() | ②sc.next() | ③sc.mark(8) | ④stream.read()",
+            "①sc.wait() | ②sc.close() | ③stream.wait() | ④stream.close()"
+        ],
+        "answer": [
+            2,
+            2,
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 需要導入 java.util.Scanner。",
+            "B: 建立 Scanner 物件 sc。",
+            "C: 使用 sc.next() 讀取字串。",
+            "D: 使用 sc.close() 關閉資源。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 10,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-10】請審視下列程式碼片段。(行號僅供參考)",
+            "01 int x = 5; ",
+            "02 int y = 10;",
+            "03 int z = ++x * y--;",
+            "04 int n = x-- + ++y;",
+            "05 System.out.println(z);",
+            "06 System.out.println(n);",
+            "請選取正確的選項來回答問題。",
+            "A. 第 05 行的輸出為何？",
+            "B. 第 06 行的輸出為何？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出"
+        ],
+        "right": [
+            "① 15 | ② 40 | ③ 50 | ④ 54 | ⑤ 60",
+            "① 11 | ② 13 | ③ 15 | ④ 16"
+        ],
+        "answer": [
+            5,
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. z = 6 * 10 = 60 (x變6, y變9)。2. n = 6 + 10 = 16 (x變5, y變10)。(註：選項若無16，請檢查 PDF 精確數字)"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 11,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-11】你在撰寫一個 Java 程式，此程式必須執行下列工作：",
+            "● 將 userName 截斷只留下前五個字元。",
+            "● 將 outStr 設定為包含 userName 及 userName 中字元數的字串。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "",
+            "程式碼片段：",
+            "A : ①substring(0, 5); ②subSequence(5, 0); ③substring(5);",
+            "B : ①%n ②%d ③%s",
+            "C : ①%f ②%d ③%c",
+            "D : ①count() ②length() ③chars()",
+            "",
+            "public static void main(String[] args){",
+            "    String userName = \"Javacoffee\";",
+            "    userName = userName.__A__",
+            "    String outStr = String.format(\"使用者名稱為 __B__ 字串有 __C__ 個字元\",",
+            "        userName, userName.__D__);",
+            "    System.out.println(outStr);",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 片段",
+            "B 片段",
+            "C 片段",
+            "D 片段"
+        ],
+        "right": [
+            "① substring(0, 5); | ② subSequence(5, 0); | ③ substring(5);",
+            "① %n | ② %d | ③ %s",
+            "① %f | ② %d | ③ %c",
+            "① count() | ② length() | ③ chars()"
+        ],
+        "answer": [
+            1,
+            3,
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 截斷字串：使用 substring(0, 5) 取得索引 0 到 4 (共 5 個字元) 的子字串。",
+            "2. 格式化輸出：String.format 中，%s 用於字串 (userName)，%d 用於整數 (長度)。",
+            "3. 取得長度：Java 的 String 物件使用 length() 方法取得字元數。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 12,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-12】你要使用初始值來宣告 2X3 的 int 資料型別陣列。",
+            "請選擇適當的程式碼片段來完成程式碼。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全不用。",
+            "程式碼片段：",
+            "①[[ ②]] ③][ ④{{ ⑤}} ⑥}{ ⑦{ ⑧},{ ⑨],[",
+            "",
+            "int[][] array = ___A___ 72, 34, 56 ___B___ 28, 14, 25 ___C___</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "①[[ |②]] |③][ |④{{ |⑤}} |⑥}{ |⑦},{ |⑧],["
+        ],
+        "answer": [
+            4,
+            7,
+            5
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "二維陣列初始化格式為 {{72, 34, 56}, {28, 14, 25}}。",
+            "A: {{ (③), B: }, { (⑧), C: }} (⑤)。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 13,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-13】你在撰寫一個方法來變更遊戲中玩家的點數，請評估下列程式碼。(行號僅供參考)",
+            "01 public class GamePoint {",
+            "02 static int extra = 300;",
+            "03 public static int changePoint(int point, Boolean bonus, int extra){",
+            "04     if(bonus == true){",
+            "05         point += extra;",
+            "06     }",
+            "07     return point;",
+            "08 }",
+            "09",
+            "10 public static void main(String[] args){",
+            "11     Boolean bonus = true;",
+            "12     int point = 10;",
+            "13     int newPoint = changePoint(point, bonus, 100);",
+            "14     System.out.println(point);",
+            "15     System.out.println(newPoint);",
+            "16 }",
+            "17 }",
+            "",
+            "下列敘述是否正確，請填入[O]或[X]。</code></pre>"
+        ],
+        "left": [
+            "A. 第 04 行 bonus 的值為 true。",
+            "B. 第 05 行 extra 的值為 300。",
+            "C. 第 07 行 point 的值為 110。",
+            "D. 第 14 行 point 的值為 110。"
+        ],
+        "right": [
+            "O | X"
+        ],
+        "answer": [
+            1,
+            2,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 正確，傳入參數 bonus 為 true。",
+            "B: 錯誤，傳入參數 extra 是 100，會遮蔽靜態變數 300。",
+            "C: 正確，10 + 100 = 110。",
+            "D: 錯誤，Java 為傳值呼叫，原始 point 不變，仍為 10。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 14,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-14】你在撰寫一個 Java 方法，此方法要能執行下列工作：",
+            "● 可接受一個 double 陣列。",
+            "● 會傳回陣列中的最大值。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "程式碼片段：",
+            "A. ① double[] array ② double array ③ double[length] array",
+            "B. ① double max = array[1]; ② double max = array[0];",
+            "C. ① array.size()-1 ② array.size() ③ array.length-1 ④ array.length",
+            "D. ① max != array[i] ② max < array[i]",
+            "E. ① max == array[i]; ② max = array[i];",
+            "",
+            "public double getMax( ___A___ ){",
+            "    ___B___",
+            "    for (int i=1; i < ___C___ ; i++)",
+            "        if( ___D___ )",
+            "            ___E___",
+            "    return max;",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項",
+            "E 選項"
+        ],
+        "right": [
+            "①double[] array | ②double array | ③double[length] array",
+            "①double max = array[1]; | ②double max = array[0];",
+            "①array.size()-1 | ②array.size() | ③array.length-1 | ④array.length",
+            "①max != array[i] | ②max < array[i]",
+            "①max == array[i]; | ②max = array[i];"
+        ],
+        "answer": [
+            1,
+            2,
+            4,
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: double[] array 是陣列參數語法。",
+            "B: 初始最大值設為第一個元素 array[0]。",
+            "C: array.length 取得陣列長度。",
+            "D: 若 max < array[i]，則更新最大值。",
+            "E: max = array[i]。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 15,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-15】你要建立 if 陳述式，在同時滿足下列兩項條件時，該陳述式會判定為 true：",
+            "● total 大於或等於 num。",
+            "● nt 小於 num。",
+            "請選擇適當運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。",
+            "運算子：① && ② || ③ < ④ > ⑤ <= ⑥ >= ⑦ == ⑧ !=",
+            "",
+            "if (num ___A___ total ___B___ nt ___C___ num)</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① && | ② &#124;&#124; | ③ < | ④ > | ⑤ <= | ⑥ >= | ⑦ == | ⑧ !="
+        ],
+        "answer": [
+            5,
+            1,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "total >= num 等價於 num <= total (⑤)。",
+            "且 (&&) (①)。",
+            "nt < num (③)。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 16,
+        "type": "multioption",
+        "hideLabel": true,
+        "question": [
+            "<pre><code class=\"language-java\">【A-16】你在應徵 Java 程式開發人員工作，需要證明你了解 switch 運算式。",
+            "在下列各個程式碼片段中，若可以使用最多三個 case 陳述式將該程式碼片段變更為 switch 運算式，請選取[O]；若無法則請選取[X]。</code></pre>",
+            "<pre><code class=\"language-java\">A.\nif (ages >= 65) {\n off = 0.50; \n} else if (ages >= 20) {\n off = 0.3\n } else {\n off = 0.0; \n}</code></pre>",
+            "<pre><code class=\"language-java\">B.\nif (level == &quot;甲&quot;) {\n  msg = &quot;超越標準&quot;; \n } else if (level == &quot;乙&quot;) {\n  msg = &quot;符合標準&quot;; \n } else {\n  msg = &quot;需要改進&quot;; \n }</code></pre>",
+            "<pre><code class=\"language-java\">C.\nif (score == 4.0) {\n order = 1; \n} else if (score >= 3.5) {\n order = 2; \n} else if (score >= 2.5) {\n order = 3; \n}</code></pre>"
+        ],
+        "options": [
+            "O | X",
+            "O | X",
+            "O | X"
+        ],
+        "answer": [
+            2,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 錯誤，範圍判斷 (>=) 無法直接用於 switch case (除非是 Java 17+ 的 pattern matching，但考試通常考基本語法)。",
+            "B: 正確，String 可以用於 switch。",
+            "C: 錯誤，範圍判斷且是 double 型別無法用於 switch。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 17,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-17】你在撰寫一個 Java 程式，使用 countPrice 方法計算美術館的入場費 (price)。基本票價為 100.00 元。加入會員需要花費 400.00 元。此方法必須符合下列規則：",
+            "● 會員可享基本票價的三折優惠。",
+            "● 65 歲以上的會員可免入場費。",
+            "● 非會員可以基本票價購票，或在同一次交易中一起購買會員資格 (joinMember) 及打折票券。",
+            "● isMember 變數可指定對象是否為會員。",
+            "",
+            "double countPrice(boolean isMember, int ages, boolean joinMember){",
+            "    double price;",
+            "    if (isMember){",
+            "        __A__",
+            "            price = 0.0;",
+            "        }",
+            "        __B__",
+            "            price = 30.0;",
+            "        }",
+            "    }",
+            "    __C__",
+            "        price = 430.0;",
+            "    }",
+            "    __D__",
+            "        price = 130.0;",
+            "    }",
+            "    return price;",
+            "}",
+            "請從左側選取正確的程式碼片段對應至右側的挖空位置。</code></pre>"
+        ],
+        "left": [
+            "__A__",
+            "__B__",
+            "__C__",
+            "__D__"
+        ],
+        "right": [
+            "elif (ages > 65)|if (ages > 65)|else{",
+            "elif (ages > 65)|if (ages > 65)|else{",
+            "else{|else if (joinMember){|if (joinMember){",
+            "else{|else if (joinMember){|if (joinMember){"
+        ],
+        "answer": [
+            2,
+            3,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 如果是會員 (isMember)：",
+            "   - 若 ages > 65，則免入場費 (price = 0.0)。對應 __A__ 為 if (ages > 65)。",
+            "   - 否則 (其他年齡層會員)，享三折 30.0 元。對應 __B__ 為 else {。",
+            "2. 如果不是會員：",
+            "   - 若要加入會員 (joinMember)，費用為 400 + 30 = 430.0 元。對應 __C__ 為 else if (joinMember)。",
+            "   - 否則 (非會員購一般票)，費用為 100 + 30 = 130.0 元。對應 __D__ 為 else {。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 18,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-18】你為銀行撰寫管理信用帳戶開立的 Java 程式，若要開立新帳戶，該對象必須符合以下任一要求：",
+            "● 超過 65 歲(ages)以上，且年收入(income)最低為 1,000,000 元。",
+            "● 至少 21 歲，且年收入高於 2,500,000 元。",
+            "",
+            "請選擇適當的運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。",
+            "運算子：① = ② && ③ <= ④ < ⑤ == ⑥ != ⑦ > ⑧ >= ⑨ ||",
+            "",
+            "if (ages ___A___ 65 ___B___ income ___C___ 1000000 ___D___ ",
+            "    ages ___E___ 21 ___F___ income ___G___ 2500000) {",
+            "    System.out.println(\"通過\");",
+            "}",
+            "else {",
+            "    System.out.println(\"未通過\");",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置",
+            "D 位置",
+            "E 位置",
+            "F 位置",
+            "G 位置"
+        ],
+        "right": [
+            "① = |② && |③ <= |④ < |⑤ == |⑥ != |⑦ > |⑧ >= |⑨ &#124;&#124;"
+        ],
+        "answer": [
+            7,
+            2,
+            8,
+            9,
+            8,
+            2,
+            7
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "根據題目需求：",
+            "1. 第一個要求：超過 65 歲 (ages > 65) 且 年收入最低 100 萬 (income >= 1000000)。",
+            "   對應：A 是 ⑦ (>)，B 是 ② (&&)，C 是 ⑧ (>=)。",
+            "2. 任一要求：使用邏輯或 (||)。",
+            "   對應：D 是 ⑨ (||)。",
+            "3. 第二個要求：至少 21 歲 (ages >= 21) 且 年收入高於 250 萬 (income > 2500000)。",
+            "   對應：E 是 ⑧ (>=)，F 是 ② (&&)，G 是 ⑦ (>)."
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 19,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-19】你在撰寫一個 Java 方法，此方法要能執行下列工作：",
+            "● 接受名稱為 ages 的 int 參數。",
+            "● 若 ages 為 65 或以上，則指定為 &quot;老人&quot; 分類 (kind)。",
+            "● 若 ages 為 20 或以上，但低於 65，則指定為 &quot;成人&quot; 分類。",
+            "● 否則，指定為 &quot;青年&quot; 分類。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "",
+            "public static String ageClassification(int ages){",
+            "    String kind;",
+            "    ___A___",
+            "        kind = &quot;老人&quot;;",
+            "    ___B___",
+            "        kind = &quot;成人&quot;;",
+            "    ___C___",
+            "        kind = &quot;青年&quot;;",
+            "    return kind;",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "①if (ages != 65) | ②if (ages >= 65) | ③if (ages > 65) | ④if (ages >= 65 &#124;&#124; ages != 20)",
+            "①if (ages < 20) | ②if (ages > 19) | ③else if (ages >= 19) | ④else if (ages >= 20)",
+            "①if (ages <= 20) | ②else | ③default | ④else if (ages != 20)"
+        ],
+        "answer": [
+            2,
+            4,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. A選② (ages>=65)",
+            "2. B選④ (else if ages>=20)",
+            "3. C選② (else)"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 20,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-20】您在撰寫一個 Java 的 countdown 方法，此方法必須執行下列工作：",
+            "● 接受名稱為 num 的 int 參數。",
+            "● 顯示從 num 遞減到零的所有數字。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "",
+            "public static void countdown(int num){",
+            "    for ( ___A___  ___B___  ___C___ ){",
+            "        System.out.println(i);",
+            "    }",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "①int i = num; | ②int i == num; | ③int i < num; | ④int i <= num;",
+            "①i < 0; | ②i <= 0; | ③i > 0; | ④i >= 0;",
+            "①+i | ②++i | ③--i | ④-i"
+        ],
+        "answer": [
+            1,
+            4,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "for迴圈初始化 i=num，條件 i>=0，每次執行後 i--。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 21,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-21】請檢閱下列程式碼片段：",
+            "char[][] array = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};",
+            "for(int i = 0; i < array.length; i++) {",
+            "    for(int j = array[i].length - 1; j >= 0; j--)",
+            "        System.out.print(array[i][j]);",
+            "}",
+            "",
+            "請問迴圈執行完成後，主控台視窗會輸出下列何者？</code></pre>"
+        ],
+        "options": [
+            "cbafedihg",
+            "abcdefghi",
+            "ghidefabc",
+            "ihgfedcba"
+        ],
+        "answer": 1,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "外層迴圈遍歷列(Row)，內層迴圈從最後一個索引反向輸出該列字元。'abc'->'cba', 'def'->'fed', 'ghi'->'ihg'。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 22,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-22】請審閱下列程式碼片段：",
+            "int[][] array = {{2, 20, 15}, {16, 7, 32}, {50, 4, 27}};",
+            "for(int i = 0; i < array.length; i++){",
+            "    for(int j = 0; j < array[i].length; j++) {",
+            "        if(array[i][j] < 10) break;",
+            "        System.out.println(array[i][j]);",
+            "    }",
+            "}",
+            "",
+            "請問迴圈執行完成後，主控台視窗輸出為何？</code></pre>"
+        ],
+        "options": [
+            "16 50",
+            "20 15 16 32 50 27",
+            "50 4 27",
+            "15 32 27"
+        ],
+        "answer": 1,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. i=0 時，2 < 10 觸發 break，第一列結束。",
+            "2. i=1 時，16 >= 10 (印 16)，接著 7 < 10 (break)。",
+            "3. i=2 時，50 >= 10 (印 50)，接著 4 < 10 (break)。",
+            "最終輸出 16 與 50。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 23,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-23】您要在不變更功能下，重寫下列程式碼。(行號僅供參考)",
+            "01 showMenu();",
+            "02 for( ; ; ){",
+            "03     boolean n = newDeal();",
+            "04     if (!n)",
+            "05         break;",
+            "06     showMenu();",
+            "07 }",
+            "",
+            "請選擇下列適當的程式碼片段填入正確位置，來完成程式碼。",
+            "",
+            "    ___A___",
+            " {",
+            "    showMenu();",
+            " }",
+            "    ___B___",
+            "</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項"
+        ],
+        "right": [
+            "① } do; | ② do | ③ } break; | ④ while (newDeal())",
+            "⑤ while (newDeal()); | ⑥ } | ⑦ } continue; | ⑧ continue"
+        ],
+        "answer": [
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "原始程式碼邏輯：先顯示一次選單，然後進入無限迴圈，每次判斷是否有新交易 (newDeal)，若無則跳出，若有則再顯示選單。這等同於「先執行一次，再判斷條件」的 do-while 結構。",
+            "1. ___A___ 位於大括號前，應填入 ② do。",
+            "2. ___B___ 位於結束大括號後，應填入 ⑤ while (newDeal());。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 24,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-24】你在撰寫一個 Java 的 checkItems 方法，此方法會執行下列功能：",
+            "● 接受名稱為 items 的 String 陣列。",
+            "● 逐一查看 items 元素內容。",
+            "● 若有元素內容超過 10 個字元，就停止查看並傳回 false。",
+            "● 反之則傳回 true。",
+            "請選取正確的程式碼片段來完成程式碼。",
+            "",
+            "public boolean checkItems(String[] items){",
+            "    boolean allCheckItems = true;",
+            "     ___A___ (String item ___B___ items) {",
+            "        if(item.length() > 10) {",
+            "            allCheckItems = false;",
+            "            ___C___",
+            "        }",
+            "    };",
+            "    return allCheckItems;",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "①while | ②for | ③do",
+            "①++ | ② : | ③; | ④instanceof",
+            "①break; | ②goto; | ③continue;"
+        ],
+        "answer": [
+            2,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "使用 for-each 語法：for(String item : items)。當條件滿足時，使用 break 立即跳出迴圈。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 25,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-25】您是位 Java 程式設計師，你的同事建立下列程式。(行號僅供參考)",
+            "01 public static void main(String[] args){",
+            "02     int times = 60;",
+            "03     while(times => 0) {",
+            "04         if(times = 0)",
+            "05             break;",
+            "06         else{",
+            "07             System.out.println(\"倒數計時中...\");",
+            "08             times++;",
+            "09         }",
+            "10     }",
+            "11 }",
+            "",
+            "此程式會從 60 開始倒數，並在主控台顯示訊息，但此程式未能達到預期功能。請選取正確的程式碼片段來修正程式碼。",
+            "",
+            "public static void main(String[] args){",
+            "    int times = 60;",
+            "    while (times ___A___ 0){",
+            "        if (times ___B___ 0){",
+            "            break;",
+            "        }",
+            "        else {",
+            "            System.out.println(\"倒數計時中...\");",
+            "            times ___C___ ;",
+            "        }",
+            "    }",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項 (while 條件)",
+            "B 選項 (if 條件)",
+            "C 選項 (遞減操作)"
+        ],
+        "right": [
+            "①== | ②>= | ③<= | ④=>",
+            "①== | ②= | ③!= | ④=>",
+            "①+= | ②-= | ③++ | ④--"
+        ],
+        "answer": [
+            2,
+            1,
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. A 位置 (while 條件)：原始程式碼使用 => 語法錯誤（Java 正確運算子為 >=），且為了能從 60 持續執行至 0，應選擇 ② >=。",
+            "2. B 位置 (if 條件)：原始程式碼使用單一等號 = 變成賦值而非判斷，應選擇 ① == 進行相等比較。",
+            "3. C 位置 (遞減操作)：原始程式碼使用 times++ 導致數值增加而非倒數，會變成無限迴圈，應選擇 ④ -- 進行遞減。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 26,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-26】你正在面試 Java 程式開發人員的工作，你看到下列程式碼：(行號僅供參考)",
+            "01 public class JavaTester",
+            "02 {",
+            "03   int a = 5;",
+            "04   static int b = 5;",
+            "05   public void test()",
+            "06   {",
+            "07     int a = 10;",
+            "08     int b = 10;",
+            "09     System.out.println(\"a = \" + a);",
+            "10     System.out.println(\"this.a = \" + this.a);",
+            "11     System.out.println(\"b = \" + b);",
+            "12     System.out.println(\"JavaTester.b = \" + JavaTester.b);",
+            "13   }",
+            "14 }",
+            "",
+            "你要判斷 test() 方法的輸出。請審視該程式碼後，由下列選項中選取正確結果。</code></pre>"
+        ],
+        "left": [
+            "A. 第 09 行輸出為",
+            "B. 第 10 行輸出為",
+            "C. 第 11 行輸出為",
+            "D. 第 12 行輸出為"
+        ],
+        "right": [
+            "① a = 5 | ② a = 10",
+            "① this.a = 5 | ② this.a = 10 | ③ this.x = \"Error\"",
+            "① b = 5 | ② b = 10",
+            "① JavaTester.b = 5 | ② JavaTester.b = 10 | ③ JavaTester.b = \"Error\""
+        ],
+        "answer": [
+            2,
+            1,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 第 09 行輸出區域變數 a = 10 (遮蔽實體變數)。",
+            "2. 第 10 行使用 this.a 存取實體變數 5。",
+            "3. 第 11 行輸出區域變數 b = 10 (遮蔽靜態變數)。",
+            "4. 第 12 行使用類別名 JavaTester.b 存取靜態變數 5。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 27,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-27】你要建立 Test 類別來模擬學校考試，此類別必須符合下列需求：",
+            "● 不用將 Test 類別實體化，就可呼叫 setMaxItems 方法。",
+            "● 只有和 Test 類別在同一套件中的類別可呼叫 setItems 方法。",
+            "● 只有和 Test 類別在同一套件中的類別可呼叫名稱為 setPassScore 的執行個體方法。",
+            "",
+            "請從以下選取正確的選項來完成程式碼。",
+            "A. ①protected ②private ③static ④public",
+            "B. ①protected ②private ③static ④public",
+            "",
+            "class Test {",
+            "    ___A___ void setItems (int num){",
+            "    }",
+            "    ___B___ void setPassScore (int score){",
+            "    }",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置"
+        ],
+        "right": [
+            "①protected | ②private | ③static | ④public"
+        ],
+        "answer": [
+            3,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 需求一「不用將類別實體化即可呼叫」：這代表該方法必須宣告為 static。因此 A 位置填入 ③static。",
+            "2. 需求二/三「只有同一套件中的類別可呼叫」：在 Java 中，protected 修飾詞允許同一個套件內的類別存取，也允許不同套件的子類別存取。在選項中，這是最符合「同一套件存取」需求的關鍵字。因此 B 位置填入 ①protected。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 28,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-28】你在撰寫名稱為 account 的 Java 類別，此類別具備下列方法：",
+            "● 不用將 account 類別實體化，就能從任何程式碼呼叫 showItems 方法。",
+            "● 僅有同一套件中的類別，以及任何套件中 account 類別的子類別可以存取名稱為 newAccount 的方法。",
+            "",
+            "請選擇適當的程式碼片段到對應的正確位置，以完成程式碼。每個程式碼片段可能使用一次或多次，甚至完全不用。",
+            "程式碼片段：",
+            "① private ② final ③ protected ④ public ⑤ static",
+            "",
+            "public class account {",
+            "    ____A____ ____B____ void showItems () {/*...*/}",
+            "    ____C____ void newAccount(String[] items) {/*...*/}",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置"
+        ],
+        "right": [
+            "① private | ② final | ③ protected | ④ public | ⑤ static"
+        ],
+        "answer": [
+            4,
+            5,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 任何程式碼皆可呼叫：使用 public (④)。",
+            "2. 不需實體化即可呼叫：使用 static (⑤)。",
+            "3. 同一套件或子類別存取：使用 protected (③)。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 29,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-29】你是 Java 程式設計師，同事建立了 Triangle 類別。(行號僅供參考)",
+            "01 public class Triangle {",
+            "02     private int width;",
+            "03     private int length;",
+            "04",
+            "05     Triangle(int width, int length){",
+            "06         this.width = width;",
+            "07         this.length = length;",
+            "08     }",
+            "09",
+            "10   public int calArea(){",
+            "11     return this.width * this.length / 2;",
+            "12   }",
+            "13",
+            "14   public int getWidth(){",
+            "15     return this.width;",
+            "16   }",
+            "17",
+            "18   public int getLength(){",
+            "19     return this.length;",
+            "20   }",
+            "21 }",
+            "",
+            "你要撰寫 Triangle 類別的測試程式，請選取正確的程式碼片段來完成測試程式。",
+            "int area;",
+            "____A____",
+            "____B____",
+            "System.out.printf(\"寬=%d 高=%d\\n\", ____C____ );</code></pre>"
+        ],
+        "left": [
+            "A 選項 (建立物件)",
+            "B 選項 (計算面積)",
+            "C 選項 (取得屬性)"
+        ],
+        "right": [
+            "① Triangle tri = new(20, 40); | ② new tri = Triangle(20, 40); | ③ Triangle tri = new Triangle(20, 40); | ④ Triangle tri = Triangle(20, 40);",
+            "① area = tri() | ② area = tri.calArea() | ③ area = calArea.tri() | ④ area = Triangle.calArea()",
+            "① tri.Width, tri.Length | ② tri.getWidth(), tri.getLength() | ③ Triangle.width, Triangle.length | ④ tri.width, tri.length | ⑤ Triangle.getWidth(), Triangle.getLength()"
+        ],
+        "answer": [
+            3,
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 建立物件需使用 new Triangle(20, 40)。",
+            "B: 呼叫實體方法計算面積 area = tri.calArea()。",
+            "C: width 與 length 為 private，需透過 getter 方法 tri.getWidth(), tri.getLength() 存取。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 30,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-30】你為學校撰寫下列程式碼。(行號僅供參考)",
+            "01 public class Teacher {",
+            "02     public String tchName = \"Jack\";",
+            "03",
+            "04     // 應在此行填入註釋",
+            "05     public String toString(){",
+            "06         return tchName;",
+            "07     }",
+            "08 }",
+            "",
+            "Teacher 類別要使用自定的 toString 方法，而非標準方法。請問應該在第 04 行使用哪個註釋？</code></pre>"
+        ],
+        "options": [
+            "@Override",
+            "@Rewrite",
+            "@Repeatable",
+            "@Inherited"
+        ],
+        "answer": 1,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "覆寫 Object 類別的標準 toString() 方法，應使用 @Override 註釋。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 31,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-31】你是銀行的 Java 程式設計師，請審視下列 account 類別。(行號僅供參考)",
+            "01 public class account {",
+            "02     protected int amount;",
+            "03     public account() {",
+            "04         amount = 0;",
+            "05     }",
+            "06     public account(int total) {",
+            "07         amount = total;",
+            "08     }",
+            "09 }",
+            "",
+            "對於下列每一項敘述，請選取 [O] 或 [X]。",
+            "A. account 類別只有一個建構函式。",
+            "B. 其他類別可以繼承 account 類別。",
+            "C. 第 07 行敘述可改寫為 this.amount = total;</code></pre>"
+        ],
+        "left": [
+            "A 敘述",
+            "B 敘述",
+            "C 敘述"
+        ],
+        "right": [
+            "O",
+            "X"
+        ],
+        "answer": [
+            2,
+            1,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 有兩個建構函式(第03與06行)。B: 類別未宣告為 final，可被繼承。C: this.amount 是指向實體成員的正確寫法。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 32,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-32】你要建立名稱為 Car 的 Java 類別用來模擬汽車，此類別必須符合下列需求：",
+            "● 任何套件中的所有類別都可將 Car 類別實體化。",
+            "● 只有 Car 類別可存取和修改 speed 資料成員。",
+            "● 只有和 Car 類別同一套件中的類別才可存取和修改 color 資料成員。",
+            "● 每一個已實體化的 Car 物件都可以擁有不同的資料成員。",
+            "",
+            "    ___A___ class Car {",
+            "        ___B___ int speed;",
+            "        ___C___ String color;",
+            "    }</code></pre>"
+        ],
+        "left": [
+            "A 選項 (class)",
+            "B 選項 (speed)",
+            "C 選項 (color)"
+        ],
+        "right": [
+            "①private | ②protected | ③public | ④final | ⑤abstract",
+            "①private | ②protected | ③public | ④final | ⑤abstract",
+            "①private | ②protected | ③public | ④final | ⑤abstract"
+        ],
+        "answer": [
+            3,
+            1,
+            2
+        ],
+        "explanation": [
+            "1. 任何套件皆可存取：使用 public。",
+            "2. 僅類別內部存取：使用 private。",
+            "3. 同一套件成員存取：使用 protected (或預設，但在本選題中 ② 為正確選項)。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 33,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-33】你要建立 Freezer 類別用來模擬冰箱，此類別必須符合下列需求：",
+            "● 只允許在同一套件中的類別可存取 Freezer 類別。",
+            "● 只允許 Freezer 類別本身存取及修改名為 temperature 的資料成員。",
+            "● 只允許與 Freezer 類別在同一套件中的類別存取名為 minTemperature 的資料成員。",
+            "● 確保 minTemperature 資料成員宣告後就無法修改。",
+            "",
+            "請選擇適當的程式碼片段填入對應的正確位置，以完成程式碼。每個程式碼片段只使用一次或多次，甚至完全不用。",
+            "程式碼片段：",
+            "①public class ②class ③final ④private ⑤abstract",
+            "",
+            "    ___A___ Freezer {",
+            "        ___B___ int temperature;",
+            "        ___C___ int minTemperature = -15;",
+            "    }</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置"
+        ],
+        "right": [
+            "①public class | ②class | ③final | ④private | ⑤abstract",
+            "①public class | ②class | ③final | ④private | ⑤abstract",
+            "①public class | ②class | ③final | ④private | ⑤abstract"
+        ],
+        "answer": [
+            2,
+            4,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 只允許在同一套件中存取，宣告為預設修飾符 (class)，選 ②class。",
+            "B: 只允許類別本身存取及修改，宣告為 ④private。",
+            "C: 確保宣告後無法修改，宣告為 ③final。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 34,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-34】Song 類別包含一個只能從類別內部存取的 isInSinger 方法。isInSinger 方法接受歌手姓名，來和歌手清單進行比較。",
+            "請選取正確的選項來完成程式碼。",
+            "選項：",
+            "A. ①private ②public ③protected ④static",
+            "B. ①bool ②int ③void ④String ⑤boolean",
+            "C. ①() ②(String singer) ③(bool singer) ④(String singer)",
+            "D. ①return Song; ②return false; ③return singer; ④return true;",
+            "E. ①return Song; ②return false; ③return singer; ④return true;",
+            "",
+            "    ___A___ ___B___ isInSinger ___C___ {",
+            "        for (int i = 0; i < numSingers; i++) {",
+            "            if (singers[i].equals(singer)) {",
+            "                ___D___",
+            "            }",
+            "        }",
+            "        ___E___",
+            "    }</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置",
+            "D 位置",
+            "E 位置"
+        ],
+        "right": [
+            "①private | ②public | ③protected | ④static",
+            "①bool | ②int | ③void | ④String | ⑤boolean",
+            "①() | ②(String singer) | ③(bool singer) | ④(String singer)",
+            "①return Song; | ②return false; | ③return singer; | ④return true;",
+            "①return Song; | ②return false; | ③return singer; | ④return true;"
+        ],
+        "answer": [
+            1,
+            5,
+            2,
+            4,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 題目要求「只能從類別內部存取」，應選 ①private。",
+            "B: 此方法用於比較並回傳是否存在，回傳型別應為 ⑤boolean。",
+            "C: 方法接受歌手姓名作為參數，應選 ②(String singer)。(註：選項 pool 中 ②④ 相同，選 ②)",
+            "D: 若找到匹配歌手，應立即傳回 ④return true;。",
+            "E: 若迴圈結束仍未找到，應傳回 ②return false;。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 35,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-35】你的程式使用 Student 類別來建立 Student 類型的物件。每個資料成員都具備存取子和更動子(getter 和 setter)方法。",
+            "請選取正確的選項來完成句子。選項：",
+            "A. ①student jack = new Student(); ②student jack = new student();",
+            "   ③Student jack = new student(); ④Student jack = new Student();",
+            "B. ①Private ②Public ③Protected",
+            "C. ①jack.show(); ②show(jack); ③show(Student.jack); ④jack -> show();",
+            "",
+            "若要建立名為 jack 的物件執行個體，需要使用 ___A___。",
+            "___B___ 資料成員只能使用其 getter 和 setter 函式從 main 方法存取。",
+            "若要將 jack 物件傳遞給名稱為 show 的非成員函式，需要從 main 方法使用 ___C___。</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置"
+        ],
+        "right": [
+            "①student jack = new Student(); | ②student jack = new student(); | ③Student jack = new student(); | ④Student jack = new Student();",
+            "①Private | ②Public | ③Protected",
+            "①jack.show(); | ②show(jack); | ③show(Student.jack); | ④jack -> show();"
+        ],
+        "answer": [
+            4,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: Java 類別名稱首字母應大寫，建構子需與類別名一致，選 ④Student jack = new Student();。",
+            "B: 封裝原則要求資料成員應設為 ①Private，透過 getter/setter 存取。",
+            "C: 呼叫非成員方法（靜態或外部方法）應直接傳入物件，選 ②show(jack);。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 36,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-36】請審視下列程式碼片段：",
+            "public class DivisionMaker",
+            "{",
+            "    public static int division(int a, int b) {",
+            "        return a / b;",
+            "    }",
+            "",
+            "    public static void main(String []args) {",
+            "        int a = 7;",
+            "        int b = 2;",
+            "        float c = division(a, b);",
+            "        System.out.println(c);",
+            "    }",
+            "}",
+            "執行此程式碼時會產生下列何種錯誤？</code></pre>"
+        ],
+        "options": [
+            "邏輯錯誤",
+            "編譯錯誤",
+            "執行階段錯誤",
+            "語法錯誤"
+        ],
+        "answer": 1,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "division 回傳 int (7/2=3)，存入 float c 變為 3.0，而非預期的 3.5。這屬於結果不符預期的邏輯錯誤。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 37,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-37】請審視下列程式碼：",
+            "public class SearchArray {",
+            "  public static void main(String[] args)",
+            "  {",
+            "    int[][] ary = {{19, 25}, {28, 30, 50}};",
+            "    for (int x = 2; x >= 0; x--){",
+            "      for (int y = 2; y >= 0; y--){",
+            "        System.out.println(ary[row][column] + \" \");",
+            "      }",
+            "    }",
+            "  }",
+            "}",
+            "",
+            "執行此程式時之輸出為何？</code>"
+        ],
+        "options": [
+            "30 28 25 19",
+            "50 30 28 25 19 28",
+            "ArrayIndexOutOfBoundsException",
+            "編譯錯誤"
+        ],
+        "answer": 3,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "x=2 起跳，但 ary 只有兩列 (索引 0, 1)，故會丟出 ArrayIndexOutOfBoundsException。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 38,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-38】請審視下列程式碼片段。(行號僅供參考)",
+            "01 public class Student {",
+            "02     private int id = 1;",
+            "03     public static void main(String[] args) {",
+            "04         Student student = new Student();",
+            "05         id = 3;",
+            "06         showId();",
+            "07     }",
+            "08",
+            "09     protected void displayId() { ",
+            "10       System.out.println(id); ",
+            "11     }",
+            "12 }",
+            "上述程式碼無法編譯。若下列各項動作能解決編譯錯誤，請選取[O]，否則請選取[X]。</code></pre>"
+        ],
+        "left": [
+            "A. 將 id 變數的存取修飾詞改為 public。",
+            "B. 將 displayId 方法的存取修飾詞改為 public。",
+            "C. 在第 05 與 06 行，將前置詞 student. 加到 id 及 displayId()之前。"
+        ],
+        "right": [
+            "O | X"
+        ],
+        "answer": [
+            2,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "main 是靜態方法，不能直接存取非靜態成員 (id) 或方法 (displayId)。需透過物件實體 student 存取。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 39,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【A-39】請審核下列程式碼片段，要找出輸出結果。(行號僅供參考)",
+            "01 try { ",
+            "02   int x = 1 / 0; ",
+            "03   System.out.println(\"執行 try\"); ",
+            "04 }",
+            "05 catch (ArithmeticException ex) { ",
+            "06   System.out.println(\"捕捉到 ArithmeticException\"); ",
+            "07 }",
+            "08 catch (Exception ex) { ",
+            "09   System.out.println(\"捕捉到 Exception\"); ",
+            "10 }",
+            "11 finally { ",
+            "12   System.out.println(\"執行 finally\"); ",
+            "13 }",
+            "對於下列敘述，請選取 [O] 或 [X]。",
+            "A. 輸出：執行 try",
+            "B. 輸出：捕捉到 ArithmeticException",
+            "C. 輸出：捕捉到 Exception",
+            "D. 輸出：執行 finally</code></pre>"
+        ],
+        "left": [
+            "A 敘述",
+            "B 敘述",
+            "C 敘述",
+            "D 敘述"
+        ],
+        "right": [
+            "O",
+            "X"
+        ],
+        "answer": [
+            2,
+            1,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 1/0 會引發 ArithmeticException。2. 被專屬 catch 捕捉，不進一般 Exception。3. finally 無論如何都會執行。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 40,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【A-40】請審視下列程式碼：",
+            "public class Test{",
+            "    public static void main(String []args) throws ",
+            "                   ArrayIndexOutOfBoundsException{",
+            "        try{",
+            "            int a = 0;",
+            "            int b = 20;",
+            "            int division = b / a;",
+            "            int ary[] = {1};",
+            "            ary[10] = 10;",
+            "            System.out.println(\"相除結果: \" + division);",
+            "        }",
+            "        catch(ArithmeticException ex){",
+            "            System.out.println(\"例外發生原因: \" + ex);",
+            "        }",
+            "        catch(RuntimeException e){",
+            "            System.out.println(\"例外發生原因: \" + e);",
+            "        }",
+            "    }",
+            "}",
+            "執行此程式碼時的輸出為何？</code></pre>"
+        ],
+        "options": [
+            "相除結果: 20",
+            "例外發生原因: java.lang.ArithmeticException: / by zero",
+            "例外發生原因: java.lang.RuntimeException: Index 10 out of bounds for length 1",
+            "例外發生原因: java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 1"
+        ],
+        "answer": 2,
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "程式會先執行 b / a (20 / 0)，立即拋出 ArithmeticException 並進入第一個 catch 塊。後續的陣列存取不會被執行。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 41,
+        "type": "single",
+        "question": [
+            "<pre><code><class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
+        ],
+        "options": [
+            "<code>/* ... */</code>",
+            "<code>/*// ... */</code>",
+            "<code>// ... //</code>",
+            "<code>//* ... //*</code>"
+        ],
+        "answer": [
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "Java 多行註解必須以 /* 開始並以 */ 結束。內部包含 // 仍視為多行註解的一部分。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 42,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-2】您正在應徵一份 Java 開發人員工作。您要證明您了解 main 方法。",
+            "對於下列每一項敘述，請選取[O] 或 [X]。</code></pre>"
+        ],
+        "left": [
+            "A. main 方法參數 args 是 String 類型的陣列。",
+            "B. Java 應用程式只能接受一個命令列引數。",
+            "C. main 方法必須是靜態，因為其執行時不會將類別中的執行個體實體化。"
+        ],
+        "right": [
+            "O | X"
+        ],
+        "answer": [
+            1,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 正確。B: 錯誤，可接受多個。C: 正確。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 43,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-3】您在撰寫一個 JAVA 主控台程式。程式需求如下：",
+            "● 可接受命令列引數。",
+            "● 分行顯示每一個命令列引數。",
+            "請選取正確程式碼：",
+            "A. ① do ② for ③ while",
+            "B. ① = ② == ③ : ④ instanceof",
+            "C. ① arg ② arg[0] ③ args</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① do |② for |③ while",
+            "① = |② == |③ : |④ instanceof",
+            "① arg |② arg[0] |③ args"
+        ],
+        "answer": [
+            2,
+            3,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "使用 for-each 遍歷 args 陣列：for (String arg : args) { System.out.println(arg); }"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 44,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作：",
+            "● 自命令列接受多個引數。",
+            "● 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
+            "",
+            "請問您應該依序使用哪三個程式碼片段來開發解決方案？請將三個程式碼片段移至答案區，然後按照正確的順序排列。",
+            "程式碼片段：",
+            "① for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
+            "② System.out.println(arguments[x]);",
+            "   }",
+            "③ public static void main(String[] args) {",
+            "④ for (int x = 1; x <= arguments.length; x++) {",
+            "⑤ public static void main(String arguments) {",
+            "⑥ System.out.println(args[x]);",
+            "   }",
+            "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
+        ],
+        "options": [
+            "<code>③ ⑦ ⑥</code>",
+            "<code>③ ④ ⑥</code>",
+            "<code>⑤ ⑦ ②</code>",
+            "<code>③ ① ②</code>"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "③ public static void main(String[] args)",
+            "⑦ for (int x = 0; x < args.length; x++)",
+            "⑥ System.out.println(args[x]);"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 45,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-05】請審視下列程式碼片段。(行號僅供參考)",
+            "01 byte V1 = 127;",
+            "02 V1++;",
+            "03 System.out.println(V1);",
+            "04 System.out.println(1.0 / 3.0);",
+            "05 System.out.println(1.0f / 3.0f);",
+            "",
+            "請選取正確的選項來回答問題。",
+            "A. 執行第 03 行之後，螢幕會輸出什麼？",
+            "B. 執行第 04 行之後，螢幕會輸出什麼？",
+            "C. 執行第 05 行之後，螢幕會輸出什麼？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出",
+            "C 輸出"
+        ],
+        "right": [
+            "① -128 | ② 128 | ③ 擲回例外狀況",
+            "① 0.33333334 | ② 0.3333333333333333 | ③ 擲回例外狀況",
+            "① 0.33333334 | ② 0.3333333333333333 | ③ 擲回例外狀況"
+        ],
+        "answer": [
+            1,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 執行第 03 行時：byte 的範圍是 -128 到 127。當 V1 為 127 執行 V1++ 會導致數值溢位 (Overflow)，根據補數運算，結果會回捲到最小值 -128。故 A 選 ①。",
+            "2. 執行第 04 行時：1.0 / 3.0 中的運算元均為 double 型別（Java 浮點數預設為 double），其具有較高的精度 (15-17 位有效數字)，結果為 0.3333333333333333。故 B 選 ②。",
+            "3. 執行第 05 行時：1.0f / 3.0f 中的運算元加上了 f 後綴，明確宣告為 float 型別，其精度較低 (約 7 位有效數字)，結果會四捨五入顯示為 0.33333334。故 C 選 ①。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 46,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-6】請檢閱下列程式碼。(行號僅供參考)",
+            "01 public static void method1(){",
+            "02     int V1 = 1; ",
+            "03     int V2 = 1;",
+            "04     for(int i = 0; i < 10; i++) {",
+            "05       V1 += i; ",
+            "06     }",
+            "07     for(int i = 0; i < 10; i++) {",
+            "08       V2 += i; ",
+            "09     }",
+            "10 }",
+            "11 public static void method2(){",
+            "12     int i = 1; ",
+            "13     int V1 = 0;",
+            "14     for(int i = 0; i < 10; i++) {",
+            "15       V1 += i; ",
+            "16     }",
+            "17 }</code></pre>"
+        ],
+        "left": [
+            "A. method1() 會產生編譯錯誤",
+            "B. method2() 會產生編譯錯誤"
+        ],
+        "right": [
+            "O | X"
+        ],
+        "answer": [
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: method1 中兩個 i 是在不同迴圈塊定義，不衝突。",
+            "B: method2 中 i 已在外面定義，for 迴圈內不能重複定義同名變數 i。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 47,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-7】請檢閱下列程式碼。(行號僅供參考)",
+            "01 public static void main(String[] args) {",
+            "02   double area = Math.PI * 1.0 * 1.0;",
+            "03   System.out.format(&quot;面積 = %.3f\\n&quot;, area);",
+            "04   System.out.format(&quot;面積 = %.0f\\n&quot;, area);",
+            "05   System.out.format(&quot;面積 = %09f\\n&quot;, area);",
+            "06 }</code></pre>"
+        ],
+        "left": [
+            "A. 第 03 行的輸出為何？ ",
+            "B. 第 04 行的輸出為何？",
+            "C. 第 05 行的輸出為何？"
+        ],
+        "right": [
+            "①面積 = 3.14 |②面積 = 3.142",
+            "①面積 = 03.141593 |②面積 = 00000003.14"
+        ],
+        "answer": [
+            2,
+            1,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: %.3f 四捨五入到小數第三位。B: %.0f 不保留小數。C: %09f 總長度 9，不足補 0 (包含小數點與小數位)。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 48,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-8】請審視下列程式碼片段。(行號僅供參考)",
+            "01 public static void main(String[] args) {",
+            "02     int sum = 55;",
+            "03     for (int i = 0; i < 10; i++) {",
+            "04       add(sum); ",
+            "05     }",
+            "06     System.out.println(sum);",
+            "07",
+            "08 }",
+            "09 public static void add(int sum) {",
+            "10   sum++; ",
+            "11}</code></pre>"
+        ],
+        "left": [
+            "A. 執行第 04 行後，若變數 i 為 9，變數 sum 的值是什麼？",
+            "B. 執行第 10 行後，若變數 i 為 7，變數 sum 的值是什麼？",
+            "C. 第 06 行變數 i 的值是什麼？ ① 11 ② 10 ③ 超出範圍"
+        ],
+        "right": [
+            "① 55",
+            "② 56",
+            "③ 57",
+            "④ 58"
+        ],
+        "answer": [
+            1,
+            1,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A/B: Java 為傳值呼叫，add 方法內的 sum++ 不會影響 main 內的 sum。",
+            "C: i 的作用域僅限於 for 迴圈內，外部無法存取。"
+        ],
+        "category": "D1_Java 基礎"
+    },
+    {
+        "id": 49,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-09】請審視下列程式碼片段。(行號僅供參考)",
+            "01 char V1 = 65;",
+            "02 System.out.println(V1);",
+            "03",
+            "04 long V2 = 20;",
+            "05 System.out.println(V2);",
+            "06",
+            "07 float V3 = new Float(&quot;-50.0&quot;);",
+            "08 System.out.println(V3);",
+            "09",
+            "10 short V4 = new Short(&quot;65.0&quot;);",
+            "11 System.out.println(V4);",
+            "",
+            "請選取正確的選項來回答問題。",
+            "A. 執行第 01、02 行之後，螢幕會輸出什麼？",
+            "B. 執行第 04、05 行之後，螢幕會輸出什麼？",
+            "C. 執行第 07、08 行之後，螢幕會輸出什麼？",
+            "D. 執行第 10、11 行之後，螢幕會輸出什麼？</code></pre>"
+        ],
+        "left": [
+            "A 輸出",
+            "B 輸出",
+            "C 輸出",
+            "D 輸出"
+        ],
+        "right": [
+            "① A | ② 65 | ③ 擲回例外狀況",
+            "① 20.0 | ② 20 | ③ 擲回例外狀況",
+            "① -50.0 | ② -50 | ③ 擲回例外狀況",
+            "① 650.0 | ② 65 | ③ 擲回例外狀況"
+        ],
+        "answer": [
+            1,
+            2,
+            1,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 執行第 01、02 行時：char 儲存的是字元編碼。65 在 Unicode/ASCII 中對應大寫字母 'A'，因此 println(V1) 會輸出字元 A。故 A 選 ①。",
+            "2. 執行第 04、05 行時：long 是 64 位元整數。20 作為整數輸出時不帶小數點。故 B 選 ②。",
+            "3. 執行第 07、08 行時：Float 的字串建構子可以正確解析包含負號與小數點的格式字串 &quot;-50.0&quot;，輸出為 -50.0。故 C 選 ①。",
+            "4. 執行第 10 行時：new Short(&quot;65.0&quot;) 會觸發錯誤。Java 的 Short 建構子呼叫 parseShort()，僅能解析整數格式字串。字串中包含 \".0\" 會被視為浮點格式，導致 NumberFormatException。故 D 選 ③。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 50,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-10】執行下列程式碼後，變數 iV 的值為何？",
+            "double dV = 3.45;",
+            "int iV = 0;",
+            "iV = (int)dV;</code></pre>"
+        ],
+        "options": [
+            "<code>3</code>",
+            "<code>2</code>",
+            "<code>0</code>",
+            "<code>擲回例外狀況</code>"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "強制將 double 轉換為 int 會直接無條件捨去小數位，結果為 3。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 51,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-11】請審視下列程式碼片段：(行號僅供參考)",
+            "01 String s1 = &quot;Java 17&quot;;",
+            "02 String s2 = &quot;Java 17&quot;;",
+            "03 String s3 = s2;",
+            "",
+            "下列敘述是否正確，請填入[O]或[X]。</code></pre>"
+        ],
+        "left": [
+            "A. s1 與 s2 在記憶體中指的是同一個物件。",
+            "B. s3 與 s2 在記憶體中指的是同一個物件。",
+            "C. 在第 04 行可將不同的字串指派給 s1。",
+            "D. 在第 05 行可將不同的字串指派給 s2。"
+        ],
+        "right": [
+            "O",
+            "X"
+        ],
+        "answer": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: Java 字串池機制，相同的字面值會指向同一物件。B: 賦值操作 s3=s2 讓兩者指向同一引用。C/D: String 變數本身可以重新賦值 (指向不同 String 物件)。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 52,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-12】請審視下列 Java 程式碼：(行號僅供參考)",
+            "01 short x = 3;",
+            "02 short y = 4;",
+            "03 String V1 = &quot;x+y=&quot; + x + y;",
+            "04 System.out.println(V1);",
+            "05 String V2 = &quot;x+y=&quot; + (x + y);",
+            "06 System.out.println(V2);</code></pre>"
+        ],
+        "left": [
+            "A. 執行第 04 行之後，會輸出什麼？",
+            "B. 執行第 06 行之後，會輸出什麼？"
+        ],
+        "right": [
+            "① x+y=34",
+            "② x+y=7",
+            "③ x+y=x+y"
+        ],
+        "answer": [
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 字串連接由左至右，結果為 &quot;x+y=3&quot; + 4 = &quot;x+y=34&quot;。",
+            "B: 括號優先計算加法，結果為 &quot;x+y=&quot; + 7 = &quot;x+y=7&quot;。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 53,
+        "type": "single",
+        "question": [
+            "<pre><code><class=\"language-java\">【B-13】下列哪個程式碼片段會在結束迴圈時保有 intList 陣列原始的元素？</code></pre>"
+        ],
+        "options": [
+            "<code>for(int i : intList) { i *= 2; }</code>",
+            "<code>for(int i = 0; i < intList.length; i++) { intList[i] *= 2; }</code>",
+            "<code>do { intList[count] *= 2; count++; } while(count < intList.length);</code>",
+            "<code>while(count < intList.length) { intList[count] *= 3; count++; }</code>"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "for-each 迴圈使用的是元素的複本（對於基本型別），修改複本 i 不會影響原始陣列內容。其餘選項皆透過索引直接修改陣列。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 54,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-14】請建立一個 Java 類別，使用 ArrayList 來實作整數堆疊(stack)。",
+            "需求：",
+            "● pop 方法會從 ArrayList 的開頭移除一個整數並傳回該值。",
+            "● push 方法會將一個整數新增到 ArrayList 的開頭。</code></pre>"
+        ],
+        "left": [
+            "A 選項 (pop index)",
+            "B 選項 (pop action)",
+            "C 選項 (push index)",
+            "D 選項 (push action)"
+        ],
+        "right": [
+            "① 0",
+            "② stack.size() - 1",
+            "③ stack.get(ip)",
+            "④ stack.remove(ip)",
+            "⑤ stack.add(ip, item)"
+        ],
+        "answer": [
+            1,
+            4,
+            1,
+            5
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "開頭即為索引 0。pop 使用 remove(0)，push 使用 add(0, item)。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 55,
+        "type": "multimatching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-15】你要建立一個 int 陣列，陣列名稱為 Ary，並使用 V1、V2 和 V3 進行初始化。",
+            "請由下列選項中選取正確的程式碼片段來完成程式碼。",
+            "程式碼片段：",
+            "A : ① int ② int[]",
+            "B : ① new int ② new int[]",
+            "C : ① (V1, V2, V3) ② [V1, V2, V3] ③ {V1, V2, V3}",
+            "",
+            "int V1 = 9;",
+            "int V2 = 12;",
+            "int V3 = 40;",
+            "____A____ Ary = ____B____ ____C____ ;</code></pre>"
+        ],
+        "left": [
+            "A 位置",
+            "B 位置",
+            "C 位置"
+        ],
+        "right": [
+            "① int | ② int[]",
+            "① new int | ② new int[]",
+            "① (V1, V2, V3) | ② [V1, V2, V3] | ③ {V1, V2, V3}"
+        ],
+        "answer": [
+            2,
+            2,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. A 位置：陣列宣告語法為資料型態加上方括號，即 int[] Ary。故選 ② int[]。",
+            "2. B 位置：建立陣列物件需使用 new 關鍵字，並指定型態與方括號，即 new int[]。故選 ② new int[]。",
+            "3. C 位置：使用大括號 {} 進行陣列初始化賦值。故選 ③ {V1, V2, V3}。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 56,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-16】執行下列程式碼後，變數 iV 的值為何？",
+            "int iV = 30;",
+            "iV += 100 % 3 + 10 * 2;</code></pre>"
+        ],
+        "options": [
+            "<code>51</code>",
+            "<code>83</code>",
+            "<code>44</code>",
+            "<code>48</code>"
+        ],
+        "answer": [
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "優先級：%, * > +。100 % 3 = 1，10 * 2 = 20。iV = 30 + (1 + 20) = 51。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 57,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-17】下列變數設定了初始值，經運算後，各變數的值為何？",
+            "int a = 4;\ndouble b = 7.0;\nint c = 50;\nfloat d = 0.3f;\nshort e = 10;",
+            "a += 6 % 2 + e;",
+            "b /= 10 * 2;",
+            "c %= e * 2 + 1;",
+            "d *= 3 + 5 % 4;</code></pre>"
+        ],
+        "left": [
+            "A. 變數 a 的值",
+            "B. 變數 b 的值",
+            "C. 變數 c 的值",
+            "D. 變數 d 的值"
+        ],
+        "right": [
+            "① 17",
+            "② 14",
+            "③ 0.35",
+            "④ 0.0",
+            "⑤ 8",
+            "⑥ 1.2"
+        ],
+        "answer": [
+            2,
+            3,
+            5,
+            6
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "a = 4 + (0 + 10) = 14。",
+            "b = 7.0 / 20 = 0.35。",
+            "c = 50 % (20 + 1) = 50 % 21 = 8。",
+            "d = 0.3 * (3 + 1) = 1.2。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 58,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-18】請審視下列 Java 方法：",
+            "static int method1(double dV, int iV1, int iV2){",
+            "    int iR = 0;",
+            "    if(dV >= 3.7 && (iV1 >= 1200 || iV2 >= 26))",
+            "        iR = 3000;",
+            "    else if (dV >= 3.0 || iV1 >= 1200 || iV2 >= 26)",
+            "        iR = 1500;",
+            "    return iR;",
+            "}",
+            "請選取正確的選項來回答問題。</code></pre>"
+        ],
+        "left": [
+            "A. method1(3.2, 1100, 28) 傳回值為何?",
+            "B. method1(2.7, 1500, 30) 傳回值為何?",
+            "C. method1(3.7, 1300, 23) 傳回值為何?"
+        ],
+        "right": [
+            "① 0",
+            "② 1500",
+            "③ 3000"
+        ],
+        "answer": [
+            2,
+            2,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 3.2 < 3.7 (進入 else if)，但 28 >= 26 (成立)，傳回 1500。",
+            "B: 2.7 < 3.7，1500 >= 1200 (else if 成立)，傳回 1500。",
+            "C: 3.7 >= 3.7 且 1300 >= 1200 (if 成立)，傳回 3000。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 59,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-19】請建立一個 if 敘述，該敘述在同時滿足兩項條件時，會傳回 true：",
+            "● x 大於或等於 y。",
+            "● z 小於 y。",
+            "請從下列選項,選取正確的運算子來完成程式碼。",
+            "if (y ___A___ x ___B___ z ___C___ y)</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① <=",
+            "② >= ",
+            "③ &&",
+            "④ <",
+            "⑤ &#124;&#124;"
+        ],
+        "answer": [
+            1,
+            3,
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "x >= y 等價於 y <= x (①)。",
+            "且為 && (③)。",
+            "z < y (④)。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 60,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-20】請審視下列 Java 程式碼片段：",
+            "displayMenu();",
+            "for( ; ; ){",
+            "    boolean b = isOK();",
+            "    if(!b) break;",
+            "    displayMenu();",
+            "}",
+            "在保留原有功能下，您將重構下列程式碼片段。請由下列選項中選取正確程式碼。</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項"
+        ],
+        "right": [
+            "① do",
+            "② while(isOK())",
+            "③ } while(isOK());",
+            "④ continue;"
+        ],
+        "answer": [
+            1,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "原程式先執行一次 displayMenu，然後判斷 isOK 並重複。可用 do-while 改寫：do { displayMenu(); } while(isOK());"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 61,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-21】您必須在 intList 二維陣列中列印每一個元素。",
+            "for (int row = 0; row < intList.length; row++)",
+            "    for (int column = 0; column < ___A___ ; column++)",
+            "        System.out.println(intList[row][column]);</code></pre>"
+        ],
+        "options": [
+            "<code>column < intList.length</code>",
+            "<code>column < intList[column].length</code>",
+            "<code>column < intList[row].length</code>",
+            "<code>column < intList[row][column].length</code>"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "內層迴圈應判斷該列的長度：intList[row].length。"
+        ],
+        "category": "D2_資料型別、變數和運算式"
+    },
+    {
+        "id": 62,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-22】某銀行要求您撰寫 JAVA 程式，審核貸款戶是否合格。申請人必須符合以下任一要求：",
+            "● 超過 64 歲(age)以上，且年收入(income)最低為 20 萬元。",
+            "● 至少 20 歲，且年收入高於 30 萬元。",
+            "運算子：① || ② && ③ < ④ <= ⑤ >= ⑥ > ⑦ != ⑧ ==",
+            "",
+            "if (age ___A___ 64 ___B___ income ___C___ 20 ___D___ age ___E___ 20 ___F___ income ___G___ 30)</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項",
+            "E 選項",
+            "F 選項",
+            "G 選項"
+        ],
+        "right": [
+            "① &#124;&#124 |② && |③ < |④ <= |⑤ >= |⑥ > |⑦ != |⑧ =="
+        ],
+        "answer": [
+            6,
+            2,
+            5,
+            1,
+            5,
+            2,
+            6
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "if (age > 64 && income >= 20 || age >= 20 && income > 30)"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 63,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-23】您正在撰寫一個名稱為 sequence 的方法。此方法必須執行下列工作：",
+            "● 傳入一個名稱為 begin 的整數參數。",
+            "● 以遞減方式逐一顯示從 begin 到 1 的所有數字。",
+            "",
+            "請由下列選項中選取正確的程式碼片段來完成程式碼。",
+            "public static void sequence(int seqStart) {",
+            "    for ( ___A___ ___B___ ___C___ ){",
+            "        System.out.println(n);",
+            "    }",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① int n = seqStart;",
+            "② n >= 1;",
+            "③ n--",
+            "④ int n = 1;",
+            "⑤ n++"
+        ],
+        "answer": [
+            1,
+            2,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "for (int n = seqStart; n >= 1; n--)"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 64,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-24】您正在撰寫一個 JAVA 方法。此方法必須執行下列工作：",
+            "● 接受名稱為 age 的 int 參數。",
+            "● 若 age 大於或等於 65，則傳回 &quot;敬老票&quot;。",
+            "● 若 age 大於或等於 18，但低於 65，則傳回 &quot;全票&quot;。",
+            "● 否則，傳回 &quot;半票&quot;。",
+            "請選取正確的程式碼片段來完成程式碼。</code></pre>"
+        ],
+        "left": [
+            "A. if 條件",
+            "B. else if 條件",
+            "C. 最後的區塊"
+        ],
+        "right": [
+            "① age >= 65",
+            "② age >= 18",
+            "③ age < 18",
+            "④ else if(age >= 18)",
+            "⑤ else"
+        ],
+        "answer": [
+            1,
+            4,
+            5
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "if(age >= 65) { ... } else if(age >= 18) { ... } else { ... }"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 65,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-25】您有一個名稱為 HouseHold 的類別。HouseHold 類別的建構式可傳入 String 物件。您需要建立名稱為 AddPerson 的類別。其繼承自 HouseHold 類別。AddPerson 類別的建構式會執行下列工作：",
+            "● 傳入名稱為 name 的字串參數。",
+            "● 將字串的值 &quot;AddPerson&quot; 傳送給 HouseHold 類別的建構式。",
+            "● 使用建構式參數 name 的值初始化類別成員 name。",
+            "請將適當的程式碼片段選項移至程式的正確位置，以完成程式碼。每個程式碼片段可能使用一次或多次，甚至完全不用。",
+            "程式碼片段</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① super",
+            "② this",
+            "③ HouseHold",
+            "④ extends",
+            "⑤ implements"
+        ],
+        "answer": [
+            3,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 使用 extends 繼承。B: 使用 super(&quot;AddPerson&quot;) 呼叫父類別建構式。C: 使用 this.name = name 初始化成員。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 66,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-26】請評估下列 Java 程式類別。(行號僅供參考)",
+            "01 public class StuGrades {",
+            "02     protected int mathScore;",
+            "03     public StuGrades() {",
+            "04       mathScore = 0; ",
+            "05     }",
+            "06     public StuGrades(int score) {",
+            "07       mathScore = score; ",
+            "08     }",
+            "09 }",
+            "對於下列每一項敘述，請選取 ① 正確 | ② 錯誤</code></pre>"
+        ],
+        "left": [
+            "A. StuGrades 類別具有單一建構函式。",
+            "B. 其他類別可繼承 StuGrades 類別。",
+            "C. 第 07 行等同於 this.mathScore = score;"
+        ],
+        "right": [
+            "① 正確 | ② 錯誤"
+        ],
+        "answer": [
+            2,
+            1,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 錯誤，有兩個建構子。B: 正確，public 類別可被繼承。C: 正確，this 可指向成員變數。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 67,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-27】請檢閱下列類別定義：",
+            "public class Rectangle {",
+            "    protected float minLength;",
+            "    protected float maxLength;",
+            "}",
+            "下列哪些類別可以存取 minLength 與 maxLength 資料成員？</code></pre>"
+        ],
+        "options": [
+            "<code>僅有 Rectangle 類別。</code>",
+            "<code>所有類別。</code>",
+            "<code>僅有未繼承 Rectangle 類別的類別。</code>",
+            "<code>僅有在同一套件中的類別及繼承 Rectangle 類別的類別。</code>"
+        ],
+        "answer": [
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "protected 權限允許同一套件內的類別以及不同套件的子類別存取。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 68,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-28】您有一個名稱為 Ccircle 的 Java 類別。您需要定義名稱為 PI 的常數資料成員。任何未將 Ccircle 實體化的類別都可以存取該資料成員。\n\n請將適當的程式碼片段選項移至程式的正確位置，以完成程式碼。每個程式碼片段可能使用一次或多次，甚至完全不用。\n\n程式碼片段：\n① public   ② private   ③ protected   ④ finally\n⑤ static   ⑥ super     ⑦ void        ⑧ final\n\npublic class Ccircle {\n    __A__  __B__  __C__ double PI = 3.14159;\n}</code></pre>"
+        ],
+        "left": [
+            "位置 A",
+            "位置 B",
+            "位置 C"
+        ],
+        "right": [
+            "① public | ② private | ③ protected | ④ finally | ⑤ static | ⑥ super | ⑦ void | ⑧ final"
+        ],
+        "answer": [
+            1,
+            5,
+            8
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 常數（Constant）在 Java 中使用 final 關鍵字定義。\n2. 靜態（Static）成員不需要將類別實體化即可存取。\n3. 公用（Public）修飾詞允許其他類別存取。\n因此完整修飾詞為 public static final。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 69,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-29】請檢閱下列類別定義：",
+            "class Kleenex {",
+            "    public void kleeError(String notice) { ",
+            "",
+            "    }",
+            "}",
+            "下列何者可以呼叫 kleeError 方法？</code></pre>"
+        ],
+        "options": [
+            "<code>僅有 Kleenex 類別。</code>",
+            "<code>僅有與 Kleenex 類別位於同一套件中之所有類別的程式碼。</code>",
+            "<code>僅有 Kleenex 類別，以及在同一套件中繼承 Kleenex 類別的類別。</code>",
+            "<code>所有套件中的任何類別。</code>"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "由於 Kleenex 類別本身是預設權限 (沒有 public)，因此整個類別僅限於同套件存取，雖然方法是 public，外部套件仍因類別不可見而無法呼叫。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 70,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-30】請檢閱下列 Crectangle 類別。(行號僅供參考)",
+            "01 public class Crectangle {",
+            "02     private int width; ",
+            "03     private int length;",
+            "04",
+            "05     Crectangle(int w, int l) {",
+            "06       this.width = w; ",
+            "07       this.length = l; ",
+            "08     }",
+            "09",
+            "10     public int calArea() {",
+            "11       return this.width * this.length; ",
+            "12     }",
+            "13",
+            "14     public int getWide() {",
+            "15          return width; ",
+            "16     }",
+            "17",
+            "18     public int getLen() {",
+            "19       return length; ",
+            "20     }",
+            "21 }",
+            "若要撰寫用來測試 Crectangle 類別的程式碼。",
+            "請選取正確的程式碼片段以完成程式碼。程式碼片段如下：",
+            "A. ① new rec = Crectangle(10, 15)  ② Crectangle rec = new(10, 15)",
+            "   ③ Crectangle rec = Crectangle(10, 15)  ④ Crectangle rec = new Crectangle(10, 15)",
+            "B. ① area = rec()  ② area = calArea.rec()  ③ area = rec.calArea()  ④ area = Crectangle.calArea()",
+            "C. ① rec.Width, rec.Length  ② rec.getWide(), rec.getLen()",
+            "   ③ rec.width, rec.length  ④ Crectangle.width, Crectangle.length  ⑤ Crectangle.getWide(), Crectangle.getLen()",
+            "",
+            "int area;",
+            "____A____ ;",
+            "____B____ ;",
+            "System.out.printf(\"Width = %d Length = %d\\n\", ____C____ );",
+            "System.out.printf(\"面積是否正確: %b\\n\", area == 150);</code></pre>"
+        ],
+        "left": [
+            "位置 A",
+            "位置 B",
+            "位置 C"
+        ],
+        "right": [
+            "A ① new rec = Crectangle(10, 15)|② Crectangle rec = new(10, 15)|③ Crectangle rec = Crectangle(10, 15)|④ Crectangle rec = new Crectangle(10, 15)",
+            "B ① area = rec()|② area = calArea.rec()|③ area = rec.calArea()|④ area = Crectangle.calArea()",
+            "C ① rec.Width, rec.Length|② rec.getWide(), rec.getLen()|③ rec.width, rec.length|④ Crectangle.width, Crectangle.length|⑤ Crectangle.getWide(), Crectangle.getLen()"
+        ],
+        "answer": [
+            4,
+            3,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 位置 A：正確的物件宣告與實體化語法為 Class name = new Class(args);，故選 ④ (對應 D)。\n2. 位置 B：呼叫物件的實體方法 (calArea) 應使用 物件名稱.方法名()，故選 ③ (對應 C)。\n3. 位置 C：由於 width 與 length 宣告為 private，外部無法直接存取，必須透過 getter 方法 (getWide(), getLen())，故選 ② (對應 B)。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 71,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-31】您撰寫了下列 Java 程式。請將適當的程式碼片段選項移至程式的正確位置，以完成程式碼。(行號僅供參考)",
+            "選項：",
+            "A. ① Candy candy = new candy(); ② Candy candy = new Candy();",
+            "   ③ candy Candy = new candy(); ④ candy Candy = new Candy();",
+            "B. ① isPurchased = true; ② Candy.isPurchased = true;",
+            "   ③ candy.isPurchased = true;",
+            "C. ① candy.overdue; ② candy.overdue();",
+            "   ③ Candy.overdue; ④ Candy.overdue();",
+            "",
+            "01 class Candy {",
+            "02     boolean isOverdued = false;",
+            "03     private boolean isPurchased = false;",
+            "04 ",
+            "05     void overdue() {",
+            "06         isOverdued = true;",
+            "07     }",
+            "08 ",
+            "09     public static void main(String[] args) {",
+            "10         ___A___",
+            "11         ___B___",
+            "12         ___C___",
+            "13     }",
+            "14 }</code></pre>"
+        ],
+        "left": [
+            "A 段程式碼",
+            "B 段程式碼",
+            "C 段程式碼"
+        ],
+        "right": [
+            "①Candy candy = new candy(); | ②Candy candy = new Candy(); | ③candy Candy = new candy(); | ④candy Candy = new Candy();",
+            "①isPurchased = true; | ②Candy.isPurchased = true; | ③candy.isPurchased = true;",
+            "①candy.overdue; | ②candy.overdue(); | ③Candy.overdue; | ④Candy.overdue();"
+        ],
+        "answer": [
+            2,
+            3,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A 段：建立物件需使用 new Candy()，且變數型別應為 Candy，故選 ② (B)。",
+            "B 段：isPurchased 是實例變數且為 private，在 static main 中須透過實體 candy 存取，故選 ③ (C)。",
+            "C 段：呼叫方法需加括號 ()，且需使用實體名稱 candy，故選 ② (B)。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 72,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-32】請評估下列例外狀況：",
+            "Exception in thread &quot;main&quot; java.lang.ArrayIndexOutOfBoundsException: 5",
+            "at itsjava.Program.listMessage(Program.java:35)",
+            "at itsjava.Program.startProcess(Program.java:22)",
+            "at itsjava.Program.main(Program.java:17)",
+            "對於下列每一項敘述，請選取① 正確 ② 錯誤</code></pre>"
+        ],
+        "left": [
+            "A. 此例外原因來自 startProcess() 方法。",
+            "B. 在錯誤發生之前有三個方法被呼叫。",
+            "C. 在第 35 行發生錯誤。",
+            "D. 此例外狀況是由語法錯誤造成。"
+        ],
+        "right": [
+            "① 正確 | ② 錯誤"
+        ],
+        "answer": [
+            2,
+            1,
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 錯誤原因直接發生在 listMessage。B: 正確，main -> startProcess -> listMessage。C: 正確，追蹤顯示 35 行。D: 錯誤，這是執行階段例外。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 73,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-33】Group 類別包含一個只能從類別內部存取的 isInGroup 方法。isInGroup 方法加入會員姓名，用來與會員清單進行比較。",
+            "請從以下選取正確的選項以完成程式碼。",
+            "A : ① private ② protected ③ public ④ static",
+            "B : ① bool ② int ③ String ④ void",
+            "C : ① () ② (bool member) ③ (Group member) ④ (String member)",
+            "",
+            "___A___ ___B___ isInGroup ___C___ {",
+            "    for(int i = 0; i < numMember; i++){",
+            "        if(members[i].equals(member)) ___D___",
+            "    }",
+            "    ___E___",
+            "}</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "①private | ②protected | ③public | ④static",
+            "①bool | ②int | ③String | ④void",
+            "①() | ②(bool member) | ③(Group member) | ④(String member)"
+        ],
+        "answer": [
+            1,
+            1,
+            4
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 內部存取為 private。B: 是否在群組內應傳回 boolean。C: 姓名參數為 String。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 74,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-34】若要開發可讀取及寫入檔案的應用程式。此應用程式必須執行下列工作：",
+            "● 顯示檔案處理錯誤引起之例外狀況。",
+            "● 顯示發生任何其他例外狀況時的堆疊資訊。",
+            "請由下列選項中選取正確的程式碼片段以完成程式碼。",
+            "程式碼片段：",
+            "A. ① ArrayIndexOutOfBoundsException  ② RuntimeException",
+            "   ③ IOException  ④ IllegalArgumentException",
+            "B. ① printMessage()  ② getMessage()  ③ printStackTrace()",
+            "C. ① Error  ② Exception  ③ RuntimeException",
+            "   ④ IllegalArgumentException  ⑤ ArrayIndexOutOfBoundsException",
+            "D. ① getStackTrace()  ② printStackTrace()  ③ fillInStackTrace()  ④ errorStackTrace()",
+            "",
+            "try {",
+            "    /* add procedure */",
+            "}",
+            "catch ( ____A____ e1) {",
+            "    System.out.println(e1. ____B____ );",
+            "}",
+            "catch ( ____C____ e2) {",
+            "    e2. ____D____ ;",
+            "}</code></pre>"
+        ],
+        "left": [
+            "位置 A",
+            "位置 B",
+            "位置 C",
+            "位置 D"
+        ],
+        "right": [
+            "① ArrayIndexOutOfBoundsException|② RuntimeException|③ IOException|④ IllegalArgumentException",
+            "① printMessage()|② getMessage()|③ printStackTrace()",
+            "① Error|② Exception|③ RuntimeException|④ IllegalArgumentException|⑤ ArrayIndexOutOfBoundsException"
+        ],
+        "answer": [
+            3,
+            2,
+            2,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "1. 位置 A & B：針對檔案處理錯誤，應捕獲 ③ IOException，並使用 ② getMessage() 顯示錯誤訊息。\n2. 位置 C & D：針對「任何其他」例外狀況，應捕獲通用基類 ② Exception，並使用 ② printStackTrace() 輸出完整堆疊資訊。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 75,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-35】請選取正確的敘述，以完成有關在 Java 中使用控制流程的敘述。",
+            "A. 若要從巢狀迴圈的內部迴圈跳離，則需使用何種敘述？",
+            "B. 若要終止巢狀迴圈的外部迴圈，則需使用何種敘述？",
+            "C. 若要跳到巢狀迴圈中內部迴圈的下一個反覆運算，則需使用何種敘述？</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項"
+        ],
+        "right": [
+            "① continue",
+            "② 已標記 break (labeled break)",
+            "③ 未標記 break",
+            "④ return"
+        ],
+        "answer": [
+            3,
+            2,
+            1
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: 一般 break 僅跳出當前層。B: labeled break 可跳出指定層。C: continue 跳過剩餘程式碼進行下次迭代。"
+        ],
+        "category": "D3_流程控制實作"
+    },
+    {
+        "id": 76,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-36】Circle 類別的建構式接受名稱為 radius 的浮點數引數；且 radius 會在 main 中進行宣告，並指派由使用者輸入的值。",
+            "您需要針對名稱為 cir1 的 Circle 類別建立執行個體。",
+            "請從以下選取正確的選項以完成程式碼。",
+            "程式碼片段：",
+            "① new ② cir1 ③ Circle ④ Circle() ⑤ Circle(radius)",
+            "",
+            "____A____ ____B____ = ____C____ ____D____ ;</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項"
+        ],
+        "right": [
+            "A. new | B. cir1 | C. Circle | D. Circle() | E. Circle(radius)"
+        ],
+        "answer": [
+            3,
+            2,
+            1,
+            5
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "完整宣告為：Circle cir1 = new Circle(radius);"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 77,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-37】請檢閱下列程式碼：",
+            "public class TryArray {",
+            "    public static void main(String[] args) {",
+            "        int[][] arr = {{19, 25}, {28, 30, 50}};",
+            "        for (int row = 2; row >= 0; row--)",
+            "            for (int column = 3; column >= 0; column--)",
+            "                System.out.print(arr[row][column] + &quot; &quot;);",
+            "    }",
+            "}",
+            "執行此程式碼時的輸出為何？</code></pre>"
+        ],
+        "options": [
+            "<code>30 28 25 19</code>",
+            "<code>50 25 30 19 28</code>",
+            "<code>出現ArrayIndexOutOfBoundsException例外內容</code>",
+            "<code>編譯錯誤</code>"
+        ],
+        "answer": [
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "arr[2] 發生越界，因為陣列索引僅為 0, 1。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 78,
+        "type": "single",
+        "question": [
+            "<pre><code class=\"language-java\">【B-38】請檢閱下列程式碼：",
+            "public class ListMani {",
+            "    public static void main(String[] args) throws ArrayIndexOutOfBoundsException {",
+            "        try {",
+            "            int d = 0; int n = 120; int fraction = n / d;",
+            "            int g[] = {1}; g[6] = 25;",
+            "            System.out.println(&quot;分數的結果: &quot; + fraction);",
+            "        }",
+            "        catch (ArithmeticException e) { System.out.println(&quot;例外內容: &quot; + e); }",
+            "        catch (RuntimeException e) { System.out.println(&quot;例外內容: &quot; + e); }",
+            "    }",
+            "}",
+            "執行此程式碼時的輸出為何？</code></pre>"
+        ],
+        "options": [
+            "<code>分數的結果: 120</code>",
+            "<code>例外內容: java.lang.ArithmeticException: / by zero</code>",
+            "<code>例外內容: java.lang.RuntimeException: Index 6 out of bounds</code>",
+            "<code>例外內容: java.lang.ArrayIndexOutOfBoundsException</code>"
+        ],
+        "answer": [
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "n/d (120/0) 觸發 ArithmeticException 並被第一個 catch 捕獲。"
+        ],
+        "category": "D5_程式碼編譯和偵錯"
+    },
+    {
+        "id": 79,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-39】您建立一個名稱為 Game 的類別，且符合下列需求：",
+            "● 包含名稱為 playNumber 的方法，其衍生類別無法覆寫該方法。",
+            "● 只有與 Game 類別在同一套件中的類別可呼叫 playNumber 方法。",
+            "請選取正確的程式碼片段以完成程式碼。",
+            "程式碼片段：</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項"
+        ],
+        "right": [
+            "① protected",
+            "② final",
+            "③ public",
+            "④ abstract"
+        ],
+        "answer": [
+            1,
+            2
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "A: protected 允許同套件存取。B: final 防止衍生類別覆寫方法。"
+        ],
+        "category": "D4_物件導向程式設計"
+    },
+    {
+        "id": 80,
+        "type": "matching",
+        "question": [
+            "<pre><code class=\"language-java\">【B-40】Book 類別包含下列私有資料成員：",
+            "● String title;",
+            "● String author;",
+            "● int year;",
+            "● int isbn;",
+            "建構式預設會依此指派空字串及零，而多載的建構式則會以上列順序接受引數。",
+            "您需要完成程式碼，將名稱為 book 的 Book 類別物件實體化，以便使用者可以在之後的函數進行更新。",
+            "",
+            "請選取正確的以完成程式碼。",
+            "程式碼片段：",
+            "A. ① book ② Book ③ int ④ new",
+            "B. ① book ② Book ③ int ④ new",
+            "C. ① book ② Book ③ int ④ new",
+            "D. ① book() ② book(title, author, year, isbn) ③ Book() ④ Book(title, author, year, isbn)",
+            "",
+            "____A____ ____B____ = ____C____ ____D____ ;</code></pre>"
+        ],
+        "left": [
+            "A 選項",
+            "B 選項",
+            "C 選項",
+            "D 選項"
+        ],
+        "right": [
+            "①book | ②Book | ③int | ④new",
+            "①book | ②Book | ③int | ④new",
+            "①book | ②Book | ③int | ④new",
+            "①book() | ②book(title, author, year, isbn) | ③Book() | ④Book(title, author, year, isbn)"
+        ],
+        "answer": [
+            2,
+            1,
+            4,
+            3
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "完整語法：Book book = new Book();"
+        ],
+        "category": "D4_物件導向程式設計"
+    }
+];
+                        function renderMatchingQuestion(index) {
+        currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
+        const container = document.getElementById('question-container') || document.getElementById('question-area');
+        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+        
+        const isPractice = (typeof quizData !== 'undefined');
+        const isCorrect = isPractice ? correctSet.has(index) : false;
+        const isCorrected = isPractice ? correctedSet.has(index) : false;
+        const isWrong = isPractice ? incorrectSet.has(index) : false;
+        const isLocked = isCorrect || isCorrected;
+        const showAnswer = isLocked || isWrong;
+
+        let rightRowGroups = item.right.map(t => (t && t.includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        let totalRightRows = rightRowGroups.reduce((a, b) => a + b, 0);
+        let splitRatio = totalRightRows / item.left.length; 
+        let isSplitMode = (totalRightRows > item.left.length);
+
+        let html = `<div class="card question-card">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+                    <svg id="matching-svg"></svg>
+                    <div class="matching-columns">
+                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
+
+        // 左側：[文字] [圓圈]
+        item.left.forEach((text, lIdx) => {
+            const isMatched = currentAns[lIdx] !== null;
+            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
+            const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
+            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
+            
+            html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
+                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
+                <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
+            </div>`;
+            
+            if (isSplitMode && splitRatio > 1) {
+                for(let p=0; p < Math.floor(splitRatio - 1); p++) {
+                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
+                }
+            }
+        });
+
+        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
+
+        // 右側：[圓圈] [文字]
+        let rIdxCounter = 0;
+        item.right.forEach((text, grpIdx) => {
+            if (text && text.includes('|')) {
+                const parts = text.replace(/<\/?code>/g, '').split('|');
+                parts.forEach((partText) => {
+                    const rIdx = rIdxCounter++;
+                    const isMatchedByAny = currentAns.includes(rIdx);
+                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                        <div class="match-dot" id="dot-right-${rIdx}">
+                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                        </div>
+                        <div class="q-text-part"><code>${partText}</code></div>
+                    </div>`;
+                });
+            } else {
+                const rIdx = rIdxCounter++;
+                const isMatchedByAny = currentAns.includes(rIdx);
+                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                    <div class="match-dot" id="dot-right-${rIdx}">
+                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                    </div>
+                    <div class="q-text-part">${cleanText}</div>
+                </div>`;
+            }
+            // 每群顯示後畫一條灰色線 (排除最後一組)
+            if (grpIdx < item.right.length - 1) {
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
+            }
+        });
+
+        html += `</div></div></div>`;
+        if (!isLocked && isPractice) {
+            html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
+        }
+        if (showAnswer) {
+            const isJavaQ6 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 6);
+            const isJavaQ7 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 7);
+            const ansText = (isJavaQ6 || isJavaQ7) ? item.answer.join(', ') : (Array.isArray(item.answer) ? item.answer.join(', ') : item.answer);
+            const statusMsg = isCorrected ? '<div class="fw-bold mb-2 text-warning">🟠 已更正成功！</div>' : 
+                             (isWrong ? '<div class="fw-bold mb-2 text-danger">❌ 答錯了，請參考正確答案進行更正</div>' : 
+                             '<div class="fw-bold mb-2 text-success">✅ 答對了！</div>');
+            html += `<div class="answer-section" style="display:block;">
+                        ${statusMsg}
+                        <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
+                        <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
+                     </div>`;
+        }
+        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
+        setTimeout(() => {
+            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
+            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
+
+            if (window.drawLines) window.drawLines();
+            if (window.Prism) Prism.highlightAll();
+        }, 30);
+    }
+    let isDragging = false, dragStartPoint = null, tempLine = null;
+    window.handleDragStart = function(e, side, idx) {
+        if (side !== 'left') return;
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        isDragging = true; if(e.cancelable) e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
+        const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
+        const svg = document.getElementById("matching-svg");
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute("x1", dragStartPoint.x); tempLine.setAttribute("y1", dragStartPoint.y);
+        tempLine.setAttribute("x2", dragStartPoint.x); tempLine.setAttribute("y2", dragStartPoint.y);
+        tempLine.setAttribute("stroke", "#0d6efd"); tempLine.setAttribute("stroke-width", "2.5");
+        tempLine.setAttribute("opacity", "0.6"); svg.appendChild(tempLine);
+    };
+    window.handleDragMove = function(e) {
+        if (!isDragging || !tempLine) return;
+        const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
+    };
+    window.handleDragEnd = function(e) {
+        if (!isDragging) return;
+        let x = window.lastClientX, y = window.lastClientY;
+        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
+        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+            if (rightItem) {
+                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+            }
+        }
+        isDragging = false; dragStartPoint = null;
+        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
+        tempLine = null; renderMatchingQuestion(currentIndex);
+    };
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0, rect = wrapper.getBoundingClientRect();
+        const baseW = rect.width / zoom, baseH = rect.height / zoom;
+        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
+        svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById("dot-left-" + lIdx), dotR = document.getElementById("dot-right-" + rIdx);
+            if (dotL && dotR) {
+                const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                const x1 = (rL.left + rL.width/2 - rect.left) / zoom, y1 = (rL.top + rL.height/2 - rect.top) / zoom;
+                const x2 = (rR.left + rR.width/2 - rect.left) / zoom, y2 = (rR.top + rR.height/2 - rect.top) / zoom;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
+            }
+        });
+    };
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+            const el = document.getElementById('timer');
+            if (el) el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+        }, 1000);
+    }
+
+    function adjustZoom(delta) {
+        const body = document.body;
+        let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
+        let newZoom = currentZoom + delta;
+        if (newZoom < 0.5) newZoom = 0.5;
+        if (newZoom > 3.0) newZoom = 3.0;
+        body.style.zoom = newZoom;
+        
+        let inverseZoom = 1 / newZoom;
+        document.querySelectorAll('.home-float-btn, .zoom-controls').forEach(el => {
+            el.style.zoom = inverseZoom;
+        });
+        
+        if (window.drawLines) window.drawLines();
+    }
+
+    function processContent(content, item) {
+        if (!content) return '';
+        const lines = Array.isArray(content) ? content : [String(content)];
+        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const num = parseInt(p1, 10);
+            const src = item['image' + num] || item['image' + p1] || item['image'];
+            return src ? `<img src="${src}" class="q-img">` : match;
+        });
+    }
+
+    function initExam() {
+        if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
+            console.error("題庫資料載入失敗！"); return;
+        }
+        const CUTOFF = 80;
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); // 57
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 3
+        
+        let historySet = new Set();
+        try {
+            const savedHistory = localStorage.getItem(HISTORY_KEY);
+            if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
+        } catch(e) {}
+
+        // 1. 池子拆分：官方與補充
+        const offPoolTotal = allQuestions.filter(q => q.id <= CUTOFF);
+        const suppPoolTotal = allQuestions.filter(q => q.id > CUTOFF);
+
+        // 2. 池內優先級排序 (未看優先)
+        const offUnseen = offPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const offSeen = offPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppUnseen = suppPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppSeen = suppPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+
+        let finalOffOrder = [...offUnseen, ...offSeen];
+        let finalSuppOrder = [...suppUnseen, ...suppSeen];
+
+        let selected = [], usedIds = new Set();
+        
+        // --- 階段 A：分類平衡 (優先從官方池抽) ---
+        const categories = {};
+        allQuestions.forEach(q => {
+            const cat = q.category || '一般';
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+        const catNames = Object.keys(categories).sort();
+        
+        catNames.forEach(cat => {
+            let pool = finalOffOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            if (pool.length === 0) pool = finalSuppOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            const limit = (cat.includes('D0')) ? 2 : 3;
+            for (let i = 0; i < limit; i++) {
+                if (pool.length > 0) {
+                    const q = pool.shift();
+                    selected.push(q);
+                    usedIds.add(q.id);
+                }
+            }
+        });
+
+        // --- 階段 B：死守官方 95% 配額 ---
+        for (let q of finalOffOrder) {
+            if (selected.filter(s => s.id <= CUTOFF).length >= TARGET_OFF_COUNT) break;
+            if (!usedIds.has(q.id)) {
+                // 如果是 D0 類別，且已經有 2 題，則跳過
+                if (q.category && q.category.includes('D0')) {
+                    const curD0 = selected.filter(s => s.category && s.category.includes('D0')).length;
+                    if (curD0 >= 2) continue;
+                }
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // --- 階段 C：填滿補充 5% 配額 ---
+        for (let q of finalSuppOrder) {
+            if (selected.length >= EXAM_LIMIT) break;
+            if (!usedIds.has(q.id)) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // --- 階段 D：兜底 ---
+        if (selected.length < EXAM_LIMIT) {
+            const fallback = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+            while (selected.length < EXAM_LIMIT && fallback.length > 0) {
+                const q = fallback.shift();
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // 3. 更新歷史
+        selected.forEach(q => historySet.add(q.id));
+        if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
+        localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
+
+        examQuestions = selected.sort((a, b) => {
+            const catA = a.category || "";
+            const catB = b.category || "";
+            return catA.localeCompare(catB) || (a.id - b.id);
+        }).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    }
+
+    function renderQuestion(index, scrollTop = true) {
+        currentIndex = index; const item = examQuestions[index]; 
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
+        const container = document.getElementById('question-area'); 
+        if (!container) return;
+        container.innerHTML = '';
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
+        
+        const card = document.createElement('div'); card.className = 'card question-card';
+        let qText = processContent(item.question, item);
+        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body">${qText}</div>`;
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        const optionsRaw = item.quiz || item.options || [];
+        const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
+        const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
+        html += '<div class="mt-3">';
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            
+            if (optStr.includes('|')) {
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[optIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                const displayLabel = customLabel || `選項 ${optIdx + 1}`;
+
+                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">${displayLabel}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => { 
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx); 
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
+                });
+                html += `</div>`;
+            } else {
+                const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
+            }
+        });
+        html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+    }
+
+    function selectOption(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (item.type === 'multiple') {
+            if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
+            const idx = userAnswers[currentIndex].indexOf(optIdx);
+            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
+            else userAnswers[currentIndex].push(optIdx);
+        } else { userAnswers[currentIndex] = optIdx; }
+        renderQuestion(currentIndex, false);
+    }
+    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
+    function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
+    function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
+
+    function submitExam() {
+        clearInterval(timerInterval); 
+        const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
+        const homeBtn = document.querySelector('.home-float-btn');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        if (ui) ui.style.display = 'none'; 
+        if (rs) rs.style.display = 'block';
+        if (homeBtn) homeBtn.style.display = 'none';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        
+        // 進入考試結束畫面時，強制重置縮放比例為 1.0，確保畫面排版正常
+        document.body.style.zoom = "1.0";
+        
+        let correctCount = 0, stats = {}, incorrectHTML = '';
+        const catNameMap = {};
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let _m = fullCat.match(/^(D\d+)/); let prefix = (_m ? _m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+        examQuestions.forEach((item, idx) => {
+            let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
+            const cat = catNameMap[prefix];
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
+            stats[cat].total++;
+            
+                        const userAns = userAnswers[idx]; let isCorrect = false;
+            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            if (item.type === 'matching' || item.type === 'multimatching') {
+                let userLetters;
+                let totalRRows = 0; 
+                item.right.forEach(t => totalRRows += (t && String(t).includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
+                let isSplitMode = (totalRRows > item.left.length);
+                let ratio = isSplitMode ? (totalRRows / item.left.length) : 1;
+
+                if (isSplitMode) {
+                    userLetters = item.left.map((_, lIdx) => {
+                        const rIdx = (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null;
+                        if (rIdx === null || rIdx === undefined) return "";
+                        return String.fromCharCode(65 + (rIdx % ratio));
+                    });
+                } else {
+                    userLetters = item.left.map((_, i) => {
+                        const rIdx = (userAns && userAns[i] !== undefined) ? userAns[i] : null;
+                        return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
+                    });
+                }
+                
+                isCorrect = (userLetters.length === answers.length);
+                if (isCorrect) {
+                    for (let i = 0; i < answers.length; i++) {
+                        if (String(userLetters[i] || "").trim().toUpperCase() !== String(answers[i] || "").trim().toUpperCase()) {
+                            isCorrect = false; break;
+                        }
+                    }
+                }
+            } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+                isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+            } else if (item.type === 'multiple') {
+                const cIdxs = answers.map(a => parseAnswerToIndex(a));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+
+            stats[cat].ids.push({ id: item.id, isWrong: !isCorrect });
+            
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
+            if (isCorrect) { correctCount++; stats[cat].correct++; }
+            else {
+                const optsRaw = item.quiz || item.options || [];
+                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+                let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
+                
+                if (item.type === 'matching' || item.type === 'multimatching') {
+                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                        <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                        <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
+                            <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
+                                ${item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="mdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                            </div>
+                            <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
+                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                } else {
+                    opts.forEach((o, i) => {
+                        const isNum = (item.labelType === 'num');
+                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        if (String(o).includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const customLabelField = "question" + alphabet[i];
+                            let customLabel = "";
+                            if (item[customLabelField]) {
+                                customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                            }
+                            const displayLabel = customLabel || `選項 ${i + 1}`;
+
+                            const subLabels = o.split('|').map((s, si) => {
+                                const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                            }).join(' ');
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        }
+                        else {
+                            const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                        }
+                    });
+                }
+                optionsHTML += '</div>';
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+            }
+        });
+        const score = Math.round((correctCount / examQuestions.length) * 100);
+        document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
+        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th class="text-start">分類</th><th class="text-start">出題編號</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
+        const sortedCats = Object.keys(stats).sort();
+        
+        for (let cat of sortedCats) {
+            let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
+            let sortedIds = stats[cat].ids.sort((a, b) => a.id - b.id).map(obj => {
+                let displayId = obj.id > 69 ? `(${obj.id})` : obj.id;
+                if (obj.isWrong) return `<span style="color:red; font-weight:bold;">${displayId}</span>`;
+                return displayId;
+            }).join(', ');
+            catHTML += `<tr><td class="text-start fw-bold">${cat}</td><td class="text-start small" style="max-width:400px; word-break:break-all;">${sortedIds}</td><td>${total}</td><td>${p}%</td></tr>`;
+        }
+        catHTML += '</tbody></table>'; 
+        catHTML += '<div class="mt-2 mb-3 small text-start" style="padding-left:10px; border-left:3px solid #6c757d;">' + 
+                   '<span style="color:red; font-weight:bold;">紅色數字</span>：代表此題答錯；' + 
+                   '<span>(括號數字)</span>：代表 1-69 題以外的補充題。' +
+                   '</div>';
+        
+        document.getElementById('category-stats').innerHTML = catHTML;
+        let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        // 確保結果區塊與回顧區已顯示，以便正確計算 getBoundingClientRect
+        if (rs) rs.style.display = 'block';
+        const reviewArea = document.getElementById('review-area');
+        if (reviewArea) reviewArea.style.display = 'block';
+        
+        // 繪製模擬考試報告中的正確連線 (視窗座標差值法修正)
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width);
+                svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px';
+                svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+            if(window.Prism) Prism.highlightAll();
+        }, 2000);
+        try {
+            let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+            examQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                let isCorr = false;
+                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
+                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
+            });
+            localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+        } catch(e) {}
+    }
+    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
+    initExam();
+</script>
+</body>
+</html>

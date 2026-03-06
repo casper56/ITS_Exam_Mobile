@@ -26,7 +26,7 @@
         code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #000 !important; background-color: transparent !important; }
         code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; color: inherit; }
         .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
-        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
         .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
@@ -70,7 +70,7 @@
             @page { size: auto; margin: 8mm !important; }
             * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
             html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: white !important; font-size: 1.0rem !important; line-height: 1.8 !important; }
-            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar, .zoom-controls, .home-float-btn { display: none !important; visibility: hidden !important; position: absolute !important; top: -9999px !important; }
+            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar { display: none !important; }
             .content-area { margin-left: 0 !important; padding: 0 !important; margin-top: 0 !important; }
             #review-area { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 10px 0 !important; padding: 0 !important; }
@@ -107,9 +107,9 @@
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
-            .mobile-toggle { display: flex !important; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
-            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex !important; }
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
+            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
 
             .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
@@ -121,10 +121,10 @@
         
         #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
-        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
-        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
-        .match-col { display: flex !important; flex-direction: column !important; gap: 25px !important; width: max-content !important; flex: none !important; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 120px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 0 !important; width: max-content !important; flex: none !important; }
         .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
         .match-item-left { justify-content: flex-start !important; text-align: left !important; }
         .match-item-right { justify-content: flex-start !important; text-align: left !important; }
@@ -174,15 +174,17 @@
         </div>
         <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
     </nav>
-    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
-    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
+    <button class="mobile-toggle no-print" onclick="toggleSidebar()">☰</button>
+    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
+    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
     <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
 </div>
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script>
     const quizData = [
@@ -3510,6 +3512,12 @@
         }
         return -1;
     }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
+    }
     let currentIndex = 0;
     let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
     window.itspyZoom = 1.0;
@@ -3570,57 +3578,113 @@
             return src ? `<img src="${src}" class="q-img">` : match;
         });
     }
-    function renderMatchingQuestion(index) {
-        currentIndex = index; const item = quizData[index];
-        const container = document.getElementById('question-container');
-        if(document.getElementById('side-btn-prev')) document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
+                        function renderMatchingQuestion(index) {
+        currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
+        const container = document.getElementById('question-container') || document.getElementById('question-area');
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
-        const isCorrect = correctSet.has(index);
-        const isCorrected = correctedSet.has(index);
-        const isWrong = incorrectSet.has(index);
-        const completed = isCorrect || isCorrected;
+        
+        const isPractice = (typeof quizData !== 'undefined');
+        const isCorrect = isPractice ? correctSet.has(index) : false;
+        const isCorrected = isPractice ? correctedSet.has(index) : false;
+        const isWrong = isPractice ? incorrectSet.has(index) : false;
+        const isLocked = isCorrect || isCorrected;
+        const showAnswer = isLocked || isWrong;
+
+        let rightRowGroups = item.right.map(t => (t && t.includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        let totalRightRows = rightRowGroups.reduce((a, b) => a + b, 0);
+        let splitRatio = totalRightRows / item.left.length; 
+        let isSplitMode = (totalRightRows > item.left.length);
+
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge ${completed ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-                                                                                    <div class="question-body" style="color:#333;">
-                                                                                        ${processContent(item.question, item)}
-                                                                        `;
-                                                                    html += `<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col">
-                            <div class="match-header-title">程式碼片段</div>`;
+                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
+
+        // 左側：[文字] [圓圈]
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
-            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
-            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${completed?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+            const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
+            const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
+            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
+            
+            html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
+                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
+                <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
+            </div>`;
+            
+            if (isSplitMode && splitRatio > 1) {
+                for(let p=0; p < Math.floor(splitRatio - 1); p++) {
+                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
+                }
+            }
         });
-                            html += `</div><div class="match-col right-col">
-                                <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;        item.right.forEach((text, rIdx) => {
-            const isMatchedByAny = currentAns.includes(rIdx);
-            const dotColor = completed ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div class="q-text-part-right">${cleanText}</div></div>`;
+
+        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
+
+        // 右側：[圓圈] [文字]
+        let rIdxCounter = 0;
+        item.right.forEach((text, grpIdx) => {
+            if (text && text.includes('|')) {
+                const parts = text.replace(/<\/?code>/g, '').split('|');
+                parts.forEach((partText) => {
+                    const rIdx = rIdxCounter++;
+                    const isMatchedByAny = currentAns.includes(rIdx);
+                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                        <div class="match-dot" id="dot-right-${rIdx}">
+                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                        </div>
+                        <div class="q-text-part"><code>${partText}</code></div>
+                    </div>`;
+                });
+            } else {
+                const rIdx = rIdxCounter++;
+                const isMatchedByAny = currentAns.includes(rIdx);
+                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                    <div class="match-dot" id="dot-right-${rIdx}">
+                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                    </div>
+                    <div class="q-text-part">${cleanText}</div>
+                </div>`;
+            }
+            // 每群顯示後畫一條灰色線 (排除最後一組)
+            if (grpIdx < item.right.length - 1) {
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
+            }
         });
+
         html += `</div></div></div>`;
-        if (!completed) html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">確認提交</button></div>`;
-        else {
-            const ansText = item.answer.join(', ');
+        if (!isLocked && isPractice) {
+            html += `<div class="text-center mt-5 mb-3 border-top pt-4"><button class="btn btn-primary px-5 btn-lg" onclick="submitMatching()">${isWrong ? '更正提交' : '確認提交'}</button></div>`;
+        }
+        if (showAnswer) {
+            const isJavaQ6 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 6);
+            const isJavaQ7 = (typeof SUBJECT_ID !== 'undefined' && SUBJECT_ID === 'itsjava' && item.id === 7);
+            const ansText = (isJavaQ6 || isJavaQ7) ? item.answer.join(', ') : (Array.isArray(item.answer) ? item.answer.join(', ') : item.answer);
+            const statusMsg = isCorrected ? '<div class="fw-bold mb-2 text-warning">🟠 已更正成功！</div>' : 
+                             (isWrong ? '<div class="fw-bold mb-2 text-danger">❌ 答錯了，請參考正確答案進行更正</div>' : 
+                             '<div class="fw-bold mb-2 text-success">✅ 答對了！</div>');
             html += `<div class="answer-section" style="display:block;">
-                        <div class="fw-bold mb-2 ${isCorrected?'text-warning':'text-success'}">${isCorrected?'🟠 已更正成功！':'✅ 答對了！'}</div>
+                        ${statusMsg}
                         <div class="review-ans" style="margin: 10px 0;">正確答案：${ansText}</div>
                         <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                      </div>`;
         }
-        html += `</div></div></div>`; container.innerHTML = html; updateUI(); saveState();
-        window.changeZoom(0); 
-        // 動態偵測字寬對齊 (V3.5.3 結構化對齊)
+        html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
         setTimeout(() => {
-            const parts = container.querySelectorAll('.match-item-left .q-text-part');
-            let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
-            parts.forEach(p => p.style.width = (maxW + 2) + 'px');
-            drawLines();
+            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
+            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
+
+            if (window.drawLines) window.drawLines();
+            if (window.Prism) Prism.highlightAll();
         }, 30);
     }
     let isDragging = false, dragStartPoint = null, tempLine = null;
@@ -3688,16 +3752,59 @@
             }
         });
     };
-    window.submitMatching = function() {
-        const item = quizData[currentIndex], ans = userAnswers[currentIndex];
-        // 允許部分提交：移除 ans.includes(null) 的強制攔截
-        const userAnswersAsLetters = (ans || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
-        const isCorrect = JSON.stringify(userAnswersAsLetters) === JSON.stringify(item.answer);
+                                window.submitMatching = function() {
+        const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
+        const ans = userAnswers[currentIndex] || [];
+        let finalUserAns = [];
+        
+        // 精確計算每個群組的起始索引
+        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        const groupStarts = [];
+        let currentStart = 0;
+        rightRowGroups.forEach(size => {
+            groupStarts.push(currentStart);
+            currentStart += size;
+        });
+
+        // 判定是否使用相對索引 (當左側題目數等於右側群組數時，如 Java Q9)
+        const useRelative = (item.right && item.right.length === item.left.length);
+
+        finalUserAns = item.left.map((_, lIdx) => {
+            const rIdx = ans[lIdx];
+            if (rIdx === null || rIdx === undefined) return "";
+            if (useRelative) {
+                // 精確計算：找出 rIdx 屬於哪一個群組
+                let gIdx = 0;
+                for (let i = 0; i < groupStarts.length; i++) {
+                    if (rIdx >= groupStarts[i]) gIdx = i;
+                    else break;
+                }
+                const relRIdx = rIdx - groupStarts[gIdx];
+                return String.fromCharCode(65 + relRIdx);
+            } else {
+                return String.fromCharCode(65 + rIdx);
+            }
+        });
+
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
+        let isCorrect = (finalUserAns.length === correctAns.length);
         if (isCorrect) {
-            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-            else { correctSet.add(currentIndex); }
+            for (let i = 0; i < correctAns.length; i++) {
+                if (parseAnswerToIndex(finalUserAns[i]) !== parseAnswerToIndex(correctAns[i])) {
+                    isCorrect = false; break;
+                }
+            }
+        }
+        
+        if (isCorrect) {
+            if (typeof correctSet !== 'undefined') {
+                if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+                else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
+            }
         } else {
-            incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
+            if (typeof incorrectSet !== 'undefined') {
+                incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
+            }
         }
         renderMatchingQuestion(currentIndex);
     };
@@ -3802,9 +3909,16 @@
                 const overlay = document.getElementById('loading-overlay');
                 const zoomBtns = document.querySelector('.zoom-controls');
                 const homeBtn = document.querySelector('.home-float-btn');
+                const mobileToggle = document.querySelector('.mobile-toggle');
+                const sidePrev = document.getElementById('side-btn-prev');
+                const sideNext = document.getElementById('side-btn-next');
+
                 if (overlay) overlay.style.display = 'flex';
-                if (zoomBtns) zoomBtns.style.display = 'none';
-                if (homeBtn) homeBtn.style.display = 'none';
+                if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
+                if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
+                if (mobileToggle) mobileToggle.style.setProperty('display', 'none', 'important');
+                if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
+                if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
 
                 // 記錄原始狀態以便後續恢復
                 const oldZoom = document.body.style.zoom || "1.0";
@@ -3830,7 +3944,7 @@
                 const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                 
                 let optHtml = "";
-                            if (item.type === 'matching') {
+                            if (item.type === 'matching' || item.type === 'multimatching') {
                                 let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
                                 let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('');
                                 
@@ -3862,7 +3976,7 @@
                 }
     
                 let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '$1');
+                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
                 const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
                     const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
                 }).join(', ');
@@ -3928,11 +4042,13 @@
                                                                                                                                                                                         setTimeout(() => { 
                                                                                                                                                                                             window.print(); 
                                                                                                                                                                                             // 列印後恢復原始 UI 狀態並隱藏遮罩
-                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
-                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.display = 'flex';
-                                                                                                                                                                                            if (homeBtn) homeBtn.style.display = 'flex';
-                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {
-                                                                                                                                                                                                sidebar.style.display = 'flex';
+                                                                                                                                                                                                                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
+                                                                                                                                                                                                                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (homeBtn) homeBtn.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (mobileToggle) mobileToggle.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (sidePrev) sidePrev.style.setProperty('display', (currentIndex === 0) ? 'none' : 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            if (sideNext) sideNext.style.setProperty('display', 'flex', 'important');
+                                                                                                                                                                                                                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {                                                                                                                                                                                                sidebar.style.display = 'flex';
                                                                                                                                                                                                 content.style.marginLeft = '280px';
                                                                                                                                                                                             }
                                                                                                                                                                                         }, 1200);                                                                                    }, 2500);
@@ -3941,12 +4057,13 @@
     function renderQuestion(index) {
         console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
-        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
         let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
-        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${Array.isArray(item.answer) ? item.answer.join(', ') : item.answer}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
+        const ansText = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(a => formatAnswer(a, item)).join(', ');
+        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${ansText}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');
         opts.forEach((opt, oIdx) => {
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;

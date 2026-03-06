@@ -1,0 +1,4088 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ-900 模擬考試</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <style>
+        /* 強制去除選項內代碼底色與黑字規範 */
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item, .sub-opt-container { color: #000 !important; }
+        code { background-color: transparent !important; }
+
+        html { scrollbar-gutter: stable; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
+        .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; width: calc(100% - 60px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 5px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                }
+                
+                .q-content { white-space: pre-wrap; }
+                
+                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                }
+        code[class*="language-"], pre[class*="language-"] { color: #333 !important; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
+
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
+        .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
+        #result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin: 0 !important; padding: 0 !important; }
+
+        table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
+        th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
+        
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 25px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
+        .side-nav-btn:hover { background: #0d6efd; color: white; width: 30px; }
+        .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
+        .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
+        .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px; border: 1px solid #000; margin: 10px 0; border-left-width: 5px; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 10px; border: 1px solid #000; }
+        @media print { 
+            @page { size: auto; margin: 10mm; }
+            * { overflow: visible !important; max-height: none !important; height: auto !important; }
+            body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
+            #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border: 2px solid #000 !important; width: 100% !important; page-break-inside: auto !important; margin-bottom: 5px !important; padding: 10px !important; border-radius: 0 !important; }
+            .review-id { margin: 0 0 5px 0 !important; padding: 0 0 2px 0 !important; border-bottom: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
+            .review-q-text { display: block !important; padding: 2px 0 !important; font-size: 1.0rem !important; width: 100% !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border: 1px solid #000 !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
+            .review-exp { font-size: 0.95rem !important; padding: 5px 10px !important; border: 1px solid #000 !important; line-height: 1.4 !important; }
+            
+            /* 強效鎖定列印配對圖佈局 (同步 Flex 佈局防止 PDF 偏移) */
+            .print-matching { 
+                display: block !important; 
+                width: 100% !important; 
+                position: relative !important; 
+                margin: 20px 0 !important; 
+                padding: 15px !important;
+                background: #fff !important;
+                border: 1px solid #333 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .matching-columns { 
+                display: flex !important; 
+                flex-direction: row !important;
+                justify-content: flex-start !important; 
+                gap: 40px !important; 
+                width: 100% !important; 
+            }
+            .match-col { 
+                display: flex !important;
+                flex-direction: column !important;
+                flex: none !important; 
+                width: max-content !important; 
+                min-width: 150px !important;
+            }
+            .match-item { 
+                display: flex !important; 
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100% !important; 
+                height: 40px !important; 
+                margin-bottom: 10px !important; 
+                line-height: 1 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .q-text-part {
+                max-height: 40px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .match-dot {
+                width: 16px !important;
+                height: 16px !important;
+                margin: 0 10px !important;
+                border: 2px solid #198754 !important;
+                border-radius: 50% !important;
+                background: #fff !important;
+                flex-shrink: 0 !important;
+                display: inline-block !important;
+            }
+            .print-svg { 
+                position: absolute !important; 
+                top: 0 !important; 
+                left: 0 !important; 
+                width: 100% !important; 
+                height: 100% !important; 
+                z-index: 99 !important; 
+                display: block !important;
+                overflow: visible !important;
+            }
+            line { stroke-opacity: 1 !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
+            .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
+        }
+        .zoom-controls { position: fixed; bottom: 30px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+        
+        /* 配對題樣式 */
+        .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
+        .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; }
+        .right-col .match-header-title { margin-left: 10px; }
+        .matching-columns { display: flex !important; justify-content: flex-start !important; align-items: flex-start !important; gap: 60px !important; position: relative; z-index: 2; padding-left: 10px !important; width: max-content !important; }
+        .match-col { display: flex !important; flex-direction: column !important; gap: 25px !important; width: max-content !important; flex: none !important; }
+        .match-item { display: flex !important; align-items: center !important; min-height: 45px !important; cursor: pointer !important; width: max-content !important; }
+        .match-item-left { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-right { justify-content: flex-start !important; text-align: left !important; }
+        .match-item-left .q-text-part { display: inline-block !important; }
+        .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
+        .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
+        #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        @media (max-width: 768px) {
+            .matching-columns, .match-header-row { gap: 30px !important; }
+            .match-col { min-width: 140px !important; }
+        }
+        /* 資料處理遮罩 */
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0d6efd; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+<div id="loading-overlay" class="no-print">
+    <div class="spinner"></div>
+    <div>資料處理中，請稍候...</div>
+</div>
+<div class="zoom-controls no-print">
+    <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
+</div>
+<div id="exam-ui">
+    <header class="exam-header d-flex justify-content-between align-items-center">
+        <div><h5 class="m-0">AZ-900 模擬考試</h5><small id="q-progress">1 / 60</small></div>
+        <div class="timer-box" id="timer">50:00</div>
+        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+    </header>
+    <div class="side-nav-btn side-nav-prev" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
+    <div class="side-nav-btn side-nav-next" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
+    <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; max-width: none !important;"><div id="question-area"></div></main>
+</div>
+<div id="result-screen" class="container-fluid">
+    <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 60</p>
+    <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
+    <div class="mt-5 no-print">
+        <a href="../../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="prepareMockPrint()">🖨️ 列印錯題</button>
+    </div>
+    <div id="review-area">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
+        <div id="review-list"></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    function prepareMockPrint() {
+        const overlay = document.getElementById('loading-overlay');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        const reviewArea = document.getElementById('review-area');
+        if (overlay) overlay.style.display = 'flex';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        if (reviewArea) reviewArea.style.display = 'block';
+        const oldZoom = document.body.style.zoom || "1.0";
+        document.body.style.zoom = "1.0";
+
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                if (!svg) return;
+
+                // 實作左側動態字寬偵測 (練習區列印專用)
+                const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+                let maxW = 0;
+                leftParts.forEach(p => {
+                    const w = p.getBoundingClientRect().width;
+                    if (w > maxW) maxW = w;
+                });
+                if (maxW > 0) {
+                    leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
+                }
+
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width); svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px'; svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+
+            setTimeout(() => {
+                window.print();
+                if (overlay) overlay.style.display = 'none';
+                if (zoomBtns) zoomBtns.style.display = 'flex';
+                document.body.style.zoom = oldZoom;
+            }, 1200);
+        }, 2500);
+    }
+
+    const EXAM_LIMIT = 60, WRONG_KEY = 'az900_exam_wrong_ids', HISTORY_KEY = 'az900_mock_history';
+    let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
+    let examQuestions = [];
+
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+
+    const allQuestions = [
+  {
+    "id": 1,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>1. 您可以為 Microsoft Entra 使用者新增資源鎖定。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 2,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>2. 您可以為相同 Azure 虛擬機器新增多個資源鎖定。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 3,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>3. 您可以修改具有刪除鎖定之 Azure 資源的屬性。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 4,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>4. 安裝在 Azure 虛擬機器上的 Microsoft SQL Server 2022 是一種平臺即服務(PaaS)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 5,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>5. Azure SQL Database 是一種平臺即服務(PaaS)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 6,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>6. Azure Cosmos DB 是一種軟體即服務(SaaS)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 7,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>7. 您只能從 Windows 裝置管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 8,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>8. 您可以從命令列管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 9,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>9. 您可以使用網頁瀏覽器管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 10,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>10. 雲端運算的資本支出(CapEx)成本低於內部部署。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 11,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>11. 雲端運算提供與內部部署相同的設定選項。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 12,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>12. 雲端運算可在業務需要變更時進行調整。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 13,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>13. Azure 隨用隨付定價是 CapEx 範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 14,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>14. 支付資料中心的電費是 OpEx 範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 15,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>15. 部署您自己的資料中心是 CapEx 範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 16,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>16. 在 Azure 訂用帳戶中新增資源群組會產生額外費用。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 17,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>17. 透過 VPN 從內部部署網路將 10GB 的資料複製到 Azure 會產生額外的 Azure 資料傳輸費用。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 18,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>18. 透過 VPN 從 Azure 將 10GB 的資料複製到內部部署網路會產生額外的 Azure 資料傳輸費用。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 19,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>19. 您可以設定 Microsoft Entra 活動記錄,以在 Azure 監視器中顯示。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 20,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>20. 您可以從 Azure 監視器建立警示。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 21,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>21. 您可以從 Azure 監視器監視多個 Azure 訂用帳戶的資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 22,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>22. 擁有權總成本(TCO)計算機會顯示在資料中心內執行工作負載的成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 23,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>23. 擁有權總成本(TCO)計算機會顯示在 Azure 中執行工作負載的成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 24,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>24. 擁有權總成本(TCO)計算機會產生圖形化報表。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 25,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>25. Azure 儲存體中的極非經常性存取層會針對至少90天的資料儲存體最佳化。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 26,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>26. Azure 儲存體中的非經常性存取層會針對至少 90 天的資料儲存體最佳化。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 27,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>27. Azure 儲存體中的封存存取層會針對至少 180 天的資料儲存體最佳化。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 28,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>28. Microsoft Entra 可用於管理對內部部署應用程式的存取。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 29,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>29. Microsoft Entra 提供單一登入(SSO)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 30,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>30. iOS 裝置可以在 Microsoft Entra 租使用者內註冊。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 31,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>31. AzCopy 是一個用來在儲存體帳戶之間來回複製 Blob 或檔案的命令列公用程式。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 32,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>32. Azure 儲存體總管是一項用來傳輸大量資料的雲端託管移轉服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 33,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>33. Azure 檔案同步會在 Azure 檔案儲存體與 Windows 檔案伺服器之間同步檔案和資料夾。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 34,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>34. 一個 Azure 訂用帳戶可以與多個 Microsoft Entra 租使用者建立關聯。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 35,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>35. 您可以變更與 Azure 訂用帳戶建立關聯的 Microsoft Entra 租使用者。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 36,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>36. 當 Azure 訂用帳戶到期時,會自動刪除已建立關聯的 Microsoft Entra 租使用者。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 37,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>37. Azure 虛擬桌面工作階段主機只能執行 Windows 10 或 Windows 11。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 38,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>38. 一個包含 20 部工作階段主機的 Azure 虛擬桌面主機集區,最多可支援 20 位使用者同時連線。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 39,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>39. Azure 虛擬桌面支援桌面與應用程式虛擬化。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 40,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>40. 建立和設定虛擬網路是平臺即服務(PaaS)雲端服務模型的一部分。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 41,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>41. 在平臺即服務(PaaS)雲端服務模型中,為 Azure Web 應用程式更新程式碼是客戶的責任。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 42,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>42. 設定平臺即服務(PaaS)雲端服務模型的使用者存取權是客戶的責任。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 43,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>43. 適用於雲端的 Microsoft Defender 可以監視 Azure 資源與內部部署資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 44,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>44. 所有適用於雲端的 Microsoft Defender 功能皆為免費。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 45,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>45. 您可以從適用於雲端的 Microsoft Defender 下載法規合規性報告。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 46,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>46. 單一Microsoft 帳戶可用於管理多個 Azure 訂用帳戶。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 47,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>47. 兩個 Azure 訂用帳戶可合併為單一訂用帳戶。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 48,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>48. 公司可以使用多個 Azure 訂用帳戶的資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 49,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>49. 唯讀鎖定會防止使用者刪除 Azure 資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 50,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>50. 使用者可以修改已套用刪除鎖定的 Azure 資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 51,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>51. 所有 Azure 資源都會繼承指派給其上層資源群組的鎖定。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 52,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>52. 使用按使用量計費的方案時,所有傳送到雲端裝載之虛擬機器的資料,或從該機器中接收的資料,一律支付固定的費率。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 53,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>53. 使用按使用量計費的方案時,因為只要支付所需的額外容量,所以可以降低整體成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 54,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>54. 無伺服器運算是按使用量計費的方案範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 55,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>55. Azure 中國由 Microsoft 營運。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 56,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>56. Azure Government 由 Microsoft 營運。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 57,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>57. Azure Government 僅適用於美國政府機構及其合作夥伴。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 58,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>58. 若要實作 Azure Multi-Factor Authentication(MFA)解決方案,您必須將內部部署身分識別同步至雲端。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 59,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>59. Azure Multi-Factor Authentication(MFA)有兩種有效方法,就是照片識別與護照號碼。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 60,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>60. 系統管理與非系統管理使用者帳戶皆可要求 Azure Multi-Factor Authentication(MFA)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 61,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>61. 部署到資源群組的所有 Azure 資源都必須位於相同的 Azure 區域。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 62,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>62. 如果您將標籤指派給某個資源群組,則該資源群組中的所有 Azure 資源都會獲指派相同的標籤。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 63,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>63. 如果您將某個資源群組的管理許可權指派給了某位使用者,則該使用者就可以管理該資源群組中的所有 Azure 資源。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 64,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>64. 系統管理員可以在 Azure 服務健康狀態中,檢視 Azure 環境中所有服務的健康情況。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 65,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>65. 系統管理員可以在 Azure 服務健康狀態中建立規則,以便在 Azure 服務失敗時收到警示。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 66,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>66. 系統管理員可以在 Azure 服務健康狀態中防止服務失敗。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 67,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>67. Azure DNS 僅支援公用 DNS 網域名稱。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 68,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>68. Azure 虛擬機器可以自動在 Azure DNS 中註冊名稱。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 69,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>69. Azure DNS 可以裝載自訂 DNS 網域。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 70,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>70. 您必須擁有實體伺服器才能使用雲端運算。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 71,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>71. 您必須擁有網際網路連線能力才能使用雲端運算。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 72,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>72. 提高雲端運算容量的成本低於提高內部部署資料中心運算容量的成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 73,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>73. 若您使用軟體即服務(SaaS),則必須套用軟體更新。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 74,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>74. 若您使用基礎結構即服務(IaaS),則必須安裝欲使用的軟體。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 75,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>75. Azure 備份是一種平臺即服務(PaaS)。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 76,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>76. 您必須擁有網際網路連線能力才能管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 77,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>77. 您必須安裝管理應用程式才能管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 78,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>78. 您可以從任何新式網頁瀏覽器管理雲端服務。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 79,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>79. Azure Resource Manager(ARM)範本是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 80,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>80. Bicep檔案是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 81,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>81. Microsoft Excel範本是一種基礎結構即程式碼(laC)的範例。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 82,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>82. 建置資料中心基礎設施是一種營運支出(OpEx)成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 83,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>83. 技術人員的每月薪資是一種營運支出(OpEx)成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 84,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>84. 租用軟體是一種營運支出(OpEx)成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 85,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>85. Microsoft Purview 會提供資料備份。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code>Microsoft Purview 本身不是一個直接的資料備份工具，而是提供資料治理、合規和保護的平臺，",
+      "它透過資料生命週期管理（保留/刪除規則）和電子檔案探索功能協助管理資料，並在內部提供資料目錄、譜系等功能來瞭解和追蹤資料，",
+      "但若要實際「備份」大量資料或實現跨系統的災難復原 (BCDR)，通常需要搭配其他 Microsoft 365 服務 (如 Exchange 備份)",
+      "或自定義的備份策略來實現，Purview 主要是協助制定和執行政策，並發現應備份和應保留的內容。</code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 86,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>86. Microsoft Purview 會提供資料探索。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 87,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>87. Microsoft Purview 會提供資料分類。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 88,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>88. 水平調整可以自動增加虛擬機器執行個體的數目。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 89,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>89. 垂直調整可以自動為虛擬機器新增額外的記憶體。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 90,
+    "type": "truefalse",
+    "question": [
+      "<pre><code>90. 調整可用於根據服務需求降低成本。</code></pre>"
+    ],
+    "options": [
+      "<code>O</code>",
+      "<code>X</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 91,
+    "type": "single",
+    "question": [
+      "<pre><code>91. 下列何者是雲端環境中垂直調整的範例?</code></pre>"
+    ],
+    "options": [
+      "<code>針對現有的 Azure 虛擬機器新增額外的 CPU</code>",
+      "<code>新增額外的 Azure 虛擬桌面工作階段主機</code>",
+      "<code>自動新增額外的 Azure App Service 執行個體</code>",
+      "<code>新增額外的 Azure 虛擬機器</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 92,
+    "type": "single",
+    "question": [
+      "<pre><code>92. 貴公司裝載了名為 App1 的會計應用程式,供公司全體客戶使用。 App1 的使用量在每月的前三週都很低,但最後一週卻很高。 Azure 雲端服務有哪一項優點,可支援這類使用模式的成本管理?</code></pre>"
+    ],
+    "options": [
+      "<code>高可用性</code>",
+      "<code>負載平衡</code>",
+      "<code>彈性</code>",
+      "<code>高延遲</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 93,
+    "type": "single",
+    "question": [
+      "<pre><code>93. 裝載於雲端中,並且由 Azure 管理軟體更新的 Microsoft SQL Server 資料庫是一種__________</code></pre>"
+    ],
+    "options": [
+      "<code>災害復原即服務(DRaaS)。</code>",
+      "<code>基礎結構即服務(IaaS)。</code>",
+      "<code>平臺即服務(PaaS)。</code>",
+      "<code>軟體即服務(SaaS)。</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 94,
+    "type": "single",
+    "question": [
+      "<pre><code>94. 請問應用程式該使用下列何者,才能與 Azure 互動及管理資源?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 命令列介面(CLI)</code>",
+      "<code>Azure Cloud Shell</code>",
+      "<code>API</code>",
+      "<code>Azure Resource Manager(ARM)範本</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 95,
+    "type": "single",
+    "question": [
+      "<pre><code>95. __________可以超低折扣提供未使用的 Azure 計算容量。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 容器執行個體</code>",
+      "<code>Azure 保留的虛擬機器執行個體</code>",
+      "<code>Azure 現成虛擬機器執行個體</code>",
+      "<code>Azure 虛擬機器擴充套件集</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 96,
+    "type": "single",
+    "question": [
+      "<pre><code>96. 您的公司擁有 Azure 訂用帳戶,其中包含多個區域的資源。 您需要確保系統管理員只能在這些區域中建立資源。 您應該使用下列哪一項?</code></pre>"
+    ],
+    "options": [
+      "<code>唯讀鎖定</code>",
+      "<code>Azure 原則</code>",
+      "<code>保留</code>",
+      "<code>管理群組</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 97,
+    "type": "single",
+    "question": [
+      "<pre><code>97. 當 Microsoft 計劃執行維護,並可能影響部署至 Azure 訂閱的資源時,您需要收到通知。 您應該使用下列哪一項?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 監視器</code>",
+      "<code>Azure 服務健康狀態</code>",
+      "<code>Azure Advisor</code>",
+      "<code>Microsoft信任中心</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 98,
+    "type": "single",
+    "question": [
+      "<pre><code>98. 以下哪一項會提供 Azure 服務和區域的健康狀態概觀。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 監視器</code>",
+      "<code>Azure 資源健康狀態</code>",
+      "<code>Azure 服務健康狀態</code>",
+      "<code>Azure 狀態</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 99,
+    "type": "single",
+    "question": [
+      "<pre><code>99. 您要在 Azure Resource Manager 中建立名為 RG1 的資源群組。 您需要防止意外刪除 RG1 中的資源。您應該使用下列哪項設定?</code></pre>"
+    ],
+    "options": [
+      "<code>部署</code>",
+      "<code>原則</code>",
+      "<code>屬性</code>",
+      "<code>鎖定</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": "images//q99.jpg",
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 100,
+    "type": "single",
+    "question": [
+      "<pre><code>100. 如果一個名為 RG1 的資源群組具有刪除鎖定,__________可以刪除 RG1。</code></pre>"
+    ],
+    "options": [
+      "<code>只有全域管理員群組的成員</code>",
+      "<code>必須先移除刪除鎖定,然後管理員才</code>",
+      "<code>必須先修改 Azure 原則,然後管理員才</code>",
+      "<code>必須先新增 Azure 標籤,然後管理員才</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 101,
+    "type": "single",
+    "question": [
+      "<pre><code>101. 您有一些執行 Windows Server 的內部部署伺服器。 您應該實作下列哪一項,才能使用 Azure 入口網站管理這些伺服器?</code></pre>"
+    ],
+    "options": [
+      "<code>Docker</code>",
+      "<code>角色型存取控制(RBAC)</code>",
+      "<code>Azure Arc</code>",
+      "<code>Azure Kubernetes Service(AKS)</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 102,
+    "type": "single",
+    "question": [
+      "<pre><code>102. 貴公司打算開始使用 Azure,並將所有網路資源全都移轉至 Azure。 您必須開始探索 Azure 以計劃移轉流程。 您應該先建立什麼專案?</code></pre>"
+    ],
+    "options": [
+      "<code>管理群組</code>",
+      "<code>訂用帳戶</code>",
+      "<code>虛擬網路</code>",
+      "<code>資源群組</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 103,
+    "type": "single",
+    "question": [
+      "<pre><code>103. ExpressRoute 是在哪一個 OSI 層運作?</code></pre>"
+    ],
+    "options": [
+      "<code>第 5 層</code>",
+      "<code>第 2 層</code>",
+      "<code>第 7 層</code>",
+      "<code>第 3 層</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 104,
+    "type": "single",
+    "question": [
+      "<pre><code>104. Azure 中國(Azure China)在架構或營運上有什麼特殊之處?</code></pre>"
+    ],
+    "options": [
+      "<code>由 Microsoft 提供。</code>",
+      "<code>功能等同於 Azure 全球。</code>",
+      "<code>服務只能從中國存取。</code>",
+      "<code>是個別獨立的 Microsoft Azure 執行個體。</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 105,
+    "type": "single",
+    "question": [
+      "<pre><code>105. 您計劃將數部執行 Windows11 電腦中的網路磁碟機對應至 Azure 儲存體。 您必須在 Azure 中為規劃的對應磁碟機建立儲存體解決方案。您應該建立哪些專案?</code></pre>"
+    ],
+    "options": [
+      "<code>儲存體帳戶中的檔案服務</code>",
+      "<code>虛擬機器資料磁碟</code>",
+      "<code>Azure SQL 資料庫</code>",
+      "<code>儲存體帳戶中的 Blob 服務</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 106,
+    "type": "single",
+    "question": [
+      "<pre><code>106. ____________是一項實體移轉服務,用以快速、便宜且可靠地傳輸大量資料。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 資料箱</code>",
+      "<code>Azure Databricks</code>",
+      "<code>Azure 檔案同步</code>",
+      "<code>Azure Migrate</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 107,
+    "type": "single",
+    "question": [
+      "<pre><code>107. 您計劃將 20 部 Azure 虛擬機器部署至 Azure 環境。為了確保一部名為VM1 的虛擬機器無法連線到其他虛擬機器,VM1 必須____________</code></pre>"
+    ],
+    "options": [
+      "<code>部署至不同的虛擬網路。</code>",
+      "<code>執行與其他虛擬機器不同的作業系統。</code>",
+      "<code>部署至不同的資源群組。</code>",
+      "<code>具有兩個網路介面。</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 108,
+    "type": "single",
+    "question": [
+      "<pre><code>108. 您可以將 Azure 原則定義指派給____________</code></pre>"
+    ],
+    "options": [
+      "<code>容器應用程式。</code>",
+      "<code>資源群組</code>",
+      "<code>資源鎖定。</code>",
+      "<code>安全性群組。</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 109,
+    "type": "single",
+    "question": [
+      "<pre><code>109. 您可以使用____________以確保雲端資源始終符合公司標準和法規要求。</code></pre>"
+    ],
+    "options": [
+      "<code>彈性</code>",
+      "<code>水平縮放</code>",
+      "<code>角色型存取控制(RBAC)</code>",
+      "<code>ARM 範本</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 110,
+    "type": "single",
+    "question": [
+      "<pre><code>110. 許多 Azure 資源會要求您指定應該部署的目標____________</code></pre>"
+    ],
+    "options": [
+      "<code>地理位置</code>",
+      "<code>區域</code>",
+      "<code>資料中心</code>",
+      "<code>城市</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 111,
+    "type": "single",
+    "question": [
+      "<pre><code>111. 即使 Azure 虛擬機器的狀態為已停止(已解除配置),您仍將繼續支付____________</code></pre>"
+    ],
+    "options": [
+      "<code>計算容量的費用</code>",
+      "<code>I/O 作業的費用</code>",
+      "<code>網路的費用</code>",
+      "<code>儲存體的費用</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 112,
+    "type": "single",
+    "question": [
+      "<pre><code>112. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure 虛擬機器:___________</code></pre>"
+    ],
+    "options": [
+      "<code>基礎結構即服務(IaaS)</code>",
+      "<code>平臺即服務(PaaS)</code>",
+      "<code>軟體即服務(SaaS)</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 113,
+    "type": "single",
+    "question": [
+      "<pre><code>113. Azure 虛擬機器和 Azure SQL 資料庫使用哪種雲端部署解決方案?Azure SQL 資料庫:___________</code></pre>"
+    ],
+    "options": [
+      "<code>基礎結構即服務(IaaS)</code>",
+      "<code>平臺即服務(PaaS)</code>",
+      "<code>軟體即服務(SaaS)</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 114,
+    "type": "single",
+    "question": [
+      "<pre><code>114. ___________可確保 Azure 服務具有備援能力並防止資料中心故障。</code></pre>"
+    ],
+    "options": [
+      "<code>可用性區域</code>",
+      "<code>Azure 原則</code>",
+      "<code>Azure 服務健康狀態</code>",
+      "<code>本地備援儲存體(LRS)</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 115,
+    "type": "single",
+    "question": [
+      "<pre><code>115. ___________是用來將相關的 Azure 原則分組。</code></pre>"
+    ],
+    "options": [
+      "<code>計劃</code>",
+      "<code>管理群組</code>",
+      "<code>引數</code>",
+      "<code>資源群組</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 116,
+    "type": "single",
+    "question": [
+      "<pre><code>116. 當您需要同時委派許可權給多部 Azure 虛擬機器時,您必須___________</code></pre>"
+    ],
+    "options": [
+      "<code>將 Azure 虛擬機器部署至同一個 Azure 區域。</code>",
+      "<code>使用相同的 Azure Resource Manager 範本部署 Azure 虛擬機器。</code>",
+      "<code>將 Azure 虛擬機器部署至同一個資源群組。</code>",
+      "<code>將 Azure 虛擬機器部署至同一個可用性區域。</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 117,
+    "type": "single",
+    "question": [
+      "<pre><code>117. ___________支援內部部署儲存體與 Azure 儲存體之間的同步處理。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure Blob 儲存體</code>",
+      "<code>Azure 檔案儲存體</code>",
+      "<code>Azure 佇列儲存體</code>",
+      "<code>Azure 表格儲存體</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 118,
+    "type": "single",
+    "question": [
+      "<pre><code>118. Azure 容器執行個體是一種 Azure___________</code></pre>"
+    ],
+    "options": [
+      "<code>計算服務。</code>",
+      "<code>身分識別服務。</code>",
+      "<code>網路服務。</code>",
+      "<code>儲存體服務</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 119,
+    "type": "single",
+    "question": [
+      "<pre><code>119. ___________讓組織能夠管理多個訂用帳戶間的 Azure 資源合規性。</code></pre>"
+    ],
+    "options": [
+      "<code>資源群組</code>",
+      "<code>管理群組</code>",
+      "<code>Azure 原則</code>",
+      "<code>Azure App Service</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 120,
+    "type": "single",
+    "question": [
+      "<pre><code>120. 儲存在 Azure 儲存體帳戶封存存取層中的資料___________</code></pre>"
+    ],
+    "options": [
+      "<code>隨時都可以使用 azcopy.exe 來存取。</code>",
+      "<code>只能使用 Azure 備份來讀取。</code>",
+      "<code>必須先還原,才能存取資料。</code>",
+      "<code>必須先解除凍結,才能存取資料。</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 121,
+    "type": "single",
+    "question": [
+      "<pre><code>121. 查詢內部部署 Microsoft SQL 伺服器的 Azure Web 應用程式是____________雲端範例。</code></pre>"
+    ],
+    "options": [
+      "<code>混合式</code>",
+      "<code>多供應商</code>",
+      "<code>私人</code>",
+      "<code>公用</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 122,
+    "type": "single",
+    "question": [
+      "<pre><code>122. 需要使用者在登入 Microsoft Entra 時輸入密碼並提供單次密碼是一種____________</code></pre>"
+    ],
+    "options": [
+      "<code>企業對客戶(B2C)識別服務。</code>",
+      "<code>受控識別。</code>",
+      "<code>多重要素驗證(MFA)。</code>",
+      "<code>角色型存取控制(RBAC)。</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 123,
+    "type": "single",
+    "question": [
+      "<pre><code>123. 您有一個具有唯讀鎖定的儲存體帳戶。 請問帳戶擁有者可以對儲存體帳戶執行下列哪一項動作?</code></pre>"
+    ],
+    "options": [
+      "<code>將[鎖定型別]設定為[刪除]。</code>",
+      "<code>修改儲存體帳戶的許可權。</code>",
+      "<code>重新命名鎖定。</code>",
+      "<code>移除鎖定。</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 124,
+    "type": "single",
+    "question": [
+      "<pre><code>124. 您有一個在 Azure 中執行的 Web 應用程式。 您需要確認在使用者瀏覽器中載入網頁所需的時間。 您應該使用下列何者?</code></pre>"
+    ],
+    "options": [
+      "<code>Log Analytics</code>",
+      "<code>Azure 網路監看員</code>",
+      "<code>Azure 監視器警示</code>",
+      "<code>Azure 監視器的 Application Insights</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 125,
+    "type": "single",
+    "question": [
+      "<pre><code>125. 您可以在 Azure 中使用____________傳送電子郵件警示, 當 Azure 訂用帳戶於目前計費週期的費用超過指定限制時。</code></pre>"
+    ],
+    "options": [
+      "<code>Advisor 建議</code>",
+      "<code>存取控制(IAM)</code>",
+      "<code>預算警示</code>",
+      "<code>合規性</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 126,
+    "type": "single",
+    "question": [
+      "<pre><code>126. 如果系統管理員停止 Azure 虛擬機器,您可以使用下列何者來自動傳送警示?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 網路監看員</code>",
+      "<code>Azure 監視器</code>",
+      "<code>Azure 服務健康狀態</code>",
+      "<code>Azure Advisor</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 127,
+    "type": "single",
+    "question": [
+      "<pre><code>127. 您的公司有一個 Azure 訂用帳戶和三個業務單位。 您計劃為每個業務單位部署新的資源。 您需要確保部署新的資源時會利用一種可重複且可靠的方法,將相同的設定套用至每項資源。 您應該使用下列何者?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 原則</code>",
+      "<code>Azure Resource Manager(ARM)範本</code>",
+      "<code>資源群組</code>",
+      "<code>Azure Arc</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 128,
+    "type": "single",
+    "question": [
+      "<pre><code>128. 您的公司擁有一份包含多項資源的 Azure 訂用帳戶。 您需要確認哪一個部門該為每項資源的成本負責。 您應該使用下列何者?</code></pre>"
+    ],
+    "options": [
+      "<code>標籤</code>",
+      "<code>警示</code>",
+      "<code>預算</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 129,
+    "type": "single",
+    "question": [
+      "<pre><code>129. 貴公司有數個業務單位。 每個業務單位需要 20 種不同的 Azure 資源維持日常運作。所有業務單位都需要相同型別的 Azure 資源。 您必須建議一項解決方案,將 Azure 資源的建立過程自動化。 您應該在建議中包含哪些專案?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure API 管理服務</code>",
+      "<code>虛擬機器擴充套件集</code>",
+      "<code>管理群組</code>",
+      "<code>Azure Resource Manager 範本</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 130,
+    "type": "single",
+    "question": [
+      "<pre><code>130. 您在名為 RG1 的資源群組中擁有一個名為 VNET1 的 Azure 虛擬網路。您指派了「不允許的資源型別」的 Azure 原則定義,並且指定虛擬網路並非RG1 中允許的資源型別。VNET1____________</code></pre>"
+    ],
+    "options": [
+      "<code>會自動遭刪除。</code>",
+      "<code>會自動移至另一個資源群組。</code>",
+      "<code>會持續正常運作。</code>",
+      "<code>目前是唯讀物件。</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 131,
+    "type": "single",
+    "question": [
+      "<pre><code>131. 自動調整是一種____________</code></pre>"
+    ],
+    "options": [
+      "<code>敏捷度。</code>",
+      "<code>彈性。</code>",
+      "<code>地理位置散發。</code>",
+      "<code>可預測性。</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 132,
+    "type": "single",
+    "question": [
+      "<pre><code>132. Azure Cosmos DB是____________供應專案的範例。</code></pre>"
+    ],
+    "options": [
+      "<code>平臺即服務(PaaS)</code>",
+      "<code>基礎結構即服務(IaaS)</code>",
+      "<code>內容即服務</code>",
+      "<code>軟體即服務(SaaS)</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 133,
+    "type": "single",
+    "question": [
+      "<pre><code>133. 當雲端應用程式可以配置及釋放資源時,就表示它具有____________</code></pre>"
+    ],
+    "options": [
+      "<code>彈性。</code>",
+      "<code>治理能力。</code>",
+      "<code>高可用性。</code>",
+      "<code>可預測性。</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 134,
+    "type": "single",
+    "question": [
+      "<pre><code>134. 能購買的 Azure 保留的 VM 執行個體最長天期為何?</code></pre>"
+    ],
+    "options": [
+      "<code>4年</code>",
+      "<code>5年</code>",
+      "<code>3年</code>",
+      "<code>1年</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 135,
+    "type": "single",
+    "question": [
+      "<pre><code>135. 在軟體即服務(SaaS)雲端服務中,哪一項責任由 Microsoft 與客戶共同承擔?</code></pre>"
+    ],
+    "options": [
+      "<code>作業系統更新</code>",
+      "<code>身分識別和目錄基礎結構管理</code>",
+      "<code>應用程式管理</code>",
+      "<code>資訊和資料管理</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 136,
+    "type": "single",
+    "question": [
+      "<pre><code>136. 您擁有 50 部裝載於內部部署的虛擬機器與 50 部裝載於 Azure 中的虛擬機器。這些內部部署虛擬機器與 Azure 虛擬機器皆相互連線。 這是下列何種雲端模型?</code></pre>"
+    ],
+    "options": [
+      "<code>混合式</code>",
+      "<code>私人</code>",
+      "<code>公用</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 137,
+    "type": "single",
+    "question": [
+      "<pre><code>137. 您必須使用 Azure Cloud Shell 管理 Azure。您該選取哪個 Azure入口網站圖示?",
+      "1 2 3 4</code></pre>"
+    ],
+    "options": [
+      "<code>1</code>",
+      "<code>2</code>",
+      "<code>3</code>",
+      "<code>4</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": "images//q139.jpg",
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 138,
+    "type": "single",
+    "question": [
+      "<pre><code>138. 您可以使用____________提出節省成本的建議。</code></pre>"
+    ],
+    "options": [
+      "<code>Application Insights</code>",
+      "<code>Azure Advisor</code>",
+      "<code>Azure 資源標籤</code>",
+      "<code>Azure 服務健康狀態</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 139,
+    "type": "single",
+    "question": [
+      "<pre><code>139. 您在資料中心的 Hyper-V 主機上裝載了1,000部虛擬機器。 您計劃將所有虛擬機器全都移轉至 Azure 隨用隨付訂閱。 您必須確定適用於所規劃Azure 解決方案的支出模型。 您應該確定哪個支出模型?</code></pre>"
+    ],
+    "options": [
+      "<code>運營型</code>",
+      "<code>可調整型</code>",
+      "<code>彈性型</code>",
+      "<code>資本型</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 140,
+    "type": "single",
+    "question": [
+      "<pre><code>140. Application Insights 這項功能屬於下列哪一個 Azure 服務?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure Advisor</code>",
+      "<code>Azure 應用程式閘道</code>",
+      "<code>Azure Arc</code>",
+      "<code>Azure 監視器</code>"
+    ],
+    "answer": [
+      "D"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 141,
+    "type": "single",
+    "question": [
+      "<pre><code>141. 雲端服務提供者的服務等級協定(SLA)會將 _______ 表示成指定一年內運作時間的百分比。</code></pre>"
+    ],
+    "options": [
+      "<code>可用性</code>",
+      "<code>彈性</code>",
+      "<code>可靠性</code>",
+      "<code>可擴縮性</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 142,
+    "type": "single",
+    "question": [
+      "<pre><code>142. 哪一種雲端運算模型包含內部部署與雲端架構資源?</code></pre>"
+    ],
+    "options": [
+      "<code>混合式</code>",
+      "<code>公用</code>",
+      "<code>私人</code>"
+    ],
+    "answer": [
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 143,
+    "type": "single",
+    "question": [
+      "<pre><code>143. ______ 可讓使用者使用單一登入 (SSO) 向多個應用程式進行驗證。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 中的應用程式安全性群組</code>",
+      "<code>Microsoft Entra ID</code>",
+      "<code>Azure Key Vault</code>",
+      "<code>適用於雲端的 Microsoft Defender</code>"
+    ],
+    "answer": [
+      "B"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 144,
+    "type": "single",
+    "question": [
+      "<pre><code>144. 您可以使用 ______ 對物件進行邏輯分組以報告部門成本和跟蹤預算。</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 原則</code>",
+      "<code>Azure 服務健康狀態</code>",
+      "<code>資源標籤</code>",
+      "<code>安全性群組</code>"
+    ],
+    "answer": [
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 145,
+    "type": "multiple",
+    "question": [
+      "<pre><code>145. 您擁有 Azure 環境。 您需要在執行 Android 作業系統的平板電腦中建立新的 Azure 虛擬機器。 下列哪三種是可行的解決方案?</code></pre>"
+    ],
+    "options": [
+      "<code>在 Azure Cloud Shell 中使用 Power Shell。</code>",
+      "<code>使用 Power Apps 入口網站。</code>",
+      "<code>使用安全性與合規性系統管理中心。</code>",
+      "<code>使用 Azure 入口網站。</code>",
+      "<code>在 Bash 中使用Azure Cloud Shell。</code>"
+    ],
+    "answer": [
+      "A",
+      "D",
+      "E"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 146,
+    "type": "multiple",
+    "question": [
+      "<pre><code>146. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?每個正確答案都呈現一個完整的解決方案。</code></pre>"
+    ],
+    "options": [
+      "<code>作業系統的安裝和設定</code>",
+      "<code>資料中心基礎結構的實體安全性</code>",
+      "<code>網路設定</code>",
+      "<code>儲存體的設定和維護</code>",
+      "<code>維護硬體</code>"
+    ],
+    "answer": [
+      "B",
+      "E"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 147,
+    "type": "multiple",
+    "question": [
+      "<pre><code>147. 在基礎結構即服務(IaaS)雲端服務模型中,哪兩個元素是雲端服務提供者的責任?</code></pre>"
+    ],
+    "options": [
+      "<code>儲存體的設定和維護</code>",
+      "<code>網路設定</code>",
+      "<code>資料中心基礎結構的實體安全性</code>",
+      "<code>作業系統的安裝和設定</code>",
+      "<code>維護硬體</code>"
+    ],
+    "answer": [
+      "C",
+      "E"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 148,
+    "type": "multiple",
+    "question": [
+      "<pre><code>148. 您需要管理容器。您可以使用哪兩項服務?</code></pre>"
+    ],
+    "options": [
+      "<code>Azure 虛擬機器</code>",
+      "<code>Azure 容器執行個體</code>",
+      "<code>Azure 虛擬桌面</code>",
+      "<code>Azure Functions</code>",
+      "<code>Azure Kubernetes Service(AKS)</code>"
+    ],
+    "answer": [
+      "B",
+      "E"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 149,
+    "type": "multiple",
+    "question": [
+      "<pre><code>149. 您計劃降低持續的 Azure 支出。 您需要確認影響資源成本的因素。 您應該指定哪三個因素?每個正確答案都呈現一個完整的解決方案。</code></pre>"
+    ],
+    "options": [
+      "<code>服務層</code>",
+      "<code>輸出資料量</code>",
+      "<code>Azure 區域</code>",
+      "<code>處理的資料型別</code>",
+      "<code>輸入資料量</code>"
+    ],
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D3_Azure 管理與治理"
+  },
+  {
+    "id": 150,
+    "type": "multiple",
+    "question": [
+      "<pre><code>150. Azure 系統管理員打算執行可建立 Azure 資源的 PowerShell 指令碼。 您需要建議執行此指令碼所用的電腦組態。 哪三部電腦可以執行此指令碼?</code></pre>"
+    ],
+    "options": [
+      "<code>執行 Windows10 且安裝了 Azure PowerShell 模組的電腦</code>",
+      "<code>執行 macOS 且安裝了 PowerShell 的電腦</code>",
+      "<code>執行 Linux 且安裝了 Azure CLI 工具的電腦</code>",
+      "<code>執行 Windows 11 且安裝了 Azure CLI 工具的電腦</code>",
+      "<code>執行 ChromeOS 且使用 Azure Cloud Shell 的電腦</code>"
+    ],
+    "answer": [
+      "A",
+      "B",
+      "E"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 151,
+    "type": "multioption",
+    "question": [
+      "<pre><code>151. 您計劃使用 Azure 裝載兩個名為 App1 及 App2 的應用程式。這兩個應用程式必須符合下列需求:",
+      "- 您必須能夠修改App1的程式碼。",
+      "- 投入管理App1作業系統的資源必須降至最少。",
+      "- App2必須能夠與伺服器的作業系統互動。",
+      "這兩個應用程式各應使用何種型別的雲端服務?",
+      "App1: (A)",
+      "App2: (B)</code></pre>"
+    ],
+    "options": [
+      "<code>1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+      "<code>1.基礎結構即服務(laaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>"
+    ],
+    "answer": [
+      "B",
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 152,
+    "type": "multioption",
+    "question": [
+      "<pre><code>152. 請將雲端服務與適當的描述進行配對。",
+      "描述:",
+      "A. 針對雲端環境提供最大控制能力。",
+      "B. 針對資料庫設計提供最大控制能力,但不需要維護作業系統。",
+      "C. 用來裝載Azure虛擬機器。</code></pre>"
+    ],
+    "options": [
+      "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+      "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>",
+      "<code>1.基礎結構即服務(IaaS)|2.平臺即服務(PaaS)|3.軟體即服務(SaaS)</code>"
+    ],
+    "answer": [
+      "A",
+      "B",
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 153,
+    "type": "multioption",
+    "question": [
+      "<pre><code>153. 雲端模型有三種:混合雲端、私人雲端、公共雲端,請依描述進行配對。",
+      "描述:",
+      "A. 無需資本支出。",
+      "B. 可提供對安全性的完整控制權。",
+      "C. 可選擇使用內部部署資源或雲端式資源。</code></pre>"
+    ],
+    "options": [
+      "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>",
+      "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>",
+      "<code>1.混合雲端|2.公共雲端|3.私人雲端</code>"
+    ],
+    "answer": [
+      "C",
+      "B",
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 154,
+    "type": "multioption",
+    "question": [
+      "<pre><code>154. 請將 Azure 儲存體服務與適當的描述配對。",
+      "作答區",
+      "(A)用於應用程式之間的可靠傳訊",
+      "(B)可當做 Windows 裝置中的網路共用存取",
+      "(C)可設定成使用封存存取層</code></pre>"
+    ],
+    "options": [
+      "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>",
+      "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>",
+      "<code>Azure Blob|Azure Queue|Azure Table|Azure File</code>"
+    ],
+    "answer": [
+      "D",
+      "C",
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 155,
+    "type": "multioption",
+    "question": [
+      "<pre><code>155. 您需要完成資料中心內使用的縱深防禦策略。應採取什麼措施?",
+      "請依照順序作答:</code></pre>"
+    ],
+    "options": [
+      "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>",
+      "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>",
+      "<code>1.實體安全性|2.周邊|3.應用程式|4.以上皆非</code>"
+    ],
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "weight": 1,
+    "image": "images//q157.jpg",
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  },
+  {
+    "id": 156,
+    "type": "multioption",
+    "question": [
+      "<pre><code>156. 您需要根據雲端服務模型識別客戶的共同責任層級。 依照從最高客戶責任層級(頂端)到最低客戶責任層級(底部)的排列方式,您應該按照哪一種順序排列每個模型?</code></pre>"
+    ],
+    "options": [
+      "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>",
+      "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>",
+      "<code>1.軟體即服務(SaaS)|2.平臺即服務(PaaS)|3.基礎結構即服務(IaaS)</code>"
+    ],
+    "answer": [
+      "C",
+      "B",
+      "A"
+    ],
+    "weight": 1,
+    "image": null,
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D1_雲端概念"
+  },
+  {
+    "id": 157,
+    "type": "multioption",
+    "question": [
+      "<pre><code>157. 請將驗證方法與適當的安全性層級依照順序進行配對。</code></pre>"
+    ],
+    "options": [
+      "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>",
+      "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>",
+      "<code>1.多重要素驗證(MFA)|2.密碼驗證|3.無密碼驗證</code>"
+    ],
+    "answer": [
+      "A",
+      "C",
+      "B"
+    ],
+    "weight": 1,
+    "image": "images//q159.jpg",
+    "explanation": [
+      "<pre><code></code></pre>"
+    ],
+    "category": "D2_Azure 架構與服務"
+  }
+];
+    function renderMatchingQuestion(index) {
+        currentIndex = index; const item = examQuestions[index];
+        const container = document.getElementById('question-area');
+        if (!container) return;
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = 'flex';
+        
+        if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
+        const currentAns = userAnswers[index];
+        
+        let qText = processContent(item.question, item);
+        let html = `<div class="card question-card"><div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span> <span class="badge bg-info ms-2">配對題</span></div><div class="question-body">${qText}<div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
+        <svg id="matching-svg"></svg>
+        <div class="matching-columns">
+            <div class="match-col left-col">
+                <div class="match-header-title">程式碼片段</div>`;
+        item.left.forEach((text, lIdx) => {
+            const isMatched = currentAns[lIdx] !== null;
+            const dotColor = isMatched ? '#333' : 'transparent';
+            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+            html += `<div class="match-item match-item-left ${isMatched?'matched':''}" id="left-item-${lIdx}"><div class="q-text-part" style="white-space:nowrap;">${cleanText}</div><div class="match-dot" id="dot-left-${lIdx}" onmousedown="handleDragStart(event, 'left', ${lIdx})" ontouchstart="handleDragStart(event, 'left', ${lIdx})"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div></div>`;
+        });
+        html += `</div><div class="match-col right-col">
+            <div class="match-header-title" style="width: 80px !important; white-space: nowrap !important; display: inline-block !important; text-align: left;">回答區</div>`;
+        item.right.forEach((text, rIdx) => {
+            const isMatchedByAny = currentAns.includes(rIdx);
+            const dotColor = isMatchedByAny ? '#333' : 'transparent';
+            const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+            html += `<div class="match-item match-item-right ${isMatchedByAny?'matched':''}" id="right-item-${rIdx}" data-right-idx="${rIdx}"><div class="match-dot" id="dot-right-${rIdx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div><div class="q-text-part-right">${cleanText}</div></div>`;
+        });
+        html += `</div></div></div></div></div>`;
+        container.innerHTML = html; 
+        
+        // 動態偵測字寬對齊 (同步練習區 V3.5.3)
+        setTimeout(() => {
+            const parts = container.querySelectorAll('.match-item-left .q-text-part');
+            let maxW = 0; parts.forEach(p => maxW = Math.max(maxW, p.offsetWidth));
+            parts.forEach(p => p.style.width = (maxW + 2) + 'px');
+            drawLines();
+        }, 30);
+        if(window.Prism) Prism.highlightAll();
+    }
+
+    let isDragging = false, dragStartPoint = null, tempLine = null;
+    window.handleDragStart = function(e, side, idx) {
+        if (side !== 'left') return;
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        isDragging = true; if(e.cancelable) e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
+        const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
+        const svg = document.getElementById("matching-svg");
+        tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tempLine.setAttribute("x1", dragStartPoint.x); tempLine.setAttribute("y1", dragStartPoint.y);
+        tempLine.setAttribute("x2", dragStartPoint.x); tempLine.setAttribute("y2", dragStartPoint.y);
+        tempLine.setAttribute("stroke", "#0d6efd"); tempLine.setAttribute("stroke-width", "2.5");
+        tempLine.setAttribute("opacity", "0.6"); svg.appendChild(tempLine);
+    };
+    window.handleDragMove = function(e) {
+        if (!isDragging || !tempLine) return;
+        const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        window.lastClientX = clientX; window.lastClientY = clientY;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
+        tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
+    };
+    window.handleDragEnd = function(e) {
+        if (!isDragging) return;
+        let x = window.lastClientX, y = window.lastClientY;
+        if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
+        else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+            const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
+            if (rightItem) {
+                const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
+                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
+            }
+        }
+        isDragging = false; dragStartPoint = null;
+        if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
+        tempLine = null; renderMatchingQuestion(currentIndex);
+    };
+    window.drawLines = function() {
+        const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
+        if (!svg || !wrapper) return;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0, rect = wrapper.getBoundingClientRect();
+        const baseW = rect.width / zoom, baseH = rect.height / zoom;
+        svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
+        svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
+        currentAns.forEach((rIdx, lIdx) => {
+            if (rIdx === null) return;
+            const dotL = document.getElementById("dot-left-" + lIdx), dotR = document.getElementById("dot-right-" + rIdx);
+            if (dotL && dotR) {
+                const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                const x1 = (rL.left + rL.width/2 - rect.left) / zoom, y1 = (rL.top + rL.height/2 - rect.top) / zoom;
+                const x2 = (rR.left + rR.width/2 - rect.left) / zoom, y2 = (rR.top + rR.height/2 - rect.top) / zoom;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+                line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
+            }
+        });
+    };
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+            const el = document.getElementById('timer');
+            if (el) el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+        }, 1000);
+    }
+
+    function adjustZoom(delta) {
+        const body = document.body;
+        let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
+        body.style.zoom = currentZoom + delta;
+        if (window.drawLines) window.drawLines();
+    }
+
+    function processContent(content, item) {
+        if (!content) return '';
+        const lines = Array.isArray(content) ? content : [String(content)];
+        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const num = parseInt(p1, 10);
+            const src = item['image' + num] || item['image' + p1] || item['image'];
+            return src ? `<img src="${src}" class="q-img">` : match;
+        });
+    }
+
+    function initExam() {
+        if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
+            console.error("題庫資料載入失敗！"); return;
+        }
+        const CUTOFF = 100;
+        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); // 57
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 3
+        
+        let historySet = new Set();
+        try {
+            const savedHistory = localStorage.getItem(HISTORY_KEY);
+            if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
+        } catch(e) {}
+
+        // 1. 池子拆分：官方與補充
+        const offPoolTotal = allQuestions.filter(q => q.id <= CUTOFF);
+        const suppPoolTotal = allQuestions.filter(q => q.id > CUTOFF);
+
+        // 2. 池內優先級排序 (未看優先)
+        const offUnseen = offPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const offSeen = offPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppUnseen = suppPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppSeen = suppPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+
+        let finalOffOrder = [...offUnseen, ...offSeen];
+        let finalSuppOrder = [...suppUnseen, ...suppSeen];
+
+        let selected = [], usedIds = new Set();
+        
+        // --- 階段 A：分類平衡 (優先從官方池抽) ---
+        const categories = {};
+        allQuestions.forEach(q => {
+            const cat = q.category || '一般';
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+        const catNames = Object.keys(categories).sort();
+        
+        catNames.forEach(cat => {
+            let pool = finalOffOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            if (pool.length === 0) pool = finalSuppOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            const limit = (cat.includes('D0')) ? 2 : 3;
+            for (let i = 0; i < limit; i++) {
+                if (pool.length > 0) {
+                    const q = pool.shift();
+                    selected.push(q);
+                    usedIds.add(q.id);
+                }
+            }
+        });
+
+        // --- 階段 B：死守官方 95% 配額 ---
+        for (let q of finalOffOrder) {
+            if (selected.filter(s => s.id <= CUTOFF).length >= TARGET_OFF_COUNT) break;
+            if (!usedIds.has(q.id)) {
+                // 如果是 D0 類別，且已經有 2 題，則跳過
+                if (q.category && q.category.includes('D0')) {
+                    const curD0 = selected.filter(s => s.category && s.category.includes('D0')).length;
+                    if (curD0 >= 2) continue;
+                }
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // --- 階段 C：填滿補充 5% 配額 ---
+        for (let q of finalSuppOrder) {
+            if (selected.length >= EXAM_LIMIT) break;
+            if (!usedIds.has(q.id)) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // --- 階段 D：兜底 ---
+        if (selected.length < EXAM_LIMIT) {
+            const fallback = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+            while (selected.length < EXAM_LIMIT && fallback.length > 0) {
+                const q = fallback.shift();
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
+
+        // 3. 更新歷史
+        selected.forEach(q => historySet.add(q.id));
+        if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
+        localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
+
+        examQuestions = selected.sort((a, b) => {
+            const catA = a.category || "";
+            const catB = b.category || "";
+            return catA.localeCompare(catB) || (a.id - b.id);
+        }).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    }
+
+    function renderQuestion(index, scrollTop = true) {
+        currentIndex = index; const item = examQuestions[index]; 
+        if (item.type === 'matching') { renderMatchingQuestion(index); return; }
+        const container = document.getElementById('question-area'); 
+        if (!container) return;
+        container.innerHTML = '';
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
+        
+        const card = document.createElement('div'); card.className = 'card question-card';
+        let qText = processContent(item.question, item);
+        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body">${qText}</div>`;
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        const optionsRaw = item.quiz || item.options || [];
+        const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
+        const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
+        html += '<div class="mt-3">';
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            
+            if (optStr.includes('|')) {
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[optIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                const displayLabel = customLabel || `選項 ${optIdx + 1}`;
+
+                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">${displayLabel}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => { 
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx); 
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
+                });
+                html += `</div>`;
+            } else {
+                const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
+            }
+        });
+        html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+    }
+
+    function selectOption(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (item.type === 'multiple') {
+            if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
+            const idx = userAnswers[currentIndex].indexOf(optIdx);
+            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
+            else userAnswers[currentIndex].push(optIdx);
+        } else { userAnswers[currentIndex] = optIdx; }
+        renderQuestion(currentIndex, false);
+    }
+    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
+    function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
+    function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
+
+    function submitExam() {
+        clearInterval(timerInterval); 
+        const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
+        if (ui) ui.style.display = 'none'; if (rs) rs.style.display = 'block';
+        let correctCount = 0, stats = {}, incorrectHTML = '';
+        const catNameMap = {};
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let _m = fullCat.match(/^(D\d+)/); let prefix = (_m ? _m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+        examQuestions.forEach((item, idx) => {
+            let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
+            const cat = catNameMap[prefix];
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
+            stats[cat].total++;
+            
+            const userAns = userAnswers[idx]; let isCorrect = false;
+            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            if (item.type === 'matching') {
+                const userLetters = (userAns || []).map(idx => idx === null ? "" : String.fromCharCode(65 + idx));
+                isCorrect = JSON.stringify(userLetters) === JSON.stringify(answers);
+            } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+                isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+            } else if (item.type === 'multiple') {
+                const cIdxs = answers.map(a => parseAnswerToIndex(a));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+
+            stats[cat].ids.push({ id: item.id, isWrong: !isCorrect });
+            
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
+            if (isCorrect) { correctCount++; stats[cat].correct++; }
+            else {
+                const optsRaw = item.quiz || item.options || [];
+                const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
+                let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
+                
+                if (item.type === 'matching') {
+                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                        <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                        <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
+                            <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
+                                ${item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="mdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                            </div>
+                            <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
+                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                } else {
+                    opts.forEach((o, i) => {
+                        const isNum = (item.labelType === 'num');
+                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        if (String(o).includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const customLabelField = "question" + alphabet[i];
+                            let customLabel = "";
+                            if (item[customLabelField]) {
+                                customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                            }
+                            const displayLabel = customLabel || `選項 ${i + 1}`;
+
+                            const subLabels = o.split('|').map((s, si) => {
+                                const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                            }).join(' ');
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        }
+                        else {
+                            const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                        }
+                    });
+                }
+                optionsHTML += '</div>';
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+            }
+        });
+        const score = Math.round((correctCount / examQuestions.length) * 100);
+        document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
+        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th class="text-start">分類</th><th class="text-start">出題編號</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
+        const sortedCats = Object.keys(stats).sort();
+        
+        for (let cat of sortedCats) {
+            let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
+            let sortedIds = stats[cat].ids.sort((a, b) => a.id - b.id).map(obj => {
+                let displayId = obj.id > 69 ? `(${obj.id})` : obj.id;
+                if (obj.isWrong) return `<span style="color:red; font-weight:bold;">${displayId}</span>`;
+                return displayId;
+            }).join(', ');
+            catHTML += `<tr><td class="text-start fw-bold">${cat}</td><td class="text-start small" style="max-width:400px; word-break:break-all;">${sortedIds}</td><td>${total}</td><td>${p}%</td></tr>`;
+        }
+        catHTML += '</tbody></table>'; 
+        catHTML += '<div class="mt-2 mb-3 small text-start" style="padding-left:10px; border-left:3px solid #6c757d;">' + 
+                   '<span style="color:red; font-weight:bold;">紅色數字</span>：代表此題答錯；' + 
+                   '<span>(括號數字)</span>：代表 1-69 題以外的補充題。' +
+                   '</div>';
+        
+        document.getElementById('category-stats').innerHTML = catHTML;
+        let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        // 確保結果區塊與回顧區已顯示，以便正確計算 getBoundingClientRect
+        if (rs) rs.style.display = 'block';
+        const reviewArea = document.getElementById('review-area');
+        if (reviewArea) reviewArea.style.display = 'block';
+        
+        // 繪製模擬考試報告中的正確連線 (視窗座標差值法修正)
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width);
+                svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px';
+                svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+            if(window.Prism) Prism.highlightAll();
+        }, 2000);
+        try {
+            let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+            examQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                let isCorr = false;
+                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
+                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
+            });
+            localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+        } catch(e) {}
+    }
+    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
+    initExam();
+</script>
+</body>
+</html>
