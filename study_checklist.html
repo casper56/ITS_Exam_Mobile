@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS 認證衝刺進度表 (03/07 - 04/04)</title>
+    <style>
+        :root {
+            --primary-color: #198754;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --score-bg: #e7f3ef;
+        }
+        body {
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: calc(100% - 60px);
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        h1 { margin-bottom: 10px; color: #000; }
+        .progress-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 25px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        #progress-bar {
+            background: var(--primary-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #000;
+            line-height: 25px;
+        }
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #f1f1f1; }
+        .btn-sync { background: var(--primary-color); color: #fff; border: none; }
+        .btn-sync:hover { background: #157347; }
+
+        .day-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .day-info {
+            flex: 0 0 180px;
+            font-weight: bold;
+            border-right: 2px solid var(--bg-color);
+            margin-right: 20px;
+        }
+        .tasks {
+            flex: 1;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .task-item:hover {
+            background: #f8f9fa;
+            border-color: var(--primary-color);
+        }
+        .task-item input {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        .task-item.completed {
+            background: var(--score-bg);
+            border-color: var(--primary-color);
+        }
+        .task-item.completed .sub-name {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+        .score-badge {
+            margin-left: 8px;
+            background: var(--primary-color);
+            color: white;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .date-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+        @media (max-width: 768px) {
+            .day-info {
+                flex: 1 1 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+            }
+            .tasks { gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>ITS 認證衝刺進度表</h1>
+        <p>2026/03/06 — 2026/04/04 | 自動連動 MOCK 成績</p>
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+            <div class="progress-text">總達成率: <span id="progress-val">0</span>%</div>
+        </div>
+    </header>
+
+    <div class="controls">
+        <button class="btn btn-sync" onclick="syncScores()">🔄 立即同步 MOCK 成績</button>
+        <button class="btn" onclick="clearProgress()">🗑️ 清除手動勾選</button>
+    </div>
+
+    <div id="checklist-content">
+        <!-- 內容由 JS 生成 -->
+    </div>
+</div>
+
+<script>
+    const subjects = ["ITS_Python", "ITS_Database", "ITS_程式設計", "ITS_AI"];
+    const startDate = new Date(2026, 2, 6); // 3月6日 (今天)
+    const endDate = new Date(2026, 3, 4);   // 4月4日
+    
+    function generateChecklist() {
+        const container = document.getElementById('checklist-content');
+        container.innerHTML = '';
+        let current = new Date(startDate);
+        let dayIdx = 0;
+
+        while (current <= endDate) {
+            const dateStr = current.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' });
+            const fullDateStr = current.toLocaleDateString('en-CA'); // YYYY-MM-DD
+            const dayName = current.toLocaleDateString('zh-TW', { weekday: 'long' });
+            
+            const dayTasks = [
+                subjects[(dayIdx) % 4],
+                subjects[(dayIdx + 1) % 4],
+                subjects[(dayIdx + 2) % 4]
+            ];
+
+            const card = document.createElement('div');
+            card.className = 'day-card';
+            
+            let tasksHtml = '';
+            dayTasks.forEach((sub, idx) => {
+                const taskId = `task-${dayIdx}-${idx}`;
+                tasksHtml += `
+                    <label class="task-item" id="label-${taskId}" for="${taskId}">
+                        <input type="checkbox" id="${taskId}" 
+                               data-subject="${sub}" 
+                               data-date="${fullDateStr}" 
+                               onchange="updateProgress(true)">
+                        <span class="sub-name">${sub}</span>
+                        <span id="score-${taskId}" class="score-badge" style="display:none"></span>
+                    </label>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="day-info">
+                    <span class="date-badge">Day ${dayIdx + 1}</span>
+                    ${dateStr} (${dayName})
+                </div>
+                <div class="tasks">
+                    ${tasksHtml}
+                </div>
+            `;
+            
+            container.appendChild(card);
+            current.setDate(current.getDate() + 1);
+            dayIdx++;
+        }
+        
+        syncScores();
+    }
+
+    // 同步成績紀錄
+    function syncScores() {
+        const history = JSON.parse(localStorage.getItem('its_exam_history') || '[]');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const manualSaved = JSON.parse(localStorage.getItem('its_checklist_manual') || '{}');
+
+        checkboxes.forEach(cb => {
+            const sub = cb.getAttribute('data-subject');
+            const date = cb.getAttribute('data-date');
+            const taskId = cb.id;
+
+            // 尋找當天該科目的最高分
+            const matches = history.filter(h => h.date === date && h.subject === sub);
+            if (matches.length > 0) {
+                const maxScore = Math.max(...matches.map(m => m.score));
+                cb.checked = true;
+                const scoreEl = document.getElementById(`score-${taskId}`);
+                scoreEl.innerText = maxScore + '%';
+                scoreEl.style.display = 'inline-block';
+            } else {
+                // 如果沒有成績紀錄，檢查是否有手動勾選
+                cb.checked = manualSaved[taskId] || false;
+                document.getElementById(`score-${taskId}`).style.display = 'none';
+            }
+        });
+        updateProgress(false);
+    }
+
+    function updateProgress(saveManual = true) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const total = checkboxes.length;
+        let checked = 0;
+        
+        const manualState = {};
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+                checked++;
+                cb.parentElement.classList.add('completed');
+            } else {
+                cb.parentElement.classList.remove('completed');
+            }
+            if (saveManual) {
+                manualState[cb.id] = cb.checked;
+            }
+        });
+        
+        const percent = Math.round((checked / total) * 100);
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('progress-val').innerText = percent;
+        
+        if (saveManual) {
+            localStorage.setItem('its_checklist_manual', JSON.stringify(manualState));
+        }
+    }
+
+    function clearProgress() {
+        if (confirm('確定要清除所有「手動」勾選的進度嗎？（自動同步的成績紀錄將會保留）')) {
+            localStorage.removeItem('its_checklist_manual');
+            syncScores();
+        }
+    }
+
+    window.onload = generateChecklist;
+</script>
+
+</body>
+</html>
