@@ -615,7 +615,7 @@ def clean_repair_all():
                 ${processContent(item.question, item)}
                 <div class="choicelist-wrapper">
                     <div class="choicelist-pool">
-                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        <div class="choicelist-header">選項區 (點擊選取)</div>
                         ${poolHtml}
                     </div>
                     <div class="choicelist-target">
@@ -705,7 +705,7 @@ def clean_repair_all():
                 ${processContent(item.question, item)}
                 <div class="choicelist-wrapper">
                     <div class="choicelist-pool">
-                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        <div class="choicelist-header">選項區 (點擊選取)</div>
                         ${poolHtml}
                     </div>
                     <div class="choicelist-target">
@@ -1513,7 +1513,7 @@ def clean_repair_all():
                 ${processContent(item.question, item)}
                 <div class="choicelist-wrapper">
                     <div class="choicelist-pool">
-                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        <div class="choicelist-header">選項區 (點擊選取)</div>
                         ${poolHtml}
                     </div>
                     <div class="choicelist-target">
