@@ -1,6 +1,7 @@
 import json
 import os
 import glob
+import re
 
 def clean_repair_all():
     config_path = 'www/config.json'
@@ -10,6 +11,12 @@ def clean_repair_all():
     
     with open(config_path, 'r', encoding='utf-8') as f:
         config = json.load(f)
+    
+    # 全域符號修復邏輯：自動將包含圓圈數字的 code 加上 zoom 類別
+    def auto_tag_zoom(html_str):
+        if not isinstance(html_str, str): return html_str
+        # 尋找 <code>③ ⑦ ⑥</code> 這種格式，自動替換為 <code class="zoom">
+        return re.sub(r'<code>([①②③④⑤⑥⑦⑧⑨⑩\s]+)</code>', r'<code class="zoom">\1</code>', html_str)
     
     # --- 模板 A: 模擬考試 (mock_v34.html) ---
     mock_top_tmpl = r"""<!DOCTYPE html>
@@ -94,6 +101,23 @@ def clean_repair_all():
         .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
+        
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
         
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
@@ -1038,6 +1062,23 @@ def clean_repair_all():
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
+        
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.3s ease; padding: 0; user-select: none; }
         .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
@@ -1762,8 +1803,12 @@ def clean_repair_all():
             json_file = os.path.join(subj['dir'], subj['json'])
             if not os.path.exists(json_file): continue
             with open(json_file, 'rb') as f: json_bytes = f.read()
-            json_cleaned = json_bytes.replace(b'</script>', b'<\\/script>')
-            quiz_obj = json.loads(json_cleaned.decode('utf-8'))
+            json_cleaned_str = json_bytes.decode('utf-8').replace('</script>', '<\\/script>')
+            # 全域自動埋 Tag
+            json_cleaned_str = auto_tag_zoom(json_cleaned_str)
+            json_final_bytes = json_cleaned_str.encode('utf-8')
+            
+            quiz_obj = json.loads(json_cleaned_str)
             total_count = len(quiz_obj)
             
             # 1. 生成 mock_v34.html
@@ -1773,7 +1818,7 @@ def clean_repair_all():
                                    .replace('REPLACE_SUBJECT_ID', subj['id'])
                                    .replace('REPLACE_SYNC_NAME', sync_name)
                                    .encode('utf-8'))
-                f.write(json_cleaned)
+                f.write(json_final_bytes)
                 f.write(b";")
                 f.write(mock_bottom_tmpl.replace('REPLACE_CUTOFF', str(subj['cutoff'])).encode('utf-8'))
             
@@ -1781,7 +1826,7 @@ def clean_repair_all():
             prac_path = os.path.join(subj['dir'], subj['html'])
             with open(prac_path, 'wb') as f:
                 f.write(prac_top_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_TOTAL', str(total_count)).encode('utf-8'))
-                f.write(json_cleaned)
+                f.write(json_final_bytes)
                 f.write(b";")
                 f.write(prac_bottom_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
             print(f"V3.5.1 Smart Rotation Refreshed: {subj['dir']}")

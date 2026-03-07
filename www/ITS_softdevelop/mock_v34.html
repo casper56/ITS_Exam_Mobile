@@ -81,6 +81,23 @@
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
+        
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
         .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
@@ -1547,7 +1564,7 @@
             "<pre><code class=\"language-csharp\">請設定交易以符合下列需求：",
             "- 如果客戶只有一張發票，請刪除該發票。",
             "- 如果客戶有多張發票，請取消交易。",
-            "請問 C 部分應填入下列何者程式碼？",
+            "請問 C 部分應填入下列何者程式碼？\n",
             "-- A 部分",
             "DECLARE @invoice_count INT;",
             "",

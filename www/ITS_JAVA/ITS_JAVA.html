@@ -98,6 +98,23 @@
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
+        
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.3s ease; padding: 0; user-select: none; }
         .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
@@ -1339,9 +1356,9 @@
             "System.out.printf(\"寬=%d 高=%d\\n\", ____C____ );</code></pre>"
         ],
         "left": [
-            "A 選項 (建立物件)",
-            "B 選項 (計算面積)",
-            "C 選項 (取得屬性)"
+            "A 選項",
+            "B 選項",
+            "C 選項"
         ],
         "right": [
             "① Triangle tri = new(20, 40); | ② new tri = Triangle(20, 40); | ③ Triangle tri = new Triangle(20, 40); | ④ Triangle tri = Triangle(20, 40);",
@@ -1370,7 +1387,7 @@
             "01 public class Teacher {",
             "02     public String tchName = \"Jack\";",
             "03",
-            "04     // 應在此行填入註釋",
+            "04  ",
             "05     public String toString(){",
             "06         return tchName;",
             "07     }",
@@ -1544,15 +1561,15 @@
         ],
         "right": [
             "①private | ②public | ③protected | ④static",
-            "①bool | ②int | ③void | ④String | ⑤boolean",
+            "①bool | ②int | ③void | ④String | ⑤Song",
             "①() | ②(String singer) | ③(bool singer) | ④(String singer)",
             "①return Song; | ②return false; | ③return singer; | ④return true;",
             "①return Song; | ②return false; | ③return singer; | ④return true;"
         ],
         "answer": [
             1,
-            5,
-            2,
+            1,
+            4,
             4,
             2
         ],
@@ -1856,6 +1873,12 @@
             "<pre><code class=\"language-java\">【B-3】您在撰寫一個 JAVA 主控台程式。程式需求如下：",
             "● 可接受命令列引數。",
             "● 分行顯示每一個命令列引數。",
+            "public static void main(String[] args){",
+            "       __A__(String arg __B__ args)",
+            "   {",
+            "       System.out.printIn( __C__ );",
+            "   }",
+            "}",
             "請選取正確程式碼：",
             "A. ① do ② for ③ while",
             "B. ① = ② == ③ : ④ instanceof",
@@ -1904,10 +1927,10 @@
             "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
         ],
         "options": [
-            "<code>③ ⑦ ⑥</code>",
-            "<code>③ ④ ⑥</code>",
-            "<code>⑤ ⑦ ②</code>",
-            "<code>③ ① ②</code>"
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ⑦ ⑥</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ④ ⑥</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">⑤ ⑦ ②</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ① ②</code>"
         ],
         "answer": [
             1

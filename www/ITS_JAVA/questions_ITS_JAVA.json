@@ -1141,9 +1141,9 @@
             "System.out.printf(\"寬=%d 高=%d\\n\", ____C____ );</code></pre>"
         ],
         "left": [
-            "A 選項 (建立物件)",
-            "B 選項 (計算面積)",
-            "C 選項 (取得屬性)"
+            "A 選項",
+            "B 選項",
+            "C 選項"
         ],
         "right": [
             "① Triangle tri = new(20, 40); | ② new tri = Triangle(20, 40); | ③ Triangle tri = new Triangle(20, 40); | ④ Triangle tri = Triangle(20, 40);",
@@ -1172,7 +1172,7 @@
             "01 public class Teacher {",
             "02     public String tchName = \"Jack\";",
             "03",
-            "04     // 應在此行填入註釋",
+            "04  ",
             "05     public String toString(){",
             "06         return tchName;",
             "07     }",
@@ -1346,15 +1346,15 @@
         ],
         "right": [
             "①private | ②public | ③protected | ④static",
-            "①bool | ②int | ③void | ④String | ⑤boolean",
+            "①bool | ②int | ③void | ④String | ⑤Song",
             "①() | ②(String singer) | ③(bool singer) | ④(String singer)",
             "①return Song; | ②return false; | ③return singer; | ④return true;",
             "①return Song; | ②return false; | ③return singer; | ④return true;"
         ],
         "answer": [
             1,
-            5,
-            2,
+            1,
+            4,
             4,
             2
         ],
@@ -1658,6 +1658,12 @@
             "<pre><code class=\"language-java\">【B-3】您在撰寫一個 JAVA 主控台程式。程式需求如下：",
             "● 可接受命令列引數。",
             "● 分行顯示每一個命令列引數。",
+            "public static void main(String[] args){",
+            "       __A__(String arg __B__ args)",
+            "   {",
+            "       System.out.printIn( __C__ );",
+            "   }",
+            "}",
             "請選取正確程式碼：",
             "A. ① do ② for ③ while",
             "B. ① = ② == ③ : ④ instanceof",
@@ -1706,10 +1712,10 @@
             "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
         ],
         "options": [
-            "<code>③ ⑦ ⑥</code>",
-            "<code>③ ④ ⑥</code>",
-            "<code>⑤ ⑦ ②</code>",
-            "<code>③ ① ②</code>"
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ⑦ ⑥</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ④ ⑥</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">⑤ ⑦ ②</code>",
+            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ① ②</code>"
         ],
         "answer": [
             1
