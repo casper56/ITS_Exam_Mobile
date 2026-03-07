@@ -121,11 +121,14 @@
         .choicelist-header { font-weight: bold; color: #0d6efd; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; padding-bottom: 5px; font-size: 0.9rem; }
         .choicelist-item { 
             background: #fff; border: 1px solid #ced4da; border-radius: 6px; 
-            padding: 8px 12px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem;
-            transition: all 0.2s; position: relative; user-select: none; word-break: break-all;
-            white-space: pre-wrap !important; /* 核心：支援 \n 換行 */
-            font-family: Consolas, Monaco, 'Andale Mono', monospace !important; /* 程式碼專用字型 */
-            line-height: 1.4 !important;
+            padding: 6px 10px; margin-bottom: 6px; cursor: pointer; 
+            font-size: var(--sz, 0.8rem) !important; /* 支援動態字級 */
+            transition: all 0.2s; position: relative; user-select: none;
+            white-space: pre !important; 
+            font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
+            line-height: 1.2 !important;
+            overflow-x: auto; 
+            display: block;
         }
         .choicelist-item:hover { border-color: #0d6efd; background: #f0f7ff; }
         .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
@@ -3357,10 +3360,13 @@
         const isWrong = incorrectSet.has(index);
         const isLocked = isCorrect || isCorrected; // 只有答對或更正後才鎖定
 
+        // 支援自定義字級
+        const customSz = item.sz ? `--sz: ${item.sz} !important; font-size: ${item.sz} !important;` : '';
+
         let poolHtml = '';
         item.options.forEach((opt, idx) => {
             const isUsed = currentAns.includes(idx);
-            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
+            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" style="${customSz}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
         });
 
         let targetHtml = '';
@@ -3368,18 +3374,18 @@
         for (let i = 0; i < requiredCount; i++) {
             const optIdx = currentAns[i];
             if (optIdx !== undefined) {
-                targetHtml += `<div class="choicelist-item" onclick="${isLocked ? '' : `removeFromTarget(${i})`}">${item.options[optIdx]}</div>`;
+                targetHtml += `<div class="choicelist-item" style="${customSz}" onclick="${isLocked ? '' : `removeFromTarget(${i})`}">${item.options[optIdx]}</div>`;
             } else {
                 targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
             }
         }
 
-        // 準備完整答案顯示文字 (將索引轉為內容)
+        // 準備完整答案顯示文字 (支援數字與 A,B,C 字母)
         const correctAnsArr = Array.isArray(item.answer) ? item.answer : [item.answer];
         const displayAnsHtml = correctAnsArr.map((val, i) => {
-            const optIdx = (typeof val === 'number') ? (val - 1) : -1;
+            const optIdx = parseAnswerToIndex(val);
             const text = (optIdx >= 0 && item.options[optIdx]) ? item.options[optIdx] : val;
-            return `<div class="mt-2 p-2 border-start border-success border-4 bg-light small" style="white-space:pre-wrap; font-family:monospace;"><b>第 ${i+1} 步：</b>${text}</div>`;
+            return `<div class="mt-2 border-start border-success border-4 bg-light" style="padding: 10px 12px; white-space:pre !important; font-family:Consolas, Monaco, monospace; font-size:0.95rem; overflow-x:auto; line-height:1.2;">${text}</div>`;
         }).join('');
 
         container.innerHTML = `<div class="card question-card">
@@ -3430,8 +3436,8 @@
         let isCorrect = (userIdxs.length === correctAns.length);
         if (isCorrect) {
             for (let i = 0; i < correctAns.length; i++) {
-                // 索引模式比對：將答案(1-based)轉為(0-based)與用戶選取比對
-                const targetIdx = (typeof correctAns[i] === 'number') ? (correctAns[i] - 1) : -1;
+                // 核心修復：使用 parseAnswerToIndex 統一處理數字與字母標籤
+                const targetIdx = parseAnswerToIndex(correctAns[i]);
                 if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
             }
         }
