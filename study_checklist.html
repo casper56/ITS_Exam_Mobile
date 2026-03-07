@@ -86,10 +86,11 @@
             flex-wrap: wrap;
         }
         .day-info {
-            flex: 0 0 180px;
+            flex: 0 0 220px;
             font-weight: bold;
             border-right: 2px solid var(--bg-color);
             margin-right: 20px;
+            white-space: nowrap;
         }
         .tasks {
             flex: 1;
@@ -101,21 +102,30 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            padding: 5px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
             border: 1px solid #eee;
             transition: all 0.2s;
             position: relative;
+            width: 200px;
+            box-sizing: border-box;
         }
         .task-item:hover {
             background: #f8f9fa;
             border-color: var(--primary-color);
         }
         .task-item input {
-            margin-right: 8px;
+            margin-right: 10px;
             width: 18px;
             height: 18px;
             accent-color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        .sub-name {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .task-item.completed {
             background: var(--score-bg);

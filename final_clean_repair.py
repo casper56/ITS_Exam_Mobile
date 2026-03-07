@@ -82,17 +82,7 @@ def clean_repair_all():
         
         /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
         .home-float-btn {
-            position: fixed; bottom: 35px; right: 20px; z-index: 2147483647;
-            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
-            color: white !important; display: flex; align-items: center; justify-content: center;
-            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
-        }
-        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
-        
-        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
-        .home-float-btn {
-            position: fixed; bottom: 35px; right: 20px; z-index: 2147483647;
+            position: fixed; bottom: 10px; right: 20px; z-index: 2147483647;
             width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
             color: white !important; display: flex; align-items: center; justify-content: center;
             text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -101,8 +91,8 @@ def clean_repair_all():
         .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
 
         /* 縮放控制位置調整，避免與回首頁按鈕重疊 */
-        .zoom-controls { position: fixed; bottom: 100px; right: 20px; z-index: 1080; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
+        .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
@@ -190,9 +180,6 @@ def clean_repair_all():
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
         }
-        .zoom-controls { position: fixed; bottom: 100px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-        
         /* 配對題樣式 */
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
@@ -211,8 +198,8 @@ def clean_repair_all():
             .match-col { min-width: 140px !important; }
             
             /* 手機端按鈕強化：絕對同步練習區垂直堆疊樣式 */
-            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
+            .home-float-btn { bottom: 5px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 60px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
         }
         /* 資料處理遮罩 */
@@ -1036,7 +1023,7 @@ def clean_repair_all():
         
         /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
         .home-float-btn {
-            position: fixed; bottom: 35px; right: 20px; z-index: 2147483647;
+            position: fixed; bottom: 10px; right: 20px; z-index: 2147483647;
             width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
             color: white !important; display: flex; align-items: center; justify-content: center;
             text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -1044,7 +1031,7 @@ def clean_repair_all():
         }
         .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
         /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
-        .zoom-controls { position: fixed; bottom: 100px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
@@ -1058,8 +1045,8 @@ def clean_repair_all():
             .sidebar.active { transform: translateX(0); }
             .content-area { margin-left: 0; }
             .mobile-toggle { display: flex; align-items: center; justify-content: center; bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
-            .home-float-btn { bottom: 75px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 130px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
+            .home-float-btn { bottom: 50px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 105px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
 
             .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); }            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
