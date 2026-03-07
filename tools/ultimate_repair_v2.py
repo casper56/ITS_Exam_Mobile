@@ -51,8 +51,8 @@ def clean_repair_all():
         .question-body { padding: 20px; font-size: 1.05rem; }
         .option-item { list-style: none; margin-bottom: 8px; padding: 10px 15px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
         .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; }
-        .home-float-btn { position: fixed; bottom: 85px; right: 20px; z-index: 9999; width: 50px; height: 50px; border-radius: 50%; background: #0d6efd; color: white !important; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 9998; display: flex; flex-direction: column; gap: 10px; }
+        .home-float-btn { position: fixed; bottom: 35px; right: 20px; z-index: 9999; width: 50px; height: 50px; border-radius: 50%; background: #0d6efd; color: white !important; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
+        .zoom-controls { position: fixed; bottom: 100px; right: 20px; z-index: 9998; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: white; color: #0d6efd; border: 2px solid #0d6efd; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         #review-area { display: none; text-align: left; padding: 20px; background: #fff; }
         .review-item { margin-bottom: 20px; padding: 15px; border: 2px solid #000; }
@@ -116,8 +116,8 @@ def clean_repair_all():
         .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; display: flex; flex-direction: column; }
         .content-area { flex: 1; margin-left: 280px; padding: 20px; transition: margin-left 0.3s; }
         .question-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: none; }
-        .home-float-btn { position: fixed; bottom: 85px; right: 20px; z-index: 9999; width: 50px; height: 50px; border-radius: 50%; background: #0d6efd; color: white !important; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 9998; display: flex; flex-direction: column; gap: 10px; }
+        .home-float-btn { position: fixed; bottom: 35px; right: 20px; z-index: 9999; width: 50px; height: 50px; border-radius: 50%; background: #0d6efd; color: white !important; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
+        .zoom-controls { position: fixed; bottom: 100px; right: 20px; z-index: 9998; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: white; color: #0d6efd; border: 2px solid #0d6efd; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         #review-area { display: none; padding: 20px; background: #fff; }
         .review-item { border-bottom: 1px solid #eee; padding: 15px 0; }

@@ -68,17 +68,7 @@
         
         /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
         .home-float-btn {
-            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
-            width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
-            color: white !important; display: flex; align-items: center; justify-content: center;
-            text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
-        }
-        .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
-        
-        /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
-        .home-float-btn {
-            position: fixed; bottom: 85px; right: 20px; z-index: 2147483647;
+            position: fixed; bottom: 10px; right: 20px; z-index: 2147483647;
             width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
             color: white !important; display: flex; align-items: center; justify-content: center;
             text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -87,8 +77,8 @@
         .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
 
         /* 縮放控制位置調整，避免與回首頁按鈕重疊 */
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1080; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; }
+        .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
+        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
@@ -176,9 +166,6 @@
             .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
             .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
         }
-        .zoom-controls { position: fixed; bottom: 150px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
-        .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-        
         /* 配對題樣式 */
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
@@ -197,8 +184,8 @@
             .match-col { min-width: 140px !important; }
             
             /* 手機端按鈕強化：絕對同步練習區垂直堆疊樣式 */
-            .home-float-btn { bottom: 20px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 75px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
+            .home-float-btn { bottom: 5px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 60px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
             .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
         }
         /* 資料處理遮罩 */
@@ -841,8 +828,8 @@
         "id": 21,
         "type": "single",
         "question": [
-            "<pre><code>您正在建置一個模型,想用於預測內送電子郵件是否為垃圾郵件。下表顯示了資料集的代表性範例。",
-			"請問在此資料集中,有什麼問題是您必須解決的?</code></pre>"
+            "<pre><code>您正在建置一個模型,想用於預測內送電子郵件是否為垃圾郵件。下表顯示了資料集的代表性範例。</code></pre>[[image01]]",
+			"<pre><code>請問在此資料集中,有什麼問題是您必須解決的?</code></pre>"
         ],
         "options": [
             "<code>資料毀損</code>",
@@ -854,7 +841,8 @@
             "B"
         ],
         "weight": 1,
-        "image": "images/21.png",
+		"image": null,
+        "image01": "images/21.png",
         "explanation": [
             "<pre><code>● 從表格範例中（假設 [否] 是錯誤或待清理的標籤，但主要問題在於類別分佈），如果「是垃圾郵件」的樣本數量遠少於「非垃圾郵件」的樣本數量（或者反之），這就是資料不平衡（Data Imbalance）問題，這會導致模型傾向於預測多數類，而對少數類的識別能力較差。",
             "● 雖然 [否] 可能代表資料毀損或需要清理，但題目更可能指向類別不平衡的問題，這是垃圾郵件檢測中常見的挑戰。</code></pre>"
@@ -1039,8 +1027,8 @@
         "id": 29,
         "type": "single",
         "question": [
-            "<pre><code>您建置了兩個AI,用於區分成人和兒童,各個AI的混淆矩陣如下所示。",
-			"圖片顯示兩個混淆矩陣。",
+            "<pre><code>您建置了兩個AI,用於區分成人和兒童,各個AI的混淆矩陣如下所示。</code></pre>[[image01]]",
+			"<pre><code>圖片顯示兩個混淆矩陣。",
 			"矩陣1：預測成人/實際成人 3, 預測兒童/實際成人 2, 預測成人/實際兒童 2, 預測兒童/實際兒童 3。準確率 = (3+3)/(3+2+2+3) = 6/10 = 60%。",
 			"矩陣2：預測成人/實際成人 0, 預測兒童/實際成人 2, 預測成人/實際兒童 0, 預測兒童/實際兒童 8。準確率 = (0+8)/(0+2+0+8) = 8/10 = 80%。",
 			"哪個AI較佳?為什麼?</code></pre>"
@@ -1055,7 +1043,8 @@
             "A"
         ],
         "weight": 1,
-        "image": "images/33.png",
+		"image": null,
+        "image01": "images/33.png",
         "explanation": [
             "<pre><code>●  選擇AI1的理由是「正確預測成人和兒童的數值相同」，這可能是在強調模型在各類別上的平衡性，即使整體準確率較低。",
             "● AI1對成人預測3個正確，對兒童預測3個正確。",
