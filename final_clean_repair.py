@@ -557,13 +557,19 @@ def clean_repair_all():
             const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
             if (rightItem) {
                 const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                // 強制初始化為陣列並存入答案
+                if (!Array.isArray(userAnswers[currentIndex])) {
+                    const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
+                    userAnswers[currentIndex] = new Array(item.left.length).fill(null);
+                }
                 userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
             }
         }
         isDragging = false; dragStartPoint = null;
         if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
-        tempLine = null; renderMatchingQuestion(currentIndex);
+        tempLine = null; 
+        const renderFunc = (typeof renderMatchingQuestion === 'function') ? renderMatchingQuestion : null;
+        if (renderFunc) renderFunc(currentIndex);
     };
     window.drawLines = function() {
         const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
@@ -972,32 +978,15 @@ def clean_repair_all():
             
                         const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            
             if (item.type === 'matching' || item.type === 'multimatching') {
-                let userLetters;
-                let totalRRows = 0; 
-                item.right.forEach(t => totalRRows += (t && String(t).includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
-                let isSplitMode = (totalRRows > item.left.length);
-                let ratio = isSplitMode ? (totalRRows / item.left.length) : 1;
-
-                if (isSplitMode) {
-                    userLetters = item.left.map((_, lIdx) => {
-                        const rIdx = (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null;
-                        if (rIdx === null || rIdx === undefined) return "";
-                        return String.fromCharCode(65 + (rIdx % ratio));
-                    });
-                } else {
-                    userLetters = item.left.map((_, i) => {
-                        const rIdx = (userAns && userAns[i] !== undefined) ? userAns[i] : null;
-                        return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
-                    });
-                }
-                
-                isCorrect = (userLetters.length === answers.length);
+                // 補齊連線題判定邏輯
+                const userIndices = item.left.map((_, lIdx) => (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null);
+                isCorrect = (userIndices.length === answers.length);
                 if (isCorrect) {
                     for (let i = 0; i < answers.length; i++) {
-                        if (String(userLetters[i] || "").trim().toUpperCase() !== String(answers[i] || "").trim().toUpperCase()) {
-                            isCorrect = false; break;
-                        }
+                        const targetIdx = parseAnswerToIndex(answers[i]);
+                        if (userIndices[i] !== targetIdx) { isCorrect = false; break; }
                     }
                 }
             } else if (item.type === 'choicelist') {

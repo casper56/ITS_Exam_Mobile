@@ -1715,8 +1715,7 @@
             "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
         ],
         "options": [
-            "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n",
-            "':</code>",
+            "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n':</code>",
             "<code>(程式碼1).if line = 'An': (程式碼2).if line != '':</code>",
             "<code>(程式碼1).if line!= != 'An': (程式碼2).if line != None:</code>",
             "<code>(程式碼1).if line != '': (程式碼2).if line != '':</code>"
@@ -2129,21 +2128,21 @@
         "question": [
             "<pre><code class=\"language-python\">【CH05-7】你在設計一個 Python 程式遊戲，讓參加的人從 1 到 100 之間猜一個數字，最多有三次機會。",
             "程式碼如下：",
-            "from random import randint",
-            "target = randint(1,100)",
-            "chance = 1",
-            "print('Guess an integer from 1 to 10. You will have 3 chances.')",
-            "_(選項 1)_",
-            "    guess = int(input('Guess an integer:'))",
-            "    if guess > target:",
-            "        print('Guess is too high')",
-            "    elif guess < target:",
-            "        print('Guess is too low')",
-            "    else:",
-            "        print('Guess is just right')",
-            "        _(選項 2)_",
-            "    _(選項 3)_",
-            "程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
+            "01 from random import randint",
+            "02 target = randint(1,100)",
+            "03 chance = 1",
+            "04 print('Guess an integer from 1 to 10. You will have 3 chances.')",
+            "05 _(選項 1)_",
+            "06    guess = int(input('Guess an integer:'))",
+            "07    if guess > target:",
+            "08        print('Guess is too high')",
+            "09    elif guess < target:",
+            "10        print('Guess is too low')",
+            "11    else:",
+            "12        print('Guess is just right')",
+            "13        _(選項 2)_",
+            "14    _(選項 3)_",
+            "\n程式可以讓使用者猜三次,如果猜出正確數字即停止程式。你要如何完成行號 5 、13 及 14 的程式碼？",
             "請將回答區專案的選到正確的程式碼片段</code></pre>"
         ],
         "left": [
@@ -4027,10 +4026,10 @@
             "    unittest.main()</code></pre>"
         ],
         "options": [
-            "<code>A.test|B.unittest</code>",
-            "<code>A.unittest.TestCase|B.test.Test</code>",
-            "<code>A.isInstance(self)|B.test_isInstance(self)</code>",
-            "<code>A.self.assertIsInstance(obj, cls)|B.check(obj, cls)</code>"
+            "<code>test|unittest</code>",
+            "<code>unittest.TestCase|test.Test</code>",
+            "<code>isInstance(self)|test_isInstance(self)</code>",
+            "<code>self.assertIsInstance(obj, cls)|check(obj, cls)</code>"
         ],
         "answer": [
             "B",
