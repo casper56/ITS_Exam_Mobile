@@ -131,6 +131,7 @@
         .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
         .choicelist-target .choicelist-item { border-left: 5px solid #0d6efd; }
         .target-slot { border: 1px dashed #adb5bd; border-radius: 6px; height: 45px; margin-bottom: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 0.8rem; }
+        .choicelist-q-text { white-space: pre-wrap !important; margin-bottom: 15px; line-height: 1.6; }
         @media (max-width: 768px) {
             .choicelist-wrapper { flex-direction: column; gap: 15px; }
             .choicelist-pool { 
@@ -8635,13 +8636,19 @@
             }
         }
 
-        const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+        // 準備完整答案顯示文字 (將索引轉為內容)
+        const correctAnsArr = Array.isArray(item.answer) ? item.answer : [item.answer];
+        const displayAnsHtml = correctAnsArr.map((val, i) => {
+            const optIdx = (typeof val === 'number') ? (val - 1) : -1;
+            const text = (optIdx >= 0 && item.options[optIdx]) ? item.options[optIdx] : val;
+            return `<div class="mt-2 p-2 border-start border-success border-4 bg-light small" style="white-space:pre-wrap; font-family:monospace;"><b>第 ${i+1} 步：</b>${text}</div>`;
+        }).join('');
 
         container.innerHTML = `<div class="card question-card">
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body">
-                ${processContent(item.question, item)}
-                <div class="choicelist-wrapper">
+            <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
+            <div class="px-3 pb-3">
+                <div class="choicelist-wrapper" style="margin-top:0;">
                     <div class="choicelist-pool">
                         <div class="choicelist-header">選項區 (點擊選取)</div>
                         ${poolHtml}
@@ -8653,8 +8660,9 @@
                 </div>
                 ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" onclick="submitChoiceList()">${isWrong ? '更正提交' : '確認提交'}</button></div>` : ''}
                 <div class="answer-section" id="ans-section" style="${isWrong || isLocked ? 'display:block' : 'display:none'}">
-                    <h6 class="fw-bold mb-3">${isWrong ? '❌ 答錯了' : '✅ 答對了'}！${isLocked ? '正確順序：<span class="text-blue">' + ansText + '</span>' : '請重新檢查順序再試一次。'}</h6>
-                    <div class="explanation" style="${isLocked ? '' : 'display:none'}">${processContent(item.explanation || '暫無解析。', item)}</div>
+                    <h6 class="fw-bold mb-3">${isWrong ? '❌ 答錯了' : '✅ 答對了'}！正確順序如下：</h6>
+                    <div class="mb-3">${displayAnsHtml}</div>
+                    <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                 </div>
             </div>
         </div>`;
