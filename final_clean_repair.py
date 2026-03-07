@@ -118,6 +118,39 @@ def clean_repair_all():
         @media (max-width: 768px) {
             code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
         }
+
+        /* ChoiceList 題型樣式 */
+        .choicelist-wrapper { display: flex; gap: 20px; margin: 15px 0; min-height: 300px; }
+        .choicelist-pool, .choicelist-target { flex: 1; border: 2px solid #dee2e6; border-radius: 8px; padding: 10px; background: #fdfdfd; }
+        .choicelist-header { font-weight: bold; color: #0d6efd; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; padding-bottom: 5px; font-size: 0.9rem; }
+        .choicelist-item { 
+            background: #fff; border: 1px solid #ced4da; border-radius: 6px; 
+            padding: 8px 12px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem;
+            transition: all 0.2s; position: relative; user-select: none; word-break: break-all;
+            white-space: pre-wrap !important; /* 核心：支援 \n 換行 */
+            font-family: Consolas, Monaco, 'Andale Mono', monospace !important; /* 程式碼專用字型 */
+            line-height: 1.4 !important;
+        }
+        .choicelist-item:hover { border-color: #0d6efd; background: #f0f7ff; }
+        .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
+        .choicelist-target .choicelist-item { border-left: 5px solid #0d6efd; }
+        .target-slot { border: 1px dashed #adb5bd; border-radius: 6px; height: 45px; margin-bottom: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .choicelist-wrapper { flex-direction: column; gap: 15px; }
+            .choicelist-pool { 
+                order: 1; /* 選項池在上 */
+                max-height: 250px; /* 限制高度防止過長 */
+                overflow-y: auto; 
+                background: #f1f3f5;
+            }
+            .choicelist-target { 
+                order: 2; /* 答案區在下 */
+                min-height: 120px;
+                background: #fff;
+                border: 2px solid #0d6efd;
+            }
+            .choicelist-item { padding: 12px; font-size: 1rem; } /* 加大手機點擊範圍 */
+        }
         
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
@@ -552,6 +585,63 @@ def clean_repair_all():
         });
     };
 
+    /* ChoiceList 互動邏輯 (模擬考版) */
+    window.renderChoiceListQuestion = function(index) {
+        currentIndex = index; const item = examQuestions[index];
+        const container = document.getElementById('question-area');
+        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
+        const currentAns = userAnswers[index];
+
+        let poolHtml = '';
+        item.options.forEach((opt, idx) => {
+            const isUsed = currentAns.includes(idx);
+            poolHtml += `<div class="choicelist-item ${isUsed ? 'disabled' : ''}" onclick="${isUsed ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
+        });
+
+        let targetHtml = '';
+        const requiredCount = item.answer.length;
+        for (let i = 0; i < requiredCount; i++) {
+            const optIdx = currentAns[i];
+            if (optIdx !== undefined) {
+                targetHtml += `<div class="choicelist-item" onclick="removeFromTarget(${i})">${item.options[optIdx]}</div>`;
+            } else {
+                targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
+            }
+        }
+
+        container.innerHTML = `<div class="card question-card">
+            <div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="choicelist-wrapper">
+                    <div class="choicelist-pool">
+                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        ${poolHtml}
+                    </div>
+                    <div class="choicelist-target">
+                        <div class="choicelist-header">答案區 (點擊移除)</div>
+                        ${targetHtml}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        if(window.Prism) Prism.highlightAll();
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+        if (userAnswers[currentIndex].length < item.answer.length) {
+            userAnswers[currentIndex].push(optIdx);
+            renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        renderChoiceListQuestion(currentIndex);
+    };
+
     function startTimer() {
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -577,6 +667,100 @@ def clean_repair_all():
         
         if (window.drawLines) window.drawLines();
     }
+
+    /* ChoiceList 互動邏輯 (練習區版) */
+    window.renderChoiceListQuestion = function(index) {
+        currentIndex = index; const item = quizData[index];
+        const container = document.getElementById('question-container');
+        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
+        const currentAns = userAnswers[index];
+        
+        const isCorrect = correctSet.has(index);
+        const isCorrected = correctedSet.has(index);
+        const isWrong = incorrectSet.has(index);
+        const isLocked = isCorrect || isCorrected; // 只有答對或更正後才鎖定
+
+        let poolHtml = '';
+        item.options.forEach((opt, idx) => {
+            const isUsed = currentAns.includes(idx);
+            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
+        });
+
+        let targetHtml = '';
+        const requiredCount = item.answer.length;
+        for (let i = 0; i < requiredCount; i++) {
+            const optIdx = currentAns[i];
+            if (optIdx !== undefined) {
+                targetHtml += `<div class="choicelist-item" onclick="${isLocked ? '' : `removeFromTarget(${i})`}">${item.options[optIdx]}</div>`;
+            } else {
+                targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
+            }
+        }
+
+        const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+
+        container.innerHTML = `<div class="card question-card">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="choicelist-wrapper">
+                    <div class="choicelist-pool">
+                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        ${poolHtml}
+                    </div>
+                    <div class="choicelist-target">
+                        <div class="choicelist-header">答案區 (點擊移除)</div>
+                        ${targetHtml}
+                    </div>
+                </div>
+                ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" onclick="submitChoiceList()">${isWrong ? '更正提交' : '確認提交'}</button></div>` : ''}
+                <div class="answer-section" id="ans-section" style="${isWrong || isLocked ? 'display:block' : 'display:none'}">
+                    <h6 class="fw-bold mb-3">${isWrong ? '❌ 答錯了' : '✅ 答對了'}！${isLocked ? '正確順序：<span class="text-blue">' + ansText + '</span>' : '請重新檢查順序再試一次。'}</h6>
+                    <div class="explanation" style="${isLocked ? '' : 'display:none'}">${processContent(item.explanation || '暫無解析。', item)}</div>
+                </div>
+            </div>
+        </div>`;
+        if(window.Prism) Prism.highlightAll();
+        updateUI();
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = quizData[currentIndex];
+        if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+        if (userAnswers[currentIndex].length < item.answer.length) {
+            userAnswers[currentIndex].push(optIdx);
+            renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        renderChoiceListQuestion(currentIndex);
+    };
+
+    window.submitChoiceList = function() {
+        const item = quizData[currentIndex];
+        const userIdxs = userAnswers[currentIndex] || [];
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
+
+        let isCorrect = (userIdxs.length === correctAns.length);
+        if (isCorrect) {
+            for (let i = 0; i < correctAns.length; i++) {
+                // 索引模式比對：將答案(1-based)轉為(0-based)與用戶選取比對
+                const targetIdx = (typeof correctAns[i] === 'number') ? (correctAns[i] - 1) : -1;
+                if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
+            }
+        }
+
+        if (isCorrect) {
+            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+            else { correctSet.add(currentIndex); }
+        } else {
+            incorrectSet.add(currentIndex);
+        }
+        saveState();
+        renderChoiceListQuestion(currentIndex);
+    };
 
     function processContent(content, item) {
         if (!content) return '';
@@ -804,7 +988,18 @@ def clean_repair_all():
                         }
                     }
                 }
+            } else if (item.type === 'choicelist') {
+                const userIdxs = userAns || [];
+                isCorrect = (userIdxs.length === answers.length);
+                if (isCorrect) {
+                    for (let i = 0; i < answers.length; i++) {
+                        // 支援數值索引比對 (1-based 轉 0-based)
+                        const targetIdx = (typeof answers[i] === 'number') ? (answers[i] - 1) : -1;
+                        if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
+                    }
+                }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
@@ -1078,6 +1273,39 @@ def clean_repair_all():
         @media (max-width: 768px) {
             code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
         }
+
+        /* ChoiceList 題型樣式 */
+        .choicelist-wrapper { display: flex; gap: 20px; margin: 15px 0; min-height: 300px; }
+        .choicelist-pool, .choicelist-target { flex: 1; border: 2px solid #dee2e6; border-radius: 8px; padding: 10px; background: #fdfdfd; }
+        .choicelist-header { font-weight: bold; color: #0d6efd; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; padding-bottom: 5px; font-size: 0.9rem; }
+        .choicelist-item { 
+            background: #fff; border: 1px solid #ced4da; border-radius: 6px; 
+            padding: 8px 12px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem;
+            transition: all 0.2s; position: relative; user-select: none; word-break: break-all;
+            white-space: pre-wrap !important; /* 核心：支援 \n 換行 */
+            font-family: Consolas, Monaco, 'Andale Mono', monospace !important; /* 程式碼專用字型 */
+            line-height: 1.4 !important;
+        }
+        .choicelist-item:hover { border-color: #0d6efd; background: #f0f7ff; }
+        .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
+        .choicelist-target .choicelist-item { border-left: 5px solid #0d6efd; }
+        .target-slot { border: 1px dashed #adb5bd; border-radius: 6px; height: 45px; margin-bottom: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .choicelist-wrapper { flex-direction: column; gap: 15px; }
+            .choicelist-pool { 
+                order: 1; /* 選項池在上 */
+                max-height: 250px; /* 限制高度防止過長 */
+                overflow-y: auto; 
+                background: #f1f3f5;
+            }
+            .choicelist-target { 
+                order: 2; /* 答案區在下 */
+                min-height: 120px;
+                background: #fff;
+                border: 2px solid #0d6efd;
+            }
+            .choicelist-item { padding: 12px; font-size: 1rem; } /* 加大手機點擊範圍 */
+        }
         
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.3s ease; padding: 0; user-select: none; }
         .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
@@ -1248,6 +1476,100 @@ def clean_repair_all():
             sidebar.classList.remove('active');
         }
     });
+    /* ChoiceList 互動邏輯 (練習區版) */
+    window.renderChoiceListQuestion = function(index) {
+        currentIndex = index; const item = quizData[index];
+        const container = document.getElementById('question-container');
+        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
+        const currentAns = userAnswers[index];
+        
+        const isCorrect = correctSet.has(index);
+        const isCorrected = correctedSet.has(index);
+        const isWrong = incorrectSet.has(index);
+        const isLocked = isCorrect || isCorrected; // 只有答對或更正後才鎖定
+
+        let poolHtml = '';
+        item.options.forEach((opt, idx) => {
+            const isUsed = currentAns.includes(idx);
+            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
+        });
+
+        let targetHtml = '';
+        const requiredCount = item.answer.length;
+        for (let i = 0; i < requiredCount; i++) {
+            const optIdx = currentAns[i];
+            if (optIdx !== undefined) {
+                targetHtml += `<div class="choicelist-item" onclick="${isLocked ? '' : `removeFromTarget(${i})`}">${item.options[optIdx]}</div>`;
+            } else {
+                targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
+            }
+        }
+
+        const ansText = Array.isArray(item.answer) ? item.answer.join(', ') : item.answer;
+
+        container.innerHTML = `<div class="card question-card">
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-body">
+                ${processContent(item.question, item)}
+                <div class="choicelist-wrapper">
+                    <div class="choicelist-pool">
+                        <div class="choicelist-header">選項池 (點擊選取)</div>
+                        ${poolHtml}
+                    </div>
+                    <div class="choicelist-target">
+                        <div class="choicelist-header">答案區 (點擊移除)</div>
+                        ${targetHtml}
+                    </div>
+                </div>
+                ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" onclick="submitChoiceList()">${isWrong ? '更正提交' : '確認提交'}</button></div>` : ''}
+                <div class="answer-section" id="ans-section" style="${isWrong || isLocked ? 'display:block' : 'display:none'}">
+                    <h6 class="fw-bold mb-3">${isWrong ? '❌ 答錯了' : '✅ 答對了'}！${isLocked ? '正確順序：<span class="text-blue">' + ansText + '</span>' : '請重新檢查順序再試一次。'}</h6>
+                    <div class="explanation" style="${isLocked ? '' : 'display:none'}">${processContent(item.explanation || '暫無解析。', item)}</div>
+                </div>
+            </div>
+        </div>`;
+        if(window.Prism) Prism.highlightAll();
+        updateUI();
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = quizData[currentIndex];
+        if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+        if (userAnswers[currentIndex].length < item.answer.length) {
+            userAnswers[currentIndex].push(optIdx);
+            renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        renderChoiceListQuestion(currentIndex);
+    };
+
+    window.submitChoiceList = function() {
+        const item = quizData[currentIndex];
+        const userIdxs = userAnswers[currentIndex] || [];
+        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
+
+        let isCorrect = (userIdxs.length === correctAns.length);
+        if (isCorrect) {
+            for (let i = 0; i < correctAns.length; i++) {
+                // 索引模式比對：將答案(1-based)轉為(0-based)與用戶選取比對
+                const targetIdx = (typeof correctAns[i] === 'number') ? (correctAns[i] - 1) : -1;
+                if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
+            }
+        }
+
+        if (isCorrect) {
+            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+            else { correctSet.add(currentIndex); }
+        } else {
+            incorrectSet.add(currentIndex);
+        }
+        saveState();
+        renderChoiceListQuestion(currentIndex);
+    };
+
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
@@ -1737,6 +2059,7 @@ def clean_repair_all():
         console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'choicelist') { renderChoiceListQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';

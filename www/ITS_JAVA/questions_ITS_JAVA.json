@@ -1608,7 +1608,7 @@
             "<pre><code><class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
         ],
         "options": [
-            "<code>/* ... */</code>",
+            "<code>/*That may be too schematized a presentation  most readers.*/</code>",
             "<code>/*// ... */</code>",
             "<code>// ... //</code>",
             "<code>//* ... //*</code>"
@@ -1693,41 +1693,37 @@
     },
     {
         "id": 44,
-        "type": "single",
+        "type": "choicelist",
         "question": [
-            "<pre><code class=\"language-java\">【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作：",
-            "● 自命令列接受多個引數。",
-            "● 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
-            "",
-            "請問您應該依序使用哪三個程式碼片段來開發解決方案？請將三個程式碼片段移至答案區，然後按照正確的順序排列。",
-            "程式碼片段：",
-            "① for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
-            "② System.out.println(arguments[x]);",
-            "   }",
-            "③ public static void main(String[] args) {",
-            "④ for (int x = 1; x <= arguments.length; x++) {",
-            "⑤ public static void main(String arguments) {",
-            "⑥ System.out.println(args[x]);",
-            "   }",
-            "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
-        ],
+		"【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作:",
+		"1. 自命令列接受多個引數。",
+		"2. 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
+		"請問您應該依序使用哪三個程式碼片段來開發解決方案？",
+		"請將三個程式碼片段移至答案區，然後按照正確的順序排列。"
+		],
         "options": [
-            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ⑦ ⑥</code>",
-            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ④ ⑥</code>",
-            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">⑤ ⑦ ②</code>",
-            "<code class=\"zoom\" style=\"--sz: 2.5rem !important;\">③ ① ②</code>"
+            "for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
+            "System.out.println(arguments[x]);\n     }\n   }",
+            "public static void main(String[] args){",
+            "  for (int x = 1; x <= arguments.length; x++) {",
+            "public static void main(String arguments) {",
+            "  System.out.println(arguments[x]);\n  } \n}",
+            "  for (int x = 0; x < args.length; x++) {"
         ],
         "answer": [
-            1
+            3,
+            7,
+            6
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "③ public static void main(String[] args)",
-            "⑦ for (int x = 0; x < args.length; x++)",
-            "⑥ System.out.println(args[x]);"
+            "開發此解決方案的正確順序：",
+            "1. 宣告主程式進入點：public static void main(String[] args) {",
+            "2. 使用迴圈從索引 0 開始遍歷陣列：for (int x = 0; x < args.length; x++) {",
+            "3. 輸出該索引的值：System.out.println(args[x]);"
         ],
-        "category": "D3_流程控制實作"
+        "category": "D1_Java 基礎"
     },
     {
         "id": 45,
