@@ -138,9 +138,7 @@ def clean_repair_all():
         @media (max-width: 768px) {
             .choicelist-wrapper { flex-direction: column; gap: 15px; }
             .choicelist-pool { 
-                order: 1; /* 選項池在上 */
-                max-height: 250px; /* 限制高度防止過長 */
-                overflow-y: auto; 
+                order: 1; /* 選項區在上 */
                 background: #f1f3f5;
             }
             .choicelist-target { 
@@ -1293,9 +1291,7 @@ def clean_repair_all():
         @media (max-width: 768px) {
             .choicelist-wrapper { flex-direction: column; gap: 15px; }
             .choicelist-pool { 
-                order: 1; /* 選項池在上 */
-                max-height: 250px; /* 限制高度防止過長 */
-                overflow-y: auto; 
+                order: 1; /* 選項區在上 */
                 background: #f1f3f5;
             }
             .choicelist-target { 

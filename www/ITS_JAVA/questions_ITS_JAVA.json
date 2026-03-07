@@ -1707,7 +1707,7 @@
             "public static void main(String[] args){",
             "  for (int x = 1; x <= arguments.length; x++) {",
             "public static void main(String arguments) {",
-            "  System.out.println(arguments[x]);\n  } \n}",
+            "     System.out.println(arguments[x]);\n  } \n}",
             "  for (int x = 0; x < args.length; x++) {"
         ],
         "answer": [
