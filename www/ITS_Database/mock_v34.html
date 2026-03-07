@@ -229,6 +229,7 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
@@ -314,6 +315,7 @@
     }
 
     const EXAM_LIMIT = 60, WRONG_KEY = 'itsdb_exam_wrong_ids', HISTORY_KEY = 'itsdb_mock_history';
+    const SYNC_SUBJECT_NAME = 'ITS_Database';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
@@ -3803,16 +3805,13 @@
             }
         }
 
-        // 3. 更新歷史
+        // 3. 更新歷史並打散題目順序
         selected.forEach(q => historySet.add(q.id));
         if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
         localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
-        examQuestions = selected.sort((a, b) => {
-            const catA = a.category || "";
-            const catB = b.category || "";
-            return catA.localeCompare(catB) || (a.id - b.id);
-        }).slice(0, EXAM_LIMIT);
+        // 完全隨機打散，不再依分類名稱排序
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
 
@@ -4083,6 +4082,10 @@
                 if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
             });
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+            // 使用獨立的 SyncManager 進行成績同步，防止功能被意外刪除
+            if (typeof SyncManager !== 'undefined') {
+                SyncManager.saveExamResult(SYNC_SUBJECT_NAME, score);
+            }
         } catch(e) {}
     }
     window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });

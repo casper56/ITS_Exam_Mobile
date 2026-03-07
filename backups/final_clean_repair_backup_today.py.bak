@@ -243,7 +243,6 @@ def clean_repair_all():
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
@@ -329,7 +328,6 @@ def clean_repair_all():
     }
 
     const EXAM_LIMIT = 60, WRONG_KEY = 'REPLACE_SUBJECT_ID_exam_wrong_ids', HISTORY_KEY = 'REPLACE_SUBJECT_ID_mock_history';
-    const SYNC_SUBJECT_NAME = 'REPLACE_SYNC_NAME';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
@@ -648,13 +646,16 @@ def clean_repair_all():
             }
         }
 
-        // 3. 更新歷史並打散題目順序
+        // 3. 更新歷史
         selected.forEach(q => historySet.add(q.id));
         if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
         localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
-        // 完全隨機打散，不再依分類名稱排序
-        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        examQuestions = selected.sort((a, b) => {
+            const catA = a.category || "";
+            const catB = b.category || "";
+            return catA.localeCompare(catB) || (a.id - b.id);
+        }).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
 
@@ -925,10 +926,6 @@ def clean_repair_all():
                 if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
             });
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
-            // 使用獨立的 SyncManager 進行成績同步，防止功能被意外刪除
-            if (typeof SyncManager !== 'undefined') {
-                SyncManager.saveExamResult(SYNC_SUBJECT_NAME, score);
-            }
         } catch(e) {}
     }
     window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
@@ -1130,7 +1127,6 @@ def clean_repair_all():
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
@@ -1749,16 +1745,8 @@ def clean_repair_all():
 </body>
 </html>"""
 
-    SYNC_NAME_MAP = {
-        'itspy': 'ITS_Python',
-        'itsdb': 'ITS_Database',
-        'itscs': 'ITS_程式設計',
-        'itsai': 'ITS_AI'
-    }
-
     for subj in config['subjects']:
         try:
-            sync_name = SYNC_NAME_MAP.get(subj['id'], 'Unknown')
             json_file = os.path.join(subj['dir'], subj['json'])
             if not os.path.exists(json_file): continue
             with open(json_file, 'rb') as f: json_bytes = f.read()
@@ -1769,10 +1757,7 @@ def clean_repair_all():
             # 1. 生成 mock_v34.html
             mock_path = os.path.join(subj['dir'], 'mock_v34.html')
             with open(mock_path, 'wb') as f:
-                f.write(mock_top_tmpl.replace('REPLACE_TITLE', subj['title'])
-                                   .replace('REPLACE_SUBJECT_ID', subj['id'])
-                                   .replace('REPLACE_SYNC_NAME', sync_name)
-                                   .encode('utf-8'))
+                f.write(mock_top_tmpl.replace('REPLACE_TITLE', subj['title']).replace('REPLACE_SUBJECT_ID', subj['id']).encode('utf-8'))
                 f.write(json_cleaned)
                 f.write(b";")
                 f.write(mock_bottom_tmpl.replace('REPLACE_CUTOFF', str(subj['cutoff'])).encode('utf-8'))
