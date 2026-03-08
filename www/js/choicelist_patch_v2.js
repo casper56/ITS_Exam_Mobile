@@ -1,6 +1,112 @@
-/* ChoiceList 終極補丁 V3.5.24 (精確字元 & sz 響應版) */
+/* ChoiceList 全球通用統一補丁 V3.5.4 (答對隱藏框版) */
 (function() {
     let selectedSlotIdx = -1;
+
+    // --- 注入強力 CSS ---
+    const style = document.createElement('style');
+    style.innerHTML = `
+        :root {
+            --cl-pool-gap: 2px;
+            --cl-gap: 2px;
+            --cl-row-height: 2.6rem;
+            --cl-padding: 0 12px;
+            --cl-header-height: 30px;
+        }
+        .cl-header {
+            font-weight: bold !important; color: #0d6efd !important;
+            height: var(--cl-header-height) !important; line-height: var(--cl-header-height) !important;
+            margin-bottom: 10px !important; border-bottom: 1px solid #ddd !important;
+            width: fit-content !important; font-size: 0.8rem !important; padding-bottom: 2px !important;
+        }
+        .cl-items-container { display: flex !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important; }
+        .pool-area { gap: var(--cl-pool-gap) !important; }
+        .target-area { gap: var(--cl-gap) !important; }
+
+        .choicelist-item, .choicelist-code-line {
+            display: block !important; 
+            height: var(--cl-row-height) !important;
+            line-height: var(--cl-row-height) !important;
+            padding: var(--cl-padding) !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+            border-radius: 4px !important;
+            white-space: pre !important; 
+            overflow: visible !important;
+            text-align: left !important;
+        }
+        .choicelist-item { background: #fff; border: 1px solid #ced4da; cursor: pointer; }
+        .choicelist-code-line { border: 1px solid transparent; border-bottom: 1px solid #f0f0f0; }
+
+        .choicelist-target { flex: none !important; width: fit-content !important; max-width: 75% !important; margin-left: 0 !important; }
+        .target-bg { background: #f8f9fa !important; border-radius: 8px; padding: 4px !important; border: 1px solid #ddd !important; }
+        .choicelist-pool { flex: none !important; width: fit-content !important; margin-right: 4px !important; }
+
+        .target-slot.inline-slot, .choicelist-item.inline-item { 
+            display: inline-flex !important; 
+            align-items: center; 
+            justify-content: flex-start !important; 
+            height: 1.8rem !important; 
+            line-height: 1 !important;
+            vertical-align: middle !important; 
+            padding: 0 8px !important; 
+            margin: 0 4px !important;
+            border-radius: 4px !important; 
+            font-size: 0.95em !important;
+            cursor: pointer !important; 
+            position: relative; 
+            z-index: 50;
+            box-sizing: border-box !important;
+            white-space: pre !important;
+            text-align: left !important;
+        }
+        /* 已填入藍色框樣式 */
+        .choicelist-item.inline-item { 
+            background: #e7f1ff !important; 
+            border: 2px solid #0d6efd !important; 
+            border-left-width: 5px !important; 
+            color: #0d6efd !important; 
+        }
+        /* 答對後隱藏框樣式 */
+        .locked-slot {
+            background: transparent !important;
+            border: 1px solid transparent !important;
+            color: #198754 !important; /* 綠色代表正確 */
+            font-weight: bold !important;
+            cursor: default !important;
+        }
+        
+        .target-slot.inline-slot { background: #fff !important; border: 2px dashed #adb5bd !important; color: #6c757d !important; justify-content: center !important; }
+        .active-slot { border: 2px solid red !important; background: #fff5f5 !important; box-shadow: 0 0 8px rgba(255,0,0,0.5) !important; color: red !important; }
+        
+        .opt-label { 
+            display: inline-block !important; 
+            font-weight: bold; 
+            color: #6c757d; 
+            margin-right: 10px; 
+            border-right: 1px solid #dee2e6; 
+            padding-right: 10px; 
+            min-width: 1.5rem; 
+            text-align: center; 
+            line-height: 1.4 !important;
+            vertical-align: middle !important;
+        }
+
+        .choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: flex-start !important; overflow-x: auto !important; padding-bottom: 10px; gap: 0 !important; }
+        .token { background: transparent !important; display: inline !important; white-space: pre !important; }
+    `;
+    document.head.appendChild(style);
+
+    const stripCodeTags = (str) => {
+        if (!str) return "";
+        return str.replace(/<pre><code.*?>/g, '').replace(/<\/code><\/pre>/g, '').replace(/<code.*?>/g, '').replace(/<\/code>/g, '');
+    };
+
+    const highlightHardened = (text) => {
+        if (!window.Prism || !text) return text;
+        const hardened = text.replace(/ /g, '\u00a0');
+        return Prism.highlight(hardened, Prism.languages.python, 'python');
+    };
 
     window.renderChoiceListQuestion = function(index) {
         const isMock = (typeof examQuestions !== 'undefined');
@@ -12,109 +118,112 @@
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
-        const currentAns = userAnswers[index];
+        const isCorrect = correctSet.has(index);
+        const isIncorrect = incorrectSet.has(index);
+        const isCorrected = correctedSet.has(index);
         const isReviewMode = !!(document.getElementById('review-list') && document.getElementById('review-list').innerHTML);
-        const isPractice = !isMock;
-        const isLocked = isMock ? isReviewMode : (correctSet.has(index) || correctedSet.has(index));
-        const isWrong = isPractice ? incorrectSet.has(index) : false;
+        const isLocked = isMock ? isReviewMode : (isCorrect || isCorrected);
 
-        // --- V3.5.24 精確字元量測核心 ---
-        const szStr = item.sz || "0.85rem";
-        // 動態計算 CHAR_W：以 16px 為基準 rem 換算，Consolas 比例約 0.62
-        const baseFontSize = parseFloat(szStr) * 16;
-        const CHAR_W = baseFontSize * 0.62; 
-        
         const slotData = item.slots || item.slot;
-        let maxSlotChars = 0;
-        if (slotData && Array.isArray(slotData)) {
-            slotData.forEach(line => {
-                // 1. 強力移除特定 Python 37字標籤 (物理級扣除)
-                let p = line.replace('<pre><code class=\\"language-python\\">', '');
-                p = p.replace('<pre><code class=\"language-python\">', '');
-                p = p.replace('</code></pre>', '');
-                // 2. 移除所有剩餘 HTML 標籤、斜線、Slot標記
-                p = p.replace(/<[^>]*>/g, "").replace(/\\/g, "").replace(/<slot\d*>/g, "").trimEnd();
-                
-                // 目標：31 (對應程式碼內容)
-                if (p.length > maxSlotChars) maxSlotChars = p.length;
-            });
-        }
-
-        let maxOptChars = 0;
-        item.options.forEach(opt => {
-            const p = opt.replace(/<[^>]*>/g, "").replace(/\\/g, "").trim();
-            if (p.length > maxOptChars) maxOptChars = p.length;
-        });
-
-        // 選項區寬度 = slots 最大字元 (31) * 字寬
-        const finalOptW = Math.ceil(maxSlotChars * CHAR_W) + 15;
-        const optStyle = `min-width:${finalOptW}px; width:${finalOptW}px;`;
-
-        // 答案區總寬度 = (選項最大字元 + slots 最大字元) * 字寬
-        const totalTargetW = Math.ceil((maxOptChars + maxSlotChars) * CHAR_W) + 40;
-        const targetInnerStyle = `min-width:${totalTargetW}px; width:${totalTargetW}px;`;
-        // ----------------------------------------------
-
         const requiredCount = (slotData && Array.isArray(slotData)) ? 
-            slotData.join('').split('<slot').length - 1 : 
-            item.answer.length;
+            slotData.join('').split('<slot').length - 1 : 1;
 
-        if (userAnswers[index].length !== requiredCount) userAnswers[index] = new Array(requiredCount).fill(null);
+        if (!Array.isArray(userAnswers[index]) || userAnswers[index].length !== requiredCount) {
+            userAnswers[index] = new Array(requiredCount).fill(null);
+        }
+        const currentAns = userAnswers[index];
+        
         if (selectedSlotIdx === -1 || selectedSlotIdx >= requiredCount) {
             const firstEmpty = userAnswers[index].indexOf(null);
             selectedSlotIdx = (firstEmpty !== -1) ? firstEmpty : 0;
         }
+        if (isLocked) selectedSlotIdx = -1;
 
+        const szStr = item.sz || "0.85rem";
+        const baseFontSize = parseFloat(szStr) * 16;
+        const CHAR_W = baseFontSize * 0.62;
         const customSz = `font-size: ${szStr} !important; --sz: ${szStr} !important;`;
 
+        let maxTextLen = 8; 
+        item.options.forEach(opt => {
+            const text = stripCodeTags(opt);
+            if (text.length > maxTextLen) maxTextLen = text.length;
+        });
+        const finalBoxW = Math.ceil((maxTextLen + 6) * CHAR_W) + 20;
+        const boxStyle = `width: ${finalBoxW}px !important; min-width: ${finalBoxW}px !important; ${isLocked ? 'cursor: default !important;' : ''}`;
+
+        // 選項區渲染
         let poolHtml = '';
         item.options.forEach((opt, idx) => {
             const isUsed = currentAns.includes(idx);
-            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" style="${customSz} ${optStyle}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
+            const label = String.fromCharCode(65 + idx);
+            const cleanText = stripCodeTags(opt);
+            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" style="${customSz} ${boxStyle}" onclick="${isUsed || isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
         });
 
+        // 回答區渲染
         let targetHtml = '';
-        if (slotData && Array.isArray(slotData)) {
+        if (slotData) {
             let sIdxCounter = 0;
             slotData.forEach(line => {
-                const lineHtml = line.replace(/<slot\d*>/g, () => {
-                    const sIdx = sIdxCounter++;
-                    const optIdx = currentAns[sIdx], isActive = (selectedSlotIdx === sIdx && !isLocked);
-                    if (optIdx !== null) return `<span class="choicelist-item inline-item ${isActive ? 'active-slot' : ''}" style="${customSz} ${optStyle}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">${item.options[optIdx]}</span>`;
-                    return `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${optStyle}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">[Slot ${sIdx + 1}]</span>`;
+                const rawLine = stripCodeTags(line);
+                const segments = rawLine.split(/<slot\d*>/);
+                let lineFinalHtml = '';
+                segments.forEach((seg, i) => {
+                    lineFinalHtml += highlightHardened(seg);
+                    if (i < segments.length - 1) {
+                        const sIdx = sIdxCounter++;
+                        const optIdx = currentAns[sIdx], isActive = (selectedSlotIdx === sIdx && !isLocked);
+                        const clickHandler = isLocked ? '' : `onclick="event.stopPropagation(); window.selectSlot(${sIdx})"`;
+                        
+                        if (optIdx !== null && optIdx !== undefined) {
+                            // 關鍵判斷：如果鎖定(答對)，則不顯示 choicelist-item 類別，改用 locked-slot
+                            const cls = isLocked ? 'locked-slot' : 'choicelist-item inline-item';
+                            const filledText = stripCodeTags(item.options[optIdx]);
+                            lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${boxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
+                        } else {
+                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${boxStyle}" ${clickHandler}>[選項 ${sIdx + 1}]</span>`;
+                        }
+                    }
                 });
-                targetHtml += `<div class="choicelist-code-line" style="${customSz}">${lineHtml}</div>`;
+                targetHtml += `<div class="choicelist-code-line" style="${customSz}">${lineFinalHtml}</div>`;
             });
         }
 
-        const displayAnsHtml = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(val => {
-            const optIdx = parseAnswerToIndex(val);
-            return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace" style="${customSz}">${item.options[optIdx] || val}</div>`;
-        }).join('');
+        let statusTextHtml = '';
+        let cardClass = 'card question-card';
+        if (isCorrect) { statusTextHtml = '<div class="alert alert-success py-1 px-2 mb-2 fw-bold">答對了 ✅</div>'; cardClass += ' correct'; }
+        else if (isCorrected) { statusTextHtml = '<div class="alert alert-warning py-1 px-2 mb-2 fw-bold text-dark">已修正 ⚠️</div>'; cardClass += ' corrected'; }
+        else if (isIncorrect) { statusTextHtml = '<div class="alert alert-danger py-1 px-2 mb-2 fw-bold">答錯了 ❌</div>'; cardClass += ' incorrect'; }
 
-        container.innerHTML = `<div class="card question-card">
+        container.innerHTML = `<div class="${cardClass}">
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
             <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
             <div class="px-3 pb-3">
-                <div class="choicelist-wrapper" style="width: fit-content; margin-left: 0;">
-                    <div class="choicelist-pool" style="width: auto;"><h6>選項區</h6>${poolHtml}</div>
-                    <div class="choicelist-target" style="width: auto; min-width: auto;">
-                        <h6>答案區</h6>
-                        <div style="background:#f8f9fa; padding:15px; border-radius:8px; overflow-x:auto;">
-                            <div style="${targetInnerStyle}">${targetHtml}</div>
+                <div class="choicelist-wrapper">
+                    <div class="choicelist-pool">
+                        <div class="cl-header">選項區</div>
+                        <div class="cl-items-container pool-area">${poolHtml}</div>
+                    </div>
+                    <div class="choicelist-target">
+                        <div class="cl-header">回答區</div>
+                        <div class="target-bg">
+                            <div class="cl-items-container target-area">${targetHtml}</div>
                         </div>
                     </div>
                 </div>
-                ${isPractice && !isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" onclick="submitChoiceList()">確認提交</button></div>` : ''}
-                <div class="answer-section" style="${(isPractice && (isWrong || isLocked)) || (isMock && isReviewMode) ? 'display:block' : 'display:none'}">
-                    <h6>正確順序如下：</h6>
-                    <div class="mb-3">${displayAnsHtml}</div>
+                ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" id="choicelist-submit-btn" onclick="window.submitChoiceList()">確認提交</button></div>` : ''}
+                <div class="answer-section" id="choicelist-ans-section" style="${isLocked || isIncorrect ? 'display:block' : 'display:none'}">
+                    ${statusTextHtml}
+                    <h6 class="fw-bold mb-3">正確順序如下：</h6>
+                    <div class="mb-3">${(Array.isArray(item.answer) ? item.answer : [item.answer]).map(val => {
+                        const idx = parseAnswerToIndex(val);
+                        return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace"><span class="badge bg-secondary me-2">${String.fromCharCode(65 + idx)}</span>${stripCodeTags(item.options[idx]) || val}</div>`;
+                    }).join('')}</div>
                     <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                 </div>
             </div>
         </div>`;
-        if(window.Prism) Prism.highlightAll();
         if(typeof updateUI === 'function') updateUI();
     };
 
@@ -127,27 +236,27 @@
 
     window.moveToTarget = function(optIdx) {
         if (!userAnswers[currentIndex]) return;
-        if (selectedSlotIdx === -1 || userAnswers[currentIndex][selectedSlotIdx] !== null) {
-            const empty = userAnswers[currentIndex].indexOf(null);
-            if (empty !== -1) selectedSlotIdx = empty;
-        }
-        if (selectedSlotIdx !== -1) {
-            userAnswers[currentIndex][selectedSlotIdx] = optIdx;
-            const nextEmpty = userAnswers[currentIndex].indexOf(null);
-            if (nextEmpty !== -1) selectedSlotIdx = nextEmpty;
+        let targetIdx = selectedSlotIdx;
+        if (targetIdx === -1 || userAnswers[currentIndex][targetIdx] !== null) targetIdx = userAnswers[currentIndex].indexOf(null);
+        if (targetIdx !== -1) {
+            userAnswers[currentIndex][targetIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
             if (typeof saveState === 'function') saveState();
             window.renderChoiceListQuestion(currentIndex);
         }
     };
 
-    window.removeFromTarget = function(ansIdx) { window.selectSlot(ansIdx); };
-    
     window.submitChoiceList = function() {
         const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
         const userIdxs = userAnswers[currentIndex] || [], correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
         let isCorrect = (userIdxs.length === correctAns.length && !userIdxs.includes(null));
-        if (isCorrect) { for (let i = 0; i < correctAns.length; i++) { if (userIdxs[i] !== parseAnswerToIndex(correctAns[i])) { isCorrect = false; break; } } }
-        if (isCorrect) { if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); } else { correctSet.add(currentIndex); } }
+        if (isCorrect) { 
+            for (let i = 0; i < correctAns.length; i++) { if (userIdxs[i] !== parseAnswerToIndex(correctAns[i])) { isCorrect = false; break; } } 
+        }
+        if (isCorrect) { 
+            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); } 
+            else { correctSet.add(currentIndex); } 
+        }
         else { incorrectSet.add(currentIndex); }
         if (typeof saveState === 'function') saveState();
         window.renderChoiceListQuestion(currentIndex);

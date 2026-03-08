@@ -1907,20 +1907,20 @@
             "你需要完成程式以符合要求，應該要如何完成這段程式碼？</code></pre>"            
             ],
         "slots" : [
-            "#程式碼片段",
+            "<pre><code class=\"language-python\">#程式碼片段",
             "def get_rating(age):",
             "    rating = ''",
             "    if <slot01>",
             "    elif <slot02>",
             "    elif <slot03>",
             "    else <slot04>",
-            "    return rating"
+            "    return rating</code></pre>"
         ],
         "options": [
-            "age<13: rating='普通級'",
+            "<pre><code class=\"language-python\">age<13: rating='普通級'",
             "age<18: rating='輔導級'",
             ":rating='限制級'",
-            "age is None: rating='未知'"
+            "age is None: rating='未知'</code></pre>"
         ],
         "answer": [
             "D",
@@ -2412,7 +2412,7 @@
     {
         "id": 55,
         "type": "choicelist",
-        "sz": "0.75rem",
+        "sz": "0.65rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-13】你用 Python 設計了一個比大小函式，必須符合以下的需求：",
             "● 這個函式有二個引數：一個整數清單和一個整數作為引數。",
