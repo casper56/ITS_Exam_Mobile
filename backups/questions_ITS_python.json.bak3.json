@@ -1102,13 +1102,13 @@
             "● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。",
             "● 重量必須印在 5 個空格範圍內並靠右對齊，小數點最多一個位數。",
             "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。",
-            "你建立了以下的程式碼。",
-            "def print _table(file):",
-            "   data = open(file,'r')",
-            "   for record in data:",
-            "      fields = record.split(',')",
-            "？？？？",
-            "你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。",
+            "你建立了以下的程式碼。\n",
+            "01 def print _table(file):",
+            "02   data = open(file,'r')",
+            "03   for record in data:",
+            "04      fields = record.split(',')",
+            "05  ？？？？",
+            "\n你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。",
             "每個程式碼片段都可以使用一次、多次，或者不使用。",
             "問題選項區",
             "(選項1) (選項2) (選項3) (選項4)'",
@@ -1214,11 +1214,11 @@
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。",
-            "你的程式碼如下：",
-            "print('Enter product name: ')",
-            "?",
-            "print(product_name)",
-            "在02行應該編寫哪個程式碼？</code></pre>"
+            "你的程式碼如下：\n",
+            "01 print('Enter product name: ')",
+            "02 ?",
+            "03 print(product_name)",
+            "\n在02行應該編寫哪個程式碼？</code></pre>"
         ],
         "options": [
             "<code>product_name = input()</code>",
@@ -1367,31 +1367,34 @@
     },
     {
         "id": 38,
-        "type": "choicelist",
-        "sz": "0.75rem",
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH04-8】你正在設計一個 Python 處理檔案的函式。",
             "● 如果檔案不存在，則返回 '檔案不存在'。",
-            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",		
-            "你應該如何安排這些程式碼片段的順序來完成函式？",
-            "請將適合的程式碼片段移動到回答區，並按正確的順序排列。</code></pre>"
-            
-        ],
-		"slots": [
-			"import os",
+            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",
+            "<pre><code class=\"language-python\">import os",
             "  def get _ file_message(file):",
-			"<slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>",
-			"<slot05>"
-		],
+            "  _(選項1)_",
+            "  _(選項2)_",
+            "  _(選項3)_",
+            "  _(選項4)_",
+            "  _(選項5)_",
+            "你應該如何安排這些程式碼片段的順序來完成函式？",
+            "請將適合的程式碼片段移動到回答區，並按正確的順序排列。",
+            "程式碼片段",
+            "A.with open(file, 'r') as file:",
+            "B.return 'File dose not exist'",
+            "C.return file.readline()",
+            "D.if os.path.isfile(file):",
+            "E.else:</code></pre>"
+        ],
         "options": [
-            "\t   with open(file, 'r') as file:",
-            "\t   return 'File dose not exist'",
-            "\t      return file.readline()",
-            "\tif os.path.isfile(file):",
-            "\telse:"
+            "<code>A|B|C|D|E</code>",
+            "<code>A|B|C|D|E</code>",
+            "<code>A|B|C|D|E</code>",
+            "<code>A|B|C|D|E</code>",
+            "<code>A|B|C|D|E</code>"
         ],
         "answer": [
             "D",
@@ -1598,25 +1601,25 @@
             "print('Your letter grade is :', letter_grade)",
             "",
             "選項1答案選擇區",
-            "答案 A. if grade <= 90:",
-            "答案 B. if grade >= 90:",
-            "答案 C. elif grade > 90:",
-            "答案 D. elif grade >= 90:",
+            "if grade <= 90:",
+            "if grade >= 90:",
+            "elif grade > 90:",
+            "elif grade >= 90:",
             "選項2答案選擇區",
-            "答案 A. if grade > 80:",
-            "答案 B. if grade >= 80:",
-            "答案 C. elif grade > 80:",
-            "答案 D. elif grade >= 80:",
+            "if grade > 80:",
+            "if grade >= 80:",
+            "elif grade > 80:",
+            "elif grade >= 80:",
             "選項3答案選擇區",
-            "A. if grade > 70:",
-            "B. if grade >= 70:",
-            "C. elif grade > 70:",
-            "D. elif grade >= 70:",
+            "if grade > 70:",
+            "if grade >= 70:",
+            "elif grade > 70:",
+            "elif grade >= 70:",
             "選項4答案選擇區",
-            "A. if grade > 60:",
-            "B. if grade >= 60:",
-            "C. elif grade > 60:",
-            "D. elif grade >= 60:</code></pre>"
+            "if grade > 60:",
+            "if grade >= 60:",
+            "elif grade > 60:",
+            "elif grade >= 60:</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",
@@ -1641,31 +1644,35 @@
     },
     {
         "id": 44,
-        "type": "choicelist",
-		"sz": "0.75rem",
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-2】你要設計一款以使用者年齢進行電影分級的程式，必須符合以下要求：",
             "● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。",
             "● 任何 13 歲或以上，但小於 18 歲的人都會顯示 '輔導級' 的訊息。",
             "● 任何 12 歲或或更年輕的人都會顯示 '普通級' 的訊息。",
             "● 如果年齡未知，則會顯示 '未知' 的訊息。",
-            "你需要完成程式以符合要求，應該要如何完成這段程式碼？</code></pre>"            
-            ],
-        "slots" : [
+            "你需要完成程式以符合要求，應該要如何完成這段程式碼？",
             "#程式碼片段",
             "def get_rating(age):",
             "    rating = ''",
-            "    if <slot01>",
-            "    elif <slot02>",
-            "    elif <slot03>",
-            "    else <slot04>",
-            "    return rating"
+            "    if _(選項 1)_",
+            "    elif _(選項 2)_",
+            "    elif _(選項 3)_",
+            "    else_(選項 4)_",
+            "    return rating",
+            "",
+            "答案選擇區",
+            "答案 A. age<13: rating='普通級'",
+            "答案 B. age<18: rating='輔導級'",
+            "答案 C. :rating='限制級'",
+            "答案 D. age is None: rating='未知'</code></pre>"
         ],
         "options": [
-            "age<13: rating='普通級'",
-            "age<18: rating='輔導級'",
-            ":rating='限制級'",
-            "age is None: rating='未知'"
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "D",
@@ -1970,12 +1977,6 @@
             "\t\tif name.upper() == name:\n\t\t   print(name, 'is all upper case.')",
             "\t\telse:\n\t\t   print(name, 'is lower case.')"
         ],
-		"slots": [
-			"<slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>"
-		],
         "answer": [
             "A",
             "E",
@@ -2175,13 +2176,6 @@
             "         break",
             "def search(nums, num):"
         ],
-		"slots": [
-			"<slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>",
-			"<slot05>"
-		],
         "answer": [
             "E",
             "A",
@@ -2558,7 +2552,7 @@
             "    x = input('Enter a new word or QUIT to exit: ')",
             "",
             "選項 1 答案選擇區",
-            " A. while B. for C. if D. in</code></pre>"
+            " A. while   ,B. for   ,C. if   ,D. in</code></pre>"
         ],
         "options": [
             "<code>A|B|C|D</code>",

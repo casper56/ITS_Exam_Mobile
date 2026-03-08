@@ -1372,14 +1372,15 @@
         "question": [
             "<pre><code class=\"language-python\">【CH04-8】你正在設計一個 Python 處理檔案的函式。",
             "● 如果檔案不存在，則返回 '檔案不存在'。",
-            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",		
+            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",
+			
             "你應該如何安排這些程式碼片段的順序來完成函式？",
             "請將適合的程式碼片段移動到回答區，並按正確的順序排列。</code></pre>"
             
         ],
 		"slots": [
-			"import os",
-            "  def get _ file_message(file):",
+			"<pre><code class=\"language-python\">import os",
+            "  def get _ file_message(file):</code></pre>",
 			"<slot01>",
 			"<slot02>",
 			"<slot03>",
@@ -1642,7 +1643,6 @@
     {
         "id": 44,
         "type": "choicelist",
-		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-2】你要設計一款以使用者年齢進行電影分級的程式，必須符合以下要求：",
             "● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。",
@@ -1651,7 +1651,7 @@
             "● 如果年齡未知，則會顯示 '未知' 的訊息。",
             "你需要完成程式以符合要求，應該要如何完成這段程式碼？</code></pre>"            
             ],
-        "slots" : [
+        "slot" : [
             "#程式碼片段",
             "def get_rating(age):",
             "    rating = ''",
