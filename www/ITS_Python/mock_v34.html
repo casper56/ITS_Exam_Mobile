@@ -1764,7 +1764,7 @@
     {
         "id": 38,
         "type": "choicelist",
-        "sz": "0.75rem",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-8】你正在設計一個 Python 處理檔案的函式。",
             "● 如果檔案不存在，則返回 '檔案不存在'。",
@@ -1774,20 +1774,20 @@
             
         ],
 		"slots": [
-			"import os",
+			"<pre><code class=\"language-python\">import os",
             "  def get _ file_message(file):",
 			"<slot01>",
 			"<slot02>",
 			"<slot03>",
 			"<slot04>",
-			"<slot05>"
+			"<slot05></code></pre>"
 		],
         "options": [
-            "\t   with open(file, 'r') as file:",
-            "\t   return 'File dose not exist'",
-            "\t      return file.readline()",
-            "\tif os.path.isfile(file):",
-            "\telse:"
+            "<pre><code class=\"language-python\">   with open(file, 'r') as file:",
+            "     return 'File dose not exist'",
+            "        return file.readline()",
+            "  if os.path.isfile(file):",
+            "  else:</code></pre>"
         ],
         "answer": [
             "D",
@@ -7577,5 +7577,6 @@
     window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
     initExam();
 </script>
+    <script src="../js/choicelist_patch_v2.js"></script>
 </body>
 </html>

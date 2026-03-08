@@ -1217,6 +1217,7 @@ def clean_repair_all():
     window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
     initExam();
 </script>
+    <script src="../js/choicelist_patch_v2.js"></script>
 </body>
 </html>"""
 
@@ -2227,6 +2228,7 @@ def clean_repair_all():
     }
     loadState(); window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); }); renderQuestion(currentIndex);
 </script>
+    <script src="../js/choicelist_patch_v2.js"></script>
 </body>
 </html>"""
 
