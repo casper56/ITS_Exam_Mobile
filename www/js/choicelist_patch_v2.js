@@ -144,20 +144,27 @@
         const CHAR_W = baseFontSize * 0.62;
         const customSz = `font-size: ${szStr} !important; --sz: ${szStr} !important;`;
 
-        let maxTextLen = 8; 
+        // 1. 先找出所有選項中，最長一行的字元數 (考慮 \n 與 \t)
+        let globalMaxLen = 4;
         item.options.forEach(opt => {
             const text = stripCodeTags(opt);
-            if (text.length > maxTextLen) maxTextLen = text.length;
+            const lines = text.split('\n');
+            lines.forEach(line => {
+                const processed = line.replace(/\t/g, '    ');
+                if (processed.length > globalMaxLen) globalMaxLen = processed.length;
+            });
         });
-        const finalBoxW = Math.ceil((maxTextLen + 6) * CHAR_W) + 20;
-        const boxStyle = `width: ${finalBoxW}px !important; min-width: ${finalBoxW}px !important; ${isLocked ? 'cursor: default !important;' : ''}`;
+
+        // 2. 根據全域最長行計算統一的寬度
+        const unifiedW = Math.ceil((globalMaxLen + 6) * CHAR_W) + 20;
+        const unifiedBoxStyle = `width: ${unifiedW}px !important; min-width: ${unifiedW}px !important;`;
 
         // 選項區渲染
         let poolHtml = '';
         item.options.forEach((opt, idx) => {
             const label = String.fromCharCode(65 + idx);
             const cleanText = stripCodeTags(opt);
-            poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${boxStyle}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+            poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
         });
 
         // 回答區渲染
@@ -176,12 +183,12 @@
                         const clickHandler = isLocked ? '' : `onclick="event.stopPropagation(); window.selectSlot(${sIdx})"`;
                         
                         if (optIdx !== null && optIdx !== undefined) {
-                            // 關鍵判斷：如果鎖定(答對)，則不顯示 choicelist-item 類別，改用 locked-slot
                             const cls = isLocked ? 'locked-slot' : 'choicelist-item inline-item';
                             const filledText = stripCodeTags(item.options[optIdx]);
-                            lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${boxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
+                            lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
                         } else {
-                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${boxStyle}" ${clickHandler}>[選項 ${sIdx + 1}]</span>`;
+                            // 空插槽也使用統一寬度
+                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[選項 ${sIdx + 1}]</span>`;
                         }
                     }
                 });

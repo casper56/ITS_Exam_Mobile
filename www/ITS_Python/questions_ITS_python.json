@@ -1952,11 +1952,11 @@
         ],
         "options": [
             "<pre><code class=\"language-python\">name = input('Enter your English name:')",
-            "elif name.lower() == name:\n   print(name, 'is all lower case.')",
-            "telse:\n   print(name, 'is upper case.')",
-            "else:\n   print(name, 'is mixed case.')",
-            "if name.upper() == name:\n   print(name, 'is all upper case.')",
-            "else:\n   print(name, 'is lower case.')</code></pre>"
+            "elif name.lower() == name:\n        print(name, 'is all lower case.')",
+            "else:\n        print(name, 'is upper case.')",
+            "else:\n        print(name, 'is mixed case.')",
+            "if name.upper() == name:\n        print(name, 'is all upper case.')",
+            "else:\n        print(name, 'is lower case.')</code></pre>"
         ],
 		"slots": [
 			"<slot01>",
@@ -2157,18 +2157,18 @@
             "請將適合的程式碼片段從程式碼片段清單移動到回答區，並按正確的順序排列。</code></pre>"
         ],
         "options": [
-            "   for i in range(len(nums)):",
+            "<pre><code class=\"language-python\">   for i in range(len(nums)):",
             "      if nums[i] > num:\n         print('A value greater than {0} is found in the list of {1}'.format(num, nums))",
             "      else:\n         print('A value greater than {0} cannot be found in the list of {1}'.format(num, nums))",
             "         break",
-            "def search(nums, num):"
+            "def search(nums, num):</code></pre>"
         ],
 		"slots": [
-			"<slot01>",
+			"<pre><code class=\"language-python\"><slot01>",
 			"<slot02>",
 			"<slot03>",
 			"<slot04>",
-			"<slot05>"
+			"<slot05></code></pre>"
 		],
         "answer": [
             "E",
