@@ -92,7 +92,26 @@
             vertical-align: middle !important;
         }
 
-        .choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: flex-start !important; overflow-x: auto !important; padding-bottom: 10px; gap: 0 !important; }
+        .choicelist-wrapper { 
+            display: flex !important; 
+            flex-direction: row !important; 
+            align-items: flex-start !important; 
+            overflow-x: auto !important; 
+            padding-bottom: 10px; 
+            gap: 12px !important; 
+        }
+        /* 僅在寬度窄且為直立模式時，才切換為上下堆疊 */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .choicelist-wrapper {
+                flex-direction: column !important;
+                overflow-x: visible !important;
+            }
+            .choicelist-pool, .choicelist-target {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 0 15px 0 !important;
+            }
+        }
         .token { background: transparent !important; display: inline !important; white-space: pre !important; }
     `;
     document.head.appendChild(style);
@@ -106,6 +125,22 @@
         if (!window.Prism || !text) return text;
         const hardened = text.replace(/ /g, '\u00a0');
         return Prism.highlight(hardened, Prism.languages.python, 'python');
+    };
+
+    const processContentLocal = (content, item) => {
+        if (!content) return "";
+        let html = content;
+        // 1. 處理 [[image01]] 格式
+        html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const num = parseInt(p1);
+            const src = item['image' + num] || item['image' + p1] || item['image'] || `images/${p1}.png`;
+            // 如果 src 不含路徑，補上 ./images/
+            const finalSrc = (src.includes('/') || src.includes('\\')) ? src : `./images/${src}`;
+            return `<img src="${finalSrc}" class="q-img" style="max-width:100%; height:auto; display:block; margin:10px 0;">`;
+        });
+        // 2. 處理 <code> 標籤
+        html = html.replace(/<code>(.*?)<\/code>/g, '<code class="language-python">$1</code>');
+        return html;
     };
 
     window.renderChoiceListQuestion = function(index) {
