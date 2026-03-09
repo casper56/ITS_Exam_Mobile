@@ -223,6 +223,13 @@
                 </div>
             </div>
         </div>`;
+
+        // --- 強制控制導覽按鈕顯示 ---
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = 'flex';
+        
         if(typeof updateUI === 'function') updateUI();
     };
 
