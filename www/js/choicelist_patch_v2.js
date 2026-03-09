@@ -24,14 +24,14 @@
 
         .choicelist-item, .choicelist-code-line {
             display: block !important; 
-            height: var(--cl-row-height) !important;
-            line-height: var(--cl-row-height) !important;
-            padding: var(--cl-padding) !important;
+            min-height: var(--cl-row-height) !important;
+            padding: 8px 12px !important;
             margin: 0 !important;
             box-sizing: border-box !important;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
             border-radius: 4px !important;
-            white-space: pre !important; 
+            white-space: pre-wrap !important; 
+            word-break: break-all !important;
             overflow: visible !important;
             text-align: left !important;
         }
