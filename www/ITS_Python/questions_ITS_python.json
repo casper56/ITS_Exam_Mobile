@@ -324,7 +324,7 @@
             " sum += rating",
             " count += 1",
             "average = float(sum / count)",
-            "____(2)____ (\"The average star rating for the new coffee is: \" + ____(3)____)</code></pre>"
+            "____(2)____ (\"The average star rating for the new coffee is: \" + ____(3)____)選答區</code></pre>"
         ],
         "options": [
             "<code>(1) A. float(input(\"...\")) (2) C. print (3) D. format(average, '.2f'))</code>",
@@ -728,7 +728,7 @@
             "<pre><code class=\"language-python\">【CH02-14】您正在撰寫一個 Python 程式評估算術公式。",
             "此公式描述 a 是先取得一個輸入值，而 b 等於 a 乘以 -1 之後再平方，所以 b 是結果。",
             "您所建立的程式碼片段如下。",
-            "<pre><code class=\"language-python\">a = eval(input(\"Enter a number for the equation: \")))",
+            "a = eval(input(\"Enter a number for the equation: \")))",
             "b = 選項1 選項2 選項3 選項4 選項5",
             "您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，",
             "以完成第 2 行的程式碼。每個程式碼片段可能使用一次，也可能使用多次，甚至完全用不到。</code></pre>"
@@ -1458,8 +1458,8 @@
             "   else:",
             "       print('End of file')",
             "       eof = True",
-            "students.close()",
-            "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
+            "students.close()\n",
+            "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？","</code></pre>"
         ],
         "options": [
             "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n':</code>",
@@ -1722,36 +1722,32 @@
     },
     {
         "id": 46,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-4】你正在編寫一個函式來判別負數與非負數。這個函式必須符合以下要求：",
             "● 如果 a 是負數，則回傳 'The result is a negative number'",
             "● 如果 a 不是負數，則為非負數，再繼續判別。",
             "● 如果 a 大於 0，則回傳 'The result is a positive number'",
             "● 否則回傳 'The result is a zero'",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
-            "def reResult(a):",
-            "    _(選項 1)_",
-            "        answer = 'The result is a negative number'",
-            "    _(選項 2)_",
-            "        _(選項 3)_",
-            "            answer = 'The result is a positive number'",
-            "        _(選項 4)_",
-            "            answer = 'The result is a zero'",
-            "    return answer",
-            "",
-            "答案選擇區",
-            "答案 A. if a < 0:",
-            "答案 B. if a > 0:",
-            "答案 C. else:",
-            "答案 D. elif:</code></pre>"
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
         ],
+		"slots" : [
+			"<pre><code class=\"language-python\">def reResult(a):",
+            "    <slot01>",
+            "        answer = 'The result is a negative number'",
+            "    <slot02>",
+            "        <slot03>",
+            "            answer = 'The result is a positive number'",
+            "        <slot04>",
+            "            answer = 'The result is a zero'",
+            "    return answer</code></pre>"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "<pre><code class=\"language-python\">if a < 0:",
+            "if a > 0:",
+            "else:",
+            "elif:</code></pre>"
         ],
         "answer": [
             "A",
