@@ -100,7 +100,8 @@
             padding-bottom: 10px; 
             gap: 12px !important; 
         }
-        @media (max-width: 768px) {
+        /* 僅在寬度窄且為直立模式時，才切換為上下堆疊 */
+        @media (max-width: 768px) and (orientation: portrait) {
             .choicelist-wrapper {
                 flex-direction: column !important;
                 overflow-x: visible !important;
