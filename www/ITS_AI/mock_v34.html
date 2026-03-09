@@ -3705,10 +3705,10 @@
     }
 
     function renderQuestion(index, scrollTop = true) {
-        currentIndex = index; const item = examQuestions[index]; 
+        currentIndex = index; const item = examQuestions[index];
         if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
-        const container = document.getElementById('question-area'); 
-        if (!container) return;
+        if (item.type === 'choicelist') { if(typeof window.renderChoiceListQuestion === 'function') { window.renderChoiceListQuestion(index); return; } }
+        const container = document.getElementById('question-area');        if (!container) return;
         container.innerHTML = '';
         const progressEl = document.getElementById('q-progress');
         if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
@@ -3810,14 +3810,26 @@
                     }
                 }
             } else if (item.type === 'choicelist') {
-                const userIdxs = userAns || [];
-                isCorrect = (userIdxs.length === answers.length);
+                const userIdxs = Array.isArray(userAns) ? userAns : [];
+                const correctIndices = answers.map(a => (typeof a === 'number') ? (a - 1) : parseAnswerToIndex(a));
+                
+                isCorrect = (userIdxs.length === correctIndices.length);
                 if (isCorrect) {
-                    for (let i = 0; i < answers.length; i++) {
-                        // 支援數值索引比對 (1-based 轉 0-based)
-                        const targetIdx = (typeof answers[i] === 'number') ? (answers[i] - 1) : -1;
-                        if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
+                    for (let i = 0; i < correctIndices.length; i++) {
+                        if (userIdxs[i] !== correctIndices[i]) { isCorrect = false; break; }
                     }
+                }
+                
+                // --- F12 Debug Message ---
+                console.log(`%c[Grading Q${idx+1}] Type: ChoiceList`, "color: #0d6efd; font-weight: bold;");
+                console.log(` - 您的答題 (Indices):`, userIdxs);
+                console.log(` - 正確答案 (Indices):`, correctIndices);
+                console.log(` - 原始正確標籤:`, answers);
+                console.log(` - 轉換規則說明: A=0, B=1, C=2, D=3, E=4 (以此類推)`);
+                if (!isCorrect) {
+                    console.log(`%c - 判定結果: ❌ 錯誤`, "color: red; font-weight: bold;");
+                } else {
+                    console.log(`%c - 判定結果: ✅ 正確`, "color: green; font-weight: bold;");
                 }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
 
@@ -3957,11 +3969,27 @@
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {
-                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                const userAns = userAnswers[idx]; 
+                const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
                 let isCorr = false;
-                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
-                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
-                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                
+                if (q.type === 'choicelist') {
+                    // 排序題判定：比對索引陣列
+                    if (Array.isArray(userAns) && userAns.length === answers.length && !userAns.includes(null)) {
+                        isCorr = true;
+                        for (let j = 0; j < answers.length; j++) {
+                            if (userAns[j] !== parseAnswerToIndex(answers[j])) { isCorr = false; break; }
+                        }
+                    }
+                } else if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) {
+                    isCorr = userAns && answers.every((a, i) => parseAnswerToIndex(a) === userAns[i]);
+                } else if (q.type === 'multiple') { 
+                    const cIdxs = answers.map(a => parseAnswerToIndex(a)); 
+                    isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); 
+                } else {
+                    isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                }
+                
                 if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
             });
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));

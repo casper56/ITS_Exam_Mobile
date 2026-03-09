@@ -324,7 +324,7 @@
             " sum += rating",
             " count += 1",
             "average = float(sum / count)",
-            "____(2)____ (\"The average star rating for the new coffee is: \" + ____(3)____)選答區</code></pre>"
+            "____(2)____ (\"The average star rating for the new coffee is: \" + ____(3)____)\n選答區</code></pre>"
         ],
         "options": [
             "<code>(1) A. float(input(\"...\")) (2) C. print (3) D. format(average, '.2f'))</code>",
@@ -1785,7 +1785,7 @@
             "    <slot02>",
             "        <slot03>",
             "            fee = 120",
-            "        else:",
+            "          else:",
             "            fee = 180",
             "    return fee</code></pre>"
 		],

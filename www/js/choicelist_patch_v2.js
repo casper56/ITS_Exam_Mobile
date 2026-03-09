@@ -118,10 +118,10 @@
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        const isCorrect = correctSet.has(index);
-        const isIncorrect = incorrectSet.has(index);
-        const isCorrected = correctedSet.has(index);
-        const isReviewMode = !!(document.getElementById('review-list') && document.getElementById('review-list').innerHTML);
+        const isCorrect = (typeof correctSet !== 'undefined') ? correctSet.has(index) : false;
+        const isIncorrect = (typeof incorrectSet !== 'undefined') ? incorrectSet.has(index) : false;
+        const isCorrected = (typeof correctedSet !== 'undefined') ? correctedSet.has(index) : false;
+        const isReviewMode = !!(document.getElementById('review-list') && document.getElementById('review-list').innerHTML !== "");
         const isLocked = isMock ? isReviewMode : (isCorrect || isCorrected);
 
         const slotData = item.slots || item.slot;
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-                ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" id="choicelist-submit-btn" onclick="window.submitChoiceList()">確認提交</button></div>` : ''}
+                ${(!isLocked && !isMock) ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" id="choicelist-submit-btn" onclick="window.submitChoiceList()">確認提交</button></div>` : ''}
                 <div class="answer-section" id="choicelist-ans-section" style="${isLocked || isIncorrect ? 'display:block' : 'display:none'}">
                     ${statusTextHtml}
                     <h6 class="fw-bold mb-3">正確順序如下：</h6>
@@ -241,8 +241,10 @@
     };
 
     window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
         userAnswers[currentIndex][idx] = null;
         selectedSlotIdx = idx;
+        console.log(`[ChoiceList Debug] 插槽 ${idx} 已清空。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
         if (typeof saveState === 'function') saveState();
         window.renderChoiceListQuestion(currentIndex);
     };
@@ -254,12 +256,14 @@
         if (targetIdx !== -1) {
             userAnswers[currentIndex][targetIdx] = optIdx;
             selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            console.log(`[ChoiceList Debug] 選項 ${String.fromCharCode(65 + optIdx)} 已填入插槽 ${targetIdx}。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
             if (typeof saveState === 'function') saveState();
             window.renderChoiceListQuestion(currentIndex);
         }
     };
 
     window.submitChoiceList = function() {
+        if (typeof incorrectSet === 'undefined') return;
         const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
         const userIdxs = userAnswers[currentIndex] || [], correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
         let isCorrect = (userIdxs.length === correctAns.length && !userIdxs.includes(null));
