@@ -99,6 +99,7 @@
 
     const stripCodeTags = (str) => {
         if (!str) return "";
+        if (Array.isArray(str)) return str.map(stripCodeTags).join(" ");
         return str.replace(/<pre><code.*?>/g, '').replace(/<\/code><\/pre>/g, '').replace(/<code.*?>/g, '').replace(/<\/code>/g, '');
     };
 
@@ -145,8 +146,10 @@
         const customSz = `font-size: ${szStr} !important; --sz: ${szStr} !important;`;
 
         // 1. 先找出所有選項中，最長一行的字元數 (考慮 \n 與 \t)
+        // 支援分組選項：將 options 扁平化處理
         let globalMaxLen = 4;
-        item.options.forEach(opt => {
+        const flatOptions = item.options.flat(Infinity);
+        flatOptions.forEach(opt => {
             const text = stripCodeTags(opt);
             const lines = text.split('\n');
             lines.forEach(line => {
@@ -159,13 +162,35 @@
         const unifiedW = Math.ceil((globalMaxLen + 6) * CHAR_W) + 20;
         const unifiedBoxStyle = `width: ${unifiedW}px !important; min-width: ${unifiedW}px !important;`;
 
-        // 選項區渲染
+        // 選項區渲染 (支援同時顯示多組分組選項)
         let poolHtml = '';
-        item.options.forEach((opt, idx) => {
-            const label = String.fromCharCode(65 + idx);
-            const cleanText = stripCodeTags(opt);
-            poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
-        });
+        const isGrouped = Array.isArray(item.options[0]);
+        
+        if (isGrouped) {
+            item.options.forEach((group, gIdx) => {
+                const isActiveGroup = (selectedSlotIdx === gIdx && !isLocked);
+                const activeStyle = isActiveGroup ? 'border: 2px solid #0d6efd !important; border-radius: 8px; background: #f0f7ff !important; padding: 4px !important; margin-bottom: 10px !important;' : 'margin-bottom: 10px !important;';
+                
+                poolHtml += `<div class="grouped-pool-unit" style="${activeStyle}">`;
+                poolHtml += `<div class="cl-header" style="${isActiveGroup ? 'border-bottom: 2px solid #0d6efd !important;' : ''}">選項區 (插槽 ${gIdx + 1})</div>`;
+                poolHtml += `<div class="cl-items-container pool-area">`;
+                group.forEach((opt, optIdx) => {
+                    const label = String.fromCharCode(65 + optIdx);
+                    const cleanText = stripCodeTags(opt);
+                    poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${optIdx}, ${gIdx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+                });
+                poolHtml += `</div></div>`;
+            });
+        } else {
+            poolHtml += `<div class="cl-header">選項區</div>`;
+            poolHtml += `<div class="cl-items-container pool-area">`;
+            item.options.forEach((opt, idx) => {
+                const label = String.fromCharCode(65 + idx);
+                const cleanText = stripCodeTags(opt);
+                poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+            });
+            poolHtml += `</div>`;
+        }
 
         // 回答區渲染
         let targetHtml = '';
@@ -184,11 +209,12 @@
                         
                         if (optIdx !== null && optIdx !== undefined) {
                             const cls = isLocked ? 'locked-slot' : 'choicelist-item inline-item';
-                            const filledText = stripCodeTags(item.options[optIdx]);
+                            const filledOpt = isGrouped ? item.options[sIdx][optIdx] : item.options[optIdx];
+                            const filledText = stripCodeTags(filledOpt);
                             lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
                         } else {
                             // 空插槽也使用統一寬度
-                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[選項 ${sIdx + 1}]</span>`;
+                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[插槽 ${sIdx + 1}]</span>`;
                         }
                     }
                 });
@@ -203,13 +229,12 @@
         else if (isIncorrect) { statusTextHtml = '<div class="alert alert-danger py-1 px-2 mb-2 fw-bold">答錯了 ❌</div>'; cardClass += ' incorrect'; }
 
         container.innerHTML = `<div class="${cardClass}">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">插槽題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div></div>
             <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
             <div class="px-3 pb-3">
                 <div class="choicelist-wrapper">
                     <div class="choicelist-pool">
-                        <div class="cl-header">選項區</div>
-                        <div class="cl-items-container pool-area">${poolHtml}</div>
+                        ${poolHtml}
                     </div>
                     <div class="choicelist-target">
                         <div class="cl-header">回答區</div>
@@ -222,9 +247,10 @@
                 <div class="answer-section" id="choicelist-ans-section" style="${isLocked || isIncorrect ? 'display:block' : 'display:none'}">
                     ${statusTextHtml}
                     <h6 class="fw-bold mb-3">正確順序如下：</h6>
-                    <div class="mb-3">${(Array.isArray(item.answer) ? item.answer : [item.answer]).map(val => {
+                    <div class="mb-3">${(Array.isArray(item.answer) ? item.answer : [item.answer]).map((val, ansIdx) => {
                         const idx = parseAnswerToIndex(val);
-                        return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace"><span class="badge bg-secondary me-2">${String.fromCharCode(65 + idx)}</span>${stripCodeTags(item.options[idx]) || val}</div>`;
+                        const optText = isGrouped ? item.options[ansIdx][idx] : item.options[idx];
+                        return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace"><span class="badge bg-secondary me-2">${String.fromCharCode(65 + idx)}</span>${stripCodeTags(optText) || val}</div>`;
                     }).join('')}</div>
                     <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                 </div>
@@ -249,13 +275,25 @@
         window.renderChoiceListQuestion(currentIndex);
     };
 
-    window.moveToTarget = function(optIdx) {
+    window.moveToTarget = function(optIdx, groupIdx = null) {
         if (!userAnswers[currentIndex]) return;
-        let targetIdx = selectedSlotIdx;
-        if (targetIdx === -1 || userAnswers[currentIndex][targetIdx] !== null) targetIdx = userAnswers[currentIndex].indexOf(null);
+        
+        // 如果傳入了 groupIdx，則優先填入該插槽；否則使用全域選中的 selectedSlotIdx
+        let targetIdx = (groupIdx !== null) ? groupIdx : selectedSlotIdx;
+        
+        // 如果 targetIdx 已經有值，或者尚未選中任何插槽，則找第一個空的
+        if (targetIdx === -1 || (groupIdx === null && userAnswers[currentIndex][targetIdx] !== null)) {
+            targetIdx = userAnswers[currentIndex].indexOf(null);
+        }
+        
         if (targetIdx !== -1) {
             userAnswers[currentIndex][targetIdx] = optIdx;
-            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            
+            // 自動跳轉到下一個空格
+            if (groupIdx === null || selectedSlotIdx === groupIdx) {
+                selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            }
+            
             console.log(`[ChoiceList Debug] 選項 ${String.fromCharCode(65 + optIdx)} 已填入插槽 ${targetIdx}。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
             if (typeof saveState === 'function') saveState();
             window.renderChoiceListQuestion(currentIndex);

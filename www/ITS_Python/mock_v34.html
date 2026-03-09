@@ -291,8 +291,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script>
-    function prepareMockPrint() {
+<script src="../js/choicelist_patch_v2.js"></script>
+<script>    function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
         const homeBtn = document.querySelector('.home-float-btn');
@@ -397,30 +397,32 @@
     const allQuestions = [
     {
         "id": 1,
-        "type": "multioption",
+        "type": "choicelist",
+		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH01-1】資料型態的檢視：",
             "你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。",
             "輸出結果必須盡可能精準。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-            "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。",
-            "#步速計算器",
-            "distance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))",
+            "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。</code></pre>"
+        ],
+		"slots" : [
+			 "#步速計算器",
+			"distance = <slot01>(input(\"Enter the distance traveled in meters\"))",
             "# convert to kilometers",
             "distance_kms = distance / 1000",
             "#輸入已用時間(分鐘)",
-            "time_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))",
+            "time_minute = <slot02>_(input(\"Enter the time elapsed in minutes\"))",
             "#輸入已用秒數",
-            "time_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))",
+            "time_sec = <slot03>_(input(\"Enter the time elapsed in seconds\"))",
             "time time_minute*60+time_se_sec",
             "pace = time / distance_kms",
             "#平均速度",
-            "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))",
-            "以上空格分別要填入的函式名為：</code></pre>"
-        ],
+            "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))"
+		],
         "options": [
-            "<code>int|string|float</code>",
-            "<code>int|string|float</code>",
-            "<code>int|string|float</code>"
+            "int",
+			"string",
+			"float "
         ],
         "answer": [
             "C",
@@ -958,35 +960,48 @@
     },
     {
         "id": 18,
-        "type": "multioption",
+        "type": "choicelist",
+        "sz": "0.75rem",
         "question": [
-            "<pre><code class=\"language-python\">17. 【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，",
+            "<pre><code class=\"language-python\">【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，",
             "然而週四和週日也有特別的費率。費用結構如下所示：",
             "1. 費用每天 100 美元。",
             "2. 如果在晚上 11 點後返還，將被多收取額外一天的費用。",
             "3. 如果是在星期天租的，可享受 10% 的折扣。",
             "4. 如果是在星期四租的，可以享受 20% 的折扣。",
-            "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？",
-            "",
+            "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？</code></pre>"
+        ],
+        "slots": [
             "ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
             "days_rented = int(input(\"How many days was car rented?\"))",
             "day_rented = input(\"What day was the car rented?\").capitalize()",
             "cost_per_day = 100",
-            "if ontime _(選項 1)_",
-            "days_rented += 1",
-            "if day_rented _(選項 2)_",
-            "total = (days_rented * cost_per_day) * 0.9",
-            "elif day_rented _(選項 3)_",
-            "total = (days_rented*cost_per_day) * 0.8",
+            "if ontime <slot01>",
+            "  days_rented += 1",
+            "if day_rented <slot02>",
+            "  total = (days_rented * cost_per_day) * 0.9",
+            "elif day_rented <slot03>",
+            "   total = (days_rented*cost_per_day) * 0.8",
             "else:",
-            "total = days_rented * cost_per_day",
-            "print(\"Cost of the car rental is : $\", total)",
-            "以上空格選項分別要填入的程式為：</code></pre>"
+            "  total = days_rented * cost_per_day",
+            "print(\"Cost of the car rental is : $\", total)"
         ],
         "options": [
-            "<code>!=\"n\":|==\"n\":| --\"y\":</code>",
-            "<code>==\"Sunday\":|>=\"Sunday\":| is \"Sunday\":</code>",
-            "<code>==\"Thursday\":|<=\"Thursday\":| is \"Thursday\":</code>"
+            [
+                "!=\"n\":",
+                "==\"n\":",
+                "--\"y\":"
+            ],
+            [
+                "==\"Sunday\":",
+                ">=\"Sunday\":",
+                "| is \"Sunday\":"
+            ],
+            [
+                "==\"Thursday\":",
+                "<=\"Thursday\":",
+                " is \"Thursday\":"
+            ]
         ],
         "answer": [
             "B",
@@ -1119,22 +1134,27 @@
     },
     {
         "id": 22,
-        "type": "multioption",
+        "type": "choicelist",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH02-14】您正在撰寫一個 Python 程式評估算術公式。",
             "此公式描述 a 是先取得一個輸入值，而 b 等於 a 乘以 -1 之後再平方，所以 b 是結果。",
             "您所建立的程式碼片段如下。",
-            "a = eval(input(\"Enter a number for the equation: \")))",
-            "b = 選項1 選項2 選項3 選項4 選項5",
             "您需要確保結果正確。第 2 行程式中有 5 個空格選項，請選擇程式碼片段中的內容到正確的位置上，",
             "以完成第 2 行的程式碼。每個程式碼片段可能使用一次，也可能使用多次，甚至完全用不到。</code></pre>"
         ],
+        "slots": [
+            "<pre><code class=\"language-python\">a = eval(input(\"Enter a number for the equation: \")))",
+            "b = <slot01> <slot02> <slot03> <slot04> <slot05></code></pre>"
+        ],
         "options": [
-            "<code>-|(|)|**|**2|2|a</code>",
-            "<code>-|(|)|**|**2|2|a</code>",
-            "<code>-|(|)|**|**2|2|a</code>",
-            "<code>-|(|)|**|**2|2|a</code>",
-            "<code>-|(|)|**|**2|2|a</code>"
+            "-",
+            "(",
+            ")",
+            "**",
+            "**2",
+            "2",
+            "a"
         ],
         "answer": [
             "B",
@@ -1249,32 +1269,33 @@
     },
     {
         "id": 26,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH03-4】同事開發一個將產品名稱輸入到資料庫的程式，但是其中發生了錯誤，每個存入的名稱字母順序都顛倒了。",
-            "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：",
+            "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：</code></pre>"
+        ],
+        "slots": [
             "def reverse_pname(backwards_pname):",
             "    forward_pname = ''",
-            "    for index in _(選項 1)_",
-            "        forward_pname += _(選項 2)_",
+            "    for index in <slot01>",
+            "        forward_pname += <slot02>",
             "    return forward_pname",
-            "print(reverse_pname(\"klim\"))",
-            "",
-            "選項 1 答案選擇區",
-            "答案 A.backwards _pname",
-            "答案 B.len(backwards _pname)",
-            "答案 C.range(0, len(backwards _pname),-1)",
-            "答案 D.range(len(backwards_pname)-1,-1,-1) ",
-            "選項 2 答案選擇區",
-            "答案 A.backwards_pname[index-1]",
-            "答案 B.backwards_pname[len(forward_pname)-1)",
-            "答案 C.backwards_pname[len(backward_pname)-len(forward_pname)]",
-            "答案 D.backwards_pname[index]</code></pre>"
+            "print(reverse_pname(\"klim\"))"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "backwards _pname",
+                "len(backwards _pname)",
+                "range(0, len(backwards _pname),-1)",
+                "range(len(backwards_pname)-1,-1,-1) "
+            ],
+            [
+                "backwards_pname[index-1]",
+                "backwards_pname[len(forward_pname)-1)",
+                "backwards_pname[len(backward_pname)-len(forward_pname)]",
+                "backwards_pname[index]</code></pre>"
+            ]
         ],
         "answer": [
             "D",
@@ -1396,34 +1417,34 @@
     },
     {
         "id": 30,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH03-8】你設計了一個函式來執行除法，因為除法的除數不能為零，所以在函式中必須要針對這個重點進行檢查。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "def safe_divide(numerator, denominator):",
-            "    _(選項 1)_",
+            "    <slot01>",
             "        print(\"A required value is missing.\")",
-            "    _(選項 2)_",
+            "    <slot02>",
             "        print(\"The denominator is zero.\")",
             "    else:",
-            "        return numerator / denominator_(選項 1)_",
-            "答案選項",
-            "答案 A. if numerator is None or denominator is None:",
-            "答案 B. if numerator is None and denominator is None:",
-            "答案 C. if numerator = None or denominator = None:",
-            "答案 D. if numerator - None and denominator = None:",
-            "",
-            "_(選項 2)_",
-            "答案選項",
-            "答案 A. elif denominator == 0:",
-            "答案 B. elif denominator = 0:",
-            "答案 C. elif denominator != 0:",
-            "答案 D, elif denominator in 0:</code></pre>"
+            "        return numerator / denominator"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "if numerator is None or denominator is None:",
+                "if numerator is None and denominator is None:",
+                "if numerator = None or denominator = None:",
+                "if numerator - None and denominator = None:"
+            ],
+            [
+                "elif denominator == 0:",
+                "elif denominator = 0:",
+                "elif denominator != 0:",
+                "elif denominator in 0:"
+            ]
         ],
         "answer": [
             "A",
@@ -1441,8 +1462,8 @@
     },
     {
         "id": 31,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-1】老師正在設計一個 Python 程式，學生可以使用它來記錄他們考試的平均分數。",
             "該程式必須允許使用者輸入他們的名字和當前分數。",
@@ -1450,7 +1471,9 @@
             "輸出必須符合以下要求：●  使用者姓名必須是靠左對齊的。",
             "●  如果使用者姓名少於 20 個字元，則必須在右側新增額外的空間。",
             "●  平均分數在小數點左方是三位數，小數點右方是二位數。(XXX.XX)。",
-            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
+            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "name = input('Please enter your name:')",
             "score = count = 0",
             "total = 0",
@@ -1461,14 +1484,21 @@
             "   total += score",
             "   count += 1",
             "   average = total / count",
-            "   print('_(選項 1)_, your average is _(選項 2)_' %(name, average))",
-            "問題回答區",
-            "選項 1. 答案 A. %-20i\t答案 B. %-20d\t答案 C. %-20f\t答案 D. %-20s",
-            "選項 2. 答案 A. %1.6s\t答案 B. %6.2f\t答案 C. %6.2d\t答案 D. %2.6f</code></pre>"
+            "   print('<slot01>, your average is <slot02> %(name, average))"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "%-20i",
+                "%-20d",
+                "%-20f",
+                "%-20s"
+            ],
+            [
+                "%1.6s",
+                "%6.2f",
+                "%6.2d",
+                "%2.6f"
+            ]
         ],
         "answer": [
             "D",
@@ -1484,8 +1514,8 @@
     },
     {
         "id": 32,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-2】你正在設計一個函式以讀取資料檔案並將結果列印為格式化表格。",
             "資料檔案中包含有關蔬菜的資訊。每個記錄都包含蔬菜的名稱、重量和價格。",
@@ -1497,7 +1527,9 @@
             "具體地說，列印輸出必須符合以下要求：",
             "● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。",
             "● 重量必須印在 5 個空格範圍內並靠右對齊，小數點最多一個位數。",
-            "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。",
+            "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。</code></pre>"
+        ],
+        "slots": [
             "你建立了以下的程式碼。\n",
             "01 def print _table(file):",
             "02   data = open(file,'r')",
@@ -1506,23 +1538,17 @@
             "05  ？？？？",
             "\n你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。",
             "每個程式碼片段都可以使用一次、多次，或者不使用。",
-            "問題選項區",
-            "(選項1) (選項2) (選項3) (選項4)'",
-            ".format(fields[0], eval(fields(1)), eval(fields[2])))",
-            "選項程式碼片段區",
-            "答案 A. print('",
-            "答案 B. {10: 0}",
-            "答案 C. {5: 1f}",
-            "答案 D. {7: 2f}",
-            "答案 E. {2: 7.2f}",
-            "答案 F. {1: 5.1f}",
-            "答案 G. {0: 10}</code></pre>"
+            "<slot01> <slot02> <slot03> (<slot04>'",
+            ".format(fields[0], eval(fields(1)), eval(fields[2])))"
         ],
         "options": [
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>"
+            "print('",
+            "{10: 0}",
+            "{5: 1f}",
+            "{7: 2f}",
+            "{2: 7.2f}",
+            "{1: 5.1f}",
+            "{0: 10}"
         ],
         "answer": [
             "A",
@@ -1636,47 +1662,46 @@
     },
     {
         "id": 36,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-6】有一個旅行社需要一個簡單的程式用來輸入合作飯店及民宿的調查資料。",
             "● 程式必須接受輸入並返回基於五顆星規模的平均評等。",
             "● 輸出必須四捨五入到小數第二位。",
             "你必須完成這個程式碼以符合需求，你要如何完成這個程式碼？",
-            "請在答案選擇區選擇適當的程式碼片段。",
+            "請在答案選擇區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "sum = count = done = 0",
             "average = 0.0",
             "while (done != -1):",
-            "   rating = _(選項 1)_",
+            "   rating = <slot01>",
             "   if rating == -1:",
             "      break",
             "   sum += rating",
             "   count += 1",
             "   average = float(sum / count)",
-            "   _(選項 2)_ + _(選項 3)_",
-            "",
-            "選項1答案選擇區",
-            "答案 A. print('Enter next rating (1-5),-1 for done')",
-            "答案 B. float(input('Enter next rating (1-5),-1 for done'))",
-            "答案 C. input('Enter next rating (1-5),-1 for done')",
-            "答案 D. input 'Enter next rating (1-5),-1 for done')",
-            "",
-            "選項2答案選擇區",
-            "答案 A. output('The average star rating for this hotel is:'",
-            "答案 B. console.input('The average star rating for this hotel is:'",
-            "答案 C. printline('The average star rating for this hotel is:'",
-            "答案 D. print('The average star rating for this hotel is:'",
-            "",
-            "選項3答案選擇區",
-            "答案 A. format(average, '.2f'))",
-            "答案 B. format(average, '.2d'))",
-            "答案 C. (average, '.2f')",
-            "答案 D. format.average.(2d)</code></pre>"
+            "   <slot02> + <slot03>"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "print('Enter next rating (1-5),-1 for done')",
+                "float(input('Enter next rating (1-5),-1 for done'))",
+                "input('Enter next rating (1-5),-1 for done')",
+                "input 'Enter next rating (1-5),-1 for done')"
+            ],
+            [
+                "output('The average star rating for this hotel is:'",
+                "console.input('The average star rating for this hotel is:'",
+                "printline('The average star rating for this hotel is:'",
+                "print('The average star rating for this hotel is:'"
+            ],
+            [
+                "format(average, '.2f'))",
+                "format(average, '.2d'))",
+                "(average, '.2f')",
+                "format.average.(2d)"
+            ]
         ],
         "answer": [
             "B",
@@ -1696,8 +1721,8 @@
     },
     {
         "id": 37,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-7】你必須開發一個簡單的 Python 檔案程式來執行以下的動作：",
             "● 檢查檔案是否存在。",
@@ -1705,45 +1730,43 @@
             "● 如果該檔案不存在，就使用指定的名稱新增檔案。",
             "● 在檔案最後加入文字：'End of file'。",
             "你需要完成程式碼以符合要求。你要如何完成這段程式碼？",
-            "請在回答區選擇適當的程式碼片段。",
-            "import os",
-            "if _(選項 1)_",
+            "請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
+            "<pre><code class=\"language-python\">import os",
+            "if <slot01>",
             "   file = open('theFile.txt')",
-            "   _(選項 2)_",
+            "   <slot02>",
             "file.close()",
-            "file = _(選項 3)_",
-            "_(選項 4)_ ('End of file')",
-            "file.close()",
-            "",
-            "選項1答案選擇區",
-            "答案 A. isfile('theFile.txt')",
-            "答案 B. os.exist('theFile.txt')",
-            "答案 C. os.find('theFile.txt')",
-            "答案 D. os.path.isfile('theFile.txt')",
-            "",
-            "選項2答案選擇區",
-            "答案 A. output(theFile.txt')",
-            "答案 B. print(file.get('theFile.txt'))",
-            "答案 C. print(file.read())",
-            "答案 D. print('theFile.txt')",
-            "",
-            "選項3答案選擇區",
-            "答案 A. open('theFile.txt', 'a')",
-            "答案 B. open('theFile.txt', 'at')",
-            "答案 C. open('theFile,txt', 'w')",
-            "答案 D. open('theFile.txt', 'wt')",
-            "",
-            "選項3答案選擇區",
-            "答案 A. Append",
-            "答案 B. file.add",
-            "答案 C. file.write",
-            "答案 D. write</code></pre>"
+            "file = <slot03>",
+            "<slot04> ('End of file')",
+            "file.close()</code></pre>"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "isfile('theFile.txt')",
+                "os.exist('theFile.txt')",
+                "os.find('theFile.txt')",
+                "os.path.isfile('theFile.txt')"
+            ],
+            [
+                "output(theFile.txt')",
+                "print(file.get('theFile.txt'))",
+                "print(file.read())",
+                "print('theFile.txt')"
+            ],
+            [
+                "open('theFile.txt', 'a')",
+                "open('theFile.txt', 'at')",
+                "open('theFile,txt', 'w')",
+                "open('theFile.txt', 'wt')"
+            ],
+            [
+                "Append",
+                "file.add",
+                "file.write",
+                "write"
+            ]
         ],
         "answer": [
             "D",
@@ -1768,20 +1791,19 @@
         "question": [
             "<pre><code class=\"language-python\">【CH04-8】你正在設計一個 Python 處理檔案的函式。",
             "● 如果檔案不存在，則返回 '檔案不存在'。",
-            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",		
+            "● 如果該檔案存在，則該函式返回第一行的內容。請完成以下程式碼：",
             "你應該如何安排這些程式碼片段的順序來完成函式？",
             "請將適合的程式碼片段移動到回答區，並按正確的順序排列。</code></pre>"
-            
         ],
-		"slots": [
-			"<pre><code class=\"language-python\">import os",
+        "slots": [
+            "<pre><code class=\"language-python\">import os",
             "  def get _ file_message(file):",
-			"<slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>",
-			"<slot05></code></pre>"
-		],
+            "<slot01>",
+            "<slot02>",
+            "<slot03>",
+            "<slot04>",
+            "<slot05></code></pre>"
+        ],
         "options": [
             "<pre><code class=\"language-python\">   with open(file, 'r') as file:",
             "     return 'File dose not exist'",
@@ -1878,36 +1900,36 @@
     },
     {
         "id": 41,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH04-11】某間公司需要有人協助更新他們的檔案系統。",
             "您必須建立一個執行下列動作的簡易檔案操作程式：",
             "檢視檔案是否存在。",
             "如果檔案存在，則顯示其內容。",
-            "請選取正確的程式碼片段以完成程式碼。",
-            "#程式碼片段",
-            "import os",
-            "if _(選項 1)_",
-            "   file = open('myFile.txt')",
-            "   _(選項 2)_",
-            "   file.close()",
-            "",
-            "選項1答案選擇區",
-            "A. os.path.isfile('myFile.txt')",
-            "B. os.path.isexists('myFile.txt')",
-            "C. os.path.isdir('myFile.txt')",
-            "D. os.path.exists('myFile.txt')",
-            "",
-            "選項2答案選擇區",
-            "A. print(file.read())",
-            "B. print(file.write())",
-            "C. print(file.close())",
-            "D. print(file,open())</code></pre>"
+            "請選取正確的程式碼片段以完成程式碼。</code></pre>"
         ],
+		"slots" : [
+			"#程式碼片段",
+            "import os",
+            "if <slot01>",
+            "   file = open('myFile.txt')",
+            "   <slot01>",
+            "   file.close()"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+			[
+				"os.path.isfile('myFile.txt')",
+				"os.path.isexists('myFile.txt')",
+				"os.path.isdir('myFile.txt')",
+				"os.path.exists('myFile.txt')"
+			],
+			[
+				"print(file.read())",
+				"print(file.write())",
+				"print(file.close())",
+				"print(file,open())"
+			]
         ],
         "answer": [
             "A",
@@ -1949,8 +1971,8 @@
     },
     {
         "id": 43,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-1】你設計了一個程式要依學生的成績來顯示等級，它的規定如下：</code></pre>",
             "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
@@ -1978,47 +2000,48 @@
             "  </tbody></table>",
             "<pre><code class=\"language-python\">例如，如果使用者輸入 90 ，則輸出應該是 '你的成績為 A (甲等)'。",
             "如果使用者輸入 89 ，則輸出應該是 '你的成績為 B (乙等)'。你要如何完成這段程式碼？",
-            "請在回答區選擇適當的程式碼片段。",
-            "# Letter Grade Converter",
+            "請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+		"slots" : [
+			"# Letter Grade Converter",
             "grade = int(input('Enter a numeric grade:'))",
-            "_(選項 1)_",
+            "<slot01>",
             "  letter_grade = 'A'",
-            "_(選項 2)_",
+            "<slot02>",
             "  letter_grade = 'B'",
-            "_(選項 3)_",
+            "<slot03>",
             "  letter_grade = 'C'",
-            "_(選項 4)_",
+            "<slot04>",
             "  letter_grade = 'D'",
             "else:",
             "  letter_grade = 'F'",
-            "print('Your letter grade is :', letter_grade)",
-            "",
-            "選項1答案選擇區",
-            "答案 A. if grade <= 90:",
-            "答案 B. if grade >= 90:",
-            "答案 C. elif grade > 90:",
-            "答案 D. elif grade >= 90:",
-            "選項2答案選擇區",
-            "答案 A. if grade > 80:",
-            "答案 B. if grade >= 80:",
-            "答案 C. elif grade > 80:",
-            "答案 D. elif grade >= 80:",
-            "選項3答案選擇區",
-            "A. if grade > 70:",
-            "B. if grade >= 70:",
-            "C. elif grade > 70:",
-            "D. elif grade >= 70:",
-            "選項4答案選擇區",
-            "A. if grade > 60:",
-            "B. if grade >= 60:",
-            "C. elif grade > 60:",
-            "D. elif grade >= 60:</code></pre>"
-        ],
+            "print('Your letter grade is :', letter_grade)"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+			[
+                "if grade <= 90:",
+                "if grade >= 90:",
+                "elif grade > 90:",
+                "elif grade >= 90:"
+			],
+			[
+                "if grade > 80:",
+                "if grade >= 80:",
+                "elif grade > 80:",
+                "elif grade >= 80:"
+            ],
+			[
+                "if grade > 70:",
+                "if grade >= 70:",
+                "elif grade > 70:",
+                "elif grade >= 70:"
+            ],
+			[
+                "if grade > 60:",
+                "if grade >= 60:",
+                "elif grade > 60:",
+                "elif grade >= 60:"
+            ]
         ],
         "answer": [
             "B",
@@ -2038,16 +2061,16 @@
     {
         "id": 44,
         "type": "choicelist",
-		"sz": "0.95rem",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-2】你要設計一款以使用者年齢進行電影分級的程式，必須符合以下要求：",
             "● 任何 18 歲或以上的人會顯示 '限制級' 的訊息。",
             "● 任何 13 歲或以上，但小於 18 歲的人都會顯示 '輔導級' 的訊息。",
             "● 任何 12 歲或或更年輕的人都會顯示 '普通級' 的訊息。",
             "● 如果年齡未知，則會顯示 '未知' 的訊息。",
-            "你需要完成程式以符合要求，應該要如何完成這段程式碼？</code></pre>"            
-            ],
-        "slots" : [
+            "你需要完成程式以符合要求，應該要如何完成這段程式碼？</code></pre>"
+        ],
+        "slots": [
             "<pre><code class=\"language-python\">#程式碼片段",
             "def get_rating(age):",
             "    rating = ''",
@@ -2128,8 +2151,8 @@
             "● 否則回傳 'The result is a zero'",
             "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
         ],
-		"slots" : [
-			"<pre><code class=\"language-python\">def reResult(a):",
+        "slots": [
+            "<pre><code class=\"language-python\">def reResult(a):",
             "    <slot01>",
             "        answer = 'The result is a negative number'",
             "    <slot02>",
@@ -2138,7 +2161,7 @@
             "        <slot04>",
             "            answer = 'The result is a zero'",
             "    return answer</code></pre>"
-		],
+        ],
         "options": [
             "<pre><code class=\"language-python\">if a < 0:",
             "if a > 0:",
@@ -2173,8 +2196,8 @@
             "● 17 歲以上但不是學生 = 180 元",
             "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
         ],
-		"slots" : [
-			"<pre><code class=\"language-python\">def ticket_fee(age, school):",
+        "slots": [
+            "<pre><code class=\"language-python\">def ticket_fee(age, school):",
             "    fee = 0",
             "    <slot01>",
             "        fee = 60",
@@ -2184,7 +2207,7 @@
             "          else:",
             "            fee = 180",
             "    return fee</code></pre>"
-		],
+        ],
         "options": [
             "<pre><code class=\"language-python\">if age >= 5 and school:",
             "elif age >= 5 and not school:",
@@ -2214,8 +2237,8 @@
             "<pre><code class=\"language-python\">【CH05-6】你設計一個 Python 程式來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，",
             "其中規定輸入的值必須是正整數。你要如何完成這段程式碼？</code></pre>"
         ],
-		"slots" : [
-			"<pre><code class=\"language-python\">num = int(input('Enter a number with 1 or 2 digits:'))",
+        "slots": [
+            "<pre><code class=\"language-python\">num = int(input('Enter a number with 1 or 2 digits:'))",
             "digits = '0'",
             "if num > 0:",
             "    <slot01>",
@@ -2229,7 +2252,7 @@
             "    print('The number is 0')",
             "else:",
             "    print('The number is not a positive number')</code></pre>"
-		],
+        ],
         "options": [
             "<pre><code class=\"language-python\">if num < 10:",
             "if num < 100:",
@@ -2311,14 +2334,14 @@
             "<pre><code class=\"language-python\">【CH05-8】在以下的程式碼中，要加入哪些程式碼片段讓 print 語法可以正確執行？",
             "你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
-		"slots" : [
-			"<pre><code class=\"language-python\">aList = 1,2,3]",
+        "slots": [
+            "<pre><code class=\"language-python\">aList = 1,2,3]",
             "bList = ['a', 'b', 'c']",
             "<slot01>",
             "   print('aList is equal to bList')",
             "<slot02>",
             "   print('aList is not equal to bList')</code></pre>"
-		],
+        ],
         "options": [
             "<pre><code class=\"language-python\">if aList == bList:",
             "if alist == blist",
@@ -2342,9 +2365,7 @@
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
-
             "<pre><code class=\"language-python\">【CH05-9】你設計了一個 Python 程式來檢查輸入英文姓名的大小寫，請在下方選擇四個程式碼到回答區中進行順序排列。</code></pre>"
-            
         ],
         "options": [
             "<pre><code class=\"language-python\">name = input('Enter your English name:')",
@@ -2354,12 +2375,12 @@
             "if name.upper() == name:\n        print(name, 'is all upper case.')",
             "else:\n        print(name, 'is lower case.')</code></pre>"
         ],
-		"slots": [
-			"<slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>"
-		],
+        "slots": [
+            "<slot01>",
+            "<slot02>",
+            "<slot03>",
+            "<slot04>"
+        ],
         "answer": [
             "A",
             "E",
@@ -2378,8 +2399,8 @@
     },
     {
         "id": 52,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-10】公司決定要幫所有年薪不到 50 萬的員工調升基本工資 5%，並給予獎金 1 萬元，以下是計算公式：",
             "● 新工資 = 目前工資 X 105% + $10000 獎金。",
@@ -2387,29 +2408,27 @@
             "請在回答區選擇適當的程式碼片段。",
             "#清單中的每個人的工資都根據增加而更新。",
             "#年薪50萬元以上的員工將不會得到加薪。",
-            "# salaryList 是由員工資料庫中取得，程式碼不會顯示。",
-            "",
-            "_(選項 1)_",
+            "# salaryList 是由員工資料庫中取得，程式碼不會顯示。</code></pre>"
+        ],
+        "slots": [
+            "<slot01>",
             "    if salaryList[index] >= 500000:",
-            "        _(選項 2)_",
-            "     salaryList[index] = int((salaryList[index] * 1.05) + 10000)",
-            "",
-            "選項 1 答案選擇區",
-            " 答案 A. for index in range(len(salaryList)+1):",
-            " 答案 B. for index in range(len(salaryList)-1):",
-            " 答案 C. for index in range(len(salaryList)):",
-            " 答案 D. for index in salaryList:",
-            "",
-            "",
-            "選項 2 答案選擇區",
-            " A. exit()",
-            " B. continue",
-            " C. break",
-            " D. end</code></pre>"
+            "        <slot02>",
+            "     salaryList[index] = int((salaryList[index] * 1.05) + 10000)"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "for index in range(len(salaryList)+1):",
+                "for index in range(len(salaryList)-1):",
+                "for index in range(len(salaryList)):",
+                "for index in salaryList:"
+            ],
+            [
+                "exit()",
+                "continue",
+                "break",
+                "end"
+            ]
         ],
         "answer": [
             "C",
@@ -2426,35 +2445,35 @@
     },
     {
         "id": 53,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-11】你設計了一個函式計算並顯示從 2 到 9 的所有乘法組合的九九乘法表。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>[[image01]]<pre><code class=\"language-python\">",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>[[image01]]"
+        ],
+        "slots": [
             "# Displays times tables 2 - 9",
             "def times_tables():",
-            "    _(選項 1)_",
-            "        _(選項 2)_",
+            "    <slot01>",
+            "        <slot02>",
             "            print(row * col, end=' ')",
             "        print()",
             "# main",
-            "times_tables()",
-            "",
-            "選項 1 答案選擇區",
-            "答案 A. for col in range(9):",
-            "答案 B. for col in range(2, 10):",
-            "答案 C. for col in range(2, 9, 1):",
-            "答案 D. for col in range(10):",
-            "",
-            "選項 2 答案選擇區",
-            "答案 A. for row in range(9):",
-            "答案 B. for row in range(2, 9, 1):",
-            "答案 C. for row in range(2, 10):",
-            "答案 D. for row in range(10):</code></pre>"
+            "times_tables()"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "for col in range(9):",
+                "for col in range(2, 10):",
+                "for col in range(2, 9, 1):",
+                "for col in range(10):"
+            ],
+            [
+                "for row in range(9):",
+                "for row in range(2, 9, 1):",
+                "for row in range(2, 10):",
+                "for row in range(10):"
+            ]
         ],
         "answer": [
             "B",
@@ -2475,52 +2494,27 @@
     },
     {
         "id": 54,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
-            "<pre><code class=\"language-python\">【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。",
-            "第 1 段程式為 _(選項 1)_",
-            "第 2 段程式為 _(選項 2)_",
-            "第 3 段程式為 _(選項 3)_",
+            "<pre><code class=\"language-python\">【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。</code></pre>"
+        ],
+        "slots": [
+            "<slot01>",
+            "<slot02>",
+            "<slot03>",
             "  if is_prime:",
             "     print(n)",
-            "第 4 段程式為 _(選項 4)_",
-            "",
-            "答案選擇區",
-            "答案 A.",
-            "n = 2",
-            "is_prime = True",
-            "while n <= 100:",
-            "",
-            "答案 B.",
-            "n = 2",
-            "while n <= 100:",
-            "is_prime = True",
-            "",
-            "答案 C.",
-            "break",
-            "",
-            "答案 D.",
-            "Continue",
-            "",
-            "答案 E.",
-            "n += 1",
-            "",
-            "答案 F.",
-            "for i in range(2, n):",
-            "if n / i = = 0:",
-            "is_prime = False",
-            "",
-            "答案 G.",
-            "for i in range(2, n):",
-            "if n % i == 0:",
-            "is_prime = False</code></pre>"
+            "  <slot04>"
         ],
         "options": [
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>",
-            "<code>A|B|C|D|E|F|G</code>"
+            "\nn = 2\nis_prime = True\nwhile n <= 100:",
+            "\nn = 2\nwhile n <= 100:\n  is_prime = True",
+            "     break",
+            "Continue",
+            "n += 1",
+            "\nfor i in range(2, n):\n  if n / i = = 0:\n    is_prime = False",
+            "\nfor i in range(2, n):\n  if n % i == 0:\n     is_prime = False"
         ],
         "answer": [
             "B",
@@ -2559,13 +2553,13 @@
             "         break",
             "def search(nums, num):</code></pre>"
         ],
-		"slots": [
-			"<pre><code class=\"language-python\"><slot01>",
-			"<slot02>",
-			"<slot03>",
-			"<slot04>",
-			"<slot05></code></pre>"
-		],
+        "slots": [
+            "<pre><code class=\"language-python\"><slot01>",
+            "<slot02>",
+            "<slot03>",
+            "<slot04>",
+            "<slot05></code></pre>"
+        ],
         "answer": [
             "E",
             "A",
@@ -2586,46 +2580,44 @@
     },
     {
         "id": 56,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-14】你正在設計一個 Python 程式驗證產品編號。",
             "● 產品編號的格式必須為 dd-dddd，並且只包含數字和破折號。",
             "● 如果格式正確則程式必須列印 True，如果格式不正確，則列印 False。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
-            "_(選項 1)_",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
+            "<slot01>",
             "parts = ''",
-            "_(選項 2)_",
-            "    _(選項 3)_",
+            "<slot02>",
+            "    <slot03>",
             "    product_no = input('Enter product number (dd-dddd): ')",
             "    parts = product_no.split('-')",
             "    if len(parts) == 2:",
             "        if len(parts[0]) == 2 and len(parts[1]) == 4:",
             "            if parts[0].isdigit() and parts[1].isdigit():",
-            "                _(選項 4)_",
-            "    print(valid)",
-            "",
-            "選項 1 答案選擇區",
-            "A. product_no = ''",
-            "B. product_no = 'sentinel'",
-            "",
-            "選項 2 答案選擇區",
-            "A. while product_no != '':",
-            "B. while product_no != 'sentinel':",
-            "",
-            "選項 3 答案選擇區",
-            "A. valid = False",
-            "B. valid = True",
-            "",
-            "選項 4 答案選擇區",
-            "A. valid = False",
-            "B. valid = True</code></pre>"
+            "                <slot04>",
+            "    print(valid)"
         ],
         "options": [
-            "<code>A|B</code>",
-            "<code>A|B</code>",
-            "<code>A|B</code>",
-            "<code>A|B</code>"
+            [
+                "product_no = ''",
+                "product_no = 'sentinel'"
+            ],
+            [
+                "while product_no != '':",
+                "while product_no != 'sentinel':"
+            ],
+            [
+                "valid = False",
+                "valid = True"
+            ],
+            [
+                "valid = False",
+                "valid = True"
+            ]
         ],
         "answer": [
             "B",
@@ -2649,42 +2641,42 @@
     },
     {
         "id": 57,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-15】你正在設計 Python 應用程式。該程式將逐一檢視數字清單，並在找到 4 時進行跳脫的動作。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "nList = [0,1,2,3,4,5,6,6,7,8,9]",
             "index = 0",
-            "_(選項 1)_ index < 10:",
+            "<slot01> index < 10:",
             "    print(nList[index])",
             "    if nList[index] == 4:",
-            "        _(選項 2)_",
+            "        <slot02>",
             "    else:",
-            "        _(選項 3)_",
-            "",
-            "選項 1 答案選擇區",
-            "A. while",
-            "B. for",
-            "C. if",
-            "D. break",
-            "",
-            "選項 2 答案選擇區",
-            "A. while",
-            "B. for",
-            "C. if",
-            "D. break",
-            "",
-            "選項 3 答案選擇區",
-            "A. continue",
-            "B. break",
-            "C. index += 1",
-            "D. index = 1</code></pre>"
+            "        <slot03>",
+            ""
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "while",
+                "for",
+                "if",
+                "break"
+            ],
+            [
+                "while",
+                "for",
+                "if",
+                "break"
+            ],
+            [
+                "continue",
+                "break",
+                "index += 1",
+                "index = 1"
+            ]
         ],
         "answer": [
             "A",
@@ -2702,30 +2694,31 @@
     },
     {
         "id": 58,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。",
             "● 您需要列印五行程式碼。",
             "● 其中第一行第三行和第五行各有四個星星。",
             "● 而第二行和第四行各有一個星。",
-            "如下所示：請在下列位置中選擇正確的數字以完成程式碼。",
-            "01 result_str = ''",
-            "02 for row in range(1, _(選項 1)_):",
-            "03     for column in range(1, _(選項 2)_):",
+            "如下所示：請在下列位置中選擇正確的數字以完成程式碼。</code></pre>"
+        ],
+		"slots" : [
+			"01 result_str = ''",
+            "02 for row in range(1, <slot01>):",
+            "03     for column in range(1, <slot01>):",
             "04         if row == 1 or row == 3 or row == 5:",
             "05             result_str = result_str + '*'",
             "06         elif column == 1:",
             "07             result_str = result_str + '*'",
             "08     result_str += '\\ n'",
-            "09 print(result_str)",
-            "",
-            "答案選擇區",
-            "A. 3  B. 4  C. 5 D. 6</code></pre>"
-        ],
+            "09 print(result_str)"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "3",
+			"4",
+			"5",
+			"6"
         ],
         "answer": [
             "D",
@@ -2751,39 +2744,36 @@
     },
     {
         "id": 59,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-17】您正在撰寫程式碼來根據下列準則傳回字母成績：● 變數 grade 會將數字成績儲存成 0 到 100 之間的整數。",
             "● 90 到 100 的成績 = A。",
             "● 80 到 89 的成績 = B。",
             "● 70 到 7 9的成績 = C。",
             "● 其他所有成績都不及格。",
-            "請選取正確的程式碼片段以完成程式碼。",
+            "請選取正確的程式碼片段以完成程式碼。</code></pre>"
+        ],
+        "slots": [
             "#程式碼片段",
             "grade = int(input('Please enter your grade: '))",
-            " _(選項 1)_ grade <= 100 and grade >= 0:",
-            "     _(選項 2)_ grade >= 90:",
+            " <slot01> grade <= 100 and grade >= 0:",
+            "     <slot02> grade >= 90:",
             "        print('Your grade is A.')",
-            "     _(選項 3)_ grade >= 80:",
+            "     <slot03> grade >= 80:",
             "        print('Your grade is B.')",
-            "     _(選項 4)_ grade < 80 and grade > 69:",
+            "     <slot04> grade < 80 and grade > 69:",
             "        print('Your grade is C.')",
-            "     _(選項 5)_",
+            "     <slot05>",
             "        print('Your grade is failing.')",
-            " _(選項 6)_",
-            "    print('Invalid grade entered.')",
-            "",
-            "答案選擇區",
-            "A. if   B. else:   C. elif   D. else if</code></pre>"
+            " <slot06>",
+            "    print('Invalid grade entered.')"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "if",
+            "else:",
+            "elif",
+            "else if"
         ],
         "answer": [
             "A",
@@ -2803,16 +2793,18 @@
             "2. B 級 (80-89)：elif grade >= 80: (已隱含 < 90 的前提)。",
             "3. C 級 (70-79)：elif grade >= 70:。",
             "4. D 級 (60-69)：elif grade >= 60:。",
-            "5. 不及格：最後由 else 捕捉。</code></pre>"
+            "5. 不及格：最後由 else 捕捉。</code></pre>[[image01]"
         ],
         "category": "D2_流程控制與判斷"
     },
     {
         "id": 60,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
-            "<pre><code class=\"language-python\">【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？",
+            "<pre><code class=\"language-python\">【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？</code></pre>"
+        ],
+        "slots": [
             "#程式碼片段",
             "# Function accepts list of words from a file",
             "# word_list = ['apple', 'banana', 'peach', 'grape']",
@@ -2820,32 +2812,29 @@
             "# Returns count of a particular letter in that list.",
             "def count_letter(letter, word_list):",
             "    count = 0",
-            "    for_(選項 1)_",
-            "        if _(選項 2)_",
+            "    for <slot01>",
+            "        if <slot02>",
             "            count += 1",
             "    return count",
-            "",
-            "",
             "# word_list is populated from a file. Code not shown. here we use a sample list.",
             "word_list = ['apple', 'banana', 'peach', 'grape']",
             "letter = input('which letter would you like to count: ')",
             "letter_count = count_letter(letter, word_list)",
-            "print('There are:', letter_count, 'instances of', letter)",
-            "選項 1 答案選擇區",
-            "A. word_list in word:",
-            "B. word in word_list:",
-            "C. word == letter_list:",
-            "D. word is letter_list:",
-            "",
-            "選項 2 答案選擇區",
-            "A. word is letter:",
-            "B. letter is word:",
-            "C. word in letter:",
-            "D. letter in word:</code></pre>"
+            "print('There are:', letter_count, 'instances of', letter)"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "word_list in word:",
+                "word in word_list:",
+                "word == letter_list:",
+                "word is letter_list:"
+            ],
+            [
+                "word is letter:",
+                "letter is word:",
+                "word in letter:",
+                "letter in word:"
+            ]
         ],
         "answer": [
             "B",
@@ -2869,37 +2858,38 @@
     },
     {
         "id": 61,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：",
+            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "#程式碼片段",
             "scores = [80,90,75,85]",
             "count = 0",
             "sum = 0",
             "# 在以下的程式碼有二個錯誤：",
-            "for index in range(_(選項 1)_):",
+            "for index in range(<slot01>):",
             "    count += 1",
             "    sum += scores[index]",
-            "average = _(選項 2)_",
+            "    average = <slot02>",
             "print('The total scords is:', sum)",
-            "print('The average scords is:', average)",
-            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。",
-            "選項 1 答案選擇區",
-            "A. size(scores)",
-            "B. size(scores) - 1",
-            "C. len(scores) + 1",
-            "D. len(scores)",
-            "",
-            "選項 2 答案選擇區",
-            "A. sum / count",
-            "B. sum**count",
-            "C. sum * count",
-            "D. sum // count</code></pre>"
+            "print('The average scords is:', average)"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "size(scores)",
+                "size(scores) - 1",
+                "len(scores) + 1",
+                "len(scores)"
+            ],
+            [
+                "sum / count",
+                "sum**count",
+                "sum * count",
+                "sum // count"
+            ]
         ],
         "answer": [
             "D",
@@ -2926,28 +2916,28 @@
     },
     {
         "id": 62,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-20】您正在撰寫符合下列需求的程式碼：",
             "● 允許使用者不斷輸入字詞。",
-            "● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。",
+            "● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。</code></pre>"
+        ],
+        "slots": [
             "#程式碼片段",
             "x = 'Hello World'",
-            "_(選項 1)_ x != 'QUIT':",
+            "<slot01> x != 'QUIT':",
             "    num = 0",
-            "    _(選項 2)_ char _(選項 3)_ x:",
+            "    <slot02> char <slot03> x:",
             "        num += 1",
             "    print(num)",
-            "    x = input('Enter a new word or QUIT to exit: ')",
-            "",
-            "選項 1 答案選擇區",
-            " A. while   ,B. for   ,C. if   ,D. in</code></pre>"
+            "    x = input('Enter a new word or QUIT to exit: ')"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "while",
+            "for",
+            "if",
+            "in"
         ],
         "answer": [
             "A",
@@ -3091,72 +3081,82 @@
     },
     {
         "id": 66,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
-            "<pre><code class=\"language-python\">【CH06-3】一家運動器材公司正在設計一個程式用來記錄客戶跑步時的距離，你設計以下的 Python 程式碼:",
-            "_(選項 1)_",
-            "    name = input('What is your name?')",
-            "    return name",
-            "_(選項 2)_",
-            "    calories = kms * calories_per_km",
-            "    return calories",
-            "distance = int(input('How many kilometers did you run this week?'))",
-            "burn_rate = 80",
-            "runner = get_name()",
-            "calories_burned = calc_calories(distance, burn_rate)",
-            "print(runner, ', you burned about ', calories_burned, 'calories.')",
-            "在程式中必須要定義二個必要的函式。你將在第 1 及第 4 行中使用哪些程式碼片段？</code></pre>"
+            "<pre><code class=\"language-python\">【CH02-21】你正為一個計算所有員工年度加薪後的總薪資列表 salaryList 撰寫程式。",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
+            " <slot01>",
+            "for index in range(len(salaryList)):",
+            "    if salaryList[index] >= 500000:",
+            "        <slot02>",
+            "    else:",
+            "        salaryList[index] = int((salaryList[index] * 1.05) + 10000)"
         ],
         "options": [
-            "<code>def get_name():|def get_name(runner):|def get_name(name):</code>",
-            "<code>def calc_calories(): | def calc calories(kms, burn_rate):|def calc_calories(kms, calories_per_km):</code>"
+            [
+                "for index in range(len(salaryList)+1):",
+                "for index in range(len(salaryList)-1):",
+                "for index in range(len(salaryList)):",
+                "for index in salaryList:"
+            ],
+            [
+                "exit()",
+                "continue",
+                "break",
+                "end"
+            ]
         ],
         "answer": [
-            "A",
-            "C"
+            "C",
+            "B"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">解題分析：\n呼叫時傳入兩個引數 (distance, burn_rate)，故定義時參數名稱需對齊內部使用的 kms 與 calories_per_km。</code></pre>"
+            "<pre><code class=\"language-python\">1. 使用 range(len(salaryList)) 來遍歷索引。",
+            "2. 如果薪資大於等於 50 萬，則 continue 跳過不加薪。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
         "id": 67,
-        "type": "multioption",
+        "type": "choicelist",
+        "sz": "0.85rem",
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH06-4】你正在設計一個線上遊戲記記分的 Python 應用程式。需要符合以下條件的函式：",
             "● 函式名為 calc_score",
             "● 函式接收二個引數：目前分數和一個值",
             "● 函式將值增加到目前分數",
-            "● 函式返回新分數你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。",
+            "● 函式返回新分數你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "#程式碼片段",
-            "_(選項 1)_   _(選項 2)_",
-            "current += value",
-            "__(選項 3)_選項 1 答案選擇區",
-            "A. calc_score",
-            "B. def calc_score",
-            "C. return calc_score",
-            "",
-            "選項 2 答案選擇區",
-            "A. (current, value):",
-            "B. ():",
-            "C. (current, value)",
-            "D. ()",
-            "",
-            "選項 3 答案選擇區",
-            "A. pass current",
-            "B. return current",
-            "C. return",
-            "D. pass</code></pre>"
+            "<slot01>   <slot02>",
+            "  current += value",
+            "  <slot03>"
         ],
         "options": [
-            "<code>A|B|C</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "calc_score",
+                "def calc_score",
+                "return calc_score"
+            ],
+            [
+                "(current, value):",
+                "():",
+                "(current, value)",
+                "()"
+            ],
+            [
+                "pass current",
+                "return current",
+                "return",
+                "pass"
+            ]
         ],
         "answer": [
             "B",
@@ -3264,23 +3264,36 @@
     },
     {
         "id": 70,
-        "type": "multioption",
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】某位同事撰寫了一個程式來輸入名稱至資料庫中。然而,此程式卻將每個名稱中的字母前後顛倒。",
-            "您需要撰寫一個 Python 函式來按照正確順序輸出名稱中的字元。",
+            "您需要撰寫一個 Python 函式來按照正確順序輸出名稱中的字元。</code></pre>"
+        ],
+        "slots": [
             "#Function reverses characters in a string.",
             "#returns new string in reversed order.",
             "def reverse_name(backward_name):",
             "    forward_name = \"\"",
-            "    length = (1)",
+            "    length = <slot01>",
             "while length >= 0:",
-            "    forward_name += (2)",
+            "    forward_name += <slot02>",
             "    length = length-1",
-            "    return forward_nameprint(reverse_name(\"nohtyp\")</code></pre>"
+            "    return forward_nameprint(reverse_name(\"nohtyp\")"
         ],
         "options": [
-            "<code>backward_name:|len(backward_name)-1|range(0,len(backward_name),-1)|range(len(backward_name)-1,-1,-1)</code>",
-            "<code>backward_name[index]|backward_name[length]|backward_name[length+1]|backward_name[len(backward_name)-len(forward_name)]</code>"
+            [
+                "backward_name:",
+                "len(backward_name)-1",
+                "range(0,len(backward_name),-1)",
+                "range(len(backward_name)-1,-1,-1)"
+            ],
+            [
+                "backward_name[index]",
+                "backward_name[length]",
+                "backward_name[length+1]",
+                "backward_name[len(backward_name)-len(forward_name)]"
+            ]
         ],
         "answer": [
             "B",
@@ -3713,45 +3726,37 @@
     },
     {
         "id": 82,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH07-8】您正在撰寫一個程式來隨機指派房間(roomnumber)和隊建立組別(group)以進行公司培訓活動。",
-            "請選取正確的程式碼片段以完成程式碼。",
-            "import random",
-            "",
-            "roomsAssigned = [1]",
-            "groupList = ['Ropes', 'Rafting', 'Obstacle', 'Wellness']",
-            "count = 0",
-            "print('Welcome to CompanyPro's Team-Building Weekend!')",
-            "name = input('Please enter your name (q to quit)? ')",
+            "請選取正確的程式碼片段以完成程式碼。</code></pre>"
+        ],
+        "slots": [
             "while name != 'q' and count < 50:",
             "    room_number = random.randint(1,50)",
             "    while room_number in roomsAssigned:",
-            "        _(選項 1)_",
+            "        <slot01>",
             "    print(f'{name}, your room number is {room_number}')",
             "    roomsAssigned.append(room_number)",
-            "    _(選項 2)_",
+            "    <slot02>",
             "    print(f'You will meet with the {group} Group this afternoon.')",
             "    count += 1",
-            "    name = input('Please enter your name (q to quit)? ')",
-            "",
-            "答案選擇區",
-            "選項 1",
-            "A. room_number = random.randint(1,50)",
-            "B. room_number = random.randint(1,51)",
-            "C. room_number = random.randrange(50)",
-            "D. room_number = random.randrange(51)",
-            "",
-            "選項 2",
-            "A. group = random.choice(groupList)",
-            "B. group = random.shuffle(groupList)",
-            "C. group = random.random(groupList)",
-            "D. group = random.uniform(groupList)</code></pre>"
+            "    name = input('Please enter your name (q to quit) ')"
         ],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            [
+                "room_number = random.randint(1,50)",
+                "room_number = random.randint(1,51)",
+                "room_number = random.randint(1,50)",
+                "room_number = random.randrange(51)"
+            ],
+            [
+                "group = random.choice(groupList)",
+                "group = random.shuffle(groupList)",
+                "group = random.random(groupList)",
+                "group = random.uniform(groupList)"
+            ]
         ],
         "answer": [
             "A",
@@ -3810,37 +3815,26 @@
     },
     {
         "id": 84,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH08-2】你製作一個程式詢問使用者家中有多少個小孩，使用者必須輸入整數，如果輸入值不是整數，",
-            "程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-            "程式碼片段",
-            "",
+            "程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
+        ],
+        "slots": [
             "while True:",
-            "    _(選項 1)_",
+            "    <slot01>",
             "        x = int(input('How many children do you have? '))",
             "        break",
-            "    _(選項 2)_ ValueError:",
-            "        print('Please make sure you entered an integer, please try again...')",
-            "",
-            "答案選擇區",
-            "選項 1",
-            "A. try:",
-            "B. else:",
-            "C. except:",
-            "D. raise:",
-            "E. finally:",
-            "選項 2",
-            "A. try",
-            "B. else",
-            "C. except",
-            "D. raise",
-            "E. finally</code></pre>"
+            "    <slot02> ValueError:",
+            "        print('Please make sure you entered an integer, please try again...')"
         ],
         "options": [
-            "<code>A|B|C|D|E</code>",
-            "<code>A|B|C|D|E</code>"
+            "try:",
+            "else:",
+            "except:",
+            "raise:",
+            "finally:"
         ],
         "answer": [
             "A",
@@ -3866,15 +3860,15 @@
             "3. 呼叫 process() 函式之後一律呼叫 displayResult()函式。",
             "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
-		"slots" : [
-			"<pre><code class=\"language-python\">程式碼片段",
+        "slots": [
+            "<pre><code class=\"language-python\">程式碼片段",
             "<slot01>:",
             "    process()",
             "<slot02>:",
             "    logError()",
             "<slot03>:",
             "    displayResult()</code></pre>"
-		],
+        ],
         "options": [
             "<pre><code class=\"language-python\">assert",
             "raise",

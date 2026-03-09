@@ -312,8 +312,8 @@ def clean_repair_all():
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script>
-    function prepareMockPrint() {
+<script src="../js/choicelist_patch_v2.js"></script>
+<script>    function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
         const homeBtn = document.querySelector('.home-float-btn');
@@ -1347,8 +1347,8 @@ def clean_repair_all():
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script>
-    const quizData = """
+<script src="../js/choicelist_patch_v2.js"></script>
+<script>    const quizData = """
 
     prac_bottom_tmpl = r"""
     function parseAnswerToIndex(val) {
