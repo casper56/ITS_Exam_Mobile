@@ -351,8 +351,8 @@
             "<pre><code class=\"language-python\">【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。",
             "公式內容為b等於 a 加上 5，然後再平方，其中 a 是輸入的值， b 是結果。",
             "你設計了以下的程式碼片段：",
-            "a = eval(input(\"Enter a number for the equation:\"))",
-            "b =",
+            "01 a = eval(input(\"Enter a number for the equation:\"))",
+            "02 b =",
             "如何完成 2 行的程式碼？</code></pre>"
         ],
         "options": [
@@ -1812,36 +1812,33 @@
     },
     {
         "id": 48,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-6】你設計一個 Python 程式來檢查使用者輸入的數字是 1 位數、 2 位數還是 2 位數以上，",
-            "其中規定輸入的值必須是正整數。你要如何完成這段程式碼？",
-            "num = int(input('Enter a number with 1 or 2 digits:'))",
+            "其中規定輸入的值必須是正整數。你要如何完成這段程式碼？</code></pre>"
+        ],
+		"slots" : [
+			"<pre><code class=\"language-python\">num = int(input('Enter a number with 1 or 2 digits:'))",
             "digits = '0'",
             "if num > 0:",
-            "    _(選項 1)_",
+            "    <slot01>",
             "        digits = '1'",
-            "    _(選項 2)_",
+            "    <slot02>",
             "        digits = '2'",
-            "    _(選項 3)_",
+            "    <slot03>",
             "        digits = '>2'",
             "    print(digits + ' digits.')",
             "elif num == 0:",
             "    print('The number is 0')",
             "else:",
-            "    print('The number is not a positive number')",
-            "",
-            "答案選擇區",
-            "答案 A. if num < 10:",
-            "答案 B. if num < 100:",
-            "答案 C. elif num < 100:",
-            "答案 D. else:</code></pre>"
-        ],
+            "    print('The number is not a positive number')</code></pre>"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "<pre><code class=\"language-python\">if num < 10:",
+            "if num < 100:",
+            "elif num < 100:",
+            "else:</code></pre>"
         ],
         "answer": [
             "A",
@@ -1912,27 +1909,25 @@
     },
     {
         "id": 50,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-8】在以下的程式碼中，要加入哪些程式碼片段讓 print 語法可以正確執行？",
-            "你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。",
-            "aList = 1,2,3]",
-            "bList = ['a', 'b', 'c']",
-            "_(選項 1)_",
-            "   print('aList is equal to bList')",
-            "_(選項 2)_",
-            "   print('aList is not equal to bList')",
-            "",
-            "答案選擇區",
-            "A. if aList == bList:",
-            "B. if alist == blist",
-            "C. else:",
-            "D. else</code></pre>"
+            "你要如何完成程式碼讓 print 語法是正確的？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
+		"slots" : [
+			"<pre><code class=\"language-python\">aList = 1,2,3]",
+            "bList = ['a', 'b', 'c']",
+            "<slot01>",
+            "   print('aList is equal to bList')",
+            "<slot02>",
+            "   print('aList is not equal to bList')</code></pre>"
+		],
         "options": [
-            "<code>A|B|C|D</code>",
-            "<code>A|B|C|D</code>"
+            "<pre><code class=\"language-python\">if aList == bList:",
+            "if alist == blist",
+            "else:",
+            "else</code></pre>"
         ],
         "answer": [
             "A",
@@ -3466,33 +3461,30 @@
     },
     {
         "id": 85,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH08-5】您需要撰寫執行下列工作的程式碼：",
             "呼叫 process() 函式。",
             "2. 如果 process() 函式回傳錯誤，則呼叫 logError() 函式。",
             "3. 呼叫 process() 函式之後一律呼叫 displayResult()函式。",
-            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-            "程式碼片段",
-            "_(選項 1)_:",
-            "    process()",
-            "_(選項 2)_:",
-            "    logError()",
-            "_(選項 3)_:",
-            "    displayResult()",
-            "",
-            "答案選擇區",
-            "A. assert",
-            "B. raise",
-            "C. except",
-            "D. try",
-            "E. finally</code></pre>"
+            "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
+		"slots" : [
+			"<pre><code class=\"language-python\">程式碼片段",
+            "<slot01>:",
+            "    process()",
+            "<slot02>:",
+            "    logError()",
+            "<slot03>:",
+            "    displayResult()</code></pre>"
+		],
         "options": [
-            "<code>A|B|C|D|E</code>",
-            "<code>A|B|C|D|E</code>",
-            "<code>A|B|C|D|E</code>"
+            "<pre><code class=\"language-python\">assert",
+            "raise",
+            "except",
+            "try",
+            "finally</code></pre>"
         ],
         "answer": [
             "D",
