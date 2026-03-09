@@ -155,10 +155,9 @@
         // 選項區渲染
         let poolHtml = '';
         item.options.forEach((opt, idx) => {
-            const isUsed = currentAns.includes(idx);
             const label = String.fromCharCode(65 + idx);
             const cleanText = stripCodeTags(opt);
-            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" style="${customSz} ${boxStyle}" onclick="${isUsed || isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+            poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${boxStyle}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
         });
 
         // 回答區渲染

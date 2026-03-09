@@ -1767,35 +1767,32 @@
     },
     {
         "id": 47,
-        "type": "multioption",
-        "hideLabel": true,
+        "type": "choicelist",
+        "sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-5】你設計了一個電影票收費的函式，票價的規則如下：",
             "● 5 歲以下 = 免費入場",
             "● 5 歲及以上的學生 = 60 元",
             "● 5 歲到 17 歲但不是學生 = 120 元",
             "● 17 歲以上但不是學生 = 180 元",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
-            "def ticket_fee(age, school):",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
+        ],
+		"slots" : [
+			"<pre><code class=\"language-python\">def ticket_fee(age, school):",
             "    fee = 0",
-            "    _(選項 1)_",
+            "    <slot01>",
             "        fee = 60",
-            "    _(選項 2)_",
-            "        _(選項 3)_",
+            "    <slot02>",
+            "        <slot03>",
             "            fee = 120",
             "        else:",
             "            fee = 180",
-            "    return fee",
-            "",
-            "答案選擇區",
-            "答案 A. if age >= 5 and school:",
-            "答案 B. elif age >= 5 and not school:",
-            "答案 C. if age <= 17:</code></pre>"
-        ],
+            "    return fee</code></pre>"
+		],
         "options": [
-            "<code>A|B|C</code>",
-            "<code>A|B|C</code>",
-            "<code>A|B|C</code>"
+            "<pre><code class=\"language-python\">if age >= 5 and school:",
+            "elif age >= 5 and not school:",
+            " if age <= 17:</code></pre>"
         ],
         "answer": [
             "A",
