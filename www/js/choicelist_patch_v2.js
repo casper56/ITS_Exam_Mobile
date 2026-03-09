@@ -127,6 +127,22 @@
         return Prism.highlight(hardened, Prism.languages.python, 'python');
     };
 
+    const processContentLocal = (content, item) => {
+        if (!content) return "";
+        let html = content;
+        // 1. 處理 [[image01]] 格式
+        html = html.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const num = parseInt(p1);
+            const src = item['image' + num] || item['image' + p1] || item['image'] || `images/${p1}.png`;
+            // 如果 src 不含路徑，補上 ./images/
+            const finalSrc = (src.includes('/') || src.includes('\\')) ? src : `./images/${src}`;
+            return `<img src="${finalSrc}" class="q-img" style="max-width:100%; height:auto; display:block; margin:10px 0;">`;
+        });
+        // 2. 處理 <code> 標籤
+        html = html.replace(/<code>(.*?)<\/code>/g, '<code class="language-python">$1</code>');
+        return html;
+    };
+
     window.renderChoiceListQuestion = function(index) {
         const isMock = (typeof examQuestions !== 'undefined');
         const quizList = isMock ? examQuestions : quizData;
