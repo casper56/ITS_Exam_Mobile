@@ -16,3 +16,9 @@
 - **代碼包裝陷阱**：在使用 `<code>` 包裹題目時，必須判定內容是否已包含 `<table>`, `<style>`, `<pre>` 或 `<code` 標籤。**嚴禁**對已格式化的 HTML 進行二次包裝，否則會徹底破壞表格佈局。
 - **全域同步原則**：修改任何渲染邏輯時，必須**同時**更新：1. 練習區 (`renderQuestion`) 2. 模擬考 (`mock_v34`) 3. 列印預覽 (`prepareAndPrint`) 4. 錯誤回顧。漏掉任何一處都是失職。
 - **Prism 背景權重**：Prism.js 的 `background: #fdfdfd !important` 權重極高，必須在 CSS 最頂端強制覆蓋為 `background: transparent !important`，否則選項內會出現白色方塊。
+
+## 核心功能護欄 (Grade Sync Safety)
+- **成績同步不可移除**：所有模擬考 (`mock_v34.html`) 必須引入 `../js/sync_manager.js` 並在 `submitExam` 結尾呼叫 `SyncManager.saveExamResult(SYNC_SUBJECT_NAME, score)`。
+- **科目名稱對應**：`SYNC_SUBJECT_NAME` 必須由 `final_clean_repair.py` 透過 `SYNC_NAME_MAP` 字典進行正確替換，嚴禁硬編碼科目名稱。
+- **邏輯抽離原則**：嚴禁將 `sync_manager.js` 的邏輯重新寫回 HTML 模板中，必須保持外部引入形式，以確保 UI 修改不影響數據存檔。
+

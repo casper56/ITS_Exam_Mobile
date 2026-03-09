@@ -98,6 +98,63 @@
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
+
+        /* ChoiceList 題型樣式 */
+        .choicelist-wrapper { display: flex; gap: 20px; margin: 15px 0; min-height: 300px; }
+        .choicelist-pool, .choicelist-target { flex: 1; border: 2px solid #dee2e6; border-radius: 8px; padding: 10px; background: #fdfdfd; }
+        .choicelist-header { font-weight: bold; color: #0d6efd; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; padding-bottom: 5px; font-size: 0.9rem; }
+        .choicelist-item { 
+            background: #fff; border: 1px solid #ced4da; border-radius: 6px; 
+            padding: 6px 10px; margin-bottom: 6px; cursor: pointer; 
+            font-size: var(--sz, 0.8rem) !important; /* 支援動態字級 */
+            transition: all 0.2s; position: relative; user-select: none;
+            white-space: pre !important; 
+            font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
+            line-height: 1.2 !important;
+            overflow-x: auto; 
+            display: block;
+        }
+        .choicelist-item:hover { border-color: #0d6efd; background: #f0f7ff; }
+        .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
+        .choicelist-target .choicelist-item { border-left: 5px solid #0d6efd; }
+        .choicelist-static-text { font-size: 0.9rem; color: #495057; margin: 8px 0 4px 0; padding-left: 5px; border-left: 3px solid #dee2e6; font-family: inherit; }
+        .target-slot { border: 1px dashed #adb5bd; border-radius: 6px; height: 45px; margin-bottom: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+        .target-slot.active-slot { border: 2px solid #0d6efd; background: #e7f1ff; color: #0d6efd; font-weight: bold; }
+        .choicelist-code-line { white-space: pre; font-family: Consolas, Monaco, monospace; font-size: 1rem; line-height: 2.2; color: #333; }
+        .choicelist-item.inline-item { display: inline-block !important; margin: 0 4px !important; padding: 2px 10px !important; vertical-align: middle; min-width: 60px; text-align: center; border-left: 3px solid #0d6efd !important; }
+        .target-slot.inline-slot { display: inline-block !important; width: 100px !important; height: 32px !important; margin: 0 4px !important; vertical-align: middle; line-height: 30px !important; margin-bottom: 0 !important; }
+        .choicelist-q-text { white-space: pre-wrap !important; margin-bottom: 15px; line-height: 1.6; }
+        @media (max-width: 768px) {
+            .choicelist-wrapper { flex-direction: column; gap: 15px; }
+            .choicelist-pool { 
+                order: 1; /* 選項區在上 */
+                background: #f1f3f5;
+            }
+            .choicelist-target { 
+                order: 2; /* 答案區在下 */
+                min-height: 120px;
+                background: #fff;
+                border: 2px solid #0d6efd;
+            }
+            .choicelist-item { padding: 12px; font-size: 1rem; } /* 加大手機點擊範圍 */
+        }
+        
         .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.3s ease; padding: 0; user-select: none; }
         .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
         pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
@@ -190,6 +247,7 @@
 <div id="review-area"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
@@ -1338,9 +1396,9 @@
             "System.out.printf(\"寬=%d 高=%d\\n\", ____C____ );</code></pre>"
         ],
         "left": [
-            "A 選項 (建立物件)",
-            "B 選項 (計算面積)",
-            "C 選項 (取得屬性)"
+            "A 選項",
+            "B 選項",
+            "C 選項"
         ],
         "right": [
             "① Triangle tri = new(20, 40); | ② new tri = Triangle(20, 40); | ③ Triangle tri = new Triangle(20, 40); | ④ Triangle tri = Triangle(20, 40);",
@@ -1369,7 +1427,7 @@
             "01 public class Teacher {",
             "02     public String tchName = \"Jack\";",
             "03",
-            "04     // 應在此行填入註釋",
+            "04  ",
             "05     public String toString(){",
             "06         return tchName;",
             "07     }",
@@ -1543,15 +1601,15 @@
         ],
         "right": [
             "①private | ②public | ③protected | ④static",
-            "①bool | ②int | ③void | ④String | ⑤boolean",
+            "①bool | ②int | ③void | ④String | ⑤Song",
             "①() | ②(String singer) | ③(bool singer) | ④(String singer)",
             "①return Song; | ②return false; | ③return singer; | ④return true;",
             "①return Song; | ②return false; | ③return singer; | ④return true;"
         ],
         "answer": [
             1,
-            5,
-            2,
+            1,
+            4,
             4,
             2
         ],
@@ -1805,7 +1863,7 @@
             "<pre><code><class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
         ],
         "options": [
-            "<code>/* ... */</code>",
+            "<code>/*That may be too schematized a presentation  most readers.*/</code>",
             "<code>/*// ... */</code>",
             "<code>// ... //</code>",
             "<code>//* ... //*</code>"
@@ -1855,6 +1913,12 @@
             "<pre><code class=\"language-java\">【B-3】您在撰寫一個 JAVA 主控台程式。程式需求如下：",
             "● 可接受命令列引數。",
             "● 分行顯示每一個命令列引數。",
+            "public static void main(String[] args){",
+            "       __A__(String arg __B__ args)",
+            "   {",
+            "       System.out.printIn( __C__ );",
+            "   }",
+            "}",
             "請選取正確程式碼：",
             "A. ① do ② for ③ while",
             "B. ① = ② == ③ : ④ instanceof",
@@ -1884,41 +1948,42 @@
     },
     {
         "id": 44,
-        "type": "single",
+        "type": "choicelist",
         "question": [
-            "<pre><code class=\"language-java\">【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作：",
-            "● 自命令列接受多個引數。",
-            "● 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
-            "",
-            "請問您應該依序使用哪三個程式碼片段來開發解決方案？請將三個程式碼片段移至答案區，然後按照正確的順序排列。",
-            "程式碼片段：",
-            "① for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
-            "② System.out.println(arguments[x]);",
-            "   }",
-            "③ public static void main(String[] args) {",
-            "④ for (int x = 1; x <= arguments.length; x++) {",
-            "⑤ public static void main(String arguments) {",
-            "⑥ System.out.println(args[x]);",
-            "   }",
-            "⑦ for (int x = 0; x < args.length; x++) {</code></pre>"
-        ],
+		"【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作:",
+		"1. 自命令列接受多個引數。",
+		"2. 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
+		"請問您應該依序使用哪三個程式碼片段來開發解決方案？",
+		"請將三個程式碼片段移至答案區，然後按照正確的順序排列。"
+		],
+		"slots": [
+			"<slot01>",
+			"<slot02>",
+			"<slot03>"
+		],
         "options": [
-            "<code>③ ⑦ ⑥</code>",
-            "<code>③ ④ ⑥</code>",
-            "<code>⑤ ⑦ ②</code>",
-            "<code>③ ① ②</code>"
+            "for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
+            "System.out.println(arguments[x]);\n     }\n   }",
+            "public static void main(String[] args){",
+            "  for (int x = 1; x <= arguments.length; x++) {",
+            "public static void main(String arguments) {",
+            "     System.out.println(arguments[x]);\n  } \n}",
+            "  for (int x = 0; x < args.length; x++) {"
         ],
         "answer": [
-            1
+            3,
+            7,
+            6
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "③ public static void main(String[] args)",
-            "⑦ for (int x = 0; x < args.length; x++)",
-            "⑥ System.out.println(args[x]);"
+            "開發此解決方案的正確順序：",
+            "1. 宣告主程式進入點：public static void main(String[] args) {",
+            "2. 使用迴圈從索引 0 開始遍歷陣列：for (int x = 0; x < args.length; x++) {",
+            "3. 輸出該索引的值：System.out.println(args[x]);"
         ],
-        "category": "D3_流程控制實作"
+        "category": "D1_Java 基礎"
     },
     {
         "id": 45,
@@ -3293,6 +3358,42 @@
             sidebar.classList.remove('active');
         }
     });
+    /* ChoiceList 互動邏輯 (自主練習版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = quizData[currentIndex];
+        if (!userAnswers[currentIndex]) return;
+        
+        if (selectedSlotIdx === -1 || userAnswers[currentIndex][selectedSlotIdx] !== null) {
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+        }
+
+        if (selectedSlotIdx !== -1) {
+            userAnswers[currentIndex][selectedSlotIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof saveState === 'function') saveState();
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
@@ -3782,6 +3883,7 @@
         console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'choicelist') { renderChoiceListQuestion(index); return; }
         const container = document.getElementById('question-container');
         const opts = item.quiz || item.options || [];
         document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
@@ -3832,5 +3934,6 @@
     }
     loadState(); window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); }); renderQuestion(currentIndex);
 </script>
+    <script src="../js/choicelist_patch_v2.js"></script>
 </body>
 </html>

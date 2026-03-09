@@ -1701,11 +1701,6 @@
 		"請問您應該依序使用哪三個程式碼片段來開發解決方案？",
 		"請將三個程式碼片段移至答案區，然後按照正確的順序排列。"
 		],
-		"slots": [
-			"<slot01>",
-			"<slot02>",
-			"<slot03>"
-		],
         "options": [
             "for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
             "System.out.println(arguments[x]);\n     }\n   }",

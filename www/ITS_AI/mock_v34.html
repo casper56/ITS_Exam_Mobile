@@ -81,6 +81,63 @@
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
+        /* 全域符號縮放規範 (JSON 埋 Tag 與 --sz 變數支援) */
+        code.zoom {
+            --sz: 2.2rem; /* 全域預設放大倍率 */
+            font-size: var(--sz) !important;
+            font-weight: 900 !important;
+            letter-spacing: 5px !important;
+            display: inline-block !important;
+            line-height: 1 !important;
+            background: transparent !important;
+            border: none !important;
+            color: #000 !important;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            code.zoom { font-size: calc(var(--sz) * 0.8) !important; }
+        }
+
+        /* ChoiceList 題型樣式 */
+        .choicelist-wrapper { display: flex; gap: 20px; margin: 15px 0; min-height: 300px; }
+        .choicelist-pool, .choicelist-target { flex: 1; border: 2px solid #dee2e6; border-radius: 8px; padding: 10px; background: #fdfdfd; }
+        .choicelist-header { font-weight: bold; color: #0d6efd; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; padding-bottom: 5px; font-size: 0.9rem; }
+        .choicelist-item { 
+            background: #fff; border: 1px solid #ced4da; border-radius: 6px; 
+            padding: 6px 10px; margin-bottom: 6px; cursor: pointer; 
+            font-size: var(--sz, 0.8rem) !important; /* 支援動態字級 */
+            transition: all 0.2s; position: relative; user-select: none;
+            white-space: pre !important; 
+            font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
+            line-height: 1.2 !important;
+            overflow-x: auto; 
+            display: block;
+        }
+        .choicelist-item:hover { border-color: #0d6efd; background: #f0f7ff; }
+        .choicelist-item.disabled { opacity: 0.3; cursor: not-allowed; background: #e9ecef; }
+        .choicelist-target .choicelist-item { border-left: 5px solid #0d6efd; }
+        .choicelist-static-text { font-size: 0.9rem; color: #495057; margin: 8px 0 4px 0; padding-left: 5px; border-left: 3px solid #dee2e6; font-family: inherit; }
+        .target-slot { border: 1px dashed #adb5bd; border-radius: 6px; height: 45px; margin-bottom: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+        .target-slot.active-slot { border: 2px solid #0d6efd; background: #e7f1ff; color: #0d6efd; font-weight: bold; }
+        .choicelist-code-line { white-space: pre; font-family: Consolas, Monaco, monospace; font-size: 1rem; line-height: 2.2; color: #333; }
+        .choicelist-item.inline-item { display: inline-block !important; margin: 0 4px !important; padding: 2px 10px !important; vertical-align: middle; min-width: 60px; text-align: center; border-left: 3px solid #0d6efd !important; }
+        .target-slot.inline-slot { display: inline-block !important; width: 100px !important; height: 32px !important; margin: 0 4px !important; vertical-align: middle; line-height: 30px !important; margin-bottom: 0 !important; }
+        .choicelist-q-text { white-space: pre-wrap !important; margin-bottom: 15px; line-height: 1.6; }
+        @media (max-width: 768px) {
+            .choicelist-wrapper { flex-direction: column; gap: 15px; }
+            .choicelist-pool { 
+                order: 1; /* 選項區在上 */
+                background: #f1f3f5;
+            }
+            .choicelist-target { 
+                order: 2; /* 答案區在下 */
+                min-height: 120px;
+                background: #fff;
+                border: 2px solid #0d6efd;
+            }
+            .choicelist-item { padding: 12px; font-size: 1rem; } /* 加大手機點擊範圍 */
+        }
+        
         #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
         .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
         .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
@@ -229,6 +286,7 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
@@ -314,6 +372,7 @@
     }
 
     const EXAM_LIMIT = 60, WRONG_KEY = 'itsai_exam_wrong_ids', HISTORY_KEY = 'itsai_mock_history';
+    const SYNC_SUBJECT_NAME = 'ITS_AI';
     let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
     let examQuestions = [];
 
@@ -3417,13 +3476,19 @@
             const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
             if (rightItem) {
                 const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                // 強制初始化為陣列並存入答案
+                if (!Array.isArray(userAnswers[currentIndex])) {
+                    const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
+                    userAnswers[currentIndex] = new Array(item.left.length).fill(null);
+                }
                 userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
             }
         }
         isDragging = false; dragStartPoint = null;
         if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
-        tempLine = null; renderMatchingQuestion(currentIndex);
+        tempLine = null; 
+        const renderFunc = (typeof renderMatchingQuestion === 'function') ? renderMatchingQuestion : null;
+        if (renderFunc) renderFunc(currentIndex);
     };
     window.drawLines = function() {
         const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
@@ -3445,6 +3510,32 @@
                 line.setAttribute('stroke', "#0d6efd"); line.setAttribute('stroke-width', "2.5"); svg.appendChild(line);
             }
         });
+    };
+
+    /* ChoiceList 互動邏輯 (模擬考版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.moveToTarget = function(optIdx) {
+        if (!userAnswers[currentIndex]) return;
+        let targetIdx = selectedSlotIdx;
+        const requiredCount = (typeof examQuestions !== 'undefined') ? 
+            (examQuestions[currentIndex].slots || examQuestions[currentIndex].slot || []).join('').split('<slot').length - 1 : 1;
+
+        if (targetIdx === -1 || userAnswers[currentIndex][targetIdx] !== null) targetIdx = userAnswers[currentIndex].indexOf(null);
+        if (targetIdx !== -1) {
+            userAnswers[currentIndex][targetIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     function startTimer() {
@@ -3472,6 +3563,42 @@
         
         if (window.drawLines) window.drawLines();
     }
+
+    /* ChoiceList 互動邏輯 (自主練習版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = quizData[currentIndex];
+        if (!userAnswers[currentIndex]) return;
+        
+        if (selectedSlotIdx === -1 || userAnswers[currentIndex][selectedSlotIdx] !== null) {
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+        }
+
+        if (selectedSlotIdx !== -1) {
+            userAnswers[currentIndex][selectedSlotIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof saveState === 'function') saveState();
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+        }
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
 
     function processContent(content, item) {
         if (!content) return '';
@@ -3567,24 +3694,21 @@
             }
         }
 
-        // 3. 更新歷史
+        // 3. 更新歷史並打散題目順序
         selected.forEach(q => historySet.add(q.id));
         if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
         localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
 
-        examQuestions = selected.sort((a, b) => {
-            const catA = a.category || "";
-            const catB = b.category || "";
-            return catA.localeCompare(catB) || (a.id - b.id);
-        }).slice(0, EXAM_LIMIT);
+        // 完全隨機打散，不再依分類名稱排序
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
         renderQuestion(0); startTimer();
     }
 
     function renderQuestion(index, scrollTop = true) {
-        currentIndex = index; const item = examQuestions[index]; 
+        currentIndex = index; const item = examQuestions[index];
         if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
-        const container = document.getElementById('question-area'); 
-        if (!container) return;
+        if (item.type === 'choicelist') { if(typeof window.renderChoiceListQuestion === 'function') { window.renderChoiceListQuestion(index); return; } }
+        const container = document.getElementById('question-area');        if (!container) return;
         container.innerHTML = '';
         const progressEl = document.getElementById('q-progress');
         if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
@@ -3674,35 +3798,41 @@
             
                         const userAns = userAnswers[idx]; let isCorrect = false;
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            
             if (item.type === 'matching' || item.type === 'multimatching') {
-                let userLetters;
-                let totalRRows = 0; 
-                item.right.forEach(t => totalRRows += (t && String(t).includes('|') ? t.replace(/<\/?code>/g,'').split('|').length : 1));
-                let isSplitMode = (totalRRows > item.left.length);
-                let ratio = isSplitMode ? (totalRRows / item.left.length) : 1;
-
-                if (isSplitMode) {
-                    userLetters = item.left.map((_, lIdx) => {
-                        const rIdx = (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null;
-                        if (rIdx === null || rIdx === undefined) return "";
-                        return String.fromCharCode(65 + (rIdx % ratio));
-                    });
-                } else {
-                    userLetters = item.left.map((_, i) => {
-                        const rIdx = (userAns && userAns[i] !== undefined) ? userAns[i] : null;
-                        return (rIdx === null || rIdx === undefined) ? "" : String.fromCharCode(65 + rIdx);
-                    });
-                }
-                
-                isCorrect = (userLetters.length === answers.length);
+                // 補齊連線題判定邏輯
+                const userIndices = item.left.map((_, lIdx) => (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null);
+                isCorrect = (userIndices.length === answers.length);
                 if (isCorrect) {
                     for (let i = 0; i < answers.length; i++) {
-                        if (String(userLetters[i] || "").trim().toUpperCase() !== String(answers[i] || "").trim().toUpperCase()) {
-                            isCorrect = false; break;
-                        }
+                        const targetIdx = parseAnswerToIndex(answers[i]);
+                        if (userIndices[i] !== targetIdx) { isCorrect = false; break; }
                     }
                 }
+            } else if (item.type === 'choicelist') {
+                const userIdxs = Array.isArray(userAns) ? userAns : [];
+                const correctIndices = answers.map(a => (typeof a === 'number') ? (a - 1) : parseAnswerToIndex(a));
+                
+                isCorrect = (userIdxs.length === correctIndices.length);
+                if (isCorrect) {
+                    for (let i = 0; i < correctIndices.length; i++) {
+                        if (userIdxs[i] !== correctIndices[i]) { isCorrect = false; break; }
+                    }
+                }
+                
+                // --- F12 Debug Message ---
+                console.log(`%c[Grading Q${idx+1}] Type: ChoiceList`, "color: #0d6efd; font-weight: bold;");
+                console.log(` - 您的答題 (Indices):`, userIdxs);
+                console.log(` - 正確答案 (Indices):`, correctIndices);
+                console.log(` - 原始正確標籤:`, answers);
+                console.log(` - 轉換規則說明: A=0, B=1, C=2, D=3, E=4 (以此類推)`);
+                if (!isCorrect) {
+                    console.log(`%c - 判定結果: ❌ 錯誤`, "color: red; font-weight: bold;");
+                } else {
+                    console.log(`%c - 判定結果: ✅ 正確`, "color: green; font-weight: bold;");
+                }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+
                 isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
             } else if (item.type === 'multiple') {
                 const cIdxs = answers.map(a => parseAnswerToIndex(a));
@@ -3839,18 +3969,39 @@
         try {
             let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
             examQuestions.forEach((q, idx) => {
-                const userAns = userAnswers[idx]; const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                const userAns = userAnswers[idx]; 
+                const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
                 let isCorr = false;
-                if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) isCorr = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
-                else if (q.type === 'multiple') { const cIdxs = answers.map(a => parseAnswerToIndex(a)); isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); }
-                else isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                
+                if (q.type === 'choicelist') {
+                    // 排序題判定：比對索引陣列
+                    if (Array.isArray(userAns) && userAns.length === answers.length && !userAns.includes(null)) {
+                        isCorr = true;
+                        for (let j = 0; j < answers.length; j++) {
+                            if (userAns[j] !== parseAnswerToIndex(answers[j])) { isCorr = false; break; }
+                        }
+                    }
+                } else if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) {
+                    isCorr = userAns && answers.every((a, i) => parseAnswerToIndex(a) === userAns[i]);
+                } else if (q.type === 'multiple') { 
+                    const cIdxs = answers.map(a => parseAnswerToIndex(a)); 
+                    isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); 
+                } else {
+                    isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                }
+                
                 if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
             });
             localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+            // 使用獨立的 SyncManager 進行成績同步，防止功能被意外刪除
+            if (typeof SyncManager !== 'undefined') {
+                SyncManager.saveExamResult(SYNC_SUBJECT_NAME, score);
+            }
         } catch(e) {}
     }
     window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
     initExam();
 </script>
+    <script src="../js/choicelist_patch_v2.js"></script>
 </body>
 </html>

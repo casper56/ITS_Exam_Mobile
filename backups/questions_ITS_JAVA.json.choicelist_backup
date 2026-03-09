@@ -1608,7 +1608,7 @@
             "<pre><code><class=\"language-java\">【B-1】下列哪些程式碼片段顯示了多行註解語法？(複選)</code></pre>"
         ],
         "options": [
-            "<code>/*That may be too schematized a presentation  most readers.*/</code>",
+            "<code>/* ... */</code>",
             "<code>/*// ... */</code>",
             "<code>// ... //</code>",
             "<code>//* ... //*</code>"
@@ -1695,30 +1695,25 @@
         "id": 44,
         "type": "choicelist",
         "question": [
-		"【B-04】您正在面試某份工作。主考官要求您建立一個簡易的主控台程式。此程式必須執行下列工作:",
+		"【B-04】您正在建立一個簡易的主控台程式。此程式必須：",
 		"1. 自命令列接受多個引數。",
 		"2. 以使用者在命令列上所輸入的相同順序在畫面上輸出引數。",
 		"請問您應該依序使用哪三個程式碼片段來開發解決方案？",
 		"請將三個程式碼片段移至答案區，然後按照正確的順序排列。"
 		],
-		"slots": [
-			"<slot01>",
-			"<slot02>",
-			"<slot03>"
-		],
         "options": [
-            "for (int x = 1; x <= Integer.parseInt(args[0]); x++) {",
-            "System.out.println(arguments[x]);\n     }\n   }",
-            "public static void main(String[] args){",
-            "  for (int x = 1; x <= arguments.length; x++) {",
+            "public static void main(String[] args) {",
+            "for (int x = 0; x < args.length; x++) {",
+            "System.out.println(args[x]);",
+            "for (int x = 1; x <= arguments.length; x++) {",
             "public static void main(String arguments) {",
-            "     System.out.println(arguments[x]);\n  } \n}",
-            "  for (int x = 0; x < args.length; x++) {"
+            "System.out.println(arguments[x]);",
+            "   }"
         ],
         "answer": [
-            3,
-            7,
-            6
+            "public static void main(String[] args) {",
+            "for (int x = 0; x < args.length; x++) {",
+            "System.out.println(args[x]);"
         ],
         "weight": 1,
         "image": null,
