@@ -5323,83 +5323,30 @@
         });
     };
 
-    /* ChoiceList 互動邏輯 (模擬考版) */
-    window.renderChoiceListQuestion = function(index) {
-        currentIndex = index; const item = examQuestions[index];
-        const container = document.getElementById('question-area');
-        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
-        const currentAns = userAnswers[index];
-
-        let poolHtml = '';
-        item.options.forEach((opt, idx) => {
-            const isUsed = currentAns.includes(idx);
-            poolHtml += `<div class="choicelist-item ${isUsed ? 'disabled' : ''}" onclick="${isUsed ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
-        });
-
-        let targetHtml = '';
-        const slotData = item.slots || item.slot;
-        const requiredCount = (slotData && Array.isArray(slotData)) ? 
-            slotData.join('').split('<slot').length - 1 : 
-            item.answer.length;
-
-        if (slotData && Array.isArray(slotData)) {
-            let sIdxCounter = 0;
-            slotData.forEach(line => {
-                // 行內解析：將 <slotXX> 替換為交互式元素，純文字行則直接顯示
-                const lineHtml = line.replace(/<slot\d*>/g, () => {
-                    const sIdx = sIdxCounter++;
-                    const optIdx = currentAns[sIdx];
-                    const isActive = (selectedSlotIdx === sIdx && !isLocked);
-                    if (optIdx !== null && optIdx !== undefined) {
-                        return `<span class="choicelist-item inline-item ${isActive ? 'active-slot' : ''}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">${item.options[optIdx]}</span>`;
-                    } else {
-                        return `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">[Slot ${sIdx + 1}]</span>`;
-                    }
-                });
-                targetHtml += `<div class="choicelist-code-line">${lineHtml}</div>`;
-            });
-        } else {
-            for (let i = 0; i < requiredCount; i++) {
-                const optIdx = currentAns[i];
-                if (optIdx !== undefined) {
-                    targetHtml += `<div class="choicelist-item" onclick="removeFromTarget(${i})">${item.options[optIdx]}</div>`;
-                } else {
-                    targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
-                }
-            }
-        }
-
-        container.innerHTML = `<div class="card question-card">
-            <div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary ms-2">${item.category || ''}</span></div>
-            <div class="question-body">
-                ${processContent(item.question, item)}
-                <div class="choicelist-wrapper">
-                    <div class="choicelist-pool">
-                        <div class="choicelist-header">選項區 (點擊選取)</div>
-                        ${poolHtml}
-                    </div>
-                    <div class="choicelist-target">
-                        <div class="choicelist-header">答案區 (點擊移除)</div>
-                        ${targetHtml}
-                    </div>
-                </div>
-            </div>
-        </div>`;
-        if(window.Prism) Prism.highlightAll();
+    /* ChoiceList 互動邏輯 (模擬考版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     window.moveToTarget = function(optIdx) {
-        const item = examQuestions[currentIndex];
-        if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
-        if (userAnswers[currentIndex].length < item.answer.length) {
-            userAnswers[currentIndex].push(optIdx);
-            renderChoiceListQuestion(currentIndex);
+        if (!userAnswers[currentIndex]) return;
+        let targetIdx = selectedSlotIdx;
+        const requiredCount = (typeof examQuestions !== 'undefined') ? 
+            (examQuestions[currentIndex].slots || examQuestions[currentIndex].slot || []).join('').split('<slot').length - 1 : 1;
+
+        if (targetIdx === -1 || userAnswers[currentIndex][targetIdx] !== null) targetIdx = userAnswers[currentIndex].indexOf(null);
+        if (targetIdx !== -1) {
+            userAnswers[currentIndex][targetIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
         }
     };
 
-    window.removeFromTarget = function(ansIdx) {
-        userAnswers[currentIndex].splice(ansIdx, 1);
-        renderChoiceListQuestion(currentIndex);
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     function startTimer() {
@@ -5428,99 +5375,13 @@
         if (window.drawLines) window.drawLines();
     }
 
-    /* ChoiceList 互動邏輯 (練習區版) */
-    let selectedSlotIdx = -1;
-    window.renderChoiceListQuestion = function(index) {
-        currentIndex = index; const item = quizData[index];
-        const container = document.getElementById('question-container');
-        if (!Array.isArray(userAnswers[index])) userAnswers[index] = [];
-        const currentAns = userAnswers[index];
-        
-        const isCorrect = correctSet.has(index);
-        const isCorrected = correctedSet.has(index);
-        const isWrong = incorrectSet.has(index);
-        const isLocked = isCorrect || isCorrected; // 只有答對或更正後才鎖定
-
-        // 支援自定義字級
-        const customSz = item.sz ? `--sz: ${item.sz} !important; font-size: ${item.sz} !important;` : '';
-
-        let poolHtml = '';
-        item.options.forEach((opt, idx) => {
-            const isUsed = currentAns.includes(idx);
-            poolHtml += `<div class="choicelist-item ${isUsed || isLocked ? 'disabled' : ''}" style="${customSz}" onclick="${isUsed || isLocked ? '' : `moveToTarget(${idx})`}">${opt}</div>`;
-        });
-
-        let targetHtml = '';
-        const slotData = item.slots || item.slot;
-        if (slotData && Array.isArray(slotData)) {
-            let sIdxCounter = 0;
-            slotData.forEach(line => {
-                // 行內解析：將 <slotXX> 替換為交互式元素，純文字行則直接顯示
-                const lineHtml = line.replace(/<slot\d*>/g, () => {
-                    const sIdx = sIdxCounter++;
-                    const optIdx = currentAns[sIdx];
-                    const isActive = (selectedSlotIdx === sIdx && !isLocked);
-                    if (optIdx !== null && optIdx !== undefined) {
-                        return `<span class="choicelist-item inline-item ${isActive ? 'active-slot' : ''}" style="${customSz}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">${item.options[optIdx]}</span>`;
-                    } else {
-                        return `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" onclick="${isLocked ? '' : `selectSlot(${sIdx})`}">[Slot ${sIdx + 1}]</span>`;
-                    }
-                });
-                targetHtml += `<div class="choicelist-code-line">${lineHtml}</div>`;
-            });
-        } else {
-            const requiredCount = item.answer.length;
-            for (let i = 0; i < requiredCount; i++) {
-                const optIdx = currentAns[i];
-                if (optIdx !== undefined) {
-                    targetHtml += `<div class="choicelist-item" style="${customSz}" onclick="${isLocked ? '' : `removeFromTarget(${i})`}">${item.options[optIdx]}</div>`;
-                } else {
-                    targetHtml += `<div class="target-slot">位置 ${i + 1}</div>`;
-                }
-            }
-        }
-
-        // 準備完整答案顯示文字 (支援數字與 A,B,C 字母)
-        const correctAnsArr = Array.isArray(item.answer) ? item.answer : [item.answer];
-        const displayAnsHtml = correctAnsArr.map((val, i) => {
-            const optIdx = parseAnswerToIndex(val);
-            const text = (optIdx >= 0 && item.options[optIdx]) ? item.options[optIdx] : val;
-            return `<div class="mt-2 border-start border-success border-4 bg-light" style="padding: 10px 12px; white-space:pre !important; font-family:Consolas, Monaco, monospace; font-size:0.95rem; overflow-x:auto; line-height:1.2;">${text}</div>`;
-        }).join('');
-
-        container.innerHTML = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info">排序題</span></div><div class="category-tag">${item.category || '一般'}</div></div>
-            <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
-            <div class="px-3 pb-3">
-                <div class="choicelist-wrapper" style="margin-top:0;">
-                    <div class="choicelist-pool">
-                        <div class="choicelist-header">選項區 (點擊選取)</div>
-                        ${poolHtml}
-                    </div>
-                    <div class="choicelist-target">
-                        <div class="choicelist-header">答案區 (點擊填入/選定位置)</div>
-                        <div style="background:#f8f9fa; padding:15px; border-radius:8px; overflow-x:auto;">${targetHtml}</div>
-                    </div>
-                </div>
-                ${!isLocked ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" onclick="submitChoiceList()">${isWrong ? '更正提交' : '確認提交'}</button></div>` : ''}
-                <div class="answer-section" id="ans-section" style="${isWrong || isLocked ? 'display:block' : 'display:none'}">
-                    <h6 class="fw-bold mb-3">${isWrong ? '❌ 答錯了' : '✅ 答對了'}！正確順序如下：</h6>
-                    <div class="mb-3">${displayAnsHtml}</div>
-                    <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
-                </div>
-            </div>
-        </div>`;
-        if(window.Prism) Prism.highlightAll();
-        updateUI();
-    };
-
+    /* ChoiceList 互動邏輯 (自主練習版 - 已由 choicelist_patch_v2.js 接管) */
     window.selectSlot = function(idx) {
-        if (userAnswers[currentIndex][idx] !== null) {
-            userAnswers[currentIndex][idx] = null;
-        }
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
         selectedSlotIdx = idx;
-        saveState();
-        renderChoiceListQuestion(currentIndex);
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     window.moveToTarget = function(optIdx) {
@@ -5534,38 +5395,20 @@
         if (selectedSlotIdx !== -1) {
             userAnswers[currentIndex][selectedSlotIdx] = optIdx;
             selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
-            saveState();
-            renderChoiceListQuestion(currentIndex);
+            if (typeof saveState === 'function') saveState();
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
         }
     };
 
     window.removeFromTarget = function(ansIdx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
         userAnswers[currentIndex].splice(ansIdx, 1);
-        renderChoiceListQuestion(currentIndex);
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     window.submitChoiceList = function() {
-        const item = quizData[currentIndex];
-        const userIdxs = userAnswers[currentIndex] || [];
-        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
-
-        let isCorrect = (userIdxs.length === correctAns.length);
-        if (isCorrect) {
-            for (let i = 0; i < correctAns.length; i++) {
-                // 核心修復：使用 parseAnswerToIndex 統一處理數字與字母標籤
-                const targetIdx = parseAnswerToIndex(correctAns[i]);
-                if (userIdxs[i] !== targetIdx) { isCorrect = false; break; }
-            }
-        }
-
-        if (isCorrect) {
-            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-            else { correctSet.add(currentIndex); }
-        } else {
-            incorrectSet.add(currentIndex);
-        }
-        saveState();
-        renderChoiceListQuestion(currentIndex);
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
 
     function processContent(content, item) {
