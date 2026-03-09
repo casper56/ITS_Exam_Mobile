@@ -92,7 +92,25 @@
             vertical-align: middle !important;
         }
 
-        .choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: flex-start !important; overflow-x: auto !important; padding-bottom: 10px; gap: 0 !important; }
+        .choicelist-wrapper { 
+            display: flex !important; 
+            flex-direction: row !important; 
+            align-items: flex-start !important; 
+            overflow-x: auto !important; 
+            padding-bottom: 10px; 
+            gap: 12px !important; 
+        }
+        @media (max-width: 768px) {
+            .choicelist-wrapper {
+                flex-direction: column !important;
+                overflow-x: visible !important;
+            }
+            .choicelist-pool, .choicelist-target {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 0 15px 0 !important;
+            }
+        }
         .token { background: transparent !important; display: inline !important; white-space: pre !important; }
     `;
     document.head.appendChild(style);
