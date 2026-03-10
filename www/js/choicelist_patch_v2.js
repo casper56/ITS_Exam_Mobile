@@ -158,21 +158,21 @@
             });
         });
 
-        // 2. 根據全域最長行計算統一的寬度
-        const unifiedW = Math.ceil((globalMaxLen + 6) * CHAR_W) + 20;
+        // 2. 根據全域最長行計算統一的寬度 (V3.5.4 強化版)
+        const unifiedW = Math.ceil((globalMaxLen + 4) * CHAR_W) + 20;
         const unifiedBoxStyle = `width: ${unifiedW}px !important; min-width: ${unifiedW}px !important;`;
 
         // 選項區渲染 (支援同時顯示多組分組選項)
-        let poolHtml = '';
+        let poolHtml = `<div class="cl-header" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">選項區</div>`;
         const isGrouped = Array.isArray(item.options[0]);
         
         if (isGrouped) {
             item.options.forEach((group, gIdx) => {
                 const isActiveGroup = (selectedSlotIdx === gIdx && !isLocked);
-                const activeStyle = isActiveGroup ? 'border: 2px solid #0d6efd !important; border-radius: 8px; background: #f0f7ff !important; padding: 4px !important; margin-bottom: 10px !important;' : 'margin-bottom: 10px !important;';
+                const activeStyle = isActiveGroup ? 'border: 2px solid #0d6efd !important; border-radius: 8px; background: #f0f7ff !important; padding: 8px !important; margin-bottom: 15px !important;' : 'margin-bottom: 15px !important;';
                 
                 poolHtml += `<div class="grouped-pool-unit" style="${activeStyle}">`;
-                poolHtml += `<div class="cl-header" style="${isActiveGroup ? 'border-bottom: 2px solid #0d6efd !important;' : ''}">選項區 (插槽 ${gIdx + 1})</div>`;
+                poolHtml += `<div style="font-weight:bold; color:#666; margin-bottom:8px; font-size:0.85rem;">[ 插槽 ${gIdx + 1} 專用 ]</div>`;
                 poolHtml += `<div class="cl-items-container pool-area">`;
                 group.forEach((opt, optIdx) => {
                     const label = String.fromCharCode(65 + optIdx);
@@ -182,7 +182,6 @@
                 poolHtml += `</div></div>`;
             });
         } else {
-            poolHtml += `<div class="cl-header">選項區</div>`;
             poolHtml += `<div class="cl-items-container pool-area">`;
             item.options.forEach((opt, idx) => {
                 const label = String.fromCharCode(65 + idx);
@@ -192,8 +191,8 @@
             poolHtml += `</div>`;
         }
 
-        // 回答區渲染
-        let targetHtml = '';
+        // 回答區渲染 (V3.5.4 標準：嵌入式標題)
+        let targetHtml = `<div class="cl-header" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">回答區</div><div class="target-bg" style="background:#f8f9fa; border-radius:8px; padding:10px; border:1px solid #ddd;">`;
         if (slotData) {
             let sIdxCounter = 0;
             slotData.forEach(line => {
@@ -213,14 +212,14 @@
                             const filledText = stripCodeTags(filledOpt);
                             lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
                         } else {
-                            // 空插槽也使用統一寬度
-                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[插槽 ${sIdx + 1}]</span>`;
+                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[ 插槽 ${sIdx + 1} ]</span>`;
                         }
                     }
                 });
                 targetHtml += `<div class="choicelist-code-line" style="${customSz}">${lineFinalHtml}</div>`;
             });
         }
+        targetHtml += `</div>`;
 
         let statusTextHtml = '';
         let cardClass = 'card question-card';
@@ -232,15 +231,12 @@
             <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">插槽題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div></div>
             <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
             <div class="px-3 pb-3">
-                <div class="choicelist-wrapper">
-                    <div class="choicelist-pool">
+                <div class="choicelist-wrapper" style="display:flex; gap:25px; align-items:flex-start;">
+                    <div class="choicelist-pool" style="flex:0 0 auto;">
                         ${poolHtml}
                     </div>
-                    <div class="choicelist-target">
-                        <div class="cl-header">回答區</div>
-                        <div class="target-bg">
-                            <div class="cl-items-container target-area">${targetHtml}</div>
-                        </div>
+                    <div class="choicelist-target" style="flex:1 1 auto; min-width:0;">
+                        ${targetHtml}
                     </div>
                 </div>
                 ${(!isLocked && !isMock) ? `<div class="text-center mt-4 pt-3 border-top"><button class="btn btn-primary px-5" id="choicelist-submit-btn" onclick="window.submitChoiceList()">確認提交</button></div>` : ''}

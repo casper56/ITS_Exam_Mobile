@@ -6754,60 +6754,54 @@
                 <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
+                        <div class="match-col left-col">
+                            <div class="match-header-title" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">程式碼片段</div>`;
 
         // 左側：[文字] [圓圈]
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
             const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
-            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
+            const rowStyle = 'style="height:45px; margin-bottom:5px;"';
             
             html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
-                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
+                <div class="q-text-part">${cleanText}</div>
                 <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
             </div>`;
             
             if (isSplitMode && splitRatio > 1) {
                 for(let p=0; p < Math.floor(splitRatio - 1); p++) {
-                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
+                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div><div class="match-dot" style="visibility:hidden"></div></div>`;
                 }
             }
         });
 
-        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
+        html += `</div><div class="match-col right-col">
+                    <div class="match-header-title" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">回答區</div>`;
 
-        // 右側：[圓圈] [文字]
+        // 右側：[文字] [圓圈] (V3.5.4 標準：圓圈在文字後)
         let rIdxCounter = 0;
         item.right.forEach((text, grpIdx) => {
+            const processRightItem = (t, idx) => {
+                const isMatchedByAny = currentAns.includes(idx);
+                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                const cleanT = t.includes('<code') ? t : `<code>${t}</code>`;
+                return `<div class="match-item match-item-right" id="right-item-${idx}" data-right-idx="${idx}" style="height:45px; margin-bottom:5px;">
+                    <div class="q-text-part">${cleanT}</div>
+                    <div class="match-dot" id="dot-right-${idx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
+                </div>`;
+            };
+
             if (text && text.includes('|')) {
                 const parts = text.replace(/<\/?code>/g, '').split('|');
                 parts.forEach((partText) => {
-                    const rIdx = rIdxCounter++;
-                    const isMatchedByAny = currentAns.includes(rIdx);
-                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
-                        <div class="match-dot" id="dot-right-${rIdx}">
-                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
-                        </div>
-                        <div class="q-text-part"><code>${partText}</code></div>
-                    </div>`;
+                    html += processRightItem(partText, rIdxCounter++);
                 });
             } else {
-                const rIdx = rIdxCounter++;
-                const isMatchedByAny = currentAns.includes(rIdx);
-                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
-                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
-                    <div class="match-dot" id="dot-right-${rIdx}">
-                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
-                    </div>
-                    <div class="q-text-part">${cleanText}</div>
-                </div>`;
+                html += processRightItem(text, rIdxCounter++);
             }
-            // 每群顯示後畫一條灰色線 (排除最後一組)
             if (grpIdx < item.right.length - 1) {
-                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 0; width: 100%;"></div>`;
             }
         });
 
@@ -6830,13 +6824,20 @@
         }
         html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
         setTimeout(() => {
-            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
+            const wrapper = document.getElementById('matching-wrapper');
+            if (!wrapper) return;
+            // 左側動態對齊
+            const lParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
             let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
-            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
+            lParts.forEach(p => p.style.width = (maxLW + 5) + 'px');
+            // 右側動態對齊
+            const rParts = wrapper.querySelectorAll('.match-item-right .q-text-part');
+            let maxRW = 0; rParts.forEach(p => maxRW = Math.max(maxRW, p.offsetWidth));
+            rParts.forEach(p => p.style.width = (maxRW + 5) + 'px');
 
             if (window.drawLines) window.drawLines();
             if (window.Prism) Prism.highlightAll();
-        }, 30);
+        }, 100);
     }
     let isDragging = false, dragStartPoint = null, tempLine = null;
     window.handleDragStart = function(e, side, idx) {
@@ -6906,52 +6907,25 @@
                                 window.submitMatching = function() {
         const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
         const ans = userAnswers[currentIndex] || [];
-        let finalUserAns = [];
-        
-        // 精確計算每個群組的起始索引
-        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-        const groupStarts = [];
-        let currentStart = 0;
-        rightRowGroups.forEach(size => {
-            groupStarts.push(currentStart);
-            currentStart += size;
-        });
-
-        // 判定是否使用相對索引 (當左側題目數等於右側群組數時，如 Java Q9)
-        const useRelative = (item.right && item.right.length === item.left.length);
-
-        finalUserAns = item.left.map((_, lIdx) => {
-            const rIdx = ans[lIdx];
-            if (rIdx === null || rIdx === undefined) return "";
-            if (useRelative) {
-                // 精確計算：找出 rIdx 屬於哪一個群組
-                let gIdx = 0;
-                for (let i = 0; i < groupStarts.length; i++) {
-                    if (rIdx >= groupStarts[i]) gIdx = i;
-                    else break;
-                }
-                const relRIdx = rIdx - groupStarts[gIdx];
-                return String.fromCharCode(65 + relRIdx);
-            } else {
-                return String.fromCharCode(65 + rIdx);
-            }
-        });
-
         const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
-        let isCorrect = (finalUserAns.length === correctAns.length);
+        
+        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+        const groupStarts = []; let currentStart = 0;
+        rightRowGroups.forEach(size => { groupStarts.push(currentStart); currentStart += size; });
+        const useRelative = (item.right && item.right.length === item.left.length);
+        
+        let isCorrect = (ans.length === item.left.length && !ans.includes(null));
         if (isCorrect) {
-            for (let i = 0; i < correctAns.length; i++) {
-                if (parseAnswerToIndex(finalUserAns[i]) !== parseAnswerToIndex(correctAns[i])) {
-                    isCorrect = false; break;
-                }
+            for (let i = 0; i < item.left.length; i++) {
+                const userRIdx = ans[i];
+                let targetIdx = parseAnswerToIndex(correctAns[i]);
+                if (useRelative) targetIdx = groupStarts[i] + targetIdx;
+                if (userRIdx !== targetIdx) { isCorrect = false; break; }
             }
         }
-        
         if (isCorrect) {
-            if (typeof correctSet !== 'undefined') {
-                if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-                else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
-            }
+            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
+            else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
         } else {
             if (typeof incorrectSet !== 'undefined') {
                 incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
@@ -7097,7 +7071,7 @@
                 let optHtml = "";
                             if (item.type === 'matching' || item.type === 'multimatching') {
                                 let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
-                                let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('');
+                                let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${r}</div><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
                                 
                                 optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
                                     <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
