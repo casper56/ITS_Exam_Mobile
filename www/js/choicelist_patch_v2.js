@@ -46,19 +46,21 @@
             display: inline-flex !important; 
             align-items: center; 
             justify-content: flex-start !important; 
-            height: 1.8rem !important; 
-            line-height: 1 !important;
+            min-height: 1.8rem !important; 
+            height: auto !important;
+            line-height: 1.2 !important;
             vertical-align: middle !important; 
-            padding: 0 8px !important; 
-            margin: 0 4px !important;
+            padding: 4px 8px !important; 
+            margin: 2px 4px !important;
             border-radius: 4px !important; 
             font-size: 0.95em !important;
             cursor: pointer !important; 
             position: relative; 
             z-index: 50;
             box-sizing: border-box !important;
-            white-space: pre !important;
+            white-space: pre-wrap !important;
             text-align: left !important;
+            word-break: break-all !important;
         }
         /* 已填入藍色框樣式 */
         .choicelist-item.inline-item { 
@@ -112,7 +114,15 @@
                 margin: 0 0 15px 0 !important;
             }
         }
-        .token { background: transparent !important; display: inline !important; white-space: pre !important; }
+        .token { background: transparent !important; display: inline !important; white-space: inherit !important; }
+        .cl-content-text { 
+            display: inline-block !important;
+            width: 100% !important;
+            white-space: pre-wrap !important; 
+            word-break: break-all !important;
+            line-height: 1.4 !important;
+            vertical-align: top !important;
+        }
     `;
     document.head.appendChild(style);
 
@@ -124,8 +134,8 @@
 
     const highlightHardened = (text) => {
         if (!window.Prism || !text) return text;
-        const hardened = text.replace(/ /g, '\u00a0');
-        return Prism.highlight(hardened, Prism.languages.python, 'python');
+        // 直接使用 Prism 高亮，不進行 NBSP 替換，依賴 CSS 的 pre-wrap
+        return Prism.highlight(text, Prism.languages.python, 'python');
     };
 
     const processContentLocal = (content, item) => {
@@ -212,7 +222,7 @@
                 group.forEach((opt, optIdx) => {
                     const label = String.fromCharCode(65 + optIdx);
                     const cleanText = stripCodeTags(opt);
-                    poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${optIdx}, ${gIdx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+                    poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${optIdx}, ${gIdx})`}"><span class="opt-label">${label}</span><span class="cl-content-text">${highlightHardened(cleanText)}</span></div>`;
                 });
                 poolHtml += `</div></div>`;
             });
@@ -221,7 +231,7 @@
             item.options.forEach((opt, idx) => {
                 const label = String.fromCharCode(65 + idx);
                 const cleanText = stripCodeTags(opt);
-                poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span style="white-space:pre !important;">${highlightHardened(cleanText)}</span></div>`;
+                poolHtml += `<div class="choicelist-item ${isLocked ? 'disabled' : ''}" style="${customSz} ${unifiedBoxStyle} ${isLocked ? 'cursor: default !important;' : ''}" onclick="${isLocked ? '' : `window.moveToTarget(${idx})`}"><span class="opt-label">${label}</span><span class="cl-content-text">${highlightHardened(cleanText)}</span></div>`;
             });
             poolHtml += `</div>`;
         }
@@ -245,7 +255,7 @@
                             const cls = isLocked ? 'locked-slot' : 'choicelist-item inline-item';
                             const filledOpt = isGrouped ? item.options[sIdx][optIdx] : item.options[optIdx];
                             const filledText = stripCodeTags(filledOpt);
-                            lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
+                            lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}><span class="cl-content-text">${highlightHardened(filledText)}</span></span>`;
                         } else {
                             lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[ 選項 ${sIdx + 1} ]</span>`;
                         }
@@ -281,7 +291,8 @@
                     <div class="mb-3">${(Array.isArray(item.answer) ? item.answer : [item.answer]).map((val, ansIdx) => {
                         const idx = parseAnswerToIndex(val);
                         const optText = isGrouped ? item.options[ansIdx][idx] : item.options[idx];
-                        return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace"><span class="badge bg-secondary me-2">${String.fromCharCode(65 + idx)}</span>${stripCodeTags(optText) || val}</div>`;
+                        const cleanText = stripCodeTags(optText);
+                        return `<div class="mt-2 border-start border-success border-4 bg-light p-2 font-monospace" style="display:flex; align-items:flex-start;"><span class="badge bg-secondary me-2" style="flex:0 0 auto; margin-top:2px;">${String.fromCharCode(65 + idx)}</span><span class="cl-content-text" style="flex:1 1 auto;">${highlightHardened(cleanText) || val}</span></div>`;
                     }).join('')}</div>
                     <div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div>
                 </div>
