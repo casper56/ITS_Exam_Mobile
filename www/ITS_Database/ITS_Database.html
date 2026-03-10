@@ -3598,8 +3598,8 @@
                 const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
                 const cleanT = t.includes('<code') ? t : `<code>${t}</code>`;
                 return `<div class="match-item match-item-right" id="right-item-${idx}" data-right-idx="${idx}" style="height:45px; margin-bottom:5px;">
+                    <div class="match-dot" id="dot-right-${idx}" style="margin-right:10px;"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
                     <div class="q-text-part">${cleanT}</div>
-                    <div class="match-dot" id="dot-right-${idx}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
                 </div>`;
             };
 
