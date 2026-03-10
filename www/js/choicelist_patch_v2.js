@@ -207,7 +207,7 @@
                 const activeStyle = isActiveGroup ? 'border: 2px solid #0d6efd !important; border-radius: 8px; background: #f0f7ff !important; padding: 8px !important; margin-bottom: 15px !important;' : 'margin-bottom: 15px !important;';
                 
                 poolHtml += `<div class="grouped-pool-unit" style="${activeStyle}">`;
-                poolHtml += `<div style="font-weight:bold; color:#666; margin-bottom:8px; font-size:0.85rem;">[ 插槽 ${gIdx + 1} 專用 ]</div>`;
+                poolHtml += `<div style="font-weight:bold; color:#666; margin-bottom:8px; font-size:0.85rem;">[ 選項 ${gIdx + 1} ]</div>`;
                 poolHtml += `<div class="cl-items-container pool-area">`;
                 group.forEach((opt, optIdx) => {
                     const label = String.fromCharCode(65 + optIdx);
@@ -247,7 +247,7 @@
                             const filledText = stripCodeTags(filledOpt);
                             lineFinalHtml += `<span class="${cls} ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>${highlightHardened(filledText)}</span>`;
                         } else {
-                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[ 插槽 ${sIdx + 1} ]</span>`;
+                            lineFinalHtml += `<span class="target-slot inline-slot ${isActive ? 'active-slot' : ''}" style="${unifiedBoxStyle}" ${clickHandler}>[ 選項 ${sIdx + 1} ]</span>`;
                         }
                     }
                 });
@@ -263,7 +263,7 @@
         else if (isIncorrect) { statusTextHtml = '<div class="alert alert-danger py-1 px-2 mb-2 fw-bold">答錯了 ❌</div>'; cardClass += ' incorrect'; }
 
         container.innerHTML = `<div class="${cardClass}">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">插槽題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">填空題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div></div>
             <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
             <div class="px-3 pb-3">
                 <div class="choicelist-wrapper" style="display:flex; gap:25px; align-items:flex-start;">
@@ -301,7 +301,7 @@
         if (typeof userAnswers[currentIndex] === 'undefined') return;
         userAnswers[currentIndex][idx] = null;
         selectedSlotIdx = idx;
-        console.log(`[ChoiceList Debug] 插槽 ${idx} 已清空。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
+        console.log(`[ChoiceList Debug] 選項位置 ${idx} 已清空。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
         if (typeof saveState === 'function') saveState();
         window.renderChoiceListQuestion(currentIndex);
     };
@@ -309,10 +309,10 @@
     window.moveToTarget = function(optIdx, groupIdx = null) {
         if (!userAnswers[currentIndex]) return;
         
-        // 如果傳入了 groupIdx，則優先填入該插槽；否則使用全域選中的 selectedSlotIdx
+        // 如果傳入了 groupIdx，則優先填入該選項位置；否則使用全域選中的 selectedSlotIdx
         let targetIdx = (groupIdx !== null) ? groupIdx : selectedSlotIdx;
         
-        // 如果 targetIdx 已經有值，或者尚未選中任何插槽，則找第一個空的
+        // 如果 targetIdx 已經有值，或者尚未選中任何選項位置，則找第一個空的
         if (targetIdx === -1 || (groupIdx === null && userAnswers[currentIndex][targetIdx] !== null)) {
             targetIdx = userAnswers[currentIndex].indexOf(null);
         }
@@ -325,7 +325,7 @@
                 selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
             }
             
-            console.log(`[ChoiceList Debug] 選項 ${String.fromCharCode(65 + optIdx)} 已填入插槽 ${targetIdx}。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
+            console.log(`[ChoiceList Debug] 選項 ${String.fromCharCode(65 + optIdx)} 已填入位置 ${targetIdx}。目前 Q${currentIndex} 答題紀錄:`, userAnswers[currentIndex]);
             if (typeof saveState === 'function') saveState();
             window.renderChoiceListQuestion(currentIndex);
         }
