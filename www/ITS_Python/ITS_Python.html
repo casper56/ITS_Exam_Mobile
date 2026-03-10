@@ -6642,10 +6642,13 @@
         if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
         const container = document.getElementById('question-container');
         if (container) {
+            // 將對齊基準改為左上角 (top left)，這樣會緊貼內容區邊界
             container.style.transform = "scale(" + window.itspyZoom + ")";
-            container.style.transformOrigin = "top center";
-            if (window.itspyZoom > 1.0) container.style.marginBottom = ((window.itspyZoom - 1.0) * 100) + "%";
-            else container.style.marginBottom = "0";
+            container.style.transformOrigin = "top left";
+            
+            // 由於縮放後寬度會變，需確保容器寬度能容納縮放內容，否則會出現截斷
+            container.style.width = (100 / window.itspyZoom) + "%";
+            
             if (typeof window.drawLines === 'function') window.drawLines();
         }
     };
