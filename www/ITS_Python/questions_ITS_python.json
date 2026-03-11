@@ -875,6 +875,8 @@
         "id": 26,
         "type": "choicelist",
         "sz": "0.75rem",
+        "ratio": 0.52,
+        "buff": 0,
         "question": [
             "<pre><code class=\"language-python\">【CH03-4】同事開發一個將產品名稱輸入到資料庫的程式，但是其中發生了錯誤，每個存入的名稱字母順序都顛倒了。",
             "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：</code></pre>"
@@ -2139,7 +2141,9 @@
     {
         "id": 55,
         "type": "choicelist",
-        "sz": "0.75rem",
+        "sz": "0.7rem",
+        "ratio": 0.55,
+        "buff": 1,
         "question": [
             "<pre><code class=\"language-python\">【CH05-13】你用 Python 設計了一個比大小函式，必須符合以下的需求：",
             "● 這個函式有二個引數：一個整數清單和一個整數作為引數。",
