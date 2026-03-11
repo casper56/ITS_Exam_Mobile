@@ -172,8 +172,12 @@
         else if (isCorrected) { statusTextHtml = '<div class="alert alert-warning py-1 px-2 mb-2 fw-bold text-dark">已修正 ⚠️</div>'; cardClass += ' corrected'; }
         else if (isIncorrect) { statusTextHtml = '<div class="alert alert-danger py-1 px-2 mb-2 fw-bold">答錯了 ❌</div>'; cardClass += ' incorrect'; }
 
+        const headerHtml = isMock 
+            ? `題目 ${index + 1} / ${quizList.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span>`
+            : `<div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">填空題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div>`;
+
         container.innerHTML = `<div class="${cardClass}">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">填空題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header">${headerHtml}</div>
             <div class="question-body" style="padding-bottom:0;"><div class="choicelist-q-text">${processContent(item.question, item)}</div></div>
             <div class="px-3 pb-3">
                 <div class="choicelist-wrapper">${poolContainer}${targetContainer}</div>

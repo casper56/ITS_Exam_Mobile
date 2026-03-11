@@ -263,7 +263,7 @@
 </div>
 <div id="exam-ui">
     <header class="exam-header d-flex justify-content-between align-items-center">
-        <div><h5 class="m-0">ITS Database 模擬考試</h5><small id="q-progress">1 / 60</small></div>
+        <div><h5 class="m-0">ITS Database 模擬考試</h5></div>
         <div class="timer-box" id="timer">50:00</div>
         <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
     </header>
@@ -3582,6 +3582,7 @@
         const currentAns = userAnswers[index];
         
         const isPractice = (typeof quizData !== 'undefined');
+        const qList = examQuestions;
         const isCorrect = isPractice ? correctSet.has(index) : false;
         const isCorrected = isPractice ? correctedSet.has(index) : false;
         const isWrong = isPractice ? incorrectSet.has(index) : false;
@@ -3594,7 +3595,7 @@
         let isSplitMode = (totalRightRows > item.left.length);
 
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header">題目 ${index + 1} / ${qList.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div>
             <div class="question-body">
                 ${processContent(item.question, item)}
                 <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
