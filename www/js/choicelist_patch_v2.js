@@ -1,4 +1,4 @@
-/* ChoiceList 全球通用統一補丁 V3.5.10 (全功能穩定版 - 含側邊導航) */
+/* ChoiceList 全球通用統一補丁 V3.5.14 (精確高度對齊與空格保留) */
 (function() {
     let selectedSlotIdx = -1;
 
@@ -8,8 +8,8 @@
         ':root { --cl-pool-gap: 4px; --cl-gap: 2px; --cl-row-height: 2.6rem; --cl-padding: 0 12px; --cl-header-height: 30px; } ' +
         '.cl-header { font-weight: bold !important; color: #0d6efd !important; height: var(--cl-header-height) !important; line-height: var(--cl-header-height) !important; margin-bottom: 10px !important; border-bottom: 1px solid #ddd !important; width: fit-content !important; font-size: 0.8rem !important; padding-bottom: 2px !important; } ' +
         
-        /* 選項區容器：垂直並列題組 */
-        '.choicelist-pool { display: flex !important; flex-direction: column !important; flex: 0 0 auto !important; width: fit-content !important; max-width: 85% !important; margin-right: 20px !important; gap: 15px !important; } ' +
+        /* 選項區：恢復原始 fit-content 寬度 */
+        '.choicelist-pool { display: flex !important; flex-direction: column !important; flex: 0 0 auto !important; width: fit-content !important; max-width: 85% !important; } ' +
         '.cl-items-container.pool-area { display: grid !important; grid-template-columns: 1fr; width: fit-content !important; min-width: 120px; gap: var(--cl-pool-gap) !important; } ' +
         '.grouped-pool-unit { width: fit-content !important; max-width: 100%; border-radius: 8px; transition: all 0.3s; } ' +
         
@@ -18,9 +18,10 @@
         '.choicelist-item { background: #fff; border: 1px solid #ced4da; cursor: pointer; width: 100% !important; } ' +
         '.choicelist-code-line { border: 1px solid transparent; border-bottom: 1px solid #f0f0f0; } ' +
         
-        /* 回答區容器 */
-        '.choicelist-target { flex: 0 0 auto !important; min-width: 300px !important; max-width: 100% !important; margin-left: 0 !important; } ' +
-        '.target-bg { background: #f8f9fa !important; border-radius: 8px; padding: 4px !important; border: 1px solid #ddd !important; } ' +
+        /* 回答區：恢復原始 fit-content 寬度 */
+        '.choicelist-target { display: flex !important; flex-direction: column !important; flex: 0 0 auto !important; min-width: 300px !important; max-width: 100% !important; } ' +
+        /* 淺灰色背景：flex: 1 確保高度對齊，維持 padding */
+        '.pool-bg, .target-bg { background: #f8f9fa !important; border-radius: 8px; padding: 8px !important; border: 1px solid #ddd !important; flex: 1 1 auto !important; display: flex !important; flex-direction: column !important; gap: var(--cl-pool-gap) !important; } ' +
         
         '.target-slot.inline-slot, .choicelist-item.inline-item { display: inline-flex !important; align-items: center; justify-content: flex-start !important; min-height: 1.8rem !important; height: auto !important; line-height: 1.2 !important; vertical-align: middle !important; padding: 4px 8px !important; margin: 2px 4px !important; border-radius: 4px !important; font-size: 0.95em !important; cursor: pointer !important; position: relative; z-index: 50; box-sizing: border-box !important; white-space: pre-wrap !important; text-align: left !important; word-break: break-all !important; } ' +
         '.choicelist-item.inline-item { background: #e7f1ff !important; border: 2px solid #0d6efd !important; border-left-width: 5px !important; color: #0d6efd !important; width: auto !important; } ' +
@@ -29,13 +30,14 @@
         '.active-slot { border: 2px solid red !important; background: #fff5f5 !important; box-shadow: 0 0 8px rgba(255,0,0,0.5) !important; color: red !important; } ' +
         '.opt-label { display: inline-block !important; flex: 0 0 auto !important; font-weight: bold; color: #6c757d; margin-right: 10px; border-right: 1px solid #dee2e6; padding-right: 10px; min-width: 1.5rem; text-align: center; line-height: 1.4 !important; vertical-align: middle !important; } ' +
         
-        '.choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: flex-start !important; overflow-x: auto !important; padding-bottom: 15px; gap: 10px !important; width: 100% !important; } ' +
+        /* 核心佈局：stretch 強制高度同步，gap 控制間距 */
+        '.choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: stretch !important; overflow-x: auto !important; padding-bottom: 15px; gap: 20px !important; width: 100% !important; } ' +
         '.cl-content-text { display: inline-block !important; flex: 0 0 auto !important; white-space: pre !important; word-break: keep-all !important; line-height: 1.4 !important; vertical-align: top !important; } ' +
         
-        /* 手機版特規：允許換行與垂直堆疊 */
+        /* 手機版特規 */
         '@media (max-width: 768px) { ' +
             '.choicelist-item, .choicelist-code-line, .cl-content-text { white-space: pre-wrap !important; word-break: break-all !important; } ' +
-            '.choicelist-pool, .choicelist-target { width: 100% !important; max-width: 100% !important; margin-right: 0 !important; } ' +
+            '.choicelist-pool, .choicelist-target { width: 100% !important; max-width: 100% !important; } ' +
             '.choicelist-wrapper { flex-direction: column !important; overflow-x: visible !important; } ' +
         '} ';
     document.head.appendChild(style);
@@ -83,8 +85,8 @@
         const charBuff = (item.buff !== undefined) ? item.buff : 0;
         const CHAR_W = (parseFloat(szStr) * 16) * charRatio;
 
-        // 選項區渲染
-        let poolItemsHtml = "<div class=\"cl-header\">選項區</div>";
+        // 選項區渲染 (新增 pool-bg)
+        let poolItemsHtml = "<div class=\"cl-header\">選項區</div><div class=\"pool-bg\">";
         const isGrouped = Array.isArray(item.options[0]);
         
         if (isGrouped) {
@@ -130,6 +132,7 @@
             });
             poolItemsHtml += "</div>";
         }
+        poolItemsHtml += "</div>"; // close pool-bg
 
         // 回答區渲染
         let targetItemsHtml = "<div class=\"cl-header\">回答區</div><div class=\"target-bg\">";
@@ -140,7 +143,8 @@
                 const segments = rawLine.split(/<slot\d*>/);
                 let lineFinalHtml = "";
                 segments.forEach((seg, i) => {
-                    lineFinalHtml += highlightHardened(seg);
+                    // 包裹文字以保留空格縮排
+                    lineFinalHtml += "<span class=\"cl-content-text\">" + highlightHardened(seg) + "</span>";
                     if (i < segments.length - 1) {
                         const sIdx = sIdxCounter++;
                         const optIdx = userAnswers[index][sIdx], isActive = (selectedSlotIdx === sIdx && !isLocked);
@@ -189,10 +193,10 @@
         </div>`;
 
         // 恢復導航按鈕功能
-        const sidePrev = document.getElementById('side-btn-prev');
-        const sideNext = document.getElementById('side-btn-next');
-        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
-        if (sideNext) sideNext.style.display = 'flex';
+        const sp = document.getElementById('side-btn-prev');
+        const sn = document.getElementById('side-btn-next');
+        if (sp) sp.style.display = (index === 0) ? 'none' : 'flex';
+        if (sn) sn.style.display = 'flex';
 
         if(typeof updateUI === "function") updateUI();
     };

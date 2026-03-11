@@ -3686,6 +3686,13 @@
                         function renderMatchingQuestion(index) {
         currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
         const container = document.getElementById('question-container') || document.getElementById('question-area');
+        
+        // 處理導覽按鈕顯示
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = 'flex';
+
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
         
@@ -4145,7 +4152,6 @@
                                                                                                                                                                     }
     
     function renderQuestion(index) {
-        console.log("V3.5.4 Rendering Q:", index);
         window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
         if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
         if (item.type === 'choicelist') { renderChoiceListQuestion(index); return; }

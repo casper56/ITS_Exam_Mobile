@@ -3711,6 +3711,13 @@
                         function renderMatchingQuestion(index) {
         currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
         const container = document.getElementById('question-container') || document.getElementById('question-area');
+        
+        // 處理導覽按鈕顯示
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
+        if (sideNext) sideNext.style.display = 'flex';
+
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
         
@@ -4202,16 +4209,11 @@
                     }
                 }
                 
-                // --- F12 Debug Message ---
-                console.log(`%c[Grading Q${idx+1}] Type: ChoiceList`, "color: #0d6efd; font-weight: bold;");
-                console.log(` - 您的答題 (Indices):`, userIdxs);
-                console.log(` - 正確答案 (Indices):`, correctIndices);
-                console.log(` - 原始正確標籤:`, answers);
-                console.log(` - 轉換規則說明: A=0, B=1, C=2, D=3, E=4 (以此類推)`);
+                // --- Grading logic ---
                 if (!isCorrect) {
-                    console.log(`%c - 判定結果: ❌ 錯誤`, "color: red; font-weight: bold;");
+                    // Fail
                 } else {
-                    console.log(`%c - 判定結果: ✅ 正確`, "color: green; font-weight: bold;");
+                    // Success
                 }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
 

@@ -291,8 +291,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-<script src="../js/choicelist_patch_v2.js"></script>
-<script>    function prepareMockPrint() {
+<script>
+    function prepareMockPrint() {
         const overlay = document.getElementById('loading-overlay');
         const zoomBtns = document.querySelector('.zoom-controls');
         const homeBtn = document.querySelector('.home-float-btn');
@@ -397,32 +397,30 @@
     const allQuestions = [
     {
         "id": 1,
-        "type": "choicelist",
-        "sz": "0.75rem",
+        "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH01-1】資料型態的檢視：",
             "你是運動 App 的程式設計師。你必須製作一個函式為跑者計算步速，所謂步速就是每公里所花的時間。",
             "輸出結果必須盡可能精準。要如何完成程式碼？請在回答區中選擇適當的程式碼片段。",
-            "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。</code></pre>"
-        ],
-        "slots": [
+            "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。",
             "#步速計算器",
-            "distance = <slot01>(input(\"Enter the distance traveled in meters\"))",
+            "distance = _(選項 1)_(input(\"Enter the distance traveled in meters\"))",
             "# convert to kilometers",
             "distance_kms = distance / 1000",
             "#輸入已用時間(分鐘)",
-            "time_minute = <slot02>_(input(\"Enter the time elapsed in minutes\"))",
+            "time_minute = _(選項 2)_(input(\"Enter the time elapsed in minutes\"))",
             "#輸入已用秒數",
-            "time_sec = <slot03>_(input(\"Enter the time elapsed in seconds\"))",
+            "time_sec = _(選項 3)_(input(\"Enter the time elapsed in seconds\"))",
             "time time_minute*60+time_se_sec",
             "pace = time / distance_kms",
             "#平均速度",
-            "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))"
+            "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))",
+            "以上空格分別要填入的函式名為：</code></pre>"
         ],
         "options": [
-            "int",
-            "string",
-            "float "
+            "<code>int|string|float</code>",
+            "<code>int|string|float</code>",
+            "<code>int|string|float</code>"
         ],
         "answer": [
             "C",
@@ -707,6 +705,45 @@
         "id": 10,
         "type": "single",
         "question": [
+            "<pre><code class=\"language-python\">某間食品公司需要一套簡易程式，讓他們的客服中心能夠用來輸入新咖啡種類的問卷調查資料。",
+            "此程式必須執行下列工作:",
+            "- 接受輸入 (rating)。",
+            "- 傳回五星評比標準的平均評分 (average)。",
+            "- 將輸出四捨五入到兩位小數。",
+            "",
+            "sum = count = done = 0",
+            "average = 0.0",
+            "while done != -1:",
+            " rating = ____(1)____",
+            " if rating == -1:",
+            " break",
+            " sum += rating",
+            " count += 1",
+            "average = float(sum / count)",
+            "____(2)____ (\"The average star rating for the new coffee is: \" + ____(3)____)\n選答區</code></pre>"
+        ],
+        "options": [
+            "<code>(1) A. float(input(\"...\")) (2) C. print (3) D. format(average, '.2f'))</code>",
+            "<code>(1) B. input \"...\" (2) B. output (3) A. {average, '.2f}</code>",
+            "<code>(1) C. input(\"...\") (2) D. printline (3) C. format(average,'.2d'))</code>"
+        ],
+        "answer": [
+            "A"
+        ],
+        "weight": 1,
+        "image": null,
+        "explanation": [
+            "<pre><code class=\"language-python\">解題分析：",
+            "1. 輸入處理 (1)：輸入必須轉換為數值才能進行加法運算，使用 float(input(...)) 是正確的語法。",
+            "2. 輸出函式 (2)：Python 3 使用 print 函式輸出資料。",
+            "3. 格式化 (3)：題目要求四捨五入到兩位小數。format(average, '.2f') 是正確用法。</code></pre>"
+        ],
+        "category": "D1_資料型別與運算子"
+    },
+    {
+        "id": 11,
+        "type": "single",
+        "question": [
             "<pre><code class=\"language-python\">【CH02-3】你正在編寫 Python 程式用於計算一個數學公式。",
             "公式內容為b等於 a 加上 5，然後再平方，其中 a 是輸入的值， b 是結果。",
             "你設計了以下的程式碼片段：",
@@ -732,7 +769,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 11,
+        "id": 12,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-4】你正在開發一個補習班的 Python 函式來計算折扣，補習班希望鼓勵小朋友和老年人報名，",
@@ -763,7 +800,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 12,
+        "id": 13,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)</code></pre>"
@@ -789,7 +826,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 13,
+        "id": 14,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-6】計算以下的 Python 數學運算式結果為何？",
@@ -817,7 +854,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 14,
+        "id": 15,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-7】你編寫了以下的程式碼：",
@@ -853,7 +890,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 15,
+        "id": 16,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-8】你為公司開發了一個 Python 應用程式，程式碼如下：",
@@ -885,7 +922,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 16,
+        "id": 17,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-9】請按先後順序從頭至尾排列這六類運算的正確順序：",
@@ -920,9 +957,9 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 17,
+        "id": 18,
         "type": "choicelist",
-        "sz": "0.75rem",
+		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH02-10】租車公司需要一種方法來決定客戶租用車輛的費用，該費用取決於車輛歸還的時間，",
             "然而週四和週日也有特別的費率。費用結構如下所示：",
@@ -932,8 +969,8 @@
             "4. 如果是在星期四租的，可以享受 20% 的折扣。",
             "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？</code></pre>"
         ],
-        "slots": [
-            "ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
+		"slots" : [
+			"ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
             "days_rented = int(input(\"How many days was car rented?\"))",
             "day_rented = input(\"What day was the car rented?\").capitalize()",
             "cost_per_day = 100",
@@ -946,23 +983,23 @@
             "else:",
             "  total = days_rented * cost_per_day",
             "print(\"Cost of the car rental is : $\", total)"
-        ],
+		],
         "options": [
-            [
-                "!=\"n\":",
-                "==\"n\":",
-                "--\"y\":"
-            ],
-            [
-                "==\"Sunday\":",
-                ">=\"Sunday\":",
-                "| is \"Sunday\":"
-            ],
-            [
-                "==\"Thursday\":",
-                "<=\"Thursday\":",
-                " is \"Thursday\":"
-            ]
+			[
+				"!=\"n\":",
+				"==\"n\":",
+				"--\"y\":"
+			],
+			[
+				"==\"Sunday\":",
+				">=\"Sunday\":",
+				"| is \"Sunday\":"
+			],
+			[
+				"==\"Thursday\":",
+				"<=\"Thursday\":",
+				" is \"Thursday\":"
+			]
         ],
         "answer": [
             "B",
@@ -979,7 +1016,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 18,
+        "id": 19,
         "type": "multioption",
         "question": [
             "<pre><code class=\"language-python\">【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：",
@@ -1010,7 +1047,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 19,
+        "id": 20,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1054,7 +1091,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 20,
+        "id": 21,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-13】老閭要求你對以下程式碼除錯，什麼將會輸出列印到螢幕上？：",
@@ -1094,7 +1131,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 21,
+        "id": 22,
         "type": "choicelist",
         "sz": "0.95rem",
         "question": [
@@ -1134,7 +1171,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 22,
+        "id": 23,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-1】你編寫了以下的程式碼：",
@@ -1163,7 +1200,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 23,
+        "id": 24,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-2】在下列的程式碼中：",
@@ -1188,7 +1225,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 24,
+        "id": 25,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1229,36 +1266,34 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 25,
+        "id": 26,
         "type": "choicelist",
-        "sz": "0.75rem",
-        "ratio": 0.52,
-        "buff": 0,
+		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH03-4】同事開發一個將產品名稱輸入到資料庫的程式，但是其中發生了錯誤，每個存入的名稱字母順序都顛倒了。",
             "請你開發一個 Python 函式，將每個產品名稱以正確的順序輸出。請選擇適當的程式碼片段來完成程式：</code></pre>"
         ],
-        "slots": [
-            "def reverse_pname(backwards_pname):",
+		"slots" : [
+			"def reverse_pname(backwards_pname):",
             "    forward_pname = ''",
             "    for index in <slot01>",
             "        forward_pname += <slot02>",
             "    return forward_pname",
             "print(reverse_pname(\"klim\"))"
-        ],
+		],
         "options": [
             [
-                "backwards _pname",
-                "len(backwards _pname)",
-                "range(0, len(backwards _pname),-1)",
-                "range(len(backwards_pname)-1,-1,-1) "
+				"backwards _pname",
+				"len(backwards _pname)",
+				"range(0, len(backwards _pname),-1)",
+				"range(len(backwards_pname)-1,-1,-1) "
             ],
-            [
-                "backwards_pname[index-1]",
-                "backwards_pname[len(forward_pname)-1)",
-                "backwards_pname[len(backward_pname)-len(forward_pname)]",
-                "backwards_pname[index]</code></pre>"
-            ]
+			[
+				"backwards_pname[index-1]",
+				"backwards_pname[len(forward_pname)-1)",
+				"backwards_pname[len(backward_pname)-len(forward_pname)]",
+				"backwards_pname[index]</code></pre>"
+			]
         ],
         "answer": [
             "D",
@@ -1275,7 +1310,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 26,
+        "id": 27,
         "type": "matching",
         "question": [
             "<pre><code class=\"language-python\">【CH03-5】你有以下清單結構：alph = \"abcdefghijklmnopqrstuvwxyz\"",
@@ -1315,7 +1350,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 27,
+        "id": 28,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -1351,7 +1386,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 28,
+        "id": 29,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-7】你開發了一個 Python 應用程式，其中有一個名為 month 的清單單儲存所有月份的英文。",
@@ -1379,7 +1414,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 29,
+        "id": 30,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -1424,7 +1459,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 30,
+        "id": 31,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -1436,8 +1471,8 @@
             "●  平均分數在小數點左方是三位數，小數點右方是二位數。(XXX.XX)。",
             "你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
-        "slots": [
-            "name = input('Please enter your name:')",
+		"slots" : [
+			"name = input('Please enter your name:')",
             "score = count = 0",
             "total = 0",
             "while (score != -1):",
@@ -1448,21 +1483,21 @@
             "   count += 1",
             "   average = total / count",
             "   print('<slot01>, your average is <slot02> %(name, average))"
-        ],
+		],
         "options": [
-            [
-                "%-20i",
-                "%-20d",
-                "%-20f",
-                "%-20s"
-            ],
-            [
-                "%1.6s",
-                "%6.2f",
-                "%6.2d",
-                "%2.6f"
-            ]
-        ],
+			[
+				"%-20i",
+				"%-20d",
+				"%-20f",
+				"%-20s"
+			],
+			[
+				"%1.6s",
+				"%6.2f",
+				"%6.2d",
+				"%2.6f"
+			]
+		],
         "answer": [
             "D",
             "B"
@@ -1476,7 +1511,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 31,
+        "id": 32,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -1490,10 +1525,10 @@
             "具體地說，列印輸出必須符合以下要求：",
             "● 蔬菜名稱必須印在 10 個空格範圍內並靠左對齊。",
             "● 重量必須印在 5 個空格範圍內並靠右對齊，小數點最多一個位數。",
-            "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。</code></pre>"
+            "● 價格必須印在 7 個空格範圍內並右對齊，小數點後最多兩位數。</code></pre>"       
         ],
-        "slots": [
-            "你建立了以下的程式碼。\n",
+		"slots" : [
+			"你建立了以下的程式碼。\n",
             "01 def print _table(file):",
             "02   data = open(file,'r')",
             "03   for record in data:",
@@ -1503,7 +1538,7 @@
             "每個程式碼片段都可以使用一次、多次，或者不使用。",
             "<slot01> <slot02> <slot03> (<slot04>'",
             ".format(fields[0], eval(fields(1)), eval(fields[2])))"
-        ],
+		],
         "options": [
             "print('",
             "{10: 0}",
@@ -1531,7 +1566,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 32,
+        "id": 33,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH04-3】你正在設計一個電子商務程式，它可以接受來自使用者輸入，並以逗號分隔的格式輸出資料。",
@@ -1566,7 +1601,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 33,
+        "id": 34,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-4】請檢視下面的程式碼：",
@@ -1595,7 +1630,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 34,
+        "id": 35,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-5】你為公司設計 Python 應用程式，需要接受來自使用者的輸入並將該資訊列印到螢幕上。",
@@ -1624,7 +1659,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 35,
+        "id": 36,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -1634,8 +1669,8 @@
             "你必須完成這個程式碼以符合需求，你要如何完成這個程式碼？",
             "請在答案選擇區選擇適當的程式碼片段。</code></pre>"
         ],
-        "slots": [
-            "sum = count = done = 0",
+		"slots" : [
+			"sum = count = done = 0",
             "average = 0.0",
             "while (done != -1):",
             "   rating = <slot01>",
@@ -1645,26 +1680,26 @@
             "   count += 1",
             "   average = float(sum / count)",
             "   <slot02> + <slot03>"
-        ],
+		],
         "options": [
-            [
-                "print('Enter next rating (1-5),-1 for done')",
-                "float(input('Enter next rating (1-5),-1 for done'))",
-                "input('Enter next rating (1-5),-1 for done')",
-                "input 'Enter next rating (1-5),-1 for done')"
-            ],
-            [
-                "output('The average star rating for this hotel is:'",
-                "console.input('The average star rating for this hotel is:'",
-                "printline('The average star rating for this hotel is:'",
-                "print('The average star rating for this hotel is:'"
-            ],
-            [
-                "format(average, '.2f'))",
-                "format(average, '.2d'))",
-                "(average, '.2f')",
-                "format.average.(2d)"
-            ]
+			[
+				"print('Enter next rating (1-5),-1 for done')",
+				"float(input('Enter next rating (1-5),-1 for done'))",
+				"input('Enter next rating (1-5),-1 for done')",
+				"input 'Enter next rating (1-5),-1 for done')"
+			],
+			[
+				"output('The average star rating for this hotel is:'",
+				"console.input('The average star rating for this hotel is:'",
+				"printline('The average star rating for this hotel is:'",
+				"print('The average star rating for this hotel is:'"
+			],
+			[
+				"format(average, '.2f'))",
+				"format(average, '.2d'))",
+				"(average, '.2f')",
+				"format.average.(2d)"
+			]
         ],
         "answer": [
             "B",
@@ -1683,7 +1718,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 36,
+        "id": 37,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -1695,8 +1730,8 @@
             "你需要完成程式碼以符合要求。你要如何完成這段程式碼？",
             "請在回答區選擇適當的程式碼片段。</code></pre>"
         ],
-        "slots": [
-            "<pre><code class=\"language-python\">import os",
+		"slots" : [
+			"<pre><code class=\"language-python\">import os",
             "if <slot01>",
             "   file = open('theFile.txt')",
             "   <slot02>",
@@ -1704,32 +1739,32 @@
             "file = <slot03>",
             "<slot04> ('End of file')",
             "file.close()</code></pre>"
-        ],
+		],
         "options": [
-            [
-                "isfile('theFile.txt')",
-                "os.exist('theFile.txt')",
-                "os.find('theFile.txt')",
-                "os.path.isfile('theFile.txt')"
+			[
+				"isfile('theFile.txt')",
+				"os.exist('theFile.txt')",
+				"os.find('theFile.txt')",
+				"os.path.isfile('theFile.txt')"
             ],
-            [
-                "output(theFile.txt')",
-                "print(file.get('theFile.txt'))",
-                "print(file.read())",
-                "print('theFile.txt')"
+			[
+				"output(theFile.txt')",
+				"print(file.get('theFile.txt'))",
+				"print(file.read())",
+				"print('theFile.txt')"
             ],
-            [
-                "open('theFile.txt', 'a')",
-                "open('theFile.txt', 'at')",
-                "open('theFile,txt', 'w')",
-                "open('theFile.txt', 'wt')"
+			[
+				"open('theFile.txt', 'a')",
+				"open('theFile.txt', 'at')",
+				"open('theFile,txt', 'w')",
+				"open('theFile.txt', 'wt')"
             ],
-            [
-                "Append",
-                "file.add",
-                "file.write",
-                "write"
-            ]
+			[
+				"Append",
+				"file.add",
+				"file.write",
+				"write"
+			]
         ],
         "answer": [
             "D",
@@ -1748,7 +1783,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 37,
+        "id": 38,
         "type": "choicelist",
         "sz": "0.95rem",
         "question": [
@@ -1792,7 +1827,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 38,
+        "id": 39,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-9】你設計一個 Python 應用程式，需要將資料讀寫到文字檔中。",
@@ -1818,7 +1853,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 39,
+        "id": 40,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-10】你正在設計一個 Python 程式來讀取學生資料的檔案，檔案中包含了學生的班級、座號和姓名，",
@@ -1862,37 +1897,37 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 40,
-        "type": "choicelist",
-        "sz": "0.95rem",
+        "id": 41,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH04-11】某間公司需要有人協助更新他們的檔案系統。",
             "您必須建立一個執行下列動作的簡易檔案操作程式：",
             "檢視檔案是否存在。",
             "如果檔案存在，則顯示其內容。",
-            "請選取正確的程式碼片段以完成程式碼。</code></pre>"
-        ],
-        "slots": [
+            "請選取正確的程式碼片段以完成程式碼。",
             "#程式碼片段",
             "import os",
-            "if <slot01>",
+            "if _(選項 1)_",
             "   file = open('myFile.txt')",
-            "   <slot01>",
-            "   file.close()"
+            "   _(選項 2)_",
+            "   file.close()",
+            "",
+            "選項1答案選擇區",
+            "A. os.path.isfile('myFile.txt')",
+            "B. os.path.isexists('myFile.txt')",
+            "C. os.path.isdir('myFile.txt')",
+            "D. os.path.exists('myFile.txt')",
+            "",
+            "選項2答案選擇區",
+            "A. print(file.read())",
+            "B. print(file.write())",
+            "C. print(file.close())",
+            "D. print(file,open())</code></pre>"
         ],
         "options": [
-            [
-                "os.path.isfile('myFile.txt')",
-                "os.path.isexists('myFile.txt')",
-                "os.path.isdir('myFile.txt')",
-                "os.path.exists('myFile.txt')"
-            ],
-            [
-                "print(file.read())",
-                "print(file.write())",
-                "print(file.close())",
-                "print(file,open())"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "A",
@@ -1909,7 +1944,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 41,
+        "id": 42,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-12】請問下列陳述式有何功能？",
@@ -1933,9 +1968,9 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 42,
-        "type": "choicelist",
-        "sz": "0.95rem",
+        "id": 43,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-1】你設計了一個程式要依學生的成績來顯示等級，它的規定如下：</code></pre>",
             "<style>.q-table td { vertical-align: middle; } .header-bg { background: #f8f9fa; font-weight: bold; text-align: center; } .category-title { background: #e2e3e5; font-weight: bold; color: #383d41; } .code-font { font-family: 'Cascadia Code', Consolas, monospace; color: #0056b3; font-size: 13px; }</style>",
@@ -1963,48 +1998,47 @@
             "  </tbody></table>",
             "<pre><code class=\"language-python\">例如，如果使用者輸入 90 ，則輸出應該是 '你的成績為 A (甲等)'。",
             "如果使用者輸入 89 ，則輸出應該是 '你的成績為 B (乙等)'。你要如何完成這段程式碼？",
-            "請在回答區選擇適當的程式碼片段。</code></pre>"
-        ],
-        "slots": [
+            "請在回答區選擇適當的程式碼片段。",
             "# Letter Grade Converter",
             "grade = int(input('Enter a numeric grade:'))",
-            "<slot01>",
+            "_(選項 1)_",
             "  letter_grade = 'A'",
-            "<slot02>",
+            "_(選項 2)_",
             "  letter_grade = 'B'",
-            "<slot03>",
+            "_(選項 3)_",
             "  letter_grade = 'C'",
-            "<slot04>",
+            "_(選項 4)_",
             "  letter_grade = 'D'",
             "else:",
             "  letter_grade = 'F'",
-            "print('Your letter grade is :', letter_grade)"
+            "print('Your letter grade is :', letter_grade)",
+            "",
+            "選項1答案選擇區",
+            "答案 A. if grade <= 90:",
+            "答案 B. if grade >= 90:",
+            "答案 C. elif grade > 90:",
+            "答案 D. elif grade >= 90:",
+            "選項2答案選擇區",
+            "答案 A. if grade > 80:",
+            "答案 B. if grade >= 80:",
+            "答案 C. elif grade > 80:",
+            "答案 D. elif grade >= 80:",
+            "選項3答案選擇區",
+            "A. if grade > 70:",
+            "B. if grade >= 70:",
+            "C. elif grade > 70:",
+            "D. elif grade >= 70:",
+            "選項4答案選擇區",
+            "A. if grade > 60:",
+            "B. if grade >= 60:",
+            "C. elif grade > 60:",
+            "D. elif grade >= 60:</code></pre>"
         ],
         "options": [
-            [
-                "if grade <= 90:",
-                "if grade >= 90:",
-                "elif grade > 90:",
-                "elif grade >= 90:"
-            ],
-            [
-                "if grade > 80:",
-                "if grade >= 80:",
-                "elif grade > 80:",
-                "elif grade >= 80:"
-            ],
-            [
-                "if grade > 70:",
-                "if grade >= 70:",
-                "elif grade > 70:",
-                "elif grade >= 70:"
-            ],
-            [
-                "if grade > 60:",
-                "if grade >= 60:",
-                "elif grade > 60:",
-                "elif grade >= 60:"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "B",
@@ -2022,7 +2056,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 43,
+        "id": 44,
         "type": "choicelist",
         "sz": "0.95rem",
         "question": [
@@ -2073,7 +2107,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 44,
+        "id": 45,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH05-3】你用學生的成績 (grade) 及排名 (rank) 編寫程式碼來決定最後成績：",
@@ -2103,7 +2137,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 45,
+        "id": 46,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -2148,7 +2182,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 46,
+        "id": 47,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -2193,7 +2227,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 47,
+        "id": 48,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -2237,7 +2271,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 48,
+        "id": 49,
         "type": "matching",
         "hideLabel": true,
         "question": [
@@ -2290,7 +2324,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 49,
+        "id": 50,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -2324,7 +2358,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 50,
+        "id": 51,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -2361,9 +2395,9 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 51,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 52,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-10】公司決定要幫所有年薪不到 50 萬的員工調升基本工資 5%，並給予獎金 1 萬元，以下是計算公式：",
             "● 新工資 = 目前工資 X 105% + $10000 獎金。",
@@ -2371,27 +2405,29 @@
             "請在回答區選擇適當的程式碼片段。",
             "#清單中的每個人的工資都根據增加而更新。",
             "#年薪50萬元以上的員工將不會得到加薪。",
-            "# salaryList 是由員工資料庫中取得，程式碼不會顯示。</code></pre>"
-        ],
-        "slots": [
-            "<slot01>",
+            "# salaryList 是由員工資料庫中取得，程式碼不會顯示。",
+            "",
+            "_(選項 1)_",
             "    if salaryList[index] >= 500000:",
-            "        <slot02>",
-            "     salaryList[index] = int((salaryList[index] * 1.05) + 10000)"
+            "        _(選項 2)_",
+            "     salaryList[index] = int((salaryList[index] * 1.05) + 10000)",
+            "",
+            "選項 1 答案選擇區",
+            " 答案 A. for index in range(len(salaryList)+1):",
+            " 答案 B. for index in range(len(salaryList)-1):",
+            " 答案 C. for index in range(len(salaryList)):",
+            " 答案 D. for index in salaryList:",
+            "",
+            "",
+            "選項 2 答案選擇區",
+            " A. exit()",
+            " B. continue",
+            " C. break",
+            " D. end</code></pre>"
         ],
         "options": [
-            [
-                "for index in range(len(salaryList)+1):",
-                "for index in range(len(salaryList)-1):",
-                "for index in range(len(salaryList)):",
-                "for index in salaryList:"
-            ],
-            [
-                "exit()",
-                "continue",
-                "break",
-                "end"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "C",
@@ -2407,36 +2443,36 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 52,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 53,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-11】你設計了一個函式計算並顯示從 2 到 9 的所有乘法組合的九九乘法表。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>[[image01]]"
-        ],
-        "slots": [
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>[[image01]]<pre><code class=\"language-python\">",
             "# Displays times tables 2 - 9",
             "def times_tables():",
-            "    <slot01>",
-            "        <slot02>",
+            "    _(選項 1)_",
+            "        _(選項 2)_",
             "            print(row * col, end=' ')",
             "        print()",
             "# main",
-            "times_tables()"
+            "times_tables()",
+            "",
+            "選項 1 答案選擇區",
+            "答案 A. for col in range(9):",
+            "答案 B. for col in range(2, 10):",
+            "答案 C. for col in range(2, 9, 1):",
+            "答案 D. for col in range(10):",
+            "",
+            "選項 2 答案選擇區",
+            "答案 A. for row in range(9):",
+            "答案 B. for row in range(2, 9, 1):",
+            "答案 C. for row in range(2, 10):",
+            "答案 D. for row in range(10):</code></pre>"
         ],
         "options": [
-            [
-                "for col in range(9):",
-                "for col in range(2, 10):",
-                "for col in range(2, 9, 1):",
-                "for col in range(10):"
-            ],
-            [
-                "for row in range(9):",
-                "for row in range(2, 9, 1):",
-                "for row in range(2, 10):",
-                "for row in range(10):"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "B",
@@ -2456,28 +2492,53 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 53,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 54,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。</code></pre>"
-        ],
-        "slots": [
-            "<slot01>",
-            "  <slot02>",
-            "    <slot03>",
+            "<pre><code class=\"language-python\">【CH05-12】你設計了一個 Python 程式來顯示 2 到 100 中的所有質數，請將下方的程式碼片段排列到回答區的正確位置。",
+            "第 1 段程式為 _(選項 1)_",
+            "第 2 段程式為 _(選項 2)_",
+            "第 3 段程式為 _(選項 3)_",
             "  if is_prime:",
-            "    print(n)",
-            "  <slot04>"
+            "     print(n)",
+            "第 4 段程式為 _(選項 4)_",
+            "",
+            "答案選擇區",
+            "答案 A.",
+            "n = 2",
+            "is_prime = True",
+            "while n <= 100:",
+            "",
+            "答案 B.",
+            "n = 2",
+            "while n <= 100:",
+            "is_prime = True",
+            "",
+            "答案 C.",
+            "break",
+            "",
+            "答案 D.",
+            "Continue",
+            "",
+            "答案 E.",
+            "n += 1",
+            "",
+            "答案 F.",
+            "for i in range(2, n):",
+            "if n / i = = 0:",
+            "is_prime = False",
+            "",
+            "答案 G.",
+            "for i in range(2, n):",
+            "if n % i == 0:",
+            "is_prime = False</code></pre>"
         ],
         "options": [
-            "\nn = 2\nis_prime = True\nwhile n <= 100:",
-            "\nn = 2\nwhile n <= 100:\n  is_prime = True",
-            "     break",
-            "Continue",
-            "n += 1",
-            "\nfor i in range(2, n):\n  if n / i = = 0:\n    is_prime = False",
-            "\nfor i in range(2, n):\n  if n % i == 0:\n     is_prime = False"
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>",
+            "<code>A|B|C|D|E|F|G</code>"
         ],
         "answer": [
             "B",
@@ -2496,11 +2557,9 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 54,
+        "id": 55,
         "type": "choicelist",
-        "sz": "0.7rem",
-        "ratio": 0.55,
-        "buff": 1,
+        "sz": "0.65rem",
         "question": [
             "<pre><code class=\"language-python\">【CH05-13】你用 Python 設計了一個比大小函式，必須符合以下的需求：",
             "● 這個函式有二個引數：一個整數清單和一個整數作為引數。",
@@ -2544,45 +2603,47 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 55,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 56,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-14】你正在設計一個 Python 程式驗證產品編號。",
             "● 產品編號的格式必須為 dd-dddd，並且只包含數字和破折號。",
             "● 如果格式正確則程式必須列印 True，如果格式不正確，則列印 False。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
-        ],
-        "slots": [
-            "<slot01>",
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
+            "_(選項 1)_",
             "parts = ''",
-            "<slot02>",
-            "    <slot03>",
+            "_(選項 2)_",
+            "    _(選項 3)_",
             "    product_no = input('Enter product number (dd-dddd): ')",
             "    parts = product_no.split('-')",
             "    if len(parts) == 2:",
             "        if len(parts[0]) == 2 and len(parts[1]) == 4:",
             "            if parts[0].isdigit() and parts[1].isdigit():",
-            "                <slot04>",
-            "    print(valid)"
+            "                _(選項 4)_",
+            "    print(valid)",
+            "",
+            "選項 1 答案選擇區",
+            "A. product_no = ''",
+            "B. product_no = 'sentinel'",
+            "",
+            "選項 2 答案選擇區",
+            "A. while product_no != '':",
+            "B. while product_no != 'sentinel':",
+            "",
+            "選項 3 答案選擇區",
+            "A. valid = False",
+            "B. valid = True",
+            "",
+            "選項 4 答案選擇區",
+            "A. valid = False",
+            "B. valid = True</code></pre>"
         ],
         "options": [
-            [
-                "product_no = ''",
-                "product_no = 'sentinel'"
-            ],
-            [
-                "while product_no != '':",
-                "while product_no != 'sentinel':"
-            ],
-            [
-                "valid = False",
-                "valid = True"
-            ],
-            [
-                "valid = False",
-                "valid = True"
-            ]
+            "<code>A|B</code>",
+            "<code>A|B</code>",
+            "<code>A|B</code>",
+            "<code>A|B</code>"
         ],
         "answer": [
             "B",
@@ -2605,43 +2666,43 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 56,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 57,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-15】你正在設計 Python 應用程式。該程式將逐一檢視數字清單，並在找到 4 時進行跳脫的動作。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
-        ],
-        "slots": [
+            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。",
             "nList = [0,1,2,3,4,5,6,6,7,8,9]",
             "index = 0",
-            "<slot01> index < 10:",
+            "_(選項 1)_ index < 10:",
             "    print(nList[index])",
             "    if nList[index] == 4:",
-            "        <slot02>",
+            "        _(選項 2)_",
             "    else:",
-            "        <slot03>",
-            ""
+            "        _(選項 3)_",
+            "",
+            "選項 1 答案選擇區",
+            "A. while",
+            "B. for",
+            "C. if",
+            "D. break",
+            "",
+            "選項 2 答案選擇區",
+            "A. while",
+            "B. for",
+            "C. if",
+            "D. break",
+            "",
+            "選項 3 答案選擇區",
+            "A. continue",
+            "B. break",
+            "C. index += 1",
+            "D. index = 1</code></pre>"
         ],
         "options": [
-            [
-                "while",
-                "for",
-                "if",
-                "break"
-            ],
-            [
-                "while",
-                "for",
-                "if",
-                "break"
-            ],
-            [
-                "continue",
-                "break",
-                "index += 1",
-                "index = 1"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "A",
@@ -2658,32 +2719,31 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 57,
-        "type": "choicelist",
-        "sz": "0.95rem",
+        "id": 58,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-16】您正在撰寫程式碼以使用星星建立 E 字形。",
             "● 您需要列印五行程式碼。",
             "● 其中第一行第三行和第五行各有四個星星。",
             "● 而第二行和第四行各有一個星。",
-            "如下所示：請在下列位置中選擇正確的數字以完成程式碼。</code></pre>"
-        ],
-        "slots": [
+            "如下所示：請在下列位置中選擇正確的數字以完成程式碼。",
             "01 result_str = ''",
-            "02 for row in range(1, <slot01>):",
-            "03     for column in range(1, <slot01>):",
+            "02 for row in range(1, _(選項 1)_):",
+            "03     for column in range(1, _(選項 2)_):",
             "04         if row == 1 or row == 3 or row == 5:",
             "05             result_str = result_str + '*'",
             "06         elif column == 1:",
             "07             result_str = result_str + '*'",
             "08     result_str += '\\ n'",
-            "09 print(result_str)"
+            "09 print(result_str)",
+            "",
+            "答案選擇區",
+            "A. 3  B. 4  C. 5 D. 6</code></pre>"
         ],
         "options": [
-            "3",
-            "4",
-            "5",
-            "6"
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "D",
@@ -2708,37 +2768,40 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 58,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 59,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-17】您正在撰寫程式碼來根據下列準則傳回字母成績：● 變數 grade 會將數字成績儲存成 0 到 100 之間的整數。",
             "● 90 到 100 的成績 = A。",
             "● 80 到 89 的成績 = B。",
             "● 70 到 7 9的成績 = C。",
             "● 其他所有成績都不及格。",
-            "請選取正確的程式碼片段以完成程式碼。</code></pre>"
-        ],
-        "slots": [
+            "請選取正確的程式碼片段以完成程式碼。",
             "#程式碼片段",
             "grade = int(input('Please enter your grade: '))",
-            " <slot01> grade <= 100 and grade >= 0:",
-            "     <slot02> grade >= 90:",
+            " _(選項 1)_ grade <= 100 and grade >= 0:",
+            "     _(選項 2)_ grade >= 90:",
             "        print('Your grade is A.')",
-            "     <slot03> grade >= 80:",
+            "     _(選項 3)_ grade >= 80:",
             "        print('Your grade is B.')",
-            "     <slot04> grade < 80 and grade > 69:",
+            "     _(選項 4)_ grade < 80 and grade > 69:",
             "        print('Your grade is C.')",
-            "     <slot05>",
+            "     _(選項 5)_",
             "        print('Your grade is failing.')",
-            " <slot06>",
-            "    print('Invalid grade entered.')"
+            " _(選項 6)_",
+            "    print('Invalid grade entered.')",
+            "",
+            "答案選擇區",
+            "A. if   B. else:   C. elif   D. else if</code></pre>"
         ],
         "options": [
-            "if",
-            "else:",
-            "elif",
-            "else if"
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "A",
@@ -2758,18 +2821,16 @@
             "2. B 級 (80-89)：elif grade >= 80: (已隱含 < 90 的前提)。",
             "3. C 級 (70-79)：elif grade >= 70:。",
             "4. D 級 (60-69)：elif grade >= 60:。",
-            "5. 不及格：最後由 else 捕捉。</code></pre>[[image01]"
+            "5. 不及格：最後由 else 捕捉。</code></pre>"
         ],
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 59,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 60,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？</code></pre>"
-        ],
-        "slots": [
+            "<pre><code class=\"language-python\">【CH05-18】出版社想要檢查出版物中特定字母的數量，你需要設計一個函式以符合要求。你要如何完成這段程式碼？",
             "#程式碼片段",
             "# Function accepts list of words from a file",
             "# word_list = ['apple', 'banana', 'peach', 'grape']",
@@ -2777,29 +2838,32 @@
             "# Returns count of a particular letter in that list.",
             "def count_letter(letter, word_list):",
             "    count = 0",
-            "      for <slot01>",
-            "          if <slot02>",
+            "    for_(選項 1)_",
+            "        if _(選項 2)_",
             "            count += 1",
             "    return count",
+            "",
+            "",
             "# word_list is populated from a file. Code not shown. here we use a sample list.",
             "word_list = ['apple', 'banana', 'peach', 'grape']",
             "letter = input('which letter would you like to count: ')",
             "letter_count = count_letter(letter, word_list)",
-            "print('There are:', letter_count, 'instances of', letter)"
+            "print('There are:', letter_count, 'instances of', letter)",
+            "選項 1 答案選擇區",
+            "A. word_list in word:",
+            "B. word in word_list:",
+            "C. word == letter_list:",
+            "D. word is letter_list:",
+            "",
+            "選項 2 答案選擇區",
+            "A. word is letter:",
+            "B. letter is word:",
+            "C. word in letter:",
+            "D. letter in word:</code></pre>"
         ],
         "options": [
-            [
-                "word_list in word:",
-                "word in word_list:",
-                "word == letter_list:",
-                "word is letter_list:"
-            ],
-            [
-                "word is letter:",
-                "letter is word:",
-                "word in letter:",
-                "letter in word:"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "B",
@@ -2822,39 +2886,38 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 60,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 61,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-19】學校要求你對一些導致成績單出現問題的程式碼除錯。在程式中已經宣告了下列變數：",
-            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。</code></pre>"
-        ],
-        "slots": [
             "#程式碼片段",
             "scores = [80,90,75,85]",
             "count = 0",
             "sum = 0",
             "# 在以下的程式碼有二個錯誤：",
-            "for index in range(<slot01>):",
+            "for index in range(_(選項 1)_):",
             "    count += 1",
             "    sum += scores[index]",
-            "    average = <slot02>",
+            "average = _(選項 2)_",
             "print('The total scords is:', sum)",
-            "print('The average scords is:', average)"
+            "print('The average scords is:', average)",
+            "你應使用哪些程式碼來修復錯誤？回答時，請在回答區中選擇適當的程式碼片段。",
+            "選項 1 答案選擇區",
+            "A. size(scores)",
+            "B. size(scores) - 1",
+            "C. len(scores) + 1",
+            "D. len(scores)",
+            "",
+            "選項 2 答案選擇區",
+            "A. sum / count",
+            "B. sum**count",
+            "C. sum * count",
+            "D. sum // count</code></pre>"
         ],
         "options": [
-            [
-                "size(scores)",
-                "size(scores) - 1",
-                "len(scores) + 1",
-                "len(scores)"
-            ],
-            [
-                "sum / count",
-                "sum**count",
-                "sum * count",
-                "sum // count"
-            ]
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "D",
@@ -2880,29 +2943,29 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 61,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 62,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH05-20】您正在撰寫符合下列需求的程式碼：",
             "● 允許使用者不斷輸入字詞。",
-            "● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。</code></pre>"
-        ],
-        "slots": [
+            "● 輸出每個字詞的字元數。請選取正確的選項以完成程式碼。",
             "#程式碼片段",
             "x = 'Hello World'",
-            "<slot01> x != 'QUIT':",
+            "_(選項 1)_ x != 'QUIT':",
             "    num = 0",
-            "    <slot02> char <slot03> x:",
+            "    _(選項 2)_ char _(選項 3)_ x:",
             "        num += 1",
             "    print(num)",
-            "    x = input('Enter a new word or QUIT to exit: ')"
+            "    x = input('Enter a new word or QUIT to exit: ')",
+            "",
+            "選項 1 答案選擇區",
+            " A. while   ,B. for   ,C. if   ,D. in</code></pre>"
         ],
         "options": [
-            "while",
-            "for",
-            "if",
-            "in"
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>",
+            "<code>A|B|C|D</code>"
         ],
         "answer": [
             "A",
@@ -2919,7 +2982,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 62,
+        "id": 63,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -2964,7 +3027,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 63,
+        "id": 64,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-1】公司正將過去的進銷存程式碼轉移到 Python，以下哪個是正確的語法？選項 A",
@@ -3004,7 +3067,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 64,
+        "id": 65,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3045,51 +3108,43 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 65,
-        "type": "choicelist",
-        "sz": "0.85rem",
+        "id": 66,
+        "type": "multioption",
+        "hideLabel": true,
         "question": [
-            "<pre><code class=\"language-python\">【CH02-21】你正為一個計算所有員工年度加薪後的總薪資列表 salaryList 撰寫程式。",
-            "你要如何完成這段程式碼？請在回答區選擇適當的程式碼片段。</code></pre>"
-        ],
-        "slots": [
-            " <slot01>",
-            "for index in range(len(salaryList)):",
-            "    if salaryList[index] >= 500000:",
-            "        <slot02>",
-            "    else:",
-            "        salaryList[index] = int((salaryList[index] * 1.05) + 10000)"
+            "<pre><code class=\"language-python\">【CH06-3】一家運動器材公司正在設計一個程式用來記錄客戶跑步時的距離，你設計以下的 Python 程式碼:",
+            "_(選項 1)_",
+            "    name = input('What is your name?')",
+            "    return name",
+            "_(選項 2)_",
+            "    calories = kms * calories_per_km",
+            "    return calories",
+            "distance = int(input('How many kilometers did you run this week?'))",
+            "burn_rate = 80",
+            "runner = get_name()",
+            "calories_burned = calc_calories(distance, burn_rate)",
+            "print(runner, ', you burned about ', calories_burned, 'calories.')",
+            "在程式中必須要定義二個必要的函式。你將在第 1 及第 4 行中使用哪些程式碼片段？</code></pre>"
         ],
         "options": [
-            [
-                "for index in range(len(salaryList)+1):",
-                "for index in range(len(salaryList)-1):",
-                "for index in range(len(salaryList)):",
-                "for index in salaryList:"
-            ],
-            [
-                "exit()",
-                "continue",
-                "break",
-                "end"
-            ]
+            "<code>def get_name():|def get_name(runner):|def get_name(name):</code>",
+            "<code>def calc_calories(): | def calc calories(kms, burn_rate):|def calc_calories(kms, calories_per_km):</code>"
         ],
         "answer": [
-            "C",
-            "B"
+            "A",
+            "C"
         ],
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-python\">1. 使用 range(len(salaryList)) 來遍歷索引。",
-            "2. 如果薪資大於等於 50 萬，則 continue 跳過不加薪。</code></pre>"
+            "<pre><code class=\"language-python\">解題分析：\n呼叫時傳入兩個引數 (distance, burn_rate)，故定義時參數名稱需對齊內部使用的 kms 與 calories_per_km。</code></pre>"
         ],
         "category": "D4_函式與註解"
     },
     {
-        "id": 66,
+        "id": 67,
         "type": "choicelist",
-        "sz": "0.85rem",
+		"sz": "0.85rem",
         "hideLabel": true,
         "question": [
             "<pre><code class=\"language-python\">【CH06-4】你正在設計一個線上遊戲記記分的 Python 應用程式。需要符合以下條件的函式：",
@@ -3098,30 +3153,30 @@
             "● 函式將值增加到目前分數",
             "● 函式返回新分數你要如何完成程式碼？請在回答區中還撲適當的程式碼片段。</code></pre>"
         ],
-        "slots": [
-            "#程式碼片段",
+		"slots" : [
+			"#程式碼片段",
             "<slot01>   <slot02>",
             "  current += value",
             "  <slot03>"
-        ],
+		],
         "options": [
-            [
-                "calc_score",
-                "def calc_score",
-                "return calc_score"
+			[
+				"calc_score",
+				"def calc_score",
+				"return calc_score"
             ],
-            [
-                "(current, value):",
-                "():",
-                "(current, value)",
-                "()"
+			[
+				"(current, value):",
+				"():",
+				"(current, value)",
+				"()"
             ],
-            [
-                "pass current",
-                "return current",
-                "return",
-                "pass"
-            ]
+			[
+				"pass current",
+				"return current",
+				"return",
+				"pass"
+			]
         ],
         "answer": [
             "B",
@@ -3136,7 +3191,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 67,
+        "id": 68,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3180,7 +3235,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 68,
+        "id": 69,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3228,15 +3283,15 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 69,
+        "id": 70,
         "type": "choicelist",
-        "sz": "0.85rem",
+		"sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】某位同事撰寫了一個程式來輸入名稱至資料庫中。然而,此程式卻將每個名稱中的字母前後顛倒。",
             "您需要撰寫一個 Python 函式來按照正確順序輸出名稱中的字元。</code></pre>"
         ],
-        "slots": [
-            "#Function reverses characters in a string.",
+		"slots" : [
+			"#Function reverses characters in a string.",
             "#returns new string in reversed order.",
             "def reverse_name(backward_name):",
             "    forward_name = \"\"",
@@ -3245,20 +3300,20 @@
             "    forward_name += <slot02>",
             "    length = length-1",
             "    return forward_nameprint(reverse_name(\"nohtyp\")"
-        ],
+		],
         "options": [
-            [
-                "backward_name:",
-                "len(backward_name)-1",
-                "range(0,len(backward_name),-1)",
-                "range(len(backward_name)-1,-1,-1)"
-            ],
-            [
-                "backward_name[index]",
-                "backward_name[length]",
-                "backward_name[length+1]",
-                "backward_name[len(backward_name)-len(forward_name)]"
-            ]
+			[
+            "backward_name:",
+				"len(backward_name)-1",
+				"range(0,len(backward_name),-1)",
+				"range(len(backward_name)-1,-1,-1)"
+			],
+			[
+            "backward_name[index]",
+			"backward_name[length]",
+			"backward_name[length+1]",
+			"backward_name[len(backward_name)-len(forward_name)]"
+			]
         ],
         "answer": [
             "B",
@@ -3274,7 +3329,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 70,
+        "id": 71,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">您任職於某個遊戲開發團隊。您需要撰寫程式碼來產生符合下列需求的隨機數字：",
@@ -3300,7 +3355,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 71,
+        "id": 72,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3350,7 +3405,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 72,
+        "id": 73,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3415,7 +3470,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 73,
+        "id": 74,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-10】您為公司開發了一個 Python 應用程式，您想要在自己的程式碼中加入附註，好讓其他團隊成員能夠瞭解。",
@@ -3440,7 +3495,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 74,
+        "id": 75,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？</code></pre>"
@@ -3465,7 +3520,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 75,
+        "id": 76,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-2】你設計一個讀取檔案後將檔案中的每一行列印出來的函式。程式碼如下：",
@@ -3495,7 +3550,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 76,
+        "id": 77,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？</code></pre>"
@@ -3520,7 +3575,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 77,
+        "id": 78,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code></pre>"
@@ -3545,7 +3600,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 78,
+        "id": 79,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-5】你設計程式碼來產生一個隨機數數來符合以下要求：",
@@ -3591,7 +3646,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 79,
+        "id": 80,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH07-6】你正在設計一個處理數字的函式。該函式具有以下要求：",
@@ -3626,7 +3681,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 80,
+        "id": 81,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3690,14 +3745,21 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 81,
+        "id": 82,
         "type": "choicelist",
-        "sz": "0.75rem",
+		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH07-8】您正在撰寫一個程式來隨機指派房間(roomnumber)和隊建立組別(group)以進行公司培訓活動。",
             "請選取正確的程式碼片段以完成程式碼。</code></pre>"
         ],
-        "slots": [
+		"slots" : [
+			"import random",
+            "",
+            "roomsAssigned = [1]",
+            "groupList = ['Ropes', 'Rafting', 'Obstacle', 'Wellness']",
+            "count = 0",
+            "print('Welcome to CompanyPro's Team-Building Weekend!')",
+            "name = input('Please enter your name (q to quit)? ')",
             "while name != 'q' and count < 50:",
             "    room_number = random.randint(1,50)",
             "    while room_number in roomsAssigned:",
@@ -3707,21 +3769,21 @@
             "    <slot02>",
             "    print(f'You will meet with the {group} Group this afternoon.')",
             "    count += 1",
-            "    name = input('Please enter your name (q to quit) ')"
-        ],
+            "    name = input('Please enter your name (q to quit)? ')"
+		],
         "options": [
-            [
-                "room_number = random.randint(1,50)",
-                "room_number = random.randint(1,51)",
-                "room_number = random.randrange(50)",
-                "room_number = random.randrange(51)"
+			[
+				"room_number = random.randint(1,50)",
+				"room_number = random.randint(1,51)",
+				"room_number = random.randrange(50)",
+				"room_number = random.randrange(51)"
             ],
-            [
-                "group = random.choice(groupList)",
-                "group = random.shuffle(groupList)",
-                "group = random.random(groupList)",
-                "group = random.uniform(groupList)"
-            ]
+			[
+				"group = random.choice(groupList)",
+				"group = random.shuffle(groupList)",
+				"group = random.random(groupList)",
+				"group = random.uniform(groupList)"
+			]
         ],
         "answer": [
             "A",
@@ -3737,7 +3799,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 82,
+        "id": 83,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3779,21 +3841,21 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 83,
+        "id": 84,
         "type": "choicelist",
-        "sz": "0.75rem",
+		"sz": "0.75rem",
         "question": [
             "<pre><code class=\"language-python\">【CH08-2】你製作一個程式詢問使用者家中有多少個小孩，使用者必須輸入整數，如果輸入值不是整數，",
             "程式碼必須指出並要求重新輸入。你要如何完成程式碼？請在回答區中選擇適當的程式碼片段。</code></pre>"
         ],
-        "slots": [
-            "while True:",
+		"slots" : [
+			"while True:",
             "    <slot01>",
             "        x = int(input('How many children do you have? '))",
             "        break",
             "    <slot02> ValueError:",
             "        print('Please make sure you entered an integer, please try again...')"
-        ],
+		],
         "options": [
             "try:",
             "else:",
@@ -3815,7 +3877,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 84,
+        "id": 85,
         "type": "choicelist",
         "sz": "0.85rem",
         "question": [
@@ -3856,7 +3918,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 85,
+        "id": 86,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3896,7 +3958,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 86,
+        "id": 87,
         "type": "multioption",
         "hideLabel": true,
         "question": [
@@ -3952,7 +4014,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 87,
+        "id": 88,
         "type": "multiple",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -3986,7 +4048,7 @@
         ]
     },
     {
-        "id": 88,
+        "id": 89,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4022,7 +4084,7 @@
         ]
     },
     {
-        "id": 89,
+        "id": 90,
         "type": "single",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4051,7 +4113,7 @@
         ]
     },
     {
-        "id": 90,
+        "id": 91,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4078,7 +4140,7 @@
         ]
     },
     {
-        "id": 91,
+        "id": 92,
         "type": "single",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4108,7 +4170,7 @@
         ]
     },
     {
-        "id": 92,
+        "id": 93,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4142,7 +4204,7 @@
         ]
     },
     {
-        "id": 93,
+        "id": 94,
         "type": "multioption",
         "category": "D0_官方鑑定考點",
         "question": [
@@ -4172,7 +4234,7 @@
         ]
     },
     {
-        "id": 94,
+        "id": 95,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】你編寫了以下程式來處理字串：",
@@ -4199,7 +4261,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 95,
+        "id": 96,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】關於變數的區域範圍 (Scope)，請檢視以下程式碼：",
@@ -4229,7 +4291,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 96,
+        "id": 97,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】在 Python 中執行以下數學運算，結果為何？",
@@ -4254,7 +4316,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 97,
+        "id": 98,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】使用 with open('data.txt', 'r') as f: 語法的主要好處是什麼？</code></pre>"
@@ -4277,7 +4339,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 98,
+        "id": 99,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】檢視以下錯誤處理程式碼：",
@@ -4308,7 +4370,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 99,
+        "id": 100,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH05-補充】執行以下敘述程式碼，最後會列印出什麼？",
@@ -4337,7 +4399,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 100,
+        "id": 101,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】使用 f-String (Python 3.6+) 格式化字串，若變數 name='Alice' 和 age=20，",
@@ -4361,7 +4423,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 101,
+        "id": 102,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】如果你想為你的 Python 模組 my_module.py 生成 HTML 格式的說明檔案，應該在命令列使用什麼指令？</code></pre>"
@@ -4384,7 +4446,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 102,
+        "id": 103,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】關於 math.trunc() 和 math.floor() 處理負數時的行為，下列何者正確？ (例如處理 -3.5)</code></pre>"
@@ -4407,7 +4469,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 103,
+        "id": 104,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】你希望從清單 [1, 2, 3, 4, 5] 中**隨機選取 3 個不重複**的元素，應該使用 random 模組的哪個方法？</code></pre>"
@@ -4432,7 +4494,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 104,
+        "id": 105,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】你正在設計一個遊戲的抽獎系統，獎品有三種：",
@@ -4461,7 +4523,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 105,
+        "id": 106,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】執行以下程式碼後，變數 nums 的狀態為何？",
@@ -4491,7 +4553,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 106,
+        "id": 107,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在函式中，如果你檢測到一個不合法的引數值，",
@@ -4516,7 +4578,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 107,
+        "id": 108,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】你需要測試一段會輸出文字到控制檯 (stdout) 的程式碼，但不希望文字真的印在螢幕上，而是想存在記憶體中以便分析。可以使用哪個模組？</code></pre>"
@@ -4560,7 +4622,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 108,
+        "id": 109,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在 unittest 模組中，若要驗證 x 的值是否為 True，應使用哪個斷言方法？</code></pre>"
@@ -4585,7 +4647,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 109,
+        "id": 110,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在 unittest 中，若要驗證變數 x 的資料型態是否為整數 (int)，最推薦使用的斷",
@@ -4608,7 +4670,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 110,
+        "id": 111,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在 unittest 測試中，關於各種斷言指令 (Assert Methods)的使用時機",
@@ -4632,7 +4694,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 111,
+        "id": 112,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你有一個名為 colors 的清單：",
@@ -4656,7 +4718,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 112,
+        "id": 113,
         "type": "multiple",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】關於 Python 中的元組 (Tuple) 和清單 (List)，",
@@ -4684,7 +4746,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 113,
+        "id": 114,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你有一個字典 student = {'name': 'John', 'age': 18}。",
@@ -4710,7 +4772,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 114,
+        "id": 115,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你希望在清單 fruits = ['apple', 'banana'] 的**開頭**插入一個元素 'orange'。應該使用哪種方法？</code></pre>"
@@ -4733,7 +4795,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 115,
+        "id": 116,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】關於 sort() 和 sorted() 的區別，下列敘述何者正確？</code></pre>"
@@ -4767,7 +4829,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 116,
+        "id": 117,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你想要將一個清單 nums = [1, 2, 3] 的順序**原地 (in-place) 反轉**，",
@@ -4792,7 +4854,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 117,
+        "id": 118,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-綜合應用】執行下列 Python 程式碼後，最終列印出的結果為何？",
@@ -4819,7 +4881,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 118,
+        "id": 119,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-集合運算】觀察下列程式碼，print(result) 的輸出結果為何？",
@@ -4846,7 +4908,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 119,
+        "id": 120,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？</code></pre>"
@@ -4869,7 +4931,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 120,
+        "id": 121,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？</code></pre>"
@@ -4896,7 +4958,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 121,
+        "id": 122,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-集合操作】你想要在一個集合 my_set = {1, 2, 3} 中加入數字 4。",
@@ -4924,7 +4986,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 122,
+        "id": 123,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-除錯】執行下列哪一段程式碼會導致 AttributeError (屬性錯誤)？</code></pre>"
@@ -4947,7 +5009,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 123,
+        "id": 124,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-清單邏輯】執行下列程式碼後，nums 的內容為何？",
@@ -4975,7 +5037,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 124,
+        "id": 125,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】你正在開發一個科學計算程式，",
@@ -5001,7 +5063,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 125,
+        "id": 126,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】關於 math.fmod(x, y) 與模數運運算元 x % y 的差異，",
@@ -5026,7 +5088,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 126,
+        "id": 127,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 temp.txt，應該使用 os 模組的哪個函式？</code></pre>"
@@ -5049,7 +5111,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 127,
+        "id": 128,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你有一個清單 scores = [100, 80, 90, 80]。你想要移除**第一個**出現的 80 分。應該使用哪個方法？</code></pre>"
@@ -5073,7 +5135,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 128,
+        "id": 129,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】你的程式需要計算一個圓的面積，公式為 &pi;r^2$。使用 math 模組時，下列寫法何者最精確且標準？</code></pre>"
@@ -5096,7 +5158,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 129,
+        "id": 130,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你這在編寫一個程式，需要將清單 list_b 的**所有元素**合併到 list_a 的尾端，形成一個長清單。",
@@ -5124,7 +5186,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 130,
+        "id": 131,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH03-補充】你有一個學生成績清單 grades = [85, 92, 78, 90, 55]。若要快速找出清單中的**最高分**與**最低分**，",
@@ -5148,7 +5210,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 131,
+        "id": 132,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】關於 math.sqrt(x) 與 math.isqrt(x) 的差異，下列何者正確？</code></pre>"
@@ -5172,7 +5234,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 132,
+        "id": 133,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】你需要分析浮點數的底層結構。請問 math.frexp(x) 函式的作用是什麼？</code></pre>"
@@ -5196,7 +5258,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 133,
+        "id": 134,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】你使用 datetime 模組查詢今天是星期幾：",
@@ -5225,7 +5287,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 134,
+        "id": 135,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】你需要產生一個 **0.0 到 1.0 之間** (包含 0.0 但不包含 1.0) 的隨機**浮點數**。",
@@ -5249,7 +5311,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 135,
+        "id": 136,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在單元測試 (Unittest) 中，若要驗證兩個變數是否指向**同一個物件** (記憶體位址相同，而不僅僅是值相等)，",
@@ -5274,7 +5336,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 136,
+        "id": 137,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【演算法-佇列】此程式中 q 是用來當作一個先進先出的佇列 (queue)。",
@@ -5320,7 +5382,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 137,
+        "id": 138,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【演算法-堆疊】此程式中 s 是用來當作一個後進先出的堆疊 (Stack)。",
@@ -5355,7 +5417,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 138,
+        "id": 139,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python運算元】執行下列程式碼後，輸出為何？",
@@ -5390,7 +5452,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 139,
+        "id": 140,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python迴圈邏輯】執行下列程式碼後，輸出為何？",
@@ -5436,7 +5498,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 140,
+        "id": 141,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python流程控制】執行下列程式碼後，輸出為何？",
@@ -5474,7 +5536,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 141,
+        "id": 142,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python迴圈與列表】執行下列程式碼後，輸出為何？",
@@ -5517,7 +5579,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 142,
+        "id": 143,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python變數範圍】執行下列程式碼：",
@@ -5552,7 +5614,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 143,
+        "id": 144,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python輸入與運算】執行下列程式碼：",
@@ -5587,7 +5649,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 144,
+        "id": 145,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python解包錯誤】執行下列程式碼：",
@@ -5621,7 +5683,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 145,
+        "id": 146,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【Python字元編碼】執行下列程式碼：",
@@ -5655,7 +5717,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 146,
+        "id": 147,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【APCS-進階切片】執行下列程式碼後，輸出為何？",
@@ -5685,7 +5747,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 147,
+        "id": 148,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【APCS-遞迴邏輯】執行下列函式 f(3) 的回傳值為何？",
@@ -5721,7 +5783,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 148,
+        "id": 149,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【APCS-迴圈追蹤】執行下列程式碼後，cnt 的值為何？",
@@ -5754,7 +5816,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 149,
+        "id": 150,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】在 Python 中，若要取得「自 1970 年 1 月 1 日 00:00:00 (UTC) 起」經過的總秒數 (Unix Timestamp)，",
@@ -5779,7 +5841,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 150,
+        "id": 151,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？</code></pre>"
@@ -5803,7 +5865,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 151,
+        "id": 152,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】若您在程式開頭使用了 import time as t，則下列哪一行程式碼是**正確**的呼叫方式？</code></pre>"
@@ -5826,7 +5888,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 152,
+        "id": 153,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】關於 from time import * 的用法，下列敘述何者正確？</code></pre>"
@@ -5850,7 +5912,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 153,
+        "id": 154,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】您想要從一個包含 50 個學生的清單中，隨機抽出 3 位幸運得主，且這 3 位不能重複。",
@@ -5875,7 +5937,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 154,
+        "id": 155,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】您需要寫一個 Python 腳本，能夠讀取使用者在執行時傳入的「命令列參數」(Command Line Arguments)。",
@@ -5900,7 +5962,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 155,
+        "id": 156,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】關於 math 模組中的 math.ceil() 與 math.floor() 函式，下列敘述何者正確？</code></pre>"
@@ -5924,7 +5986,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 156,
+        "id": 157,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH06-補充】您想知道目前的 Python 程式是在哪個作業系統下執行 (例如 Windows 或 Linux)，以決定檔案路徑的寫法。",
@@ -5950,7 +6012,7 @@
         "category": "D4_函式與註解"
     },
     {
-        "id": 157,
+        "id": 158,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH01-補充】關於 Python 的算術運算子，下列程式碼的執行結果為何？",
@@ -5978,7 +6040,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 158,
+        "id": 159,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH01-補充】您有一個字串變數 s = 'Python'。請問下列哪一個指令可以取出 'tho' 這段子字串？</code></pre>"
@@ -6003,7 +6065,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 159,
+        "id": 160,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH01-補充】關於布林邏輯運算子，下列程式碼的輸出結果為何？",
@@ -6032,7 +6094,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 160,
+        "id": 161,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH01-補充】下列哪一行程式碼使用了「複合賦值運算子」，且其執行結果與 x = x + 5 相同？</code></pre>"
@@ -6056,7 +6118,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 161,
+        "id": 162,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】關於 Python 的例外處理結構，下列哪一個區塊中的程式碼是「無論是否發生錯誤，最後都**一定會執行**」的？",
@@ -6083,7 +6145,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 162,
+        "id": 163,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】請分析下列程式碼的執行結果：",
@@ -6118,7 +6180,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 163,
+        "id": 164,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】在使用 Python 的 unittest 模組進行單元測試時，若要測試函式回傳值 result 是否等於整數 100，",
@@ -6144,7 +6206,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 164,
+        "id": 165,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】若您在程式中偵測到使用者輸入了不合法的數值 (例如年齡輸入負數)，想要**主動觸發**一個錯誤讓上層程式處理，",
@@ -6169,7 +6231,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 165,
+        "id": 166,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】在 Python 中，若要為一個自定義函式編寫「說明文件 (Documentation String)」，以便其他人可以透過 help(func_name) 查詢其功能，應該使用下列哪種語法？</code></pre>"
@@ -6194,7 +6256,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 166,
+        "id": 167,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】您正在閱讀一份符合 PEP 8 風格指南的 Python 程式碼。請問下列哪一個變數名稱**不符合**標準的命名慣例？</code></pre>"
@@ -6219,7 +6281,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 167,
+        "id": 168,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】Python 使用什麼方式來定義程式碼區塊 (Block) 的範圍 (例如 if 語句或 for 迴圈內部的程式碼)？</code></pre>"
@@ -6243,7 +6305,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 168,
+        "id": 169,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】若您定義了一個函式，但在開發階段還沒想好要寫什麼程式碼，卻又希望程式能先執行不報錯。",
@@ -6268,7 +6330,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 169,
+        "id": 170,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH04-補充】關於 Python 的註解 (Comment)，下列敘述何者正確？</code></pre>"
@@ -6292,7 +6354,7 @@
         "category": "D3_輸入輸出與檔案"
     },
     {
-        "id": 170,
+        "id": 171,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】執行下列程式碼，當迴圈結束後，螢幕上會印出什麼結果？",
@@ -6320,7 +6382,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 171,
+        "id": 172,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】關於 Python 迴圈獨有的 else 子句 (例如 for...else 或 while...else)，下列敘述何者正確？</code></pre>"
@@ -6344,7 +6406,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 172,
+        "id": 173,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】您想要將一行 if-else 判斷式寫得更簡潔 (單行語法/三元運算子)。",
@@ -6368,7 +6430,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 173,
+        "id": 174,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】執行 list(range(10, 0, -2)) 會產生下列哪一個數列？</code></pre>"
@@ -6393,7 +6455,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 174,
+        "id": 175,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH02-補充】下列哪一段程式碼使用了「列表生成式 (List Comprehension)」來產生一個包含 1 到 5 平方數 ([1, 4, 9, 16, 25]) 的清單？</code></pre>"
@@ -6417,7 +6479,7 @@
         "category": "D1_資料型別與運算子"
     },
     {
-        "id": 175,
+        "id": 176,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】在 Python 中定義一個類別 (Class) 時，下列哪一個特殊方法是用來**初始化**物件屬性的（建構子）？</code></pre>"
@@ -6442,7 +6504,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 176,
+        "id": 177,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】觀察下列程式碼，請問 self 代表什麼意義？",
@@ -6468,7 +6530,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 177,
+        "id": 178,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】若 Cat 類別繼承自 Animal 類別，且您希望在 Cat 的 __init__ 方法中，先執行 Animal 的初始化邏輯，應該使用下列哪個函式？</code></pre>"
@@ -6491,7 +6553,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 178,
+        "id": 179,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】在 Python 類別中，若您希望某個屬性變為「私有 (Private)」，不讓外部輕易存取，根據慣例應該如何在變數名稱前加上前綴？</code></pre>"
@@ -6514,7 +6576,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 179,
+        "id": 180,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH07-補充】下列哪一段程式碼正確地建立了一個 Student 類別的**物件實體** (Instance)？</code></pre>"
@@ -6537,7 +6599,7 @@
         "category": "D6_模組與常用工具"
     },
     {
-        "id": 180,
+        "id": 181,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】若您需要為特定的應用程式邏輯定義一個「自定義例外 (Custom Exception)」，應該建立一個類別並繼承自下列哪一個內建類別？</code></pre>"
@@ -6561,7 +6623,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 181,
+        "id": 182,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】關於 assert 關鍵字的使用，下列敘述何者正確？</code></pre>"
@@ -6585,7 +6647,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 182,
+        "id": 183,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH08-補充】請檢視下列程式碼，若 x = 'A'，執行時會發生什麼情況？",
@@ -6652,7 +6714,7 @@
         "category": "D5_錯誤處理與測試"
     },
     {
-        "id": 183,
+        "id": 184,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【CH05-補充】下列哪一種錯誤屬於「邏輯錯誤 (Logic Error)」，且 Python 直譯器**無法**在執行前或執行中自動偵測並報錯？</code></pre>"
@@ -6677,7 +6739,7 @@
         "category": "D2_流程控制與判斷"
     },
     {
-        "id": 184,
+        "id": 185,
         "type": "single",
         "question": [
             "<pre><code class=\"language-python\">【補充】在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？</code></pre>"
@@ -6725,13 +6787,6 @@
                         function renderMatchingQuestion(index) {
         currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
         const container = document.getElementById('question-container') || document.getElementById('question-area');
-        
-        // 處理導覽按鈕顯示
-        const sidePrev = document.getElementById('side-btn-prev');
-        const sideNext = document.getElementById('side-btn-next');
-        if (sidePrev) sidePrev.style.display = (index === 0) ? 'none' : 'flex';
-        if (sideNext) sideNext.style.display = 'flex';
-
         if (userAnswers[index] === undefined) userAnswers[index] = new Array(item.left.length).fill(null);
         const currentAns = userAnswers[index];
         
@@ -6754,54 +6809,60 @@
                 <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
                     <svg id="matching-svg"></svg>
                     <div class="matching-columns">
-                        <div class="match-col left-col">
-                            <div class="match-header-title" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">程式碼片段</div>`;
+                        <div class="match-col left-col"><div class="match-header-title">程式碼片段</div>`;
 
         // 左側：[文字] [圓圈]
         item.left.forEach((text, lIdx) => {
             const isMatched = currentAns[lIdx] !== null;
             const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatched ? '#333' : 'transparent'));
             const cleanText = (text === '&nbsp;' || !text) ? '&nbsp;' : (text.includes('<code') ? text : `<code>${text}</code>`);
-            const rowStyle = 'style="height:45px; margin-bottom:5px;"';
+            const rowStyle = isSplitMode ? 'style="height:45px; margin-bottom:5px;"' : 'style="height:45px; margin-bottom:5px;"';
             
             html += `<div class="match-item match-item-left" id="left-item-${lIdx}" ${rowStyle}>
-                <div class="q-text-part">${cleanText}</div>
+                <div class="q-text-part" style="white-space:nowrap;">${cleanText}</div>
                 <div class="match-dot" id="dot-left-${lIdx}" onmousedown="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}" ontouchstart="${isLocked?'':`handleDragStart(event, 'left', ${lIdx})`}"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
             </div>`;
             
             if (isSplitMode && splitRatio > 1) {
                 for(let p=0; p < Math.floor(splitRatio - 1); p++) {
-                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div><div class="match-dot" style="visibility:hidden"></div></div>`;
+                    html += `<div class="match-item match-item-left" style="height:45px; margin-bottom:5px;"><div class="q-text-part">&nbsp;</div></div>`;
                 }
             }
         });
 
-        html += `</div><div class="match-col right-col">
-                    <div class="match-header-title" style="width: 100%; border-bottom: 2px solid #0d6efd; margin-bottom: 10px; color: #0d6efd; font-weight: bold; padding-bottom: 5px;">回答區</div>`;
+        html += `</div><div class="match-col right-col"><div class="match-header-title">回答區</div>`;
 
-        // 右側：[文字] [圓圈] (V3.5.4 標準：圓圈在文字後)
+        // 右側：[圓圈] [文字]
         let rIdxCounter = 0;
         item.right.forEach((text, grpIdx) => {
-            const processRightItem = (t, idx) => {
-                const isMatchedByAny = currentAns.includes(idx);
-                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
-                const cleanT = t.includes('<code') ? t : `<code>${t}</code>`;
-                return `<div class="match-item match-item-right" id="right-item-${idx}" data-right-idx="${idx}" style="height:45px; margin-bottom:5px;">
-                    <div class="match-dot" id="dot-right-${idx}" style="margin-right:10px;"><div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div></div>
-                    <div class="q-text-part">${cleanT}</div>
-                </div>`;
-            };
-
             if (text && text.includes('|')) {
                 const parts = text.replace(/<\/?code>/g, '').split('|');
                 parts.forEach((partText) => {
-                    html += processRightItem(partText, rIdxCounter++);
+                    const rIdx = rIdxCounter++;
+                    const isMatchedByAny = currentAns.includes(rIdx);
+                    const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                    html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                        <div class="match-dot" id="dot-right-${rIdx}">
+                            <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                        </div>
+                        <div class="q-text-part"><code>${partText}</code></div>
+                    </div>`;
                 });
             } else {
-                html += processRightItem(text, rIdxCounter++);
+                const rIdx = rIdxCounter++;
+                const isMatchedByAny = currentAns.includes(rIdx);
+                const dotColor = isLocked ? (isCorrected ? '#fd7e14' : '#198754') : (isWrong ? '#dc3545' : (isMatchedByAny ? '#333' : 'transparent'));
+                const cleanText = text.includes('<code') ? text : `<code>${text}</code>`;
+                html += `<div class="match-item match-item-right" id="right-item-${rIdx}" data-right-idx="${rIdx}" style="height:45px; margin-bottom:5px;">
+                    <div class="match-dot" id="dot-right-${rIdx}">
+                        <div style="width:10px; height:10px; border-radius:50%; background:${dotColor};"></div>
+                    </div>
+                    <div class="q-text-part">${cleanText}</div>
+                </div>`;
             }
+            // 每群顯示後畫一條灰色線 (排除最後一組)
             if (grpIdx < item.right.length - 1) {
-                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 0; width: 100%;"></div>`;
+                html += `<div style="height: 2px; background-color: #bbb; margin: 10px 0 15px 10px; width: 100%;"></div>`;
             }
         });
 
@@ -6824,20 +6885,13 @@
         }
         html += `</div></div></div>`; container.innerHTML = html; if(typeof updateUI==='function') updateUI(); if(typeof saveState==='function') saveState();
         setTimeout(() => {
-            const wrapper = document.getElementById('matching-wrapper');
-            if (!wrapper) return;
-            // 左側動態對齊
-            const lParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+            const lParts = container.querySelectorAll('.match-item-left .q-text-part');
             let maxLW = 0; lParts.forEach(p => maxLW = Math.max(maxLW, p.offsetWidth));
-            lParts.forEach(p => p.style.width = (maxLW + 5) + 'px');
-            // 右側動態對齊
-            const rParts = wrapper.querySelectorAll('.match-item-right .q-text-part');
-            let maxRW = 0; rParts.forEach(p => maxRW = Math.max(maxRW, p.offsetWidth));
-            rParts.forEach(p => p.style.width = (maxRW + 5) + 'px');
+            lParts.forEach(p => p.style.width = (maxLW + 2) + 'px');
 
             if (window.drawLines) window.drawLines();
             if (window.Prism) Prism.highlightAll();
-        }, 100);
+        }, 30);
     }
     let isDragging = false, dragStartPoint = null, tempLine = null;
     window.handleDragStart = function(e, side, idx) {
@@ -7198,17 +7252,12 @@
             const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
             
             if (item.type === 'matching' || item.type === 'multimatching') {
+                // 補齊連線題判定邏輯
                 const userIndices = item.left.map((_, lIdx) => (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null);
-                const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-                const groupStarts = []; let currentStart = 0;
-                rightRowGroups.forEach(size => { groupStarts.push(currentStart); currentStart += size; });
-                const useRelative = (item.right && item.right.length === item.left.length);
-                
-                isCorrect = (userIndices.length === answers.length && !userIndices.includes(null));
+                isCorrect = (userIndices.length === answers.length);
                 if (isCorrect) {
                     for (let i = 0; i < answers.length; i++) {
-                        let targetIdx = parseAnswerToIndex(answers[i]);
-                        if (useRelative) targetIdx = groupStarts[i] + targetIdx;
+                        const targetIdx = parseAnswerToIndex(answers[i]);
                         if (userIndices[i] !== targetIdx) { isCorrect = false; break; }
                     }
                 }
@@ -7223,11 +7272,16 @@
                     }
                 }
                 
-                // --- Grading logic ---
+                // --- F12 Debug Message ---
+                console.log(`%c[Grading Q${idx+1}] Type: ChoiceList`, "color: #0d6efd; font-weight: bold;");
+                console.log(` - 您的答題 (Indices):`, userIdxs);
+                console.log(` - 正確答案 (Indices):`, correctIndices);
+                console.log(` - 原始正確標籤:`, answers);
+                console.log(` - 轉換規則說明: A=0, B=1, C=2, D=3, E=4 (以此類推)`);
                 if (!isCorrect) {
-                    // Fail
+                    console.log(`%c - 判定結果: ❌ 錯誤`, "color: red; font-weight: bold;");
                 } else {
-                    // Success
+                    console.log(`%c - 判定結果: ✅ 正確`, "color: green; font-weight: bold;");
                 }
             } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
 
@@ -7263,7 +7317,7 @@
                             </div>
                             <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
                                 <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
-                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${r}</div><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block;">${r}</div></div>`).join('')}
                             </div>
                         </div>
                     </div>`;
