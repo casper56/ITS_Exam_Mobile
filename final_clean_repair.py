@@ -709,8 +709,8 @@ def clean_repair_all():
             console.error("題庫資料載入失敗！"); return;
         }
         const CUTOFF = REPLACE_CUTOFF;
-        const TARGET_OFF_COUNT = Math.floor(EXAM_LIMIT * 0.95); // 57
-        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 3
+        const TARGET_OFF_COUNT = 58; // 官方題改為 58 題
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 補充題則為 2 題
         
         let historySet = new Set();
         try {
