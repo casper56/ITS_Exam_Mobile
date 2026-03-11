@@ -1,26 +1,34 @@
-const CACHE_NAME = 'its-exam-v14';
+const CACHE_NAME = 'its-exam-v15';
 const URLS_TO_CACHE = [
-  './index.html',
+  '../index.html',
   './ITS_Python/ITS_Python.html',
   './ITS_Database/ITS_Database.html',
   './ITS_AI/ITS_AI.html',
+  './ITS_JAVA/ITS_JAVA.html',
+  './ITS_softdevelop/ITS_softdevelop.html',
   './Generative_AI/Generative_AI.html',
   './AZ900/AZ900.html',
   './AI900/AI900.html',
   './assets/icon.png',
+  './js/choicelist_patch_v2.js',
+  './js/sync_manager.js',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js'
+  'https://cdn.jsdelivr.net/npm/marked/marked.min.js'
 ];
 
 // Install
 self.addEventListener('install', event => {
-  self.skipWaiting(); // Force new service worker to activate immediately
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(URLS_TO_CACHE);
+      console.log('Service Worker: Caching files...');
+      // 使用 Promise.allSettled 替代 addAll，確保個別檔案失敗不影響整體安裝
+      return Promise.allSettled(
+        URLS_TO_CACHE.map(url => {
+          return cache.add(url).catch(err => console.error(`Failed to cache: ${url}`, err));
+        })
+      );
     })
   );
 });
@@ -32,6 +40,7 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
+            console.log('Service Worker: Clearing old cache', cacheName);
             return caches.delete(cacheName);
           }
         })
