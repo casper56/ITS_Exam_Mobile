@@ -33,6 +33,9 @@
         /* 核心佈局：stretch 強制高度同步，gap 控制間距 */
         '.choicelist-wrapper { display: flex !important; flex-direction: row !important; align-items: stretch !important; overflow-x: auto !important; padding-bottom: 15px; gap: 20px !important; width: 100% !important; } ' +
         '.cl-content-text { display: inline-block !important; flex: 0 0 auto !important; white-space: pre !important; word-break: keep-all !important; line-height: 1.4 !important; vertical-align: top !important; } ' +
+        '.choicelist-q-text { white-space: normal !important; margin-bottom: 15px; line-height: 1.6; } ' +
+        '.choicelist-q-text pre { white-space: pre-wrap !important; word-break: break-all !important; background: transparent !important; padding: 0 !important; margin: 10px 0 !important; border: none !important; } ' +
+        '.choicelist-q-text code { font-family: Consolas, Monaco, monospace !important; color: #000 !important; background: transparent !important; } ' +
         
         /* 手機版特規 */
         '@media (max-width: 768px) { ' +
@@ -174,7 +177,7 @@
 
         const headerHtml = isMock 
             ? `題目 ${index + 1} / ${quizList.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span>`
-            : `<div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizList.length}</span><span class="badge bg-info">填空題 (ChoiceList)</span></div><div class="category-tag">${item.category || '一般'}</div>`;
+            : `題目 ${index + 1} / ${quizList.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span>`;
 
         container.innerHTML = `<div class="${cardClass}">
             <div class="question-header">${headerHtml}</div>
@@ -203,6 +206,8 @@
         if (sn) sn.style.display = 'flex';
 
         if(typeof updateUI === "function") updateUI();
+        // 加入語法高亮觸發
+        setTimeout(() => { if (window.Prism) Prism.highlightAll(); }, 50);
     };
 
     window.selectSlot = function(idx) {
