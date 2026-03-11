@@ -3763,10 +3763,21 @@
                                         </div>
                                     </div>
                                 </div>`;
+                            } else if (item.type === 'choicelist') {
+                                const isGrouped = Array.isArray(item.options[0]);
+                                if (isGrouped) {
+                                    optHtml = item.options.map((group, gIdx) => {
+                                        const groupOpts = group.map((opt, optIdx) => `<span style="margin-right:15px;">(${String.fromCharCode(65+optIdx)}) ${opt}</span>`).join(' ');
+                                        return `<div class="mb-2"><b style="color:#666;">[ 選項組 ${gIdx+1} ]</b><br/>${groupOpts}</div>`;
+                                    }).join('');
+                                } else {
+                                    optHtml = item.options.map((opt, oIdx) => `<span style="margin-right:15px;">(${String.fromCharCode(65+oIdx)}) ${opt}</span>`).join(' ');
+                                }
+                                optHtml = `<div class="p-2 border rounded bg-light" style="font-family:Consolas,monospace; font-size:0.9rem;">${optHtml}</div>`;
                             } else {
                 
                     optHtml = opts.map((o, i) => {
-                        if (String(o).includes('|')) {
+                        if (typeof o === 'string' && o.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
                             const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
@@ -3871,7 +3882,7 @@
         opts.forEach((opt, oIdx) => {
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            if (String(opt).includes('|')) {
+            if (typeof opt === 'string' && opt.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const displayLabel = item["question" + alphabet[oIdx]] || `選項 ${oIdx + 1}`;
                 let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
