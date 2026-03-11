@@ -7280,7 +7280,7 @@
                             }
                             const displayLabel = customLabel || `選項 ${i + 1}`;
 
-                            const subLabels = o.split('|').map((s, si) => {
+                            const subLabels = String(o).split('|').map((s, si) => {
                                 const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                                 return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                             }).join(' ');
@@ -7304,7 +7304,7 @@
         for (let cat of sortedCats) {
             let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
             let sortedIds = stats[cat].ids.sort((a, b) => a.id - b.id).map(obj => {
-                let displayId = obj.id > 69 ? `(${obj.id})` : obj.id;
+                let displayId = obj.id > 93 ? `(${obj.id})` : obj.id;
                 if (obj.isWrong) return `<span style="color:red; font-weight:bold;">${displayId}</span>`;
                 return displayId;
             }).join(', ');
@@ -7313,7 +7313,7 @@
         catHTML += '</tbody></table>'; 
         catHTML += '<div class="mt-2 mb-3 small text-start" style="padding-left:10px; border-left:3px solid #6c757d;">' + 
                    '<span style="color:red; font-weight:bold;">紅色數字</span>：代表此題答錯；' + 
-                   '<span>(括號數字)</span>：代表 1-69 題以外的補充題。' +
+                   '<span>(括號數字)</span>：代表 1-93 題以外的補充題。' +
                    '</div>';
         
         document.getElementById('category-stats').innerHTML = catHTML;

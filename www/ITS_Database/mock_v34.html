@@ -4126,7 +4126,7 @@
                             }
                             const displayLabel = customLabel || `選項 ${i + 1}`;
 
-                            const subLabels = o.split('|').map((s, si) => {
+                            const subLabels = String(o).split('|').map((s, si) => {
                                 const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
                                 return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                             }).join(' ');
