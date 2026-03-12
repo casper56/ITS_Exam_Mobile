@@ -43,3 +43,61 @@ const SyncManager = {
         }
     }
 };
+
+/**
+ * SyncManager Patch - 自動恢復 PDF 遺失紀錄
+ */
+(function() {
+    const RECOVERY_DATA = [
+        { subject: "ITS_AI", date: "2026-03-12", score: 97 },
+        { subject: "ITS_AI", date: "2026-03-11", score: 97 },
+        { subject: "ITS_程式設計", date: "2026-03-12", score: 95 },
+        { subject: "ITS_程式設計", date: "2026-03-11", score: 92 },
+        { subject: "ITS_Python", date: "2026-03-12", score: 97, note: "1" },
+        { subject: "ITS_Python", date: "2026-03-12", score: 98 },
+        { subject: "ITS_Python", date: "2026-03-11", score: 98, note: "2" },
+        { subject: "ITS_Python", date: "2026-03-11", score: 98, note: "1" },
+        { subject: "ITS_Python", date: "2026-03-11", score: 98 },
+        { subject: "ITS_程式設計", date: "2026-03-10", score: 95, note: "1" },
+        { subject: "ITS_程式設計", date: "2026-03-10", score: 95 },
+        { subject: "ITS_程式設計", date: "2026-03-08", score: 97 },
+        { subject: "ITS_Python", date: "2026-03-10", score: 97 },
+        { subject: "ITS_Python", date: "2026-03-09", score: 98 },
+        { subject: "ITS_Python", date: "2026-03-08", score: 98 },
+        { subject: "ITS_Python", date: "2026-03-06", score: 93 },
+        { subject: "ITS_AI", date: "2026-03-09", score: 97 },
+        { subject: "ITS_AI", date: "2026-03-08", score: 95 },
+        { subject: "ITS_AI", date: "2026-03-07", score: 97 },
+        { subject: "ITS_Database", date: "2026-03-11", score: 95 },
+        { subject: "ITS_Database", date: "2026-03-10", score: 100 },
+        { subject: "ITS_Database", date: "2026-03-09", score: 95 },
+        { subject: "ITS_Database", date: "2026-03-07", score: 95, note: "1" },
+        { subject: "ITS_Database", date: "2026-03-07", score: 95 },
+        { subject: "ITS_程式設計", date: "2026-03-07", score: 90 },
+        { subject: "ITS_程式設計", date: "2026-03-06", score: 92 },
+        { subject: "ITS_Database", date: "2026-03-06", score: 95 },
+        { subject: "ITS_Python", date: "2026-03-05", score: 90 },
+        { subject: "ITS_Database", date: "2026-02-23", score: 95 }
+    ];
+
+    const historyKey = 'its_exam_history';
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    let changed = false;
+
+    RECOVERY_DATA.forEach(record => {
+        const exists = history.some(h => h.subject === record.subject && h.date === record.date && (!record.note || h.note === record.note));
+        if (!exists) {
+            history.push({
+                ...record,
+                timestamp: new Date(record.date).getTime(),
+                recovered: true
+            });
+            changed = true;
+        }
+    });
+
+    if (changed) {
+        localStorage.setItem(historyKey, JSON.stringify(history));
+        console.log('SyncManager: 已自動從 PDF 備份恢復遺失的練習紀錄。');
+    }
+})();
