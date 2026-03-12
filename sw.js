@@ -1,4 +1,4 @@
-const CACHE_NAME = 'its-exam-v16'; // 升級版本以強制重新快取
+const CACHE_NAME = 'its-exam-v17'; // 升級版本以強制重新快取
 const URLS_TO_CACHE = [
   './index.html',
   './www/ITS_Python/ITS_Python.html',
