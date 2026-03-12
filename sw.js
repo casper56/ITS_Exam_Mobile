@@ -1,4 +1,4 @@
-const CACHE_NAME = 'its-exam-v19'; // 升級版本以強制重新快取
+const CACHE_NAME = 'its-exam-prod-v1'; // 固定的快取名稱
 const URLS_TO_CACHE = [
   './index.html',
   './www/ITS_Python/ITS_Python.html',
@@ -21,37 +21,20 @@ const URLS_TO_CACHE = [
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Service Worker: Caching files...');
-        return Promise.allSettled(
-          URLS_TO_CACHE.map(url => {
-            return cache.add(url).catch(err => {
-              if (err.name !== 'SecurityError') {
-                console.warn(`Failed to cache: ${url}`, err);
-              }
-            });
-          })
-        );
-      })
-      .catch(err => {
-        if (err.name === 'SecurityError') {
-          console.warn('Service Worker: Storage access blocked by browser security (Tracking Prevention).');
-        } else {
-          console.error('Service Worker: Cache open failed', err);
-        }
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Service Worker: Initial Caching...');
+      return cache.addAll(URLS_TO_CACHE);
+    })
   );
 });
 
-// Activate - Clean up old caches
+// Activate
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Clearing old cache', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -60,11 +43,24 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch
+// Fetch - Network First Strategy (網路優先)
 self.addEventListener('fetch', event => {
+  // 只針對 GET 請求進行快取處理
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then(networkResponse => {
+        // 如果網路抓取成功，將其複製一份存入快取
+        const responseClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseClone);
+        });
+        return networkResponse;
+      })
+      .catch(() => {
+        // 如果網路失敗（離線），則從快取中尋找
+        return caches.match(event.request);
+      })
   );
 });
