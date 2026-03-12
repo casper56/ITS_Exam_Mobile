@@ -449,7 +449,7 @@
     {
         "id": 13,
         "question": [
-            "<pre><code class=\"language-csharp\">請將清單中的每個版本控制系統命令，移至正確的描述位置：",
+            "<pre><code class=\"language-csharp\">請將清單中的每個版本控制系統命令，移至正確的描述位置",
             "命令：",
             "1. branch",
             "2. checkout",

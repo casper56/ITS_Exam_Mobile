@@ -15,7 +15,9 @@ def clean_repair_all():
     # 全域符號修復邏輯：自動將包含圓圈數字的 code 加上 zoom 類別
     def auto_tag_zoom(html_str):
         if not isinstance(html_str, str): return html_str
-        # 尋找 <code>③ ⑦ ⑥</code> 這種格式，自動替換為 <code class="zoom">
+        # 1. 修正 Chrome 底線問題：將 _(選項 X)_ 轉為 [ 選項 X ]
+        html_str = re.sub(r'_\(選項\s*(\d+)\)_', r'[ 選項 \1 ]', html_str)
+        # 2. 尋找 <code>③ ⑦ ⑥</code> 這種格式，自動替換為 <code class="zoom">
         return re.sub(r'<code>([①②③④⑤⑥⑦⑧⑨⑩\s]+)</code>', r'<code class="zoom">\1</code>', html_str)
     
     # --- 模板 A: 模擬考試 (mock_v34.html) ---
@@ -63,6 +65,7 @@ def clean_repair_all():
                 code {
                     background-color: transparent !important; 
                     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                    text-decoration: none !important;
                 }
         code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
