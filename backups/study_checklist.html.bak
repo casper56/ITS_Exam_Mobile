@@ -165,6 +165,17 @@
             font-size: 0.75em;
             font-weight: bold;
         }
+        .overall-stats {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .overall-stats h2 { margin-top: 0; color: var(--primary-color); font-size: 1.5em; }
+        .overall-stats p { font-size: 1.2em; font-weight: bold; margin: 10px 0; color: #333; }
         .date-badge {
             display: inline-block;
             background: #000;
@@ -207,6 +218,8 @@
     <div id="checklist-content">
         <!-- 內容由 JS 生成 -->
     </div>
+    
+    <div id="overall-stats-container"></div>
 </div>
 
 <script src="www/js/sync_manager.js"></script>
@@ -300,12 +313,26 @@
     function renderAverageScores() {
         const history = JSON.parse(localStorage.getItem('its_exam_history') || '[]');
         const averages = {};
+        let totalExams = history.length;
+        let totalScore = 0;
         
+        // 用來計算排程中各科的安排次數
+        const scheduledCounts = {};
         subjects.forEach(sub => {
             averages[sub] = { total: 0, count: 0 };
+            scheduledCounts[sub] = 0;
+        });
+
+        // 計算排程次數
+        document.querySelectorAll('.task-item input[type="checkbox"]').forEach(cb => {
+            const sub = cb.getAttribute('data-subject');
+            if (scheduledCounts[sub] !== undefined) {
+                scheduledCounts[sub]++;
+            }
         });
 
         history.forEach(entry => {
+            totalScore += entry.score;
             if (averages[entry.subject]) {
                 averages[entry.subject].total += entry.score;
                 averages[entry.subject].count++;
@@ -324,9 +351,38 @@
             }
             const badge = document.createElement('div');
             badge.className = 'avg-badge';
-            badge.innerHTML = `${sub} (考 ${avgData.count} 次): <span>${avgData.count > 0 ? avgScore + '%' : '尚無成績'}</span>`;
+            badge.innerHTML = `${sub} (已考 ${avgData.count} 次): <span>${avgData.count > 0 ? avgScore + '%' : '尚無成績'}</span>`;
             container.appendChild(badge);
         });
+
+        const overallContainer = document.getElementById('overall-stats-container');
+        if (overallContainer) {
+            let overallAvg = 0;
+            if (totalExams > 0) {
+                overallAvg = Math.round(totalScore / totalExams);
+            }
+            
+            let subjectStatsHtml = '<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 15px;">';
+            subjects.forEach(sub => {
+                const avgData = averages[sub];
+                let avgScore = avgData.count > 0 ? Math.round(avgData.total / avgData.count) + '%' : '尚無成績';
+                subjectStatsHtml += `<div style="background: #f8f9fa; padding: 10px 20px; border-radius: 8px; border: 1px solid #dee2e6; text-align: center;">
+                    <strong style="font-size: 1.1em;">${sub}</strong><br>
+                    排定次數: <span style="font-weight: bold; color: #000;">${scheduledCounts[sub]} 次</span><br>
+                    已考次數: ${avgData.count} 次<br>
+                    平均分數: <span style="color: var(--primary-color); font-weight: bold; font-size: 1.2em;">${avgScore}</span>
+                </div>`;
+            });
+            subjectStatsHtml += '</div>';
+
+            overallContainer.innerHTML = `
+                <div class="overall-stats">
+                    <h2>📊 MOCK 總計統計與排程分析</h2>
+                    <p>🎯 總已測驗次數: ${totalExams} 次 &nbsp;|&nbsp; 🏆 總體平均分數: ${totalExams > 0 ? overallAvg + '%' : '尚無成績'}</p>
+                    ${subjectStatsHtml}
+                </div>
+            `;
+        }
     }
 
     function updateProgress(saveManual = true) {

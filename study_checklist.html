@@ -312,8 +312,19 @@
 
     function renderAverageScores() {
         const history = JSON.parse(localStorage.getItem('its_exam_history') || '[]');
+        
+        // 過濾歷史紀錄：以當日個別科目最高分為準，且記數為一次
+        const dailyMaxMap = {};
+        history.forEach(entry => {
+            const key = entry.date + '_' + entry.subject;
+            if (!dailyMaxMap[key] || entry.score > dailyMaxMap[key].score) {
+                dailyMaxMap[key] = entry;
+            }
+        });
+        const dailyMaxHistory = Object.values(dailyMaxMap);
+
         const averages = {};
-        let totalExams = history.length;
+        let totalExams = dailyMaxHistory.length;
         let totalScore = 0;
         
         // 用來計算排程中各科的安排次數
@@ -331,7 +342,7 @@
             }
         });
 
-        history.forEach(entry => {
+        dailyMaxHistory.forEach(entry => {
             totalScore += entry.score;
             if (averages[entry.subject]) {
                 averages[entry.subject].total += entry.score;
