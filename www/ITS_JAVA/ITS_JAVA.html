@@ -299,15 +299,12 @@
         "type": "multimatching",
         "question": [
             "<pre><code class=\"language-java\">【A-03】你正在參加 Java 程式開發人員的面試，必須證明您熟識 main 方法。",
-            "對於下列關於 main 方法的敘述，請選取 [O] 或 [X]。",
-            "A. main 方法的 args 參數是 String 資料類別的陣列。",
-            "B. Java 應用程式只能接受一個命令列引數。",
-            "C. main 方法必須為靜態，因為執行時不會將類別中的物件實體化。</code></pre>"
+            "對於下列關於 main 方法的敘述，請選取 [O] 或 [X]。</code></pre>"
         ],
         "left": [
-            "A 敘述",
-            "B 敘述",
-            "C 敘述"
+            "A. main 方法的 args 參數是 String 資料類別的陣列。",
+            "B. Java 應用程式只能接受一個命令列引數。",
+            "C. main 方法必須為靜態，因為執行時不會將類別中的物件實體化。"
         ],
         "right": [
             "O",
@@ -327,25 +324,33 @@
     },
     {
         "id": 4,
-        "type": "multimatching",
+        "type": "choicelist",
+		"sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-java\">【A-04】你在建立一個 Java 主控台應用程式，必須定義應用程式啟動時所執行的第一個方法的簽章，請選取正確的程式碼片段來完成程式碼。",
-            "程式碼片段：",
-            "A : ①private void ②public static void ③private static String ④public String",
-            "B : ①int args[] ②int args ③String args[] ④String arg",
-            "",
-            "   ____A____  main ( ____B____ )",
+            "程式碼片段：</code></pre>"
+        ],
+		"slots" : [
+            "<pre><code class=\"language-java\">   <slot01>  main <slot02>",
             "   {",
             "       System.out.print(\"Java 學習網\");",
             "   }</code></pre>"
-        ],
-        "left": [
-            "A 片段",
-            "B 片段"
-        ],
-        "right": [
-            "①private void | ②public static void | ③private static String | ④public String",
-            "①int args[] | ②int args | ③String args[] | ④String arg"
+		],
+       
+        "options": [
+			[
+				"private void",
+				"public static",
+				"void",
+				"private static String",
+				"public String"
+			],
+			[
+				"int args[] ",
+				"int args",
+				"String args[]",
+				"String arg"
+			]
         ],
         "answer": [
             2,
@@ -898,34 +903,34 @@
     },
     {
         "id": 18,
-        "type": "matching",
+        "type": "choicelist",
+		"sz": "0.85rem",
         "question": [
             "<pre><code class=\"language-java\">【A-18】你為銀行撰寫管理信用帳戶開立的 Java 程式，若要開立新帳戶，該對象必須符合以下任一要求：",
             "● 超過 65 歲(ages)以上，且年收入(income)最低為 1,000,000 元。",
             "● 至少 21 歲，且年收入高於 2,500,000 元。",
             "",
-            "請選擇適當的運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。",
-            "運算子：① = ② && ③ <= ④ < ⑤ == ⑥ != ⑦ > ⑧ >= ⑨ ||",
-            "",
-            "if (ages ___A___ 65 ___B___ income ___C___ 1000000 ___D___ ",
-            "    ages ___E___ 21 ___F___ income ___G___ 2500000) {",
+            "請選擇適當的運算子填入對應的正確位置，以完成程式碼。每個運算子可能使用一次或多次，甚至完全不用。</code></pre>"
+        ],
+		"slots" : [
+			"<pre><code class=\"language-java\">if (ages <slot01> 65 <slot02> income <slot03> 1000000 <slot04> ",
+            "    ages <slot05> 21 <slot06> income <slot07> 2500000) {",
             "    System.out.println(\"通過\");",
             "}",
             "else {",
             "    System.out.println(\"未通過\");",
             "}</code></pre>"
-        ],
-        "left": [
-            "A 位置",
-            "B 位置",
-            "C 位置",
-            "D 位置",
-            "E 位置",
-            "F 位置",
-            "G 位置"
-        ],
-        "right": [
-            "① = |② && |③ <= |④ < |⑤ == |⑥ != |⑦ > |⑧ >= |⑨ &#124;&#124;"
+		],
+        "options": [
+            "=",
+			"&&",
+			"<=",
+			"<",
+			"==",
+			"!=",
+			">",
+			">=",
+			"&#124;&#124;"
         ],
         "answer": [
             7,
