@@ -5,8 +5,8 @@
     // --- 注入強力 CSS ---
     const style = document.createElement('style');
     style.innerHTML = 
-        ':root { --cl-pool-gap: 4px; --cl-gap: 2px; --cl-row-height: 2.6rem; --cl-padding: 0 12px; --cl-header-height: 30px; } ' +
-        '.cl-header { font-weight: bold !important; color: #0d6efd !important; height: var(--cl-header-height) !important; line-height: var(--cl-header-height) !important; margin-bottom: 10px !important; border-bottom: 1px solid #ddd !important; width: fit-content !important; font-size: 0.8rem !important; padding-bottom: 2px !important; } ' +
+        ':root { --cl-pool-gap: 2px; --cl-gap: 1px; --cl-row-height: 1.8rem; --cl-padding: 0 8px; --cl-header-height: 28px; } ' +
+        '.cl-header { font-weight: bold !important; color: #0d6efd !important; height: var(--cl-header-height) !important; line-height: var(--cl-header-height) !important; margin-bottom: 5px !important; border-bottom: 1px solid #ddd !important; width: fit-content !important; font-size: 0.8rem !important; padding-bottom: 1px !important; } ' +
         
         /* 選項區：恢復原始 fit-content 寬度 */
         '.choicelist-pool { display: flex !important; flex-direction: column !important; flex: 0 0 auto !important; width: fit-content !important; max-width: 85% !important; } ' +
@@ -14,7 +14,7 @@
         '.grouped-pool-unit { width: fit-content !important; max-width: 100%; border-radius: 8px; transition: all 0.3s; } ' +
         
         /* PC 版預設：絕對不換行 */
-        '.choicelist-item, .choicelist-code-line { display: flex !important; align-items: flex-start !important; min-height: var(--cl-row-height) !important; padding: 8px 12px !important; margin: 0 !important; box-sizing: border-box !important; font-family: "Consolas", "Monaco", "Courier New", monospace !important; border-radius: 4px !important; white-space: pre !important; word-break: keep-all !important; overflow: visible !important; text-align: left !important; } ' +
+        '.choicelist-item, .choicelist-code-line { display: flex !important; align-items: flex-start !important; min-height: var(--cl-row-height) !important; padding: 2px 8px !important; margin: 0 !important; box-sizing: border-box !important; font-family: "Consolas", "Monaco", "Courier New", monospace !important; border-radius: 4px !important; white-space: pre !important; word-break: keep-all !important; overflow: visible !important; text-align: left !important; } ' +
         '.choicelist-item { background: #fff; border: 1px solid #ced4da; cursor: pointer; width: 100% !important; } ' +
         '.choicelist-code-line { border: 1px solid transparent; border-bottom: 1px solid #f0f0f0; } ' +
         
