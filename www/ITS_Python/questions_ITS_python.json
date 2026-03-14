@@ -10,7 +10,7 @@
       "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。</code></pre>"
     ],
     "slots": [
-      "<pre><code class=\"language-python\">#步速計算器",
+      "<code class=\"language-python\">#步速計算器",
       "distance = <slot01>(input(\"Enter the distance traveled in meters\"))",
       "# convert to kilometers",
       "distance_kms = distance / 1000",
@@ -21,7 +21,7 @@
       "time time_minute*60+time_se_sec",
       "pace = time / distance_kms",
       "#平均速度",
-      "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre>"
+      "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code>"
     ],
     "options": [
       "int",
@@ -88,8 +88,7 @@
     "id": 3,
     "type": "single",
     "question": [
-      "<code class=\"language-python\">【CH01-3】你正在編寫一個計算使用者出生年份的程式，",
-      "該程式詢問使用者的年齡和當前年份，",
+      "<code class=\"language-python\">【CH01-3】你正在編寫一個計算使用者出生年份的程式, 該程式詢問使用者的年齡和當前年份,",
       "然後輸出使用者的出生年份。",
       "你編寫以下程式碼：",
       "01 age = input(\"Enter your age: \")",
@@ -99,9 +98,9 @@
       "下列選項正確答案為？</code>"
     ],
     "options": [
-      "<code>第 1 行中的 age 的資料型別是 str</code>",
-      "<code>第 3 行中的 born 的資料型別是 float</code>",
-      "<code>第 4 行中的 message 的資料型別是 bool</code>"
+      "第 1 行中的 age 的資料型別是 str",
+      "第 3 行中的 born 的資料型別是 float",
+      "第 4 行中的 message 的資料型別是 bool</code>"
     ],
     "answer": [
       "A"
@@ -135,9 +134,9 @@
       "c = x3 / y3</code></pre>"
     ],
     "options": [
-      "<code>執行程式碼片段 1 後，變數 a 的資料類為 str。</code>",
-      "<code>執行程式碼片段 2 後，變數 b 的資料型別是 float</code>",
-      "<code>執行程式碼片段 3 後，變數 c 的資料型別為 int</code>"
+      "執行程式碼片段 1 後，變數 a 的資料類為 str。",
+      "執行程式碼片段 2 後，變數 b 的資料型別是 float",
+      "執行程式碼片段 3 後，變數 c 的資料型別為 int</code>"
     ],
     "answer": [
       "A",
@@ -166,10 +165,10 @@
       "type(False)</code></pre>"
     ],
     "options": [
-      "<code>int,  int,  bool,  bool</code>",
-      "<code>float,  float,  str,  bool</code>",
-      "<code>int,  float,  str,  bool</code>",
-      "<code>float,  int,  str,  str</code>"
+      "int,  int,  bool,  bool",
+      "float,  float,  str,  bool",
+      "int,  float,  str,  bool",
+      "float,  int,  str,  str</code>"
     ],
     "answer": [
       "B"
@@ -252,10 +251,10 @@
       "你應該使用哪兩個程式碼片段？</code></pre>"
     ],
     "options": [
-      "<code>average_score = float(total_score // number_of_students)</code>",
-      "<code>average score = int(total_score / number of_students)</code>",
-      "<code>average_score = float(total_score ** number_of_students)</code>",
-      "<code>average_score = total_score // number_of_students</code>"
+      "<code class=\"language-python\">average_score = float(total_score // number_of_students)",
+      "average score = int(total_score / number of_students)",
+      "average_score = float(total_score ** number_of_students)",
+      "average_score = total_score // number_of_students</code>"
     ],
     "answer": [
       "B",
@@ -284,10 +283,10 @@
       "執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "<code>30.0</code>",
-      "<code>30.5</code>",
-      "<code>457</code>",
-      "<code>語法錯誤</code>"
+      "30.0",
+      "30.5",
+      "457",
+      "語法錯誤</code>"
     ],
     "answer": [
       "A"
@@ -319,10 +318,10 @@
       "如何完成 2 行的程式碼？</code></pre>"
     ],
     "options": [
-      "<code>b= (a + 5)**2</code>",
-      "<code>b = a + 5 **2</code>",
-      "<code>b = a + 5 * 2</code>",
-      "<code>b=a+(5**2)</code>"
+      "b= (a + 5)**2",
+      "b = a + 5 **2",
+      "b = a + 5 * 2",
+      "b=a+(5**2)</code>"
     ],
     "answer": [
       "A"
@@ -350,10 +349,10 @@
       "為了完成這個程式碼，你應該在 3 行加入什麼程式碼？</code></pre>"
     ],
     "options": [
-      "<code>if not (kid or senior):</code>",
-      "<code>if (not kid) or senior:</code>",
-      "<code>if not (kid and senior):</code>",
-      "<code>if (not kid) and senior:</code>"
+      "if not (kid or senior):",
+      "if (not kid) or senior:",
+      "if not (kid and senior):",
+      "if (not kid) and senior:</code>"
     ],
     "answer": [
       "A"
@@ -373,10 +372,10 @@
       "<pre><code class=\"language-python\">【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)</code></pre>"
     ],
     "options": [
-      "<code>0 or 5</code>",
-      "<code>bool(0)</code>",
-      "<code>None is None</code>",
-      "<code>-5 < 0 < 5</code>"
+      "0 or 5",
+      "bool(0)",
+      "None is None",
+      "-5 < 0 < 5</code>"
     ],
     "answer": [
       "C",
@@ -400,10 +399,10 @@
       "(3*(1+2)**2-2**2*3)</code></pre>"
     ],
     "options": [
-      "<code>3</code>",
-      "<code>13</code>",
-      "<code>15</code>",
-      "<code>69</code>"
+      "3",
+      "13",
+      "15",
+      "69</code>"
     ],
     "answer": [
       "C"
@@ -437,9 +436,9 @@
       "在第三次 print 後會顯示什麼？_(選項 3)_</code></pre>"
     ],
     "options": [
-      "<code>Test 1|Test 1Test 2|Test 2</code>",
-      "<code>Test 1|Test 1Test 2|Test 2</code>",
-      "<code>Test 1|Test 1Test 2|Test 2</code>"
+      "Test 1|Test 1Test 2|Test 2",
+      "Test 1|Test 1Test 2|Test 2",
+      "Test 1|Test 1Test 2|Test 2</code>"
     ],
     "answer": [
       "A",
@@ -476,9 +475,9 @@
       "選項3 :哪個運算式等於題目函式中的運算式？"
     ],
     "options": [
-      "<code>a+b|b*c|c-d</code>",
-      "<code>加(+)|減(-)|乘(*)</code>",
-      "<code>(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d</code>"
+      "a+b|b*c|c-d",
+      "加(+)|減(-)|乘(*)",
+      "(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d</code>"
     ],
     "answer": [
       "A",
@@ -507,10 +506,10 @@
       "6. 且 (And)</code></pre>"
     ],
     "options": [
-      "<code>加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且</code>",
-      "<code>括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且</code>",
-      "<code>指數 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 且 -> 加法和減法</code>",
-      "<code>乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法</code>"
+      "加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且",
+      "括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且",
+      "指數 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 且 -> 加法和減法",
+      "乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法</code>"
     ],
     "answer": [
       "B"
@@ -543,7 +542,7 @@
       "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？</code></pre>"
     ],
     "slots": [
-      "ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
+      "<code class=\"language-python\">ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
       "days_rented = int(input(\"How many days was car rented?\"))",
       "day_rented = input(\"What day was the car rented?\").capitalize()",
       "cost_per_day = 100",
@@ -555,7 +554,7 @@
       "   total = (days_rented*cost_per_day) * 0.8",
       "else:",
       "  total = days_rented * cost_per_day",
-      "print(\"Cost of the car rental is : $\", total)"
+      "print(\"Cost of the car rental is : $\", total)</code>"
     ],
     "options": [
       [
@@ -601,9 +600,9 @@
       "print(a % b)的輸出結果是？_(選項 3)_</code></pre>"
     ],
     "options": [
-      "<code>1|2|2.2</code>",
-      "<code>1|2|2.2</code>",
-      "<code>1|2|2.2</code>"
+      "1|2|2.2",
+      "1|2|2.2",
+      "1|2|2.2</code>"
     ],
     "answer": [
       "C",
@@ -642,10 +641,10 @@
       "4. 第 9 行的語法是不正確的比較。</code></pre>"
     ],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -682,10 +681,10 @@
       "請選擇正確的輸出結果。</code></pre>"
     ],
     "options": [
-      "<code>party，greeting，birthday，cake</code>",
-      "<code>party，cake，birthday，birthday</code>",
-      "<code>birthday，party，greeting，cake</code>",
-      "<code>birthday，greeting，party，cake</code>"
+      "party，greeting，birthday，cake",
+      "party，cake，birthday，birthday",
+      "birthday，party，greeting，cake",
+      "birthday，greeting，party，cake</code>"
     ],
     "answer": [
       "B"
@@ -756,10 +755,10 @@
       "執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "<code>[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]</code>",
-      "<code>[4, 10, 18]</code>",
-      "<code>[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]</code>",
-      "<code>[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]</code>"
+      "[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]",
+      "[4, 10, 18]",
+      "[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]",
+      "[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]</code>"
     ],
     "answer": [
       "C"
@@ -781,10 +780,10 @@
       "print(4 in aList)會輸出列印的內容？</code></pre>"
     ],
     "options": [
-      "<code>4</code>",
-      "<code>5</code>",
-      "<code>True</code>",
-      "<code>False</code>"
+      "4",
+      "5",
+      "True",
+      "False</code>"
     ],
     "answer": [
       "C"
@@ -825,10 +824,10 @@
       "選項 4. 第四次 print (第 7 行)後會顯示什麼？"
     ],
     "options": [
-      "<code>True|False</code>",
-      "<code>True|False</code>",
-      "<code>True|False</code>",
-      "<code>True|False</code>"
+      "True|False",
+      "True|False",
+      "True|False",
+      "True|False</code>"
     ],
     "answer": [
       "B",
@@ -957,11 +956,11 @@
       "5. classroom[1: -3]"
     ],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -986,10 +985,10 @@
       "你要分割這個清單，取得由第二個月份開始，每間隔一個值的月份名稱，你應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "<code>month[2:2]</code>",
-      "<code>month[::2]</code>",
-      "<code>month[1::2]</code>",
-      "<code>month[1:2]</code>"
+      "month[2:2]",
+      "month[::2]",
+      "month[1::2]",
+      "month[1:2]</code>"
     ],
     "answer": [
       "C"
@@ -1172,11 +1171,11 @@
       "●每個產品必須用逗號隔開。你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？</code></pre>"
     ],
     "options": [
-      "<code>print('\"{0}\", {1} '.format(product, qty))</code>",
-      "<code>print('\"' + product + '\", ' + str(qty))</code>",
-      "<code>print('\"%s\", %s' % (product, qty))</code>",
-      "<code>print('{0}, {1}'.format(product, qty))</code>",
-      "<code>print(product + ', ' + qty)</code>"
+      "print('\"{0}\", {1} '.format(product, qty))",
+      "print('\"' + product + '\", ' + str(qty))",
+      "print('\"%s\", %s' % (product, qty))",
+      "print('{0}, {1}'.format(product, qty))",
+      "print(product + ', ' + qty)</code>"
     ],
     "answer": [
       "A",
@@ -1205,10 +1204,10 @@
       "print(animals.format(x, y, z))輸出的結果為？</code></pre>"
     ],
     "options": [
-      "<code>Lion and Tiger and Jaguar</code>",
-      "<code>Lion and Jaguar and Tiger</code>",
-      "<code>Jaguar and Lion and Tiger</code>",
-      "<code>Tiger and Lion and Jaguar</code>"
+      "Lion and Tiger and Jaguar",
+      "Lion and Jaguar and Tiger",
+      "Jaguar and Lion and Tiger",
+      "Tiger and Lion and Jaguar</code>"
     ],
     "answer": [
       "A"
@@ -1234,10 +1233,10 @@
       "在02行應該編寫哪個程式碼？</code></pre>"
     ],
     "options": [
-      "<code>product_name = input()</code>",
-      "<code>input(product_name)</code>",
-      "<code>input('product_name')</code>",
-      "<code>name = product_input</code>"
+      "product_name = input()",
+      "input(product_name)",
+      "input('product_name')",
+      "name = product_input</code>"
     ],
     "answer": [
       "A"
@@ -1428,10 +1427,10 @@
       "你應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "<code>open('file_data', 'a')</code>",
-      "<code>open('file_data', 'w')</code>",
-      "<code>open('file_data', 'rt')</code>",
-      "<code>open('file_data', 'r')</code>"
+      "open('file_data', 'a')",
+      "open('file_data', 'w')",
+      "open('file_data', 'rt')",
+      "open('file_data', 'r')</code>"
     ],
     "answer": [
       "A"
@@ -1471,10 +1470,10 @@
       "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
     ],
     "options": [
-      "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n':</code>",
-      "<code>(程式碼1).if line = 'An': (程式碼2).if line != '':</code>",
-      "<code>(程式碼1).if line!= != 'An': (程式碼2).if line != None:</code>",
-      "<code>(程式碼1).if line != '': (程式碼2).if line != '':</code>"
+      "(程式碼1).if line != '': (程式碼2).if line != '\\n':",
+      "(程式碼1).if line = 'An': (程式碼2).if line != '':",
+      "(程式碼1).if line!= != 'An': (程式碼2).if line != None:",
+      "(程式碼1).if line != '': (程式碼2).if line != '':</code>"
     ],
     "answer": [
       "A"
@@ -1544,10 +1543,10 @@
       "data = input()</code></pre>"
     ],
     "options": [
-      "<code>允許使用者在主控臺中輸入文字</code>",
-      "<code>建立 HTML 輸入元素</code>",
-      "<code>顯示電腦上的所有輸入周邊裝置</code>",
-      "<code>顯示允許使用者輸入的訊息方塊</code>"
+      "允許使用者在主控臺中輸入文字",
+      "建立 HTML 輸入元素",
+      "顯示電腦上的所有輸入周邊裝置",
+      "顯示允許使用者輸入的訊息方塊</code>"
     ],
     "answer": [
       "A",
@@ -1715,10 +1714,10 @@
       "當 grade = 76，rand = 3 時，執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "<code>71</code>",
-      "<code>76</code>",
-      "<code>81</code>",
-      "<code>86</code>"
+      "71",
+      "76",
+      "81",
+      "86</code>"
     ],
     "answer": [
       "A"
@@ -2575,8 +2574,8 @@
       "D. if numList(i) ! 6</code>"
     ],
     "options": [
-      "<code>A|B|C|D</code>",
-      "<code>A|B|C|D</code>"
+      "A|B|C|D",
+      "A|B|C|D</code>"
     ],
     "answer": [
       "A",
@@ -2615,10 +2614,10 @@
       "return saletotal</code></pre>"
     ],
     "options": [
-      "<code>A</code>",
-      "<code>B</code>",
-      "<code>C</code>",
-      "<code>D</code>"
+      "A",
+      "B",
+      "C",
+      "D</code>"
     ],
     "answer": [
       "D"
@@ -2659,10 +2658,10 @@
 		"題4:第 7 行包含內嵌注釋。"
 	],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -2760,10 +2759,10 @@
 		"題四:第 3 行的結果會改變在第 6 行中變數 points 的值。"
 	],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -2802,18 +2801,18 @@
       "針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。</code></pre>"
     ],
     "questionA": [
-      "<pre><code>題一:getpay() 函式會發生錯誤。</code></pre>"
+      "<pre>題一:getpay() 函式會發生錯誤。</code></pre>"
     ],
     "questionB": [
-      "<pre><code>題二:getpay(salary = 5000) 不會回傳任何值。</code></pre>"
+      "<pre>題二:getpay(salary = 5000) 不會回傳任何值。</code></pre>"
     ],
     "questionC": [
-      "<pre><code>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
+      "<pre>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
     ],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -2885,10 +2884,10 @@
       "•最高數字是 100。請問哪兩個程式碼片段將符合需求?每個正確答案都是一個完整的解決方案。(請選擇 2 個答案。)</code></pre>"
     ],
     "options": [
-      "<code>from random import randrange\nprint(randrange(0, 100, 5))</code>",
-      "<code>from random import randint\nprint(randint(1, 20) * 5)</code>",
-      "<code>from random import randrange\nprint(randrange(5, 105, 5))</code>",
-      "<code>from random import randint\nprint(randint(0, 20) * 5)</code>"
+      "from random import randrange\nprint(randrange(0, 100, 5))",
+      "from random import randint\nprint(randint(1, 20) * 5)",
+      "from random import randrange\nprint(randrange(5, 105, 5))",
+      "from random import randint\nprint(randint(0, 20) * 5)</code>"
     ],
     "answer": [
       "B",
@@ -2938,9 +2937,9 @@
 		"題三:第 16 行和第 18 行的函式呼叫會產生錯誤。"
 	],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -3004,10 +3003,10 @@
 		"roomAssignment(year=6, name='Minnie George')</code></pre>"
 	],
     "options": [
-      "<code>正確|錯誤</code>",
-      "<code>正確|錯誤</code>",
-      "<code>正確|錯誤</code>",
-      "<code>正確|錯誤</code>"
+      "正確|錯誤",
+      "正確|錯誤",
+      "正確|錯誤",
+      "正確|錯誤</code>"
     ],
     "answer": [
       "A",
@@ -3033,10 +3032,10 @@
       "請問您應該採取下列哪一項做法？</code></pre>"
     ],
     "options": [
-      "<code>在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。</code>",
-      "<code>在任何一行的 # 後面放置附註。</code>",
-      "<code>在任何一行的 // 後面放置附註。</code>",
-      "<code>在任何程式碼片段的 /**/ 之間置附註</code>"
+      "在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。",
+      "在任何一行的 # 後面放置附註。",
+      "在任何一行的 // 後面放置附註。",
+      "在任何程式碼片段的 /**/ 之間置附註</code>"
     ],
     "answer": [
       "B"
@@ -3057,10 +3056,10 @@
       "<pre><code class=\"language-python\">【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？</code></pre>"
     ],
     "options": [
-      "<code>from datetime as dt</code>",
-      "<code>from datetime import datetime as dt</code>",
-      "<code>import datetime from datetime as dt</code>",
-      "<code>import datetime.datetime as dt</code>"
+      "from datetime as dt",
+      "from datetime import datetime as dt",
+      "import datetime from datetime as dt",
+      "import datetime.datetime as dt</code>"
     ],
     "answer": [
       "B"
@@ -3089,10 +3088,10 @@
       "\n當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？</code></pre>"
     ],
     "options": [
-      "<code>你需匯入 os 模組。</code>",
-      "<code>path 方法並不存在 os 模組中。</code>",
-      "<code>path 物件中不存在 isfile 方法。</code>",
-      "<code>isfile 方法不接受一個引數。</code>"
+      "你需匯入 os 模組。",
+      "path 方法並不存在 os 模組中。",
+      "path 物件中不存在 isfile 方法。",
+      "isfile 方法不接受一個引數。</code>"
     ],
     "answer": [
       "A"
@@ -3113,10 +3112,10 @@
       "<pre><code class=\"language-python\">【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？</code></pre>"
     ],
     "options": [
-      "<code>random.randrange(11, 21, 1)</code>",
-      "<code>random.randrange(11, 20, 1)</code>",
-      "<code>random.randint(11, 20)</code>",
-      "<code>random.randint(11, 21)</code>"
+      "random.randrange(11, 21, 1)",
+      "random.randrange(11, 20, 1)",
+      "random.randint(11, 20)",
+      "random.randint(11, 21)</code>"
     ],
     "answer": [
       "A",
@@ -3135,13 +3134,13 @@
     "id": 76,
     "type": "single",
     "question": [
-      "<pre><code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code></pre>"
+      "<code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code>"
     ],
     "options": [
-      "<code>random.random()</code>",
-      "<code>random.randrange(0.0, 1.0)</code>",
-      "<code>random.randrange()</code>",
-      "<code>random.randint(0, 10)</code>"
+      "random.random()",
+      "random.randrange(0.0, 1.0)",
+      "random.randrange()",
+      "random.randint(0, 10)</code>"
     ],
     "answer": [
       "D"
@@ -3183,10 +3182,10 @@
       "print(randrange(2,50,1))</code></pre>"
     ],
     "options": [
-      "<code>選項 1 程式碼片段符合要求</code>",
-      "<code>選項 2 程式碼片段符合要求</code>",
-      "<code>選項 3 程式碼片段符合要求</code>",
-      "<code>選項 4 程式碼片段符合要求</code>"
+      "選項 1 程式碼片段符合要求",
+      "選項 2 程式碼片段符合要求",
+      "選項 3 程式碼片段符合要求",
+      "選項 4 程式碼片段符合要求</code>"
     ],
     "answer": [
       "A",
@@ -3212,11 +3211,11 @@
       "● 函式必須無條件進位到整數你應該使用哪兩個數學函式？</code></pre>"
     ],
     "options": [
-      "<code>math.fabs(x)</code>",
-      "<code>math.floor(x)</code>",
-      "<code>math.fmod(x)</code>",
-      "<code>math.ceil(x)</code>",
-      "<code>math.frexp(x)</code>"
+      "math.fabs(x)",
+      "math.floor(x)",
+      "math.fmod(x)",
+      "math.ceil(x)",
+      "math.frexp(x)</code>"
     ],
     "answer": [
       "A",
@@ -3284,9 +3283,9 @@
 		"D. daysLeft = 6 + now.week()</code></pre>"
 	],
     "options": [
-      "<code>A|B|C|D</code>",
-      "<code>A|B|C|D</code>",
-      "<code>A|B|C|D</code>"
+      "A|B|C|D",
+      "A|B|C|D",
+      "A|B|C|D</code>"
     ],
     "answer": [
       "A",
@@ -3359,22 +3358,22 @@
       "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：</code></pre>"
     ],
     "questionA": [
-      "<pre><code>● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
+      "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
     ],
     "questionB": [
-      "<pre><code>● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code></pre>"
+      "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code>"
     ],
     "questionC": [
-      "<pre><code>● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code></pre>"
+      "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code>"
     ],
     "questionD": [
-      "<pre><code>● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code></pre>"
+      "● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code>"
     ],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3493,9 +3492,9 @@
 		"題三:eval 函式應該用於第 3 和 4 行。"
 	],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3550,10 +3549,10 @@
       "題四:此程式碼將正常執行，不會發生錯誤。"
     ],
     "options": [
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>",
-      "<code>Yes|No</code>"
+      "Yes|No",
+      "Yes|No",
+      "Yes|No",
+      "Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -3589,10 +3588,10 @@
       "請問您應該使用哪兩個程式碼片段? (選擇兩項)</code></pre>"
     ],
     "options": [
-      "<code>print(\"{0},{1}\".format(item, sales))</code>",
-      "<code>print(item + ',' + sales)</code>",
-      "<code>print('\"{0}\", {1}'.format(item, sales))</code>",
-      "<code>print('\"' + item + '\",', sales)</code>"
+      "print(\"{0},{1}\".format(item, sales))",
+      "print(item + ',' + sales)",
+      "print('\"{0}\", {1}'.format(item, sales))",
+      "print('\"' + item + '\",', sales)</code>"
     ],
     "answer": [
       "C",
@@ -3630,7 +3629,7 @@
 	],
     "options": [
       "<code class=\"language-python\">A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數",
-      "A.bool|B.float|C.int|D.String</code>",
+      "A.bool|B.float|C.int|D.String",
       "A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
     ],
     "answer": [
@@ -3658,10 +3657,10 @@
       "請問輸出為何?</code></pre>"
     ],
     "options": [
-      "<code>04-07-17</code>",
-      "<code>2017-APRIL-07</code>",
-      "<code>APRIL-07-17</code>",
-      "<code>04-07-2017</code>"
+      "04-07-17",
+      "2017-APRIL-07",
+      "APRIL-07-17",
+      "04-07-2017</code>"
     ],
     "answer": [
       "C"
@@ -3686,9 +3685,9 @@
       "假設有函式 cube(n)，哪個命令可列印其文件字串?</code></pre>"
     ],
     "options": [
-      "<code>A. '|B. \"|C. \"\"|D. \"\"\"</code>",
-      "<code>A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾</code>",
-      "<code>A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
+      "A. '|B. \"|C. \"\"|D. \"\"\"",
+      "A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾",
+      "A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
     ],
     "answer": [
       "D",
@@ -3715,10 +3714,10 @@
       "請問此命令的輸出為何?</code></pre>"
     ],
     "options": [
-      "<code>Bread</code>",
-      "<code>Cheese</code>",
-      "<code>Script.py</code>",
-      "<code>Bacon</code>"
+      "Bread",
+      "Cheese",
+      "Script.py",
+      "Bacon</code>"
     ],
     "answer": [
       "D"
@@ -3821,15 +3820,15 @@
     "id": 93,
     "type": "single",
     "question": [
-      "<pre><code class=\"language-python\">【CH04-補充】你編寫了以下程式來處理字串：",
+      "<code class=\"language-python\">【CH04-補充】你編寫了以下程式來處理字串：",
       "text = '  Python Programming  '",
-      "result = text.strip().upper().split(' ')[0]變數 result 的最終值是什麼？</code></pre>"
+      "result = text.strip().upper().split(' ')[0]變數 result 的最終值是什麼？</code>"
     ],
     "options": [
-      "<code>'PYTHON'</code>",
-      "<code>'PYTHON PROGRAMMING'</code>",
-      "<code>'  PYTHON'</code>",
-      "<code>'PROGRAMMING'</code>"
+      "'PYTHON'",
+      "'PYTHON PROGRAMMING'",
+      "'  PYTHON'",
+      "'PROGRAMMING'"
     ],
     "answer": [
       "A"
@@ -3857,10 +3856,10 @@
       "執行後的輸出結果為何？</code></pre>"
     ],
     "options": [
-      "<code>10</code>",
-      "<code>20</code>",
-      "<code>None</code>",
-      "<code>發生執行階段錯誤</code>"
+      "10",
+      "20",
+      "None",
+      "發生執行階段錯誤</code>"
     ],
     "answer": [
       "A"
@@ -3882,10 +3881,10 @@
       "result = 2 ** 3 ** 2</code></pre>"
     ],
     "options": [
-      "<code>512</code>",
-      "<code>64</code>",
-      "<code>18</code>",
-      "<code>81</code>"
+      "512",
+      "64",
+      "18",
+      "81</code>"
     ],
     "answer": [
       "A"
@@ -3906,10 +3905,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】使用 with open('data.txt', 'r') as f: 語法的主要好處是什麼？</code></pre>"
     ],
     "options": [
-      "<code>當區塊結束時，檔案會自動關閉，即使發生錯誤也不例外</code>",
-      "<code>它會自動將檔案內容讀取到清單中</code>",
-      "<code>它允許同時讀取和寫入檔案</code>",
-      "<code>它會自動檢查檔案是否存在，不存在則建立之</code>"
+      "當區塊結束時，檔案會自動關閉，即使發生錯誤也不例外",
+      "它會自動將檔案內容讀取到清單中",
+      "它允許同時讀取和寫入檔案",
+      "它會自動檢查檔案是否存在，不存在則建立之</code>"
     ],
     "answer": [
       "A"
@@ -3936,10 +3935,10 @@
       "執行後的輸出結果為何？</code></pre>"
     ],
     "options": [
-      "<code>Success</code>",
-      "<code>Error</code>",
-      "<code>Error Success</code>",
-      "<code>什麼都不會顯示</code>"
+      "Success",
+      "Error",
+      "Error Success",
+      "什麼都不會顯示</code>"
     ],
     "answer": [
       "A"
@@ -3964,10 +3963,10 @@
       "    print(i, end=' ')</code></pre>"
     ],
     "options": [
-      "<code>1 3</code>",
-      "<code>1 2 3</code>",
-      "<code>1</code>",
-      "<code>1 2</code>"
+      "1 3",
+      "1 2 3",
+      "1",
+      "1 2</code>"
     ],
     "answer": [
       "A"
@@ -3990,10 +3989,10 @@
       "下列哪種寫法可以正確輸出 Alice is 20？</code></pre>"
     ],
     "options": [
-      "<code>f'{name} is {age}'</code>",
-      "<code>f\"{name} is {age}\"</code>",
-      "<code>'{name} is {age}'.format()</code>",
-      "<code>f(name, ' is ', age)</code>"
+      "f'{name} is {age}'",
+      "f\"{name} is {age}\"",
+      "'{name} is {age}'.format()",
+      "f(name, ' is ', age)</code>"
     ],
     "answer": [
       "A"
@@ -4013,10 +4012,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】如果你想為你的 Python 模組 my_module.py 生成 HTML 格式的說明檔案，應該在命令列使用什麼指令？</code></pre>"
     ],
     "options": [
-      "<code>python -m pydoc -w my_module</code>",
-      "<code>python -m docgen my_module</code>",
-      "<code>pip install documentation</code>",
-      "<code>python my_module.py --help</code>"
+      "python -m pydoc -w my_module",
+      "python -m docgen my_module",
+      "pip install documentation",
+      "python my_module.py --help</code>"
     ],
     "answer": [
       "A"
@@ -4036,10 +4035,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】關於 math.trunc() 和 math.floor() 處理負數時的行為，下列何者正確？ (例如處理 -3.5)</code></pre>"
     ],
     "options": [
-      "<code>math.trunc(-3.5) 回傳 -3，math.floor(-3.5) 回傳 -4</code>",
-      "<code>兩者都回傳 -3</code>",
-      "<code>兩者都回傳 -4</code>",
-      "<code>math.trunc(-3.5) 回傳 -4，math.floor(-3.5) 回傳 -3</code>"
+      "math.trunc(-3.5) 回傳 -3，math.floor(-3.5) 回傳 -4",
+      "兩者都回傳 -3",
+      "兩者都回傳 -4",
+      "math.trunc(-3.5) 回傳 -4，math.floor(-3.5) 回傳 -3</code>"
     ],
     "answer": [
       "A"
@@ -4059,10 +4058,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】你希望從清單 [1, 2, 3, 4, 5] 中**隨機選取 3 個不重複**的元素，應該使用 random 模組的哪個方法？</code></pre>"
     ],
     "options": [
-      "<code>random.sample([1, 2, 3, 4, 5], 3)</code>",
-      "<code>random.choices([1, 2, 3, 4, 5], k=3)</code>",
-      "<code>random.select([1, 2, 3, 4, 5], 3)</code>",
-      "<code>random.pick([1, 2, 3, 4, 5], 3)</code>"
+      "random.sample([1, 2, 3, 4, 5], 3)",
+      "random.choices([1, 2, 3, 4, 5], k=3)",
+      "random.select([1, 2, 3, 4, 5], 3)",
+      "random.pick([1, 2, 3, 4, 5], 3)</code>"
     ],
     "answer": [
       "A"
@@ -4088,10 +4087,10 @@
       "若希望根據上述機率**隨機抽取 5 次** (可重複中獎)，應該使用下列哪一行程式碼？</code></pre>"
     ],
     "options": [
-      "<code>random.choices(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)</code>",
-      "<code>random.sample(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)</code>",
-      "<code>random.choices(['Gold', 'Silver', 'Stone'], k=5)</code>",
-      "<code>random.sample(['Gold', 'Silver', 'Stone'], 5)</code>"
+      "random.choices(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)",
+      "random.sample(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)",
+      "random.choices(['Gold', 'Silver', 'Stone'], k=5)",
+      "random.sample(['Gold', 'Silver', 'Stone'], 5)</code>"
     ],
     "answer": [
       "A"
@@ -4116,10 +4115,10 @@
       "random.shuffle(nums)</code></pre>"
     ],
     "options": [
-      "<code>nums 的元素順序被隨機打亂，且直接修改了原始清單</code>",
-      "<code>nums 保持不變，shuffle 回傳了一個新的打亂清單</code>",
-      "<code>nums 變成了 None</code>",
-      "<code>會發生錯誤，因為 list 不支援 shuffle</code>"
+      "nums 的元素順序被隨機打亂，且直接修改了原始清單",
+      "nums 保持不變，shuffle 回傳了一個新的打亂清單",
+      "nums 變成了 None",
+      "會發生錯誤，因為 list 不支援 shuffle</code>"
     ],
     "answer": [
       "A"
@@ -4144,10 +4143,10 @@
       "並希望主動中斷程式執行並回報錯誤，應該使用哪個關鍵字？</code></pre>"
     ],
     "options": [
-      "<code>raise ValueError('Invalid value')</code>",
-      "<code>throw ValueError('Invalid value')</code>",
-      "<code>return ValueError('Invalid value')</code>",
-      "<code>break ValueError('Invalid value')</code>"
+      "raise ValueError('Invalid value')",
+      "throw ValueError('Invalid value')",
+      "return ValueError('Invalid value')",
+      "break ValueError('Invalid value')</code>"
     ],
     "answer": [
       "A"
@@ -4168,10 +4167,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要測試一段會輸出文字到控制檯 (stdout) 的程式碼，但不希望文字真的印在螢幕上，而是想存在記憶體中以便分析。可以使用哪個模組？</code></pre>"
     ],
     "options": [
-      "<code>io.StringIO</code>",
-      "<code>sys.stdout_capture</code>",
-      "<code>os.memory_file</code>",
-      "<code>io.TextWrapper</code>"
+      "io.StringIO",
+      "sys.stdout_capture",
+      "os.memory_file",
+      "io.TextWrapper</code>"
     ],
     "answer": [
       "A"
@@ -4212,10 +4211,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】在 unittest 模組中，若要驗證 x 的值是否為 True，應使用哪個斷言方法？</code></pre>"
     ],
     "options": [
-      "<code>self.assertTrue(x)</code>",
-      "<code>self.assertIsTrue(x)</code>",
-      "<code>self.assertEqual(x, 'True')</code>",
-      "<code>self.assert(x)</code>"
+      "self.assertTrue(x)",
+      "self.assertIsTrue(x)",
+      "self.assertEqual(x, 'True')",
+      "self.assert(x)</code>"
     ],
     "answer": [
       "A"
@@ -4238,10 +4237,10 @@
       "言方法是？</code></pre>"
     ],
     "options": [
-      "<code>self.assertType(x, int)</code>",
-      "<code>self.assertIsInstance(x, int)</code>",
-      "<code>self.assertEqual(type(x), int)</code>",
-      "<code>self.assertClass(x, int)</code>"
+      "self.assertType(x, int)",
+      "self.assertIsInstance(x, int)",
+      "self.assertEqual(type(x), int)",
+      "self.assertClass(x, int)</code>"
     ],
     "answer": [
       "B"
@@ -4261,10 +4260,10 @@
       ",下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>若要檢查兩個變數的值是否相等 (Value Equality)，應使用 assertIs</code>",
-      "<code>若要檢查兩個變數是否指向同一個記憶體物件 (Reference Equality)，應使用 assertEqual</code>",
-      "<code>若要檢查 x 是否包含在清單 y 中，應使用 assertIn(x, y)</code>",
-      "<code>若要檢查 x 是否為 None，應使用 assertTrue(x == None)</code>"
+      "若要檢查兩個變數的值是否相等 (Value Equality)，應使用 assertIs",
+      "若要檢查兩個變數是否指向同一個記憶體物件 (Reference Equality)，應使用 assertEqual",
+      "若要檢查 x 是否包含在清單 y 中，應使用 assertIn(x, y)",
+      "若要檢查 x 是否為 None，應使用 assertTrue(x == None)</code>"
     ],
     "answer": [
       "C"
@@ -4286,10 +4285,10 @@
       "執行 print(colors[-2:]) 的結果是什麼？</code></pre>"
     ],
     "options": [
-      "<code>['blue', 'yellow']</code>",
-      "<code>['green', 'blue']</code>",
-      "<code>['yellow']</code>",
-      "<code>['red', 'green']</code>"
+      "['blue', 'yellow']",
+      "['green', 'blue']",
+      "['yellow']",
+      "['red', 'green']</code>"
     ],
     "answer": [
       "A"
@@ -4309,10 +4308,10 @@
       "下列哪些敘述是**正確**的？ (複選)</code></pre>"
     ],
     "options": [
-      "<code>元組是不可變的 (Immutable)，而清單是可變的 (Mutable)</code>",
-      "<code>元組定義時通常使用小括號 ()，清單使用中括號 []</code>",
-      "<code>元組和清單都可以包含不同型別的資料 (例如同時包含 int 和 string)</code>",
-      "<code>元組和清單都擁有 append() 方法來動態增加元素</code>"
+      "元組是不可變的 (Immutable)，而清單是可變的 (Mutable)",
+      "元組定義時通常使用小括號 ()，清單使用中括號 []",
+      "元組和清單都可以包含不同型別的資料 (例如同時包含 int 和 string)",
+      "元組和清單都擁有 append() 方法來動態增加元素</code>"
     ],
     "answer": [
       "A",
@@ -4337,10 +4336,10 @@
       "你希望取得 'score' 的值，如果 'score' 不存在，則回傳 0，避免程式崩潰。應使用哪種語法？</code></pre>"
     ],
     "options": [
-      "<code>student.get('score', 0)</code>",
-      "<code>student['score'] or 0</code>",
-      "<code>student.find('score', 0)</code>",
-      "<code>student['score'] if exists else 0</code>"
+      "student.get('score', 0)",
+      "student['score'] or 0",
+      "student.find('score', 0)",
+      "student['score'] if exists else 0</code>"
     ],
     "answer": [
       "A"
@@ -4362,10 +4361,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】你希望在清單 fruits = ['apple', 'banana'] 的**開頭**插入一個元素 'orange'。應該使用哪種方法？</code></pre>"
     ],
     "options": [
-      "<code>fruits.insert(0, 'orange')</code>",
-      "<code>fruits.append('orange')</code>",
-      "<code>fruits.add('orange')</code>",
-      "<code>fruits[0] = 'orange'</code>"
+      "fruits.insert(0, 'orange')",
+      "fruits.append('orange')",
+      "fruits.add('orange')",
+      "fruits[0] = 'orange'</code>"
     ],
     "answer": [
       "A"
@@ -4385,10 +4384,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】關於 sort() 和 sorted() 的區別，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>list.sort() 會直接修改原始清單 (In-place)，而 sorted(list) 會回傳一個新的已排序清單</code>",
-      "<code>sorted(list) 會直接修改原始清單，而 list.sort() 會回傳新清單</code>",
-      "<code>兩者功能完全相同，只是語法不同</code>",
-      "<code>sort() 只能用於數字清單，sorted() 只能用於字串清單</code>"
+      "list.sort() 會直接修改原始清單 (In-place)，而 sorted(list) 會回傳一個新的已排序清單",
+      "sorted(list) 會直接修改原始清單，而 list.sort() 會回傳新清單",
+      "兩者功能完全相同，只是語法不同",
+      "sort() 只能用於數字清單，sorted() 只能用於字串清單</code>"
     ],
     "answer": [
       "A"
@@ -4420,10 +4419,10 @@
       "使其變為 [3, 2, 1] 且不產生新的清單物件。應該使用哪種語法？</code></pre>"
     ],
     "options": [
-      "<code>nums.reverse()</code>",
-      "<code>nums = reversed(nums)</code>",
-      "<code>nums = nums[::-1]</code>",
-      "<code>nums.sort(reverse=False)</code>"
+      "nums.reverse()",
+      "nums = reversed(nums)",
+      "nums = nums[::-1]",
+      "nums.sort(reverse=False)</code>"
     ],
     "answer": [
       "A"
@@ -4448,10 +4447,10 @@
       "print(nums)</code></pre>"
     ],
     "options": [
-      "<code>[1, 2, 3, 4]</code>",
-      "<code>[1, 2, 2, 3, 4]</code>",
-      "<code>{1, 2, 3, 4}</code>",
-      "<code>(1, 2, 3, 4)</code>"
+      "[1, 2, 3, 4]",
+      "[1, 2, 2, 3, 4]",
+      "{1, 2, 3, 4}",
+      "(1, 2, 3, 4)</code>"
     ],
     "answer": [
       "A"
@@ -4475,10 +4474,10 @@
       "print(result)</code></pre>"
     ],
     "options": [
-      "<code>{1, 2, 3, 4, 5, 6}</code>",
-      "<code>{3, 4}</code>",
-      "<code>[3, 4]</code>",
-      "<code>{1, 2, 5, 6}</code>"
+      "{1, 2, 3, 4, 5, 6}",
+      "{3, 4}",
+      "[3, 4]",
+      "{1, 2, 5, 6}</code>"
     ],
     "answer": [
       "B"
@@ -4498,10 +4497,10 @@
       "<pre><code class=\"language-python\">【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？</code></pre>"
     ],
     "options": [
-      "<code>print(data[1])</code>",
-      "<code>print(data['b'])</code>",
-      "<code>print(data.b)</code>",
-      "<code>print(data(20))</code>"
+      "print(data[1])",
+      "print(data['b'])",
+      "print(data.b)",
+      "print(data(20))</code>"
     ],
     "answer": [
       "B"
@@ -4521,10 +4520,10 @@
       "<pre><code class=\"language-python\">【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？</code></pre>"
     ],
     "options": [
-      "<code>my_list = [1, 2, 3]; my_list[0] = 9</code>",
-      "<code>my_dict = {'x': 1}; my_dict['x'] = 9</code>",
-      "<code>my_tuple = (1, 2, 3); my_tuple[0] = 9</code>",
-      "<code>my_set = {1, 2, 3}; my_set.add(9)</code>"
+      "my_list = [1, 2, 3]; my_list[0] = 9",
+      "my_dict = {'x': 1}; my_dict['x'] = 9",
+      "my_tuple = (1, 2, 3); my_tuple[0] = 9",
+      "my_set = {1, 2, 3}; my_set.add(9)</code>"
     ],
     "answer": [
       "C"
@@ -4549,10 +4548,10 @@
       "下列哪一行程式碼是正確的？</code></pre>"
     ],
     "options": [
-      "<code>my_set.append(4)</code>",
-      "<code>my_set.add(4)</code>",
-      "<code>my_set.insert(3, 4)</code>",
-      "<code>my_set[3] = 4</code>"
+      "my_set.append(4)",
+      "my_set.add(4)",
+      "my_set.insert(3, 4)",
+      "my_set[3] = 4</code>"
     ],
     "answer": [
       "B"
@@ -4576,10 +4575,10 @@
       "<pre><code class=\"language-python\">【CH03-除錯】執行下列哪一段程式碼會導致 AttributeError (屬性錯誤)？</code></pre>"
     ],
     "options": [
-      "<code>data = [1, 2]; data.append(3)</code>",
-      "<code>data = {1, 2}; data.add(3)</code>",
-      "<code>data = {'a': 1}; data['b'] = 2</code>",
-      "<code>data = (1, 2); data.append(3)</code>"
+      "data = [1, 2]; data.append(3)",
+      "data = {1, 2}; data.add(3)",
+      "data = {'a': 1}; data['b'] = 2",
+      "data = (1, 2); data.append(3)</code>"
     ],
     "answer": [
       "D"
@@ -4601,10 +4600,10 @@
       "nums.insert(1, 20)</code></pre>"
     ],
     "options": [
-      "<code>[10, 20, 30]</code>",
-      "<code>[20, 10, 30]</code>",
-      "<code>[10, 30, 20]</code>",
-      "<code>[10, 20]</code>"
+      "[10, 20, 30]",
+      "[20, 10, 30]",
+      "[10, 30, 20]",
+      "[10, 20]</code>"
     ],
     "answer": [
       "A"
@@ -4629,10 +4628,10 @@
       "下列哪一種方式是**正確**的判斷方法？</code></pre>"
     ],
     "options": [
-      "<code>if x == float('nan'):</code>",
-      "<code>if x == math.nan:</code>",
-      "<code>if math.isnan(x):</code>",
-      "<code>if x is math.nan:</code>"
+      "if x == float('nan'):",
+      "if x == math.nan:",
+      "if math.isnan(x):",
+      "if x is math.nan:</code>"
     ],
     "answer": [
       "C"
@@ -4654,10 +4653,10 @@
       "下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>兩者功能完全相同，沒有差異</code>",
-      "<code>math.fmod 適合處理整數，% 適合處理浮點數</code>",
-      "<code>當處理負數時，math.fmod 的結果符號會隨被除數 (x)，而 % 的結果符號隨除數 (y)</code>",
-      "<code>math.fmod 只回傳整數，% 回傳浮點數</code>"
+      "兩者功能完全相同，沒有差異",
+      "math.fmod 適合處理整數，% 適合處理浮點數",
+      "當處理負數時，math.fmod 的結果符號會隨被除數 (x)，而 % 的結果符號隨除數 (y)",
+      "math.fmod 只回傳整數，% 回傳浮點數</code>"
     ],
     "answer": [
       "C"
@@ -4678,10 +4677,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 temp.txt，應該使用 os 模組的哪個函式？</code></pre>"
     ],
     "options": [
-      "<code>os.delete('temp.txt')</code>",
-      "<code>os.remove('temp.txt')</code>",
-      "<code>os.path.delete('temp.txt')</code>",
-      "<code>os.files.del('temp.txt')</code>"
+      "os.delete('temp.txt')",
+      "os.remove('temp.txt')",
+      "os.path.delete('temp.txt')",
+      "os.files.del('temp.txt')</code>"
     ],
     "answer": [
       "B"
@@ -4701,10 +4700,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】你有一個清單 scores = [100, 80, 90, 80]。你想要移除**第一個**出現的 80 分。應該使用哪個方法？</code></pre>"
     ],
     "options": [
-      "<code>scores.remove(80)</code>",
-      "<code>scores.pop(80)</code>",
-      "<code>scores.delete(80)</code>",
-      "<code>del scores[80]</code>"
+      "scores.remove(80)",
+      "scores.pop(80)",
+      "scores.delete(80)",
+      "del scores[80]</code>"
     ],
     "answer": [
       "A"
@@ -4725,10 +4724,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你的程式需要計算一個圓的面積，公式為 &pi;r^2$。使用 math 模組時，下列寫法何者最精確且標準？</code></pre>"
     ],
     "options": [
-      "<code>area = 3.14 * (r ** 2)</code>",
-      "<code>area = math.pi * math.pow(r, 2)</code>",
-      "<code>area = math.PI * r * r</code>",
-      "<code>area = math.pi * math.sqrt(r)</code>"
+      "area = 3.14 * (r ** 2)",
+      "area = math.pi * math.pow(r, 2)",
+      "area = math.PI * r * r",
+      "area = math.pi * math.sqrt(r)</code>"
     ],
     "answer": [
       "B"
@@ -4752,10 +4751,10 @@
       "# 預期結果: [1, 2, 3, 4]</code></pre>"
     ],
     "options": [
-      "<code>list_a.extend(list_b)</code>",
-      "<code>list_a.append(list_b)</code>",
-      "<code>list_a.insert(list_b)</code>",
-      "<code>list_a.add(list_b)</code>"
+      "list_a.extend(list_b)",
+      "list_a.append(list_b)",
+      "list_a.insert(list_b)",
+      "list_a.add(list_b)</code>"
     ],
     "answer": [
       "A"
@@ -4777,10 +4776,10 @@
       "應使用哪些內建函式？</code></pre>"
     ],
     "options": [
-      "<code>max(grades), min(grades)</code>",
-      "<code>grades.max(), grades.min()</code>",
-      "<code>largest(grades), smallest(grades)</code>",
-      "<code>high(grades), low(grades)</code>"
+      "max(grades), min(grades)",
+      "grades.max(), grades.min()",
+      "largest(grades), smallest(grades)",
+      "high(grades), low(grades)</code>"
     ],
     "answer": [
       "A"
@@ -4800,10 +4799,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 math.sqrt(x) 與 math.isqrt(x) 的差異，下列何者正確？</code></pre>"
     ],
     "options": [
-      "<code>math.sqrt 回傳浮點數 (float)，math.isqrt 回傳整數 (int) 且無條件捨去小數</code>",
-      "<code>math.sqrt 可以處理負數，math.isqrt 不行</code>",
-      "<code>兩者功能完全相同，只是新舊版本差異</code>",
-      "<code>math.isqrt 會四捨五入到最接近的整數</code>"
+      "math.sqrt 回傳浮點數 (float)，math.isqrt 回傳整數 (int) 且無條件捨去小數",
+      "math.sqrt 可以處理負數，math.isqrt 不行",
+      "兩者功能完全相同，只是新舊版本差異",
+      "math.isqrt 會四捨五入到最接近的整數</code>"
     ],
     "answer": [
       "A"
@@ -4824,10 +4823,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要分析浮點數的底層結構。請問 math.frexp(x) 函式的作用是什麼？</code></pre>"
     ],
     "options": [
-      "<code>回傳 x 的尾數 (mantissa) 與指數 (exponent)</code>",
-      "<code>回傳 x 的階乘 (factorial)</code>",
-      "<code>回傳 x 的絕對值 (absolute value)</code>",
-      "<code>回傳 x 的自然對數 (natural log)</code>"
+      "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
+      "回傳 x 的階乘 (factorial)",
+      "回傳 x 的絕對值 (absolute value)",
+      "回傳 x 的自然對數 (natural log)</code>"
     ],
     "answer": [
       "A"
@@ -4852,10 +4851,10 @@
       "如果輸出結果是 0，代表今天是星期幾？</code></pre>"
     ],
     "options": [
-      "<code>星期一 (Monday)</code>",
-      "<code>星期日 (Sunday)</code>",
-      "<code>星期六 (Saturday)</code>",
-      "<code>1 月 1 日</code>"
+      "星期一 (Monday)",
+      "星期日 (Sunday)",
+      "星期六 (Saturday)",
+      "1 月 1 日</code>"
     ],
     "answer": [
       "A"
@@ -4878,10 +4877,10 @@
       "應該使用 random 模組的哪個函式？</code></pre>"
     ],
     "options": [
-      "<code>random.random()</code>",
-      "<code>random.randint(0, 1)</code>",
-      "<code>random.uniform(0, 10)</code>",
-      "<code>random.float()</code>"
+      "random.random()",
+      "random.randint(0, 1)",
+      "random.uniform(0, 10)",
+      "random.float()</code>"
     ],
     "answer": [
       "A"
@@ -4902,10 +4901,10 @@
       "應使用哪個斷言方法？</code></pre>"
     ],
     "options": [
-      "<code>self.assertIs(a, b)</code>",
-      "<code>self.assertEqual(a, b)</code>",
-      "<code>self.assertSame(a, b)</code>",
-      "<code>self.assertTrue(a == b)</code>"
+      "self.assertIs(a, b)",
+      "self.assertEqual(a, b)",
+      "self.assertSame(a, b)",
+      "self.assertTrue(a == b)</code>"
     ],
     "answer": [
       "A"
@@ -4936,11 +4935,11 @@
       "    return c</code></pre>"
     ],
     "options": [
-      "<code>x: q[head]=c; y: head += 1</code>",
-      "<code>x: q.append(c); y: head += 1</code>",
-      "<code>x: q[head]=c; y: head -= 1</code>",
-      "<code>x: q.append(c); y: head -= 1</code>",
-      "<code>以上皆非</code>"
+      "x: q[head]=c; y: head += 1",
+      "x: q.append(c); y: head += 1",
+      "x: q[head]=c; y: head -= 1",
+      "x: q.append(c); y: head -= 1",
+      "以上皆非</code>"
     ],
     "answer": [
       "B"
@@ -4980,10 +4979,10 @@
       "    return c</code></pre>"
     ],
     "options": [
-      "<code>x: s.append(c); y: c = s.pop(0)</code>",
-      "<code>x: s.append(c); y: c = s.pop()</code>",
-      "<code>x: s.insert(0, c); y: c = s.pop(0)</code>",
-      "<code>x: s.append(c); y: c = s[0]</code>"
+      "x: s.append(c); y: c = s.pop(0)",
+      "x: s.append(c); y: c = s.pop()",
+      "x: s.insert(0, c); y: c = s.pop(0)",
+      "x: s.append(c); y: c = s[0]</code>"
     ],
     "answer": [
       "B"
@@ -5011,11 +5010,11 @@
       "print(a, b, c)</code></pre>"
     ],
     "options": [
-      "<code>3 -3 -3</code>",
-      "<code>3 2 -3</code>",
-      "<code>3 -3 -2</code>",
-      "<code>3 2 -2</code>",
-      "<code>執行錯誤</code>"
+      "3 -3 -3",
+      "3 2 -3",
+      "3 -3 -2",
+      "3 2 -2",
+      "執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5053,11 +5052,11 @@
       "print(sum(q[h:]))</code></pre>"
     ],
     "options": [
-      "<code>1</code>",
-      "<code>3</code>",
-      "<code>4</code>",
-      "<code>6</code>",
-      "<code>以上皆非或執行錯誤</code>"
+      "1",
+      "3",
+      "4",
+      "6",
+      "以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5098,10 +5097,10 @@
       "print(s)</code></pre>"
     ],
     "options": [
-      "<code>312765</code>",
-      "<code>780</code>",
-      "<code>312</code>",
-      "<code>執行錯誤</code>"
+      "312765",
+      "780",
+      "312",
+      "執行錯誤</code>"
     ],
     "answer": [
       "A"
@@ -5135,11 +5134,11 @@
       "print(sum(q))</code></pre>"
     ],
     "options": [
-      "<code>1</code>",
-      "<code>3</code>",
-      "<code>5</code>",
-      "<code>7</code>",
-      "<code>以上皆非或執行錯誤</code>"
+      "1",
+      "3",
+      "5",
+      "7",
+      "以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "C"
@@ -5176,11 +5175,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "<code>hello py [123, 45]</code>",
-      "<code>hello 123 45</code>",
-      "<code>hello ['123', '45']</code>",
-      "<code>hello py ['123', '45']</code>",
-      "<code>以上皆非或執行錯誤</code>"
+      "hello py [123, 45]",
+      "hello 123 45",
+      "hello ['123', '45']",
+      "hello py ['123', '45']",
+      "以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "D"
@@ -5209,11 +5208,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "<code>10045</code>",
-      "<code>[100, 45]</code>",
-      "<code>145</code>",
-      "<code>[10045]</code>",
-      "<code>以上皆非或執行錯誤</code>"
+      "10045",
+      "[100, 45]",
+      "145",
+      "[10045]",
+      "以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5244,11 +5243,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "<code>100 45</code>",
-      "<code>[100, 45], 25</code>",
-      "<code>[100, [45, 25]]</code>",
-      "<code>45 25</code>",
-      "<code>以上皆非或執行錯誤</code>"
+      "100 45",
+      "[100, 45], 25",
+      "[100, [45, 25]]",
+      "45 25",
+      "以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "E"
@@ -5278,11 +5277,11 @@
       "輸出為何？</code></pre>"
     ],
     "options": [
-      "<code>fakek</code>",
-      "<code>fakej</code>",
-      "<code>fakk</code>",
-      "<code>fakj</code>",
-      "<code>執行錯誤 Error</code>"
+      "fakek",
+      "fakej",
+      "fakk",
+      "fakj",
+      "執行錯誤 Error</code>"
     ],
     "answer": [
       "B"
@@ -5309,10 +5308,10 @@
       "print(s[::-2])</code></pre>"
     ],
     "options": [
-      "<code>geca</code>",
-      "<code>aceg</code>",
-      "<code>gec</code>",
-      "<code>db</code>"
+      "geca",
+      "aceg",
+      "gec",
+      "db</code>"
     ],
     "answer": [
       "A"
@@ -5341,10 +5340,10 @@
       "    return n + f(n-1)</code></pre>"
     ],
     "options": [
-      "<code>0</code>",
-      "<code>3</code>",
-      "<code>6</code>",
-      "<code>執行錯誤 (RecursionError)</code>"
+      "0",
+      "3",
+      "6",
+      "執行錯誤 (RecursionError)</code>"
     ],
     "answer": [
       "C"
@@ -5378,10 +5377,10 @@
       "print(cnt)</code></pre>"
     ],
     "options": [
-      "<code>10</code>",
-      "<code>16</code>",
-      "<code>20</code>",
-      "<code>25</code>"
+      "10",
+      "16",
+      "20",
+      "25</code>"
     ],
     "answer": [
       "A"
@@ -5407,10 +5406,10 @@
       "應使用下列哪個函式？</code></pre>"
     ],
     "options": [
-      "<code>time.clock()</code>",
-      "<code>time.now()</code>",
-      "<code>time.time()</code>",
-      "<code>time.date()</code>"
+      "time.clock()",
+      "time.now()",
+      "time.time()",
+      "time.date()</code>"
     ],
     "answer": [
       "C"
@@ -5431,10 +5430,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？</code></pre>"
     ],
     "options": [
-      "<code>time.stop(3.5)</code>",
-      "<code>time.pause(3500)</code>",
-      "<code>time.sleep(3.5)</code>",
-      "<code>time.wait(3.5)</code>"
+      "time.stop(3.5)",
+      "time.pause(3500)",
+      "time.sleep(3.5)",
+      "time.wait(3.5)</code>"
     ],
     "answer": [
       "C"
@@ -5455,10 +5454,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】若您在程式開頭使用了 import time as t，則下列哪一行程式碼是**正確**的呼叫方式？</code></pre>"
     ],
     "options": [
-      "<code>time.sleep(1)</code>",
-      "<code>t.sleep(1)</code>",
-      "<code>sleep(1)</code>",
-      "<code>Time.sleep(1)</code>"
+      "time.sleep(1)",
+      "t.sleep(1)",
+      "sleep(1)",
+      "Time.sleep(1)</code>"
     ],
     "answer": [
       "B"
@@ -5478,10 +5477,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 from time import * 的用法，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>這是不合法的 Python 語法</code>",
-      "<code>這會匯入 time 模組，但呼叫時仍需加上 time. 前綴 (例如 time.sleep())</code>",
-      "<code>這會將 time 模組內的所有函式匯入，呼叫時不須加前綴 (例如直接寫 sleep())</code>",
-      "<code>這只能匯入 sleep 函式，其他函式無法使用</code>"
+      "這是不合法的 Python 語法",
+      "這會匯入 time 模組，但呼叫時仍需加上 time. 前綴 (例如 time.sleep())",
+      "這會將 time 模組內的所有函式匯入，呼叫時不須加前綴 (例如直接寫 sleep())",
+      "這只能匯入 sleep 函式，其他函式無法使用</code>"
     ],
     "answer": [
       "C"
@@ -5503,10 +5502,10 @@
       "應該使用 random 模組的哪一個函式？</code></pre>"
     ],
     "options": [
-      "<code>random.choices(students, k=3)</code>",
-      "<code>random.sample(students, k=3)</code>",
-      "<code>random.randint(students, 3)</code>",
-      "<code>random.shuffle(students, 3)</code>"
+      "random.choices(students, k=3)",
+      "random.sample(students, k=3)",
+      "random.randint(students, 3)",
+      "random.shuffle(students, 3)</code>"
     ],
     "answer": [
       "B"
@@ -5528,10 +5527,10 @@
       "應該匯入哪個模組並使用哪個屬性？</code></pre>"
     ],
     "options": [
-      "<code>import os; os.args</code>",
-      "<code>import sys; sys.argv</code>",
-      "<code>import argparse; argparse.params</code>",
-      "<code>import subprocess; subprocess.input</code>"
+      "import os; os.args",
+      "import sys; sys.argv",
+      "import argparse; argparse.params",
+      "import subprocess; subprocess.input</code>"
     ],
     "answer": [
       "B"
@@ -5552,10 +5551,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 math 模組中的 math.ceil() 與 math.floor() 函式，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>math.ceil(3.2) 回傳 3，math.floor(3.2) 回傳 4</code>",
-      "<code>math.ceil(3.2) 回傳 4，math.floor(3.2) 回傳 3</code>",
-      "<code>兩者功能相同，都是四捨五入</code>",
-      "<code>math.ceil() 用於負數，math.floor() 用於正數</code>"
+      "math.ceil(3.2) 回傳 3，math.floor(3.2) 回傳 4",
+      "math.ceil(3.2) 回傳 4，math.floor(3.2) 回傳 3",
+      "兩者功能相同，都是四捨五入",
+      "math.ceil() 用於負數，math.floor() 用於正數</code>"
     ],
     "answer": [
       "B"
@@ -5577,10 +5576,10 @@
       "可以使用下列哪個變數？</code></pre>"
     ],
     "options": [
-      "<code>os.name</code>",
-      "<code>sys.os</code>",
-      "<code>platform.system_os</code>",
-      "<code>environment.type</code>"
+      "os.name",
+      "sys.os",
+      "platform.system_os",
+      "environment.type</code>"
     ],
     "answer": [
       "A"
@@ -5605,10 +5604,10 @@
       "print(2 ** 3)</code></pre>"
     ],
     "options": [
-      "<code>3, 1, 6</code>",
-      "<code>3.33, 1, 8</code>",
-      "<code>3, 1, 8</code>",
-      "<code>3, 0.1, 6</code>"
+      "3, 1, 6",
+      "3.33, 1, 8",
+      "3, 1, 8",
+      "3, 0.1, 6</code>"
     ],
     "answer": [
       "C"
@@ -5630,10 +5629,10 @@
       "<pre><code class=\"language-python\">【CH01-補充】您有一個字串變數 s = 'Python'。請問下列哪一個指令可以取出 'tho' 這段子字串？</code></pre>"
     ],
     "options": [
-      "<code>s[2:5]</code>",
-      "<code>s[2:4]</code>",
-      "<code>s[3:5]</code>",
-      "<code>s[3:6]</code>"
+      "s[2:5]",
+      "s[2:4]",
+      "s[3:5]",
+      "s[3:6]</code>"
     ],
     "answer": [
       "A"
@@ -5660,10 +5659,10 @@
       "print(not x)</code></pre>"
     ],
     "options": [
-      "<code>True, True, True</code>",
-      "<code>False, True, False</code>",
-      "<code>False, False, True</code>",
-      "<code>True, False, False</code>"
+      "True, True, True",
+      "False, True, False",
+      "False, False, True",
+      "True, False, False</code>"
     ],
     "answer": [
       "B"
@@ -5684,10 +5683,10 @@
       "<pre><code class=\"language-python\">【CH01-補充】下列哪一行程式碼使用了「複合賦值運算子」，且其執行結果與 x = x + 5 相同？</code></pre>"
     ],
     "options": [
-      "<code>x += 5</code>",
-      "<code>x =+ 5</code>",
-      "<code>x ++ 5</code>",
-      "<code>x .add(5)</code>"
+      "x += 5",
+      "x =+ 5",
+      "x ++ 5",
+      "x .add(5)</code>"
     ],
     "answer": [
       "A"
@@ -5709,10 +5708,10 @@
       "(常用於關閉檔案或釋放資源)</code></pre>"
     ],
     "options": [
-      "<code>try</code>",
-      "<code>except</code>",
-      "<code>else</code>",
-      "<code>finally</code>"
+      "try",
+      "except",
+      "else",
+      "finally</code>"
     ],
     "answer": [
       "D"
@@ -5744,10 +5743,10 @@
       "    print('D')</code></pre>"
     ],
     "options": [
-      "<code>A, B, C, D</code>",
-      "<code>A, B, D</code>",
-      "<code>A, C, D</code>",
-      "<code>A, B</code>"
+      "A, B, C, D",
+      "A, B, D",
+      "A, C, D",
+      "A, B</code>"
     ],
     "answer": [
       "B"
@@ -5771,10 +5770,10 @@
       "應使用下列哪一個斷言方法 (Assertion Method)？</code></pre>"
     ],
     "options": [
-      "<code>self.checkEqual(result, 100)</code>",
-      "<code>self.assertEqual(result, 100)</code>",
-      "<code>self.assertIs(result, 100)</code>",
-      "<code>self.assert(result == 100)</code>"
+      "self.checkEqual(result, 100)",
+      "self.assertEqual(result, 100)",
+      "self.assertIs(result, 100)",
+      "self.assert(result == 100)</code>"
     ],
     "answer": [
       "B"
@@ -5797,10 +5796,10 @@
       "應該使用哪個關鍵字？</code></pre>"
     ],
     "options": [
-      "<code>throw ValueError('Age cannot be negative')</code>",
-      "<code>catch ValueError('Age cannot be negative')</code>",
-      "<code>raise ValueError('Age cannot be negative')</code>",
-      "<code>return ValueError('Age cannot be negative')</code>"
+      "throw ValueError('Age cannot be negative')",
+      "catch ValueError('Age cannot be negative')",
+      "raise ValueError('Age cannot be negative')",
+      "return ValueError('Age cannot be negative')</code>"
     ],
     "answer": [
       "C"
@@ -5821,10 +5820,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】在 Python 中，若要為一個自定義函式編寫「說明文件 (Documentation String)」，以便其他人可以透過 help(func_name) 查詢其功能，應該使用下列哪種語法？</code></pre>"
     ],
     "options": [
-      "<code>在函式定義的第一行使用 # 開頭的註解</code>",
-      "<code>在函式定義的第一行使用三引號 \"\"\"...\"\"\" 包圍的字串</code>",
-      "<code>在函式上方使用 @doc 裝飾器</code>",
-      "<code>在函式內部使用 return \"說明文字\"</code>"
+      "在函式定義的第一行使用 # 開頭的註解",
+      "在函式定義的第一行使用三引號 \"\"\"...\"\"\" 包圍的字串",
+      "在函式上方使用 @doc 裝飾器",
+      "在函式內部使用 return \"說明文字\"</code>"
     ],
     "answer": [
       "B"
@@ -5846,10 +5845,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】您正在閱讀一份符合 PEP 8 風格指南的 Python 程式碼。請問下列哪一個變數名稱**不符合**標準的命名慣例？</code></pre>"
     ],
     "options": [
-      "<code>user_name</code>",
-      "<code>total_score</code>",
-      "<code>calculate_average</code>",
-      "<code>StudentName</code>"
+      "user_name",
+      "total_score",
+      "calculate_average",
+      "StudentName</code>"
     ],
     "answer": [
       "D"
@@ -5871,10 +5870,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】Python 使用什麼方式來定義程式碼區塊 (Block) 的範圍 (例如 if 語句或 for 迴圈內部的程式碼)？</code></pre>"
     ],
     "options": [
-      "<code>大括號 { }</code>",
-      "<code>關鍵字 begin 與 end</code>",
-      "<code>縮排 (Indentation)</code>",
-      "<code>分號 ;</code>"
+      "大括號 { }",
+      "關鍵字 begin 與 end",
+      "縮排 (Indentation)",
+      "分號 ;</code>"
     ],
     "answer": [
       "C"
@@ -5896,10 +5895,10 @@
       "應該在函式主體中填入哪個關鍵字作為「佔位符 (Placeholder)」？</code></pre>"
     ],
     "options": [
-      "<code>null</code>",
-      "<code>pass</code>",
-      "<code>void</code>",
-      "<code>continue</code>"
+      "null",
+      "pass",
+      "void",
+      "continue</code>"
     ],
     "answer": [
       "B"
@@ -5920,10 +5919,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】關於 Python 的註解 (Comment)，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>多行註解必須使用 /* ... */</code>",
-      "<code>單行註解使用 // 符號</code>",
-      "<code>Python 直譯器會忽略 # 符號後面的所有文字 (直到行尾)</code>",
-      "<code>註解只能寫在程式碼的上方，不能寫在行尾</code>"
+      "多行註解必須使用 /* ... */",
+      "單行註解使用 // 符號",
+      "Python 直譯器會忽略 # 符號後面的所有文字 (直到行尾)",
+      "註解只能寫在程式碼的上方，不能寫在行尾</code>"
     ],
     "answer": [
       "C"
@@ -5948,10 +5947,10 @@
       "    print(i, end=' ')</code></pre>"
     ],
     "options": [
-      "<code>1 2 3 4 5</code>",
-      "<code>1 2 4 5</code>",
-      "<code>1 2</code>",
-      "<code>1 2 3</code>"
+      "1 2 3 4 5",
+      "1 2 4 5",
+      "1 2",
+      "1 2 3</code>"
     ],
     "answer": [
       "B"
@@ -5972,10 +5971,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】關於 Python 迴圈獨有的 else 子句 (例如 for...else 或 while...else)，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>else 區塊只有在迴圈因為 break 中斷時才會執行</code>",
-      "<code>else 區塊只有在迴圈**正常結束** (沒有遇到 break) 時才會執行</code>",
-      "<code>else 區塊無論如何都會在迴圈結束後執行</code>",
-      "<code>Python 的迴圈不支援 else 語法</code>"
+      "else 區塊只有在迴圈因為 break 中斷時才會執行",
+      "else 區塊只有在迴圈**正常結束** (沒有遇到 break) 時才會執行",
+      "else 區塊無論如何都會在迴圈結束後執行",
+      "Python 的迴圈不支援 else 語法</code>"
     ],
     "answer": [
       "B"
@@ -5997,10 +5996,10 @@
       "若 score >= 60 則 result 為 'Pass'，否則為 'Fail'。下列哪一行寫法正確？</code></pre>"
     ],
     "options": [
-      "<code>result = 'Pass' if score >= 60 else 'Fail'</code>",
-      "<code>result = score >= 60 ? 'Pass' : 'Fail'</code>",
-      "<code>result = if score >= 60 'Pass' else 'Fail'</code>",
-      "<code>result = 'Pass' when score >= 60 else 'Fail'</code>"
+      "result = 'Pass' if score >= 60 else 'Fail'",
+      "result = score >= 60 ? 'Pass' : 'Fail'",
+      "result = if score >= 60 'Pass' else 'Fail'",
+      "result = 'Pass' when score >= 60 else 'Fail'</code>"
     ],
     "answer": [
       "A"
@@ -6020,10 +6019,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】執行 list(range(10, 0, -2)) 會產生下列哪一個數列？</code></pre>"
     ],
     "options": [
-      "<code>[10, 8, 6, 4, 2, 0]</code>",
-      "<code>[10, 8, 6, 4, 2]</code>",
-      "<code>[0, 2, 4, 6, 8, 10]</code>",
-      "<code>[] (空清單)</code>"
+      "[10, 8, 6, 4, 2, 0]",
+      "[10, 8, 6, 4, 2]",
+      "[0, 2, 4, 6, 8, 10]",
+      "[] (空清單)</code>"
     ],
     "answer": [
       "B"
@@ -6045,10 +6044,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】下列哪一段程式碼使用了「列表生成式 (List Comprehension)」來產生一個包含 1 到 5 平方數 ([1, 4, 9, 16, 25]) 的清單？</code></pre>"
     ],
     "options": [
-      "<code>nums = [x * x for x in range(1, 6)]</code>",
-      "<code>nums = list(x^2 for x in 1 to 5)</code>",
-      "<code>nums = for x in range(1, 6): x * x</code>",
-      "<code>nums = [x ** 2 in range(1, 6)]</code>"
+      "nums = [x * x for x in range(1, 6)]",
+      "nums = list(x^2 for x in 1 to 5)",
+      "nums = for x in range(1, 6): x * x",
+      "nums = [x ** 2 in range(1, 6)]</code>"
     ],
     "answer": [
       "A"
@@ -6069,10 +6068,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】在 Python 中定義一個類別 (Class) 時，下列哪一個特殊方法是用來**初始化**物件屬性的（建構子）？</code></pre>"
     ],
     "options": [
-      "<code>def __init__(self):</code>",
-      "<code>def __str__(self):</code>",
-      "<code>def __new__(self):</code>",
-      "<code>def __class__(self):</code>"
+      "def __init__(self):",
+      "def __str__(self):",
+      "def __new__(self):",
+      "def __class__(self):</code>"
     ],
     "answer": [
       "A"
@@ -6097,10 +6096,10 @@
       "        print(\"Woof!\")</code></pre>"
     ],
     "options": [
-      "<code>它代表 Dog 類別本身</code>",
-      "<code>它代表該方法 (bark) 本身</code>",
-      "<code>它代表根據類別建立出來的個別**物件實體 (Instance)**</code>",
-      "<code>它是一個 Python 保留字，沒有實際意義</code>"
+      "它代表 Dog 類別本身",
+      "它代表該方法 (bark) 本身",
+      "它代表根據類別建立出來的個別**物件實體 (Instance)**",
+      "它是一個 Python 保留字，沒有實際意義</code>"
     ],
     "answer": [
       "C"
@@ -6120,10 +6119,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】若 Cat 類別繼承自 Animal 類別，且您希望在 Cat 的 __init__ 方法中，先執行 Animal 的初始化邏輯，應該使用下列哪個函式？</code></pre>"
     ],
     "options": [
-      "<code>parent().__init__()</code>",
-      "<code>super().__init__()</code>",
-      "<code>Animal.new()</code>",
-      "<code>self.parent.__init__()</code>"
+      "parent().__init__()",
+      "super().__init__()",
+      "Animal.new()",
+      "self.parent.__init__()</code>"
     ],
     "answer": [
       "B"
@@ -6143,10 +6142,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】在 Python 類別中，若您希望某個屬性變為「私有 (Private)」，不讓外部輕易存取，根據慣例應該如何在變數名稱前加上前綴？</code></pre>"
     ],
     "options": [
-      "<code>使用一個底線 (例如 _score)</code>",
-      "<code>使用兩個底線 (例如 __score)</code>",
-      "<code>使用 private 關鍵字</code>",
-      "<code>使用 @private 裝飾器</code>"
+      "使用一個底線 (例如 _score)",
+      "使用兩個底線 (例如 __score)",
+      "使用 private 關鍵字",
+      "使用 @private 裝飾器</code>"
     ],
     "answer": [
       "B"
@@ -6166,10 +6165,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】下列哪一段程式碼正確地建立了一個 Student 類別的**物件實體** (Instance)？</code></pre>"
     ],
     "options": [
-      "<code>s = new Student()</code>",
-      "<code>s = Student()</code>",
-      "<code>s = Student.new()</code>",
-      "<code>s = class Student()</code>"
+      "s = new Student()",
+      "s = Student()",
+      "s = Student.new()",
+      "s = class Student()</code>"
     ],
     "answer": [
       "B"
@@ -6189,10 +6188,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】若您需要為特定的應用程式邏輯定義一個「自定義例外 (Custom Exception)」，應該建立一個類別並繼承自下列哪一個內建類別？</code></pre>"
     ],
     "options": [
-      "<code>BaseException</code>",
-      "<code>Exception</code>",
-      "<code>Error</code>",
-      "<code>Object</code>"
+      "BaseException",
+      "Exception",
+      "Error",
+      "Object</code>"
     ],
     "answer": [
       "B"
@@ -6213,10 +6212,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】關於 assert 關鍵字的使用，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "<code>assert x > 0 會在 x 小於等於 0 時拋出 AssertionError</code>",
-      "<code>assert 只能在 unittest 模組中使用</code>",
-      "<code>assert 用來處理使用者輸入錯誤，類似 try-except</code>",
-      "<code>當 Python 以最佳化模式 (-O) 執行時，assert 仍會執行</code>"
+      "assert x > 0 會在 x 小於等於 0 時拋出 AssertionError",
+      "assert 只能在 unittest 模組中使用",
+      "assert 用來處理使用者輸入錯誤，類似 try-except",
+      "當 Python 以最佳化模式 (-O) 執行時，assert 仍會執行</code>"
     ],
     "answer": [
       "A"
@@ -6243,10 +6242,10 @@
       "    print('Value Error')</code></pre>"
     ],
     "options": [
-      "<code>印出 'Value Error'</code>",
-      "<code>印出 'General Error'</code>",
-      "<code>程式崩潰並顯示 Traceback</code>",
-      "<code>同時印出 'General Error' 和 'Value Error'</code>"
+      "印出 'Value Error'",
+      "印出 'General Error'",
+      "程式崩潰並顯示 Traceback",
+      "同時印出 'General Error' 和 'Value Error'</code>"
     ],
     "answer": [
       "B"
@@ -6304,10 +6303,10 @@
       "<pre><code class=\"language-python\">【CH05-補充】下列哪一種錯誤屬於「邏輯錯誤 (Logic Error)」，且 Python 直譯器**無法**在執行前或執行中自動偵測並報錯？</code></pre>"
     ],
     "options": [
-      "<code>將變數名稱 count 誤打成 cont (NameError)</code>",
-      "<code>計算平均數時，分母誤用了 count - 1 導致結果不準確</code>",
-      "<code>忘記寫迴圈的冒號 (SyntaxError)</code>",
-      "<code>試圖除以零 (ZeroDivisionError)</code>"
+      "將變數名稱 count 誤打成 cont (NameError)",
+      "計算平均數時，分母誤用了 count - 1 導致結果不準確",
+      "忘記寫迴圈的冒號 (SyntaxError)",
+      "試圖除以零 (ZeroDivisionError)</code>"
     ],
     "answer": [
       "B"
@@ -6329,10 +6328,10 @@
       "<pre><code class=\"language-python\">【補充】在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？</code></pre>"
     ],
     "options": [
-      "<code>date</code>",
-      "<code>timedelta</code>",
-      "<code>time</code>",
-      "<code>datetime</code>"
+      "date",
+      "timedelta",
+      "time",
+      "datetime</code>"
     ],
     "answer": [
       "B"

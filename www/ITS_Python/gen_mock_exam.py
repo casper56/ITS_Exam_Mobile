@@ -292,8 +292,22 @@ def create_mock_exam_html(json_file, output_html, subject_name):
         const savedAns = userAnswers[index];
 
         html += '<div class="mt-3">';
+        let currentCodeClass = ''; let isInsideCode = false;
         options.forEach((opt, optIdx) => {{
-            const optStr = String(opt);
+            let processedOpt = String(opt);
+            if (processedOpt.includes('<code class="')) {{
+                isInsideCode = true;
+                const match = processedOpt.match(/<code class="([^"]+)">/);
+                if (match) currentCodeClass = match[1];
+            }}
+            if (isInsideCode) {{
+                if (!processedOpt.includes('<code class="') && !processedOpt.includes('</code>')) {{ processedOpt = `<code class="${{currentCodeClass}}">${{processedOpt}}</code>`; }}
+                else if (processedOpt.includes('<code class="') && !processedOpt.includes('</code>')) {{ processedOpt = processedOpt + '</code>'; }}
+                else if (!processedOpt.includes('<code class="') && processedOpt.includes('</code>')) {{ processedOpt = `<code class="${{currentCodeClass}}">${{processedOpt}}`; }}
+            }}
+            if (processedOpt.includes('</code>')) {{ isInsideCode = false; }}
+
+            const optStr = processedOpt;
             if (optStr.includes('|')) {{
                 const subOpts = optStr.split('|');
                 html += `<div class="sub-question-label">選項 ${{optIdx + 1}}</div>`;

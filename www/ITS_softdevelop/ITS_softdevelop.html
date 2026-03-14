@@ -4417,19 +4417,35 @@
         const ansText = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(a => formatAnswer(a, item)).join(', ');
         container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${ansText}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
         const optionsArea = container.querySelector('.options-area');
+        let currentCodeClass = ''; let isInsideCode = false;
         opts.forEach((opt, oIdx) => {
+            let processedOpt = String(opt);
+            const hadStart = processedOpt.includes('<code class="');
+            const hadEnd = processedOpt.includes('</code>');
+            if (hadStart) {
+                isInsideCode = true;
+                const match = processedOpt.match(/<code class="([^"]+)">/);
+                if (match) currentCodeClass = match[1];
+            }
+            if (isInsideCode) {
+                if (!hadStart && !hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}</code>`; }
+                else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
+                else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
+            }
+            if (hadEnd) { isInsideCode = false; }
+
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            if (typeof opt === 'string' && opt.includes('|')) {
+            if (typeof processedOpt === 'string' && processedOpt.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const customField = "question" + alphabet[oIdx];
                 const displayLabel = processContent(item[customField], item) || `選項 ${oIdx + 1}`;
                 let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
-                opt.split('|').forEach((s, subIdx) => { 
+                processedOpt.split('|').forEach((s, subIdx) => { 
                     sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 
                 });
                 optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${opt}</div>`; }
+            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedOpt}</div>`; }
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = Array.isArray(item.answer) ? item.answer : [item.answer];

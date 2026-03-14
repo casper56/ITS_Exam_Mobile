@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS Python 認證練習</title>
+    <title>ITS Python 模擬考試</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
@@ -13,75 +13,58 @@
         code { background-color: transparent !important; white-space: pre-wrap !important; }
 
         html { scrollbar-gutter: stable; }
-        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
-        .main-wrapper { display: flex; min-height: 100vh; }
-        .sidebar { width: 280px; background: #fff; border-right: 1px solid #dee2e6; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; transition: transform 0.3s ease; height: 100vh; }
-        .sidebar-header { background: #212529; color: #fff; padding: 15px; border-bottom: 1px solid #dee2e6; flex-shrink: 0; }
-        .sidebar-header h5 { font-size: 1.25rem; font-weight: bold; color: #fff; margin-bottom: 0; }
-        #progress-stats { font-size: 1.2rem; font-weight: bold; color: #fff; }
-        .sidebar-content { flex: 1; overflow-y: auto !important; padding: 15px; }
-        .sidebar-footer { padding: 15px; border-top: 1px solid #dee2e6; background: #f8f9fa; flex-shrink: 0; }
-        .content-area { flex: 1; margin-left: 280px; padding: 0; transition: margin-left 0.3s ease; overflow-x: hidden !important; }
-        
-        code:not([class*="language-"]) { display: inline-block; margin: 5px 0; line-height: 1.4; font-size: 1.0rem; color: #000 !important; background-color: transparent !important; }
-        code { background-color: transparent !important; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; color: inherit; }
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
+        .exam-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; background: #212529; color: white; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-box { font-size: 1.5rem; font-weight: bold; color: #ffc107; }
+        .main-content { margin-top: 80px; padding-bottom: 100px; width: calc(100% - 60px) !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; }
+        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; margin-bottom: 25px; }
+                .question-header { background-color: #fff; border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; }
+                .question-body, .explanation, .review-q-text, .review-exp { 
+                    padding: 5px 20px; 
+                    font-size: 1.05rem; 
+                    background-color: #fff; 
+                    color: #000; 
+                    word-wrap: break-word; 
+                    word-break: normal; 
+                    overflow-x: hidden;
+                }
+                
+                .q-content { white-space: pre-wrap; }
+                
+                code:not([class*="language-"]) { 
+                    display: inline-block; 
+                    margin: 5px 0; 
+                    line-height: 1.4; 
+                    font-size: 1.0rem; 
+                    color: #222222; 
+                }
+                
+                code {
+                    background-color: transparent !important; 
+                    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                    text-decoration: none !important;
+                }
         code[class*="language-"], pre[class*="language-"] { color: #333; text-shadow: none !important; background: transparent !important; white-space: pre-wrap !important; word-break: break-all !important; }
         .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { background: none !important; }
 
-        .form-check-input { border-radius: 50% !important; width: 1.2rem; height: 1.2rem; background-image: none !important; cursor: pointer; }
-        .form-check-input:checked { background-color: #0d6efd !important; border-color: #0d6efd !important; }
-        .option-item { border: 1px solid #e9ecef; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: flex-start; gap: 8px; }
-        .option-item pre { margin: 0; display: inline-block; width: 100%; }
-        .option-item.correct, .sub-opt-container.correct { background-color: #d1e7dd !important; border-color: #badbcc !important; color: #000 !important; }
-        .option-item.incorrect, .sub-opt-container.incorrect { background-color: #f8d7da !important; border-color: #f5c2c7 !important; color: #000 !important; }
-        .sub-opt-container.selected { background-color: #e7f1ff !important; border-color: #9ec5fe !important; color: #000 !important; }
-        .q-node { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6; border-radius: 6px; background-color: #fff; cursor: pointer; font-size: 0.85rem; }
-        .q-node.correct { background-color: #d1e7dd; color: #0f5132; }
-        .q-node.incorrect { background-color: #f8d7da; color: #842029; }
-        .q-node.corrected { background-color: #fd7e14; color: #fff; }
-        .q-node.active { background-color: #0d6efd; color: white; transform: scale(1.1); z-index: 1; }
-        .progress-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-        .category-tag { font-size: 0.8rem; color: #6c757d; background-color: #f8f9fa; padding: 2px 8px; border-radius: 12px; border: 1px solid #dee2e6; margin-top: 5px; display: inline-block; }
-        .type-badge { font-size: 0.75rem; vertical-align: middle; }
-        .question-card { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #fff; border-radius: 8px; }
-        .question-header { border-bottom: 2px solid #0d6efd; padding: 15px 20px; font-weight: bold; color: #0d6efd; display: flex; justify-content: space-between; align-items: center; }
-        .question-body { padding: 5px 20px; font-size: 1.0rem; word-wrap: break-word; word-break: normal; overflow-x: hidden; line-height: 1.8; }
-        .answer-section { display: none; margin-top: 20px; padding: 20px; background: #fff; border: 2px solid #0d6efd; border-radius: 8px; }
-        .explanation, .explanation pre, .explanation code, .review-exp-box pre, .review-exp-box code, pre[class*="language-"], code[class*="language-"] { white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-wrap: anywhere !important; }
-        
-        table, .q-table { border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; width: auto; max-width: 100%; }
-        table td, table th, .q-table td, .q-table th { border: 1px solid #000 !important; padding: 8px 12px; vertical-align: middle; }
+        .option-item { list-style: none; margin-bottom: 8px; padding: 8px 12px; border: 1px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: #fff; font-size: 1rem; display: flex; align-items: flex-start; gap: 5px; }
+        .option-item:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+        .option-item.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-opt-container { padding: 6px 10px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-size: 0.85rem; }
+        .sub-opt-container.selected { background-color: #cfe2ff; border-color: #0d6efd; color: #084298; font-weight: bold; }
+        .sub-question-label { font-weight: bold; margin-top: 15px; margin-bottom: 8px; color: #212529; border-left: 4px solid #198754; padding-left: 10px; font-size: 0.9rem; }
+        #result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid #0d6efd; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 20px auto; color: #0d6efd; }
+        .q-img { max-width: 48%; height: auto; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 5px 5px 5px 0; display: inline-block; vertical-align: top; }
+        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
+        .question-body pre { margin: 0 !important; padding: 0 !important; }
 
-        #review-area { display: none; text-align: left; padding: 20px; background: white; }
-                    .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 2px 0 !important; padding: 0 !important; }
-                    .review-q-text { font-size: 1.0rem; line-height: 1.6 !important; margin-bottom: 2px !important; color: #333; }
-                    .review-ans { color: #198754; font-weight: bold; padding: 4px 15px !important; margin: 2px 0 !important; border-left: 5px solid #198754; background: white; font-size: 1.0rem; }
-            .review-exp-box { background: #f8f9fa; padding: 8px !important; border-radius: 10px; border: 1px solid #eeeeee; line-height: 1.5 !important; color: #333; font-size: 0.95rem; }
-            
-            /* 列印版配對題佈局鎖定 */
-            .print-matching { display: block !important; width: 100% !important; position: relative !important; margin: 15px 0 !important; }
-            .match-header-row, .matching-columns { display: block !important; width: 100% !important; clear: both !important; }
-            .match-header-title, .match-col { display: inline-block !important; width: 48% !important; vertical-align: top !important; }
-            .match-item { display: flex !important; width: 100% !important; margin-bottom: 5px !important; }
-            .print-svg { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; z-index: 10 !important; background: none !important; }
+        table, .q-table { max-width: 98% !important; border-collapse: collapse !important; margin: 15px 0; border: 1px solid #000 !important; font-size: 0.9rem; line-height: 1.2; box-sizing: border-box !important; }
+        th, td, .q-table th, .q-table td { border: 1px solid #000 !important; padding: 10px 8px; vertical-align: top; word-break: break-all !important; color: #000; overflow-wrap: break-word !important; }
         
-        @media print {
-            @page { size: auto; margin: 8mm !important; }
-            * { box-sizing: border-box !important; -webkit-print-color-adjust: exact; overflow: visible !important; }
-            html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: white !important; font-size: 1.0rem !important; line-height: 1.8 !important; }
-            .main-wrapper, .mobile-toggle, .side-nav-btn, .no-print, .sidebar { display: none !important; }
-            .content-area { margin-left: 0 !important; padding: 0 !important; margin-top: 0 !important; }
-            #review-area { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            .review-item { border-bottom: 1px solid #eee !important; width: 100% !important; page-break-inside: auto; margin: 0 0 10px 0 !important; padding: 0 !important; }
-            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 8px 5px !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
-            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
-            .q-table, table { font-size: 0.7rem !important; max-width: 98% !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; border-collapse: collapse !important; }
-            .q-table td, .q-table th, td, th { border: 1px solid #000 !important; padding: 6px !important; }
-        }
-        .side-nav-btn { position: fixed; top: 45%; width: 38px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: left 0.3s ease, background 0.3s, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; transform: translateY(-50%); }
+        .side-nav-btn { position: fixed; top: 55%; transform: translateY(-50%); width: 38px; height: 65px; background: rgba(108, 117, 125, 0.7); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; transition: all 0.3s ease, width 0.2s; text-decoration: none; font-size: 1.1rem; border: none; font-family: serif; font-weight: bold; }
         .side-nav-btn:hover { background: #0d6efd; color: white; width: 45px; }
-        .side-nav-prev { left: 280px; border-radius: 0 15px 15px 0; }
+        .side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
         .side-nav-next { right: 0; border-radius: 15px 0 0 15px; }
         
         /* 回首頁懸浮按鈕樣式 (與 MOCK 區同步) */
@@ -90,11 +73,12 @@
             width: 50px; height: 50px; border-radius: 50%; background: #0d6efd;
             color: white !important; display: flex; align-items: center; justify-content: center;
             text-decoration: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s ease; font-size: 1.5rem; border: 2px solid #fff;
+            transition: transform 0.2s, background 0.3s; font-size: 1.5rem; border: 2px solid #fff;
         }
         .home-float-btn:hover { background: #0a58ca; transform: scale(1.1); color: white !important; }
-        /* 縮放與配對題樣式整合 (與 MOCK 區同步) */
-        .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; transition: all 0.3s ease; }
+
+        /* 縮放控制位置調整，避免與回首頁按鈕重疊 */
+        .zoom-controls { position: fixed; bottom: 75px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 10px; }
         .zoom-btn { width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: #0d6efd; border: 2px solid #0d6efd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
         .zoom-btn:hover { background: #f8f9fa; transform: scale(1.1); }
         
@@ -155,36 +139,92 @@
             .choicelist-item { padding: 12px; font-size: 1rem; } /* 加大手機點擊範圍 */
         }
         
-        .mobile-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1100; width: 50px; height: 50px; border-radius: 50%; background: #212529; color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; cursor: pointer; transition: all 0.3s ease; padding: 0; user-select: none; }
-        .mobile-toggle:hover { background: #495057; transform: scale(1.1); }
-        pre { background-color: transparent !important; border: none !important; line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word !important; word-break: break-all !important; overflow-x: hidden !important; margin: 0 !important; padding: 0 !important; }
-        .question-body pre { margin-bottom: 0 !important; }
-
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.active { transform: translateX(0); }
-            .content-area { margin-left: 0; }
+        #review-area { display: none; text-align: left; margin-top: 30px; border-top: 2px solid #dee2e6; padding: 20px; background: #fff; position: relative; z-index: 2000; }
+        .review-item { margin-bottom: 20px; padding: 10px; border: 2px solid #000; border-radius: 4px; background: #fff; }
+        .review-id { font-weight: bold; color: #000; padding: 5px 0; border-bottom: 1px solid #000; margin-bottom: 10px; }
+        .review-ans { color: #198754; font-weight: bold; padding: 10px; border: 1px solid #000; margin: 10px 0; border-left-width: 5px; }
+        .review-exp { font-size: 0.95rem; color: #212529; background: #f8f9fa; padding: 10px; border: 1px solid #000; }
+        @media print { 
+            @page { size: auto; margin: 10mm; }
+            * { overflow: visible !important; max-height: none !important; height: auto !important; }
+            body { background: white; width: 100%; margin: 0; padding: 0; font-size: 1.0rem !important; }
+            #exam-ui, #result-screen h2, .score-circle, .lead, #result-msg, .no-print { display: none !important; }
+            #result-screen { display: block !important; padding: 0 !important; width: 100% !important; margin: 0 !important; }
+            #review-area { display: block !important; border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .review-item { border: 2px solid #000 !important; width: 100% !important; page-break-inside: auto !important; margin-bottom: 5px !important; padding: 10px !important; border-radius: 0 !important; }
+            .review-id { margin: 0 0 5px 0 !important; padding: 0 0 2px 0 !important; border-bottom: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
+            .review-q-text { display: block !important; padding: 2px 0 !important; font-size: 1.0rem !important; width: 100% !important; }
+            .review-ans { color: #198754 !important; font-weight: bold !important; padding: 4px 10px !important; border: 1px solid #000 !important; border-left: 5px solid #198754 !important; margin: 5px 0 !important; }
+            .review-exp { font-size: 0.95rem !important; padding: 5px 10px !important; border: 1px solid #000 !important; line-height: 1.4 !important; }
             
-            /* 手機端按鈕堆疊優化 (由下往上: Toggle -> Home -> Zoom) */
-            .mobile-toggle { display: flex; align-items: center; justify-content: center; bottom: 10px !important; right: 15px !important; width: 45px !important; height: 45px !important; opacity: 1.0 !important; font-size: 1.5rem !important; border-width: 2px !important; }
-            .home-float-btn { bottom: 65px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
-            .zoom-controls { bottom: 120px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
-            
-            /* 當 Sidebar 開啟時，隱藏 Home/Zoom 按鈕以免重疊 */
-            .sidebar.active ~ .mobile-toggle { bottom: 10px !important; }
-            .sidebar.active ~ .home-float-btn, .sidebar.active ~ .zoom-controls { display: none !important; }
-            
-            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
-
-            .side-nav-btn { width: 35px; height: 55px; font-size: 1.1rem; background: rgba(33, 37, 41, 0.7); top: 45% !important; }
-            .side-nav-btn.side-nav-prev { left: 0; border-radius: 0 15px 15px 0; }
-            .sidebar.active ~ .side-nav-btn.side-nav-prev { left: 280px !important; }
-            .form-check-input { width: 22px !important; height: 22px !important; margin-top: 2px !important; }
-            .option-item { padding: 12px 15px !important; font-size: 1.1rem !important; }
-            .form-control { font-size: 1.1rem !important; padding: 12px !important; height: auto !important; }
+            /* 強效鎖定列印配對圖佈局 (同步 Flex 佈局防止 PDF 偏移) */
+            .print-matching { 
+                display: block !important; 
+                width: 100% !important; 
+                position: relative !important; 
+                margin: 20px 0 !important; 
+                padding: 15px !important;
+                background: #fff !important;
+                border: 1px solid #333 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .matching-columns { 
+                display: flex !important; 
+                flex-direction: row !important;
+                justify-content: flex-start !important; 
+                gap: 40px !important; 
+                width: 100% !important; 
+            }
+            .match-col { 
+                display: flex !important;
+                flex-direction: column !important;
+                flex: none !important; 
+                width: max-content !important; 
+                min-width: 150px !important;
+            }
+            .match-item { 
+                display: flex !important; 
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100% !important; 
+                height: 40px !important; 
+                margin-bottom: 10px !important; 
+                line-height: 1 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .q-text-part {
+                max-height: 40px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .match-dot {
+                width: 16px !important;
+                height: 16px !important;
+                margin: 0 10px !important;
+                border: 2px solid #198754 !important;
+                border-radius: 50% !important;
+                background: #fff !important;
+                flex-shrink: 0 !important;
+                display: inline-block !important;
+            }
+            .print-svg { 
+                position: absolute !important; 
+                top: 0 !important; 
+                left: 0 !important; 
+                width: 100% !important; 
+                height: 100% !important; 
+                z-index: 99 !important; 
+                display: block !important;
+                overflow: visible !important;
+            }
+            line { stroke-opacity: 1 !important; }
+            pre, code { white-space: pre-wrap !important; word-break: break-all !important; border: none !important; font-size: 1.0rem !important; margin: 0 !important; padding: 0 !important; }
+            .q-table { font-size: 0.7rem !important; margin: 10px 0 !important; page-break-inside: avoid; -webkit-print-color-adjust: exact; }
+            .q-table td, .q-table th { border: 1px solid #000 !important; padding: 6px !important; }
         }
-        
-        #question-container { transform-origin: top center; transition: none !important; position: relative; z-index: 1; }
+        /* 配對題樣式 */
         .matching-wrapper { position: relative; margin: 10px 0 15px 0 !important; padding: 0 10px 10px 10px !important; width: 100%; user-select: none; touch-action: pan-y pinch-zoom; overflow: visible !important; }
         .match-header-title { font-weight: bold; color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 5px; white-space: nowrap !important; }
         .right-col .match-header-title { margin-left: 10px; }
@@ -196,15 +236,15 @@
         .match-item-left .q-text-part { display: inline-block !important; }
         .match-dot { width: 22px !important; height: 22px !important; border: 1.5px solid #333 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; background: #fff !important; position: relative !important; flex-shrink: 0 !important; margin: 0 10px !important; }
         .match-item.matched .match-dot::after, .match-item.selected .match-dot::after { background: #333; }
-        .match-item.selected .match-dot { border-color: #0d6efd; }
         #matching-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         @media (max-width: 768px) {
-            .matching-columns, .match-header-row { gap: 60px !important; }
+            .matching-columns, .match-header-row { gap: 30px !important; }
             .match-col { min-width: 140px !important; }
-            .match-header-title { font-size: 1rem !important; }
-            .match-item { font-size: 0.9rem !important; }
-            .match-dot { width: 18px !important; height: 18px !important; margin: 0 10px !important; }
-            .match-dot::after { width: 8px !important; height: 8px !important; }
+            
+            /* 手機端按鈕強化：絕對同步練習區垂直堆疊樣式 */
+            .home-float-btn { bottom: 5px !important; right: 15px !important; width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; }
+            .zoom-controls { bottom: 60px !important; right: 15px !important; gap: 10px !important; flex-direction: column !important; display: flex; }
+            .zoom-btn { width: 45px !important; height: 45px !important; font-size: 1.5rem !important; opacity: 1.0 !important; border-width: 2px !important; display: flex !important; align-items: center; justify-content: center; margin-bottom: 0 !important; }
         }
         /* 資料處理遮罩 */
         #loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-size: 1.5rem; font-weight: bold; color: #333; }
@@ -213,39 +253,39 @@
     </style>
 </head>
 <body>
-    <div id="loading-overlay" class="no-print">
-        <div class="spinner"></div>
-        <div>資料處理中，請稍候...</div>
-    </div>
-    <div class="zoom-controls no-print">
-        <div class="zoom-btn" onclick="changeZoom(0.1)">➕</div>
-        <div class="zoom-btn" onclick="changeZoom(-0.1)">➖</div>
-    </div>
-    <a href="../../index.html" class="home-float-btn no-print">🏠</a>
-<div class="main-wrapper">
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center"><a href="../../index.html" class="text-decoration-none text-white me-2">🏠</a><h5 class="m-0" style="font-size: 1.1rem;">題庫列表</h5></div>
-                <div class="d-flex gap-1">
-                    <button type="button" onclick="prepareAndPrint()" class="btn btn-outline-light btn-sm py-1 px-2" style="font-size: 0.8rem;">完整解析</button>
-                    <button type="button" onclick="prepareAndPrint(true)" class="btn btn-warning btn-sm py-1 px-2" style="font-size: 0.8rem; font-weight: bold;">錯題訂正</button>
-                </div>
-            </div>
-            <div id="progress-stats">✅0 ❌0 🟠0 / 183</div>
-        </div>
-        <div class="sidebar-content">
-            <div class="progress-grid" id="progress-grid"></div>
-        </div>
-        <div class="sidebar-footer"><button class="btn btn-outline-danger btn-sm w-100" onclick="resetProgress()">重置 練習進度</button></div>
-    </nav>
-    <button class="mobile-toggle no-print" onclick="toggleSidebar()">☰</button>
-    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="prevQuestion()">&#10094;</div>
-    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="nextQuestion()">&#10095;</div>
-    <main class="content-area"><div class="container-fluid" style="width: calc(100% - 60px); padding: 0; margin-left: auto; margin-right: auto; max-width: none;"><div id="question-container"></div></div></main>
+<div id="loading-overlay" class="no-print">
+    <div class="spinner"></div>
+    <div>資料處理中，請稍候...</div>
 </div>
-<div id="review-area"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<a href="../../index.html" class="home-float-btn no-print">🏠</a>
+<div class="zoom-controls no-print">
+    <div class="zoom-btn" onclick="adjustZoom(0.1)">➕</div>
+    <div class="zoom-btn" onclick="adjustZoom(-0.1)">➖</div>
+</div>
+<div id="exam-ui">
+    <header class="exam-header d-flex justify-content-between align-items-center">
+        <div><h5 class="m-0">ITS Python 模擬考試</h5></div>
+        <div class="timer-box" id="timer">50:00</div>
+        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+    </header>
+    <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
+    <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
+    <main class="container-fluid main-content" style="width: calc(100% - 60px); margin-top: 80px; max-width: none !important;"><div id="question-area"></div></main>
+</div>
+<div id="result-screen" class="container-fluid">
+    <h2 class="mb-4">考試結束</h2><div class="score-circle" id="final-score">0</div>
+    <p class="lead">答對題數：<span id="correct-count">0</span> / 60</p>
+    <div id="category-stats" class="mb-4 no-print"></div><div id="result-msg" class="mb-4"></div>
+    <div class="mt-5 no-print">
+        <a href="../../index.html" class="btn btn-primary btn-lg me-2">回首頁</a>
+        <button class="btn btn-outline-secondary btn-lg me-2" onclick="location.reload()">重新挑戰</button>
+        <button id="btn-export-pdf" class="btn btn-success btn-lg" onclick="prepareMockPrint()">🖨️ 列印錯題</button>
+    </div>
+    <div id="review-area">
+        <div class="d-flex justify-content-between align-items-center mb-4 no-print"><h3 class="m-0">錯誤題目回顧報告</h3></div>
+        <div id="review-list"></div>
+    </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="../js/sync_manager.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
@@ -253,7 +293,109 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 <script src="../js/choicelist_patch_v2.js"></script>
-<script>    const quizData = [
+<script>    function prepareMockPrint() {
+        const overlay = document.getElementById('loading-overlay');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        const homeBtn = document.querySelector('.home-float-btn');
+        const sidePrev = document.getElementById('side-btn-prev');
+        const sideNext = document.getElementById('side-btn-next');
+        const reviewArea = document.getElementById('review-area');
+        if (overlay) overlay.style.display = 'flex';
+        if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
+        if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
+        if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
+        if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
+        if (reviewArea) reviewArea.style.display = 'block';
+        const oldZoom = document.body.style.zoom || "1.0";
+        document.body.style.zoom = "1.0";
+
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                if (!svg) return;
+
+                // 實作左側動態字寬偵測 (練習區列印專用)
+                const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
+                let maxW = 0;
+                leftParts.forEach(p => {
+                    const w = p.getBoundingClientRect().width;
+                    if (w > maxW) maxW = w;
+                });
+                if (maxW > 0) {
+                    leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
+                }
+
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width); svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px'; svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+
+            setTimeout(() => {
+                window.print();
+                if (overlay) overlay.style.display = 'none';
+                // 注意：在「考試結束」畫面中，這些按鈕應保持隱藏，不可恢復 display: 'flex'
+                if (zoomBtns) zoomBtns.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
+                if (sidePrev) sidePrev.style.display = 'none';
+                if (sideNext) sideNext.style.display = 'none';
+                // 確保縮放保持在 1.0
+                document.body.style.zoom = "1.0";
+            }, 1200);
+        }, 2500);
+    }
+
+    const EXAM_LIMIT = 60, WRONG_KEY = 'itspy_exam_wrong_ids', HISTORY_KEY = 'itspy_mock_history';
+    const SYNC_SUBJECT_NAME = 'ITS_Python';
+    let currentIndex = 0, userAnswers = {}, timeLeft = 50 * 60, timerInterval;
+    let examQuestions = [];
+
+    function parseAnswerToIndex(val) {
+        if (typeof val === 'number') return val - 1;
+        if (typeof val === 'string') {
+            const v = val.toUpperCase();
+            if (v === 'Y') return 0; if (v === 'N') return 1;
+            const code = v.charCodeAt(0);
+            if (code >= 65 && code <= 90) return code - 65;
+            return parseInt(val) - 1;
+        }
+        return -1;
+    }
+    function formatAnswer(a, item) {
+        const idx = parseAnswerToIndex(a);
+        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
+        const actualIsNum = (item && item.labelType === 'num');
+        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
+    }
+
+    const allQuestions = [
   {
     "id": 1,
     "type": "choicelist",
@@ -265,7 +407,7 @@
       "其中距離轉換為浮點數，分秒的輸入值都要轉換為整數。</code></pre>"
     ],
     "slots": [
-      "<code class=\"language-python\">#步速計算器",
+      "<pre><code class=\"language-python\">#步速計算器",
       "distance = <slot01>(input(\"Enter the distance traveled in meters\"))",
       "# convert to kilometers",
       "distance_kms = distance / 1000",
@@ -276,7 +418,7 @@
       "time time_minute*60+time_se_sec",
       "pace = time / distance_kms",
       "#平均速度",
-      "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code>"
+      "print(\"The average velocity is\"， str((pace //60)) + \" \" \" + str ((pace0))</code></pre>"
     ],
     "options": [
       "int",
@@ -343,7 +485,8 @@
     "id": 3,
     "type": "single",
     "question": [
-      "<code class=\"language-python\">【CH01-3】你正在編寫一個計算使用者出生年份的程式, 該程式詢問使用者的年齡和當前年份,",
+      "<code class=\"language-python\">【CH01-3】你正在編寫一個計算使用者出生年份的程式，",
+      "該程式詢問使用者的年齡和當前年份，",
       "然後輸出使用者的出生年份。",
       "你編寫以下程式碼：",
       "01 age = input(\"Enter your age: \")",
@@ -353,9 +496,9 @@
       "下列選項正確答案為？</code>"
     ],
     "options": [
-      "第 1 行中的 age 的資料型別是 str",
-      "第 3 行中的 born 的資料型別是 float",
-      "第 4 行中的 message 的資料型別是 bool</code>"
+      "<code>第 1 行中的 age 的資料型別是 str</code>",
+      "<code>第 3 行中的 born 的資料型別是 float</code>",
+      "<code>第 4 行中的 message 的資料型別是 bool</code>"
     ],
     "answer": [
       "A"
@@ -389,9 +532,9 @@
       "c = x3 / y3</code></pre>"
     ],
     "options": [
-      "執行程式碼片段 1 後，變數 a 的資料類為 str。",
-      "執行程式碼片段 2 後，變數 b 的資料型別是 float",
-      "執行程式碼片段 3 後，變數 c 的資料型別為 int</code>"
+      "<code>執行程式碼片段 1 後，變數 a 的資料類為 str。</code>",
+      "<code>執行程式碼片段 2 後，變數 b 的資料型別是 float</code>",
+      "<code>執行程式碼片段 3 後，變數 c 的資料型別為 int</code>"
     ],
     "answer": [
       "A",
@@ -420,10 +563,10 @@
       "type(False)</code></pre>"
     ],
     "options": [
-      "int,  int,  bool,  bool",
-      "float,  float,  str,  bool",
-      "int,  float,  str,  bool",
-      "float,  int,  str,  str</code>"
+      "<code>int,  int,  bool,  bool</code>",
+      "<code>float,  float,  str,  bool</code>",
+      "<code>int,  float,  str,  bool</code>",
+      "<code>float,  int,  str,  str</code>"
     ],
     "answer": [
       "B"
@@ -506,10 +649,10 @@
       "你應該使用哪兩個程式碼片段？</code></pre>"
     ],
     "options": [
-      "<code class=\"language-python\">average_score = float(total_score // number_of_students)",
-      "average score = int(total_score / number of_students)",
-      "average_score = float(total_score ** number_of_students)",
-      "average_score = total_score // number_of_students</code>"
+      "<code>average_score = float(total_score // number_of_students)</code>",
+      "<code>average score = int(total_score / number of_students)</code>",
+      "<code>average_score = float(total_score ** number_of_students)</code>",
+      "<code>average_score = total_score // number_of_students</code>"
     ],
     "answer": [
       "B",
@@ -538,10 +681,10 @@
       "執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "30.0",
-      "30.5",
-      "457",
-      "語法錯誤</code>"
+      "<code>30.0</code>",
+      "<code>30.5</code>",
+      "<code>457</code>",
+      "<code>語法錯誤</code>"
     ],
     "answer": [
       "A"
@@ -573,10 +716,10 @@
       "如何完成 2 行的程式碼？</code></pre>"
     ],
     "options": [
-      "b= (a + 5)**2",
-      "b = a + 5 **2",
-      "b = a + 5 * 2",
-      "b=a+(5**2)</code>"
+      "<code>b= (a + 5)**2</code>",
+      "<code>b = a + 5 **2</code>",
+      "<code>b = a + 5 * 2</code>",
+      "<code>b=a+(5**2)</code>"
     ],
     "answer": [
       "A"
@@ -604,10 +747,10 @@
       "為了完成這個程式碼，你應該在 3 行加入什麼程式碼？</code></pre>"
     ],
     "options": [
-      "if not (kid or senior):",
-      "if (not kid) or senior:",
-      "if not (kid and senior):",
-      "if (not kid) and senior:</code>"
+      "<code>if not (kid or senior):</code>",
+      "<code>if (not kid) or senior:</code>",
+      "<code>if not (kid and senior):</code>",
+      "<code>if (not kid) and senior:</code>"
     ],
     "answer": [
       "A"
@@ -627,10 +770,10 @@
       "<pre><code class=\"language-python\">【CH02-5】你開發了一個比較數字的 Python 程式，下列何者的值是 True ？(可複選)</code></pre>"
     ],
     "options": [
-      "0 or 5",
-      "bool(0)",
-      "None is None",
-      "-5 < 0 < 5</code>"
+      "<code>0 or 5</code>",
+      "<code>bool(0)</code>",
+      "<code>None is None</code>",
+      "<code>-5 < 0 < 5</code>"
     ],
     "answer": [
       "C",
@@ -654,10 +797,10 @@
       "(3*(1+2)**2-2**2*3)</code></pre>"
     ],
     "options": [
-      "3",
-      "13",
-      "15",
-      "69</code>"
+      "<code>3</code>",
+      "<code>13</code>",
+      "<code>15</code>",
+      "<code>69</code>"
     ],
     "answer": [
       "C"
@@ -691,9 +834,9 @@
       "在第三次 print 後會顯示什麼？[ 選項 3 ]</code></pre>"
     ],
     "options": [
-      "Test 1|Test 1Test 2|Test 2",
-      "Test 1|Test 1Test 2|Test 2",
-      "Test 1|Test 1Test 2|Test 2</code>"
+      "<code>Test 1|Test 1Test 2|Test 2</code>",
+      "<code>Test 1|Test 1Test 2|Test 2</code>",
+      "<code>Test 1|Test 1Test 2|Test 2</code>"
     ],
     "answer": [
       "A",
@@ -730,9 +873,9 @@
       "選項3 :哪個運算式等於題目函式中的運算式？"
     ],
     "options": [
-      "a+b|b*c|c-d",
-      "加(+)|減(-)|乘(*)",
-      "(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d</code>"
+      "<code>a+b|b*c|c-d</code>",
+      "<code>加(+)|減(-)|乘(*)</code>",
+      "<code>(a+b)*(c-d)|(a+(b*c))-d|((a+b)*c)-d</code>"
     ],
     "answer": [
       "A",
@@ -761,10 +904,10 @@
       "6. 且 (And)</code></pre>"
     ],
     "options": [
-      "加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且",
-      "括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且",
-      "指數 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 且 -> 加法和減法",
-      "乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法</code>"
+      "<code>加法和減法 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 指數 -> 且</code>",
+      "<code>括弧 -> 指數 -> 正數、負數與反位元 -> 乘法和除法 -> 加法和減法 -> 且</code>",
+      "<code>指數 -> 乘法和除法 -> 正數、負數與反位元 -> 括弧 -> 且 -> 加法和減法</code>",
+      "<code>乘法和除法 -> 括弧 -> 正數、負數與反位元 -> 指數 -> 且 -> 加法和減法</code>"
     ],
     "answer": [
       "B"
@@ -797,7 +940,7 @@
       "你需要撰寫程式碼去符合這個需求，要如何完成這段程式碼？</code></pre>"
     ],
     "slots": [
-      "<code class=\"language-python\">ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
+      "ontime = input(\"Was car returned before 11 pm? y or n\").lower()",
       "days_rented = int(input(\"How many days was car rented?\"))",
       "day_rented = input(\"What day was the car rented?\").capitalize()",
       "cost_per_day = 100",
@@ -809,7 +952,7 @@
       "   total = (days_rented*cost_per_day) * 0.8",
       "else:",
       "  total = days_rented * cost_per_day",
-      "print(\"Cost of the car rental is : $\", total)</code>"
+      "print(\"Cost of the car rental is : $\", total)"
     ],
     "options": [
       [
@@ -855,9 +998,9 @@
       "print(a % b)的輸出結果是？[ 選項 3 ]</code></pre>"
     ],
     "options": [
-      "1|2|2.2",
-      "1|2|2.2",
-      "1|2|2.2</code>"
+      "<code>1|2|2.2</code>",
+      "<code>1|2|2.2</code>",
+      "<code>1|2|2.2</code>"
     ],
     "answer": [
       "C",
@@ -896,10 +1039,10 @@
       "4. 第 9 行的語法是不正確的比較。</code></pre>"
     ],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -936,10 +1079,10 @@
       "請選擇正確的輸出結果。</code></pre>"
     ],
     "options": [
-      "party，greeting，birthday，cake",
-      "party，cake，birthday，birthday",
-      "birthday，party，greeting，cake",
-      "birthday，greeting，party，cake</code>"
+      "<code>party，greeting，birthday，cake</code>",
+      "<code>party，cake，birthday，birthday</code>",
+      "<code>birthday，party，greeting，cake</code>",
+      "<code>birthday，greeting，party，cake</code>"
     ],
     "answer": [
       "B"
@@ -1010,10 +1153,10 @@
       "執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]",
-      "[4, 10, 18]",
-      "[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]",
-      "[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]</code>"
+      "<code>[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 61]</code>",
+      "<code>[4, 10, 18]</code>",
+      "<code>[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]</code>",
+      "<code>[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]</code>"
     ],
     "answer": [
       "C"
@@ -1035,10 +1178,10 @@
       "print(4 in aList)會輸出列印的內容？</code></pre>"
     ],
     "options": [
-      "4",
-      "5",
-      "True",
-      "False</code>"
+      "<code>4</code>",
+      "<code>5</code>",
+      "<code>True</code>",
+      "<code>False</code>"
     ],
     "answer": [
       "C"
@@ -1079,10 +1222,10 @@
       "選項 4. 第四次 print (第 7 行)後會顯示什麼？"
     ],
     "options": [
-      "True|False",
-      "True|False",
-      "True|False",
-      "True|False</code>"
+      "<code>True|False</code>",
+      "<code>True|False</code>",
+      "<code>True|False</code>",
+      "<code>True|False</code>"
     ],
     "answer": [
       "B",
@@ -1211,11 +1354,11 @@
       "5. classroom[1: -3]"
     ],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -1240,10 +1383,10 @@
       "你要分割這個清單，取得由第二個月份開始，每間隔一個值的月份名稱，你應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "month[2:2]",
-      "month[::2]",
-      "month[1::2]",
-      "month[1:2]</code>"
+      "<code>month[2:2]</code>",
+      "<code>month[::2]</code>",
+      "<code>month[1::2]</code>",
+      "<code>month[1:2]</code>"
     ],
     "answer": [
       "C"
@@ -1426,11 +1569,11 @@
       "●每個產品必須用逗號隔開。你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？</code></pre>"
     ],
     "options": [
-      "print('\"{0}\", {1} '.format(product, qty))",
-      "print('\"' + product + '\", ' + str(qty))",
-      "print('\"%s\", %s' % (product, qty))",
-      "print('{0}, {1}'.format(product, qty))",
-      "print(product + ', ' + qty)</code>"
+      "<code>print('\"{0}\", {1} '.format(product, qty))</code>",
+      "<code>print('\"' + product + '\", ' + str(qty))</code>",
+      "<code>print('\"%s\", %s' % (product, qty))</code>",
+      "<code>print('{0}, {1}'.format(product, qty))</code>",
+      "<code>print(product + ', ' + qty)</code>"
     ],
     "answer": [
       "A",
@@ -1459,10 +1602,10 @@
       "print(animals.format(x, y, z))輸出的結果為？</code></pre>"
     ],
     "options": [
-      "Lion and Tiger and Jaguar",
-      "Lion and Jaguar and Tiger",
-      "Jaguar and Lion and Tiger",
-      "Tiger and Lion and Jaguar</code>"
+      "<code>Lion and Tiger and Jaguar</code>",
+      "<code>Lion and Jaguar and Tiger</code>",
+      "<code>Jaguar and Lion and Tiger</code>",
+      "<code>Tiger and Lion and Jaguar</code>"
     ],
     "answer": [
       "A"
@@ -1488,10 +1631,10 @@
       "在02行應該編寫哪個程式碼？</code></pre>"
     ],
     "options": [
-      "product_name = input()",
-      "input(product_name)",
-      "input('product_name')",
-      "name = product_input</code>"
+      "<code>product_name = input()</code>",
+      "<code>input(product_name)</code>",
+      "<code>input('product_name')</code>",
+      "<code>name = product_input</code>"
     ],
     "answer": [
       "A"
@@ -1682,10 +1825,10 @@
       "你應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "open('file_data', 'a')",
-      "open('file_data', 'w')",
-      "open('file_data', 'rt')",
-      "open('file_data', 'r')</code>"
+      "<code>open('file_data', 'a')</code>",
+      "<code>open('file_data', 'w')</code>",
+      "<code>open('file_data', 'rt')</code>",
+      "<code>open('file_data', 'r')</code>"
     ],
     "answer": [
       "A"
@@ -1725,10 +1868,10 @@
       "在(程式碼1)及(程式碼2)中你應該編寫哪些程式碼？</code></pre>"
     ],
     "options": [
-      "(程式碼1).if line != '': (程式碼2).if line != '\\n':",
-      "(程式碼1).if line = 'An': (程式碼2).if line != '':",
-      "(程式碼1).if line!= != 'An': (程式碼2).if line != None:",
-      "(程式碼1).if line != '': (程式碼2).if line != '':</code>"
+      "<code>(程式碼1).if line != '': (程式碼2).if line != '\\n':</code>",
+      "<code>(程式碼1).if line = 'An': (程式碼2).if line != '':</code>",
+      "<code>(程式碼1).if line!= != 'An': (程式碼2).if line != None:</code>",
+      "<code>(程式碼1).if line != '': (程式碼2).if line != '':</code>"
     ],
     "answer": [
       "A"
@@ -1798,10 +1941,10 @@
       "data = input()</code></pre>"
     ],
     "options": [
-      "允許使用者在主控臺中輸入文字",
-      "建立 HTML 輸入元素",
-      "顯示電腦上的所有輸入周邊裝置",
-      "顯示允許使用者輸入的訊息方塊</code>"
+      "<code>允許使用者在主控臺中輸入文字</code>",
+      "<code>建立 HTML 輸入元素</code>",
+      "<code>顯示電腦上的所有輸入周邊裝置</code>",
+      "<code>顯示允許使用者輸入的訊息方塊</code>"
     ],
     "answer": [
       "A",
@@ -1969,10 +2112,10 @@
       "當 grade = 76，rand = 3 時，執行程式碼的輸出值是？</code></pre>"
     ],
     "options": [
-      "71",
-      "76",
-      "81",
-      "86</code>"
+      "<code>71</code>",
+      "<code>76</code>",
+      "<code>81</code>",
+      "<code>86</code>"
     ],
     "answer": [
       "A"
@@ -2829,8 +2972,8 @@
       "D. if numList(i) ! 6</code>"
     ],
     "options": [
-      "A|B|C|D",
-      "A|B|C|D</code>"
+      "<code>A|B|C|D</code>",
+      "<code>A|B|C|D</code>"
     ],
     "answer": [
       "A",
@@ -2869,10 +3012,10 @@
       "return saletotal</code></pre>"
     ],
     "options": [
-      "A",
-      "B",
-      "C",
-      "D</code>"
+      "<code>A</code>",
+      "<code>B</code>",
+      "<code>C</code>",
+      "<code>D</code>"
     ],
     "answer": [
       "D"
@@ -2913,10 +3056,10 @@
 		"題4:第 7 行包含內嵌注釋。"
 	],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3014,10 +3157,10 @@
 		"題四:第 3 行的結果會改變在第 6 行中變數 points 的值。"
 	],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3056,18 +3199,18 @@
       "針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。</code></pre>"
     ],
     "questionA": [
-      "<pre>題一:getpay() 函式會發生錯誤。</code></pre>"
+      "<pre><code>題一:getpay() 函式會發生錯誤。</code></pre>"
     ],
     "questionB": [
-      "<pre>題二:getpay(salary = 5000) 不會回傳任何值。</code></pre>"
+      "<pre><code>題二:getpay(salary = 5000) 不會回傳任何值。</code></pre>"
     ],
     "questionC": [
-      "<pre>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
+      "<pre><code>題三:getpay(qty = 500, qtyrate=4) 回傳值為 2000</code></pre>"
     ],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -3139,10 +3282,10 @@
       "•最高數字是 100。請問哪兩個程式碼片段將符合需求?每個正確答案都是一個完整的解決方案。(請選擇 2 個答案。)</code></pre>"
     ],
     "options": [
-      "from random import randrange\nprint(randrange(0, 100, 5))",
-      "from random import randint\nprint(randint(1, 20) * 5)",
-      "from random import randrange\nprint(randrange(5, 105, 5))",
-      "from random import randint\nprint(randint(0, 20) * 5)</code>"
+      "<code>from random import randrange\nprint(randrange(0, 100, 5))</code>",
+      "<code>from random import randint\nprint(randint(1, 20) * 5)</code>",
+      "<code>from random import randrange\nprint(randrange(5, 105, 5))</code>",
+      "<code>from random import randint\nprint(randint(0, 20) * 5)</code>"
     ],
     "answer": [
       "B",
@@ -3192,9 +3335,9 @@
 		"題三:第 16 行和第 18 行的函式呼叫會產生錯誤。"
 	],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -3258,10 +3401,10 @@
 		"roomAssignment(year=6, name='Minnie George')</code></pre>"
 	],
     "options": [
-      "正確|錯誤",
-      "正確|錯誤",
-      "正確|錯誤",
-      "正確|錯誤</code>"
+      "<code>正確|錯誤</code>",
+      "<code>正確|錯誤</code>",
+      "<code>正確|錯誤</code>",
+      "<code>正確|錯誤</code>"
     ],
     "answer": [
       "A",
@@ -3287,10 +3430,10 @@
       "請問您應該採取下列哪一項做法？</code></pre>"
     ],
     "options": [
-      "在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。",
-      "在任何一行的 # 後面放置附註。",
-      "在任何一行的 // 後面放置附註。",
-      "在任何程式碼片段的 /**/ 之間置附註</code>"
+      "<code>在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。</code>",
+      "<code>在任何一行的 # 後面放置附註。</code>",
+      "<code>在任何一行的 // 後面放置附註。</code>",
+      "<code>在任何程式碼片段的 /**/ 之間置附註</code>"
     ],
     "answer": [
       "B"
@@ -3311,10 +3454,10 @@
       "<pre><code class=\"language-python\">【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？</code></pre>"
     ],
     "options": [
-      "from datetime as dt",
-      "from datetime import datetime as dt",
-      "import datetime from datetime as dt",
-      "import datetime.datetime as dt</code>"
+      "<code>from datetime as dt</code>",
+      "<code>from datetime import datetime as dt</code>",
+      "<code>import datetime from datetime as dt</code>",
+      "<code>import datetime.datetime as dt</code>"
     ],
     "answer": [
       "B"
@@ -3343,10 +3486,10 @@
       "\n當你執行該程式時，你會收到第 3 行上的錯誤。導致錯誤的原因是什麼？</code></pre>"
     ],
     "options": [
-      "你需匯入 os 模組。",
-      "path 方法並不存在 os 模組中。",
-      "path 物件中不存在 isfile 方法。",
-      "isfile 方法不接受一個引數。</code>"
+      "<code>你需匯入 os 模組。</code>",
+      "<code>path 方法並不存在 os 模組中。</code>",
+      "<code>path 物件中不存在 isfile 方法。</code>",
+      "<code>isfile 方法不接受一個引數。</code>"
     ],
     "answer": [
       "A"
@@ -3367,10 +3510,10 @@
       "<pre><code class=\"language-python\">【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？</code></pre>"
     ],
     "options": [
-      "random.randrange(11, 21, 1)",
-      "random.randrange(11, 20, 1)",
-      "random.randint(11, 20)",
-      "random.randint(11, 21)</code>"
+      "<code>random.randrange(11, 21, 1)</code>",
+      "<code>random.randrange(11, 20, 1)</code>",
+      "<code>random.randint(11, 20)</code>",
+      "<code>random.randint(11, 21)</code>"
     ],
     "answer": [
       "A",
@@ -3389,13 +3532,13 @@
     "id": 76,
     "type": "single",
     "question": [
-      "<code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code>"
+      "<pre><code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code></pre>"
     ],
     "options": [
-      "random.random()",
-      "random.randrange(0.0, 1.0)",
-      "random.randrange()",
-      "random.randint(0, 10)</code>"
+      "<code>random.random()</code>",
+      "<code>random.randrange(0.0, 1.0)</code>",
+      "<code>random.randrange()</code>",
+      "<code>random.randint(0, 10)</code>"
     ],
     "answer": [
       "D"
@@ -3437,10 +3580,10 @@
       "print(randrange(2,50,1))</code></pre>"
     ],
     "options": [
-      "選項 1 程式碼片段符合要求",
-      "選項 2 程式碼片段符合要求",
-      "選項 3 程式碼片段符合要求",
-      "選項 4 程式碼片段符合要求</code>"
+      "<code>選項 1 程式碼片段符合要求</code>",
+      "<code>選項 2 程式碼片段符合要求</code>",
+      "<code>選項 3 程式碼片段符合要求</code>",
+      "<code>選項 4 程式碼片段符合要求</code>"
     ],
     "answer": [
       "A",
@@ -3466,11 +3609,11 @@
       "● 函式必須無條件進位到整數你應該使用哪兩個數學函式？</code></pre>"
     ],
     "options": [
-      "math.fabs(x)",
-      "math.floor(x)",
-      "math.fmod(x)",
-      "math.ceil(x)",
-      "math.frexp(x)</code>"
+      "<code>math.fabs(x)</code>",
+      "<code>math.floor(x)</code>",
+      "<code>math.fmod(x)</code>",
+      "<code>math.ceil(x)</code>",
+      "<code>math.frexp(x)</code>"
     ],
     "answer": [
       "A",
@@ -3538,9 +3681,9 @@
 		"D. daysLeft = 6 + now.week()</code></pre>"
 	],
     "options": [
-      "A|B|C|D",
-      "A|B|C|D",
-      "A|B|C|D</code>"
+      "<code>A|B|C|D</code>",
+      "<code>A|B|C|D</code>",
+      "<code>A|B|C|D</code>"
     ],
     "answer": [
       "A",
@@ -3613,22 +3756,22 @@
       "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：</code></pre>"
     ],
     "questionA": [
-      "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
+      "<pre><code>● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
     ],
     "questionB": [
-      "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code>"
+      "<pre><code>● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code></pre>"
     ],
     "questionC": [
-      "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code>"
+      "<pre><code>● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code></pre>"
     ],
     "questionD": [
-      "● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code>"
+      "<pre><code>● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code></pre>"
     ],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3747,9 +3890,9 @@
 		"題三:eval 函式應該用於第 3 和 4 行。"
 	],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "Y",
@@ -3804,10 +3947,10 @@
       "題四:此程式碼將正常執行，不會發生錯誤。"
     ],
     "options": [
-      "Yes|No",
-      "Yes|No",
-      "Yes|No",
-      "Yes|No</code>"
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>",
+      "<code>Yes|No</code>"
     ],
     "answer": [
       "N",
@@ -3843,10 +3986,10 @@
       "請問您應該使用哪兩個程式碼片段? (選擇兩項)</code></pre>"
     ],
     "options": [
-      "print(\"{0},{1}\".format(item, sales))",
-      "print(item + ',' + sales)",
-      "print('\"{0}\", {1}'.format(item, sales))",
-      "print('\"' + item + '\",', sales)</code>"
+      "<code>print(\"{0},{1}\".format(item, sales))</code>",
+      "<code>print(item + ',' + sales)</code>",
+      "<code>print('\"{0}\", {1}'.format(item, sales))</code>",
+      "<code>print('\"' + item + '\",', sales)</code>"
     ],
     "answer": [
       "C",
@@ -3884,7 +4027,7 @@
 	],
     "options": [
       "<code class=\"language-python\">A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數",
-      "A.bool|B.float|C.int|D.String",
+      "A.bool|B.float|C.int|D.String</code>",
       "A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
     ],
     "answer": [
@@ -3912,10 +4055,10 @@
       "請問輸出為何?</code></pre>"
     ],
     "options": [
-      "04-07-17",
-      "2017-APRIL-07",
-      "APRIL-07-17",
-      "04-07-2017</code>"
+      "<code>04-07-17</code>",
+      "<code>2017-APRIL-07</code>",
+      "<code>APRIL-07-17</code>",
+      "<code>04-07-2017</code>"
     ],
     "answer": [
       "C"
@@ -3940,9 +4083,9 @@
       "假設有函式 cube(n)，哪個命令可列印其文件字串?</code></pre>"
     ],
     "options": [
-      "A. '|B. \"|C. \"\"|D. \"\"\"",
-      "A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾",
-      "A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
+      "<code>A. '|B. \"|C. \"\"|D. \"\"\"</code>",
+      "<code>A.在檔案開頭|B.在函式定義後的第一行|C.在檔案結尾</code>",
+      "<code>A.print(_doc_)|B.print(cube(doc))|C.print(cube.__doc__)|D.print(cube(docstring))</code>"
     ],
     "answer": [
       "D",
@@ -3969,10 +4112,10 @@
       "請問此命令的輸出為何?</code></pre>"
     ],
     "options": [
-      "Bread",
-      "Cheese",
-      "Script.py",
-      "Bacon</code>"
+      "<code>Bread</code>",
+      "<code>Cheese</code>",
+      "<code>Script.py</code>",
+      "<code>Bacon</code>"
     ],
     "answer": [
       "D"
@@ -4075,15 +4218,15 @@
     "id": 93,
     "type": "single",
     "question": [
-      "<code class=\"language-python\">【CH04-補充】你編寫了以下程式來處理字串：",
+      "<pre><code class=\"language-python\">【CH04-補充】你編寫了以下程式來處理字串：",
       "text = '  Python Programming  '",
-      "result = text.strip().upper().split(' ')[0]變數 result 的最終值是什麼？</code>"
+      "result = text.strip().upper().split(' ')[0]變數 result 的最終值是什麼？</code></pre>"
     ],
     "options": [
-      "'PYTHON'",
-      "'PYTHON PROGRAMMING'",
-      "'  PYTHON'",
-      "'PROGRAMMING'"
+      "<code>'PYTHON'</code>",
+      "<code>'PYTHON PROGRAMMING'</code>",
+      "<code>'  PYTHON'</code>",
+      "<code>'PROGRAMMING'</code>"
     ],
     "answer": [
       "A"
@@ -4111,10 +4254,10 @@
       "執行後的輸出結果為何？</code></pre>"
     ],
     "options": [
-      "10",
-      "20",
-      "None",
-      "發生執行階段錯誤</code>"
+      "<code>10</code>",
+      "<code>20</code>",
+      "<code>None</code>",
+      "<code>發生執行階段錯誤</code>"
     ],
     "answer": [
       "A"
@@ -4136,10 +4279,10 @@
       "result = 2 ** 3 ** 2</code></pre>"
     ],
     "options": [
-      "512",
-      "64",
-      "18",
-      "81</code>"
+      "<code>512</code>",
+      "<code>64</code>",
+      "<code>18</code>",
+      "<code>81</code>"
     ],
     "answer": [
       "A"
@@ -4160,10 +4303,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】使用 with open('data.txt', 'r') as f: 語法的主要好處是什麼？</code></pre>"
     ],
     "options": [
-      "當區塊結束時，檔案會自動關閉，即使發生錯誤也不例外",
-      "它會自動將檔案內容讀取到清單中",
-      "它允許同時讀取和寫入檔案",
-      "它會自動檢查檔案是否存在，不存在則建立之</code>"
+      "<code>當區塊結束時，檔案會自動關閉，即使發生錯誤也不例外</code>",
+      "<code>它會自動將檔案內容讀取到清單中</code>",
+      "<code>它允許同時讀取和寫入檔案</code>",
+      "<code>它會自動檢查檔案是否存在，不存在則建立之</code>"
     ],
     "answer": [
       "A"
@@ -4190,10 +4333,10 @@
       "執行後的輸出結果為何？</code></pre>"
     ],
     "options": [
-      "Success",
-      "Error",
-      "Error Success",
-      "什麼都不會顯示</code>"
+      "<code>Success</code>",
+      "<code>Error</code>",
+      "<code>Error Success</code>",
+      "<code>什麼都不會顯示</code>"
     ],
     "answer": [
       "A"
@@ -4218,10 +4361,10 @@
       "    print(i, end=' ')</code></pre>"
     ],
     "options": [
-      "1 3",
-      "1 2 3",
-      "1",
-      "1 2</code>"
+      "<code>1 3</code>",
+      "<code>1 2 3</code>",
+      "<code>1</code>",
+      "<code>1 2</code>"
     ],
     "answer": [
       "A"
@@ -4244,10 +4387,10 @@
       "下列哪種寫法可以正確輸出 Alice is 20？</code></pre>"
     ],
     "options": [
-      "f'{name} is {age}'",
-      "f\"{name} is {age}\"",
-      "'{name} is {age}'.format()",
-      "f(name, ' is ', age)</code>"
+      "<code>f'{name} is {age}'</code>",
+      "<code>f\"{name} is {age}\"</code>",
+      "<code>'{name} is {age}'.format()</code>",
+      "<code>f(name, ' is ', age)</code>"
     ],
     "answer": [
       "A"
@@ -4267,10 +4410,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】如果你想為你的 Python 模組 my_module.py 生成 HTML 格式的說明檔案，應該在命令列使用什麼指令？</code></pre>"
     ],
     "options": [
-      "python -m pydoc -w my_module",
-      "python -m docgen my_module",
-      "pip install documentation",
-      "python my_module.py --help</code>"
+      "<code>python -m pydoc -w my_module</code>",
+      "<code>python -m docgen my_module</code>",
+      "<code>pip install documentation</code>",
+      "<code>python my_module.py --help</code>"
     ],
     "answer": [
       "A"
@@ -4290,10 +4433,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】關於 math.trunc() 和 math.floor() 處理負數時的行為，下列何者正確？ (例如處理 -3.5)</code></pre>"
     ],
     "options": [
-      "math.trunc(-3.5) 回傳 -3，math.floor(-3.5) 回傳 -4",
-      "兩者都回傳 -3",
-      "兩者都回傳 -4",
-      "math.trunc(-3.5) 回傳 -4，math.floor(-3.5) 回傳 -3</code>"
+      "<code>math.trunc(-3.5) 回傳 -3，math.floor(-3.5) 回傳 -4</code>",
+      "<code>兩者都回傳 -3</code>",
+      "<code>兩者都回傳 -4</code>",
+      "<code>math.trunc(-3.5) 回傳 -4，math.floor(-3.5) 回傳 -3</code>"
     ],
     "answer": [
       "A"
@@ -4313,10 +4456,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】你希望從清單 [1, 2, 3, 4, 5] 中**隨機選取 3 個不重複**的元素，應該使用 random 模組的哪個方法？</code></pre>"
     ],
     "options": [
-      "random.sample([1, 2, 3, 4, 5], 3)",
-      "random.choices([1, 2, 3, 4, 5], k=3)",
-      "random.select([1, 2, 3, 4, 5], 3)",
-      "random.pick([1, 2, 3, 4, 5], 3)</code>"
+      "<code>random.sample([1, 2, 3, 4, 5], 3)</code>",
+      "<code>random.choices([1, 2, 3, 4, 5], k=3)</code>",
+      "<code>random.select([1, 2, 3, 4, 5], 3)</code>",
+      "<code>random.pick([1, 2, 3, 4, 5], 3)</code>"
     ],
     "answer": [
       "A"
@@ -4342,10 +4485,10 @@
       "若希望根據上述機率**隨機抽取 5 次** (可重複中獎)，應該使用下列哪一行程式碼？</code></pre>"
     ],
     "options": [
-      "random.choices(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)",
-      "random.sample(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)",
-      "random.choices(['Gold', 'Silver', 'Stone'], k=5)",
-      "random.sample(['Gold', 'Silver', 'Stone'], 5)</code>"
+      "<code>random.choices(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)</code>",
+      "<code>random.sample(['Gold', 'Silver', 'Stone'], weights=[10, 30, 60], k=5)</code>",
+      "<code>random.choices(['Gold', 'Silver', 'Stone'], k=5)</code>",
+      "<code>random.sample(['Gold', 'Silver', 'Stone'], 5)</code>"
     ],
     "answer": [
       "A"
@@ -4370,10 +4513,10 @@
       "random.shuffle(nums)</code></pre>"
     ],
     "options": [
-      "nums 的元素順序被隨機打亂，且直接修改了原始清單",
-      "nums 保持不變，shuffle 回傳了一個新的打亂清單",
-      "nums 變成了 None",
-      "會發生錯誤，因為 list 不支援 shuffle</code>"
+      "<code>nums 的元素順序被隨機打亂，且直接修改了原始清單</code>",
+      "<code>nums 保持不變，shuffle 回傳了一個新的打亂清單</code>",
+      "<code>nums 變成了 None</code>",
+      "<code>會發生錯誤，因為 list 不支援 shuffle</code>"
     ],
     "answer": [
       "A"
@@ -4398,10 +4541,10 @@
       "並希望主動中斷程式執行並回報錯誤，應該使用哪個關鍵字？</code></pre>"
     ],
     "options": [
-      "raise ValueError('Invalid value')",
-      "throw ValueError('Invalid value')",
-      "return ValueError('Invalid value')",
-      "break ValueError('Invalid value')</code>"
+      "<code>raise ValueError('Invalid value')</code>",
+      "<code>throw ValueError('Invalid value')</code>",
+      "<code>return ValueError('Invalid value')</code>",
+      "<code>break ValueError('Invalid value')</code>"
     ],
     "answer": [
       "A"
@@ -4422,10 +4565,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要測試一段會輸出文字到控制檯 (stdout) 的程式碼，但不希望文字真的印在螢幕上，而是想存在記憶體中以便分析。可以使用哪個模組？</code></pre>"
     ],
     "options": [
-      "io.StringIO",
-      "sys.stdout_capture",
-      "os.memory_file",
-      "io.TextWrapper</code>"
+      "<code>io.StringIO</code>",
+      "<code>sys.stdout_capture</code>",
+      "<code>os.memory_file</code>",
+      "<code>io.TextWrapper</code>"
     ],
     "answer": [
       "A"
@@ -4466,10 +4609,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】在 unittest 模組中，若要驗證 x 的值是否為 True，應使用哪個斷言方法？</code></pre>"
     ],
     "options": [
-      "self.assertTrue(x)",
-      "self.assertIsTrue(x)",
-      "self.assertEqual(x, 'True')",
-      "self.assert(x)</code>"
+      "<code>self.assertTrue(x)</code>",
+      "<code>self.assertIsTrue(x)</code>",
+      "<code>self.assertEqual(x, 'True')</code>",
+      "<code>self.assert(x)</code>"
     ],
     "answer": [
       "A"
@@ -4492,10 +4635,10 @@
       "言方法是？</code></pre>"
     ],
     "options": [
-      "self.assertType(x, int)",
-      "self.assertIsInstance(x, int)",
-      "self.assertEqual(type(x), int)",
-      "self.assertClass(x, int)</code>"
+      "<code>self.assertType(x, int)</code>",
+      "<code>self.assertIsInstance(x, int)</code>",
+      "<code>self.assertEqual(type(x), int)</code>",
+      "<code>self.assertClass(x, int)</code>"
     ],
     "answer": [
       "B"
@@ -4515,10 +4658,10 @@
       ",下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "若要檢查兩個變數的值是否相等 (Value Equality)，應使用 assertIs",
-      "若要檢查兩個變數是否指向同一個記憶體物件 (Reference Equality)，應使用 assertEqual",
-      "若要檢查 x 是否包含在清單 y 中，應使用 assertIn(x, y)",
-      "若要檢查 x 是否為 None，應使用 assertTrue(x == None)</code>"
+      "<code>若要檢查兩個變數的值是否相等 (Value Equality)，應使用 assertIs</code>",
+      "<code>若要檢查兩個變數是否指向同一個記憶體物件 (Reference Equality)，應使用 assertEqual</code>",
+      "<code>若要檢查 x 是否包含在清單 y 中，應使用 assertIn(x, y)</code>",
+      "<code>若要檢查 x 是否為 None，應使用 assertTrue(x == None)</code>"
     ],
     "answer": [
       "C"
@@ -4540,10 +4683,10 @@
       "執行 print(colors[-2:]) 的結果是什麼？</code></pre>"
     ],
     "options": [
-      "['blue', 'yellow']",
-      "['green', 'blue']",
-      "['yellow']",
-      "['red', 'green']</code>"
+      "<code>['blue', 'yellow']</code>",
+      "<code>['green', 'blue']</code>",
+      "<code>['yellow']</code>",
+      "<code>['red', 'green']</code>"
     ],
     "answer": [
       "A"
@@ -4563,10 +4706,10 @@
       "下列哪些敘述是**正確**的？ (複選)</code></pre>"
     ],
     "options": [
-      "元組是不可變的 (Immutable)，而清單是可變的 (Mutable)",
-      "元組定義時通常使用小括號 ()，清單使用中括號 []",
-      "元組和清單都可以包含不同型別的資料 (例如同時包含 int 和 string)",
-      "元組和清單都擁有 append() 方法來動態增加元素</code>"
+      "<code>元組是不可變的 (Immutable)，而清單是可變的 (Mutable)</code>",
+      "<code>元組定義時通常使用小括號 ()，清單使用中括號 []</code>",
+      "<code>元組和清單都可以包含不同型別的資料 (例如同時包含 int 和 string)</code>",
+      "<code>元組和清單都擁有 append() 方法來動態增加元素</code>"
     ],
     "answer": [
       "A",
@@ -4591,10 +4734,10 @@
       "你希望取得 'score' 的值，如果 'score' 不存在，則回傳 0，避免程式崩潰。應使用哪種語法？</code></pre>"
     ],
     "options": [
-      "student.get('score', 0)",
-      "student['score'] or 0",
-      "student.find('score', 0)",
-      "student['score'] if exists else 0</code>"
+      "<code>student.get('score', 0)</code>",
+      "<code>student['score'] or 0</code>",
+      "<code>student.find('score', 0)</code>",
+      "<code>student['score'] if exists else 0</code>"
     ],
     "answer": [
       "A"
@@ -4616,10 +4759,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】你希望在清單 fruits = ['apple', 'banana'] 的**開頭**插入一個元素 'orange'。應該使用哪種方法？</code></pre>"
     ],
     "options": [
-      "fruits.insert(0, 'orange')",
-      "fruits.append('orange')",
-      "fruits.add('orange')",
-      "fruits[0] = 'orange'</code>"
+      "<code>fruits.insert(0, 'orange')</code>",
+      "<code>fruits.append('orange')</code>",
+      "<code>fruits.add('orange')</code>",
+      "<code>fruits[0] = 'orange'</code>"
     ],
     "answer": [
       "A"
@@ -4639,10 +4782,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】關於 sort() 和 sorted() 的區別，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "list.sort() 會直接修改原始清單 (In-place)，而 sorted(list) 會回傳一個新的已排序清單",
-      "sorted(list) 會直接修改原始清單，而 list.sort() 會回傳新清單",
-      "兩者功能完全相同，只是語法不同",
-      "sort() 只能用於數字清單，sorted() 只能用於字串清單</code>"
+      "<code>list.sort() 會直接修改原始清單 (In-place)，而 sorted(list) 會回傳一個新的已排序清單</code>",
+      "<code>sorted(list) 會直接修改原始清單，而 list.sort() 會回傳新清單</code>",
+      "<code>兩者功能完全相同，只是語法不同</code>",
+      "<code>sort() 只能用於數字清單，sorted() 只能用於字串清單</code>"
     ],
     "answer": [
       "A"
@@ -4674,10 +4817,10 @@
       "使其變為 [3, 2, 1] 且不產生新的清單物件。應該使用哪種語法？</code></pre>"
     ],
     "options": [
-      "nums.reverse()",
-      "nums = reversed(nums)",
-      "nums = nums[::-1]",
-      "nums.sort(reverse=False)</code>"
+      "<code>nums.reverse()</code>",
+      "<code>nums = reversed(nums)</code>",
+      "<code>nums = nums[::-1]</code>",
+      "<code>nums.sort(reverse=False)</code>"
     ],
     "answer": [
       "A"
@@ -4702,10 +4845,10 @@
       "print(nums)</code></pre>"
     ],
     "options": [
-      "[1, 2, 3, 4]",
-      "[1, 2, 2, 3, 4]",
-      "{1, 2, 3, 4}",
-      "(1, 2, 3, 4)</code>"
+      "<code>[1, 2, 3, 4]</code>",
+      "<code>[1, 2, 2, 3, 4]</code>",
+      "<code>{1, 2, 3, 4}</code>",
+      "<code>(1, 2, 3, 4)</code>"
     ],
     "answer": [
       "A"
@@ -4729,10 +4872,10 @@
       "print(result)</code></pre>"
     ],
     "options": [
-      "{1, 2, 3, 4, 5, 6}",
-      "{3, 4}",
-      "[3, 4]",
-      "{1, 2, 5, 6}</code>"
+      "<code>{1, 2, 3, 4, 5, 6}</code>",
+      "<code>{3, 4}</code>",
+      "<code>[3, 4]</code>",
+      "<code>{1, 2, 5, 6}</code>"
     ],
     "answer": [
       "B"
@@ -4752,10 +4895,10 @@
       "<pre><code class=\"language-python\">【CH03-字典操作】已知字典 data = {'a': 10, 'b': 20}，下列哪一種寫法可以正確印出 20？</code></pre>"
     ],
     "options": [
-      "print(data[1])",
-      "print(data['b'])",
-      "print(data.b)",
-      "print(data(20))</code>"
+      "<code>print(data[1])</code>",
+      "<code>print(data['b'])</code>",
+      "<code>print(data.b)</code>",
+      "<code>print(data(20))</code>"
     ],
     "answer": [
       "B"
@@ -4775,10 +4918,10 @@
       "<pre><code class=\"language-python\">【CH03-不可變性】下列哪一行程式碼在執行時會產生錯誤 (Error)？</code></pre>"
     ],
     "options": [
-      "my_list = [1, 2, 3]; my_list[0] = 9",
-      "my_dict = {'x': 1}; my_dict['x'] = 9",
-      "my_tuple = (1, 2, 3); my_tuple[0] = 9",
-      "my_set = {1, 2, 3}; my_set.add(9)</code>"
+      "<code>my_list = [1, 2, 3]; my_list[0] = 9</code>",
+      "<code>my_dict = {'x': 1}; my_dict['x'] = 9</code>",
+      "<code>my_tuple = (1, 2, 3); my_tuple[0] = 9</code>",
+      "<code>my_set = {1, 2, 3}; my_set.add(9)</code>"
     ],
     "answer": [
       "C"
@@ -4803,10 +4946,10 @@
       "下列哪一行程式碼是正確的？</code></pre>"
     ],
     "options": [
-      "my_set.append(4)",
-      "my_set.add(4)",
-      "my_set.insert(3, 4)",
-      "my_set[3] = 4</code>"
+      "<code>my_set.append(4)</code>",
+      "<code>my_set.add(4)</code>",
+      "<code>my_set.insert(3, 4)</code>",
+      "<code>my_set[3] = 4</code>"
     ],
     "answer": [
       "B"
@@ -4830,10 +4973,10 @@
       "<pre><code class=\"language-python\">【CH03-除錯】執行下列哪一段程式碼會導致 AttributeError (屬性錯誤)？</code></pre>"
     ],
     "options": [
-      "data = [1, 2]; data.append(3)",
-      "data = {1, 2}; data.add(3)",
-      "data = {'a': 1}; data['b'] = 2",
-      "data = (1, 2); data.append(3)</code>"
+      "<code>data = [1, 2]; data.append(3)</code>",
+      "<code>data = {1, 2}; data.add(3)</code>",
+      "<code>data = {'a': 1}; data['b'] = 2</code>",
+      "<code>data = (1, 2); data.append(3)</code>"
     ],
     "answer": [
       "D"
@@ -4855,10 +4998,10 @@
       "nums.insert(1, 20)</code></pre>"
     ],
     "options": [
-      "[10, 20, 30]",
-      "[20, 10, 30]",
-      "[10, 30, 20]",
-      "[10, 20]</code>"
+      "<code>[10, 20, 30]</code>",
+      "<code>[20, 10, 30]</code>",
+      "<code>[10, 30, 20]</code>",
+      "<code>[10, 20]</code>"
     ],
     "answer": [
       "A"
@@ -4883,10 +5026,10 @@
       "下列哪一種方式是**正確**的判斷方法？</code></pre>"
     ],
     "options": [
-      "if x == float('nan'):",
-      "if x == math.nan:",
-      "if math.isnan(x):",
-      "if x is math.nan:</code>"
+      "<code>if x == float('nan'):</code>",
+      "<code>if x == math.nan:</code>",
+      "<code>if math.isnan(x):</code>",
+      "<code>if x is math.nan:</code>"
     ],
     "answer": [
       "C"
@@ -4908,10 +5051,10 @@
       "下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "兩者功能完全相同，沒有差異",
-      "math.fmod 適合處理整數，% 適合處理浮點數",
-      "當處理負數時，math.fmod 的結果符號會隨被除數 (x)，而 % 的結果符號隨除數 (y)",
-      "math.fmod 只回傳整數，% 回傳浮點數</code>"
+      "<code>兩者功能完全相同，沒有差異</code>",
+      "<code>math.fmod 適合處理整數，% 適合處理浮點數</code>",
+      "<code>當處理負數時，math.fmod 的結果符號會隨被除數 (x)，而 % 的結果符號隨除數 (y)</code>",
+      "<code>math.fmod 只回傳整數，% 回傳浮點數</code>"
     ],
     "answer": [
       "C"
@@ -4932,10 +5075,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要寫一個程式來清理暫存檔。若要**刪除**一個已存在的檔案 temp.txt，應該使用 os 模組的哪個函式？</code></pre>"
     ],
     "options": [
-      "os.delete('temp.txt')",
-      "os.remove('temp.txt')",
-      "os.path.delete('temp.txt')",
-      "os.files.del('temp.txt')</code>"
+      "<code>os.delete('temp.txt')</code>",
+      "<code>os.remove('temp.txt')</code>",
+      "<code>os.path.delete('temp.txt')</code>",
+      "<code>os.files.del('temp.txt')</code>"
     ],
     "answer": [
       "B"
@@ -4955,10 +5098,10 @@
       "<pre><code class=\"language-python\">【CH03-補充】你有一個清單 scores = [100, 80, 90, 80]。你想要移除**第一個**出現的 80 分。應該使用哪個方法？</code></pre>"
     ],
     "options": [
-      "scores.remove(80)",
-      "scores.pop(80)",
-      "scores.delete(80)",
-      "del scores[80]</code>"
+      "<code>scores.remove(80)</code>",
+      "<code>scores.pop(80)</code>",
+      "<code>scores.delete(80)</code>",
+      "<code>del scores[80]</code>"
     ],
     "answer": [
       "A"
@@ -4979,10 +5122,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你的程式需要計算一個圓的面積，公式為 &pi;r^2$。使用 math 模組時，下列寫法何者最精確且標準？</code></pre>"
     ],
     "options": [
-      "area = 3.14 * (r ** 2)",
-      "area = math.pi * math.pow(r, 2)",
-      "area = math.PI * r * r",
-      "area = math.pi * math.sqrt(r)</code>"
+      "<code>area = 3.14 * (r ** 2)</code>",
+      "<code>area = math.pi * math.pow(r, 2)</code>",
+      "<code>area = math.PI * r * r</code>",
+      "<code>area = math.pi * math.sqrt(r)</code>"
     ],
     "answer": [
       "B"
@@ -5006,10 +5149,10 @@
       "# 預期結果: [1, 2, 3, 4]</code></pre>"
     ],
     "options": [
-      "list_a.extend(list_b)",
-      "list_a.append(list_b)",
-      "list_a.insert(list_b)",
-      "list_a.add(list_b)</code>"
+      "<code>list_a.extend(list_b)</code>",
+      "<code>list_a.append(list_b)</code>",
+      "<code>list_a.insert(list_b)</code>",
+      "<code>list_a.add(list_b)</code>"
     ],
     "answer": [
       "A"
@@ -5031,10 +5174,10 @@
       "應使用哪些內建函式？</code></pre>"
     ],
     "options": [
-      "max(grades), min(grades)",
-      "grades.max(), grades.min()",
-      "largest(grades), smallest(grades)",
-      "high(grades), low(grades)</code>"
+      "<code>max(grades), min(grades)</code>",
+      "<code>grades.max(), grades.min()</code>",
+      "<code>largest(grades), smallest(grades)</code>",
+      "<code>high(grades), low(grades)</code>"
     ],
     "answer": [
       "A"
@@ -5054,10 +5197,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 math.sqrt(x) 與 math.isqrt(x) 的差異，下列何者正確？</code></pre>"
     ],
     "options": [
-      "math.sqrt 回傳浮點數 (float)，math.isqrt 回傳整數 (int) 且無條件捨去小數",
-      "math.sqrt 可以處理負數，math.isqrt 不行",
-      "兩者功能完全相同，只是新舊版本差異",
-      "math.isqrt 會四捨五入到最接近的整數</code>"
+      "<code>math.sqrt 回傳浮點數 (float)，math.isqrt 回傳整數 (int) 且無條件捨去小數</code>",
+      "<code>math.sqrt 可以處理負數，math.isqrt 不行</code>",
+      "<code>兩者功能完全相同，只是新舊版本差異</code>",
+      "<code>math.isqrt 會四捨五入到最接近的整數</code>"
     ],
     "answer": [
       "A"
@@ -5078,10 +5221,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】你需要分析浮點數的底層結構。請問 math.frexp(x) 函式的作用是什麼？</code></pre>"
     ],
     "options": [
-      "回傳 x 的尾數 (mantissa) 與指數 (exponent)",
-      "回傳 x 的階乘 (factorial)",
-      "回傳 x 的絕對值 (absolute value)",
-      "回傳 x 的自然對數 (natural log)</code>"
+      "<code>回傳 x 的尾數 (mantissa) 與指數 (exponent)</code>",
+      "<code>回傳 x 的階乘 (factorial)</code>",
+      "<code>回傳 x 的絕對值 (absolute value)</code>",
+      "<code>回傳 x 的自然對數 (natural log)</code>"
     ],
     "answer": [
       "A"
@@ -5106,10 +5249,10 @@
       "如果輸出結果是 0，代表今天是星期幾？</code></pre>"
     ],
     "options": [
-      "星期一 (Monday)",
-      "星期日 (Sunday)",
-      "星期六 (Saturday)",
-      "1 月 1 日</code>"
+      "<code>星期一 (Monday)</code>",
+      "<code>星期日 (Sunday)</code>",
+      "<code>星期六 (Saturday)</code>",
+      "<code>1 月 1 日</code>"
     ],
     "answer": [
       "A"
@@ -5132,10 +5275,10 @@
       "應該使用 random 模組的哪個函式？</code></pre>"
     ],
     "options": [
-      "random.random()",
-      "random.randint(0, 1)",
-      "random.uniform(0, 10)",
-      "random.float()</code>"
+      "<code>random.random()</code>",
+      "<code>random.randint(0, 1)</code>",
+      "<code>random.uniform(0, 10)</code>",
+      "<code>random.float()</code>"
     ],
     "answer": [
       "A"
@@ -5156,10 +5299,10 @@
       "應使用哪個斷言方法？</code></pre>"
     ],
     "options": [
-      "self.assertIs(a, b)",
-      "self.assertEqual(a, b)",
-      "self.assertSame(a, b)",
-      "self.assertTrue(a == b)</code>"
+      "<code>self.assertIs(a, b)</code>",
+      "<code>self.assertEqual(a, b)</code>",
+      "<code>self.assertSame(a, b)</code>",
+      "<code>self.assertTrue(a == b)</code>"
     ],
     "answer": [
       "A"
@@ -5190,11 +5333,11 @@
       "    return c</code></pre>"
     ],
     "options": [
-      "x: q[head]=c; y: head += 1",
-      "x: q.append(c); y: head += 1",
-      "x: q[head]=c; y: head -= 1",
-      "x: q.append(c); y: head -= 1",
-      "以上皆非</code>"
+      "<code>x: q[head]=c; y: head += 1</code>",
+      "<code>x: q.append(c); y: head += 1</code>",
+      "<code>x: q[head]=c; y: head -= 1</code>",
+      "<code>x: q.append(c); y: head -= 1</code>",
+      "<code>以上皆非</code>"
     ],
     "answer": [
       "B"
@@ -5234,10 +5377,10 @@
       "    return c</code></pre>"
     ],
     "options": [
-      "x: s.append(c); y: c = s.pop(0)",
-      "x: s.append(c); y: c = s.pop()",
-      "x: s.insert(0, c); y: c = s.pop(0)",
-      "x: s.append(c); y: c = s[0]</code>"
+      "<code>x: s.append(c); y: c = s.pop(0)</code>",
+      "<code>x: s.append(c); y: c = s.pop()</code>",
+      "<code>x: s.insert(0, c); y: c = s.pop(0)</code>",
+      "<code>x: s.append(c); y: c = s[0]</code>"
     ],
     "answer": [
       "B"
@@ -5265,11 +5408,11 @@
       "print(a, b, c)</code></pre>"
     ],
     "options": [
-      "3 -3 -3",
-      "3 2 -3",
-      "3 -3 -2",
-      "3 2 -2",
-      "執行錯誤</code>"
+      "<code>3 -3 -3</code>",
+      "<code>3 2 -3</code>",
+      "<code>3 -3 -2</code>",
+      "<code>3 2 -2</code>",
+      "<code>執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5307,11 +5450,11 @@
       "print(sum(q[h:]))</code></pre>"
     ],
     "options": [
-      "1",
-      "3",
-      "4",
-      "6",
-      "以上皆非或執行錯誤</code>"
+      "<code>1</code>",
+      "<code>3</code>",
+      "<code>4</code>",
+      "<code>6</code>",
+      "<code>以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5352,10 +5495,10 @@
       "print(s)</code></pre>"
     ],
     "options": [
-      "312765",
-      "780",
-      "312",
-      "執行錯誤</code>"
+      "<code>312765</code>",
+      "<code>780</code>",
+      "<code>312</code>",
+      "<code>執行錯誤</code>"
     ],
     "answer": [
       "A"
@@ -5389,11 +5532,11 @@
       "print(sum(q))</code></pre>"
     ],
     "options": [
-      "1",
-      "3",
-      "5",
-      "7",
-      "以上皆非或執行錯誤</code>"
+      "<code>1</code>",
+      "<code>3</code>",
+      "<code>5</code>",
+      "<code>7</code>",
+      "<code>以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "C"
@@ -5430,11 +5573,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "hello py [123, 45]",
-      "hello 123 45",
-      "hello ['123', '45']",
-      "hello py ['123', '45']",
-      "以上皆非或執行錯誤</code>"
+      "<code>hello py [123, 45]</code>",
+      "<code>hello 123 45</code>",
+      "<code>hello ['123', '45']</code>",
+      "<code>hello py ['123', '45']</code>",
+      "<code>以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "D"
@@ -5463,11 +5606,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "10045",
-      "[100, 45]",
-      "145",
-      "[10045]",
-      "以上皆非或執行錯誤</code>"
+      "<code>10045</code>",
+      "<code>[100, 45]</code>",
+      "<code>145</code>",
+      "<code>[10045]</code>",
+      "<code>以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "B"
@@ -5498,11 +5641,11 @@
       "則輸出為何？</code></pre>"
     ],
     "options": [
-      "100 45",
-      "[100, 45], 25",
-      "[100, [45, 25]]",
-      "45 25",
-      "以上皆非或執行錯誤</code>"
+      "<code>100 45</code>",
+      "<code>[100, 45], 25</code>",
+      "<code>[100, [45, 25]]</code>",
+      "<code>45 25</code>",
+      "<code>以上皆非或執行錯誤</code>"
     ],
     "answer": [
       "E"
@@ -5532,11 +5675,11 @@
       "輸出為何？</code></pre>"
     ],
     "options": [
-      "fakek",
-      "fakej",
-      "fakk",
-      "fakj",
-      "執行錯誤 Error</code>"
+      "<code>fakek</code>",
+      "<code>fakej</code>",
+      "<code>fakk</code>",
+      "<code>fakj</code>",
+      "<code>執行錯誤 Error</code>"
     ],
     "answer": [
       "B"
@@ -5563,10 +5706,10 @@
       "print(s[::-2])</code></pre>"
     ],
     "options": [
-      "geca",
-      "aceg",
-      "gec",
-      "db</code>"
+      "<code>geca</code>",
+      "<code>aceg</code>",
+      "<code>gec</code>",
+      "<code>db</code>"
     ],
     "answer": [
       "A"
@@ -5595,10 +5738,10 @@
       "    return n + f(n-1)</code></pre>"
     ],
     "options": [
-      "0",
-      "3",
-      "6",
-      "執行錯誤 (RecursionError)</code>"
+      "<code>0</code>",
+      "<code>3</code>",
+      "<code>6</code>",
+      "<code>執行錯誤 (RecursionError)</code>"
     ],
     "answer": [
       "C"
@@ -5632,10 +5775,10 @@
       "print(cnt)</code></pre>"
     ],
     "options": [
-      "10",
-      "16",
-      "20",
-      "25</code>"
+      "<code>10</code>",
+      "<code>16</code>",
+      "<code>20</code>",
+      "<code>25</code>"
     ],
     "answer": [
       "A"
@@ -5661,10 +5804,10 @@
       "應使用下列哪個函式？</code></pre>"
     ],
     "options": [
-      "time.clock()",
-      "time.now()",
-      "time.time()",
-      "time.date()</code>"
+      "<code>time.clock()</code>",
+      "<code>time.now()</code>",
+      "<code>time.time()</code>",
+      "<code>time.date()</code>"
     ],
     "answer": [
       "C"
@@ -5685,10 +5828,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】若希望讓程式暫停執行 3.5 秒，下列寫法何者正確？</code></pre>"
     ],
     "options": [
-      "time.stop(3.5)",
-      "time.pause(3500)",
-      "time.sleep(3.5)",
-      "time.wait(3.5)</code>"
+      "<code>time.stop(3.5)</code>",
+      "<code>time.pause(3500)</code>",
+      "<code>time.sleep(3.5)</code>",
+      "<code>time.wait(3.5)</code>"
     ],
     "answer": [
       "C"
@@ -5709,10 +5852,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】若您在程式開頭使用了 import time as t，則下列哪一行程式碼是**正確**的呼叫方式？</code></pre>"
     ],
     "options": [
-      "time.sleep(1)",
-      "t.sleep(1)",
-      "sleep(1)",
-      "Time.sleep(1)</code>"
+      "<code>time.sleep(1)</code>",
+      "<code>t.sleep(1)</code>",
+      "<code>sleep(1)</code>",
+      "<code>Time.sleep(1)</code>"
     ],
     "answer": [
       "B"
@@ -5732,10 +5875,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 from time import * 的用法，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "這是不合法的 Python 語法",
-      "這會匯入 time 模組，但呼叫時仍需加上 time. 前綴 (例如 time.sleep())",
-      "這會將 time 模組內的所有函式匯入，呼叫時不須加前綴 (例如直接寫 sleep())",
-      "這只能匯入 sleep 函式，其他函式無法使用</code>"
+      "<code>這是不合法的 Python 語法</code>",
+      "<code>這會匯入 time 模組，但呼叫時仍需加上 time. 前綴 (例如 time.sleep())</code>",
+      "<code>這會將 time 模組內的所有函式匯入，呼叫時不須加前綴 (例如直接寫 sleep())</code>",
+      "<code>這只能匯入 sleep 函式，其他函式無法使用</code>"
     ],
     "answer": [
       "C"
@@ -5757,10 +5900,10 @@
       "應該使用 random 模組的哪一個函式？</code></pre>"
     ],
     "options": [
-      "random.choices(students, k=3)",
-      "random.sample(students, k=3)",
-      "random.randint(students, 3)",
-      "random.shuffle(students, 3)</code>"
+      "<code>random.choices(students, k=3)</code>",
+      "<code>random.sample(students, k=3)</code>",
+      "<code>random.randint(students, 3)</code>",
+      "<code>random.shuffle(students, 3)</code>"
     ],
     "answer": [
       "B"
@@ -5782,10 +5925,10 @@
       "應該匯入哪個模組並使用哪個屬性？</code></pre>"
     ],
     "options": [
-      "import os; os.args",
-      "import sys; sys.argv",
-      "import argparse; argparse.params",
-      "import subprocess; subprocess.input</code>"
+      "<code>import os; os.args</code>",
+      "<code>import sys; sys.argv</code>",
+      "<code>import argparse; argparse.params</code>",
+      "<code>import subprocess; subprocess.input</code>"
     ],
     "answer": [
       "B"
@@ -5806,10 +5949,10 @@
       "<pre><code class=\"language-python\">【CH06-補充】關於 math 模組中的 math.ceil() 與 math.floor() 函式，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "math.ceil(3.2) 回傳 3，math.floor(3.2) 回傳 4",
-      "math.ceil(3.2) 回傳 4，math.floor(3.2) 回傳 3",
-      "兩者功能相同，都是四捨五入",
-      "math.ceil() 用於負數，math.floor() 用於正數</code>"
+      "<code>math.ceil(3.2) 回傳 3，math.floor(3.2) 回傳 4</code>",
+      "<code>math.ceil(3.2) 回傳 4，math.floor(3.2) 回傳 3</code>",
+      "<code>兩者功能相同，都是四捨五入</code>",
+      "<code>math.ceil() 用於負數，math.floor() 用於正數</code>"
     ],
     "answer": [
       "B"
@@ -5831,10 +5974,10 @@
       "可以使用下列哪個變數？</code></pre>"
     ],
     "options": [
-      "os.name",
-      "sys.os",
-      "platform.system_os",
-      "environment.type</code>"
+      "<code>os.name</code>",
+      "<code>sys.os</code>",
+      "<code>platform.system_os</code>",
+      "<code>environment.type</code>"
     ],
     "answer": [
       "A"
@@ -5859,10 +6002,10 @@
       "print(2 ** 3)</code></pre>"
     ],
     "options": [
-      "3, 1, 6",
-      "3.33, 1, 8",
-      "3, 1, 8",
-      "3, 0.1, 6</code>"
+      "<code>3, 1, 6</code>",
+      "<code>3.33, 1, 8</code>",
+      "<code>3, 1, 8</code>",
+      "<code>3, 0.1, 6</code>"
     ],
     "answer": [
       "C"
@@ -5884,10 +6027,10 @@
       "<pre><code class=\"language-python\">【CH01-補充】您有一個字串變數 s = 'Python'。請問下列哪一個指令可以取出 'tho' 這段子字串？</code></pre>"
     ],
     "options": [
-      "s[2:5]",
-      "s[2:4]",
-      "s[3:5]",
-      "s[3:6]</code>"
+      "<code>s[2:5]</code>",
+      "<code>s[2:4]</code>",
+      "<code>s[3:5]</code>",
+      "<code>s[3:6]</code>"
     ],
     "answer": [
       "A"
@@ -5914,10 +6057,10 @@
       "print(not x)</code></pre>"
     ],
     "options": [
-      "True, True, True",
-      "False, True, False",
-      "False, False, True",
-      "True, False, False</code>"
+      "<code>True, True, True</code>",
+      "<code>False, True, False</code>",
+      "<code>False, False, True</code>",
+      "<code>True, False, False</code>"
     ],
     "answer": [
       "B"
@@ -5938,10 +6081,10 @@
       "<pre><code class=\"language-python\">【CH01-補充】下列哪一行程式碼使用了「複合賦值運算子」，且其執行結果與 x = x + 5 相同？</code></pre>"
     ],
     "options": [
-      "x += 5",
-      "x =+ 5",
-      "x ++ 5",
-      "x .add(5)</code>"
+      "<code>x += 5</code>",
+      "<code>x =+ 5</code>",
+      "<code>x ++ 5</code>",
+      "<code>x .add(5)</code>"
     ],
     "answer": [
       "A"
@@ -5963,10 +6106,10 @@
       "(常用於關閉檔案或釋放資源)</code></pre>"
     ],
     "options": [
-      "try",
-      "except",
-      "else",
-      "finally</code>"
+      "<code>try</code>",
+      "<code>except</code>",
+      "<code>else</code>",
+      "<code>finally</code>"
     ],
     "answer": [
       "D"
@@ -5998,10 +6141,10 @@
       "    print('D')</code></pre>"
     ],
     "options": [
-      "A, B, C, D",
-      "A, B, D",
-      "A, C, D",
-      "A, B</code>"
+      "<code>A, B, C, D</code>",
+      "<code>A, B, D</code>",
+      "<code>A, C, D</code>",
+      "<code>A, B</code>"
     ],
     "answer": [
       "B"
@@ -6025,10 +6168,10 @@
       "應使用下列哪一個斷言方法 (Assertion Method)？</code></pre>"
     ],
     "options": [
-      "self.checkEqual(result, 100)",
-      "self.assertEqual(result, 100)",
-      "self.assertIs(result, 100)",
-      "self.assert(result == 100)</code>"
+      "<code>self.checkEqual(result, 100)</code>",
+      "<code>self.assertEqual(result, 100)</code>",
+      "<code>self.assertIs(result, 100)</code>",
+      "<code>self.assert(result == 100)</code>"
     ],
     "answer": [
       "B"
@@ -6051,10 +6194,10 @@
       "應該使用哪個關鍵字？</code></pre>"
     ],
     "options": [
-      "throw ValueError('Age cannot be negative')",
-      "catch ValueError('Age cannot be negative')",
-      "raise ValueError('Age cannot be negative')",
-      "return ValueError('Age cannot be negative')</code>"
+      "<code>throw ValueError('Age cannot be negative')</code>",
+      "<code>catch ValueError('Age cannot be negative')</code>",
+      "<code>raise ValueError('Age cannot be negative')</code>",
+      "<code>return ValueError('Age cannot be negative')</code>"
     ],
     "answer": [
       "C"
@@ -6075,10 +6218,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】在 Python 中，若要為一個自定義函式編寫「說明文件 (Documentation String)」，以便其他人可以透過 help(func_name) 查詢其功能，應該使用下列哪種語法？</code></pre>"
     ],
     "options": [
-      "在函式定義的第一行使用 # 開頭的註解",
-      "在函式定義的第一行使用三引號 \"\"\"...\"\"\" 包圍的字串",
-      "在函式上方使用 @doc 裝飾器",
-      "在函式內部使用 return \"說明文字\"</code>"
+      "<code>在函式定義的第一行使用 # 開頭的註解</code>",
+      "<code>在函式定義的第一行使用三引號 \"\"\"...\"\"\" 包圍的字串</code>",
+      "<code>在函式上方使用 @doc 裝飾器</code>",
+      "<code>在函式內部使用 return \"說明文字\"</code>"
     ],
     "answer": [
       "B"
@@ -6100,10 +6243,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】您正在閱讀一份符合 PEP 8 風格指南的 Python 程式碼。請問下列哪一個變數名稱**不符合**標準的命名慣例？</code></pre>"
     ],
     "options": [
-      "user_name",
-      "total_score",
-      "calculate_average",
-      "StudentName</code>"
+      "<code>user_name</code>",
+      "<code>total_score</code>",
+      "<code>calculate_average</code>",
+      "<code>StudentName</code>"
     ],
     "answer": [
       "D"
@@ -6125,10 +6268,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】Python 使用什麼方式來定義程式碼區塊 (Block) 的範圍 (例如 if 語句或 for 迴圈內部的程式碼)？</code></pre>"
     ],
     "options": [
-      "大括號 { }",
-      "關鍵字 begin 與 end",
-      "縮排 (Indentation)",
-      "分號 ;</code>"
+      "<code>大括號 { }</code>",
+      "<code>關鍵字 begin 與 end</code>",
+      "<code>縮排 (Indentation)</code>",
+      "<code>分號 ;</code>"
     ],
     "answer": [
       "C"
@@ -6150,10 +6293,10 @@
       "應該在函式主體中填入哪個關鍵字作為「佔位符 (Placeholder)」？</code></pre>"
     ],
     "options": [
-      "null",
-      "pass",
-      "void",
-      "continue</code>"
+      "<code>null</code>",
+      "<code>pass</code>",
+      "<code>void</code>",
+      "<code>continue</code>"
     ],
     "answer": [
       "B"
@@ -6174,10 +6317,10 @@
       "<pre><code class=\"language-python\">【CH04-補充】關於 Python 的註解 (Comment)，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "多行註解必須使用 /* ... */",
-      "單行註解使用 // 符號",
-      "Python 直譯器會忽略 # 符號後面的所有文字 (直到行尾)",
-      "註解只能寫在程式碼的上方，不能寫在行尾</code>"
+      "<code>多行註解必須使用 /* ... */</code>",
+      "<code>單行註解使用 // 符號</code>",
+      "<code>Python 直譯器會忽略 # 符號後面的所有文字 (直到行尾)</code>",
+      "<code>註解只能寫在程式碼的上方，不能寫在行尾</code>"
     ],
     "answer": [
       "C"
@@ -6202,10 +6345,10 @@
       "    print(i, end=' ')</code></pre>"
     ],
     "options": [
-      "1 2 3 4 5",
-      "1 2 4 5",
-      "1 2",
-      "1 2 3</code>"
+      "<code>1 2 3 4 5</code>",
+      "<code>1 2 4 5</code>",
+      "<code>1 2</code>",
+      "<code>1 2 3</code>"
     ],
     "answer": [
       "B"
@@ -6226,10 +6369,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】關於 Python 迴圈獨有的 else 子句 (例如 for...else 或 while...else)，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "else 區塊只有在迴圈因為 break 中斷時才會執行",
-      "else 區塊只有在迴圈**正常結束** (沒有遇到 break) 時才會執行",
-      "else 區塊無論如何都會在迴圈結束後執行",
-      "Python 的迴圈不支援 else 語法</code>"
+      "<code>else 區塊只有在迴圈因為 break 中斷時才會執行</code>",
+      "<code>else 區塊只有在迴圈**正常結束** (沒有遇到 break) 時才會執行</code>",
+      "<code>else 區塊無論如何都會在迴圈結束後執行</code>",
+      "<code>Python 的迴圈不支援 else 語法</code>"
     ],
     "answer": [
       "B"
@@ -6251,10 +6394,10 @@
       "若 score >= 60 則 result 為 'Pass'，否則為 'Fail'。下列哪一行寫法正確？</code></pre>"
     ],
     "options": [
-      "result = 'Pass' if score >= 60 else 'Fail'",
-      "result = score >= 60 ? 'Pass' : 'Fail'",
-      "result = if score >= 60 'Pass' else 'Fail'",
-      "result = 'Pass' when score >= 60 else 'Fail'</code>"
+      "<code>result = 'Pass' if score >= 60 else 'Fail'</code>",
+      "<code>result = score >= 60 ? 'Pass' : 'Fail'</code>",
+      "<code>result = if score >= 60 'Pass' else 'Fail'</code>",
+      "<code>result = 'Pass' when score >= 60 else 'Fail'</code>"
     ],
     "answer": [
       "A"
@@ -6274,10 +6417,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】執行 list(range(10, 0, -2)) 會產生下列哪一個數列？</code></pre>"
     ],
     "options": [
-      "[10, 8, 6, 4, 2, 0]",
-      "[10, 8, 6, 4, 2]",
-      "[0, 2, 4, 6, 8, 10]",
-      "[] (空清單)</code>"
+      "<code>[10, 8, 6, 4, 2, 0]</code>",
+      "<code>[10, 8, 6, 4, 2]</code>",
+      "<code>[0, 2, 4, 6, 8, 10]</code>",
+      "<code>[] (空清單)</code>"
     ],
     "answer": [
       "B"
@@ -6299,10 +6442,10 @@
       "<pre><code class=\"language-python\">【CH02-補充】下列哪一段程式碼使用了「列表生成式 (List Comprehension)」來產生一個包含 1 到 5 平方數 ([1, 4, 9, 16, 25]) 的清單？</code></pre>"
     ],
     "options": [
-      "nums = [x * x for x in range(1, 6)]",
-      "nums = list(x^2 for x in 1 to 5)",
-      "nums = for x in range(1, 6): x * x",
-      "nums = [x ** 2 in range(1, 6)]</code>"
+      "<code>nums = [x * x for x in range(1, 6)]</code>",
+      "<code>nums = list(x^2 for x in 1 to 5)</code>",
+      "<code>nums = for x in range(1, 6): x * x</code>",
+      "<code>nums = [x ** 2 in range(1, 6)]</code>"
     ],
     "answer": [
       "A"
@@ -6323,10 +6466,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】在 Python 中定義一個類別 (Class) 時，下列哪一個特殊方法是用來**初始化**物件屬性的（建構子）？</code></pre>"
     ],
     "options": [
-      "def __init__(self):",
-      "def __str__(self):",
-      "def __new__(self):",
-      "def __class__(self):</code>"
+      "<code>def __init__(self):</code>",
+      "<code>def __str__(self):</code>",
+      "<code>def __new__(self):</code>",
+      "<code>def __class__(self):</code>"
     ],
     "answer": [
       "A"
@@ -6351,10 +6494,10 @@
       "        print(\"Woof!\")</code></pre>"
     ],
     "options": [
-      "它代表 Dog 類別本身",
-      "它代表該方法 (bark) 本身",
-      "它代表根據類別建立出來的個別**物件實體 (Instance)**",
-      "它是一個 Python 保留字，沒有實際意義</code>"
+      "<code>它代表 Dog 類別本身</code>",
+      "<code>它代表該方法 (bark) 本身</code>",
+      "<code>它代表根據類別建立出來的個別**物件實體 (Instance)**</code>",
+      "<code>它是一個 Python 保留字，沒有實際意義</code>"
     ],
     "answer": [
       "C"
@@ -6374,10 +6517,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】若 Cat 類別繼承自 Animal 類別，且您希望在 Cat 的 __init__ 方法中，先執行 Animal 的初始化邏輯，應該使用下列哪個函式？</code></pre>"
     ],
     "options": [
-      "parent().__init__()",
-      "super().__init__()",
-      "Animal.new()",
-      "self.parent.__init__()</code>"
+      "<code>parent().__init__()</code>",
+      "<code>super().__init__()</code>",
+      "<code>Animal.new()</code>",
+      "<code>self.parent.__init__()</code>"
     ],
     "answer": [
       "B"
@@ -6397,10 +6540,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】在 Python 類別中，若您希望某個屬性變為「私有 (Private)」，不讓外部輕易存取，根據慣例應該如何在變數名稱前加上前綴？</code></pre>"
     ],
     "options": [
-      "使用一個底線 (例如 _score)",
-      "使用兩個底線 (例如 __score)",
-      "使用 private 關鍵字",
-      "使用 @private 裝飾器</code>"
+      "<code>使用一個底線 (例如 _score)</code>",
+      "<code>使用兩個底線 (例如 __score)</code>",
+      "<code>使用 private 關鍵字</code>",
+      "<code>使用 @private 裝飾器</code>"
     ],
     "answer": [
       "B"
@@ -6420,10 +6563,10 @@
       "<pre><code class=\"language-python\">【CH07-補充】下列哪一段程式碼正確地建立了一個 Student 類別的**物件實體** (Instance)？</code></pre>"
     ],
     "options": [
-      "s = new Student()",
-      "s = Student()",
-      "s = Student.new()",
-      "s = class Student()</code>"
+      "<code>s = new Student()</code>",
+      "<code>s = Student()</code>",
+      "<code>s = Student.new()</code>",
+      "<code>s = class Student()</code>"
     ],
     "answer": [
       "B"
@@ -6443,10 +6586,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】若您需要為特定的應用程式邏輯定義一個「自定義例外 (Custom Exception)」，應該建立一個類別並繼承自下列哪一個內建類別？</code></pre>"
     ],
     "options": [
-      "BaseException",
-      "Exception",
-      "Error",
-      "Object</code>"
+      "<code>BaseException</code>",
+      "<code>Exception</code>",
+      "<code>Error</code>",
+      "<code>Object</code>"
     ],
     "answer": [
       "B"
@@ -6467,10 +6610,10 @@
       "<pre><code class=\"language-python\">【CH08-補充】關於 assert 關鍵字的使用，下列敘述何者正確？</code></pre>"
     ],
     "options": [
-      "assert x > 0 會在 x 小於等於 0 時拋出 AssertionError",
-      "assert 只能在 unittest 模組中使用",
-      "assert 用來處理使用者輸入錯誤，類似 try-except",
-      "當 Python 以最佳化模式 (-O) 執行時，assert 仍會執行</code>"
+      "<code>assert x > 0 會在 x 小於等於 0 時拋出 AssertionError</code>",
+      "<code>assert 只能在 unittest 模組中使用</code>",
+      "<code>assert 用來處理使用者輸入錯誤，類似 try-except</code>",
+      "<code>當 Python 以最佳化模式 (-O) 執行時，assert 仍會執行</code>"
     ],
     "answer": [
       "A"
@@ -6497,10 +6640,10 @@
       "    print('Value Error')</code></pre>"
     ],
     "options": [
-      "印出 'Value Error'",
-      "印出 'General Error'",
-      "程式崩潰並顯示 Traceback",
-      "同時印出 'General Error' 和 'Value Error'</code>"
+      "<code>印出 'Value Error'</code>",
+      "<code>印出 'General Error'</code>",
+      "<code>程式崩潰並顯示 Traceback</code>",
+      "<code>同時印出 'General Error' 和 'Value Error'</code>"
     ],
     "answer": [
       "B"
@@ -6558,10 +6701,10 @@
       "<pre><code class=\"language-python\">【CH05-補充】下列哪一種錯誤屬於「邏輯錯誤 (Logic Error)」，且 Python 直譯器**無法**在執行前或執行中自動偵測並報錯？</code></pre>"
     ],
     "options": [
-      "將變數名稱 count 誤打成 cont (NameError)",
-      "計算平均數時，分母誤用了 count - 1 導致結果不準確",
-      "忘記寫迴圈的冒號 (SyntaxError)",
-      "試圖除以零 (ZeroDivisionError)</code>"
+      "<code>將變數名稱 count 誤打成 cont (NameError)</code>",
+      "<code>計算平均數時，分母誤用了 count - 1 導致結果不準確</code>",
+      "<code>忘記寫迴圈的冒號 (SyntaxError)</code>",
+      "<code>試圖除以零 (ZeroDivisionError)</code>"
     ],
     "answer": [
       "B"
@@ -6583,10 +6726,10 @@
       "<pre><code class=\"language-python\">【補充】在 Python 的 datetime 模組中，若要計算「三天後」的日期，應該使用哪一個類別來表示這段「時間差距」？</code></pre>"
     ],
     "options": [
-      "date",
-      "timedelta",
-      "time",
-      "datetime</code>"
+      "<code>date</code>",
+      "<code>timedelta</code>",
+      "<code>time</code>",
+      "<code>datetime</code>"
     ],
     "answer": [
       "B"
@@ -6622,122 +6765,6 @@
     "category": "D6_模組與常用工具"
   }
 ];
-    function parseAnswerToIndex(val) {
-        if (typeof val === 'number') return val - 1;
-        if (typeof val === 'string') {
-            const v = val.toUpperCase();
-            if (v === 'Y') return 0; if (v === 'N') return 1;
-            const code = v.charCodeAt(0);
-            if (code >= 65 && code <= 90) return code - 65;
-            return parseInt(val) - 1;
-        }
-        return -1;
-    }
-    function formatAnswer(a, item) {
-        const idx = parseAnswerToIndex(a);
-        if (idx < 0 || String(a).match(/^[YN]$/i)) return a;
-        const actualIsNum = (item && item.labelType === 'num');
-        return actualIsNum ? (idx + 1) : String.fromCharCode(65 + idx);
-    }
-    let currentIndex = 0;
-    let correctSet = new Set(), incorrectSet = new Set(), correctedSet = new Set(), userAnswers = {}; 
-    window.itspyZoom = 1.0;
-    window.changeZoom = function(delta) {
-        window.itspyZoom = Math.round((window.itspyZoom + delta) * 10) / 10;
-        if (window.itspyZoom < 0.6) window.itspyZoom = 0.6;
-        if (window.itspyZoom > 2.5) window.itspyZoom = 2.5;
-        const container = document.getElementById('question-container');
-        if (container) {
-            // 將對齊基準改為左上角 (top left)，這樣會緊貼內容區邊界
-            container.style.transform = "scale(" + window.itspyZoom + ")";
-            container.style.transformOrigin = "top left";
-            
-            // 由於縮放後寬度會變，需確保容器寬度能容納縮放內容，否則會出現截斷
-            container.style.width = (100 / window.itspyZoom) + "%";
-            
-            if (typeof window.drawLines === 'function') window.drawLines();
-        }
-    };
-    const SUBJECT_ID = 'itspy';
-    const CORR_KEY = SUBJECT_ID + '_correct_v1', INCORR_KEY = SUBJECT_ID + '_incorrect_v1', CORR_EDIT_KEY = SUBJECT_ID + '_corrected_v1', INDEX_KEY = SUBJECT_ID + '_index_v1', ANSWERS_KEY = SUBJECT_ID + '_answers_v1';
-    function loadState() {
-        try {
-            const sCorr = localStorage.getItem(CORR_KEY), sIncorr = localStorage.getItem(INCORR_KEY), sEdit = localStorage.getItem(CORR_EDIT_KEY), sIdx = localStorage.getItem(INDEX_KEY), sAns = localStorage.getItem(ANSWERS_KEY);
-            if (sCorr) correctSet = new Set(JSON.parse(sCorr));
-            if (sIncorr) incorrectSet = new Set(JSON.parse(sIncorr));
-            if (sEdit) correctedSet = new Set(JSON.parse(sEdit));
-            if (sIdx) currentIndex = parseInt(sIdx) || 0;
-            if (sAns) userAnswers = JSON.parse(sAns);
-        } catch(e) {}
-    }
-    function saveState() {
-        try {
-            localStorage.setItem(CORR_KEY, JSON.stringify([...correctSet]));
-            localStorage.setItem(INCORR_KEY, JSON.stringify([...incorrectSet]));
-            localStorage.setItem(CORR_EDIT_KEY, JSON.stringify([...correctedSet]));
-            localStorage.setItem(INDEX_KEY, currentIndex.toString());
-            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
-        } catch(e) {}
-    }
-    function resetProgress() { 
-        if(confirm('確定清除紀錄嗎？')) { 
-            try { localStorage.removeItem(CORR_KEY); localStorage.removeItem(INCORR_KEY); localStorage.removeItem(CORR_EDIT_KEY); localStorage.removeItem(INDEX_KEY); localStorage.removeItem(ANSWERS_KEY); } catch(e) {}
-            location.reload(); 
-        } 
-    }
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-    document.addEventListener('click', function(e) {
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.querySelector('.mobile-toggle');
-        if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggle.contains(e.target)) {
-            sidebar.classList.remove('active');
-        }
-    });
-    /* ChoiceList 互動邏輯 (自主練習版 - 已由 choicelist_patch_v2.js 接管) */
-    window.selectSlot = function(idx) {
-        if (typeof userAnswers[currentIndex] === 'undefined') return;
-        userAnswers[currentIndex][idx] = null;
-        selectedSlotIdx = idx;
-        if (typeof saveState === 'function') saveState();
-        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
-    };
-
-    window.moveToTarget = function(optIdx) {
-        const item = quizData[currentIndex];
-        if (!userAnswers[currentIndex]) return;
-        
-        if (selectedSlotIdx === -1 || userAnswers[currentIndex][selectedSlotIdx] !== null) {
-            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
-        }
-
-        if (selectedSlotIdx !== -1) {
-            userAnswers[currentIndex][selectedSlotIdx] = optIdx;
-            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
-            if (typeof saveState === 'function') saveState();
-            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
-        }
-    };
-
-    window.removeFromTarget = function(ansIdx) {
-        if (typeof userAnswers[currentIndex] === 'undefined') return;
-        userAnswers[currentIndex].splice(ansIdx, 1);
-        if (typeof saveState === 'function') saveState();
-        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
-    };
-
-    window.submitChoiceList = function() {
-        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
-    };
-
-    function processContent(content, item) {
-        if (!content) return '';
-        const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
-            const num = parseInt(p1, 10);
-            const src = item['image' + num] || item['image' + p1] || item['image'];
-            return src ? `<img src="${src}" class="q-img">` : match;
-        });
-    }
                         function renderMatchingQuestion(index) {
         currentIndex = index; const item = (typeof quizData !== 'undefined') ? quizData[index] : examQuestions[index];
         const container = document.getElementById('question-container') || document.getElementById('question-area');
@@ -6752,6 +6779,7 @@
         const currentAns = userAnswers[index];
         
         const isPractice = (typeof quizData !== 'undefined');
+        const qList = examQuestions;
         const isCorrect = isPractice ? correctSet.has(index) : false;
         const isCorrected = isPractice ? correctedSet.has(index) : false;
         const isWrong = isPractice ? incorrectSet.has(index) : false;
@@ -6764,7 +6792,7 @@
         let isSplitMode = (totalRightRows > item.left.length);
 
         let html = `<div class="card question-card">
-            <div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1}</span><span class="badge ${isLocked ? (isCorrected ? 'bg-warning' : 'bg-success') : (isWrong ? 'bg-danger' : 'bg-info')} type-badge">${isCorrected ? '更正題' : (isWrong ? '答錯題' : (isCorrect ? '答對題' : '配對題'))}</span></div><div class="category-tag">${item.category || '一般'}</div></div>
+            <div class="question-header">題目 ${index + 1} / ${qList.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div>
             <div class="question-body">
                 ${processContent(item.question, item)}
                 <div class="matching-wrapper" id="matching-wrapper" onmousemove="handleDragMove(event)" onmouseup="handleDragEnd(event)" ontouchmove="handleDragMove(event)" ontouchend="handleDragEnd(event)">
@@ -6864,7 +6892,7 @@
         window.lastClientX = clientX; window.lastClientY = clientY;
         const dot = document.getElementById("dot-left-" + idx), rect = dot.getBoundingClientRect();
         const wrapperRect = document.getElementById("matching-wrapper").getBoundingClientRect();
-        const zoom = window.itspyZoom || 1.0;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
         dragStartPoint = { lIdx: idx, x: (rect.left + rect.width/2 - wrapperRect.left) / zoom, y: (rect.top + rect.height/2 - wrapperRect.top) / zoom };
         const svg = document.getElementById("matching-svg");
         tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -6878,7 +6906,7 @@
         const wrapper = document.getElementById('matching-wrapper'), rect = wrapper.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
         window.lastClientX = clientX; window.lastClientY = clientY;
-        const zoom = window.itspyZoom || 1.0;
+        const zoom = parseFloat(document.body.style.zoom) || 1.0;
         tempLine.setAttribute('x2', (clientX - rect.left) / zoom); tempLine.setAttribute('y2', (clientY - rect.top) / zoom);
     };
     window.handleDragEnd = function(e) {
@@ -6886,23 +6914,28 @@
         let x = window.lastClientX, y = window.lastClientY;
         if (e && e.changedTouches && e.changedTouches[0]) { x = e.changedTouches[0].clientX; y = e.changedTouches[0].clientY; }
         else if (e && e.clientX !== undefined) { x = e.clientX; y = e.clientY; }
-        
         if (Number.isFinite(x) && Number.isFinite(y)) {
             const targetEl = document.elementFromPoint(x, y), rightItem = targetEl ? targetEl.closest('.match-item-right') : null;
             if (rightItem) {
                 const rIdx = parseInt(rightItem.getAttribute('data-right-idx'));
-                if (!userAnswers[currentIndex]) userAnswers[currentIndex] = [];
+                // 強制初始化為陣列並存入答案
+                if (!Array.isArray(userAnswers[currentIndex])) {
+                    const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
+                    userAnswers[currentIndex] = new Array(item.left.length).fill(null);
+                }
                 userAnswers[currentIndex][dragStartPoint.lIdx] = rIdx;
             }
         }
         isDragging = false; dragStartPoint = null;
         if (tempLine && tempLine.parentNode) tempLine.parentNode.removeChild(tempLine);
-        tempLine = null; renderMatchingQuestion(currentIndex);
+        tempLine = null; 
+        const renderFunc = (typeof renderMatchingQuestion === 'function') ? renderMatchingQuestion : null;
+        if (renderFunc) renderFunc(currentIndex);
     };
     window.drawLines = function() {
         const svg = document.getElementById('matching-svg'), wrapper = document.getElementById('matching-wrapper');
         if (!svg || !wrapper) return;
-        const zoom = window.itspyZoom || 1.0, rect = wrapper.getBoundingClientRect();
+        const zoom = parseFloat(document.body.style.zoom) || 1.0, rect = wrapper.getBoundingClientRect();
         const baseW = rect.width / zoom, baseH = rect.height / zoom;
         svg.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
         svg.innerHTML = ''; const currentAns = userAnswers[currentIndex]; if (!currentAns) return;
@@ -6920,362 +6953,496 @@
             }
         });
     };
-                                window.submitMatching = function() {
-        const item = (typeof quizData !== 'undefined') ? quizData[currentIndex] : examQuestions[currentIndex];
-        const ans = userAnswers[currentIndex] || [];
-        const correctAns = Array.isArray(item.answer) ? item.answer : [item.answer];
-        
-        const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
-        const groupStarts = []; let currentStart = 0;
-        rightRowGroups.forEach(size => { groupStarts.push(currentStart); currentStart += size; });
-        const useRelative = (item.right && item.right.length === item.left.length);
-        
-        let isCorrect = (ans.length === item.left.length && !ans.includes(null));
-        if (isCorrect) {
-            for (let i = 0; i < item.left.length; i++) {
-                const userRIdx = ans[i];
-                let targetIdx = parseAnswerToIndex(correctAns[i]);
-                if (useRelative) targetIdx = groupStarts[i] + targetIdx;
-                if (userRIdx !== targetIdx) { isCorrect = false; break; }
-            }
-        }
-        if (isCorrect) {
-            if (incorrectSet.has(currentIndex)) { incorrectSet.delete(currentIndex); correctedSet.add(currentIndex); }
-            else if (!correctedSet.has(currentIndex)) { correctSet.add(currentIndex); }
-        } else {
-            if (typeof incorrectSet !== 'undefined') {
-                incorrectSet.add(currentIndex); correctSet.delete(currentIndex); correctedSet.delete(currentIndex);
-            }
-        }
-        renderMatchingQuestion(currentIndex);
+
+    /* ChoiceList 互動邏輯 (模擬考版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
     };
-    function toggleExplanation(forceShow = null) {
-        const el = document.getElementById('ans-section'), btn = document.getElementById('toggle-exp-btn');
-        if (!el || !btn) return;
-        const isShow = (forceShow !== null) ? forceShow : (el.style.display !== 'block');
-        el.style.display = isShow ? 'block' : 'none';
-        if (isShow) setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
-    }
-    function checkAnswer(element, qIdx, optIdx, event) {
-        const item = quizData[qIdx], isMultiple = item.type === 'multiple';
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseAnswerToIndex(a));
-        const input = element.querySelector('input');
-        if (event && event.target !== input) { if (isMultiple) input.checked = !input.checked; else input.checked = true; }
-        if (isMultiple) {
-            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
-            let selected = []; inputs.forEach((inp, idx) => { if (inp.checked) selected.push(idx); });
-            userAnswers[qIdx] = selected;
-            element.classList.toggle('correct', input.checked && correctIndices.includes(optIdx));
-            element.classList.toggle('incorrect', input.checked && !correctIndices.includes(optIdx));
-            const isPerfect = selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v));
-            if (isPerfect) {
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
-                inputs.forEach(i => i.disabled = true); toggleExplanation(true);
-            } else if (selected.some(v => !correctIndices.includes(v)) || selected.length > correctIndices.length) {
-                incorrectSet.add(qIdx); correctSet.delete(qIdx); correctedSet.delete(qIdx);
-            }
-        } else {
-            if (correctSet.has(qIdx) || correctedSet.has(qIdx)) return;
-            userAnswers[qIdx] = optIdx;
-            if (correctIndices.includes(optIdx)) {
-                element.classList.add('correct');
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else { correctSet.add(qIdx); }
-                document.querySelectorAll(`input[name="q${qIdx}"]`).forEach(i => i.disabled = true);
-            } else {
-                element.classList.add('incorrect'); incorrectSet.add(qIdx);
-                const ci = document.getElementById(`o${correctIndices[0]}`); if (ci) ci.closest('.option-item').classList.add('correct');
-            }
-            toggleExplanation(true);
+
+    window.moveToTarget = function(optIdx) {
+        if (!userAnswers[currentIndex]) return;
+        let targetIdx = selectedSlotIdx;
+        const requiredCount = (typeof examQuestions !== 'undefined') ? 
+            (examQuestions[currentIndex].slots || examQuestions[currentIndex].slot || []).join('').split('<slot').length - 1 : 1;
+
+        if (targetIdx === -1 || userAnswers[currentIndex][targetIdx] !== null) targetIdx = userAnswers[currentIndex].indexOf(null);
+        if (targetIdx !== -1) {
+            userAnswers[currentIndex][targetIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
         }
-        saveState(); updateUI();
+    };
+
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+            const el = document.getElementById('timer');
+            if (el) el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+        }, 1000);
     }
-    function checkSubAnswer(element, qIdx, optIdx, subIdx, event) {
-        const item = quizData[qIdx];
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctSubIdx = parseAnswerToIndex(answers[optIdx]), input = element.querySelector('input');
-        if (event && event.target !== input) input.checked = true;
-        if (!userAnswers[qIdx]) userAnswers[qIdx] = {}; userAnswers[qIdx][optIdx] = subIdx;
-        element.parentElement.querySelectorAll('.sub-opt-container').forEach(el => el.classList.remove('selected'));
-        element.classList.add('selected');
-        if (subIdx === correctSubIdx) {
-            element.classList.add('correct');
-            const totalSub = (item.quiz || item.options || []).length;
-            const curCorrect = document.querySelectorAll('.sub-opt-container.correct').length;
-            if (curCorrect === totalSub) {
-                if (incorrectSet.has(qIdx)) { incorrectSet.delete(qIdx); correctedSet.add(qIdx); }
-                else if (!correctedSet.has(qIdx)) { correctSet.add(qIdx); }
-                toggleExplanation(true);
-            }
-            document.querySelectorAll(`input[name="q${qIdx}_opt${optIdx}"]`).forEach(i => i.disabled = true);
-        } else {
-            element.classList.add('incorrect'); incorrectSet.add(qIdx);
-            const ci = document.getElementById(`o${optIdx}_s${correctSubIdx}`); if (ci) ci.parentElement.classList.add('correct');
-            toggleExplanation(true);
+
+    function adjustZoom(delta) {
+        const body = document.body;
+        let currentZoom = parseFloat(getComputedStyle(body).zoom) || 1;
+        let newZoom = currentZoom + delta;
+        if (newZoom < 0.5) newZoom = 0.5;
+        if (newZoom > 3.0) newZoom = 3.0;
+        body.style.zoom = newZoom;
+        
+        let inverseZoom = 1 / newZoom;
+        document.querySelectorAll('.home-float-btn, .zoom-controls').forEach(el => {
+            el.style.zoom = inverseZoom;
+        });
+        
+        if (window.drawLines) window.drawLines();
+    }
+
+    /* ChoiceList 互動邏輯 (自主練習版 - 已由 choicelist_patch_v2.js 接管) */
+    window.selectSlot = function(idx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex][idx] = null;
+        selectedSlotIdx = idx;
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.moveToTarget = function(optIdx) {
+        const item = quizData[currentIndex];
+        if (!userAnswers[currentIndex]) return;
+        
+        if (selectedSlotIdx === -1 || userAnswers[currentIndex][selectedSlotIdx] !== null) {
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
         }
-        saveState(); updateUI();
-    }
-    function evaluateCurrentQuestion() {
-        const item = quizData[currentIndex], qIdx = currentIndex;
-        if (correctSet.has(qIdx) || correctedSet.has(qIdx) || incorrectSet.has(qIdx)) return;
-        const saved = userAnswers[qIdx]; if (!saved) return; 
-        let answers = item.answer; if (!Array.isArray(answers)) answers = [answers];
-        const correctIndices = answers.map(a => parseAnswerToIndex(a));
-        if (item.type === 'multiple') {
-            const selected = Array.isArray(saved) ? saved : []; if (selected.length === 0) return;
-            if (selected.length === correctIndices.length && selected.every(v => correctIndices.includes(v))) correctSet.add(qIdx); else incorrectSet.add(qIdx);
-        } else if (String(item.quiz || item.options || "").includes('|')) {
-            const totalSub = (item.quiz || item.options || []).length;
-            let allCorrect = (Object.keys(saved).length === totalSub);
-            if (allCorrect) { for(let i=0; i<totalSub; i++) if (parseInt(saved[i]) != parseAnswerToIndex(answers[i])) { allCorrect = false; break; } }
-            if (allCorrect) correctSet.add(qIdx); else incorrectSet.add(qIdx);
+
+        if (selectedSlotIdx !== -1) {
+            userAnswers[currentIndex][selectedSlotIdx] = optIdx;
+            selectedSlotIdx = userAnswers[currentIndex].indexOf(null);
+            if (typeof saveState === 'function') saveState();
+            if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
         }
-        saveState(); updateUI();
+    };
+
+    window.removeFromTarget = function(ansIdx) {
+        if (typeof userAnswers[currentIndex] === 'undefined') return;
+        userAnswers[currentIndex].splice(ansIdx, 1);
+        if (typeof saveState === 'function') saveState();
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    window.submitChoiceList = function() {
+        if (typeof window.renderChoiceListQuestion === 'function') window.renderChoiceListQuestion(currentIndex);
+    };
+
+    function processContent(content, item) {
+        if (!content) return '';
+        const lines = Array.isArray(content) ? content : [String(content)];
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+            const num = parseInt(p1, 10);
+            const src = item['image' + num] || item['image' + p1] || item['image'];
+            return src ? `<img src="${src}" class="q-img">` : match;
+        });
     }
-    function nextQuestion() { evaluateCurrentQuestion(); if (currentIndex < quizData.length-1) renderQuestion(currentIndex+1); }
-    function prevQuestion() { evaluateCurrentQuestion(); if (currentIndex > 0) renderQuestion(currentIndex-1); }
-    function jumpTo(idx) { evaluateCurrentQuestion(); renderQuestion(idx); }
-            function prepareAndPrint(onlyMistakes = false) {
-                let targetItems = quizData.map((item, idx) => ({ item, idx }));
-                let title = "ITS Python 認證完整解析";
-                if (onlyMistakes) {
-                    targetItems = targetItems.filter(({ idx }) => incorrectSet.has(idx) || correctedSet.has(idx));
-                    if (targetItems.length === 0) { alert('目前沒有錯題或訂正紀錄可供列印！'); return; }
-                    title = "ITS Python 訂正解析講義";
+
+    function initExam() {
+        if (typeof allQuestions === 'undefined' || allQuestions.length === 0) {
+            console.error("題庫資料載入失敗！"); return;
+        }
+        const CUTOFF = 92;
+        const TARGET_OFF_COUNT = 58; // 官方題改為 58 題
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 補充題則為 2 題
+        
+        let historySet = new Set();
+        try {
+            const savedHistory = localStorage.getItem(HISTORY_KEY);
+            if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
+        } catch(e) {}
+
+        // 1. 池子拆分：官方與補充
+        const offPoolTotal = allQuestions.filter(q => q.id <= CUTOFF);
+        const suppPoolTotal = allQuestions.filter(q => q.id > CUTOFF);
+
+        // 2. 池內優先級排序 (未看優先)
+        const offUnseen = offPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const offSeen = offPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppUnseen = suppPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
+        const suppSeen = suppPoolTotal.filter(q => historySet.has(q.id)).sort(() => 0.5 - Math.random());
+
+        let finalOffOrder = [...offUnseen, ...offSeen];
+        let finalSuppOrder = [...suppUnseen, ...suppSeen];
+
+        let selected = [], usedIds = new Set();
+        
+        // --- 階段 A：分類平衡 (優先從官方池抽) ---
+        const categories = {};
+        allQuestions.forEach(q => {
+            const cat = q.category || '一般';
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(q);
+        });
+        const catNames = Object.keys(categories).sort();
+        
+        catNames.forEach(cat => {
+            let pool = finalOffOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            if (pool.length === 0) pool = finalSuppOrder.filter(q => q.category === cat && !usedIds.has(q.id));
+            const limit = (cat.includes('D0')) ? 2 : 3;
+            for (let i = 0; i < limit; i++) {
+                if (pool.length > 0) {
+                    const q = pool.shift();
+                    selected.push(q);
+                    usedIds.add(q.id);
                 }
+            }
+        });
 
-                // 顯示處理中遮罩並隱藏縮放按鈕
-                const overlay = document.getElementById('loading-overlay');
-                const zoomBtns = document.querySelector('.zoom-controls');
-                const homeBtn = document.querySelector('.home-float-btn');
-                const mobileToggle = document.querySelector('.mobile-toggle');
-                const sidePrev = document.getElementById('side-btn-prev');
-                const sideNext = document.getElementById('side-btn-next');
+        // --- 階段 B：死守官方 95% 配額 ---
+        for (let q of finalOffOrder) {
+            if (selected.filter(s => s.id <= CUTOFF).length >= TARGET_OFF_COUNT) break;
+            if (!usedIds.has(q.id)) {
+                // 如果是 D0 類別，且已經有 2 題，則跳過
+                if (q.category && q.category.includes('D0')) {
+                    const curD0 = selected.filter(s => s.category && s.category.includes('D0')).length;
+                    if (curD0 >= 2) continue;
+                }
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
 
-                if (overlay) overlay.style.display = 'flex';
-                if (zoomBtns) zoomBtns.style.setProperty('display', 'none', 'important');
-                if (homeBtn) homeBtn.style.setProperty('display', 'none', 'important');
-                if (mobileToggle) mobileToggle.style.setProperty('display', 'none', 'important');
-                if (sidePrev) sidePrev.style.setProperty('display', 'none', 'important');
-                if (sideNext) sideNext.style.setProperty('display', 'none', 'important');
+        // --- 階段 C：填滿補充 5% 配額 ---
+        for (let q of finalSuppOrder) {
+            if (selected.length >= EXAM_LIMIT) break;
+            if (!usedIds.has(q.id)) {
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
 
-                // 記錄原始狀態以便後續恢復
-                const oldZoom = document.body.style.zoom || "1.0";
-                const sidebar = document.querySelector('.sidebar');
-                const content = document.querySelector('.content-area');
-                const sidebarWasVisible = sidebar && (getComputedStyle(sidebar).display !== 'none');
+        // --- 階段 D：兜底 ---
+        if (selected.length < EXAM_LIMIT) {
+            const fallback = allQuestions.filter(q => !usedIds.has(q.id)).sort(() => 0.5 - Math.random());
+            while (selected.length < EXAM_LIMIT && fallback.length > 0) {
+                const q = fallback.shift();
+                selected.push(q);
+                usedIds.add(q.id);
+            }
+        }
 
-                // 暫時重置縮放與隱藏側邊欄，確保座標計算基準與列印佈局一致
-                document.body.style.zoom = "1.0";
-                if (sidebar) sidebar.style.display = 'none';
-                if (content) content.style.marginLeft = '0';
+        // 3. 更新歷史並打散題目順序
+        selected.forEach(q => historySet.add(q.id));
+        if (historySet.size > (allQuestions.length * 0.9)) historySet.clear();
+        localStorage.setItem(HISTORY_KEY, JSON.stringify([...historySet]));
+
+        // 完全隨機打散，不再依分類名稱排序
+        examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+        renderQuestion(0); startTimer();
+    }
+
+    function renderQuestion(index, scrollTop = true) {
+        currentIndex = index; const item = examQuestions[index];
+        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
+        if (item.type === 'choicelist') { if(typeof window.renderChoiceListQuestion === 'function') { window.renderChoiceListQuestion(index); return; } }
+        const container = document.getElementById('question-area');        if (!container) return;
+        container.innerHTML = '';
+        const progressEl = document.getElementById('q-progress');
+        if (progressEl) progressEl.innerText = `${index + 1} / ${examQuestions.length}`;
+        const sidePrev = document.getElementById('side-btn-prev'), sideNext = document.getElementById('side-btn-next');
+        if (sidePrev) sidePrev.style.display = index === 0 ? 'none' : 'flex';
+        if (sideNext) { sideNext.style.display = 'flex'; sideNext.title = index === (examQuestions.length-1) ? '交卷' : '下一題'; }
+        
+        const card = document.createElement('div'); card.className = 'card question-card';
+        let qText = processContent(item.question, item);
+        let html = `<div class="question-header">題目 ${index + 1} / ${examQuestions.length} <span class="badge bg-secondary small ms-2">${item.category || ''}</span></div><div class="question-body">${qText}</div>`;
+        if (item.image) html += `<div class="text-center mb-4"><img src="${item.image}" style="max-width:100%; border:1px solid #ddd; border-radius:4px;"></div>`;
+        const optionsRaw = item.quiz || item.options || [];
+        const options = Array.isArray(optionsRaw) ? optionsRaw : [optionsRaw];
+        const savedAns = userAnswers[index] !== undefined ? userAnswers[index] : {};
+        html += '<div class="mt-3">';
+        options.forEach((opt, optIdx) => {
+            const optStr = String(opt);
+            let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
+            if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
+            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            
+            if (optStr.includes('|')) {
+                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const customLabelField = "question" + alphabet[optIdx];
+                let customLabel = "";
+                if (item[customLabelField]) {
+                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                }
+                const displayLabel = customLabel || `選項 ${optIdx + 1}`;
+
+                const subOpts = optStr.split('|'); html += `<div class="sub-question-label">${displayLabel}</div><div class="d-flex flex-wrap gap-2 mb-3 ms-2">`;
+                subOpts.forEach((sub, subIdx) => { 
+                    const isSel = (savedAns && savedAns[optIdx] === subIdx); 
+                    let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
+                    if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
+                });
+                html += `</div>`;
+            } else {
+                const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
+            }
+        });
+        html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
+        if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
+    }
+
+    function selectOption(optIdx) {
+        const item = examQuestions[currentIndex];
+        if (item.type === 'multiple') {
+            if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
+            const idx = userAnswers[currentIndex].indexOf(optIdx);
+            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
+            else userAnswers[currentIndex].push(optIdx);
+        } else { userAnswers[currentIndex] = optIdx; }
+        renderQuestion(currentIndex, false);
+    }
+    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
+    function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
+    function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
+
+    function submitExam() {
+        clearInterval(timerInterval); 
+        const ui = document.getElementById('exam-ui'), rs = document.getElementById('result-screen');
+        const homeBtn = document.querySelector('.home-float-btn');
+        const zoomBtns = document.querySelector('.zoom-controls');
+        if (ui) ui.style.display = 'none'; 
+        if (rs) rs.style.display = 'block';
+        if (homeBtn) homeBtn.style.display = 'none';
+        if (zoomBtns) zoomBtns.style.display = 'none';
+        
+        // 進入考試結束畫面時，強制重置縮放比例為 1.0，確保畫面排版正常
+        document.body.style.zoom = "1.0";
+        
+        let correctCount = 0, stats = {}, incorrectHTML = '';
+        const catNameMap = {};
+        allQuestions.forEach(q => {
+            let fullCat = q.category || '一般';
+            let _m = fullCat.match(/^(D\d+)/); let prefix = (_m ? _m[1] : fullCat);
+            if (!catNameMap[prefix] || fullCat.length > catNameMap[prefix].length) catNameMap[prefix] = fullCat;
+        });
+        examQuestions.forEach((item, idx) => {
+            let _m = (item.category ? item.category.match(/^(D\d+)/) : null); let prefix = (_m ? _m[1] : item.category || '一般');
+            const cat = catNameMap[prefix];
+            if (!stats[cat]) stats[cat] = { total: 0, correct: 0, ids: [] }; 
+            stats[cat].total++;
+            
+                        const userAns = userAnswers[idx]; let isCorrect = false;
+            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+            
+            if (item.type === 'matching' || item.type === 'multimatching') {
+                const userIndices = item.left.map((_, lIdx) => (userAns && userAns[lIdx] !== undefined) ? userAns[lIdx] : null);
+                const rightRowGroups = (item.right || []).map(t => (t && String(t).includes('|')) ? t.replace(/<\/?code>/g, '').split('|').length : 1);
+                const groupStarts = []; let currentStart = 0;
+                rightRowGroups.forEach(size => { groupStarts.push(currentStart); currentStart += size; });
+                const useRelative = (item.right && item.right.length === item.left.length);
                 
-                const area = document.getElementById('review-area');
-                if (!area) return;
-                area.style.display = 'block'; // 強制顯示以計算座標
+                isCorrect = (userIndices.length === answers.length && !userIndices.includes(null));
+                if (isCorrect) {
+                    for (let i = 0; i < answers.length; i++) {
+                        let targetIdx = parseAnswerToIndex(answers[i]);
+                        if (useRelative) targetIdx = groupStarts[i] + targetIdx;
+                        if (userIndices[i] !== targetIdx) { isCorrect = false; break; }
+                    }
+                }
+            } else if (item.type === 'choicelist') {
+                const userIdxs = Array.isArray(userAns) ? userAns : [];
+                const correctIndices = answers.map(a => (typeof a === 'number') ? (a - 1) : parseAnswerToIndex(a));
                 
-                area.innerHTML = `<h1 class="text-center mb-4" style="color:#212529">${title}</h1>`;
-            targetItems.forEach(({ item, idx }) => {
-                const div = document.createElement('div'); div.className = 'review-item';
+                isCorrect = (userIdxs.length === correctIndices.length);
+                if (isCorrect) {
+                    for (let i = 0; i < correctIndices.length; i++) {
+                        if (userIdxs[i] !== correctIndices[i]) { isCorrect = false; break; }
+                    }
+                }
+                
+                // --- Grading logic ---
+                if (!isCorrect) {
+                    // Fail
+                } else {
+                    // Success
+                }
+            } else if (item.type === 'multioption' || (item.quiz || item.options || []).some(o => String(o).includes('|'))) {
+
+                isCorrect = answers.every((a, i) => userAns && parseAnswerToIndex(a) === userAns[i]);
+            } else if (item.type === 'multiple') {
+                const cIdxs = answers.map(a => parseAnswerToIndex(a));
+                isCorrect = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(val => cIdxs.includes(val));
+            } else { isCorrect = userAns === parseAnswerToIndex(item.answer[0] || item.answer); }
+
+            stats[cat].ids.push({ id: item.id, isWrong: !isCorrect });
+            
+            const isNum = (item.labelType === 'num');
+            let ansText = answers.map(a => {
+                if (String(a).toUpperCase() === 'Y' || String(a).toUpperCase() === 'N') return a;
+                const idx = parseAnswerToIndex(a);
+                if (idx < 0) return a;
+                return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
+            }).join(', ');
+
+            if (isCorrect) { correctCount++; stats[cat].correct++; }
+            else {
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
-                const isNum = (item.labelType === 'num');
-                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                let optionsHTML = '<div class="review-opts" style="margin-left:20px; margin-top:10px; font-size:0.9rem; color:#666;">';
                 
-                let optHtml = "";
-                            if (item.type === 'matching' || item.type === 'multimatching') {
-                                let leftItems = item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="pdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
-                                let rightItems = item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${r}</div><div class="match-dot" id="pdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('');
-                                
-                                optHtml = `<div class="matching-wrapper print-matching" id="print-match-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
-                                    <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
-                                    <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
-                                        <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
-                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
-                                            ${leftItems}
-                                        </div>
-                                        <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
-                                            <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
-                                            ${rightItems}
-                                        </div>
-                                    </div>
-                                </div>`;
-                            } else if (item.type === 'choicelist') {
-                                const isGrouped = Array.isArray(item.options[0]);
-                                if (isGrouped) {
-                                    optHtml = item.options.map((group, gIdx) => {
-                                        const groupOpts = group.map((opt, optIdx) => `<span style="margin-right:15px;">(${String.fromCharCode(65+optIdx)}) ${opt}</span>`).join(' ');
-                                        return `<div class="mb-2"><b style="color:#666;">[ 選項組 ${gIdx+1} ]</b><br/>${groupOpts}</div>`;
-                                    }).join('');
-                                } else {
-                                    optHtml = item.options.map((opt, oIdx) => `<span style="margin-right:15px;">(${String.fromCharCode(65+oIdx)}) ${opt}</span>`).join(' ');
-                                }
-                                optHtml = `<div class="p-2 border rounded bg-light" style="font-family:Consolas,monospace; font-size:0.9rem;">${optHtml}</div>`;
-                            } else {
-                
-                    optHtml = opts.map((o, i) => {
-                        if (typeof o === 'string' && o.includes('|')) {
+                if (item.type === 'matching' || item.type === 'multimatching') {
+                    optionsHTML += `<div class="matching-wrapper print-matching" id="pmock-${idx}" data-idx="${idx}" style="margin: 20px 0; position:relative; width:100%; display:block; border:1px solid #333; padding:15px; border-radius:4px; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+                        <svg class="print-svg" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; overflow:visible; display:block;"></svg>
+                        <div class="matching-columns" style="display:flex !important; justify-content:flex-start !important; gap: 40px !important; position:relative; z-index:5;">
+                            <div class="match-col left-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">程式碼片段</div>
+                                ${item.left.map((l, li) => `<div class="match-item match-item-left" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${l}</div><div class="match-dot" id="mdl-${idx}-${li}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                            </div>
+                            <div class="match-col right-col" style="flex:none; display:flex; flex-direction:column; width:max-content;">
+                                <div style="font-weight:bold; color:#0d6efd; margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:5px; font-size:1.1rem; width:100%; text-align:left;">正確對應回答</div>
+                                ${item.right.map((r, ri) => `<div class="match-item match-item-right" style="display:flex; align-items:center; justify-content:flex-start; min-height:40px; margin-bottom:10px;"><div class="q-text-part" style="font-family:Consolas,monospace; font-size:0.95rem; display:inline-block; text-align:left; white-space:nowrap !important;">${r}</div><div class="match-dot" id="mdr-${idx}-${ri}" style="width:16px; height:16px; margin:0 10px; border:2px solid #198754; border-radius:50%; background:#fff; flex-shrink:0;"></div></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                } else {
+                    opts.forEach((o, i) => {
+                        const isNum = (item.labelType === 'num');
+                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        if (String(o).includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
-                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                        } else {
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+                            const customLabelField = "question" + alphabet[i];
+                            let customLabel = "";
+                            if (item[customLabelField]) {
+                                customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                            }
+                            const displayLabel = customLabel || `選項 ${i + 1}`;
+
+                            const subLabels = String(o).split('|').map((s, si) => {
+                                const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                            }).join(' ');
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                         }
-                    }).join('');
+                        else {
+                            const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                        }
+                    });
                 }
-    
-                let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
-                if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
-                const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
-                    const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
-                }).join(', ');
-                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
-                area.appendChild(div);
-            });
-            
-                            // 繪製列印頁面的連線 (正確答案連線 - 標準答案畫上去)
-                                                                                    // 繪製列印頁面的連線 (正確答案連線 - 視窗座標差值法)
-                                                                                    setTimeout(() => {
-                                                                                        document.querySelectorAll('.print-matching').forEach(wrapper => {
-                                                                                            const qIdx = parseInt(wrapper.getAttribute('data-idx'));
-                                                                                            const item = quizData[qIdx];
-                                                                                            const svg = wrapper.querySelector('.print-svg');
-                                                                                            if (!svg) return;
-                                                                                            
-                                                                                            // 實作左側動態字寬偵測 (練習區列印專用)
-                                                                                            const leftParts = wrapper.querySelectorAll('.match-item-left .q-text-part');
-                                                                                            let maxW = 0;
-                                                                                            leftParts.forEach(p => {
-                                                                                                const w = p.getBoundingClientRect().width;
-                                                                                                if (w > maxW) maxW = w;
-                                                                                            });
-                                                                                            if (maxW > 0) {
-                                                                                                leftParts.forEach(p => p.style.width = (maxW + 2) + 'px');
-                                                                                            }
-
-                                                                                            const wRect = wrapper.getBoundingClientRect();
-                                                                                            if (wRect.width === 0) return;
-                                                                                            
-                                                                                            svg.setAttribute('width', wRect.width);
-                                                                                            svg.setAttribute('height', wRect.height);
-                                                                                            svg.style.width = wRect.width + 'px';
-                                                                                            svg.style.height = wRect.height + 'px';
-                                                                                            svg.innerHTML = ''; 
-                                                                                            
-                                                                                            const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-                                                                                            answers.forEach((ansVal, lIdx) => {
-                                                                                                const rIdx = parseAnswerToIndex(ansVal);
-                                                                                                const dotL = document.getElementById(`pdl-${qIdx}-${lIdx}`);
-                                                                                                const dotR = document.getElementById(`pdr-${qIdx}-${rIdx}`);
-                                                                                                if (dotL && dotR) {
-                                                                                                    const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
-                                                                                                    // 計算相對於 wrapper 的精確座標
-                                                                                                    const x1 = rL.left - wRect.left + rL.width/2;
-                                                                                                    const y1 = rL.top - wRect.top + rL.height/2;
-                                                                                                    const x2 = rR.left - wRect.left + rR.width/2;
-                                                                                                    const y2 = rR.top - wRect.top + rR.height/2;
-                                                                                                    
-                                                                                                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                                                                                                    line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
-                                                                                                    line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
-                                                                                                    line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
-                                                                                                    line.setAttribute('stroke-linecap', "round"); 
-                                                                                                    line.setAttribute('style', "stroke-opacity:1 !important;");
-                                                                                                    svg.appendChild(line);
-                                                                                                }
-                                                                                            });
-                                                                                            // 強制重繪 SVG
-                                                                                            const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
-                                                                                        });
-                                                                                        if(window.Prism) Prism.highlightAll(); 
-                                                                                                                                                                                        setTimeout(() => { 
-                                                                                                                                                                                            window.print(); 
-                                                                                                                                                                                            // 列印後恢復原始 UI 狀態並隱藏遮罩
-                                                                                                                                                                                                                                                                                                                                                                                            if (overlay) overlay.style.display = 'none';
-                                                                                                                                                                                                                                                                                                                                                                                            if (zoomBtns) zoomBtns.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (homeBtn) homeBtn.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (mobileToggle) mobileToggle.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (sidePrev) sidePrev.style.setProperty('display', (currentIndex === 0) ? 'none' : 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            if (sideNext) sideNext.style.setProperty('display', 'flex', 'important');
-                                                                                                                                                                                                                                                                                                                                                                                            document.body.style.zoom = oldZoom;                                                                                                                                                                                            if (sidebar && sidebarWasVisible) {                                                                                                                                                                                                sidebar.style.display = 'flex';
-                                                                                                                                                                                                content.style.marginLeft = '280px';
-                                                                                                                                                                                            }
-                                                                                                                                                                                        }, 1200);                                                                                    }, 2500);
-                                                                                                                                                                    }
-    
-    function renderQuestion(index) {
-        window.scrollTo(0, 0); currentIndex = index; const item = quizData[index];
-        if (item.type === 'matching' || item.type === 'multimatching') { renderMatchingQuestion(index); return; }
-        if (item.type === 'choicelist') { renderChoiceListQuestion(index); return; }
-        const container = document.getElementById('question-container');
-        const opts = item.quiz || item.options || [];
-        document.getElementById('side-btn-prev').style.display = (index === 0) ? 'none' : 'flex';
-        let typeLabel = opts.some(o => String(o).includes('|')) ? "題組" : (item.type === 'multiple' ? "複選" : "單選");
-        const ansText = (Array.isArray(item.answer) ? item.answer : [item.answer]).map(a => formatAnswer(a, item)).join(', ');
-        container.innerHTML = `<div class="card question-card"><div class="question-header"><div><span class="badge bg-primary me-2">題目 ${index + 1} / ${quizData.length}</span><span class="badge bg-info type-badge">${typeLabel}</span></div><div class="category-tag">${item.category || '一般'}</div></div><div class="question-body">${processContent(item.question, item)}${item.image ? `<img src="${item.image}" class="q-img">` : ''}<div class="options-area"></div><div class="text-center mt-4 pt-3 border-top"><button class="btn btn-outline-primary px-4" id="toggle-exp-btn" onclick="toggleExplanation()">👁️ 顯示答案 / 解析</button></div><div class="answer-section" id="ans-section"><h6 class="fw-bold mb-3">正確答案: <span class="text-blue">${ansText}</span></h6><div class="explanation">${processContent(item.explanation || '暫無解析。', item)}</div></div></div></div>`;
-        const optionsArea = container.querySelector('.options-area');
-        let currentCodeClass = ''; let isInsideCode = false;
-        opts.forEach((opt, oIdx) => {
-            let processedOpt = String(opt);
-            const hadStart = processedOpt.includes('<code class="');
-            const hadEnd = processedOpt.includes('</code>');
-            if (hadStart) {
-                isInsideCode = true;
-                const match = processedOpt.match(/<code class="([^"]+)">/);
-                if (match) currentCodeClass = match[1];
+                optionsHTML += '</div>';
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
-            if (isInsideCode) {
-                if (!hadStart && !hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}</code>`; }
-                else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
-                else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
-            }
-            if (hadEnd) { isInsideCode = false; }
-
-            let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-            if (typeof processedOpt === 'string' && processedOpt.includes('|')) {
-                const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                const customField = "question" + alphabet[oIdx];
-                const displayLabel = processContent(item[customField], item) || `選項 ${oIdx + 1}`;
-                let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
-                processedOpt.split('|').forEach((s, subIdx) => { 
-                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 
-                });
-                optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedOpt}</div>`; }
         });
-        const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
-        let answers = Array.isArray(item.answer) ? item.answer : [item.answer];
-        let cIdxs = answers.map(a => parseAnswerToIndex(a));
-        if (opts.some(o => String(o).includes('|'))) {
-            opts.forEach((opt, r) => {
-                const correctSubIdx = parseAnswerToIndex(answers[r]); const savedSubIdx = (saved && typeof saved === 'object') ? saved[r] : undefined;
-                opt.split('|').forEach((_, subIdx) => {
-                    const inp = document.getElementById(`o${r}_s${subIdx}`); if (!inp) return;
-                    if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) { inp.checked = true; inp.parentElement.classList.add('selected'); }
-                    if (completed) { if (subIdx === correctSubIdx) inp.parentElement.classList.add('correct'); else if (savedSubIdx !== undefined && parseInt(savedSubIdx) === subIdx) inp.parentElement.classList.add('incorrect'); }
-                });
-            });
-        } else if (saved !== undefined) {
-            (Array.isArray(saved)?saved:[saved]).forEach(idx => { const inp = document.getElementById(`o${idx}`); if (inp) { inp.checked = true; if(completed) inp.closest('.option-item').classList.add(cIdxs.includes(idx) ? 'correct' : 'incorrect'); } });
-            if(completed) cIdxs.forEach(ci => { const inp = document.getElementById(`o${ci}`); if (inp) inp.closest('.option-item').classList.add('correct'); });
+        const score = Math.round((correctCount / examQuestions.length) * 100);
+        document.getElementById('final-score').innerText = score; document.getElementById('correct-count').innerText = correctCount;
+        let catHTML = '<h5 class="text-center mb-3">各類答對率統計</h5><table class="table table-bordered"><thead><tr><th class="text-start">分類</th><th class="text-start">出題編號</th><th>題數</th><th>答對率</th></tr></thead><tbody>';
+        const sortedCats = Object.keys(stats).sort();
+        
+        for (let cat of sortedCats) {
+            let total = stats[cat].total, correct = stats[cat].correct, p = Math.round((correct / total) * 100);
+            let sortedIds = stats[cat].ids.sort((a, b) => a.id - b.id).map(obj => {
+                let displayId = obj.id > 92 ? `(${obj.id})` : obj.id;
+                if (obj.isWrong) return `<span style="color:red; font-weight:bold;">${displayId}</span>`;
+                return displayId;
+            }).join(', ');
+            catHTML += `<tr><td class="text-start fw-bold">${cat}</td><td class="text-start small" style="max-width:400px; word-break:break-all;">${sortedIds}</td><td>${total}</td><td>${p}%</td></tr>`;
         }
-        if (completed) { toggleExplanation(true); document.querySelectorAll(`input[name^="q${index}"]`).forEach(i => i.disabled = true); }
-        updateUI(); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50); saveState(); window.changeZoom(0);
+        catHTML += '</tbody></table>'; 
+        catHTML += '<div class="mt-2 mb-3 small text-start" style="padding-left:10px; border-left:3px solid #6c757d;">' + 
+                   '<span style="color:red; font-weight:bold;">紅色數字</span>：代表此題答錯；' + 
+                   '<span>(括號數字)</span>：代表 1-92 題以外的補充題。' +
+                   '</div>';
+        
+        document.getElementById('category-stats').innerHTML = catHTML;
+        let reportSummary = `<div class="review-item" style="border: 2px solid #0d6efd; background: #f0f7ff;"><h2 class="text-center" style="color: #0d6efd;">模擬考試成績報告</h2><div class="d-flex justify-content-around mt-3"><div class="text-center"><h4>總分: <span style="font-size: 2rem;">${score}</span></h4></div><div class="text-center"><h4>答對題數: ${correctCount} / ${examQuestions.length}</h4></div></div><div class="mt-3">${catHTML}</div></div>`;
+        document.getElementById('review-list').innerHTML = reportSummary + incorrectHTML;
+        // 確保結果區塊與回顧區已顯示，以便正確計算 getBoundingClientRect
+        if (rs) rs.style.display = 'block';
+        const reviewArea = document.getElementById('review-area');
+        if (reviewArea) reviewArea.style.display = 'block';
+        
+        // 繪製模擬考試報告中的正確連線 (視窗座標差值法修正)
+        setTimeout(() => {
+            document.querySelectorAll('.print-matching').forEach(wrapper => {
+                const qIdx = parseInt(wrapper.getAttribute('data-idx'));
+                const item = examQuestions[qIdx];
+                const svg = wrapper.querySelector('.print-svg');
+                const wRect = wrapper.getBoundingClientRect();
+                if (wRect.width === 0) return;
+                
+                svg.setAttribute('width', wRect.width);
+                svg.setAttribute('height', wRect.height);
+                svg.style.width = wRect.width + 'px';
+                svg.style.height = wRect.height + 'px';
+                svg.innerHTML = ''; 
+                
+                const answers = Array.isArray(item.answer) ? item.answer : [item.answer];
+                answers.forEach((ansVal, lIdx) => {
+                    const rIdx = parseAnswerToIndex(ansVal);
+                    const dotL = document.getElementById(`mdl-${qIdx}-${lIdx}`);
+                    const dotR = document.getElementById(`mdr-${qIdx}-${rIdx}`);
+                    if (dotL && dotR) {
+                        const rL = dotL.getBoundingClientRect(), rR = dotR.getBoundingClientRect();
+                        const x1 = rL.left - wRect.left + rL.width/2;
+                        const y1 = rL.top - wRect.top + rL.height/2;
+                        const x2 = rR.left - wRect.left + rR.width/2;
+                        const y2 = rR.top - wRect.top + rR.height/2;
+                        
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute('x1', x1.toFixed(2)); line.setAttribute('y1', y1.toFixed(2)); 
+                        line.setAttribute('x2', x2.toFixed(2)); line.setAttribute('y2', y2.toFixed(2));
+                        line.setAttribute('stroke', "#198754"); line.setAttribute('stroke-width', "5"); 
+                        line.setAttribute('stroke-linecap', "round"); 
+                        line.setAttribute('style', "stroke-opacity:1 !important;");
+                        svg.appendChild(line);
+                    }
+                });
+                const html = svg.innerHTML; svg.innerHTML = ''; svg.innerHTML = html;
+            });
+            if(window.Prism) Prism.highlightAll();
+        }, 2000);
+        try {
+            let wrongSet = new Set(JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'));
+            examQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx]; 
+                const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+                let isCorr = false;
+                
+                if (q.type === 'choicelist') {
+                    // 排序題判定：比對索引陣列
+                    if (Array.isArray(userAns) && userAns.length === answers.length && !userAns.includes(null)) {
+                        isCorr = true;
+                        for (let j = 0; j < answers.length; j++) {
+                            if (userAns[j] !== parseAnswerToIndex(answers[j])) { isCorr = false; break; }
+                        }
+                    }
+                } else if (q.type === 'multioption' || (q.quiz || q.options || []).some(o => String(o).includes('|'))) {
+                    isCorr = userAns && answers.every((a, i) => parseAnswerToIndex(a) === userAns[i]);
+                } else if (q.type === 'multiple') { 
+                    const cIdxs = answers.map(a => parseAnswerToIndex(a)); 
+                    isCorr = Array.isArray(userAns) && userAns.length === cIdxs.length && userAns.every(v => cIdxs.includes(v)); 
+                } else {
+                    isCorr = userAns === parseAnswerToIndex(q.answer[0] || q.answer);
+                }
+                
+                if (isCorr) wrongSet.delete(q.id); else wrongSet.add(q.id);
+            });
+            localStorage.setItem(WRONG_KEY, JSON.stringify([...wrongSet]));
+            // 使用獨立的 SyncManager 進行成績同步，防止功能被意外刪除
+            if (typeof SyncManager !== 'undefined') {
+                SyncManager.saveExamResult(SYNC_SUBJECT_NAME, score);
+            }
+        } catch(e) {}
     }
-    function updateUI() {
-        const stats = document.getElementById('progress-stats'); if (stats) stats.innerHTML = `✅${correctSet.size} ❌${incorrectSet.size} 🟠${correctedSet.size} <span class="ms-1 small" style="opacity:0.7">/ ${quizData.length}</span>`;
-        const grid = document.getElementById('progress-grid'); grid.innerHTML = '';
-        quizData.forEach((_, i) => {
-            const n = document.createElement('div'); n.className = 'q-node'; if (i === currentIndex) { n.classList.add('active'); setTimeout(() => n.scrollIntoView({ block: 'center', behavior: 'smooth' }), 100); }
-            if (incorrectSet.has(i)) n.classList.add('incorrect'); else if (correctedSet.has(i)) n.classList.add('corrected'); else if (correctSet.has(i)) n.classList.add('correct');
-            n.innerText = i + 1; n.onclick = () => jumpTo(i); grid.appendChild(n);
-        });
-    }
-    loadState(); window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); }); renderQuestion(currentIndex);
+    window.addEventListener('resize', () => { if(window.drawLines) window.drawLines(); });
+    initExam();
 </script>
     <script src="../js/choicelist_patch_v2.js"></script>
 </body>

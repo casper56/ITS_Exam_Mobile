@@ -141,13 +141,31 @@
         let targetItemsHtml = "<div class=\"cl-header\">回答區</div><div class=\"target-bg\">";
         if (slotData) {
             let sIdxCounter = 0;
+            let currentCodeClass = ''; let isInsideCode = false;
             slotData.forEach(line => {
-                const rawLine = stripCodeTags(line);
+                let processedLine = String(line);
+                const hadStart = processedLine.includes('<code class="');
+                const hadEnd = processedLine.includes('</code>');
+                
+                if (hadStart) {
+                    isInsideCode = true;
+                    const match = processedLine.match(/<code class="([^"]+)">/);
+                    if (match) currentCodeClass = match[1];
+                }
+                // 在 slots 模式下，我們不手動包裹整行，而是確保內部的 segments 和 slots 能繼承狀態
+                // 但為了維持邏輯一致性，我們記錄狀態並在 segments 處理時套用
+                
+                const rawLine = stripCodeTags(processedLine);
                 const segments = rawLine.split(/<slot\d*>/);
                 let lineFinalHtml = "";
                 segments.forEach((seg, i) => {
                     // 包裹文字以保留空格縮排
-                    lineFinalHtml += "<span class=\"cl-content-text\">" + highlightHardened(seg) + "</span>";
+                    let processedSeg = highlightHardened(seg);
+                    if (isInsideCode) {
+                        processedSeg = `<code class="${currentCodeClass}">${processedSeg}</code>`;
+                    }
+                    lineFinalHtml += "<span class=\"cl-content-text\">" + processedSeg + "</span>";
+                    
                     if (i < segments.length - 1) {
                         const sIdx = sIdxCounter++;
                         const optIdx = userAnswers[index][sIdx], isActive = (selectedSlotIdx === sIdx && !isLocked);
@@ -155,12 +173,17 @@
                         if (optIdx !== null && optIdx !== undefined) {
                             const cls = isLocked ? "locked-slot" : "choicelist-item inline-item";
                             const filledText = stripCodeTags(isGrouped ? item.options[sIdx][optIdx] : item.options[optIdx]);
-                            lineFinalHtml += "<span class=\"" + cls + (isActive ? " active-slot" : "") + "\" " + clickHandler + "><span class=\"cl-content-text\">" + highlightHardened(filledText) + "</span></span>";
+                            let processedFilled = highlightHardened(filledText);
+                            if (isInsideCode) {
+                                processedFilled = `<code class="${currentCodeClass}">${processedFilled}</code>`;
+                            }
+                            lineFinalHtml += "<span class=\"" + cls + (isActive ? " active-slot" : "") + "\" " + clickHandler + "><span class=\"cl-content-text\">" + processedFilled + "</span></span>";
                         } else {
                             lineFinalHtml += "<span class=\"target-slot inline-slot" + (isActive ? " active-slot" : "") + "\" " + clickHandler + ">[ 選項 " + (sIdx + 1) + " ]</span>";
                         }
                     }
                 });
+                if (hadEnd) { isInsideCode = false; }
                 targetItemsHtml += "<div class=\"choicelist-code-line\" style=\"" + customSz + "\">" + lineFinalHtml + "</div>";
             });
         }

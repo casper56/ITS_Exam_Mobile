@@ -429,8 +429,25 @@ def create_html(json_file, output_html):
         let optionsHtml = '<div class="mt-3">';
         let isComplex = options.some(opt => typeof opt === 'string' && opt.includes('|'));
 
+        let currentCodeClass = ''; let isInsideCode = false;
         options.forEach((opt, optIdx) => {{
-            const optStr = String(opt);
+            let processedOpt = String(opt);
+            const hadStart = processedOpt.includes('<code class="');
+            const hadEnd = processedOpt.includes('</code>');
+            
+            if (hadStart) {{
+                isInsideCode = true;
+                const match = processedOpt.match(/<code class="([^"]+)">/);
+                if (match) currentCodeClass = match[1];
+            }}
+            if (isInsideCode) {{
+                if (!hadStart && !hadEnd) {{ processedOpt = `<code class="${{currentCodeClass}}">${{processedOpt}}</code>`; }}
+                else if (hadStart && !hadEnd) {{ processedOpt = processedOpt + '</code>'; }}
+                else if (!hadStart && hadEnd) {{ processedOpt = `<code class="${{currentCodeClass}}">${{processedOpt}}`; }}
+            }}
+            if (hadEnd) {{ isInsideCode = false; }}
+
+            const optStr = processedOpt;
             if (optStr.includes('|')) {{
                 const subOpts = optStr.split('|');
                 optionsHtml += `<div class="sub-question-label">選項 ${{optIdx + 1}}</div>`;
