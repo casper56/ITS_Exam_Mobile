@@ -31,9 +31,9 @@ def clean_repair_all():
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         /* 強制去除選項內代碼底色與黑字規範 */
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; white-space: pre-wrap !important; }
         .option-item, .sub-opt-container { color: #000 !important; }
-        code { background-color: transparent !important; }
+        code { background-color: transparent !important; white-space: pre-wrap !important; }
 
         html { scrollbar-gutter: stable; }
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
@@ -701,7 +701,7 @@ def clean_repair_all():
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
@@ -1115,9 +1115,9 @@ def clean_repair_all():
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         /* 強制去除選項內代碼底色與黑字規範 */
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; white-space: pre-wrap !important; }
         .option-item, .sub-opt-container { color: #000 !important; }
-        code { background-color: transparent !important; }
+        code { background-color: transparent !important; white-space: pre-wrap !important; }
 
         html { scrollbar-gutter: stable; }
         body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", "Segoe UI", sans-serif; overflow-x: hidden !important; }
@@ -1473,7 +1473,7 @@ def clean_repair_all():
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
@@ -1963,7 +1963,8 @@ def clean_repair_all():
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             if (typeof opt === 'string' && opt.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                const displayLabel = item["question" + alphabet[oIdx]] || `選項 ${oIdx + 1}`;
+                const customField = "question" + alphabet[oIdx];
+                const displayLabel = processContent(item[customField], item) || `選項 ${oIdx + 1}`;
                 let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
                 opt.split('|').forEach((s, subIdx) => { 
                     sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 

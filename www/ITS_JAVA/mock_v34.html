@@ -8,9 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <style>
         /* 強制去除選項內代碼底色與黑字規範 */
-        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; }
+        .option-item code, .sub-opt-container code { background-color: transparent !important; color: #000 !important; white-space: pre-wrap !important; }
         .option-item, .sub-opt-container { color: #000 !important; }
-        code { background-color: transparent !important; }
+        code { background-color: transparent !important; white-space: pre-wrap !important; }
 
         html { scrollbar-gutter: stable; }
         body { background-color: #f4f7f6; font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; overflow-x: hidden !important; }
@@ -3912,7 +3912,7 @@
     function processContent(content, item) {
         if (!content) return '';
         const lines = Array.isArray(content) ? content : [String(content)];
-        return lines.join(String.fromCharCode(10)).replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
