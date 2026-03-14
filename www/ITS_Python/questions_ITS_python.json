@@ -1171,7 +1171,7 @@
       "●每個產品必須用逗號隔開。你需要完成程式碼以符合要求。你應該使用哪三個程式碼片段？</code></pre>"
     ],
     "options": [
-      "print('\"{0}\", {1} '.format(product, qty))",
+      "<code class=\"language-python\">print('\"{0}\", {1} '.format(product, qty))",
       "print('\"' + product + '\", ' + str(qty))",
       "print('\"%s\", %s' % (product, qty))",
       "print('{0}, {1}'.format(product, qty))",
@@ -1427,7 +1427,7 @@
       "你應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "open('file_data', 'a')",
+      "<pre><code class=\"language-python\">open('file_data', 'a')",
       "open('file_data', 'w')",
       "open('file_data', 'rt')",
       "open('file_data', 'r')</code>"
@@ -2884,7 +2884,7 @@
       "•最高數字是 100。請問哪兩個程式碼片段將符合需求?每個正確答案都是一個完整的解決方案。(請選擇 2 個答案。)</code></pre>"
     ],
     "options": [
-      "from random import randrange\nprint(randrange(0, 100, 5))",
+      "<pre><code class=\"language-python\">from random import randrange\nprint(randrange(0, 100, 5))",
       "from random import randint\nprint(randint(1, 20) * 5)",
       "from random import randrange\nprint(randrange(5, 105, 5))",
       "from random import randint\nprint(randint(0, 20) * 5)</code>"
@@ -2905,7 +2905,7 @@
     "type": "multioption",
     "hideLabel": true,
     "question": [
-      "<pre><code class=\"language-python\">【CH06-8】請檢閱下列程式。",
+      "<code class=\"language-python\">【CH06-8】請檢閱下列程式。",
       "",
       "01&nbsp;def petstore(category, species, breed='none'):",
       "02&nbsp;    \"\"\"Display information about a pet.\"\"\"",
@@ -2925,7 +2925,8 @@
       "16&nbsp;    petstore(category, species)",
       "17&nbsp;    petstore(breed='Maltese', species='Canine', category='dog')",
       "18&nbsp;    petstore('bird', species='Scarlet Macaw')",
-      "針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。</code></pre>"
+	   "",
+      "針對下列每個敘述，如果是正確的就選擇 Yes ，否則請選擇 No。</code>"
     ],
 	"questionA" : [
 		"題一:此函式會傳回一個值。"
@@ -2939,7 +2940,7 @@
     "options": [
       "Yes|No",
       "Yes|No",
-      "Yes|No</code>"
+      "Yes|No"
     ],
     "answer": [
       "N",
@@ -2976,37 +2977,38 @@
       "        print(f'{student.title()}, please report to room 515')",
       "    else:",
       "        print(f'{student.title()}, please report to room 625')",
+	  "",
       "請問哪兩個函式呼叫是正確的？請選擇 正確 或 錯誤。</code></pre>"
     ],
 	"questionA" : [
-		"<pre><code class=\"language-python\">選項 1.",
+		"<code class=\"language-python\">選項 1.",
 		"name = input('What is your name?')",
 		"grade = 0",
 		"while grade not in (1,2,3,4,5,6):",
 		"    grade = int(input('What grade are you in (1-6)?'))",
-		"    roomAssignment(name, year=grade)</code></pre>"
+		"    roomAssignment(name, year=grade)</code>"
 	],
 	"questionB" : [
-		"<pre><code class=\"language-python\">選項 2.",
+		"<code class=\"language-python\">選項 2.",
 		"name = input('What is your name?')",
 		"grade = 0",
 		"while grade not in (1,2,3,4,5,6):",
 		"    grade = int(input('What grade are you in (1-6)?'))",
-		"    roomAssignment(student, year)</code></pre>"
+		"    roomAssignment(student, year)</code>"
 	],
 	"questionC" : [
-		"<pre><code class=\"language-python\">選項 3.",
-		"roomAssignment('Sherlock Sassafrass',4)</code></pre>"
+		"code class=\"language-python\">選項 3.",
+		"roomAssignment('Sherlock Sassafrass',4)</code>"
 	],
 	"questionD" : [
-		"<pre><code class=\"language-python\">選項 4.",
-		"roomAssignment(year=6, name='Minnie George')</code></pre>"
+		"<code class=\"language-python\">選項 4.",
+		"roomAssignment(year=6, name='Minnie George')</code>"
 	],
     "options": [
       "正確|錯誤",
       "正確|錯誤",
       "正確|錯誤",
-      "正確|錯誤</code>"
+      "正確|錯誤"
     ],
     "answer": [
       "A",
@@ -3035,7 +3037,7 @@
       "在任何程式碼片段的  ＜！—— 和 ——＞ 之間放置附註。",
       "在任何一行的 # 後面放置附註。",
       "在任何一行的 // 後面放置附註。",
-      "在任何程式碼片段的 /**/ 之間置附註</code>"
+      "在任何程式碼片段的 /**/ 之間置附註"
     ],
     "answer": [
       "B"
@@ -3056,7 +3058,7 @@
       "<pre><code class=\"language-python\">【CH07-1】在程式中要使用 datetime 模組中 datetime 函式，再設定 為替代名稱，在匯入時應該使用哪個程式碼片段？</code></pre>"
     ],
     "options": [
-      "from datetime as dt",
+      "<code class=\"language-python\">from datetime as dt",
       "from datetime import datetime as dt",
       "import datetime from datetime as dt",
       "import datetime.datetime as dt</code>"
@@ -3091,7 +3093,7 @@
       "你需匯入 os 模組。",
       "path 方法並不存在 os 模組中。",
       "path 物件中不存在 isfile 方法。",
-      "isfile 方法不接受一個引數。</code>"
+      "isfile 方法不接受一個引數。"
     ],
     "answer": [
       "A"
@@ -3112,7 +3114,7 @@
       "<pre><code class=\"language-python\">【CH07-3】設計程式碼用來生成的隨機整數·最小值為 11 ，最大值為 20 。你應該使用哪兩種函式？</code></pre>"
     ],
     "options": [
-      "random.randrange(11, 21, 1)",
+      "<code class=\"language-python\">random.randrange(11, 21, 1)",
       "random.randrange(11, 20, 1)",
       "random.randint(11, 20)",
       "random.randint(11, 21)</code>"
@@ -3137,7 +3139,7 @@
       "<code class=\"language-python\">【CH07-4】你設計程式碼用來生成的隨機整數，最小值是 0 ，最大值是 10 。你應該使用哪個語法？</code>"
     ],
     "options": [
-      "random.random()",
+      "<code class=\"language-python\">random.random()",
       "random.randrange(0.0, 1.0)",
       "random.randrange()",
       "random.randint(0, 10)</code>"
@@ -3185,7 +3187,7 @@
       "選項 1 程式碼片段符合要求",
       "選項 2 程式碼片段符合要求",
       "選項 3 程式碼片段符合要求",
-      "選項 4 程式碼片段符合要求</code>"
+      "選項 4 程式碼片段符合要求"
     ],
     "answer": [
       "A",
@@ -3215,7 +3217,7 @@
       "math.floor(x)",
       "math.fmod(x)",
       "math.ceil(x)",
-      "math.frexp(x)</code>"
+      "math.frexp(x)"
     ],
     "answer": [
       "A",
@@ -3285,7 +3287,7 @@
     "options": [
       "A|B|C|D",
       "A|B|C|D",
-      "A|B|C|D</code>"
+      "A|B|C|D"
     ],
     "answer": [
       "A",
@@ -3358,22 +3360,22 @@
       "如果是正確的就選擇 <b>Yes</b>，否則請選擇 <b>No</b>：</code></pre>"
     ],
     "questionA": [
-      "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。</code></pre>"
+      "● <b>選項 1</b>：在 try 語法中可以有不只一個 except 子句。"
     ],
     "questionB": [
-      "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。</code>"
+      "● <b>選項 2</b>：在 try 語法中可以不加 except 子句 (需配合 finally)。"
     ],
     "questionC": [
-      "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。</code>"
+      "● <b>選項 3</b>：在 try 語法中可以有一個 finally 子句與 except 子句。"
     ],
     "questionD": [
-      "● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。</code>"
+      "● <b>選項 4</b>：在 try 語法中可以有不只一個 finally 子句。"
     ],
     "options": [
       "Yes|No",
       "Yes|No",
       "Yes|No",
-      "Yes|No</code>"
+      "Yes|No"
     ],
     "answer": [
       "Y",

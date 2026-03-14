@@ -47,14 +47,13 @@
 
     const stripCodeTags = (str) => {
         if (!str) return "";
-        let text = Array.isArray(str) ? str.join('\n') : String(str);
-        return text.replace(/<pre><code.*?>/g, "").replace(/<\/code><\/pre>/g, "").replace(/<code.*?>/g, "").replace(/<\/code>/g, "");
+        if (Array.isArray(str)) return str.map(stripCodeTags).join(" ");
+        return str.replace(/<pre><code.*?>/g, "").replace(/<\/code><\/pre>/g, "").replace(/<code.*?>/g, "").replace(/<\/code>/g, "");
     };
 
-    const highlightHardened = (text, lang = "python") => {
+    const highlightHardened = (text) => {
         if (!window.Prism || !text) return text;
-        const grammar = Prism.languages[lang] || Prism.languages.python;
-        return Prism.highlight(text, grammar, lang);
+        return Prism.highlight(text, Prism.languages.python, "python");
     };
 
     window.renderChoiceListQuestion = function(index) {
@@ -144,14 +143,7 @@
             let sIdxCounter = 0;
             let currentCodeClass = ''; let isInsideCode = false;
             slotData.forEach(line => {
-                let processedLine = Array.isArray(line) ? line.join('\n') : String(line);
-                if (Array.isArray(line) && line.length >= 2) {
-                    const first = String(line[0]).trim();
-                    const last = String(line[line.length - 1]).trim();
-                    if (first.startsWith('<code class="language-') && last.endsWith('</code>')) {
-                        processedLine = '<pre>' + processedLine + '</pre>';
-                    }
-                }
+                let processedLine = String(line);
                 const hadStart = processedLine.includes('<code class="');
                 const hadEnd = processedLine.includes('</code>');
                 
