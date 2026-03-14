@@ -2051,7 +2051,7 @@
         ],
         "options": [
             "<code class=\"language-sql\">移除 ORDER BY子句。</code>",
-            "<code class=\"language-sql\">移除 GROUPBY子句。</code>",
+            "<code class=\"language-sql\">移除 GROUP BY子句。</code>",
             "<code class=\"language-sql\">將 HAVING 子句變更為HAVINGCOUNT(1) = 1</code>",
             "<code class=\"language-sql\">將 HAVING 子句變更為HAVINGCOUN(Title) = 1</code>"
         ],
