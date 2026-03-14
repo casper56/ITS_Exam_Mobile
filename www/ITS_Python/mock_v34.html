@@ -592,7 +592,7 @@
       "你應該使用哪個程式碼片段？</code></pre>"
     ],
     "options": [
-      "<pre><code class=\"language-python\">totalNums = input(\"How many items would you like?\")",
+      "<code class=\"language-python\">totalNums = input(\"How many items would you like?\")",
       "totalNums = int(input(\"How many items would you like?\"))",
       "totalNums = str(input(\"How many items would you like?\"))",
       "totalNums = float(input(\"How many items would you like?\"))</code>"
@@ -622,10 +622,10 @@
       "如果要完成這個程式，在 3 行應該使用哪個程式碼？</code></pre>"
     ],
     "options": [
-      "<code>print(\"You have worked for\" + str(int(end) - int(start)) + \"hours\")</code>",
-      "<code>print(\"You have worked for\" + (int(end) - int(start)) + \"hours\")</code>",
-      "<code>print(\"You have worked for\" + str(end - start) + \"hours\")</code>",
-      "<code>print(\"You have worked for\" + int(end - start) + \"hours\")</code>"
+      "<code class=\"language-python\">print(\"You have worked for\" + str(int(end) - int(start)) + \"hours\")",
+      "print(\"You have worked for\" + (int(end) - int(start)) + \"hours\")",
+      "print(\"You have worked for\" + str(end - start) + \"hours\")",
+      "print(\"You have worked for\" + int(end - start) + \"hours\")</code>"
     ],
     "answer": [
       "A"
@@ -2272,7 +2272,7 @@
       "請將回答區專案的選到正確的程式碼片段</code></pre>"
     ],
     "slots": [
-      "01 from random import randint",
+      "<pre><code class=\"language-python\">01 from random import randint",
       "02 target = randint(1,100)",
       "03 chance = 1",
       "04 print('Guess an integer from 1 to 10. You will have 3 chances.')",
@@ -2285,7 +2285,7 @@
       "11    else:",
       "12        print('Guess is just right')",
       "13        <slot02>",
-      "14    <slot03>"
+      "14    <slot03></code></pre>"
     ],
     "options": [
       "while chance <= 3:",
@@ -2945,7 +2945,7 @@
     "type": "multioption",
     "hideLabel": true,
     "question": [
-      "<pre><code class=\"language-python\">【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。",
+      "<code class=\"language-python\">【CH05-21】你在測試以下程式碼時發現錯誤。其中包含的行號只是做為參考。",
       "01  numList = [0,1,2,3,4,5,6,7,8,9]",
       "02  i = 0",
       "03  while (i < 10)",
@@ -2955,17 +2955,17 @@
       "07        break",
       "08     else:",
       "09        i +=1",
-      "你需要更正第 3 行和 6 行中的程式碼。你要如何更正程式碼？</code></pre>"
+      "你需要更正第 3 行和 6 行中的程式碼。你要如何更正程式碼？</code>"
     ],
     "questionA": [
-      "<pre><code class=\"language-python\">選項 1，在第 3 行中應使用哪個程式碼片段？",
+      "<code class=\"language-python\">選項 1，在第 3 行中應使用哪個程式碼片段？",
       "A. while (i < 10):",
       "B. while [i < 10]",
       "C. while (i < 5):",
       "D. while [i < 5]</code>"
     ],
     "questionB": [
-	  "<pre><code class=\"language-python\">選項 2，在第 6 行中應使用哪個程式碼片段？",
+	  "<code class=\"language-python\">選項 2，在第 6 行中應使用哪個程式碼片段？",
       "A. if numList[i] == 6",
       "B. if numList[i] == 6:",
       "C. if numList(i) = 6:",
@@ -3722,7 +3722,7 @@
     ],
     "options": [
       [
-        "<pre><code class=\"language-python\">room_number = random.randint(1,50)</code>",
+        "<pre><code class=\"language-python\">room_number = random.randint(1,50)",
         "room_number = random.randint(1,51)",
         "room_number = random.randrange(50)",
         "room_number = random.randrange(51)</code>"
@@ -4026,9 +4026,9 @@
 		"題3. 為什麼第 03 行無法尋找房間？"
 	],
     "options": [
-      "<code>A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數</code>",
-      "<code>A.bool|B.float|C.int|D.String</code>",
-      "<code>A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
+      "<code class=\"language-python\">A.布林值和字串|B.浮點數和布林值|C.整數和字串|D.浮點數和整數",
+      "A.bool|B.float|C.int|D.String</code>",
+      "A.無效的語法|B.不符合的資料型態|C.命名錯誤的變數</code>"
     ],
     "answer": [
       "C",
@@ -4195,9 +4195,9 @@
 		"題3. 若要測試「清單中是否存在某個值」，請使用？"
 	],
     "options": [
-      "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
-      "<code>assertEqual|assertTrue|assertIs|assertIn</code>",
-      "<code>assertEqual|assertTrue|assertIs|assertIn</code>"
+      "<code class=\"language-python\">assertEqual|assertTrue|assertIs|assertIn",
+      "assertEqual|assertTrue|assertIs|assertIn",
+      "assertEqual|assertTrue|assertIs|assertIn</code>"
     ],
     "answer": [
       "A",
