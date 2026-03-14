@@ -75,7 +75,7 @@
             "程式碼片段：</code></pre>"
         ],
         "slots": [
-            "<pre><code class=\"language-java\">   <slot01>  main <slot02>",
+            "<pre><code class=\"language-java\">   <slot01>  main (<slot02>)",
             "   {",
             "       System.out.print(\"Java 學習網\");",
             "   }</code></pre>"
@@ -921,8 +921,7 @@
             "    <slot01>",
             " {",
             "    showMenu();",
-            " }",
-            "    <slot02>"
+            " } <slot02>"
         ],
         "options": [
             [
@@ -964,7 +963,7 @@
             "請選取正確的程式碼片段來完成程式碼。</code></pre>"
         ],
         "slots": [
-            "public boolean checkItems(String[] items){",
+            "<code class=\"language-java\">public boolean checkItems(String[] items){",
             "    boolean allCheckItems = true;",
             "     <slot01> (String item <slot02> items) {",
             "        if(item.length() > 10) {",
@@ -973,7 +972,7 @@
             "        }",
             "    };",
             "    return allCheckItems;",
-            "}"
+            "}</code>"
         ],
         "options": [
             [
@@ -1011,7 +1010,8 @@
         "sz": "0.95rem",
         "question": [
             "<pre><code class=\"language-java\">【A-25】您是位 Java 程式設計師，你的同事建立下列程式。(行號僅供參考)",
-            "此程式會從 60 開始倒數，並在主控台顯示訊息，但此程式未能達到預期功能。請選取正確的程式碼片段來修正程式碼。</code></pre>"
+            "此程式會從 60 開始倒數，並在主控台顯示訊息，但此程式未能達到預期功能。",
+			"請選取正確的程式碼片段來修正程式碼。</code></pre>"
         ],
         "slots": [
             "01 public static void main(String[] args){",
@@ -1049,7 +1049,7 @@
         ],
         "answer": [
             2,
-            2,
+            1,
             4
         ],
         "weight": 1,
@@ -1318,15 +1318,12 @@
             "08     }",
             "09 }",
             "",
-            "對於下列每一項敘述，請選取 [O] 或 [X]。",
-            "A. account 類別只有一個建構函式。",
-            "B. 其他類別可以繼承 account 類別。",
-            "C. 第 07 行敘述可改寫為 this.amount = total;</code></pre>"
+            "對於下列每一項敘述，請選取 [O] 或 [X]。</code></pre>"
         ],
         "left": [
-            "A 敘述",
-            "B 敘述",
-            "C 敘述"
+            "A. account 類別只有一個建構函式。",
+            "B. 其他類別可以繼承 account 類別。",
+            "C. 第 07 行敘述可改寫為 this.amount = total;"
         ],
         "right": [
             "O | X"
@@ -1425,7 +1422,8 @@
         "type": "choicelist",
         "sz": "0.95rem",
         "question": [
-            "<pre><code class=\"language-java\">【A-34】Song 類別包含一個只能從類別內部存取的 isInSinger 方法。isInSinger 方法接受歌手姓名，來和歌手清單進行比較。",
+            "<pre><code class=\"language-java\">【A-34】Song 類別包含一個只能從類別內部存取的 isInSinger 方法。",
+			"isInSinger 方法接受歌手姓名，來和歌手清單進行比較。",
             "請選取正確的選項來完成程式碼。</code></pre>"
         ],
         "slots": [
@@ -1454,7 +1452,7 @@
             ],
             [
                 "()",
-                "(String singer)",
+                "(Song singer)",
                 "(bool singer)",
                 "(String singer)"
             ],
@@ -1834,7 +1832,7 @@
             "public static void main(String[] args){",
             "  for (int x = 1; x <= arguments.length; x++) {",
             "public static void main(String arguments) {",
-            "     System.out.println(arguments[x]);\n  } \n}",
+            "     System.out.println(arg[x]);\n  } \n}",
             "  for (int x = 0; x < args.length; x++) {"
         ],
         "answer": [
