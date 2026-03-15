@@ -2997,7 +2997,7 @@
 		"    roomAssignment(student, year)</code>"
 	],
 	"questionC" : [
-		"code class=\"language-python\">選項 3.",
+		"<code class=\"language-python\">選項 3.",
 		"roomAssignment('Sherlock Sassafrass',4)</code>"
 	],
 	"questionD" : [

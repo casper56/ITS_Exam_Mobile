@@ -716,7 +716,9 @@ def clean_repair_all():
 
     function processContent(content, item) {
         if (!content) return '';
-        let lines = Array.isArray(content) ? [...content] : [String(content)];
+        let isArray = Array.isArray(content);
+        let lines = isArray ? [...content] : [String(content)];
+        let hasCode = lines.some(l => String(l).includes('<code'));
         if (lines.length >= 2) {
             const first = String(lines[0]).trim();
             const last = String(lines[lines.length - 1]).trim();
@@ -725,7 +727,8 @@ def clean_repair_all():
                 lines[lines.length - 1] = last + '</pre>';
             }
         }
-        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        let joined = (isArray && !hasCode) ? lines.join('<br>') : lines.join('\n');
+        return joined.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
@@ -881,7 +884,7 @@ def clean_repair_all():
                 const customLabelField = "question" + alphabet[optIdx];
                 let customLabel = "";
                 if (item[customLabelField]) {
-                    customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join('<br>') : item[customLabelField];
+                    customLabel = processContent(item[customLabelField], item);
                 }
                 const displayLabel = customLabel || `選項 ${optIdx + 1}`;
 
@@ -1024,7 +1027,7 @@ def clean_repair_all():
                             const customLabelField = "question" + alphabet[i];
                             let customLabel = "";
                             if (item[customLabelField]) {
-                                customLabel = Array.isArray(item[customLabelField]) ? item[customLabelField].join(' ') : item[customLabelField];
+                                customLabel = processContent(item[customLabelField], item);
                             }
                             const displayLabel = customLabel || `選項 ${i + 1}`;
 
@@ -1520,7 +1523,9 @@ def clean_repair_all():
 
     function processContent(content, item) {
         if (!content) return '';
-        let lines = Array.isArray(content) ? [...content] : [String(content)];
+        let isArray = Array.isArray(content);
+        let lines = isArray ? [...content] : [String(content)];
+        let hasCode = lines.some(l => String(l).includes('<code'));
         if (lines.length >= 2) {
             const first = String(lines[0]).trim();
             const last = String(lines[lines.length - 1]).trim();
@@ -1529,7 +1534,8 @@ def clean_repair_all():
                 lines[lines.length - 1] = last + '</pre>';
             }
         }
-        return lines.join('\n').replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
+        let joined = (isArray && !hasCode) ? lines.join('<br>') : lines.join('\n');
+        return joined.replace(/\[\[image(\d+)\]\]/g, (match, p1) => {
             const num = parseInt(p1, 10);
             const src = item['image' + num] || item['image' + p1] || item['image'];
             return src ? `<img src="${src}" class="q-img">` : match;
@@ -1931,7 +1937,8 @@ def clean_repair_all():
                     optHtml = opts.map((o, i) => {
                         if (typeof o === 'string' && o.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            const displayLabel = item["question" + alphabet[i]] || `選項 ${i + 1}`;
+                            const qLabelRaw = item["question" + alphabet[i]];
+                            const displayLabel = processContent(qLabelRaw, item) || `選項 ${i + 1}`;
                             const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
                             return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                         } else {
