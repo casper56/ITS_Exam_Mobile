@@ -430,11 +430,17 @@
       "a +=b",
       "print(a)",
       "print(b)",
-      "根據程式碼片段中提供的資訊選擇每個問題的答案進頂。",
-      "在第一次 print 後會顯示什麼？_(選項 1)_",
-      "在第二次 print 後會顯示什麼？_(選項 2)_",
-      "在第三次 print 後會顯示什麼？_(選項 3)_</code></pre>"
+      "根據程式碼片段中提供的資訊選擇每個問題的答案。</code></pre>"
     ],
+	"questionA" : [
+		"在第一次 print 後會顯示什麼？"
+	],
+	"questionB" : [
+		"在第二次 print 後會顯示什麼？"
+	],
+	"questionC" : [
+		"在第三次 print 後會顯示什麼？"
+	],
     "options": [
       "Test 1|Test 1Test 2|Test 2",
       "Test 1|Test 1Test 2|Test 2",
@@ -594,11 +600,17 @@
       "<pre><code class=\"language-python\">【CH02-11】你設計了一個數學運算的 Python 程式，程式碼如下：",
       "a = 11",
       "b = 5",
-      "答案選擇區",
-      "print(a / b)的輸出結果是？_(選項 1)_",
-      "print(a // b)的輸出結果是？_(選項 2)_",
-      "print(a % b)的輸出結果是？_(選項 3)_</code></pre>"
+      "答案選擇區</code></pre>"
     ],
+	"questionA" : [
+      "print(a / b)的輸出結果是？"
+	],
+	"questionB" : [
+      "print(a // b)的輸出結果是？"
+	],
+	"questionC" : [
+      "print(a % b)的輸出結果是？"
+	],
     "options": [
       "1|2|2.2",
       "1|2|2.2",
@@ -634,12 +646,20 @@
       "08&nbsp;    print(\"Number 1 is greater than number 2.\")",
       "09&nbsp;if n2 <> n1",
       "10&nbsp;print(\"The two numbers are the same.\")",
-      "針對下列每個敘述，如果正確就選擇Yes，否則請選擇 No。",
-      "1. 第 3 行的語法是不正確的比較。",
-      "2. 第 6 行的語法只有 n1 小於 n2 時才會列印出來。",
-      "3. 第 8 行的語法只有 n1 大於 n2 時才會列印出來。",
-      "4. 第 9 行的語法是不正確的比較。</code></pre>"
+      "針對下列每個敘述，如果正確就選擇Yes，否則請選擇 No。</code></pre>"
     ],
+	"questionA" : [
+		"1. 第 3 行的語法是不正確的比較。"
+	],
+	"questionB" : [
+		"2. 第 6 行的語法只有 n1 小於 n2 時才會列印出來。"
+	],
+	"questionC" : [
+		"3. 第 8 行的語法只有 n1 大於 n2 時才會列印出來。"
+	],
+	"questionD" : [
+		"4. 第 9 行的語法是不正確的比較。"
+	],
     "options": [
       "Yes|No",
       "Yes|No",
