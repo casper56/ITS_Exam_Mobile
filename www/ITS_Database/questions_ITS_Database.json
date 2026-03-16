@@ -446,10 +446,10 @@
             "<pre><code class=\"language-sql\">10. 請問哪一個陳述式會建立複合鍵?</code></pre>"
         ],
         "options": [
-            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY (OrderID, OrderltemID))",
-            "CREATE TABLE Order ( OrderID INTEGER PRIMARY KEY, Order Itemid INTEGER PRIMARY KEY)",
-            "CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY)",
-            "CREATE TABLE Order ( OrderID INTEGER, OrderltemID INTEGER, PRIMARY KEY OrderID, PRIMARY KEY OrderitemID)</code></pre>"
+            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY (OrderID, OrderltemID))</code></pre>",
+            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER PRIMARY KEY, Order Itemid INTEGER PRIMARY KEY)</code></pre>",
+            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY)</code></pre>",
+            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderltemID INTEGER, PRIMARY KEY OrderID, PRIMARY KEY OrderitemID)</code></pre>"
         ],
         "answer": [
             "A"
@@ -2475,9 +2475,7 @@
         "image": null,
         "explanation": [
             "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：",
-			"● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。",
-			"在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。",
-			"在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
+			"● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
