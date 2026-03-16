@@ -701,10 +701,10 @@
             "<pre><code class=\"language-sql\">10. 請問哪一個陳述式會建立複合鍵?</code></pre>"
         ],
         "options": [
-            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY (OrderID, OrderltemID))</code></pre>",
-            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER PRIMARY KEY, Order Itemid INTEGER PRIMARY KEY)</code></pre>",
-            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY)</code></pre>",
-            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderltemID INTEGER, PRIMARY KEY OrderID, PRIMARY KEY OrderitemID)</code></pre>"
+            "<pre><code class=\"language-sql\"><code class=\"language-sql\">CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY (OrderID, OrderltemID))",
+            "CREATE TABLE Order ( OrderID INTEGER PRIMARY KEY, Order Itemid INTEGER PRIMARY KEY)",
+            "CREATE TABLE Order ( OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY)",
+            "CREATE TABLE Order ( OrderID INTEGER, OrderltemID INTEGER, PRIMARY KEY OrderID, PRIMARY KEY OrderitemID)</code></pre>"
         ],
         "answer": [
             "A"
@@ -2705,7 +2705,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 1.6：",
+			"● **稽核 (Auditing)** 的目的就是記錄資料庫活動的蹤跡 (Log)，包括誰 (Who)、何時 (When)、做了什麼 (What)。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2728,7 +2729,10 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：",
+			"● **`NULLIF(exp1, exp2)`**：如果 exp1 等於 exp2，則回傳 NULL。",
+			"在此例中 `NULLIF(Quantity, 0)` 會在 Quantity 為 0 時回傳 NULL。",
+			"在 SQL 中，「任何數除以 NULL」結果都是 NULL，而不會報錯，這是避免除以零的標準技巧。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2752,7 +2756,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.1：",
+			"● **自我聯結 (Self Join)** 是指資料表與「自己」進行聯結。當階層關係 (如員工-主管、類別-父類別) 存在於「同一張」資料表中時，必須使用 Self Join 來查詢。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
@@ -2775,7 +2780,8 @@
         "weight": 1,
         "image": null,
         "explanation": [
-            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
+            "<pre><code class=\"language-sql\">根據 ITS 大綱 3.2：",
+			"● **`> ANY (...)`**：只要大於子查詢回傳清單中的「任何一個」值（即大於最小值）就符合條件。● `> ALL (...)`：必須大於清單中的「所有」值（即大於最大值）。</code></pre>"
         ],
         "category": "D5_資料庫管理"
     },
