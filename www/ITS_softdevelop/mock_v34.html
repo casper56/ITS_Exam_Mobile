@@ -4437,7 +4437,7 @@
                     const optText = q.options.join("").toUpperCase();
                     if (q.options.length === 2 && (optText.includes("YES") || optText.includes("TRUE") || optText.includes("正確") || optText.includes("Y") || optText.includes("N") || optText.includes("錯"))) return;
 
-                    const originalAnsIndices = (q.answer || []).map(ans => parseAnswerToIndex(ans));
+                    const isMultiPart = (q.type === 'multioption' || q.options.some(o => String(o).includes('|')));
                     let paired = q.options.map((opt, i) => ({ opt, index: i }));
 
                     for (let i = paired.length - 1; i > 0; i--) {
@@ -4445,16 +4445,31 @@
                         [paired[i], paired[j]] = [paired[j], paired[i]];
                     }
 
+                    const originalAnswers = Array.isArray(q.answer) ? q.answer : [q.answer];
                     q.options = paired.map(p => p.opt);
 
-                    const newAnsIndices = [];
-                    paired.forEach((p, newIndex) => {
-                        if (originalAnsIndices.includes(p.index)) {
-                            newAnsIndices.push(newIndex);
-                        }
-                    });
-                    newAnsIndices.sort((a,b) => a - b);
-                    q.answer = newAnsIndices.map(idx => String.fromCharCode(65 + idx));
+                    if (isMultiPart) {
+                        q.answer = paired.map(p => originalAnswers[p.index] || "");
+                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        const originalLabels = {};
+                        alphabet.split('').forEach(L => { if (q['question' + L]) originalLabels[L] = q['question' + L]; });
+                        paired.forEach((p, newIdx) => {
+                            const oldL = alphabet[p.index], newL = alphabet[newIdx];
+                            if (originalLabels[oldL]) q['question' + newL] = originalLabels[oldL];
+                            else delete q['question' + newL];
+                        });
+                    } else {
+                        const originalAnsIndices = (originalAnswers || []).map(ans => parseAnswerToIndex(ans));
+                        const newAnsIndices = [];
+                        paired.forEach((p, newIndex) => {
+                            if (originalAnsIndices.includes(p.index)) {
+                                newAnsIndices.push(newIndex);
+                            }
+                        });
+                        newAnsIndices.sort((a,b) => a - b);
+                        const newAnswers = newAnsIndices.map(idx => String.fromCharCode(65 + idx));
+                        q.answer = Array.isArray(q.answer) ? newAnswers : (newAnswers[0] || "");
+                    }
                 }
             });
         }

@@ -826,111 +826,6 @@ def clean_repair_all():
 
         // 完全隨機打散，不再依分類名稱排序
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
-
-        const enableShuffle = confirm("是否啟用「選項亂數排列」功能？\n(開啟後，各題選項順序將隨機打亂)");
-        if (enableShuffle) {
-            examQuestions.forEach(q => {
-                if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'matching' || q.type === 'multimatching' || q.type === 'drag') return;
-
-                if (q.type === 'choicelist') {
-                    if (Array.isArray(q.options[0])) {
-                        q.options = q.options.map((optArray, slotIdx) => {
-                            if (!optArray || optArray.length <= 1) return optArray;
-                            let paired = optArray.map((opt, i) => ({ opt, index: i }));
-                            for (let i = paired.length - 1; i > 0; i--) {
-                                const j = Math.floor(Math.random() * (i + 1));
-                                [paired[i], paired[j]] = [paired[j], paired[i]];
-                            }
-                            
-                            if (q.answer && q.answer[slotIdx] !== undefined) {
-                                let origAns = q.answer[slotIdx];
-                                let origIdx = -1;
-                                if (typeof origAns === 'number') {
-                                    origIdx = origAns - 1;
-                                } else if (typeof origAns === 'string') {
-                                    origIdx = parseAnswerToIndex(origAns);
-                                }
-                                
-                                if (origIdx !== -1) {
-                                    let newIdx = paired.findIndex(p => p.index === origIdx);
-                                    if (typeof origAns === 'number') {
-                                        q.answer[slotIdx] = newIdx + 1;
-                                    } else if (typeof origAns === 'string') {
-                                        q.answer[slotIdx] = String.fromCharCode(65 + newIdx);
-                                    }
-                                }
-                            }
-                            return paired.map(p => p.opt);
-                        });
-                    } else {
-                        let paired = q.options.map((opt, i) => ({ opt, index: i }));
-                        for (let i = paired.length - 1; i > 0; i--) {
-                            const j = Math.floor(Math.random() * (i + 1));
-                            [paired[i], paired[j]] = [paired[j], paired[i]];
-                        }
-                        q.options = paired.map(p => p.opt);
-
-                        if (q.answer && Array.isArray(q.answer)) {
-                            q.answer = q.answer.map(ans => {
-                                let origIdx = -1;
-                                if (typeof ans === 'number') {
-                                    origIdx = ans - 1;
-                                } else if (typeof ans === 'string') {
-                                    origIdx = parseAnswerToIndex(ans);
-                                }
-                                if (origIdx !== -1) {
-                                    let newIdx = paired.findIndex(p => p.index === origIdx);
-                                    if (typeof ans === 'number') {
-                                        return newIdx + 1;
-                                    } else if (typeof ans === 'string') {
-                                        return String.fromCharCode(65 + newIdx);
-                                    }
-                                }
-                                return ans;
-                            });
-                        }
-                    }
-                } else {
-                    const optText = q.options.join("").toUpperCase();
-                    if (q.options.length === 2 && (optText.includes("YES") || optText.includes("TRUE") || optText.includes("正確") || optText.includes("Y") || optText.includes("N") || optText.includes("錯"))) return;
-
-                    const isMultiPart = (q.type === 'multioption' || q.options.some(o => String(o).includes('|')));
-                    let paired = q.options.map((opt, i) => ({ opt, index: i }));
-
-                    for (let i = paired.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [paired[i], paired[j]] = [paired[j], paired[i]];
-                    }
-
-                    const originalAnswers = Array.isArray(q.answer) ? q.answer : [q.answer];
-                    q.options = paired.map(p => p.opt);
-
-                    if (isMultiPart) {
-                        q.answer = paired.map(p => originalAnswers[p.index] || "");
-                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                        const originalLabels = {};
-                        alphabet.split('').forEach(L => { if (q['question' + L]) originalLabels[L] = q['question' + L]; });
-                        paired.forEach((p, newIdx) => {
-                            const oldL = alphabet[p.index], newL = alphabet[newIdx];
-                            if (originalLabels[oldL]) q['question' + newL] = originalLabels[oldL];
-                            else delete q['question' + newL];
-                        });
-                    } else {
-                        const originalAnsIndices = (originalAnswers || []).map(ans => parseAnswerToIndex(ans));
-                        const newAnsIndices = [];
-                        paired.forEach((p, newIndex) => {
-                            if (originalAnsIndices.includes(p.index)) {
-                                newAnsIndices.push(newIndex);
-                            }
-                        });
-                        newAnsIndices.sort((a,b) => a - b);
-                        const newAnswers = newAnsIndices.map(idx => String.fromCharCode(65 + idx));
-                        q.answer = Array.isArray(q.answer) ? newAnswers : (newAnswers[0] || "");
-                    }
-                }
-            });
-        }
-
         renderQuestion(0); startTimer();
     }
 
@@ -977,6 +872,7 @@ def clean_repair_all():
                 else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
                 else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
             }
+            if (hadEnd) { isInsideCode = false; }
 
             const optStr = processedOpt;
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
@@ -997,18 +893,13 @@ def clean_repair_all():
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
                     if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
-                    const cleanSub = sub.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                    const processedSub = isInsideCode ? `<code class="${currentCodeClass}">${cleanSub}</code>` : sub;
-                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${processedSub}</div>`; 
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
                 });
                 html += `</div>`;
             } else {
                 const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
-                const cleanRow = optStr.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                const processedRow = isInsideCode ? `<code class="${currentCodeClass}">${cleanRow}</code>` : optStr;
-                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${processedRow}</div>`;
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
             }
-            if (hadEnd) { isInsideCode = false; }
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
         if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
@@ -1128,20 +1019,10 @@ def clean_repair_all():
                         </div>
                     </div>`;
                 } else {
-                    let revCodeClass = ''; let revInsideCode = false;
                     opts.forEach((o, i) => {
-                        let processedRow = Array.isArray(o) ? o.join('\n') : String(o);
-                        const hadStart = processedRow.includes('<code class="');
-                        const hadEnd = processedRow.includes('</code>');
-                        if (hadStart) {
-                            revInsideCode = true;
-                            const match = processedRow.match(/<code class="([^"]+)">/);
-                            if (match) revCodeClass = match[1];
-                        }
-                        
                         const isNum = (item.labelType === 'num');
                         const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-                        if (processedRow.includes('|')) {
+                        if (String(o).includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const customLabelField = "question" + alphabet[i];
                             let customLabel = "";
@@ -1150,21 +1031,16 @@ def clean_repair_all():
                             }
                             const displayLabel = customLabel || `選項 ${i + 1}`;
 
-                            const subLabels = processedRow.split('|').map((s, si) => {
+                            const subLabels = String(o).split('|').map((s, si) => {
                                 const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
-                                const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                                const processedSub = revInsideCode ? `<code class="${revCodeClass}">${cleanSub}</code>` : s;
-                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${processedSub}`;
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
                             }).join(' ');
                             optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                         }
                         else {
                             const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
-                            const cleanRow = processedRow.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                            const processedFinalRow = revInsideCode ? `<code class="${revCodeClass}">${cleanRow}</code>` : processedRow;
-                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${processedFinalRow}</div>`;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
                         }
-                        if (hadEnd) revInsideCode = false;
                     });
                 }
                 optionsHTML += '</div>';
@@ -2057,39 +1933,19 @@ def clean_repair_all():
                                 }
                                 optHtml = `<div class="p-2 border rounded bg-light" style="font-family:Consolas,monospace; font-size:0.9rem;">${optHtml}</div>`;
                             } else {
-                                let revCodeClass = ''; let revInsideCode = false;
-                                optHtml = opts.map((o, i) => {
-                                    let processedRow = Array.isArray(o) ? o.join('\n') : String(o);
-                                    const hadStart = processedRow.includes('<code class="');
-                                    const hadEnd = processedRow.includes('</code>');
-                                    if (hadStart) {
-                                        revInsideCode = true;
-                                        const match = processedRow.match(/<code class="([^"]+)">/);
-                                        if (match) revCodeClass = match[1];
-                                    }
-
-                                    let rowResult = "";
-                                    if (typeof o === 'string' && o.includes('|')) {
-                                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                                        const qLabelRaw = item["question" + alphabet[i]];
-                                        const displayLabel = processContent(qLabelRaw, item) || `選項 ${i + 1}`;
-                                        const subLabels = o.split('|').map((s, si) => {
-                                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
-                                            const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                                            const processedSub = revInsideCode ? `<code class="${revCodeClass}">${cleanSub}</code>` : s;
-                                            return `<span class="opt-num" ${numStyle}>(${lbl})</span>${processedSub}`;
-                                        }).join(' ');
-                                        rowResult = `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                                    } else {
-                                        const lbl = isNum ? (i + 1) + '.' : '(' + String.fromCharCode(65 + i) + ')';
-                                        const cleanRow = processedRow.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                                        const processedFinalRow = revInsideCode ? `<code class="${revCodeClass}">${cleanRow}</code>` : processedRow;
-                                        rowResult = `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${lbl} </span>${processedFinalRow}</div>`;
-                                    }
-                                    if (hadEnd) revInsideCode = false;
-                                    return rowResult;
-                                }).join('');
-                            }
+                
+                    optHtml = opts.map((o, i) => {
+                        if (typeof o === 'string' && o.includes('|')) {
+                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            const qLabelRaw = item["question" + alphabet[i]];
+                            const displayLabel = processContent(qLabelRaw, item) || `選項 ${i + 1}`;
+                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                        } else {
+                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
+                        }
+                    }).join('');
+                }
     
                 let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
                 if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
@@ -2203,6 +2059,7 @@ def clean_repair_all():
                 else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
                 else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
             }
+            if (hadEnd) { isInsideCode = false; }
 
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
@@ -2212,17 +2069,10 @@ def clean_repair_all():
                 const displayLabel = processContent(item[customField], item) || `選項 ${oIdx + 1}`;
                 let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
                 processedOpt.split('|').forEach((s, subIdx) => { 
-                    const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                    const processedSub = isInsideCode ? `<code class="${currentCodeClass}">${cleanSub}</code>` : s;
-                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${processedSub}</div>`; 
+                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 
                 });
                 optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { 
-                const cleanRow = processedOpt.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
-                const processedRow = isInsideCode ? `<code class="${currentCodeClass}">${cleanRow}</code>` : processedOpt;
-                optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedRow}</div>`; 
-            }
-            if (hadEnd) { isInsideCode = false; }
+            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedOpt}</div>`; }
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = Array.isArray(item.answer) ? item.answer : [item.answer];
