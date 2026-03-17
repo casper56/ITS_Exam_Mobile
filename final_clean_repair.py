@@ -962,7 +962,6 @@ def clean_repair_all():
                 else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
                 else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
             }
-            if (hadEnd) { isInsideCode = false; }
 
             const optStr = processedOpt;
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
@@ -983,13 +982,18 @@ def clean_repair_all():
                     const isSel = (savedAns && savedAns[optIdx] === subIdx); 
                     let subLabel = `(${String.fromCharCode(65 + subIdx)}) `;
                     if (item.labelType === 'num') subLabel = `(${subIdx+1}) `;
-                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${sub}</div>`; 
+                    const cleanSub = sub.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                    const processedSub = isInsideCode ? `<code class="${currentCodeClass}">${cleanSub}</code>` : sub;
+                    html += `<div class="sub-opt-container ${isSel ? 'selected' : ''}" onclick="selectSub(${optIdx}, ${subIdx})"><span class="opt-num" ${numStyle}>${subLabel}</span>${processedSub}</div>`; 
                 });
                 html += `</div>`;
             } else {
                 const isSel = Array.isArray(userAnswers[index]) ? userAnswers[index].includes(optIdx) : (userAnswers[index] === optIdx);
-                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${optStr}</div>`;
+                const cleanRow = optStr.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                const processedRow = isInsideCode ? `<code class="${currentCodeClass}">${cleanRow}</code>` : optStr;
+                html += `<div class="option-item ${isSel ? 'selected' : ''}" onclick="selectOption(${optIdx})"><span class="opt-num" ${numStyle}>${labelText}</span>${processedRow}</div>`;
             }
+            if (hadEnd) { isInsideCode = false; }
         });
         html += '</div></div>'; card.innerHTML = html; container.appendChild(card);
         if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
@@ -1109,10 +1113,20 @@ def clean_repair_all():
                         </div>
                     </div>`;
                 } else {
+                    let revCodeClass = ''; let revInsideCode = false;
                     opts.forEach((o, i) => {
+                        let processedRow = Array.isArray(o) ? o.join('\n') : String(o);
+                        const hadStart = processedRow.includes('<code class="');
+                        const hadEnd = processedRow.includes('</code>');
+                        if (hadStart) {
+                            revInsideCode = true;
+                            const match = processedRow.match(/<code class="([^"]+)">/);
+                            if (match) revCodeClass = match[1];
+                        }
+                        
                         const isNum = (item.labelType === 'num');
                         const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
-                        if (String(o).includes('|')) {
+                        if (processedRow.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const customLabelField = "question" + alphabet[i];
                             let customLabel = "";
@@ -1121,16 +1135,21 @@ def clean_repair_all():
                             }
                             const displayLabel = customLabel || `選項 ${i + 1}`;
 
-                            const subLabels = String(o).split('|').map((s, si) => {
+                            const subLabels = processedRow.split('|').map((s, si) => {
                                 const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
-                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${s}`;
+                                const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                                const processedSub = revInsideCode ? `<code class="${revCodeClass}">${cleanSub}</code>` : s;
+                                return `<span class="opt-num" ${numStyle}>(${lbl})</span>${processedSub}`;
                             }).join(' ');
                             optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
                         }
                         else {
                             const lbl = isNum ? (i + 1) + "." : `(${String.fromCharCode(65 + i)})`;
-                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${o}</div>`;
+                            const cleanRow = processedRow.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                            const processedFinalRow = revInsideCode ? `<code class="${revCodeClass}">${cleanRow}</code>` : processedRow;
+                            optionsHTML += `<div class="mb-1" style="display:flex; align-items:flex-start; gap:8px;"><span class="opt-num" ${numStyle}>${lbl} </span>${processedFinalRow}</div>`;
                         }
+                        if (hadEnd) revInsideCode = false;
                     });
                 }
                 optionsHTML += '</div>';
@@ -2023,19 +2042,39 @@ def clean_repair_all():
                                 }
                                 optHtml = `<div class="p-2 border rounded bg-light" style="font-family:Consolas,monospace; font-size:0.9rem;">${optHtml}</div>`;
                             } else {
-                
-                    optHtml = opts.map((o, i) => {
-                        if (typeof o === 'string' && o.includes('|')) {
-                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            const qLabelRaw = item["question" + alphabet[i]];
-                            const displayLabel = processContent(qLabelRaw, item) || `選項 ${i + 1}`;
-                            const subLabels = o.split('|').map((s, si) => `<span class="opt-num" ${numStyle}>(${isNum?(si+1):String.fromCharCode(65+si)})</span>${s}`).join(' ');
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
-                        } else {
-                            return `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${isNum?(i+1)+'.':'('+String.fromCharCode(65+i)+')'} </span>${o}</div>`;
-                        }
-                    }).join('');
-                }
+                                let revCodeClass = ''; let revInsideCode = false;
+                                optHtml = opts.map((o, i) => {
+                                    let processedRow = Array.isArray(o) ? o.join('\n') : String(o);
+                                    const hadStart = processedRow.includes('<code class="');
+                                    const hadEnd = processedRow.includes('</code>');
+                                    if (hadStart) {
+                                        revInsideCode = true;
+                                        const match = processedRow.match(/<code class="([^"]+)">/);
+                                        if (match) revCodeClass = match[1];
+                                    }
+
+                                    let rowResult = "";
+                                    if (typeof o === 'string' && o.includes('|')) {
+                                        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                                        const qLabelRaw = item["question" + alphabet[i]];
+                                        const displayLabel = processContent(qLabelRaw, item) || `選項 ${i + 1}`;
+                                        const subLabels = o.split('|').map((s, si) => {
+                                            const lbl = isNum ? (si + 1) : String.fromCharCode(65 + si);
+                                            const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                                            const processedSub = revInsideCode ? `<code class="${revCodeClass}">${cleanSub}</code>` : s;
+                                            return `<span class="opt-num" ${numStyle}>(${lbl})</span>${processedSub}`;
+                                        }).join(' ');
+                                        rowResult = `<div class="review-opt-line" style="margin-bottom:2px;"><span class="fw-bold">${displayLabel}</span> ${subLabels}</div>`;
+                                    } else {
+                                        const lbl = isNum ? (i + 1) + '.' : '(' + String.fromCharCode(65 + i) + ')';
+                                        const cleanRow = processedRow.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                                        const processedFinalRow = revInsideCode ? `<code class="${revCodeClass}">${cleanRow}</code>` : processedRow;
+                                        rowResult = `<div class="review-opt-line" style="margin-bottom:2px;"><span class="opt-num" ${numStyle}>${lbl} </span>${processedFinalRow}</div>`;
+                                    }
+                                    if (hadEnd) revInsideCode = false;
+                                    return rowResult;
+                                }).join('');
+                            }
     
                 let cleanQ = Array.isArray(item.question) ? [...item.question] : [String(item.question)];
                 if (cleanQ.length > 0) cleanQ[0] = cleanQ[0].replace(/^((?:<[^>]+>)*)\d+\.\s*/, '    ');
@@ -2149,7 +2188,6 @@ def clean_repair_all():
                 else if (hadStart && !hadEnd) { processedOpt = processedOpt + '</code>'; }
                 else if (!hadStart && hadEnd) { processedOpt = `<code class="${currentCodeClass}">${processedOpt}`; }
             }
-            if (hadEnd) { isInsideCode = false; }
 
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
             const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
@@ -2159,10 +2197,17 @@ def clean_repair_all():
                 const displayLabel = processContent(item[customField], item) || `選項 ${oIdx + 1}`;
                 let sHtml = `<div class="mt-2 mb-1"><code>${displayLabel}</code></div><div class="d-flex flex-wrap gap-2">`;
                 processedOpt.split('|').forEach((s, subIdx) => { 
-                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${s}</div>`; 
+                    const cleanSub = s.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                    const processedSub = isInsideCode ? `<code class="${currentCodeClass}">${cleanSub}</code>` : s;
+                    sHtml += `<div class="sub-opt-container p-2 border rounded bg-light" onclick="checkSubAnswer(this, ${index}, ${oIdx}, ${subIdx}, event)" style="cursor:pointer; font-size:0.9rem"><input class="form-check-input" type="radio" name="q${index}_opt${oIdx}" id="o${oIdx}_s${subIdx}"><span class="opt-num" ${numStyle}>(${item.labelType==='num'?subIdx+1:String.fromCharCode(65+subIdx)})</span> ${processedSub}</div>`; 
                 });
                 optionsArea.innerHTML += sHtml + '</div></div>';
-            } else { optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedOpt}</div>`; }
+            } else { 
+                const cleanRow = processedOpt.replace(/<code[^>]*>/g, "").replace(/<\/code>/g, "");
+                const processedRow = isInsideCode ? `<code class="${currentCodeClass}">${cleanRow}</code>` : processedOpt;
+                optionsArea.innerHTML += `<div class="option-item" onclick="checkAnswer(this, ${index}, ${oIdx}, event)"><input class="form-check-input" type="${item.type==='multiple'?'checkbox':'radio'}" name="q${index}" id="o${oIdx}"><span class="opt-num" ${numStyle}>${labelText}</span>${processedRow}</div>`; 
+            }
+            if (hadEnd) { isInsideCode = false; }
         });
         const saved = userAnswers[index], completed = correctSet.has(index) || incorrectSet.has(index) || correctedSet.has(index);
         let answers = Array.isArray(item.answer) ? item.answer : [item.answer];
