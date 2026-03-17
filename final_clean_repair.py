@@ -827,11 +827,70 @@ def clean_repair_all():
         // 完全隨機打散，不再依分類名稱排序
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
 
-        if (SYNC_SUBJECT_NAME === 'ITS_Database' || SYNC_SUBJECT_NAME === 'www\\ITS_Database' || SYNC_SUBJECT_NAME === 'ITS_AI' || SYNC_SUBJECT_NAME === 'www\\ITS_AI') {
-            const enableShuffle = confirm("是否啟用「選項亂數排列」功能？\n(開啟後，各題選項順序將隨機打亂)");
-            if (enableShuffle) {
-                examQuestions.forEach(q => {
-                    if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'matching' || q.type === 'multimatching' || q.type === 'drag' || q.type === 'choicelist') return;
+        const enableShuffle = confirm("是否啟用「選項亂數排列」功能？\n(開啟後，各題選項順序將隨機打亂)");
+        if (enableShuffle) {
+            examQuestions.forEach(q => {
+                if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'matching' || q.type === 'multimatching' || q.type === 'drag') return;
+
+                if (q.type === 'choicelist') {
+                    if (Array.isArray(q.options[0])) {
+                        q.options = q.options.map((optArray, slotIdx) => {
+                            if (!optArray || optArray.length <= 1) return optArray;
+                            let paired = optArray.map((opt, i) => ({ opt, index: i }));
+                            for (let i = paired.length - 1; i > 0; i--) {
+                                const j = Math.floor(Math.random() * (i + 1));
+                                [paired[i], paired[j]] = [paired[j], paired[i]];
+                            }
+                            
+                            if (q.answer && q.answer[slotIdx] !== undefined) {
+                                let origAns = q.answer[slotIdx];
+                                let origIdx = -1;
+                                if (typeof origAns === 'number') {
+                                    origIdx = origAns - 1;
+                                } else if (typeof origAns === 'string') {
+                                    origIdx = parseAnswerToIndex(origAns);
+                                }
+                                
+                                if (origIdx !== -1) {
+                                    let newIdx = paired.findIndex(p => p.index === origIdx);
+                                    if (typeof origAns === 'number') {
+                                        q.answer[slotIdx] = newIdx + 1;
+                                    } else if (typeof origAns === 'string') {
+                                        q.answer[slotIdx] = String.fromCharCode(65 + newIdx);
+                                    }
+                                }
+                            }
+                            return paired.map(p => p.opt);
+                        });
+                    } else {
+                        let paired = q.options.map((opt, i) => ({ opt, index: i }));
+                        for (let i = paired.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [paired[i], paired[j]] = [paired[j], paired[i]];
+                        }
+                        q.options = paired.map(p => p.opt);
+
+                        if (q.answer && Array.isArray(q.answer)) {
+                            q.answer = q.answer.map(ans => {
+                                let origIdx = -1;
+                                if (typeof ans === 'number') {
+                                    origIdx = ans - 1;
+                                } else if (typeof ans === 'string') {
+                                    origIdx = parseAnswerToIndex(ans);
+                                }
+                                if (origIdx !== -1) {
+                                    let newIdx = paired.findIndex(p => p.index === origIdx);
+                                    if (typeof ans === 'number') {
+                                        return newIdx + 1;
+                                    } else if (typeof ans === 'string') {
+                                        return String.fromCharCode(65 + newIdx);
+                                    }
+                                }
+                                return ans;
+                            });
+                        }
+                    }
+                } else {
                     const optText = q.options.join("").toUpperCase();
                     if (q.options.length === 2 && (optText.includes("YES") || optText.includes("TRUE") || optText.includes("正確") || optText.includes("Y") || optText.includes("N") || optText.includes("錯"))) return;
 
@@ -853,8 +912,8 @@ def clean_repair_all():
                     });
                     newAnsIndices.sort((a,b) => a - b);
                     q.answer = newAnsIndices.map(idx => String.fromCharCode(65 + idx));
-                });
-            }
+                }
+            });
         }
 
         renderQuestion(0); startTimer();
