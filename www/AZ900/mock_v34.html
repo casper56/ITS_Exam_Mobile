@@ -4114,6 +4114,37 @@
 
         // 完全隨機打散，不再依分類名稱排序
         examQuestions = selected.sort(() => 0.5 - Math.random()).slice(0, EXAM_LIMIT);
+
+        if (SYNC_SUBJECT_NAME === 'ITS_Database' || SYNC_SUBJECT_NAME === 'www\\ITS_Database' || SYNC_SUBJECT_NAME === 'ITS_AI' || SYNC_SUBJECT_NAME === 'www\\ITS_AI') {
+            const enableShuffle = confirm("是否啟用「選項亂數排列」功能？\n(開啟後，各題選項順序將隨機打亂)");
+            if (enableShuffle) {
+                examQuestions.forEach(q => {
+                    if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'matching' || q.type === 'multimatching' || q.type === 'drag' || q.type === 'choicelist') return;
+                    const optText = q.options.join("").toUpperCase();
+                    if (q.options.length === 2 && (optText.includes("YES") || optText.includes("TRUE") || optText.includes("正確") || optText.includes("Y") || optText.includes("N") || optText.includes("錯"))) return;
+
+                    const originalAnsIndices = (q.answer || []).map(ans => parseAnswerToIndex(ans));
+                    let paired = q.options.map((opt, i) => ({ opt, index: i }));
+
+                    for (let i = paired.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [paired[i], paired[j]] = [paired[j], paired[i]];
+                    }
+
+                    q.options = paired.map(p => p.opt);
+
+                    const newAnsIndices = [];
+                    paired.forEach((p, newIndex) => {
+                        if (originalAnsIndices.includes(p.index)) {
+                            newAnsIndices.push(newIndex);
+                        }
+                    });
+                    newAnsIndices.sort((a,b) => a - b);
+                    q.answer = newAnsIndices.map(idx => String.fromCharCode(65 + idx));
+                });
+            }
+        }
+
         renderQuestion(0); startTimer();
     }
 
