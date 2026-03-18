@@ -18,11 +18,17 @@ const SyncManager = {
             return;
         }
 
+        // 2. 過濾測試 0 分紀錄：不儲存 0 分的測試結果
+        if (score === 0) {
+            console.log('SyncManager: 偵測到 0 分 (測試紀錄)，跳過同步。');
+            return;
+        }
+
         try {
-            // 2. 讀取現有紀錄
+            // 3. 讀取現有紀錄
             const history = JSON.parse(localStorage.getItem(this.HISTORY_KEY) || '[]');
             
-            // 3. 準備當前數據
+            // 4. 準備當前數據
             const today = new Date().toLocaleDateString('en-CA'); // 強制輸出為 YYYY-MM-DD
             const timestamp = Date.now();
             
@@ -33,7 +39,7 @@ const SyncManager = {
                 timestamp: timestamp
             };
             
-            // 4. 加入紀錄並存回 LocalStorage
+            // 5. 加入紀錄並存回 LocalStorage
             history.push(newEntry);
             localStorage.setItem(this.HISTORY_KEY, JSON.stringify(history));
             
@@ -45,7 +51,7 @@ const SyncManager = {
 };
 
 /**
- * SyncManager Patch - 自動恢復 PDF 遺失紀錄
+ * SyncManager Patch - 自動過濾 0 分紀錄與恢復 PDF 遺失紀錄
  */
 (function() {
     const RECOVERY_DATA = [
@@ -84,6 +90,15 @@ const SyncManager = {
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
     let changed = false;
 
+    // A. 移除歷史紀錄中的 0 分測試數據
+    const filteredHistory = history.filter(h => h.score > 0);
+    if (filteredHistory.length !== history.length) {
+        history = filteredHistory;
+        changed = true;
+        console.log(`SyncManager: 已自動移除 ${history.length - filteredHistory.length} 筆 0 分測試紀錄。`);
+    }
+
+    // B. 從 PDF 備份恢復遺失紀錄
     RECOVERY_DATA.forEach(record => {
         const exists = history.some(h => h.subject === record.subject && h.date === record.date && (!record.note || h.note === record.note));
         if (!exists) {
@@ -98,6 +113,6 @@ const SyncManager = {
 
     if (changed) {
         localStorage.setItem(historyKey, JSON.stringify(history));
-        console.log('SyncManager: 已自動從 PDF 備份恢復遺失的練習紀錄。');
+        console.log('SyncManager: 紀錄已更新。');
     }
 })();
