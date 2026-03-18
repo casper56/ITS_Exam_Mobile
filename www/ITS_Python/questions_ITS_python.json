@@ -3674,7 +3674,7 @@
     "type": "single",
     "category": "D6_模組與常用工具",
     "question": [
-      "<pre><code class=\"language-python\">您撰寫了以下這段程式碼:",
+      "<pre><code class=\"language-python\">請檢視下列程式碼片段:",
       "import datetime",
       "d = datetime.datetime(2017, 4, 7)",
       "print('{:%B-%d-%y}'.format(d))",
@@ -3684,18 +3684,13 @@
       "04-07-17",
       "2017-APRIL-07",
       "APRIL-07-17",
-      "04-07-2017</code>"
+      "04-07-2017"
     ],
     "answer": [
       "C"
     ],
-    "weight": 1,
     "explanation": [
-      "<pre><code class=\"language-python\">解題分析：",
-      "1. %B：完整的月份名稱（如 April，題目顯示為全大寫 APRIL）。",
-      "2. %d：兩位數的日期（07）。",
-      "3. %y：兩位數的年份（17）。",
-      "4. 格式字串：{:%B-%d-%y} 組合為 Month-Day-Year，即 APRIL-07-17。</code></pre>"
+      "<pre><code class=\"language-python\">解析 format 格式字串:\n1. %B：月份的完整名稱 (April)。\n2. %d：兩位數的日期 (07)。\n3. %y：兩位數的年份 (17)。\n4. 格式字串 {:%B-%d-%y} 會組成 Month-Day-Year，即 APRIL-07-17。</code></pre>"
     ]
   },
   {

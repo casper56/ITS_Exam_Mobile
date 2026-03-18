@@ -122,7 +122,103 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script>
-        const rawMd = "# ITS Python 技術考點深度導讀 (ITS_PYTHON_TECH.md)\n\n本文件是根據 `www/ITS_Python/questions_ITS_python.json` 題庫 (總計 187 題) 的最新分析結果所編寫。旨在協助考生從「代碼邏輯」與「語法細節」兩個維度掌握 ITS Python 認證。\n\n---\n\n## D1_資料型別與運算子：精確度與轉換\n### 1. 數值與布林運算\n*   **整數除法 (`//`) 與 取餘數 (`%`)**：\n    *   `10 // 3` -> `3` (捨去小數)。\n    *   `10 % 3` -> `1` (餘數)。\n*   **邏輯運算 (Logical)**：`and` (且), `or` (或), `not` (非)。\n*   **比較運算 (Comparison)**：注意 `==` (值相等) 與 `is` (物件識別/記憶體位置相同) 的區別。\n\n### 2. 資料轉換 (Casting)\n*   `input()` 接收到的數值必須手動轉型：`int(input())` 或 `float(input())`。\n*   `eval()`：可動態求值，但要注意其將字串視為 Python 程式碼執行的特性。\n\n---\n\n## D2_流程控制與判斷：邏輯漏斗\n### 1. 判斷邏輯順序\n*   **漏斗式過濾 (Funneling)**：當多個 `elif` 條件有重疊時，必須將「最嚴苛/最細分」的條件放在最前面。\n    *   *錯誤範例*：先檢查 `age < 18` 再檢查 `age < 13`，會導致 10 歲的孩子被歸類到 18 歲以下區塊。\n*   **None 檢查保護**：執行比較前，務必先判斷變數是否為 `None`，以避免 runtime 錯誤。\n*   **縮排 (Indentation)**：Python 高度依賴縮排，必須一致（4 個空格或 1 個 Tab），混合使用或層級錯誤會導致 `IndentationError`。\n\n### 2. 迴圈深度控制\n*   **range(start, stop, step)**：\n    *   預設 `start=0`, `step=1`。\n    *   `stop` 是**不包含**在內的（例如 `range(5)` 產生 0, 1, 2, 3, 4）。\n*   **break/continue**：注意它們對巢狀迴圈（Nested Loops）僅對「當前層級」有效的影響。\n\n---\n\n## D3_輸入輸出與檔案：讀寫模式細節\n### 1. 檔案處理 (File I/O)\n| 模式 | 說明 | 關鍵特性 |\n| :--- | :--- | :--- |\n| **'r'** | 唯讀 (預設) | 檔案必須存在。 |\n| **'w'** | 寫入 | 會覆蓋舊檔。若檔案不存在會自動建立。 |\n| **'a'** | 附加 | 在檔案末尾寫入，不會覆蓋原內容。 |\n| **'w+'** | 讀寫 | **自動建立檔案** 且可讀寫，不會引發 `IOError`。 |\n\n### 2. 命令列參數與輸出\n*   `sys.argv`：列表格式。`sys.argv[0]` 為腳本名稱。\n*   `sys.stdout.write()`：相較於 `print()`，它不會自動換行。\n\n---\n\n## D4_函式與註解：定義與變數範圍\n*   **參數預設值**：帶有預設值的參數（如 `def func(a, b=10):`）必須排在非預設參數之後。\n*   **return 提早結束**：函式一旦觸發 `return` 即刻結束，後方代碼不再執行。\n*   **文件字串 (Docstrings)**：使用 `'''` 或 `\"\"\"` 包圍。\n    *   **位置**：必須定義在模組、類別或函式的「第一行」。\n    *   **工具**：使用 `pydoc` 模組可以從 Docstrings 自動產生文件。\n\n---\n\n## D5_錯誤處理與測試：故障排除\n### 1. 異常架構\n*   `try`: 監控代碼。\n*   `except`: 捕獲特定錯誤（如 `ZeroDivisionError`）。\n*   `else`: 當 **沒有發生錯誤** 時執行。\n*   `finally`: 不論是否發生錯誤，**最後必執行**。\n\n### 2. 單元測試 (Unittest)\n官方考試最愛考的三種斷言：\n*   `assertEqual(a, b)`：檢查內容是否相等。\n*   `assertIsInstance(obj, cls)`：檢查物件是否為特定類別的實例。\n*   `assertIs(a, b)`：檢查兩者是否指向**同一個記憶體位置**。\n\n---\n\n## D6_模組與常用工具：核心套件\n### 1. Math 模組 (數值計算)\n*   `math.floor(x)`：下向取整（不大於 x 的最大整數）。\n*   `math.ceil(x)`：向上取整。\n*   `math.fmod(x, y)`：Python 版的餘數計算，處理浮點數更精確。\n*   `math.frexp(x)`：傳回 (尾數, 指數)。\n\n### 2. Datetime 模組 (日期處理)\n*   `strftime(\"%Y-%m-%d\")`：轉為字串。\n    *   `%Y`: 4 位年份。\n    *   `%m`: 月份 (01-12)。\n    *   `%d`: 日 (01-31)。\n\n### 3. Random 模組 (隨機)\n*   `random.randint(a, b)`：包含 a 與 b 的隨機整數。\n*   `random.random()`：傳回 [0.0, 1.0) 之間的浮點數。\n*   `random.choice(seq)`：從序列（串列/字串）中隨機挑選。\n";
+        const rawMd = `# ITS Python 技術考點深度導讀 (ITS_PYTHON_TECH.md)
+
+本文件是根據 \`www/ITS_Python/questions_ITS_python.json\` 題庫 (總計 187 題) 的最新分析結果所編寫。旨在協助考生從「代碼邏輯」與「語法細節」兩個維度掌握 ITS Python 認證。
+
+---
+
+## D1_資料型別與運算子：精確度與轉換
+### 1. 數值與布林運算
+*   **整數除法 (\`//\`) 與 取餘數 (\`%\`)**：
+    *   \`10 // 3\` -> \`3\` (捨去小數)。
+    *   \`10 % 3\` -> \`1\` (餘數)。
+*   **邏輯運算 (Logical)**：\`and\` (且), \`or\` (或), \`not\` (非)。
+*   **比較運算 (Comparison)**：注意 \`==\` (值相等) 與 \`is\` (物件識別/記憶體位置相同) 的區別。
+
+### 2. 資料轉換 (Casting)
+*   \`input()\` 接收到的數值必須手動轉型：\`int(input())\` 或 \`float(input())\`。
+*   \`eval()\`：可動態求值，但要注意其將字串視為 Python 程式碼執行的特性。
+
+---
+
+## D2_流程控制與判斷：邏輯漏斗
+### 1. 判斷邏輯順序：漏斗式過濾 (Funneling)
+*   **核心原則**：當多個 \`elif\` 條件有重疊時，必須將**「最嚴苛/最細分」**的條件放在最前面。
+*   **深度分析**：Python 的 \`if-elif\` 結構在命中第一個 True 條件後就會跳出。
+    *   **正確範例**：先檢查 \`age < 13\` (童星) 再檢查 \`age < 18\` (青少年)。
+    *   **錯誤範例**：先檢查 \`age < 18\` 再檢查 \`age < 13\`。這會導致 10 歲的孩子在第一關就命中 \`age < 18\` 並執行對應區塊，永遠無法進到 \`age < 13\` 的邏輯中。
+*   **None 檢查保護**：執行比較前，務必先判斷變數是否為 \`None\`，以避免 runtime 錯誤。
+*   **縮排 (Indentation)**：Python 高度依賴縮排，必須一致（4 個空格或 1 個 Tab），混合使用或層級錯誤會導致 \`IndentationError\`。
+
+### 2. 迴圈深度控制
+*   **range(start, stop, step)**：
+    *   預設 \`start=0\`, \`step=1\`。
+    *   \`stop\` 是**不包含**在內的（例如 \`range(5)\` 產生 0, 1, 2, 3, 4）。
+*   **break/continue**：注意它們對巢狀迴圈（Nested Loops）僅對「當前層級」有效的影響。
+
+---
+
+## D3_輸入輸出與檔案：讀寫模式細節
+### 1. 檔案處理 (File I/O)
+| 模式 | 說明 | 關鍵特性 |
+| :--- | :--- | :--- |
+| **'r'** | 唯讀 (預設) | 檔案必須存在。 |
+| **'w'** | 寫入 | 會覆蓋舊檔。若檔案不存在會自動建立。 |
+| **'a'** | 附加 | 在檔案末尾寫入，不會覆蓋原內容。 |
+| **'w+'** | 讀寫 | **自動建立檔案** 且可讀寫，不會引發 \`IOError\`。 |
+
+### 2. 命令列參數與輸出
+*   \`sys.argv\`：列表格式。\`sys.argv[0]\` 為腳本名稱。
+*   \`sys.stdout.write()\`：相較於 \`print()\`，它不會自動換行。
+
+---
+
+## D4_函式與註解：定義與變數範圍
+*   **參數預設值**：帶有預設值的參數（如 \`def func(a, b=10):\`）必須排在非預設參數之後。
+*   **return 提早結束**：函式一旦觸發 \`return\` 即刻結束，後方代碼不再執行。
+*   **文件字串 (Docstrings)**：使用 \`'''\` 或 \`"""\` 包圍。
+    *   **位置**：必須定義在模組、類別或函式的「第一行」。
+    *   **工具**：使用 \`pydoc\` 模組可以從 Docstrings 自動產生文件。
+
+---
+
+## D5_錯誤處理與測試：故障排除
+### 1. 異常架構
+*   \`try\`: 監控代碼。
+*   \`except\`: 捕獲特定錯誤（如 \`ZeroDivisionError\`）。
+*   \`else\`: 當 **沒有發生錯誤** 時執行。
+*   \`finally\`: 不論是否發生錯誤，**最後必執行**。
+
+### 2. 單元測試 (Unittest)
+官方考試最愛考的三種斷言：
+*   \`assertEqual(a, b)\`：檢查內容是否相等。
+*   \`assertIsInstance(obj, cls)\`：檢查物件是否為特定類別的實例。
+*   \`assertIs(a, b)\`：檢查兩者是否指向**同一個記憶體位置**。
+
+---
+
+## D6_模組與常用工具：核心套件
+### 1. Math 模組 (數值計算)
+*   \`math.floor(x)\`：下向取整（不大於 x 的最大整數）。
+*   \`math.ceil(x)\`：向上取整。
+*   \`math.fmod(x, y)\`：Python 版的餘數計算，處理浮點數更精確。
+*   \`math.frexp(x)\`：傳回 (尾數, 指數)。
+
+### 2. Datetime 模組 (日期處理)
+*   **時間格式化 (ID 88)**：使用 \`strftime\` 或 \`.format()\` 搭配格式化代碼。
+    *   \`%B\`：月份的**完整名稱** (例如: April)。
+    *   \`%b\`：月份的簡寫 (例如: Apr)。
+    *   \`%d\`：兩位數的日期 (01-31)。
+    *   \`%y\`：**兩位數**年份 (例如: 17)。
+    *   \`%Y\`：四位數年份 (例如: 2017)。
+    *   **考點範例**：\`{:%B-%d-%y}\` 會輸出如 \`APRIL-07-17\` 的格式。
+
+### 3. Random 模組 (隨機)
+*   \`random.randint(a, b)\`：包含 a 與 b 的隨機整數。
+*   \`random.random()\`：傳回 [0.0, 1.0) 之間的浮點數。
+*   \`random.choice(seq)\`：從序列（串列/字串）中隨機挑選。
+`;
         document.getElementById('content').innerHTML = marked.parse(rawMd);
         // Prism highlight
         document.querySelectorAll('pre code').forEach((block) => {
