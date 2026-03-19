@@ -4046,7 +4046,7 @@
                 const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
                     const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
                 }).join(', ');
-                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText} &nbsp;&nbsp;|&nbsp;&nbsp; 您的回答：${userAnsText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
                 area.appendChild(div);
             });
             

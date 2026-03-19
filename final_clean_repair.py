@@ -740,8 +740,8 @@ def clean_repair_all():
             console.error("題庫資料載入失敗！"); return;
         }
         const CUTOFF = REPLACE_CUTOFF;
-        const TARGET_OFF_COUNT = 60; // 官方題改為 60 題
-        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 補充題則為 0 題
+        const TARGET_OFF_COUNT = 59; // 官方題改為 59 題
+        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 補充題則為 1 題
         
         let historySet = new Set();
         try {
@@ -1107,6 +1107,25 @@ def clean_repair_all():
                 return isNum ? (idx + 1) : String.fromCharCode(65 + idx);
             }).join(', ');
 
+            let userAnsText = '未作答';
+            if (userAns !== undefined && userAns !== null) {
+                let parseU = (u) => {
+                    if (u === null || u === undefined || u === -1) return '未作答';
+                    return isNum ? (u + 1) : String.fromCharCode(65 + u);
+                };
+                if (Array.isArray(userAns)) {
+                    userAnsText = userAns.map(parseU).join(', ');
+                } else if (typeof userAns === 'object') {
+                    let uArr = [];
+                    for(let i=0; i<answers.length; i++) {
+                        uArr.push(parseU(userAns[i]));
+                    }
+                    userAnsText = uArr.join(', ');
+                } else {
+                    userAnsText = parseU(userAns);
+                }
+            }
+
             if (isCorrect) { correctCount++; stats[cat].correct++; }
             else {
                 const optsRaw = item.quiz || item.options || [];
@@ -1168,7 +1187,7 @@ def clean_repair_all():
                     });
                 }
                 optionsHTML += '</div>';
-                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
+                incorrectHTML += `<div class="review-item"><div class="review-id">題目 ${idx + 1} (編號: ${item.id})</div><div class="review-q-text">${processContent(item.question, item)}</div>${optionsHTML}<div class="review-ans">正確答案：${ansText} &nbsp;&nbsp;|&nbsp;&nbsp; 您的回答：${userAnsText}</div><div class="review-exp"><b>解析：</b><br/>${processContent(item.explanation || '暫無解析。', item)}</div></div>`;
             }
         });
         const score = Math.round((correctCount / examQuestions.length) * 100);
@@ -2096,7 +2115,7 @@ def clean_repair_all():
                 const ansText = (Array.isArray(item.answer)?item.answer:[item.answer]).map(a => {
                     const idx = parseAnswerToIndex(a); return (idx < 0 || String(a).match(/[YN]/i)) ? a : (isNum ? (idx+1) : String.fromCharCode(65+idx));
                 }).join(', ');
-                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
+                div.innerHTML = `<div class="review-q-text"><b>${idx+1}.</b> ${processContent(cleanQ, item)}</div>${item.image?`<div class="text-center my-2"><img src="${item.image}" class="q-img"></div>`:''}<div class="review-opts">${optHtml}</div><div class="review-ans">正確答案：${ansText} &nbsp;&nbsp;|&nbsp;&nbsp; 您的回答：${userAnsText}</div><div class="review-exp">${processContent(item.explanation || '暫無解析。', item)}</div>`;
                 area.appendChild(div);
             });
             

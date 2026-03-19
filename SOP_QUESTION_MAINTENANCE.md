@@ -23,7 +23,9 @@
 
 ### 4. 統計與文件更新 (Docs Sync)
 *   **README.md**：更新該科目的官方題數統計。
-*   **科目文件** (如 `ITS_softdevelop.md`)：
+*   **analysis_bundle.js**：更新 `ANALYSIS_BUNDLE` 內的「認證題庫統計分析」（包含總題數、修改「**核心流出題 (X-XX)**：XX 題」的字樣與數值等）。
+*   **科目文件** (如 `ITS_softdevelop.md`、`ITS_Python.md`)：
+    *   更新開頭的「認證題庫統計分析」與 ID 範圍（必須包含修改「**核心流出題 (X-XX)**：XX 題」等對應字眼）。
     *   重新統計 D1~D5 各類別題數。
     *   更新百分比分佈。
     *   更新 Pool A/B 的 ID 範圍說明。
@@ -34,7 +36,11 @@
     *   若程式碼中有寫死 ID 範圍，需同步更新。
     *   評估是否需要調整「隨機抽題比例」，確保模擬考的體感與正式考一致。
 
-### 6. 驗證與提交 (Verification & Git)
+### 6. 核心系統重建 (Build & Repair)
+*   **動作**：執行 python final_clean_repair.py。
+*   **目的**：此腳本會根據更新後的 config.json、JSON 題庫以及 JavaScript 分析檔，自動重新生成各科的 index.html (主頁)、mock_v34.html (模擬考試)、以及 questions_practice.js。這是確保所有修改生效的最重要步驟。
+
+### 7. 驗證與提交 (Verification & Git)
 *   **驗證**：在 Web 預覽模式下檢查是否有跳號或圖片載入失敗。
 *   **提交**：
     ```bash
