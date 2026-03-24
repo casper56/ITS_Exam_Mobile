@@ -819,13 +819,13 @@
     "hideLabel": true,
     "question": [
       "<pre><code class=\"language-python\">【CH03-3】你為公司開發了一個 Python 應用程式，設計了以下的程式碼：",
-      "aList = [\"a\", \"b\", \"c\", \"d\", \"e\"]",
-      "bList = [1,2,3,4,5]",
-      "print(aList is bList)",
-      "print(aList == bList)",
-      "aList = bList",
-      "print(aList is bList)",
-      "print(aList == bList)",
+      "01 aList = [\"a\", \"b\", \"c\", \"d\", \"e\"]",
+      "02 bList = [1,2,3,4,5]",
+      "03 print(aList is bList)",
+      "04 print(aList == bList)",
+      "05 aList = bList",
+      "06 print(aList is bList)",
+      "07 print(aList == bList)",
       "根據程式碼片段中提供的資訊選擇每個問題的答案選項。</code></pre>"
     ],
     "questionA": [
@@ -1905,7 +1905,7 @@
       "11    else:",
       "12        print('Guess is just right')",
       "13        <slot02>",
-      "14    <slot03></code></pre>"
+      "14   <slot03></code></pre>"
     ],
     "options": [
       "<code class=\"language-python\">while chance <= 3:</code>",
@@ -3295,7 +3295,7 @@
       "",
       "選項 3.",
       "from random import randrange",
-      "print(randrange(2,50,2))",
+      "print(randrange(2,51,2))",
       "",
       "選項 4.",
       "from random import randrange",
@@ -4036,12 +4036,11 @@
       "<code class=\"language-python\">if line != '\\n':</code>",
       "<code class=\"language-python\">if line != \"\":</code>",
       "<code class=\"language-python\">if line != None:</code>",
-      "<code class=\"language-python\">if line != \"\":</code>",
       "<code class=\"language-python\">if line != \"\\n\":</code>"
     ],
     "answer": [
-      "D",
-      "E"
+      "B",
+      "D"
     ],
     "weight": 1,
     "image": null,

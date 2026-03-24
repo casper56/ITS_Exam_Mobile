@@ -1991,18 +1991,32 @@
     },
     {
         "id": 71,
-        "type": "single",
+        "type": "choicelist",
+        "sz": "0.95rem",
         "question": [
             "<pre><code>您必須決定是否要為自己兩年前開發的AI系統進行升級。請問您應該依照什麼順序完成動作? 請將所有動作按照正確的順序排列。</code></pre>[[image01]]"
         ],
+		"slots" : [
+			"動作",
+			"<slot01>",
+			"<slot02>",
+			"<slot03>",
+			"<slot04>",
+			"<slot05>"
+		],
         "options": [
-            "<code>ACBED</code>",
-            "<code>CDABE</code>",
-            "<code>ABCDE</code>",
-            "<code>DAECB</code>"
+			"分析現有系統的效能指標。",
+			"評估系統的效能是否夠高，足以做為繼續部署的理由。",
+			"檢閱在這個 AI 系統之後開發出來的相關技術。",
+			"分析新技術的指標和功能。",
+			"將潛在新功能與現有系統進行比較。"
         ],
         "answer": [
-            "C"
+            "A",
+			"B",
+			"C",
+			"D",
+			"E"
         ],
         "weight": 1,
         "image": null,
