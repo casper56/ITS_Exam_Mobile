@@ -101,7 +101,9 @@
                     const lines = text.split('\n');
                     lines.forEach(line => {
                         const processed = line.replace(/\t/g, "    ");
-                        if (processed.length > localMaxLen) localMaxLen = processed.length;
+                        let displayLen = 0;
+                        for(let i=0; i<processed.length; i++) displayLen += processed.charCodeAt(i) > 255 ? 2 : 1;
+                        if (displayLen > localMaxLen) localMaxLen = displayLen;
                     });
                 });
                 const localTextW = Math.ceil((localMaxLen + 2 + charBuff) * CHAR_W);
@@ -124,7 +126,9 @@
                 const lines = text.split('\n');
                 lines.forEach(line => {
                     const processed = line.replace(/\t/g, "    ");
-                    if (processed.length > localMaxLen) localMaxLen = processed.length;
+                    let displayLen = 0;
+                    for(let i=0; i<processed.length; i++) displayLen += processed.charCodeAt(i) > 255 ? 2 : 1;
+                    if (displayLen > localMaxLen) localMaxLen = displayLen;
                 });
             });
             const localTextW = Math.ceil((localMaxLen + 2 + charBuff) * CHAR_W);
