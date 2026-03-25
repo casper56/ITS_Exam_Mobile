@@ -9249,7 +9249,7 @@
             const optStr = processedOpt;
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
             if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -9427,7 +9427,7 @@
                         }
                         
                         const isNum = (item.labelType === 'num');
-                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                         if (processedRow.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const customLabelField = "question" + alphabet[i];

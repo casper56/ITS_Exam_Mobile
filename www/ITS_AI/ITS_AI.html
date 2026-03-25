@@ -890,6 +890,7 @@
     {
         "id": 27,
         "type": "single",
+		"labelType": "none",
         "question": [
             "<pre><code>您有下列資料集。</code></pre>[[image01]]<pre><code>您必須認識到上列哪些表格使用了資料的分類限界辦識的轉換方法。請問哪個表格使用了 One-Hot Encoding?</code></pre>"
         ],
@@ -3691,7 +3692,7 @@
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 const isNum = (item.labelType === 'num');
-                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                 
                 let optHtml = "";
                             if (item.type === 'matching' || item.type === 'multimatching') {
@@ -3871,7 +3872,7 @@
             }
 
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             if (typeof processedOpt === 'string' && processedOpt.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const customField = "question" + alphabet[oIdx];

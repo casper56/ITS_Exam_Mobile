@@ -981,7 +981,7 @@ def clean_repair_all():
             const optStr = processedOpt;
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
             if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -1159,7 +1159,7 @@ def clean_repair_all():
                         }
                         
                         const isNum = (item.labelType === 'num');
-                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                         if (processedRow.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const customLabelField = "question" + alphabet[i];
@@ -2044,7 +2044,7 @@ def clean_repair_all():
                 const optsRaw = item.quiz || item.options || [];
                 const opts = Array.isArray(optsRaw) ? optsRaw : [optsRaw];
                 const isNum = (item.labelType === 'num');
-                const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                 
                 let optHtml = "";
                             if (item.type === 'matching' || item.type === 'multimatching') {
@@ -2224,7 +2224,7 @@ def clean_repair_all():
             }
 
             let labelText = (item.labelType === 'num') ? `${oIdx+1}. ` : `(${String.fromCharCode(65+oIdx)}) `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             if (typeof processedOpt === 'string' && processedOpt.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const customField = "question" + alphabet[oIdx];

@@ -1032,6 +1032,7 @@
     {
         "id": 27,
         "type": "single",
+		"labelType": "none",
         "question": [
             "<pre><code>您有下列資料集。</code></pre>[[image01]]<pre><code>您必須認識到上列哪些表格使用了資料的分類限界辦識的轉換方法。請問哪個表格使用了 One-Hot Encoding?</code></pre>"
         ],
@@ -3906,7 +3907,7 @@
             const optStr = processedOpt;
             let labelText = `(${String.fromCharCode(65 + optIdx)}) `;
             if (item.labelType === 'num') labelText = `${optIdx + 1}. `;
-            const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+            const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
             
             if (optStr.includes('|')) {
                 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -4084,7 +4085,7 @@
                         }
                         
                         const isNum = (item.labelType === 'num');
-                        const numStyle = (item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
+                        const numStyle = (!item.labelType || item.labelType === 'none' || item.hideLabel) ? 'style="display:none"' : '';
                         if (processedRow.includes('|')) {
                             const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                             const customLabelField = "question" + alphabet[i];

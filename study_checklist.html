@@ -311,20 +311,9 @@
     }
 
     function renderAverageScores() {
-        const history = JSON.parse(localStorage.getItem('its_exam_history') || '[]');
-        
-        // 過濾歷史紀錄：以當日個別科目最高分為準，且記數為一次
-        const dailyMaxMap = {};
-        history.forEach(entry => {
-            const key = entry.date + '_' + entry.subject;
-            if (!dailyMaxMap[key] || entry.score > dailyMaxMap[key].score) {
-                dailyMaxMap[key] = entry;
-            }
-        });
-        const dailyMaxHistory = Object.values(dailyMaxMap);
-
+        // 改從進度表勾選狀態統計，確保統計次數與平均分數與視覺呈現完全同步
         const averages = {};
-        let totalExams = dailyMaxHistory.length;
+        let totalExams = 0;
         let totalScore = 0;
         
         // 用來計算排程中各科的安排次數
@@ -334,22 +323,32 @@
             scheduledCounts[sub] = 0;
         });
 
-        // 計算排程次數
+        // 遍歷所有排程任務項目
         document.querySelectorAll('.task-item input[type="checkbox"]').forEach(cb => {
             const sub = cb.getAttribute('data-subject');
+            const taskId = cb.id;
+            
             if (scheduledCounts[sub] !== undefined) {
                 scheduledCounts[sub]++;
             }
-        });
 
-        dailyMaxHistory.forEach(entry => {
-            totalScore += entry.score;
-            if (averages[entry.subject]) {
-                averages[entry.subject].total += entry.score;
-                averages[entry.subject].count++;
+            // 如果該排程任務已勾選 (代表該日有成績紀錄)
+            if (cb.checked) {
+                const scoreEl = document.getElementById(`score-${taskId}`);
+                // 只有具備自動同步分數的項目才列入成績統計 (排除純手動勾選)
+                if (scoreEl && scoreEl.innerText && scoreEl.style.display !== 'none') {
+                    const score = parseInt(scoreEl.innerText);
+                    if (!isNaN(score)) {
+                        totalScore += score;
+                        totalExams++;
+                        if (averages[sub]) {
+                            averages[sub].total += score;
+                            averages[sub].count++;
+                        }
+                    }
+                }
             }
         });
-
         const container = document.getElementById('average-scores-container');
         if (!container) return;
         container.innerHTML = '';

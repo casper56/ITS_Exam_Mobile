@@ -635,6 +635,7 @@
     {
         "id": 27,
         "type": "single",
+		"labelType": "none",
         "question": [
             "<pre><code>您有下列資料集。</code></pre>[[image01]]<pre><code>您必須認識到上列哪些表格使用了資料的分類限界辦識的轉換方法。請問哪個表格使用了 One-Hot Encoding?</code></pre>"
         ],
