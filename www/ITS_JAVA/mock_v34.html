@@ -266,7 +266,10 @@
     <header class="exam-header d-flex justify-content-between align-items-center">
         <div><h5 class="m-0">ITS Java 模擬考試</h5></div>
         <div class="timer-box" id="timer">50:00</div>
-        <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+        <div>
+            <button class="btn btn-warning btn-sm me-2 no-print" onclick="resetCurrentQuestion()">重設問題</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmSubmit()">交卷</button>
+        </div>
     </header>
     <div class="side-nav-btn side-nav-prev no-print" id="side-btn-prev" onclick="changeQuestion(-1)">&#10094;</div>
     <div class="side-nav-btn side-nav-next no-print" id="side-btn-next" onclick="changeQuestion(1)">&#10095;</div>
@@ -3767,7 +3770,10 @@
     let isDragging = false, dragStartPoint = null, tempLine = null;
     window.handleDragStart = function(e, side, idx) {
         if (side !== 'left') return;
-        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { 
+            // 點選後無法修改，強制使用重設問題
+            return;
+        }
         isDragging = true; if(e.cancelable) e.preventDefault();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
         window.lastClientX = clientX; window.lastClientY = clientY;
@@ -4223,17 +4229,28 @@
         if (scrollTop) window.scrollTo(0, 0); setTimeout(() => { if(window.Prism) Prism.highlightAll(); }, 50);
     }
 
+    function resetCurrentQuestion() {
+        delete userAnswers[currentIndex];
+        renderQuestion(currentIndex, false);
+    }
     function selectOption(optIdx) {
         const item = examQuestions[currentIndex];
         if (item.type === 'multiple') {
             if (!Array.isArray(userAnswers[currentIndex])) userAnswers[currentIndex] = [];
-            const idx = userAnswers[currentIndex].indexOf(optIdx);
-            if (idx > -1) userAnswers[currentIndex].splice(idx, 1);
-            else userAnswers[currentIndex].push(optIdx);
-        } else { userAnswers[currentIndex] = optIdx; }
+            if (userAnswers[currentIndex].includes(optIdx)) return;
+            userAnswers[currentIndex].push(optIdx);
+        } else {
+            if (userAnswers[currentIndex] !== undefined && userAnswers[currentIndex] !== null) return;
+            userAnswers[currentIndex] = optIdx;
+        }
         renderQuestion(currentIndex, false);
     }
-    function selectSub(qIdx, subIdx) { if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {}; userAnswers[currentIndex][qIdx] = subIdx; renderQuestion(currentIndex, false); }
+    function selectSub(qIdx, subIdx) {
+        if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') userAnswers[currentIndex] = {};
+        if (userAnswers[currentIndex][qIdx] !== undefined) return;
+        userAnswers[currentIndex][qIdx] = subIdx;
+        renderQuestion(currentIndex, false);
+    }
     function changeQuestion(step) { if (currentIndex + step >= 0 && currentIndex + step < examQuestions.length) { renderQuestion(currentIndex + step); } else if (currentIndex + step >= examQuestions.length) { confirmSubmit(); } }
     function confirmSubmit() { if (confirm("確定要交卷嗎？")) { submitExam(); } }
 

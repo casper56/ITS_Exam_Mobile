@@ -3830,7 +3830,10 @@
     let isDragging = false, dragStartPoint = null, tempLine = null;
     window.handleDragStart = function(e, side, idx) {
         if (side !== 'left') return;
-        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { userAnswers[currentIndex][idx] = null; renderMatchingQuestion(currentIndex); }
+        if (userAnswers[currentIndex] && userAnswers[currentIndex][idx] !== null) { 
+            // 點選後無法修改，強制使用重設問題
+            return;
+        }
         isDragging = true; if(e.cancelable) e.preventDefault();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY;
         window.lastClientX = clientX; window.lastClientY = clientY;

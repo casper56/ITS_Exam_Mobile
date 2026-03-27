@@ -3736,9 +3736,9 @@
       "01 rooms = {1: 'Foyer', 2: 'Conference Room'}",
       "02 room = input('Enter the room number: ')",
       "03 if not room in rooms:",
-      "04 print('Room does not exist.')",
+      "04    print('Room does not exist.')",
       "05 else:",
-      "06 print(\"The room name is \" + rooms[room])</code></pre>"
+      "06    print(\"The room name is \" + rooms[room])</code></pre>"
     ],
     "questionA": [
       "題1. 請問第 01 行的 rooms 字典中儲存哪兩種資料類型？"
