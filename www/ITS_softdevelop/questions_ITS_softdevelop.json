@@ -1091,7 +1091,7 @@
     {
         "id": 34,
         "question": [
-            "<pre><code class=\"language-csharp\">有一個名為 Items 的資料表，其欄位包括：",
+            "<pre><code class=\"language-sql\">有一個名為 Items 的資料表，其欄位包括：",
             "- ID（integer，主索引鍵，自動產生）",
             "- Description（text）",
             "- Completed（Boolean）",
@@ -1108,7 +1108,7 @@
         ],
         "explanation": [
             "<pre><code class=\"language-csharp\">選項A 是唯一符合以下條件的正確語法： ",
-            "<pre><code class=\"language-csharp\">1. 使用 DELETE FROM <b>table_name</b> WHERE <b>condition</b>。 ",
+            "1. 使用 DELETE FROM <b>table_name</b> WHERE <b>condition</b>。 ",
             "2. 條件正確：Completed = 1 確切對應 True。 ",
             "3. 邏輯正確：僅刪除符合條件的資料列，不影響其他資料。</code></pre>"
         ],
