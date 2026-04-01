@@ -1785,10 +1785,7 @@
     "weight": 1,
     "image": null,
     "explanation": [
-      "<pre><code class=\"language-python\">解題分析：",
-      "1. 正數判斷：if a >= 0:。正數可直接開任意次方根。",
-      "2. 負偶數次方根：a < 0 且 b % 2 == 0。這會產生虛數 (Imaginary number)。",
-      "3. 負奇數次方根：a < 0 且 b 為奇數。數學上等於 -((-a) ** (1/b))。</code></pre>"
+      "<pre><code class=\"language-python\">解題分析：</code></pre>"
     ],
     "category": "D2_流程控制與判斷"
   },
