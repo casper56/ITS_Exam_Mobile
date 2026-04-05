@@ -836,7 +836,25 @@ def clean_repair_all():
         const enableShuffle = confirm("是否啟用「選項亂數排列」功能？\n(開啟後，各題選項順序將隨機打亂)");
         if (enableShuffle) {
             examQuestions.forEach(q => {
-                if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'matching' || q.type === 'multimatching' || q.type === 'drag') return;
+                if (q.type === 'matching') {
+                    if (!q.left || q.left.length <= 1) return;
+                    let paired = q.left.map((item, i) => ({ item, index: i }));
+                    for (let i = paired.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [paired[i], paired[j]] = [paired[j], paired[i]];
+                    }
+                    q.left = paired.map(p => p.item);
+                    if (q.answer && Array.isArray(q.answer)) {
+                        let newAnswer = new Array(q.answer.length);
+                        paired.forEach((p, newIdx) => {
+                            newAnswer[newIdx] = q.answer[p.index];
+                        });
+                        q.answer = newAnswer;
+                    }
+                    return;
+                }
+
+                if (!q.options || q.options.length <= 1 || q.type === 'match' || q.type === 'multimatching' || q.type === 'drag') return;
 
                 if (q.type === 'choicelist') {
                     if (Array.isArray(q.options[0])) {
