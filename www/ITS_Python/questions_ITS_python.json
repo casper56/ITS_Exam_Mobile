@@ -1145,7 +1145,7 @@
       "05  ？？？？",
       "\n你應該如何完成第 5 行的程式碼？請將適合的程式碼片段選項填到正確的位置上。",
       "每個程式碼片段都可以使用一次、多次，或者不使用。",
-      "<slot01> <slot02> <slot03> (<slot04>'",
+      "<slot01> <slot02> <slot03> <slot04>'",
       ".format(fields[0], eval(fields(1)), eval(fields[2])))"
     ],
     "options": [
