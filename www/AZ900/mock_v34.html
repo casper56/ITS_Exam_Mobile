@@ -4034,8 +4034,6 @@
             console.error("題庫資料載入失敗！"); return;
         }
         const CUTOFF = 100;
-        const TARGET_OFF_COUNT = 59; // 官方題改為 59 題
-        const TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT; // 補充題則為 1 題
         
         let historySet = new Set();
         try {
@@ -4043,9 +4041,21 @@
             if (savedHistory) historySet = new Set(JSON.parse(savedHistory));
         } catch(e) {}
 
-        // 1. 池子拆分：官方與補充
+        // 1. 分類題庫：官方題與補充題
         const offPoolTotal = allQuestions.filter(q => q.id <= CUTOFF);
         const suppPoolTotal = allQuestions.filter(q => q.id > CUTOFF);
+
+        // 動態計算目標題數 (若無補充題則全出官方題)
+        let TARGET_OFF_COUNT = 59;
+        let TARGET_SUPP_COUNT = EXAM_LIMIT - TARGET_OFF_COUNT;
+        
+        if (suppPoolTotal.length === 0) {
+            TARGET_OFF_COUNT = EXAM_LIMIT;
+            TARGET_SUPP_COUNT = 0;
+        } else if (suppPoolTotal.length < TARGET_SUPP_COUNT) {
+            TARGET_SUPP_COUNT = suppPoolTotal.length;
+            TARGET_OFF_COUNT = EXAM_LIMIT - TARGET_SUPP_COUNT;
+        }
 
         // 2. 池內優先級排序 (未看優先)
         const offUnseen = offPoolTotal.filter(q => !historySet.has(q.id)).sort(() => 0.5 - Math.random());
