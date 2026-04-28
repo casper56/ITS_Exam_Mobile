@@ -1531,9 +1531,9 @@
       "您應該使用下列何者來分析影像?</code></pre>"
     ],
     "options": [
-      "<code>Azure AI 電腦視覺服務中的 [描述影像] 作業</code>",
+      "<code>Azure AI 電腦視覺服務中的[描述影像] 作業</code>",
       "<code>臉部服務中的(偵測) 作業</code>",
-      "<code>Azure: AI 電腦視覺服務中的 分析影像】作業</code>",
+      "<code>Azure: AI 電腦視覺服務中的[分析影像]作業</code>",
       "<code>臉部服務中的 驗證】作業</code>"
     ],
     "answer": [
