@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>AI 解決方案全方位整理手冊</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+            background-color: #ffffff;
+        }
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #1a3a5f;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #2ecc71;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24pt;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section-title {
+            color: #1a3a5f;
+            border-left: 5px solid #2ecc71;
+            padding-left: 10px;
+            font-size: 16pt;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #1a3a5f;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight-box {
+            background-color: #e8f4fd;
+            border: 1px solid #b3d7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 10pt;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI 解決方案全方位整理手冊</h1>
+    </div>
+
+    <div class="section">
+        <div class="section-title">一、 雲端與通用 AI 解決方案核心 (Core Pillars)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>解決方案</th>
+                    <th>核心功能描述</th>
+                    <th>典型開發應用場景</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>電腦視覺 (Computer Vision)</strong></td>
+                    <td>使電腦具備分析、辨識影像及影片的能力。包含 OCR、物件偵測與影像分割。</td>
+                    <td>ADAS 環境感知、工業瑕疵檢測、掃描文件文字提取 (OCR)。</td>
+                </tr>
+                <tr>
+                    <td><strong>生成式 AI (Generative AI)</strong></td>
+                    <td>利用大型語言模型 (LLM) 生成文字、圖片或程式碼等新內容。</td>
+                    <td>程式碼自動補全 (GitHub Copilot)、自動化技術文件撰寫、測驗模擬題庫生成。</td>
+                </tr>
+                <tr>
+                    <td><strong>自然語言處理 (NLP)</strong></td>
+                    <td>處理與理解人類語言，包含實體辨識、情緒分析、語言翻譯及語意理解。</td>
+                    <td>社交媒體內容關鍵字擷取、客服機器人 (Chatbots)、文件自動摘要。</td>
+                </tr>
+                <tr>
+                    <td><strong>知識採礦 (Knowledge Mining)</strong></td>
+                    <td>結合搜尋與 AI 從大量非結構化資料中搜尋並組織資訊。</td>
+                    <td>技術手冊知識庫搜尋 (RAG 架構)、電子郵件自動分類與資訊檢索。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">二、 進階產業應用與專業領域 (Advanced Domains)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>解決方案</th>
+                    <th>應用領域與重點</th>
+                    <th>相關開發技術參考</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>邊緣 AI (Edge AI / TinyML)</strong></td>
+                    <td>將模型部署於 MCU 或嵌入式系統端，實現低延遲、高隱私的在地運算。</td>
+                    <td>C/C++ 韌體開發、Linux Kernel 驅動優化、TI TDA4 模型移植。</td>
+                </tr>
+                <tr>
+                    <td><strong>異常偵測 (Anomaly Detection)</strong></td>
+                    <td>識別數據中與正常模式不符的偏離點。</td>
+                    <td>感測器數據流分析、預防性維護系統、資料庫異常監控。</td>
+                </tr>
+                <tr>
+                    <td><strong>預測性分析 (Predictive Analytics)</strong></td>
+                    <td>分析歷史數據模式以預測未來事件或數值。</td>
+                    <td>ERP 系統庫存預測、銷售數據趨勢分析、電力負載預測。</td>
+                </tr>
+                <tr>
+                    <td><strong>決策最佳化 (Optimization)</strong></td>
+                    <td>在多重約束條件下尋找最佳資源配置方案。</td>
+                    <td>智慧物流配送路徑規劃、產線排程自動化、能源管理最佳化。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="highlight-box">
+        <strong>技術開發小撇步：</strong> 在實務開發中，可以利用 <strong>Python</strong> 進行模型的訓練與原型開發，透過 <strong>C#</strong> 或 <strong>T-SQL</strong> 處理上層應用程式邏輯與資料庫存取；而對於資源受限的硬體環境，則需專注於 <strong>C/C++</strong> 與輕量化模型的部署技術。
+    </div>
+
+    <div class="footer">
+        © 2026 AI 解決方案整理手冊 | 本文件為專業技術參考用途
+    </div>
+</body>
+</html>

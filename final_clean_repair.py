@@ -2329,7 +2329,8 @@ def clean_repair_all():
         'itspy': 'ITS_Python',
         'itsdb': 'ITS_Database',
         'itscs': 'ITS_程式設計',
-        'itsai': 'ITS_AI'
+        'itsai': 'ITS_AI',
+        'data_analytics': 'ITS_DataAnalytics'
     }
 
     for subj in config['subjects']:

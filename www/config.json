@@ -71,6 +71,15 @@
       "html": "ITS_JAVA.html",
       "cutoff": 78,
       "cutoff_info": "1-78 為官方版題數"
+    },
+    {
+      "dir": "www/ITS_DataAnalytics",
+      "json": "questions_ITS_DataAnalytics.json",
+      "title": "ITS Data Analytics",
+      "id": "data_analytics",
+      "html": "ITS_DataAnalytics.html",
+      "cutoff": 74,
+      "cutoff_info": "1-74 為官方版題數"
     }
   ]
 }
